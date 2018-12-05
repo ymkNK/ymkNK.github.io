@@ -34,5 +34,13 @@ plugins:
 paginate: 8
 paginate_path: "/page/:num"
 
-
 exclude: ["node_modules", "gulpfile.js", "package.json", "yarn.lock"]
+
+gitalk:
+  enable: true    #是否开启Gitalk评论
+  clientID: aaf5fc3a72ea9ce81d62                            #生成的clientID
+  clientSecret: 7792527b47af3239ddbc2274fb5fd141c28d8339    #生成的clientSecret
+  repo: ymkNK.github.io    #仓库名称
+  owner: ymkNK    #github用户名
+  admin: ymkNK
+  distractionFreeMode: true #是否启用类似FB的阴影遮罩
