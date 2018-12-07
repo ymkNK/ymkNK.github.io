@@ -9,36 +9,38 @@ layout: default
         <a href="{{site.baseurl}}/"><img src="{{site.baseurl}}/assets/img/{% if site.author-img %}{{site.author-img}}{% endif %}" alt="{{site.author}}"></a>
       </div>
       <div class="author-name">{{site.author}}</div>
-      <a href="{{site.baseurl}}/tags" class="tag" style=" text-decoration: none; color: black;">{{site.about-author}}</a>
+      <a href="{{site.baseurl}}/tags" class="tag">{{site.about-author}}</a>
     </div>
   </header> <!-- End Header -->
+
+
   <footer>
     <section class="contact">
       <h3 class="contact-title">Contact Me</h3>
       <ul>
 
         {% if site.social-facebook %}
-          <li><a href="https://facebook.com/{{ site.social-facebook }}" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+        <li><a href="https://facebook.com/{{ site.social-facebook }}" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
         {% else %}
-          <li></li>
+        <li></li>
         {% endif %}
 
         {% if site.social-github %}
-          <li class="github"><a href="http://github.com/{{site.social-github}}" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li class="github"><a href="http://github.com/{{site.social-github}}" target="_blank"><i class="fa fa-github"></i></a></li>
         {% else %}
-          <li></li>
+        <li></li>
         {% endif %}
 
         {% if site.social-email %}
-          <li class="email"><a href="mailto:ymknkcs@163.com"><i class="fa fa-envelope-o"></i></a></li>
-         {% else %}
-          <li></li>
+        <li class="email"><a href="mailto:ymknkcs@163.com"><i class="fa fa-envelope-o"></i></a></li>
+        {% else %}
+        <li></li>
         {% endif %}
 
         {% if site.social-linkedin %}
-          <li class="linkedin"><a href="https://in.linkedin.com/in/{{site.social-linkedin}}" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li class="linkedin"><a href="https://in.linkedin.com/in/{{site.social-linkedin}}" target="_blank"><i class="fa fa-linkedin"></i></a></li>
         {% else %}
-          <li></li>
+        <li></li>
         {% endif %}
 
       </ul>
