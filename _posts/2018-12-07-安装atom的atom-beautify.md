@@ -6,7 +6,7 @@ author: ymkNK
 date: 2018-12-07 17:03:25 +0800
 categories: tech
 tag: tech
-img: 安装atom的atom-beautify_files/59469635.png
+img: 3.jpg
 ---
 # 前言
 想给atom安装beautify的插件
