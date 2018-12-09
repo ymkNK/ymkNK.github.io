@@ -1463,6 +1463,7 @@ a.newer-posts:hover {
 }
 /* -----------toc-------------*/
 .toc-container a {
+  color: #263959;
   font-size: 13px;
   margin: 0 0 0px;
   text-decoration: none;
