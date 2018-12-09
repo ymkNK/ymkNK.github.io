@@ -101,6 +101,7 @@ a {
   /* 1 */
   -webkit-text-decoration-skip: objects;
   /* 2 */
+
 }
 
 /**
@@ -870,6 +871,7 @@ table tfoot td {
 .wrapper {
   max-width: 1250px;
   position: relative;
+  /* display: flex; */
 }
 
 .post, .article-page {
@@ -919,6 +921,8 @@ table tfoot td {
   padding: 20px 10px;
   background-color: #ffffff;
 }
+
+
 
 .about {
   margin: 0 0 40px;
@@ -993,6 +997,7 @@ table tfoot td {
   color: #3399FF;
   font-weight: bold;
 }
+
 
 .content-box {
   padding: 20px;
@@ -1455,4 +1460,20 @@ a.newer-posts:hover {
   .post .post-content .post-title a {
     font-size: 21px;
   }
+}
+/* -----------toc-------------*/
+.toc-container a {
+  font-size: 13px;
+  margin: 0 0 0px;
+  text-decoration: none;
+}
+
+.toc-container a:hover {
+
+  color: #3399FF;
+  font-weight: bold;
+}
+
+.toc-container ol {
+  list-style-type: disc;
 }

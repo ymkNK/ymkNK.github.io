@@ -11,6 +11,14 @@ layout: default
       <div class="author-name">{{site.author}}</div>
       <a href="{{site.baseurl}}/tags" class="tag">{{site.about-author}}</a>
     </div>
+
+
+
+    <div class="toc-container">
+    {% include toc.html html=content min=1 max=2 %}
+    </div>
+
+
   </header> <!-- End Header -->
 
 
