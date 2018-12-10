@@ -12,7 +12,9 @@ layout: default
       <a href="{{site.baseurl}}/tags" class="tag">{{site.about-author}}</a>
     </div>
 
-
+    <div class="toc-container">
+    {% include toc.html html=content min=1 max=2 %}
+    </div>
 
 
 
@@ -57,8 +59,4 @@ layout: default
 </aside> <!-- End Sidebar -->
 <div class="content-box clearfix">
   {{ content }}
-</div>
-
-<div class="toc-container">
-{% include toc.html html=content min=1 max=2 %}
 </div>

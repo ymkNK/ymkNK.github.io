@@ -1,5 +1,9 @@
 /* Medium Devices, Desktops */
 @media only screen and (max-width : 992px) {
+  .toc-container {
+    display: none;
+  }
+  
   .post {
     width: 48%;
     max-width: 100%;
@@ -24,6 +28,10 @@
 
 /* Small Devices, Tablets */
 @media only screen and (max-width : 768px) {
+  .toc-container {
+    display: none;
+  }
+
   .sidebar {
     position: relative;
     display: flex;
@@ -67,6 +75,10 @@
 
 /* Extra Small Devices, Phones */
 @media only screen and (max-width : 480px) {
+  .toc-container {
+    display: none;
+  }
+
   .content-box {
     padding: 10px;
   }
