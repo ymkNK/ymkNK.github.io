@@ -12,7 +12,7 @@ layout: default
       <a href="{{site.baseurl}}/tags" class="tag">{{site.about-author}}</a>
     </div>
 
-    <div class="toc-container">
+    <div class="toc-container" id="toc-container">
     {% include toc.html html=content min=1 max=2 %}
     </div>
 
@@ -60,3 +60,33 @@ layout: default
 <div class="content-box clearfix">
   {{ content }}
 </div>
+
+<script type="text/javascript">
+  var as = document.getElementById('toc-container').getElementsByTagName('a');
+  for (var i = 0; i < as.length; i++)
+  if (as[i].href.indexOf(s) !=-1) {
+    as[i].onclick=function(){
+      as[i].className='clickname' ;
+    }
+  }
+
+<!--
+function tocClick(value){
+
+console.info(value);
+
+var as = document.getElementById('toc-container').getElementsByTagName('a'),find=false;
+
+for (var i = 0; i < as.length; i++)
+{
+  as[i].className="";
+}
+s = location.href; //得到网页
+for (var i = 0; i < as.length; i++)
+if (as[i].href.indexOf(s) !=-1) {
+  as[i].className='clickname' ; find=true; break;
+}
+//如果找不到参数，设置默认为首页
+if (!find) as[1].className='clickname';
+} -->
+</script>

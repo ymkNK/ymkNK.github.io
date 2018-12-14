@@ -1475,11 +1475,14 @@ a.newer-posts:hover {
 }
 
 .toc-container a:hover {
-
   color: #3399FF;
   font-weight: bold;
 }
 
 .toc-container ol {
   list-style-type: disc;
+}
+.clickname {
+  color: #3399FF;
+  font-weight: bold;
 }
