@@ -26,6 +26,7 @@ img: 1.jpg
 # Dto等model的@Data注解
 @Data注解，可以实现类的Getter和Setter的同时还有toString方法，没有必要自己再转一次Json(如果只是打印个日志的话)，lombok生成的toString的可读性是很高的
 >Lombok 是一种 Java™ 实用工具，可用来帮助开发人员消除 Java 的冗长，尤其是对于简单的 Java 对象（POJO Plain Ordinary Java Object）。它通过注解实现这一目的。
+
 # Rest的post和get
 
 rest风格不是随便使用get的(这是一个前辈给我说的，有次看了不少相关的文章和介绍，包括get和post到底有什么区别)
