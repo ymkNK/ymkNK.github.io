@@ -4,8 +4,8 @@ title: 安装atom的atom-beautify
 subtitle: 安装atom的atom-beautify
 author: ymkNK
 date: 2018-12-07 17:03:25 +0800
-categories: tech
-tag: tech
+categories: Tech
+tag: Tech
 img: 3.jpg
 ---
 # 前言
