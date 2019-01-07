@@ -1499,3 +1499,32 @@ a.newer-posts:hover {
   color: #3399FF;
   font-weight: bold;
 }
+
+
+@media only screen and (min-width: 768px) {
+    section.comment-area {
+        float: right;
+        width: 68%;
+    }
+}
+@media only screen and (min-width: 992px) {
+    section.comment-area {
+        float: right;
+        width: 72%;
+    }
+}
+@media only screen and (min-width: 1126px) {
+    section.comment-area {
+        float: right;
+        width: 76%;
+    }
+}
+@media only screen and (min-width: 1256px) {
+    section.comment-area {
+        float: right;
+        width: 970px;
+    }
+}
+section.comment-area {
+    margin: 0 10px;
+}
