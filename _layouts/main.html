@@ -13,7 +13,7 @@ layout: default
     </div>
 
     <div class="toc-container" id="toc-container">
-    {% include toc.html html=content h_min=1 h_max=2 ordered=false %}
+      {% include toc.html html=content h_min=1 h_max=2 ordered=false %}
     </div>
 
 
@@ -53,8 +53,8 @@ layout: default
       </ul>
     </section> <!-- End Section Contact -->
     <div class="copyright">
+      <p>津ICP备17010627号</p>
       <p>{{site.time | date: '%Y'}} &copy; {{site.author}}</p>
-      <<p>津ICP备17010627号</p>
     </div>
   </footer> <!-- End Footer -->
 </aside> <!-- End Sidebar -->
@@ -65,29 +65,31 @@ layout: default
 <script type="text/javascript">
   var as = document.getElementById('toc-container').getElementsByTagName('a');
   for (var i = 0; i < as.length; i++)
-  if (as[i].href.indexOf(s) !=-1) {
-    as[i].onclick=function(){
-      as[i].className='clickname' ;
+    if (as[i].href.indexOf(s) != -1) {
+      as[i].onclick = function() {
+        as[i].className = 'clickname';
+      }
     }
-  }
 
-<!--
-function tocClick(value){
+  <!--
+  function tocClick(value) {
 
-console.info(value);
+    console.info(value);
 
-var as = document.getElementById('toc-container').getElementsByTagName('a'),find=false;
+    var as = document.getElementById('toc-container').getElementsByTagName('a'),
+      find = false;
 
-for (var i = 0; i < as.length; i++)
-{
-  as[i].className="";
-}
-s = location.href; //得到网页
-for (var i = 0; i < as.length; i++)
-if (as[i].href.indexOf(s) !=-1) {
-  as[i].className='clickname' ; find=true; break;
-}
-//如果找不到参数，设置默认为首页
-if (!find) as[1].className='clickname';
-} -->
+    for (var i = 0; i < as.length; i++) {
+      as[i].className = "";
+    }
+    s = location.href; //得到网页
+    for (var i = 0; i < as.length; i++)
+      if (as[i].href.indexOf(s) != -1) {
+        as[i].className = 'clickname';
+        find = true;
+        break;
+      }
+    //如果找不到参数，设置默认为首页
+    if (!find) as[1].className = 'clickname';
+  } -->
 </script>
