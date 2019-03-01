@@ -23,10 +23,16 @@ layout: default
 
   <footer>
     <section class="contact">
+      {% if site.niubility %}
       <h3 class="contact-title">Niubility Links</h3>
       <ul>
-          <li><a href="http://www.bsyze.com/" target="_blank">bsyze</a></li>
+        {% for niubi in site.niubility %}
+        <li><a href="{{ niubi.href }}" target="_blank">{{ niubi.name }}</a></li>
+        {% endfor %}
       </ul>
+      {% else %}
+
+      {% endif %}
 
       <h3 class="contact-title">Contact Me</h3>
       <ul>

@@ -18,6 +18,14 @@ social-github: ymkNK # add your Github handle
 social-linkedin: # add your Linkedin handle
 social-email: ymknkcs@163.com # add your Email address
 
+niubility: # 友情链接的牛逼的人的链接
+  -
+    name: bsyze
+    href: http://www.bsyze.com/
+  -
+    name: leto
+    href: http://blog.letow.top/
+
 # Disqus
 discus-identifier: mr-brown # add your discus identifier
 
