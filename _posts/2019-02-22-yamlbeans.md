@@ -10,7 +10,7 @@ img: 3.jpg
 ---
 # 前言
 最近需要做一个将java对象转换成yaml文件格式的工作，由于手动进行操作的话效率会很低下，因此再找有没有合适的包可以使用。最后找到的工具就是yamlBeans,本文主要是翻译整理yamlBeans中的一部分信息
->[yamlBeans官网](ttp://yamlbeans.sourceforge.net/)  
+>[yamlBeans官网](http://yamlbeans.sourceforge.net/)  
 >[yaml文档的学习](https://www.jianshu.com/p/97222440cd08)
 
 # 添加依赖
