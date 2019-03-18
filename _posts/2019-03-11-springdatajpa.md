@@ -70,7 +70,8 @@ CurdRepository
 MongoRepository
 
 		@NoRepositoryBean
-		public interface MongoRepository<T, ID> extends PagingAndSortingRepository<T, ID>, QueryByExampleExecutor<T> {
+		public interface MongoRepository<T, ID> extends PagingAndSortingRepository<T, ID>
+		, QueryByExampleExecutor<T> {
 		    <S extends T> List<S> saveAll(Iterable<S> var1);
 
 		    List<T> findAll();
