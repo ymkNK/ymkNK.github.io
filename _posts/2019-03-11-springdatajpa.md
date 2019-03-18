@@ -156,7 +156,9 @@ MongoRepository
 
 		    public void deleteById(ID id) {
 		        Assert.notNull(id, "The given id must not be null!");
-		        this.mongoOperations.remove(this.getIdQuery(id), this.entityInformation.getJavaType(), this.entityInformation.getCollectionName());
+		        this.mongoOperations.remove(this.getIdQuery(id)
+		        , this.entityInformation.getJavaType()
+		        , this.entityInformation.getCollectionName());
 		    }
 
 		    public void delete(T entity) {
@@ -247,7 +249,10 @@ MongoRepository
 		    public <S extends T> Optional<S> findOne(Example<S> example) {
 		        Assert.notNull(example, "Sample must not be null!");
 		        Query q = new Query((new Criteria()).alike(example));
-		        return Optional.ofNullable(this.mongoOperations.findOne(q, example.getProbeType(), this.entityInformation.getCollectionName()));
+		        return Optional.ofNullable(
+		        	this.mongoOperations.findOne(q
+		        		, example.getProbeType()
+		        		, this.entityInformation.getCollectionName()));
 		    }
 
 		    public <S extends T> long count(Example<S> example) {
