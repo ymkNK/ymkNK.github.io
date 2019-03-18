@@ -134,7 +134,10 @@ MongoRepository
 
 		    public Optional<T> findById(ID id) {
 		        Assert.notNull(id, "The given id must not be null!");
-		        return Optional.ofNullable(this.mongoOperations.findById(id, this.entityInformation.getJavaType(), this.entityInformation.getCollectionName()));
+		        return Optional.ofNullable(this.mongoOperations
+		        	.findById(id
+		        		, this.entityInformation.getJavaType()
+		        		, this.entityInformation.getCollectionName()));
 		    }
 
 		    public boolean existsById(ID id) {
@@ -170,7 +173,12 @@ MongoRepository
 		    }
 
 		    public Iterable<T> findAllById(Iterable<ID> ids) {
-		        return this.findAll(new Query((new Criteria(this.entityInformation.getIdAttribute())).in((Collection)Streamable.of(ids).stream().collect(StreamUtils.toUnmodifiableList()))));
+		        return this.findAll(new Query((new Criteria(this.entityInformation
+		        	.getIdAttribute()))
+		        	.in((Collection)Streamable
+		        	.of(ids)
+		        	.stream()
+		        	.collect(StreamUtils.toUnmodifiableList()))));
 		    }
 
 		    public Page<T> findAll(Pageable pageable) {
@@ -206,9 +214,13 @@ MongoRepository
 		        Assert.notNull(example, "Sample must not be null!");
 		        Assert.notNull(pageable, "Pageable must not be null!");
 		        Query q = (new Query((new Criteria()).alike(example))).with(pageable);
-		        List list = this.mongoOperations.find(q, example.getProbeType(), this.entityInformation.getCollectionName());
+		        List list = this.mongoOperations.find(q
+		        	, example.getProbeType()
+		        	, this.entityInformation.getCollectionName());
 		        return PageableExecutionUtils.getPage(list, pageable, () -> {
-		            return this.mongoOperations.count(q, example.getProbeType(), this.entityInformation.getCollectionName());
+		            return this.mongoOperations.count(q
+		            	, example.getProbeType()
+		            	, this.entityInformation.getCollectionName());
 		        });
 		    }
 
@@ -216,7 +228,9 @@ MongoRepository
 		        Assert.notNull(example, "Sample must not be null!");
 		        Assert.notNull(sort, "Sort must not be null!");
 		        Query q = (new Query((new Criteria()).alike(example))).with(sort);
-		        return this.mongoOperations.find(q, example.getProbeType(), this.entityInformation.getCollectionName());
+		        return this.mongoOperations.find(q
+		        	, example.getProbeType()
+		        	, this.entityInformation.getCollectionName());
 		    }
 
 		    public <S extends T> List<S> findAll(Example<S> example) {
@@ -232,13 +246,17 @@ MongoRepository
 		    public <S extends T> long count(Example<S> example) {
 		        Assert.notNull(example, "Sample must not be null!");
 		        Query q = new Query((new Criteria()).alike(example));
-		        return this.mongoOperations.count(q, example.getProbeType(), this.entityInformation.getCollectionName());
+		        return this.mongoOperations.count(q
+		        	, example.getProbeType()
+		        	, this.entityInformation.getCollectionName());
 		    }
 
 		    public <S extends T> boolean exists(Example<S> example) {
 		        Assert.notNull(example, "Sample must not be null!");
 		        Query q = new Query((new Criteria()).alike(example));
-		        return this.mongoOperations.exists(q, example.getProbeType(), this.entityInformation.getCollectionName());
+		        return this.mongoOperations.exists(q
+		        	, example.getProbeType()
+		        	, this.entityInformation.getCollectionName());
 		    }
 
 		    private Query getIdQuery(Object id) {
@@ -253,6 +271,9 @@ MongoRepository
 		    this.entityInformation.getJavaType());
 
 		    private List<T> findAll(@Nullable Query query) {
-		        return query == null?Collections.emptyList():this.mongoOperations.find(query, this.entityInformation.getJavaType(), this.entityInformation.getCollectionName());
+		        return query == null?Collections.emptyList():this.mongoOperations.
+		        find(query
+		        	, this.entityInformation.getJavaType()
+		        	, this.entityInformation.getCollectionName());
 		    }
 		}
