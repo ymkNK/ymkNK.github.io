@@ -17,9 +17,9 @@ CRUD是平常业务开发过程中最常接触到的，因此想通过阅读这�
 
 #### JPA
 >JPA诞生的缘由是为了整合第三方ORM框架，建立一种标准的方式，百度百科说是JDK为了实现ORM的天下归一，目前也是在按照这个方向发展，但是还没能完全实现。在ORM框架中，Hibernate是一支很大的部队，使用很广泛，也很方便，能力也很强，同时Hibernate也是和JPA整合的比较良好，我们可以认为JPA是标准，事实上也是，JPA几乎都是接口，实现都是Hibernate在做，宏观上面看，在JPA的统一之下Hibernate很良好的运行。  
-我们都知道，在使用持久化工具的时候，一般都有一个对象来操作数据库，在原生的Hibernate中叫做Session，在JPA中叫做EntityManager，在MyBatis中叫做SqlSession，通过这个对象来操作数据库。我们一般按照三层结构来看的话，Service层做业务逻辑处理，Dao层和数据库打交道，在Dao中，就存在着上面的对象。那么ORM框架本身提供的功能有什么呢？答案是基本的CRUD，所有的基础CRUD框架都提供，我们使用起来感觉很方便，很给力，业务逻辑层面的处理ORM是没有提供的，如果使用原生的框架，业务逻辑代码我们一般会自定义，会自己去写SQL语句，然后执行。在这个时候，Spring-data-jpa的威力就体现出来了，ORM提供的能力他都提供，ORM框架没有提供的业务逻辑功能Spring-data-jpa也提供，全方位的解决用户的需求。使用Spring-data-jpa进行开发的过程中，常用的功能，我们几乎不需要写一条sql语句。  
-- >[博文地址](http.csdn.net/qq_22172133/article/details/81192040) 
-- >[JPA官方文档](https://docs.spring.io/spring-data/jpa/docs/2.1.5.RELEASE/reference/html/) 
+>我们都知道，在使用持久化工具的时候，一般都有一个对象来操作数据库，在原生的Hibernate中叫做Session，在JPA中叫做EntityManager，在MyBatis中叫做SqlSession，通过这个对象来操作数据库。我们一般按照三层结构来看的话，Service层做业务逻辑处理，Dao层和数据库打交道，在Dao中，就存在着上面的对象。那么ORM框架本身提供的功能有什么呢？答案是基本的CRUD，所有的基础CRUD框架都提供，我们使用起来感觉很方便，很给力，业务逻辑层面的处理ORM是没有提供的，如果使用原生的框架，业务逻辑代码我们一般会自定义，会自己去写SQL语句，然后执行。在这个时候，Spring-data-jpa的威力就体现出来了，ORM提供的能力他都提供，ORM框架没有提供的业务逻辑功能Spring-data-jpa也提供，全方位的解决用户的需求。使用Spring-data-jpa进行开发的过程中，常用的功能，我们几乎不需要写一条sql语句。  
+- [博文地址](http.csdn.net/qq_22172133/article/details/81192040) 
+- [JPA官方文档](https://docs.spring.io/spring-data/jpa/docs/2.1.5.RELEASE/reference/html/) 
 
 # 应用实例
 在大家的日常开发中都用到了很多，再次就不细致列举了，详情可以查看另外一篇博文
@@ -99,7 +99,8 @@ MongoRepository
 		    private final MongoOperations mongoOperations;
 		    private final MongoEntityInformation<T, ID> entityInformation;
 
-		    public SimpleMongoRepository(MongoEntityInformation<T, ID> metadata, MongoOperations mongoOperations) {
+		    public SimpleMongoRepository(MongoEntityInformation<T, ID> metadata
+		    	, MongoOperations mongoOperations) {
 		        Assert.notNull(metadata, "MongoEntityInformation must not be null!");
 		        Assert.notNull(mongoOperations, "MongoOperations must not be null!");
 		        this.entityInformation = metadata;
@@ -142,11 +143,15 @@ MongoRepository
 
 		    public boolean existsById(ID id) {
 		        Assert.notNull(id, "The given id must not be null!");
-		        return this.mongoOperations.exists(this.getIdQuery(id), this.entityInformation.getJavaType(), this.entityInformation.getCollectionName());
+		        return this.mongoOperations.exists(this.getIdQuery(id)
+		        , this.entityInformation.getJavaType()
+		        , this.entityInformation.getCollectionName());
 		    }
 
 		    public long count() {
-		        return this.mongoOperations.getCollection(this.entityInformation.getCollectionName()).count();
+		        return this.mongoOperations.getCollection(this
+		        	.entityInformation
+		        	.getCollectionName()).count();
 		    }
 
 		    public void deleteById(ID id) {
@@ -165,7 +170,8 @@ MongoRepository
 		    }
 
 		    public void deleteAll() {
-		        this.mongoOperations.remove(new Query(), this.entityInformation.getCollectionName());
+		        this.mongoOperations.remove(new Query()
+		        , this.entityInformation.getCollectionName());
 		    }
 
 		    public List<T> findAll() {
@@ -201,7 +207,8 @@ MongoRepository
 
 		    public <S extends T> List<S> insert(Iterable<S> entities) {
 		        Assert.notNull(entities, "The given Iterable of entities not be null!");
-		        List list = (List)Streamable.of(entities).stream().collect(StreamUtils.toUnmodifiableList());
+		        List list = (List)Streamable.of(entities)
+		        .stream().collect(StreamUtils.toUnmodifiableList());
 		        if(list.isEmpty()) {
 		            return list;
 		        } else {
