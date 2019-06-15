@@ -11,7 +11,6 @@ img: 5.jpg
 # 前言
 最近在帮朋友优化一个安卓的应用，使用Android来实现的一个华容道的小游戏。 [项目链接](https://github.com/MikarLittle/HuaRongDao)
 
-
 # Android Studio的开发项目文件结构图
 
 主要显示的是src文件夹下的结构
