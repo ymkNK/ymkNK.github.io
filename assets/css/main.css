@@ -1000,6 +1000,17 @@ table tfoot td {
   margin: 0 0 10px;
 }
 
+.about a {
+  font-size: 16px;
+  margin: 0 0 10px;
+  text-decoration: none;
+}
+
+.about a:hover {
+  color: #3399FF;
+  font-weight: bold;
+}
+
 .content-box {
   padding: 20px;
   padding-left: 260px;
@@ -1463,19 +1474,82 @@ a.newer-posts:hover {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
   }
+
   .post .post-thumbnail {
     width: 100%;
   }
+
   .post .post-content {
     width: 100%;
   }
+
   .post .post-content .post-title {
     margin: 0 0 5px;
   }
+
   .post .post-content .post-title a {
     font-size: 21px;
   }
+}
+
+/* -----------toc-------------*/
+.toc-container {
+  /* height:300px; */
+  overflow:auto;
+  /* position: fixed;
+  right: 0px;
+  top: 0px; */
+}
+
+.toc-container a {
+  color: #263959;
+  font-size: 13px;
+  margin: 0 0 0px;
+  text-decoration: none;
+}
+
+.toc-container a:hover {
+  color: #3399FF;
+  font-weight: bold;
+}
+
+.toc-container ol {
+  list-style-type: disc;
+}
+
+.clickname {
+  color: #3399FF;
+  font-weight: bold;
+}
+
+
+@media only screen and (min-width: 768px) {
+    section.comment-area {
+        float: right;
+        width: 68%;
+    }
+}
+@media only screen and (min-width: 992px) {
+    section.comment-area {
+        float: right;
+        width: 72%;
+    }
+}
+@media only screen and (min-width: 1126px) {
+    section.comment-area {
+        float: right;
+        width: 76%;
+    }
+}
+@media only screen and (min-width: 1256px) {
+    section.comment-area {
+        float: right;
+        width: 970px;
+    }
+}
+section.comment-area {
+    margin: 0 10px;
 }
