@@ -24,7 +24,7 @@ task :new do
     @img_num = rand(1...11)
     # 需要检查一下对应tag的目录是否存在
     @directory_name = @tag.downcase
-    @directory_url = "_posts/#{@tag}"
+    @directory_url = "_posts/#{@directory_name}"
     if File.directory?(@directory_url)
         puts "The directory: #{@directory_url} has existed."
     else
