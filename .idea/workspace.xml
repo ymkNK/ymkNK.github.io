@@ -2,42 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b844900-dd31-4d71-86d3-ede01da3838c" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/2018-12-14-spring1.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/2018-12-20-spring2.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/2018-12-25-spring3.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/2018-12-28-spring4.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/2019-01-05-spring5.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/2019-01-08-spring6.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/2019-01-15-spring-source-code.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/2019-01-17-spring-source-code-2.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/2019-02-20-spring7.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/2019-03-14-spring8.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/2019-03-24-spring9.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/2019-03-29-spring10.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/2019-07-10-spring11.md" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2018-12-05-gitalk.md" afterPath="$PROJECT_DIR$/_posts/frontend/2018-12-05-gitalk.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2018-12-05-rake.md" afterPath="$PROJECT_DIR$/_posts/tech/2018-12-05-rake.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2018-12-06-msg.md" afterPath="$PROJECT_DIR$/_posts/note/2018-12-06-msg.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2018-12-07-安装atom的atom-beautify.md" afterPath="$PROJECT_DIR$/_posts/tech/2018-12-07-安装atom的atom-beautify.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2018-12-09-summary.md" afterPath="$PROJECT_DIR$/_posts/summary/2018-12-09-summary.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2018-12-16-java.md" afterPath="$PROJECT_DIR$/_posts/java/2018-12-16-java.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2018-12-21-share.md" afterPath="$PROJECT_DIR$/_posts/note/2018-12-21-share.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2019-01-01-positioning.md" afterPath="$PROJECT_DIR$/_posts/note/2019-01-01-positioning.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2019-01-07-qps.md" afterPath="$PROJECT_DIR$/_posts/tech/2019-01-07-qps.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2019-02-22-yamlbeans.md" afterPath="$PROJECT_DIR$/_posts/tech/2019-02-22-yamlbeans.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2019-03-05-inter-process.md" afterPath="$PROJECT_DIR$/_posts/tech/2019-03-05-inter-process.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2019-03-11-springdatajpa.md" afterPath="$PROJECT_DIR$/_posts/spring/2019-03-11-springdatajpa.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2019-03-19-rocketmq.md" afterPath="$PROJECT_DIR$/_posts/tech/2019-03-19-rocketmq.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2019-03-21-stream.md" afterPath="$PROJECT_DIR$/_posts/java/2019-03-21-stream.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2019-03-27-dynamic-programming.md" afterPath="$PROJECT_DIR$/_posts/algorithm/2019-03-27-dynamic-programming.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2019-03-28-shuffle.md" afterPath="$PROJECT_DIR$/_posts/algorithm/2019-03-28-shuffle.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2019-05-13-aboutSomeThing.md" afterPath="$PROJECT_DIR$/_posts/summary/2019-05-13-aboutSomeThing.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2019-06-08-android-idea.md" afterPath="$PROJECT_DIR$/_posts/android/2019-06-08-android-idea.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2019-06-16-snippet.md" afterPath="$PROJECT_DIR$/_posts/tech/2019-06-16-snippet.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2019-07-11-feignclient.md" afterPath="$PROJECT_DIR$/_posts/spring/2019-07-11-feignclient.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2019-07-16-docker-history.md" afterPath="$PROJECT_DIR$/_posts/docker/2019-07-16-docker-history.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2019-07-19-container-is-a-special-process.md" afterPath="$PROJECT_DIR$/_posts/docker/2019-07-19-container-is-a-special-process.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2019-07-26-jenkins-callback.md" afterPath="$PROJECT_DIR$/_posts/jenkins/2019-07-26-jenkins-callback.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_layouts/main.html" afterPath="$PROJECT_DIR$/_layouts/main.html" />
     </list>
     <ignored path="ymkNK.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -123,88 +88,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2019-03-05-inter-process.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="2019-03-05-inter-process.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/_posts/tech/2019-03-05-inter-process.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-            <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.0">
-                <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                <folding />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-          <provider editor-type-id="MarkdownFxPreviewEditor">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="2019-03-19-rocketmq.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_posts/tech/2019-03-19-rocketmq.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-            <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.121527776">
-                <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
-                <folding />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-          <provider editor-type-id="MarkdownFxPreviewEditor">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="2019-03-21-stream.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_posts/java/2019-03-21-stream.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-            <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.121527776">
-                <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
-                <folding />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-          <provider editor-type-id="MarkdownFxPreviewEditor">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="2019-06-08-android-idea.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_posts/android/2019-06-08-android-idea.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-            <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.104166664">
-                <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
-                <folding />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-          <provider editor-type-id="MarkdownFxPreviewEditor">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="2019-06-16-snippet.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_posts/tech/2019-06-16-snippet.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-            <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.0">
-                <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                <folding />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-          <provider editor-type-id="MarkdownFxPreviewEditor">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="2019-07-26-jenkins-callback.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/_posts/jenkins/2019-07-26-jenkins-callback.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="FIRST">
               <first_editor vertical-scroll-proportion="0.0">
@@ -268,9 +153,9 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="1440" />
-    <option name="y" value="23" />
-    <option name="width" value="1920" />
-    <option name="height" value="1057" />
+    <option name="y" value="75" />
+    <option name="width" value="1440" />
+    <option name="height" value="821" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -845,16 +730,16 @@
       <created>1564631286827</created>
       <option name="number" value="Default" />
       <updated>1564631286827</updated>
-      <workItem from="1564631288352" duration="801000" />
+      <workItem from="1564631288352" duration="916000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="801000" />
+    <option name="totallyTimeSpent" value="916000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1440" y="23" width="1920" height="1057" extended-state="6" />
-    <editor active="false" />
+    <frame x="1440" y="75" width="1440" height="821" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -864,7 +749,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24973376" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33547926" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1322,24 +1207,10 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/tech/2019-03-05-inter-process.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.0">
-            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownFxPreviewEditor">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/tech/2019-03-19-rocketmq.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.121527776">
+          <first_editor vertical-scroll-proportion="0.16719745">
             <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
             <folding />
           </first_editor>
@@ -1350,25 +1221,11 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/java/2019-03-21-stream.md">
+    <entry file="file://$PROJECT_DIR$/_posts/jenkins/2019-07-26-jenkins-callback.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.121527776">
-            <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownFxPreviewEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/android/2019-06-08-android-idea.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.104166664">
-            <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+          <first_editor vertical-scroll-proportion="0.2231405">
+            <caret line="9" column="3" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
             <folding />
           </first_editor>
           <second_editor />
@@ -1392,7 +1249,35 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/jenkins/2019-07-26-jenkins-callback.md">
+    <entry file="file://$PROJECT_DIR$/_posts/android/2019-06-08-android-idea.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor vertical-scroll-proportion="0.1433121">
+            <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownFxPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/java/2019-03-21-stream.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor vertical-scroll-proportion="0.16719745">
+            <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownFxPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/tech/2019-03-05-inter-process.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="FIRST">
           <first_editor vertical-scroll-proportion="0.0">
