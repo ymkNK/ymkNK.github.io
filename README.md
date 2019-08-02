@@ -1,2 +1,2 @@
 # 个人的github小博客
-[lllovol.com](lllovol.com)
+[lllovol.com](https://lllovol.com)
