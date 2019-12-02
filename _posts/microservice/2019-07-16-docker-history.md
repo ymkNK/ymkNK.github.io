@@ -1,4 +1,4 @@
-	---
+---
 layout: post
 title: 小鲸鱼的成长史
 subtitle: 小鲸鱼的成长史
