@@ -1,6 +1,12 @@
 ---
 layout: main
 ---
+<head>
+<div id='wx_pic' style='margin:0 auto;display:none;'>
+<img src={{ "/assets/img/" | prepend: site.baseurl | append : page.img}} />
+</div>
+</head>
+
 <article class="article-page">
   <div class="page-content">
     {% if page.img %}
