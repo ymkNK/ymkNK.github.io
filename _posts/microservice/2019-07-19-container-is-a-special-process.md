@@ -4,8 +4,8 @@ title: 容器就是一个特殊的进程
 subtitle: 容器就是一个特殊的进程
 author: ymkNK
 date: 2019-07-19 11:56:44 +0800
-categories: Docker
-tag: Docker
+categories: MicroService
+tag: MicroService
 img: 1.jpg
 ---
 # 前言
