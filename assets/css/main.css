@@ -102,17 +102,18 @@ a {
     /* 1 */
     -webkit-text-decoration-skip: objects;
     text-decoration: none;
+    /*font-style: oblique;*/
     /*color: #4d4d4c;*/
     /* 2 */
 }
 a:active {
     color: #3399FF;
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
 
 a:hover {
     color: #3399FF;
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
 
 /**
@@ -1543,6 +1544,7 @@ a.newer-posts:hover {
 .toc-container a {
     color: #263959;
     font-size: 13px;
+    font-style: normal;
     margin: 0 0 0px;
     text-decoration: none;
 }
