@@ -454,9 +454,11 @@ template {
 
 
 .highlighter-rouge {
-  color: #ce887b;
+  /*color: #ce887b;*/
+  color: #4d4d4c;
+  background: #f7f7f7;
   font-weight: 400;
-  border: 1px solid #607D8B;
+  /*border: 1px solid #607D8B;*/
   -webkit-border-radius: 3px;
           border-radius: 3px;
   padding: 0.1rem 0.5rem;
@@ -832,8 +834,10 @@ pre code {
   padding-left: 0;
   overflow: auto;
   white-space: pre-wrap;
-  word-wrap: break-word;
-  word-break: break-all;
+  word-wrap: normal;
+  word-break: normal;
+  /*word-wrap: break-word;*/
+  /*word-break: break-all;*/
 }
 
 table {
