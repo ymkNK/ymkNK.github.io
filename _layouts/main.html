@@ -9,14 +9,15 @@ layout: default
         <a href="{{site.baseurl}}/"><img src="{{site.baseurl}}/assets/img/{% if site.author-img %}{{site.author-img}}{% endif %}" alt="{{site.author}}"></a>
       </div>
       <div class="author-name">{{site.author}}</div>
-      <a href="{{site.baseurl}}/tags" class="tag">{{site.about-author}}</a>
+      <div class="tag-url">
+        <a href="{{site.baseurl}}/tags" class="tag">{{site.about-author}}</a>
+      </div>
+
     </div>
 
     <div class="toc-container" id="toc-container">
       {% include toc.html html=content h_min=1 h_max=2 ordered=false %}
     </div>
-
-
 
   </header> <!-- End Header -->
 

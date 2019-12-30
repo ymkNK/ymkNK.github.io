@@ -964,7 +964,7 @@ table tfoot td {
 }
 
 .about {
-    margin: 0 0 40px;
+    margin: 0 0 0;
     text-align: center;
 }
 
@@ -1021,6 +1021,24 @@ table tfoot td {
     border-radius: 100%;
     background-color: #515151;
 }
+
+.about .tag-url a {
+    color: #656565;
+    display: block;
+    font-size: 16px;
+    -webkit-transition: all 350ms cubic-bezier(0.13, 0.43, 0.54, 1.82);
+    -o-transition: all 350ms cubic-bezier(0.13, 0.43, 0.54, 1.82);
+    transition: all 350ms cubic-bezier(0.13, 0.43, 0.54, 1.82);
+}
+
+.about .tag-url a:hover {
+    color: #656565;
+    /*font-weight: bold;*/
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
 
 .about p {
     font-size: 16px;
