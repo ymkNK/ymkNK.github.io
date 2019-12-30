@@ -67,6 +67,7 @@ task :git do
     @finalmsg = "#{@date}-#{@slug}"
     system "git add ."
     system "git commit -m \"#{@finalmsg}\""
+    system "git status"
     system "git push"
-    puts "git push \"#{@finalmsg}\" successfully"
+    puts "git push \"#{@finalmsg}\""
 end
