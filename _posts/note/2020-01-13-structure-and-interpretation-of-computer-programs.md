@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 《Structure and Interpretation of Computer Programs》读书笔记-前言
+title: Structure and Interpretation of Computer Programs 读书笔记 前言
 subtitle: 计算机程序的构造和解释 
 author: ymkNK
 date: 2020-01-13 15:22:58 +0800
