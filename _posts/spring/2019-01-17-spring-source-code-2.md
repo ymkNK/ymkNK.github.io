@@ -210,7 +210,7 @@ BeanDefinition是一个接口，在Spring中存在三种实现：RootBeanDefinit
 Spring通过BeanDefinition将配置文件中的<bean>配置信息转化为容器的内部表示，然后将这些BeanDefinition注册到BeanDefinitionRegistry当中。
 
 
-![64484741.png](qeh76ukrx.bkt.clouddn.com/assets/img/《Spring源码深度解析》读后感(二)_files/64484741.png)
+![64484741.png](http://qeh76ukrx.bkt.clouddn.com/assets/img/《Spring源码深度解析》读后感(二)_files/64484741.png)
 
 
 要解析属性，首先要创建用于承载属性的实例，也就是创建GenericBeanDefinition类型的实例，而  AbstractBeanDefinition bd = createBeanDefinition(className, parent);就是实现这个功能

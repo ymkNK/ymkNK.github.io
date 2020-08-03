@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-![](qeh76ukrx.bkt.clouddn.com/assets/img/pics/$1)
+![](http://qeh76ukrx.bkt.clouddn.com/assets/img/pics/$1)
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>ap</tabTrigger>
