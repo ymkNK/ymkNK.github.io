@@ -21,7 +21,7 @@ img: 3.jpg
      cd atom-beautify
      npm install
 
-![59469635.png](/assets/img/安装atom的atom-beautify_files/59469635.png)
+![59469635.png](qeh76ukrx.bkt.clouddn.com/assets/img/安装atom的atom-beautify_files/59469635.png)
 
 # Success
 
