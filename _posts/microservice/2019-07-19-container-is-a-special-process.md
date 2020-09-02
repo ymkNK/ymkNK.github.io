@@ -22,9 +22,9 @@ docker run -it busybox /bin/sh
 这个命令就是告诉docker：帮我启动一个容器  
 接下来我们可以使用ps指令，来看一看容器和宿主机中的进程信息。
 宿主机里的内容：
-![](http://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190719-120700@2x.png)
+![](https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190719-120700@2x.png)
 容器里的内容
-![](http://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190719-120743@2x.png)
+![](https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190719-120743@2x.png)
 
 # Namespace机制
 上面的小实验，这就是Linux里的namespace机制实现的，

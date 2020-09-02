@@ -84,7 +84,7 @@ example:
 上方的是我自己写的例子，YamlWriter的构造函数所需要的参数，是一个writer（可以是fileWriter也可以是StringWriter，当然其他类型的writer也是可以的）
 
 输出的图像如下(fileWriter的)：
-![YamlWriter](http://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/yamlBeans/yamlWriter.png)
+![YamlWriter](https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/yamlBeans/yamlWriter.png)
 
 #### 设置tag
 有的时候tag会特别长，这个时候，就可以将自定义设置tag
