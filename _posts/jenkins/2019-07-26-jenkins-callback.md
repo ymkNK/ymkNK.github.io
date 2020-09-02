@@ -13,7 +13,7 @@ img: 3.jpg
 >Jenkins是开源CI&CD软件领导者，提供超过1000个插件来支持构建、部署、自动化，满足任何项目的需要。[Jenkins官网](https://jenkins.io/zh/)
 
 ## 关键点
-![](http://qeh76ukrx.bkt.clouddn.com/assets/img/pics/WX20190726-115622@2x.png)
+![](http://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190726-115622@2x.png)
 通过调研后，Jenkins在完成构建后，可以添加一个构建后操作。这就可以通过这个构建后操作，将本次构建脚本执行的结果，通过这个构建后操作，传给另外一个job，然后通过这个job将执行的结果通过回调的方式，传给应用服务器。
 
 ## 整个流程
@@ -22,10 +22,10 @@ img: 3.jpg
 
 2. 在Jenkins端进行对应的job执行。
 3. 通过构建后操作的trigger parameterized build on other projects功能。
-![](http://qeh76ukrx.bkt.clouddn.com/assets/img/pics/WX20190726-150927@2x.png)
+![](http://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190726-150927@2x.png)
 4. 根据本次构建的成功与否，分别执行不同的构建后操作，传递给回调job对应的参数。
-![](http://qeh76ukrx.bkt.clouddn.com/assets/img/pics/WX20190726-145102@2x.png)
-![](http://qeh76ukrx.bkt.clouddn.com/assets/img/pics/WX20190726-145131@2x.png)
+![](http://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190726-145102@2x.png)
+![](http://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190726-145131@2x.png)
 
 5. 回调job将获取到的信息，通过一个shell脚本，通过curl传递给服务器端。
 ```
