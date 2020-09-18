@@ -69,5 +69,7 @@ task :git do
     system "git commit -m \"#{@finalmsg}\""
     system "git status"
     system "git push"
+    system "git push github"
+    system "git push gitee"
     puts "git push \"#{@finalmsg}\""
 end
