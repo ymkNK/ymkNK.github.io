@@ -15,4 +15,11 @@ img: 6.jpg
 `mysql> select * from T where ID=10；` 这么一条查询语句是如何执行的呢？
 
 MySQL基础架构
-![](https://lllovol.oss-cn-beijing.aliyuncs.com/oss/mysql%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.png?OSSAccessKeyId=LTAI4G4Hqhts9opvvGjEcW7y&Expires=1611735777&Signature=bqglE2mtVF8TVGGjL8v6kALjymU%3D)
+![](https://lllovol.oss-cn-beijing.aliyuncs.com/oss/mysql%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.png)
+
+Server层：
+- 连接器：管理连接，权限认证
+- 分析器：词法语法分析
+- 查询缓存：命中则直接返回结果
+- 优化器：执行计划生成，索引选择
+- 执行器：操作引擎，返回结果
