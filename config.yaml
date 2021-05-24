@@ -26,8 +26,8 @@ params:
     favicon:
 
     footer:
-        since: 2020
-        customText:
+        since: 2017
+        customText: Owner Rainbowly
 
     dateFormat:
         published: Jan 02, 2006
@@ -35,10 +35,10 @@ params:
 
     sidebar:
         emoji: 🍥
-        subtitle: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        subtitle: Stay Hungry, Stay Foolish
         avatar:
-            local: true
-            src: img/avatar.png
+            local: false
+            src: https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg
 
     article:
         math: false
@@ -116,6 +116,7 @@ menu:
           url: /
           weight: -100
           pre: home
+
 
 related:
     includeNewer: true
