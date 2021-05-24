@@ -143,7 +143,7 @@ enableEmoji = true
           # title shown in home page (HTML format is supported)
           title = ""
           # subtitle shown in home page
-          subtitle = "Just Want to Share and Record Some Useful,Interesting Things !"
+          subtitle = "Stay Hungry, Stay Foolish. "
           # whether to use typeit animation for subtitle
           typeit = false
           # whether to show social links
@@ -338,7 +338,7 @@ enableEmoji = true
           # 主页显示的网站标题 (支持 HTML 格式)
           title = ""
           # 主页显示的网站副标题
-          subtitle = "- Stay Hungry, Stay Foolish -"
+          subtitle = "求学若饥，谦卑若愚。"
           # 是否为副标题显示打字机动画
           typeit = true
           # 是否显示社交账号
@@ -460,7 +460,7 @@ enableEmoji = true
       logo = ""
       # title name
       # 标题名称
-      name = "DoIt"
+      name = "lllovol"
       # you can add extra information before the name (HTML format is supported), such as icons
       # 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
       pre = "<i class='far fa-edit fa-fw'></i>"
