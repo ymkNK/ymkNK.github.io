@@ -1,4 +1,4 @@
-baseURL = "https://hugodoit.pages.dev"
+baseURL = "https://lllovol.com"
 # [en, zh-cn, fr, pl, ...] determines default content language
 # [en, zh-cn, fr, pl, ...] 设置默认的语言
 defaultContentLanguage = "en"
@@ -11,7 +11,7 @@ themesDir = "themes/"
 
 # website title
 # 网站标题
-title = "DoIt"
+title = "lllovol"
 
 # whether to use robots.txt
 # 是否使用 robots.txt
