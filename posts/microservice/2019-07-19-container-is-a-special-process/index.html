@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='前言 程序的静态表现就是程序，平常的安安静静的躺在硬盘上；但是一旦运行起来，他就变成了计算机里的数据和状态的总和，这就是它的动态表现。 而容器的核心功能，就是通过约束和修改进程的动态表现，从而为其创造出了一个边界。
+ Cgroups是用来约束的主要手段。 Namespace是用来修改视图的主要方法。  docker run实验 安装好docker，输入以下命令
+docker run -it busybox /bin/sh这个命令就是告诉docker：帮我启动一个容器
+接下来我们可以使用ps指令，来看一看容器和宿主机中的进程信息。 宿主机里的内容： 容器里的内容 Namespace机制 上面的小实验，这就是Linux里的namespace机制实现的， 我们可以看到，我们容器里pid为1的/bin/sh进程，在宿主机中的pid为13193，这就是容器使用了namespace使用了障眼法，让容器里的视角，以为自己就是这个机器的1号员工（pid=1），可是实际上，他还是原来的100号进程。
+namespace其实只是Linux在创建新的进程的时候的一个参数，在Linux系统中创建线程的系统调用是clone()
+int pid=clone(main_function,stack_size,SIGCHLD,NULL);这个系统调用，创建了一个新进程，并且返回一个pid。而我们在创建一个新进程的时候，可以指定CLONE_NEWPID 参数。
+int pid=clone(main_function,stack_size,CLONE_NEWPID | SIGCHLD,NULL);这个新创建的进程就将“看见”一个全新的进程空间，看见它自己在这个进程空间中，他自己的pid为1。这其实只是一个障眼法，在宿主机上，它的pid该是多少，还是多少。
+Namespace种类 Namespace的种类很多，上文中提到的只是PID Namespace，除此之外，还有如下的Namespaces,这些namespaces用来实现对进程上下文的“障眼法操作”
+ MOUNT Namespace， 用来隔离文件系统的挂载点，使得子进程拥有自己独立的挂载点信息。 UTS（UNIX Time-sharing System ）Namespace提供了主机名和域名的隔离,能够使得子进程有独立的主机名和域名(hostname),而不仅仅只是宿主机上的一个进程. IPC Namespace,使划分到不同ipc namespace的进程组通信上隔离，无法通过消息队列、共享内存、信号量方式通信，但没有对所述所有IPC通信方式隔离。 Network Namespace，是实现网络虚拟化的重要功能，它能创建多个隔离的网络空间，它们有独自的网络栈信息。不管是虚拟机还是容器，运行的时候仿佛自己就在独立的网络中。 User Namespace,是Linux3.8新增的一种namespace，用于隔离安全相关的资源，包括user IDs and group IDs，keys,和capabilities。同样一个用户的userID和groupID在不同的user namespace中可以不一样(与PID namespace类似)。换句话说，一个用户可以在一个user namespace中是普通用户，但在另一个user namespace中是超级用户。  通过Namespace这样的方式，容器就只能看见当前Namespace所限定的资源、文件、设备、状态、配置。而对于宿主机和其他不想关的程序，对这个容器（一个进程）来说，就“雨我无瓜了”
+结语 这个原理，就是为什么容器要比虚拟机效能更高的原因，本文是读了张磊前辈的文章后的学习笔记。'><title>容器就是一个特殊的进程</title>
+
+<link rel='canonical' href='https://lllovol.com/posts/microservice/2019-07-19-container-is-a-special-process/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='容器就是一个特殊的进程'>
+<meta property='og:description' content='前言 程序的静态表现就是程序，平常的安安静静的躺在硬盘上；但是一旦运行起来，他就变成了计算机里的数据和状态的总和，这就是它的动态表现。 而容器的核心功能，就是通过约束和修改进程的动态表现，从而为其创造出了一个边界。
+ Cgroups是用来约束的主要手段。 Namespace是用来修改视图的主要方法。  docker run实验 安装好docker，输入以下命令
+docker run -it busybox /bin/sh这个命令就是告诉docker：帮我启动一个容器
+接下来我们可以使用ps指令，来看一看容器和宿主机中的进程信息。 宿主机里的内容： 容器里的内容 Namespace机制 上面的小实验，这就是Linux里的namespace机制实现的， 我们可以看到，我们容器里pid为1的/bin/sh进程，在宿主机中的pid为13193，这就是容器使用了namespace使用了障眼法，让容器里的视角，以为自己就是这个机器的1号员工（pid=1），可是实际上，他还是原来的100号进程。
+namespace其实只是Linux在创建新的进程的时候的一个参数，在Linux系统中创建线程的系统调用是clone()
+int pid=clone(main_function,stack_size,SIGCHLD,NULL);这个系统调用，创建了一个新进程，并且返回一个pid。而我们在创建一个新进程的时候，可以指定CLONE_NEWPID 参数。
+int pid=clone(main_function,stack_size,CLONE_NEWPID | SIGCHLD,NULL);这个新创建的进程就将“看见”一个全新的进程空间，看见它自己在这个进程空间中，他自己的pid为1。这其实只是一个障眼法，在宿主机上，它的pid该是多少，还是多少。
+Namespace种类 Namespace的种类很多，上文中提到的只是PID Namespace，除此之外，还有如下的Namespaces,这些namespaces用来实现对进程上下文的“障眼法操作”
+ MOUNT Namespace， 用来隔离文件系统的挂载点，使得子进程拥有自己独立的挂载点信息。 UTS（UNIX Time-sharing System ）Namespace提供了主机名和域名的隔离,能够使得子进程有独立的主机名和域名(hostname),而不仅仅只是宿主机上的一个进程. IPC Namespace,使划分到不同ipc namespace的进程组通信上隔离，无法通过消息队列、共享内存、信号量方式通信，但没有对所述所有IPC通信方式隔离。 Network Namespace，是实现网络虚拟化的重要功能，它能创建多个隔离的网络空间，它们有独自的网络栈信息。不管是虚拟机还是容器，运行的时候仿佛自己就在独立的网络中。 User Namespace,是Linux3.8新增的一种namespace，用于隔离安全相关的资源，包括user IDs and group IDs，keys,和capabilities。同样一个用户的userID和groupID在不同的user namespace中可以不一样(与PID namespace类似)。换句话说，一个用户可以在一个user namespace中是普通用户，但在另一个user namespace中是超级用户。  通过Namespace这样的方式，容器就只能看见当前Namespace所限定的资源、文件、设备、状态、配置。而对于宿主机和其他不想关的程序，对这个容器（一个进程）来说，就“雨我无瓜了”
+结语 这个原理，就是为什么容器要比虚拟机效能更高的原因，本文是读了张磊前辈的文章后的学习笔记。'>
+<meta property='og:url' content='https://lllovol.com/posts/microservice/2019-07-19-container-is-a-special-process/'>
+<meta property='og:site_name' content='lllovol'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2019-07-19T11:56:44&#43;00:00'/><meta property='article:modified_time' content='2019-07-19T11:56:44&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/1.jpg' />
+<meta name="twitter:title" content="容器就是一个特殊的进程">
+<meta name="twitter:description" content="前言 程序的静态表现就是程序，平常的安安静静的躺在硬盘上；但是一旦运行起来，他就变成了计算机里的数据和状态的总和，这就是它的动态表现。 而容器的核心功能，就是通过约束和修改进程的动态表现，从而为其创造出了一个边界。
+ Cgroups是用来约束的主要手段。 Namespace是用来修改视图的主要方法。  docker run实验 安装好docker，输入以下命令
+docker run -it busybox /bin/sh这个命令就是告诉docker：帮我启动一个容器
+接下来我们可以使用ps指令，来看一看容器和宿主机中的进程信息。 宿主机里的内容： 容器里的内容 Namespace机制 上面的小实验，这就是Linux里的namespace机制实现的， 我们可以看到，我们容器里pid为1的/bin/sh进程，在宿主机中的pid为13193，这就是容器使用了namespace使用了障眼法，让容器里的视角，以为自己就是这个机器的1号员工（pid=1），可是实际上，他还是原来的100号进程。
+namespace其实只是Linux在创建新的进程的时候的一个参数，在Linux系统中创建线程的系统调用是clone()
+int pid=clone(main_function,stack_size,SIGCHLD,NULL);这个系统调用，创建了一个新进程，并且返回一个pid。而我们在创建一个新进程的时候，可以指定CLONE_NEWPID 参数。
+int pid=clone(main_function,stack_size,CLONE_NEWPID | SIGCHLD,NULL);这个新创建的进程就将“看见”一个全新的进程空间，看见它自己在这个进程空间中，他自己的pid为1。这其实只是一个障眼法，在宿主机上，它的pid该是多少，还是多少。
+Namespace种类 Namespace的种类很多，上文中提到的只是PID Namespace，除此之外，还有如下的Namespaces,这些namespaces用来实现对进程上下文的“障眼法操作”
+ MOUNT Namespace， 用来隔离文件系统的挂载点，使得子进程拥有自己独立的挂载点信息。 UTS（UNIX Time-sharing System ）Namespace提供了主机名和域名的隔离,能够使得子进程有独立的主机名和域名(hostname),而不仅仅只是宿主机上的一个进程. IPC Namespace,使划分到不同ipc namespace的进程组通信上隔离，无法通过消息队列、共享内存、信号量方式通信，但没有对所述所有IPC通信方式隔离。 Network Namespace，是实现网络虚拟化的重要功能，它能创建多个隔离的网络空间，它们有独自的网络栈信息。不管是虚拟机还是容器，运行的时候仿佛自己就在独立的网络中。 User Namespace,是Linux3.8新增的一种namespace，用于隔离安全相关的资源，包括user IDs and group IDs，keys,和capabilities。同样一个用户的userID和groupID在不同的user namespace中可以不一样(与PID namespace类似)。换句话说，一个用户可以在一个user namespace中是普通用户，但在另一个user namespace中是超级用户。  通过Namespace这样的方式，容器就只能看见当前Namespace所限定的资源、文件、设备、状态、配置。而对于宿主机和其他不想关的程序，对这个容器（一个进程）来说，就“雨我无瓜了”
+结语 这个原理，就是为什么容器要比虚拟机效能更高的原因，本文是读了张磊前辈的文章后的学习笔记。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/1.jpg' />
+    <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
+
+    </head>
+    <body class="article-page keep-sidebar">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.body.dataset.scheme = 'dark';
+        } else {
+            document.body.dataset.scheme = 'light';
+        }
+    })();
+</script><div class="container main-container flex on-phone--column extended ">
+            <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            <figure class="site-avatar">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+        
+        <h1 class="site-name"><a href="https://lllovol.com">lllovol</a></h1>
+        <h2 class="site-description">Stay Hungry, Stay Foolish</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>Dark Mode</span>
+            </li>
+        
+    </ol>
+</aside>
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/posts/microservice/2019-07-19-container-is-a-special-process/">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/1.jpg" loading="lazy" alt="Featured image of post 容器就是一个特殊的进程" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/microservice/" >
+                MicroService
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/posts/microservice/2019-07-19-container-is-a-special-process/">容器就是一个特殊的进程</a>
+    </h2>
+
+    <footer class="article-time">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <time class="article-time--published">Jul 19, 2019</time>
+    </footer></div>
+</header>
+
+    <section class="article-content">
+    <h1 id="前言">前言</h1>
+<p>程序的静态表现就是程序，平常的安安静静的躺在硬盘上；但是一旦运行起来，他就变成了计算机里的数据和状态的总和，这就是它的动态表现。
+而容器的核心功能，就是通过约束和修改进程的动态表现，从而为其创造出了一个边界。</p>
+<ul>
+<li>Cgroups是用来约束的主要手段。</li>
+<li>Namespace是用来修改视图的主要方法。</li>
+</ul>
+<h1 id="docker-run实验">docker run实验</h1>
+<p>安装好docker，输入以下命令</p>
+<pre><code>docker run -it busybox /bin/sh
+</code></pre><p>这个命令就是告诉docker：帮我启动一个容器<br>
+接下来我们可以使用ps指令，来看一看容器和宿主机中的进程信息。
+宿主机里的内容：
+<img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190719-120700@2x.png" alt=""  />
+容器里的内容
+<img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190719-120743@2x.png" alt=""  /></p>
+<h1 id="namespace机制">Namespace机制</h1>
+<p>上面的小实验，这就是Linux里的namespace机制实现的，
+我们可以看到，我们容器里pid为1的/bin/sh进程，在宿主机中的pid为13193，这就是容器使用了namespace使用了障眼法，让容器里的视角，以为自己就是这个机器的1号员工（pid=1），可是实际上，他还是原来的100号进程。</p>
+<p>namespace其实只是Linux在创建新的进程的时候的一个参数，在Linux系统中创建线程的系统调用是clone()</p>
+<pre><code>int pid=clone(main_function,stack_size,SIGCHLD,NULL);
+</code></pre><p>这个系统调用，创建了一个新进程，并且返回一个pid。而我们在创建一个新进程的时候，可以指定CLONE_NEWPID 参数。</p>
+<pre><code>int pid=clone(main_function,stack_size,CLONE_NEWPID | SIGCHLD,NULL);
+</code></pre><p>这个新创建的进程就将“看见”一个全新的进程空间，看见它自己在这个进程空间中，他自己的pid为1。这其实只是一个障眼法，在宿主机上，它的pid该是多少，还是多少。</p>
+<h1 id="namespace种类">Namespace种类</h1>
+<p>Namespace的种类很多，上文中提到的只是PID Namespace，除此之外，还有如下的Namespaces,这些namespaces用来实现对进程上下文的“障眼法操作”</p>
+<ul>
+<li>MOUNT Namespace， 用来隔离文件系统的挂载点，使得子进程拥有自己独立的挂载点信息。</li>
+<li>UTS（UNIX Time-sharing System ）Namespace提供了主机名和域名的隔离,能够使得子进程有独立的主机名和域名(hostname),而不仅仅只是宿主机上的一个进程.</li>
+<li>IPC Namespace,使划分到不同ipc namespace的进程组通信上隔离，无法通过消息队列、共享内存、信号量方式通信，但没有对所述所有IPC通信方式隔离。</li>
+<li>Network Namespace，是实现网络虚拟化的重要功能，它能创建多个隔离的网络空间，它们有独自的网络栈信息。不管是虚拟机还是容器，运行的时候仿佛自己就在独立的网络中。</li>
+<li>User Namespace,是Linux3.8新增的一种namespace，用于隔离安全相关的资源，包括user IDs and group IDs，keys,和capabilities。同样一个用户的userID和groupID在不同的user namespace中可以不一样(与PID namespace类似)。换句话说，一个用户可以在一个user namespace中是普通用户，但在另一个user namespace中是超级用户。</li>
+</ul>
+<p>通过Namespace这样的方式，容器就只能看见当前Namespace所限定的资源、文件、设备、状态、配置。而对于宿主机和其他不想关的程序，对这个容器（一个进程）来说，就“雨我无瓜了”</p>
+<h1 id="结语">结语</h1>
+<p>这个原理，就是为什么容器要比虚拟机效能更高的原因，本文是读了张磊前辈的文章后的学习笔记。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+    
+</article>
+
+     
+        
+    
+
+
+<div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: 'aaf5fc3a72ea9ce81d62',
+        clientSecret: '7792527b47af3239ddbc2274fb5fd141c28d8339',
+        repo: 'ymkNK.github.io',
+        owner: 'ymkNK',
+        admin: ['ymkNK'],
+        id: window.location.pathname,
+        title: document.title,
+        distractionFreeMode: true
+    })
+
+    gitalk.render('gitalk-container')
+</script>
+
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        
+        2018 -
+        
+        2021
+        &copy;
+        lllovol
+    </section>
+    
+    <section class="powerby">
+        
+            <b><a href="https://github.com/ymkNK" target="_blank" rel="noopener" data-version="%s">Owner Rainbowly </a></b> <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

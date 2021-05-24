@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>database on lllovol</title>
+    <link>https://lllovol.com/categories/database/</link>
+    <description>Recent content in database on lllovol</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 30 Oct 2020 16:28:10 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/database/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>从零开始的查询优化</title>
+      <link>https://lllovol.com/posts/database/2020-10-30-query-test/</link>
+      <pubDate>Fri, 30 Oct 2020 16:28:10 +0000</pubDate>
+      
+      <guid>https://lllovol.com/posts/database/2020-10-30-query-test/</guid>
+      <description>背景 需要查询到一批部门以及子部门，最终拿到这些部门下的人员信息，我们能够进行的操作如下
+ 通过部门的目录前缀（前缀树）的方式，能够查询到所有子部门 能够通过部门查询到这个部门（不包含子部门）的所有人员 已经添加索引  方法一 思路 找到每一个需要排除的部门，以及每一个排除的部门的子部门，然后分别查出来需要排除的人,最后通过stream的flatMap进行聚合
+return allDepartment.stream().flatMap(department -&amp;gt; {List&amp;lt;EmployeeDetail&amp;gt; allByDepartmentId = employeeRepo.findAllByDepartmentId(department.getDepartmentId());return allByDepartmentId.stream();}).collect(Collectors.toList()); 耗费时间 30616ms
+方法二 思路 找到每一个需要排除的部门，将部门聚合，分别查询
+ List&amp;lt;Department&amp;gt; allDepartment = findAllChildDepartments(byId.get());return employeeRepo.findAllByDepartmentIdIsIn(allDepartment.stream().map(Department::getDepartmentId).collect(Collectors.toList()));List&amp;lt;EmployeeDetail&amp;gt; excludeEmployees = excludeDepartments.stream().flatMap(department -&amp;gt; serviceV2.findAllEmployeesByDepartmentId(department.getDepartmentId(), 1).stream()).collect(Collectors.toList());耗费时间 20057ms
+方法三 思路 将所有需要排除的部门聚合，统一查询
+ @Overridepublic List&amp;lt;EmployeeDetail&amp;gt; findAllEmployeesByDepartmentsId(Iterable&amp;lt;String&amp;gt; departmentIds) {return employeeRepo.findAllByDepartmentIdIsIn(departmentIds);} List&amp;lt;Department&amp;gt; allExcludedDepartments = excludeDepartments.stream().flatMap(department -&amp;gt; serviceV2.findAllChildDepartments(department).stream()).collect(Collectors.toList());List&amp;lt;EmployeeDetail&amp;gt; excludeEmployees = serviceV2.findAllEmployeesByDepartmentsId(allExcludedDepartments.stream().map(Department::getDepartmentId).collect(Collectors.toList()));耗费时间 26058ms 时间耗费反而多了，因为对数据库的查询次数变多了</description>
+    </item>
+    
+    <item>
+      <title>JavaJPA使用Mongo中的坑</title>
+      <link>https://lllovol.com/posts/database/2020-10-28-mongo-bad/</link>
+      <pubDate>Wed, 28 Oct 2020 15:03:26 +0000</pubDate>
+      
+      <guid>https://lllovol.com/posts/database/2020-10-28-mongo-bad/</guid>
+      <description>背景 由于业务需求将一些数据作为缓存存到Mongo库中，然后在优化这个缓存过程的时候，发现的一个坑。
+主要逻辑 原来的逻辑  获取所有数据 删除库中所有数据 将新数据全部存入库中  初步优化后的逻辑  获取所有数据 获取缓存库中所有数据 将两组数据做一个差值比较，筛选出来需要新建的 需要更新的 需要删除 三组数据 新增的数据进行新增 需要更新的数据进行更新 需要删除的数据进行删除  优化效果 从15000ms优化到230ms，由于数据量很大，但是其实并没有每次所有数据都有更新
+坑 看起来上面逻辑没有什么问题，但是在执行的时候，发现每一次更新数据的时候，实际在mongo数据库中并不是更新数据，而是从新新建了一条数据！这就导致同一条数据在更新之后出现了两次？？ 但是我明明已经将唯一的Id值作为主键了，为什么还是会被认为是新的呢？
+Model public class Example { @Id String exampleId; String name; } 看起来没有什么问题，但是这个主键获取的实际值长度特别长。导致在存入mongo库的时候，每一条新数据，都会使用系统生成的ObjectId的BSON。
+但是这个生成的id值并没有返回回来
+这就导致，使用JPA的save操作的时候，每一次都会判断成新数据。
+解决方式 查了很久，也看了JPA的部分源码，并没有设置主键长度的地方。最终解决方式，每一次更新的时候，将旧的数据清除，然后将更新的数据和新数据聚合，更新到数据库中去。</description>
+    </item>
+    
+    <item>
+      <title>为什么加了索引后查询会变快</title>
+      <link>https://lllovol.com/posts/database/2020-09-20-why-index-faster/</link>
+      <pubDate>Sun, 20 Sep 2020 18:28:53 +0000</pubDate>
+      
+      <guid>https://lllovol.com/posts/database/2020-09-20-why-index-faster/</guid>
+      <description>参考  说说为什么用了索引之后，查询就会变快？
+ 个人理解  数据页和数据页之间，组成一个双向链表 每个数据页中的记录，是一个单向链表 每个数据页都根据内部的记录生成一个页目录（Page directory），如果是主键的话，可以在页目录中使用二分法快速定位 如果我们根据一个非主键、非索引列进行查询，那么需要遍历双向链表，找到所在的页；再遍历页内的单向链表；如果表内数据很大的话，这样的查询就会很慢  如果我们根据一个非主键、非索引列进行查询，那么需要遍历双向链表，找到所在的页；再遍历页内的单向链表；如果表内数据很大的话，这样的查询就会很慢。所以没有用索引的时候，需要遍历双向链表来定位对应的页，而有了索引，则可以通过一层层“目录”定位到对应的页上。
+为什么 B+ Tree 索引会降低新增、修改、删除的速度 B+ Tree 是一颗平衡树，如果对这颗树新增、修改、删除的话，会破坏它的原有结构； 我们在做数据新增、修改、删除的时候，需要花额外的时间去维护索引； 正因为这些额外的开销，导致索引会降低新增、修改、删除的速度。</description>
+    </item>
+    
+    <item>
+      <title>什么是事务？</title>
+      <link>https://lllovol.com/posts/database/2020-09-18-what-is-transaction/</link>
+      <pubDate>Fri, 18 Sep 2020 17:27:51 +0000</pubDate>
+      
+      <guid>https://lllovol.com/posts/database/2020-09-18-what-is-transaction/</guid>
+      <description>背景 从实习开始也算是工作了两年了，但是从来没有使用过事务，原因可能是由于一直用的是MongoDB，而不是mysql，但是事物这种
+事务的定义 可以将事物简单理解为，将一系列的操作整合为一个操作，这些操作只能全部都成功或者全部都执行失败。
+事物的四个特性ACID  原子性(Atomicity):操作这些整合的操作的时候，要当成一条操作来执行，要么全部执行，要么全部不执行，一旦其中一个操作执行失败，那么就需要将数据进行回滚，回到执行事务之前的状态。 一致性(Consistency):事务的执行是让数据从一个状态转换为另外一个状态，但是对于整个数据的完整性保持稳定（比如AB两个账户相互转账，原来的总数是20000元，无论操作多少次，总数都应该还是20000元） 隔离性(Isolation):事务的隔离性是指在并发环境中，并发的事务时相互隔离的，一个事务的执行不能不被其他事务干扰。不同的事务并发操作相同的数据时，每个事务都有各自完成的数据空间，即一个事务内部的操作及使用的数据对其他并发事务时隔离的，并发执行的各个事务之间不能相互干扰。 持久性(Durability):一旦事务提交，那么它对数据库中的对应数据的状态的变更就会永久保存到数据库中。&amp;ndash;即使发生系统崩溃或机器宕机等故障，只要数据库能够重新启动，那么一定能够将其恢复到事务成功结束的状态  事务的好处与事务的实例  事务分析
+ 事务提供了一种机制，可用来将一系列数据库更改归入一个逻辑操作。更改数据库后，所做的更改可以作为一个单元进行提交或取消。事务可确保遵循原子性、一致性、隔离性和持续性（ACID）这几种属性，以使数据能够正确地提交到数据库中。 使用事务机制的好处非常明显，例如银行转账之类的交易操作中，事务有着重要的作用。事务的成功取决于事务单元帐户相互依赖的操作行为是否能全部执行成功，只要有一个操作行为失败，整个事务将失败。例如：客户A和客户B的银行账户金额都是10000元人民币，客户A需要把自己帐户中的5000元人民币转到客户B的账户上。这个过程看似简单，实际上涉及了一系列的数据库操作，可以简单地视为两步基本操作，即从客户A帐户的金额中扣除5000元人民币，以及将客户B帐户中金额添加5000元人民币。假设第1步数据库操作成功，而第二步失败的话，将导致整个操作失败，并且客户A帐户金额将被扣除5000元人民币。事务机制可以避免此类情况，以保证整个操作的完成，如果某步操作出错，之前所作的数据库操作将全部失效。</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='原来写的代码被CTO抓出来吐槽，发现确实都是一些当初自己没有注意到的地方，打算将这样的小细节一点一点的收集起来，养成更好的编码习惯。
+Slf4j  The Simple Logging Facade for Java (SLF4J) serves as a simple facade or abstraction for various logging frameworks (e.g. java.util.logging, logback, log4j) allowing the end user to plug in the desired logging framework at deployment time. 摘自https://www.slf4j.org/
+ 在编写Spring的代码的时候，只需要在Class上方添加一个@Slf4j的注解即可。slf4j是facade pattern的典型例子（隐藏系统的复杂性，并向客户端提供了一个客户端可以访问系统的接口，又被成为门面模式或者外观模式） 使用的时候，可以使用占位符的方式进行日志的记录，省去了原来自己拼接日志的麻烦。
+ log.debug(&amp;quot;wxpushGet() returned: {}&amp;quot; ,result); 但是有一些需要注意的地方。
+ 在日常开发调试的时候应该少用log.info()，而应该使用log.debug，不然在上线之后，就会产生很多冗余的信息。 只有在线上部署的时候，关键代码的信息，才使用log.info(),来显示日志的信息。千万不能滥用！ 在catch的抛出错误的时候，使用log.error()。会打印错误以及异常的信息 log.warn(),用于打印潜在的用户的错误可能的信息。  Dto等model的@Data注解 @Data注解，可以实现类的Getter和Setter的同时还有toString方法，没有必要自己再转一次Json(如果只是打印个日志的话)，lombok生成的toString的可读性是很高的
+ Lombok 是一种 Java™ 实用工具，可用来帮助开发人员消除 Java 的冗长，尤其是对于简单的 Java 对象（POJO Plain Ordinary Java Object）。它通过注解实现这一目的。'><title>SpringBoot开发中的一些小细节(一)Slf4J、Post和Get的小技巧</title>
+
+<link rel='canonical' href='https://lllovol.com/posts/spring/2018-12-14-spring1/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='SpringBoot开发中的一些小细节(一)Slf4J、Post和Get的小技巧'>
+<meta property='og:description' content='原来写的代码被CTO抓出来吐槽，发现确实都是一些当初自己没有注意到的地方，打算将这样的小细节一点一点的收集起来，养成更好的编码习惯。
+Slf4j  The Simple Logging Facade for Java (SLF4J) serves as a simple facade or abstraction for various logging frameworks (e.g. java.util.logging, logback, log4j) allowing the end user to plug in the desired logging framework at deployment time. 摘自https://www.slf4j.org/
+ 在编写Spring的代码的时候，只需要在Class上方添加一个@Slf4j的注解即可。slf4j是facade pattern的典型例子（隐藏系统的复杂性，并向客户端提供了一个客户端可以访问系统的接口，又被成为门面模式或者外观模式） 使用的时候，可以使用占位符的方式进行日志的记录，省去了原来自己拼接日志的麻烦。
+ log.debug(&amp;quot;wxpushGet() returned: {}&amp;quot; ,result); 但是有一些需要注意的地方。
+ 在日常开发调试的时候应该少用log.info()，而应该使用log.debug，不然在上线之后，就会产生很多冗余的信息。 只有在线上部署的时候，关键代码的信息，才使用log.info(),来显示日志的信息。千万不能滥用！ 在catch的抛出错误的时候，使用log.error()。会打印错误以及异常的信息 log.warn(),用于打印潜在的用户的错误可能的信息。  Dto等model的@Data注解 @Data注解，可以实现类的Getter和Setter的同时还有toString方法，没有必要自己再转一次Json(如果只是打印个日志的话)，lombok生成的toString的可读性是很高的
+ Lombok 是一种 Java™ 实用工具，可用来帮助开发人员消除 Java 的冗长，尤其是对于简单的 Java 对象（POJO Plain Ordinary Java Object）。它通过注解实现这一目的。'>
+<meta property='og:url' content='https://lllovol.com/posts/spring/2018-12-14-spring1/'>
+<meta property='og:site_name' content='lllovol'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2018-12-14T19:13:00&#43;00:00'/><meta property='article:modified_time' content='2018-12-14T19:13:00&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg' />
+<meta name="twitter:title" content="SpringBoot开发中的一些小细节(一)Slf4J、Post和Get的小技巧">
+<meta name="twitter:description" content="原来写的代码被CTO抓出来吐槽，发现确实都是一些当初自己没有注意到的地方，打算将这样的小细节一点一点的收集起来，养成更好的编码习惯。
+Slf4j  The Simple Logging Facade for Java (SLF4J) serves as a simple facade or abstraction for various logging frameworks (e.g. java.util.logging, logback, log4j) allowing the end user to plug in the desired logging framework at deployment time. 摘自https://www.slf4j.org/
+ 在编写Spring的代码的时候，只需要在Class上方添加一个@Slf4j的注解即可。slf4j是facade pattern的典型例子（隐藏系统的复杂性，并向客户端提供了一个客户端可以访问系统的接口，又被成为门面模式或者外观模式） 使用的时候，可以使用占位符的方式进行日志的记录，省去了原来自己拼接日志的麻烦。
+ log.debug(&amp;quot;wxpushGet() returned: {}&amp;quot; ,result); 但是有一些需要注意的地方。
+ 在日常开发调试的时候应该少用log.info()，而应该使用log.debug，不然在上线之后，就会产生很多冗余的信息。 只有在线上部署的时候，关键代码的信息，才使用log.info(),来显示日志的信息。千万不能滥用！ 在catch的抛出错误的时候，使用log.error()。会打印错误以及异常的信息 log.warn(),用于打印潜在的用户的错误可能的信息。  Dto等model的@Data注解 @Data注解，可以实现类的Getter和Setter的同时还有toString方法，没有必要自己再转一次Json(如果只是打印个日志的话)，lombok生成的toString的可读性是很高的
+ Lombok 是一种 Java™ 实用工具，可用来帮助开发人员消除 Java 的冗长，尤其是对于简单的 Java 对象（POJO Plain Ordinary Java Object）。它通过注解实现这一目的。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg' />
+    <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
+
+    </head>
+    <body class="article-page keep-sidebar">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.body.dataset.scheme = 'dark';
+        } else {
+            document.body.dataset.scheme = 'light';
+        }
+    })();
+</script><div class="container main-container flex on-phone--column extended ">
+            <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            <figure class="site-avatar">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+        
+        <h1 class="site-name"><a href="https://lllovol.com">lllovol</a></h1>
+        <h2 class="site-description">Stay Hungry, Stay Foolish</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>Dark Mode</span>
+            </li>
+        
+    </ol>
+</aside>
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/posts/spring/2018-12-14-spring1/">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg" loading="lazy" alt="Featured image of post SpringBoot开发中的一些小细节(一)Slf4J、Post和Get的小技巧" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/spring/" >
+                Spring
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/posts/spring/2018-12-14-spring1/">SpringBoot开发中的一些小细节(一)Slf4J、Post和Get的小技巧</a>
+    </h2>
+
+    <footer class="article-time">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <time class="article-time--published">Dec 14, 2018</time>
+    </footer></div>
+</header>
+
+    <section class="article-content">
+    <p>原来写的代码被CTO抓出来吐槽，发现确实都是一些当初自己没有注意到的地方，打算将这样的小细节一点一点的收集起来，养成更好的编码习惯。</p>
+<h1 id="slf4j">Slf4j</h1>
+<blockquote>
+<p>The Simple Logging Facade for Java (SLF4J) serves as a simple facade or abstraction for various logging frameworks (e.g. java.util.logging, logback, log4j) allowing the end user to plug in the desired logging framework at deployment time.
+摘自https://www.slf4j.org/</p>
+</blockquote>
+<p>在编写Spring的代码的时候，只需要在Class上方添加一个@Slf4j的注解即可。slf4j是facade pattern的典型例子（隐藏系统的复杂性，并向客户端提供了一个客户端可以访问系统的接口，又被成为门面模式或者外观模式）
+使用的时候，可以使用占位符的方式进行日志的记录，省去了原来自己拼接日志的麻烦。</p>
+<pre><code>    log.debug(&quot;wxpushGet() returned: {}&quot; ,result);
+</code></pre>
+<p>但是有一些需要注意的地方。</p>
+<ul>
+<li>在日常开发调试的时候应该少用log.info()，而应该使用log.debug，不然在上线之后，就会产生很多冗余的信息。</li>
+<li>只有在线上部署的时候，关键代码的信息，才使用log.info(),来显示日志的信息。<strong>千万不能滥用！</strong></li>
+<li>在catch的抛出错误的时候，使用log.error()。会打印错误以及异常的信息</li>
+<li>log.warn(),用于打印潜在的用户的错误可能的信息。</li>
+</ul>
+<h1 id="dto等model的data注解">Dto等model的@Data注解</h1>
+<p>@Data注解，可以实现类的Getter和Setter的同时还有toString方法，没有必要自己再转一次Json(如果只是打印个日志的话)，lombok生成的toString的可读性是很高的</p>
+<blockquote>
+<p>Lombok 是一种 Java™ 实用工具，可用来帮助开发人员消除 Java 的冗长，尤其是对于简单的 Java 对象（POJO Plain Ordinary Java Object）。它通过注解实现这一目的。</p>
+</blockquote>
+<h1 id="rest的post和get">Rest的post和get</h1>
+<p>rest风格不是随便使用get的(这是一个前辈给我说的，有次看了不少相关的文章和介绍，包括get和post到底有什么区别)</p>
+<blockquote>
+<p>REST即表述性状态传递（英文：Representational State Transfer，简称REST）是Roy Fielding博士在2000年他的博士论文中提出来的一种软件架构风格。它是一种针对网络应用的设计和开发方式，可以降低开发的复杂性，提高系统的可伸缩性。</p>
+<ul>
+<li><a class="link" href="http://www.ruanyifeng.com/blog/2011/09/restful.html"  target="_blank" rel="noopener"
+    >理解Restful架构</a></li>
+<li><a class="link" href="http://www.ruanyifeng.com/blog/2014/05/restful_api.html"  target="_blank" rel="noopener"
+    >Restful Api 设计指南</a></li>
+<li><a class="link" href="https://blog.csdn.net/l123649/article/details/79552299"  target="_blank" rel="noopener"
+    >get和post有什么区别</a></li>
+<li><a class="link" href="http://www.cnblogs.com/logsharing/p/8448446.html"  target="_blank" rel="noopener"
+    >get和post比较另类的区别（没有区别）</a></li>
+</ul>
+</blockquote>
+<p>今天前辈在看我的代码的时候，就问我为什么所有的都是get，说实话，当时的我真的是懵逼的。
+我脑海中原来get和post区别大概如下：</p>
+<ul>
+<li>get请求要比post快</li>
+<li>get用户可以直接修改参数，post是将数据放在request body中，稍微安全一点</li>
+<li>get一般是用来请求数据</li>
+<li>post一般是用来发送数据</li>
+</ul>
+<p>大概就是如上的内容了，然后在读完上面几篇文章后，又有了新的认识：</p>
+<ul>
+<li>get在浏览器回退的时候是无害的，而post会再次请求（应该就是返回上一页面的时候，get秒回，post会重新请求）</li>
+<li>get请求会被浏览器主动cache,而post不会，除非手动自己设置</li>
+<li>get请求只支持url的编码，而post支持多种编码的方式</li>
+<li>get请求的参数会被留在浏览器的历史记录当中，但是post不会</li>
+<li>get请求的参数有长度限制，但是post没有</li>
+<li>get只接受ASCII字符，而post没有限制</li>
+<li>get的参数会直接暴露在url上，因此不能用来传递敏感的信息</li>
+<li>get的参数通过url来传递，而post是直接放在request body当中的</li>
+</ul>
+<p>上面的很多标准答案的概念，其实都是慢慢的通过人员长期使用形成了一部分思维定式，上面的文章之一的观点就有不同的见解：</p>
+<ul>
+<li>给post加上url传参，给get加上request body,在技术上都是可以实现的，只是不能通过浏览器实现，但是并不是所有的网络服务都是通过浏览器来的</li>
+<li>两者都是单纯的源于http协议，只有一丁点根本的区别，一个用于获取数据，一个用于修改数据</li>
+<li>get的长度限制，主要是浏览器服务器等，为了防止一些黑客的攻击来进行的限制，和get、post的无关。</li>
+<li>可以在get的车里放data,也可以在post车外面放data,但是这样很蠢</li>
+</ul>
+<p><img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/SpringBoot%e5%bc%80%e5%8f%91%e4%b8%ad%e7%9a%84%e4%b8%80%e4%ba%9b%e5%b0%8f%e7%bb%86%e8%8a%82%ef%bc%88%e4%b8%80%ef%bc%89_files/64122226.png" alt="64122226.png"  />
+<img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/SpringBoot%e5%bc%80%e5%8f%91%e4%b8%ad%e7%9a%84%e4%b8%80%e4%ba%9b%e5%b0%8f%e7%bb%86%e8%8a%82%ef%bc%88%e4%b8%80%ef%bc%89_files/64276701.png" alt="64276701.png"  /></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+    
+</article>
+
+     
+        
+    
+
+
+<div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: 'aaf5fc3a72ea9ce81d62',
+        clientSecret: '7792527b47af3239ddbc2274fb5fd141c28d8339',
+        repo: 'ymkNK.github.io',
+        owner: 'ymkNK',
+        admin: ['ymkNK'],
+        id: window.location.pathname,
+        title: document.title,
+        distractionFreeMode: true
+    })
+
+    gitalk.render('gitalk-container')
+</script>
+
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        
+        2018 -
+        
+        2021
+        &copy;
+        lllovol
+    </section>
+    
+    <section class="powerby">
+        
+            <b><a href="https://github.com/ymkNK" target="_blank" rel="noopener" data-version="%s">Owner Rainbowly </a></b> <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

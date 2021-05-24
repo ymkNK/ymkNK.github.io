@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='前言 最近需要做一个将java对象转换成yaml文件格式的工作，由于手动进行操作的话效率会很低下，因此再找有没有合适的包可以使用。最后找到的工具就是yamlBeans,本文主要是翻译整理yamlBeans中的一部分信息
+ yamlBeans官网
+yaml文档的学习
+ 添加依赖 将下列代码添加到pom文件当中
+&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;com.esotericsoftware.yamlbeans&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;yamlbeans&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;1.12&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt; Yaml反序列化为常见数据结构 所谓的反序列化，就是将yaml格式的文件，转换为java的常见数据结构 主要使用的类是YamlReader，然后可以将yaml文档转换为HashMap，ArrayList,还有Strings类型。
+yaml：
+name: Nathan Sweetage: 28address: 4011 16th Ave Sphone numbers:- name: Homenumber: 206-555-5138- name: Worknumber: 425-555-2306 code:
+YamlReader reader = new YamlReader(new FileReader(&amp;quot;contact.yml&amp;quot;));Object object = reader.read();System.out.println(object);Map map = (Map)object;System.out.println(map.get(&amp;quot;address&amp;quot;)); Yaml反序列化为POJO 将yaml文档反序列化为pojo(plain ordinary java object)
+Yaml and java class:
+name: Nathan Sweetage: 28public class Contact {public String name;public int age;} Code:'><title>Yaml和Java对象之间的相互转换</title>
+
+<link rel='canonical' href='https://lllovol.com/posts/tech/2019-02-22-yamlbeans/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Yaml和Java对象之间的相互转换'>
+<meta property='og:description' content='前言 最近需要做一个将java对象转换成yaml文件格式的工作，由于手动进行操作的话效率会很低下，因此再找有没有合适的包可以使用。最后找到的工具就是yamlBeans,本文主要是翻译整理yamlBeans中的一部分信息
+ yamlBeans官网
+yaml文档的学习
+ 添加依赖 将下列代码添加到pom文件当中
+&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;com.esotericsoftware.yamlbeans&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;yamlbeans&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;1.12&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt; Yaml反序列化为常见数据结构 所谓的反序列化，就是将yaml格式的文件，转换为java的常见数据结构 主要使用的类是YamlReader，然后可以将yaml文档转换为HashMap，ArrayList,还有Strings类型。
+yaml：
+name: Nathan Sweetage: 28address: 4011 16th Ave Sphone numbers:- name: Homenumber: 206-555-5138- name: Worknumber: 425-555-2306 code:
+YamlReader reader = new YamlReader(new FileReader(&amp;quot;contact.yml&amp;quot;));Object object = reader.read();System.out.println(object);Map map = (Map)object;System.out.println(map.get(&amp;quot;address&amp;quot;)); Yaml反序列化为POJO 将yaml文档反序列化为pojo(plain ordinary java object)
+Yaml and java class:
+name: Nathan Sweetage: 28public class Contact {public String name;public int age;} Code:'>
+<meta property='og:url' content='https://lllovol.com/posts/tech/2019-02-22-yamlbeans/'>
+<meta property='og:site_name' content='lllovol'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2019-02-22T21:46:09&#43;00:00'/><meta property='article:modified_time' content='2019-02-22T21:46:09&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg' />
+<meta name="twitter:title" content="Yaml和Java对象之间的相互转换">
+<meta name="twitter:description" content="前言 最近需要做一个将java对象转换成yaml文件格式的工作，由于手动进行操作的话效率会很低下，因此再找有没有合适的包可以使用。最后找到的工具就是yamlBeans,本文主要是翻译整理yamlBeans中的一部分信息
+ yamlBeans官网
+yaml文档的学习
+ 添加依赖 将下列代码添加到pom文件当中
+&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;com.esotericsoftware.yamlbeans&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;yamlbeans&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;1.12&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt; Yaml反序列化为常见数据结构 所谓的反序列化，就是将yaml格式的文件，转换为java的常见数据结构 主要使用的类是YamlReader，然后可以将yaml文档转换为HashMap，ArrayList,还有Strings类型。
+yaml：
+name: Nathan Sweetage: 28address: 4011 16th Ave Sphone numbers:- name: Homenumber: 206-555-5138- name: Worknumber: 425-555-2306 code:
+YamlReader reader = new YamlReader(new FileReader(&amp;quot;contact.yml&amp;quot;));Object object = reader.read();System.out.println(object);Map map = (Map)object;System.out.println(map.get(&amp;quot;address&amp;quot;)); Yaml反序列化为POJO 将yaml文档反序列化为pojo(plain ordinary java object)
+Yaml and java class:
+name: Nathan Sweetage: 28public class Contact {public String name;public int age;} Code:"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg' />
+    <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
+
+    </head>
+    <body class="article-page keep-sidebar">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.body.dataset.scheme = 'dark';
+        } else {
+            document.body.dataset.scheme = 'light';
+        }
+    })();
+</script><div class="container main-container flex on-phone--column extended ">
+            <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            <figure class="site-avatar">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+        
+        <h1 class="site-name"><a href="https://lllovol.com">lllovol</a></h1>
+        <h2 class="site-description">Stay Hungry, Stay Foolish</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>Dark Mode</span>
+            </li>
+        
+    </ol>
+</aside>
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/posts/tech/2019-02-22-yamlbeans/">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg" loading="lazy" alt="Featured image of post Yaml和Java对象之间的相互转换" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/tech/" >
+                Tech
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/posts/tech/2019-02-22-yamlbeans/">Yaml和Java对象之间的相互转换</a>
+    </h2>
+
+    <footer class="article-time">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <time class="article-time--published">Feb 22, 2019</time>
+    </footer></div>
+</header>
+
+    <section class="article-content">
+    <h1 id="前言">前言</h1>
+<p>最近需要做一个将java对象转换成yaml文件格式的工作，由于手动进行操作的话效率会很低下，因此再找有没有合适的包可以使用。最后找到的工具就是yamlBeans,本文主要是翻译整理yamlBeans中的一部分信息</p>
+<blockquote>
+<p><a class="link" href="http://yamlbeans.sourceforge.net/"  target="_blank" rel="noopener"
+    >yamlBeans官网</a><br>
+<a class="link" href="https://www.jianshu.com/p/97222440cd08"  target="_blank" rel="noopener"
+    >yaml文档的学习</a></p>
+</blockquote>
+<h1 id="添加依赖">添加依赖</h1>
+<p>将下列代码添加到pom文件当中</p>
+<pre><code>&lt;dependency&gt;
+   &lt;groupId&gt;com.esotericsoftware.yamlbeans&lt;/groupId&gt;
+   &lt;artifactId&gt;yamlbeans&lt;/artifactId&gt;
+   &lt;version&gt;1.12&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<h1 id="yaml反序列化为常见数据结构">Yaml反序列化为常见数据结构</h1>
+<p>所谓的反序列化，就是将yaml格式的文件，转换为java的常见数据结构
+主要使用的类是YamlReader，然后可以将yaml文档转换为HashMap，ArrayList,还有Strings类型。<br>
+yaml：</p>
+<pre><code>name: Nathan Sweet
+age: 28
+address: 4011 16th Ave S
+phone numbers:
+ - name: Home
+   number: 206-555-5138
+ - name: Work
+   number: 425-555-2306
+</code></pre>
+<p>code:</p>
+<pre><code>YamlReader reader = new YamlReader(new FileReader(&quot;contact.yml&quot;));
+Object object = reader.read();
+System.out.println(object);
+Map map = (Map)object;
+System.out.println(map.get(&quot;address&quot;));
+</code></pre>
+<h1 id="yaml反序列化为pojo">Yaml反序列化为POJO</h1>
+<p>将yaml文档反序列化为pojo(plain ordinary java object)</p>
+<p>Yaml and java class:</p>
+<pre><code>name: Nathan Sweet
+age: 28
+
+public class Contact {
+	public String name;
+	public int age;
+}
+</code></pre>
+<p>Code:</p>
+<pre><code>YamlReader reader = new YamlReader(new FileReader(&quot;contact.yml&quot;));
+Contact contact = reader.read(Contact.class);
+System.out.println(contact.age);
+</code></pre>
+<h1 id="序列化为yaml文档">序列化为Yaml文档</h1>
+<p>这个地方就是与上方的反着来的，就是将java的常见的数据结构（HashMap,Sring,ArrayList都是可以的）或者pojo转换为yaml的文档，这里主要使用到的类是YamlWriter()</p>
+<p>example:</p>
+<pre><code>String yaml=&quot;&quot;;
+StringWriter stringWriter = new StringWriter();
+YamlWriter writer = new YamlWriter(stringWriter);
+try {
+    writer.write(greyTask);
+    writer.close();
+} catch (YamlException e) {
+    log.error(&quot;Grey Yaml Error&quot;,e);
+}
+yaml = stringWriter.toString();
+
+return yaml;
+</code></pre>
+<p>上方的是我自己写的例子，YamlWriter的构造函数所需要的参数，是一个writer（可以是fileWriter也可以是StringWriter，当然其他类型的writer也是可以的）</p>
+<p>输出的图像如下(fileWriter的)：
+<img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/yamlBeans/yamlWriter.png" alt="YamlWriter"  /></p>
+<h4 id="设置tag">设置tag</h4>
+<p>有的时候tag会特别长，这个时候，就可以将自定义设置tag</p>
+<p>code:</p>
+<pre><code>YamlWriter writer = new YamlWriter(new FileWriter(&quot;output.yml&quot;));
+writer.getConfig().setClassTag(&quot;contact&quot;, Contact.class);
+writer.write(contact);
+writer.close();
+</code></pre>
+<p>result:</p>
+<pre><code>!contact
+name: Nathan Sweet
+age: 28
+</code></pre>
+<h1 id="锚点anchor">锚点Anchor</h1>
+<p>当出现指向同一个对象的时候，就会使用锚点</p>
+<p>yaml:</p>
+<pre><code>oldest friend:
+    &amp;1 !contact
+    name: Bob
+    age: 29
+best friend: *1
+</code></pre>
+<p>上面的yaml文件中，&amp;1 ！contact相当于定义了contact为1，然后使用*1来进行引用。默认来讲，yamlWriter在进行转换的时候，如果遇到了相同的对象会自动的输出锚点。</p>
+<pre><code>Contact contact = new Contact();
+contact.name = &quot;Bob&quot;;
+contact.age = 29;
+Map map = new HashMap();
+map.put(&quot;oldest friend&quot;, contact);
+map.put(&quot;best friend&quot;, contact);
+</code></pre>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+    
+</article>
+
+     
+        
+    
+
+
+<div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: 'aaf5fc3a72ea9ce81d62',
+        clientSecret: '7792527b47af3239ddbc2274fb5fd141c28d8339',
+        repo: 'ymkNK.github.io',
+        owner: 'ymkNK',
+        admin: ['ymkNK'],
+        id: window.location.pathname,
+        title: document.title,
+        distractionFreeMode: true
+    })
+
+    gitalk.render('gitalk-container')
+</script>
+
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        
+        2018 -
+        
+        2021
+        &copy;
+        lllovol
+    </section>
+    
+    <section class="powerby">
+        
+            <b><a href="https://github.com/ymkNK" target="_blank" rel="noopener" data-version="%s">Owner Rainbowly </a></b> <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

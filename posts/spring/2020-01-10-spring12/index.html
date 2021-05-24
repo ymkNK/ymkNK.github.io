@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='前言 2020将近，已经很久没有更新blog，但是每天的工作笔记都还是有在记录，趁着马上就要过年，没有那么忙碌了，把自己19年Q4的工作中遇到的问题以及一些有用的方法整理一下~
+测试的必要性 在程序员的日常工作中，实际上真正在编写代码的时间，在整个工作时间中所占的比例其实很小的一部分。在写代码之前我们需要撰写需求文档，以及充足的思考，画出uml图（虽然很多经验丰富的大佬都没有画，但是那是建立在经验相当丰富的基础之上的）；在写完代码之后，这个项目需要发布与部署到测试环境，这就是CI/CD所负责的部分了；再之后，我们就需要测试我们的项目，是否能够完成需求文档中的需求，实现了相应的功能。 如果没有进行充分完整的测试，直接上线，这个项目差不多就是穿着皇帝的新衣在大街上到处晃荡了。同样，在互联网高速发展的今天，测试也不再仅仅是人工进行测试，自动化测试的演进又再一次的提升了团队的生产效率。这和敏捷开发、持续集成、持续部署、DevOps是一脉相承的。
+测试金字塔Test Pyramid  图来源于ThoughtWorks
+ 在上方的金字塔当中，越往金字塔尖尖方向的，集成的程度越高，测试所耗费的时间就越长，但是需要的测试数目并没有那么多；与之相反，越往金字塔底层方向的，集成的程度就越低，测试所消耗的时间也更快，但是所需要测试的数量就会更加的庞大。
+ UI Tests 项目的ui界面测试，这一层面的测试比较适合在上线之后进行冒烟测试，能够知道项目的整个流程到底是不是有问题。但是通常由于集成的程度太高，不能很快的定位问题。 Service Tests 这一层，用来测试服务是否可用，比如API测试。 Unit Tests 在代码层面进行测试，通常可以针对某一个类，某一个方法进行测试，能够快速定位问题。这个层级的层级能够保证一个系统的每一个基石都能够按照预期的那样进行工作。单元测试的数量应该在测试组合中远远多于其他类型的测试。  Junit 三段式结构 我们通常采用三段式的结构来撰写单元测试
+ 构造部分。进行对象的构建、赋值等。 逻辑部分。运行方法逻辑对第一部分的数据对象进行运算。 断言部分。判断本次单元测试能否通过。  实例代码 要使用is（）方法首先需要导入hamcrest-library-1.3.jar和hamcrest-core-1.3.jar两个jar包
+依赖配置：
+&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;org.hamcrest&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;hamcrest-library&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;1.3&amp;lt;/version&amp;gt;&amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt;&amp;lt;/dependency&amp;gt;&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;junit&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;junit&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;4.12&amp;lt;/version&amp;gt;&amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt;&amp;lt;/dependency&amp;gt;简单的UT代码实现
+import static org.hamcrest.core.Is.is;import static org.junit.Assert.assertThat;@RunWith(SpringRunner.class)@SpringBootTest@Slf4jpublic class ApplicationTests {@Test@Ignorepublic void contextLoads() {}public Boolean compare(String A, String B) {return A.'><title>SpringBoot开发中的一些小细节（十二）单元测试</title>
+
+<link rel='canonical' href='https://lllovol.com/posts/spring/2020-01-10-spring12/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='SpringBoot开发中的一些小细节（十二）单元测试'>
+<meta property='og:description' content='前言 2020将近，已经很久没有更新blog，但是每天的工作笔记都还是有在记录，趁着马上就要过年，没有那么忙碌了，把自己19年Q4的工作中遇到的问题以及一些有用的方法整理一下~
+测试的必要性 在程序员的日常工作中，实际上真正在编写代码的时间，在整个工作时间中所占的比例其实很小的一部分。在写代码之前我们需要撰写需求文档，以及充足的思考，画出uml图（虽然很多经验丰富的大佬都没有画，但是那是建立在经验相当丰富的基础之上的）；在写完代码之后，这个项目需要发布与部署到测试环境，这就是CI/CD所负责的部分了；再之后，我们就需要测试我们的项目，是否能够完成需求文档中的需求，实现了相应的功能。 如果没有进行充分完整的测试，直接上线，这个项目差不多就是穿着皇帝的新衣在大街上到处晃荡了。同样，在互联网高速发展的今天，测试也不再仅仅是人工进行测试，自动化测试的演进又再一次的提升了团队的生产效率。这和敏捷开发、持续集成、持续部署、DevOps是一脉相承的。
+测试金字塔Test Pyramid  图来源于ThoughtWorks
+ 在上方的金字塔当中，越往金字塔尖尖方向的，集成的程度越高，测试所耗费的时间就越长，但是需要的测试数目并没有那么多；与之相反，越往金字塔底层方向的，集成的程度就越低，测试所消耗的时间也更快，但是所需要测试的数量就会更加的庞大。
+ UI Tests 项目的ui界面测试，这一层面的测试比较适合在上线之后进行冒烟测试，能够知道项目的整个流程到底是不是有问题。但是通常由于集成的程度太高，不能很快的定位问题。 Service Tests 这一层，用来测试服务是否可用，比如API测试。 Unit Tests 在代码层面进行测试，通常可以针对某一个类，某一个方法进行测试，能够快速定位问题。这个层级的层级能够保证一个系统的每一个基石都能够按照预期的那样进行工作。单元测试的数量应该在测试组合中远远多于其他类型的测试。  Junit 三段式结构 我们通常采用三段式的结构来撰写单元测试
+ 构造部分。进行对象的构建、赋值等。 逻辑部分。运行方法逻辑对第一部分的数据对象进行运算。 断言部分。判断本次单元测试能否通过。  实例代码 要使用is（）方法首先需要导入hamcrest-library-1.3.jar和hamcrest-core-1.3.jar两个jar包
+依赖配置：
+&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;org.hamcrest&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;hamcrest-library&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;1.3&amp;lt;/version&amp;gt;&amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt;&amp;lt;/dependency&amp;gt;&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;junit&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;junit&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;4.12&amp;lt;/version&amp;gt;&amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt;&amp;lt;/dependency&amp;gt;简单的UT代码实现
+import static org.hamcrest.core.Is.is;import static org.junit.Assert.assertThat;@RunWith(SpringRunner.class)@SpringBootTest@Slf4jpublic class ApplicationTests {@Test@Ignorepublic void contextLoads() {}public Boolean compare(String A, String B) {return A.'>
+<meta property='og:url' content='https://lllovol.com/posts/spring/2020-01-10-spring12/'>
+<meta property='og:site_name' content='lllovol'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2020-01-10T19:07:19&#43;00:00'/><meta property='article:modified_time' content='2020-01-10T19:07:19&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg' />
+<meta name="twitter:title" content="SpringBoot开发中的一些小细节（十二）单元测试">
+<meta name="twitter:description" content="前言 2020将近，已经很久没有更新blog，但是每天的工作笔记都还是有在记录，趁着马上就要过年，没有那么忙碌了，把自己19年Q4的工作中遇到的问题以及一些有用的方法整理一下~
+测试的必要性 在程序员的日常工作中，实际上真正在编写代码的时间，在整个工作时间中所占的比例其实很小的一部分。在写代码之前我们需要撰写需求文档，以及充足的思考，画出uml图（虽然很多经验丰富的大佬都没有画，但是那是建立在经验相当丰富的基础之上的）；在写完代码之后，这个项目需要发布与部署到测试环境，这就是CI/CD所负责的部分了；再之后，我们就需要测试我们的项目，是否能够完成需求文档中的需求，实现了相应的功能。 如果没有进行充分完整的测试，直接上线，这个项目差不多就是穿着皇帝的新衣在大街上到处晃荡了。同样，在互联网高速发展的今天，测试也不再仅仅是人工进行测试，自动化测试的演进又再一次的提升了团队的生产效率。这和敏捷开发、持续集成、持续部署、DevOps是一脉相承的。
+测试金字塔Test Pyramid  图来源于ThoughtWorks
+ 在上方的金字塔当中，越往金字塔尖尖方向的，集成的程度越高，测试所耗费的时间就越长，但是需要的测试数目并没有那么多；与之相反，越往金字塔底层方向的，集成的程度就越低，测试所消耗的时间也更快，但是所需要测试的数量就会更加的庞大。
+ UI Tests 项目的ui界面测试，这一层面的测试比较适合在上线之后进行冒烟测试，能够知道项目的整个流程到底是不是有问题。但是通常由于集成的程度太高，不能很快的定位问题。 Service Tests 这一层，用来测试服务是否可用，比如API测试。 Unit Tests 在代码层面进行测试，通常可以针对某一个类，某一个方法进行测试，能够快速定位问题。这个层级的层级能够保证一个系统的每一个基石都能够按照预期的那样进行工作。单元测试的数量应该在测试组合中远远多于其他类型的测试。  Junit 三段式结构 我们通常采用三段式的结构来撰写单元测试
+ 构造部分。进行对象的构建、赋值等。 逻辑部分。运行方法逻辑对第一部分的数据对象进行运算。 断言部分。判断本次单元测试能否通过。  实例代码 要使用is（）方法首先需要导入hamcrest-library-1.3.jar和hamcrest-core-1.3.jar两个jar包
+依赖配置：
+&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;org.hamcrest&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;hamcrest-library&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;1.3&amp;lt;/version&amp;gt;&amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt;&amp;lt;/dependency&amp;gt;&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;junit&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;junit&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;4.12&amp;lt;/version&amp;gt;&amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt;&amp;lt;/dependency&amp;gt;简单的UT代码实现
+import static org.hamcrest.core.Is.is;import static org.junit.Assert.assertThat;@RunWith(SpringRunner.class)@SpringBootTest@Slf4jpublic class ApplicationTests {@Test@Ignorepublic void contextLoads() {}public Boolean compare(String A, String B) {return A."><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg' />
+    <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
+
+    </head>
+    <body class="article-page keep-sidebar">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.body.dataset.scheme = 'dark';
+        } else {
+            document.body.dataset.scheme = 'light';
+        }
+    })();
+</script><div class="container main-container flex on-phone--column extended ">
+            <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            <figure class="site-avatar">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+        
+        <h1 class="site-name"><a href="https://lllovol.com">lllovol</a></h1>
+        <h2 class="site-description">Stay Hungry, Stay Foolish</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>Dark Mode</span>
+            </li>
+        
+    </ol>
+</aside>
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/posts/spring/2020-01-10-spring12/">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg" loading="lazy" alt="Featured image of post SpringBoot开发中的一些小细节（十二）单元测试" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/spring/" >
+                Spring
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/posts/spring/2020-01-10-spring12/">SpringBoot开发中的一些小细节（十二）单元测试</a>
+    </h2>
+
+    <footer class="article-time">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <time class="article-time--published">Jan 10, 2020</time>
+    </footer></div>
+</header>
+
+    <section class="article-content">
+    <h2 id="前言">前言</h2>
+<p>2020将近，已经很久没有更新blog，但是每天的工作笔记都还是有在记录，趁着马上就要过年，没有那么忙碌了，把自己19年Q4的工作中遇到的问题以及一些有用的方法整理一下~</p>
+<h2 id="测试的必要性">测试的必要性</h2>
+<p>在程序员的日常工作中，实际上真正在编写代码的时间，在整个工作时间中所占的比例其实很小的一部分。在写代码之前我们需要撰写需求文档，以及充足的思考，画出uml图（虽然很多经验丰富的大佬都没有画，但是那是建立在经验相当丰富的基础之上的）；在写完代码之后，这个项目需要发布与部署到测试环境，这就是CI/CD所负责的部分了；再之后，我们就需要测试我们的项目，是否能够完成需求文档中的需求，实现了相应的功能。 如果没有进行充分完整的测试，直接上线，这个项目差不多就是穿着皇帝的新衣在大街上到处晃荡了。同样，在互联网高速发展的今天，测试也不再仅仅是人工进行测试，自动化测试的演进又再一次的提升了团队的生产效率。这和敏捷开发、持续集成、持续部署、DevOps是一脉相承的。</p>
+<h2 id="测试金字塔test-pyramid">测试金字塔Test Pyramid</h2>
+<p><img src="https://insights.thoughtworks.cn/wp-content/uploads/2018/10/3.png" alt="测试金字塔"  /></p>
+<blockquote>
+<p><a class="link" href="https://insights.thoughtworks.cn/practical-test-pyramid/"  target="_blank" rel="noopener"
+    >图来源于ThoughtWorks</a></p>
+</blockquote>
+<p>在上方的金字塔当中，越往金字塔尖尖方向的，集成的程度越高，测试所耗费的时间就越长，但是需要的测试数目并没有那么多；与之相反，越往金字塔底层方向的，集成的程度就越低，测试所消耗的时间也更快，但是所需要测试的数量就会更加的庞大。</p>
+<ul>
+<li>UI Tests 项目的ui界面测试，这一层面的测试比较适合在上线之后进行冒烟测试，能够知道项目的整个流程到底是不是有问题。但是通常由于集成的程度太高，不能很快的定位问题。</li>
+<li>Service Tests 这一层，用来测试服务是否可用，比如API测试。</li>
+<li>Unit Tests 在代码层面进行测试，通常可以针对某一个类，某一个方法进行测试，能够快速定位问题。这个层级的层级能够保证一个系统的每一个基石都能够按照预期的那样进行工作。单元测试的数量应该在测试组合中远远多于其他类型的测试。</li>
+</ul>
+<h2 id="junit">Junit</h2>
+<h3 id="三段式结构">三段式结构</h3>
+<p>我们通常采用三段式的结构来撰写单元测试</p>
+<ul>
+<li>构造部分。进行对象的构建、赋值等。</li>
+<li>逻辑部分。运行方法逻辑对第一部分的数据对象进行运算。</li>
+<li>断言部分。判断本次单元测试能否通过。</li>
+</ul>
+<h3 id="实例代码">实例代码</h3>
+<p>要使用is（）方法首先需要导入hamcrest-library-1.3.jar和hamcrest-core-1.3.jar两个jar包</p>
+<p>依赖配置：</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.hamcrest&lt;/groupId&gt;
+    &lt;artifactId&gt;hamcrest-library&lt;/artifactId&gt;
+    &lt;version&gt;1.3&lt;/version&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;junit&lt;/groupId&gt;
+    &lt;artifactId&gt;junit&lt;/artifactId&gt;
+    &lt;version&gt;4.12&lt;/version&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
+</code></pre><p>简单的UT代码实现</p>
+<pre><code>import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@Slf4j
+public class ApplicationTests {
+    
+    @Test
+    @Ignore
+    public void contextLoads() {
+    }
+
+    public Boolean compare(String A, String B) {
+        return A.equals(B);
+    }
+
+    @Test
+    public void testCompare() {
+        // 第一段
+    	var tempParamA = &quot;1&quot;;
+        var tempParamB = &quot;2&quot;;
+
+        // 第二段
+        var result = compare(tempParamA, tempParamB);
+
+        // 第三段
+		assertThat( result, is(false));
+    }
+}
+</code></pre><p>上述代码的意思是</p>
+<ul>
+<li>定义两个参数AB</li>
+<li>使用compare方法对两个参数进行比较</li>
+<li>断言，如果result是false，那么本次UT通过</li>
+</ul>
+<h3 id="其他需要注意的地方">其他需要注意的地方</h3>
+<ol>
+<li>通常在进行打包的时候，一般是会跳过这个打包阶段的<code>mvn clean package -DskipTests</code>，当然如果我们想要执行单元测试，那么直接<code>mvn clean package</code>这样就是ok的。</li>
+<li>在写单元测试的时候，我们需要将语义表达清楚，尤其是在写单元测试名字的时候，还有在写断言的时候，需要直接就是英文的一句具有完整语义的句子，这样在后期维护的时候会很方便，可以一眼就知道这是干什么的。</li>
+<li>在不想跑的Test上面加上<code>@Ignore</code>就可以不执行我们不需要的依赖等等，因此我们最好就是使用充血模型，在每个model中最好就有本类能做到的相关功能的方法实现。（贫血模型，通常就是简单的POJO，主要的功能方法都是在Service等外界实现的）</li>
+</ol>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+    
+</article>
+
+     
+        
+    
+
+
+<div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: 'aaf5fc3a72ea9ce81d62',
+        clientSecret: '7792527b47af3239ddbc2274fb5fd141c28d8339',
+        repo: 'ymkNK.github.io',
+        owner: 'ymkNK',
+        admin: ['ymkNK'],
+        id: window.location.pathname,
+        title: document.title,
+        distractionFreeMode: true
+    })
+
+    gitalk.render('gitalk-container')
+</script>
+
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        
+        2018 -
+        
+        2021
+        &copy;
+        lllovol
+    </section>
+    
+    <section class="powerby">
+        
+            <b><a href="https://github.com/ymkNK" target="_blank" rel="noopener" data-version="%s">Owner Rainbowly </a></b> <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

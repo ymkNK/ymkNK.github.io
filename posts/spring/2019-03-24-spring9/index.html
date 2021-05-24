@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='前言 本文主要记录最近工作中关于开发中的一些小技巧以及感悟
+小细节 String转Long 使用Long.parseLong,而不是Long.getLong
+Guava库 Joiner 超好用的Guava库，主要用于字符串的拼接，可以自动在中间加上分隔符
+ String yamlStart = &amp;quot;---\n&amp;quot;;String yamlEnd = &amp;quot;...\n&amp;quot;;Joiner joinerContent = Joiner.on(&amp;quot;...\n---\n&amp;quot;).skipNulls();return Joiner.on(&amp;quot;&amp;quot;).join(yamlStart, joinerContent.join(yamlList), yamlEnd); Splitter 可以很方便的将字符串分割成对应的数据结构
+ //将source进行处理List&amp;lt;String&amp;gt; tempSource = Splitter.on(&amp;quot;,&amp;quot;).splitToList(param.getSource()); String占位符的用法 原来：
+ String title = &amp;quot;[&amp;quot; &#43; characterName &#43; &amp;quot;][&amp;quot; &#43; task.getEnv() &#43; &amp;quot;][&amp;quot; &#43; pipelineStage.getService() &#43; &amp;quot;]&amp;quot;; 改进：
+ String title = String.format(&amp;quot;[%s][%s][%s]&amp;quot;, 线程中的问题 不能直接使用Autowired，需要定义了成员变量之后，使用外界已经加载好的service作为入参传入初始化这个线程，如果每一个线程都启一个service的话，资源消耗会很大。 （仅仅是我暂时这么理解，TODO 搞清楚原因）
+数据入库的操作 建议先入队列，然后再入库
+Configuration的问题 定义了两个configuration，一个masterClient，一个jobClient 然后有个地方使用了@Autowired来进行配置（一个在外层service，一个是另外一个service），这时候就出现了冲突，开始报错。配置一定要清晰'><title>SpringBoot开发中的一些小细节(九）Guava库</title>
+
+<link rel='canonical' href='https://lllovol.com/posts/spring/2019-03-24-spring9/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='SpringBoot开发中的一些小细节(九）Guava库'>
+<meta property='og:description' content='前言 本文主要记录最近工作中关于开发中的一些小技巧以及感悟
+小细节 String转Long 使用Long.parseLong,而不是Long.getLong
+Guava库 Joiner 超好用的Guava库，主要用于字符串的拼接，可以自动在中间加上分隔符
+ String yamlStart = &amp;quot;---\n&amp;quot;;String yamlEnd = &amp;quot;...\n&amp;quot;;Joiner joinerContent = Joiner.on(&amp;quot;...\n---\n&amp;quot;).skipNulls();return Joiner.on(&amp;quot;&amp;quot;).join(yamlStart, joinerContent.join(yamlList), yamlEnd); Splitter 可以很方便的将字符串分割成对应的数据结构
+ //将source进行处理List&amp;lt;String&amp;gt; tempSource = Splitter.on(&amp;quot;,&amp;quot;).splitToList(param.getSource()); String占位符的用法 原来：
+ String title = &amp;quot;[&amp;quot; &#43; characterName &#43; &amp;quot;][&amp;quot; &#43; task.getEnv() &#43; &amp;quot;][&amp;quot; &#43; pipelineStage.getService() &#43; &amp;quot;]&amp;quot;; 改进：
+ String title = String.format(&amp;quot;[%s][%s][%s]&amp;quot;, 线程中的问题 不能直接使用Autowired，需要定义了成员变量之后，使用外界已经加载好的service作为入参传入初始化这个线程，如果每一个线程都启一个service的话，资源消耗会很大。 （仅仅是我暂时这么理解，TODO 搞清楚原因）
+数据入库的操作 建议先入队列，然后再入库
+Configuration的问题 定义了两个configuration，一个masterClient，一个jobClient 然后有个地方使用了@Autowired来进行配置（一个在外层service，一个是另外一个service），这时候就出现了冲突，开始报错。配置一定要清晰'>
+<meta property='og:url' content='https://lllovol.com/posts/spring/2019-03-24-spring9/'>
+<meta property='og:site_name' content='lllovol'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2019-03-24T17:23:42&#43;00:00'/><meta property='article:modified_time' content='2019-03-24T17:23:42&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/9.jpg' />
+<meta name="twitter:title" content="SpringBoot开发中的一些小细节(九）Guava库">
+<meta name="twitter:description" content="前言 本文主要记录最近工作中关于开发中的一些小技巧以及感悟
+小细节 String转Long 使用Long.parseLong,而不是Long.getLong
+Guava库 Joiner 超好用的Guava库，主要用于字符串的拼接，可以自动在中间加上分隔符
+ String yamlStart = &amp;quot;---\n&amp;quot;;String yamlEnd = &amp;quot;...\n&amp;quot;;Joiner joinerContent = Joiner.on(&amp;quot;...\n---\n&amp;quot;).skipNulls();return Joiner.on(&amp;quot;&amp;quot;).join(yamlStart, joinerContent.join(yamlList), yamlEnd); Splitter 可以很方便的将字符串分割成对应的数据结构
+ //将source进行处理List&amp;lt;String&amp;gt; tempSource = Splitter.on(&amp;quot;,&amp;quot;).splitToList(param.getSource()); String占位符的用法 原来：
+ String title = &amp;quot;[&amp;quot; &#43; characterName &#43; &amp;quot;][&amp;quot; &#43; task.getEnv() &#43; &amp;quot;][&amp;quot; &#43; pipelineStage.getService() &#43; &amp;quot;]&amp;quot;; 改进：
+ String title = String.format(&amp;quot;[%s][%s][%s]&amp;quot;, 线程中的问题 不能直接使用Autowired，需要定义了成员变量之后，使用外界已经加载好的service作为入参传入初始化这个线程，如果每一个线程都启一个service的话，资源消耗会很大。 （仅仅是我暂时这么理解，TODO 搞清楚原因）
+数据入库的操作 建议先入队列，然后再入库
+Configuration的问题 定义了两个configuration，一个masterClient，一个jobClient 然后有个地方使用了@Autowired来进行配置（一个在外层service，一个是另外一个service），这时候就出现了冲突，开始报错。配置一定要清晰"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/9.jpg' />
+    <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
+
+    </head>
+    <body class="article-page keep-sidebar">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.body.dataset.scheme = 'dark';
+        } else {
+            document.body.dataset.scheme = 'light';
+        }
+    })();
+</script><div class="container main-container flex on-phone--column extended ">
+            <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            <figure class="site-avatar">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+        
+        <h1 class="site-name"><a href="https://lllovol.com">lllovol</a></h1>
+        <h2 class="site-description">Stay Hungry, Stay Foolish</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>Dark Mode</span>
+            </li>
+        
+    </ol>
+</aside>
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/posts/spring/2019-03-24-spring9/">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/9.jpg" loading="lazy" alt="Featured image of post SpringBoot开发中的一些小细节(九）Guava库" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/spring/" >
+                Spring
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/posts/spring/2019-03-24-spring9/">SpringBoot开发中的一些小细节(九）Guava库</a>
+    </h2>
+
+    <footer class="article-time">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <time class="article-time--published">Mar 24, 2019</time>
+    </footer></div>
+</header>
+
+    <section class="article-content">
+    <h1 id="前言">前言</h1>
+<p>本文主要记录最近工作中关于开发中的一些小技巧以及感悟</p>
+<h1 id="小细节">小细节</h1>
+<h4 id="string转long">String转Long</h4>
+<p>使用Long.parseLong,而不是Long.getLong</p>
+<h4 id="guava库">Guava库</h4>
+<h5 id="joiner">Joiner</h5>
+<p>超好用的Guava库，主要用于字符串的拼接，可以自动在中间加上分隔符</p>
+<pre><code>    String yamlStart = &quot;---\n&quot;;
+    String yamlEnd = &quot;...\n&quot;;
+    Joiner joinerContent = Joiner.on(&quot;...\n---\n&quot;).skipNulls();
+    return Joiner.on(&quot;&quot;).join(yamlStart, joinerContent.join(yamlList), yamlEnd);
+</code></pre>
+<h5 id="splitter">Splitter</h5>
+<p>可以很方便的将字符串分割成对应的数据结构</p>
+<pre><code>    //将source进行处理
+    List&lt;String&gt; tempSource = Splitter.on(&quot;,&quot;).splitToList(param.getSource());
+</code></pre>
+<h4 id="string占位符的用法">String占位符的用法</h4>
+<p>原来：</p>
+<pre><code>    String title = &quot;[&quot; + characterName + &quot;][&quot; + task.getEnv() + &quot;][&quot; + pipelineStage.getService() + &quot;]&quot;;
+</code></pre>
+<p>改进：</p>
+<pre><code>    String title = String.format(&quot;[%s][%s][%s]&quot;,
+</code></pre>
+<h4 id="线程中的问题">线程中的问题</h4>
+<p>不能直接使用Autowired，需要定义了成员变量之后，使用外界已经加载好的service作为入参传入初始化这个线程，如果每一个线程都启一个service的话，资源消耗会很大。
+（仅仅是我暂时这么理解，TODO 搞清楚原因）</p>
+<h4 id="数据入库的操作">数据入库的操作</h4>
+<p>建议先入队列，然后再入库</p>
+<h4 id="configuration的问题">Configuration的问题</h4>
+<p>定义了两个configuration，一个masterClient，一个jobClient
+然后有个地方使用了@Autowired来进行配置（一个在外层service，一个是另外一个service），这时候就出现了冲突，开始报错。配置一定要清晰</p>
+<h4 id="重复代码的问题">重复代码的问题</h4>
+<p>在mac中，如果是在同一个类中的重复冗余的代码，可以使用option+command加上m，可以将重复代码进行抽离。如果是在不同的类中，可以使用将重复方法抽离到父类的方法，或者是抽离到静态工具类的方法。避免重复代码的最好的方式，就是在编码的时候，尽量不要使用复制粘贴的方式来进行编码，而应该想办法，提高自己的代码的可复用性和可扩展性。</p>
+<h1 id="小感悟">小感悟</h1>
+<p>工作不知不觉已经是第七个月，但是自己的能力，还有薪资，都是处于一个“穷”的状态，俗话说得好，穷则独善其身。现在的我，还没有资格去管别人的事情，能将自己的事情做好就已经不错了。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+    
+</article>
+
+     
+        
+    
+
+
+<div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: 'aaf5fc3a72ea9ce81d62',
+        clientSecret: '7792527b47af3239ddbc2274fb5fd141c28d8339',
+        repo: 'ymkNK.github.io',
+        owner: 'ymkNK',
+        admin: ['ymkNK'],
+        id: window.location.pathname,
+        title: document.title,
+        distractionFreeMode: true
+    })
+
+    gitalk.render('gitalk-container')
+</script>
+
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        
+        2018 -
+        
+        2021
+        &copy;
+        lllovol
+    </section>
+    
+    <section class="powerby">
+        
+            <b><a href="https://github.com/ymkNK" target="_blank" rel="noopener" data-version="%s">Owner Rainbowly </a></b> <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
