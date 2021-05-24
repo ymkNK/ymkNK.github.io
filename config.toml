@@ -436,7 +436,7 @@ enableEmoji = true
   dateFormat = "2006-01-02"
   # website images for Open Graph and Twitter Cards
   # 网站图片, 用于 Open Graph 和 Twitter Cards
-  images = ["/logo.png"]
+  images = ["https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg"]
   # enable PWA
   # 开启 PWA 支持
   enablePWA = true
@@ -623,18 +623,18 @@ enableEmoji = true
     # 文章页面的分享信息设置
     [params.page.share]
       enable = true
-      Twitter = true
-      Facebook = true
+      Twitter = false
+      Facebook = false
       Linkedin = false
       Whatsapp = false
       Pinterest = false
       Tumblr = false
-      HackerNews = true
+      HackerNews = false
       Reddit = false
       VK = false
       Buffer = false
       Xing = false
-      Line = true
+      Line = false
       Instapaper = false
       Pocket = false
       Digg = false
