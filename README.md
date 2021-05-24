@@ -1,3 +1,5 @@
-# 个人的github小博客
+# lllovol
 
 [lllovol.com](https://lllovol.com) 欢迎━(*｀∀´*)ノ亻!
+
+build by hugo
