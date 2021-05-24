@@ -5606,7 +5606,7 @@ mongoTemplate.upsert(query, update, &amp;quot;class&amp;quot;);
 &lt;pre&gt;&lt;code&gt;log.debug(&amp;quot;user: {}&amp;quot;, username);
 if (log.isDebugEnabled()) {
     for (Map.Entry&amp;lt;String, CustomServiceDeployDto&amp;gt; stringCustomServiceDeployDtoEntry : serviceAndTag.entrySet()) {
-        log.debug(&amp;quot;      service and tag: {}&amp;quot;, JSONObject.toJSON(stringCustomServiceDeployDtoEntry));
+        log.debug(&amp;quot;      service and tags: {}&amp;quot;, JSONObject.toJSON(stringCustomServiceDeployDtoEntry));
     }
 }
 &lt;/code&gt;&lt;/pre&gt;
@@ -6530,7 +6530,7 @@ task :new do
             file.puts &amp;quot;author: ymkNK&amp;quot;
             file.puts &amp;quot;date: #{Time.now}&amp;quot;
             file.puts &amp;quot;categories: #{@categories}&amp;quot;
-            file.puts &amp;quot;tag: #{@tag}&amp;quot;
+            file.puts &amp;quot;tags: #{@tag}&amp;quot;
             file.puts &amp;quot;img: 1.jpg&amp;quot;
             file.puts &amp;quot;---&amp;quot;
     end

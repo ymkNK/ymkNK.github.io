@@ -31,7 +31,7 @@
  MEMOIZED-CUT-ROD(p,n)1 let r[0..n]be a new array2 for i = 0 to n3 r[i] = min_num4 return MEMOIZED-CUT-ROD-AUX(p,n,r);MEMOIZED-CUT-ROD-AUX(p,n,r)1 if r[n]&amp;gt;=02 return r[n]3 if n == 04 q = 05 else q = min_num6	for i = 1 to n 7 q=max(q,p[i]&#43;MEMOIZED-CUT-ROD-AUX(p,n-i,r))8 r[n]=q9 return q 自底向上的方法  BOTTOM-UP-CUT-ROD(p,n)1 let r[0.'>
 <meta property='og:url' content='https://lllovol.com/posts/algorithm/2019-03-27-dynamic-programming/'>
 <meta property='og:site_name' content='lllovol'>
-<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2019-03-27T20:38:15&#43;00:00'/><meta property='article:modified_time' content='2019-03-27T20:38:15&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/1.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Algorithm' /><meta property='article:published_time' content='2019-03-27T20:38:15&#43;00:00'/><meta property='article:modified_time' content='2019-03-27T20:38:15&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/1.jpg' />
 <meta name="twitter:title" content="Dynamic Programming-钢条切割问题">
 <meta name="twitter:description" content="前言 动态规划是算法中的一大类，是一个求解最优解的值的问题
  本文内容主要来自于 《算法导论第三版第四部分第15章 动态规划》
@@ -312,6 +312,12 @@
 
     <footer class="article-footer">
     
+    <section class="article-tags">
+        
+            <a href="/tags/algorithm/">Algorithm</a>
+        
+    </section>
+
 
     
     <section class="article-copyright">

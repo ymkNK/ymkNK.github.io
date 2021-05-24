@@ -17,7 +17,7 @@ code:
  private List&amp;lt;GreyDestination&amp;gt; getDestinationsPercent(List&amp;lt;GreyDestination&amp;gt; tempDestinations) {HashMap&amp;lt;String, Integer&amp;gt; serviceAndTotalWeight = new HashMap&amp;lt;&amp;gt;();HashMap&amp;lt;String, Integer&amp;gt; serviceAndCount = new HashMap&amp;lt;&amp;gt;();getServiceWeightAndCount(tempDestinations, serviceAndTotalWeight, serviceAndCount);List&amp;lt;GreyDestination&amp;gt; finalDestinations = tempDestinations.stream().map(destination -&amp;gt; {String service = destination.getService();Integer count = serviceAndCount.get(service);if (count == 1) {destination.'>
 <meta property='og:url' content='https://lllovol.com/posts/spring/2019-03-29-spring10/'>
 <meta property='og:site_name' content='lllovol'>
-<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2019-03-29T17:19:15&#43;00:00'/><meta property='article:modified_time' content='2019-03-29T17:19:15&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Spring' /><meta property='article:published_time' content='2019-03-29T17:19:15&#43;00:00'/><meta property='article:modified_time' content='2019-03-29T17:19:15&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg' />
 <meta name="twitter:title" content="SpringBoot开发中的一些小细节(十）泛型、分布式锁">
 <meta name="twitter:description" content="前言 本文主要记录最近工作中关于开发中的一些小技巧以及感悟
 小细节 权重转换百分比的问题 在工作中需要将各个对象所对应的权重转换成百分比，并且要求最后转换出来的百分比，同一类型的相加必须为百分之百，解决思路主要如下
@@ -391,6 +391,12 @@ percent * 100 / totalWeight</p>
 
     <footer class="article-footer">
     
+    <section class="article-tags">
+        
+            <a href="/tags/spring/">Spring</a>
+        
+    </section>
+
 
     
     <section class="article-copyright">

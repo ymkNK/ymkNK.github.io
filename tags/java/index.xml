@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java on lllovol</title>
+    <link>https://lllovol.com/tags/java/</link>
+    <description>Recent content in Java on lllovol</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 20 Sep 2020 18:44:18 +0000</lastBuildDate><atom:link href="https://lllovol.com/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java的部分基础机制</title>
+      <link>https://lllovol.com/posts/java/2020-09-20-java-basic/</link>
+      <pubDate>Sun, 20 Sep 2020 18:44:18 +0000</pubDate>
+      
+      <guid>https://lllovol.com/posts/java/2020-09-20-java-basic/</guid>
+      <description>Java内存管理  Java的内存管理机制
+ 1. JMM java的内存模型
+1.1 主内存和工作内存 Java 内存模型规定了所有的变量都存储在主内存（Main Memory）中，每条线程有自己的工作内存（Working Memory），线程的工作内存中保存了该线程所使用到的变量的内存副本。 不同线程之间无法直接访问其他线程工作内存中的变量，线程间变量的传递都要通过主内存来完成（如下图 2-1所有）。
+1.2 执行引擎 执行引擎，就是一个运算器，能够识别输入的指令，并根据输入的指令执行一套特定的逻辑。
+1.3 主内存和工作内存的交互模型 Java 内存模型中定义了 8 种操作完成主内存与工作内存之间具体的交互协议，虚拟机实现时必须保证 每一种操作都是原子级、不可再分的。 这 8 种操作又可分为作用于主内存和作用于工作内存的操作。
+1.3.1 作用于主内存的操作  lock 作用于主内存的变量，它把一个变量标识为一条线程独占的状态。 unlock 作用于主内存的变量，它把一个处于锁定状态的变量释放出来，释放后的变量才能被其他线程锁定。 read 作用于主内存的变量，它把一个变量的值从主内存传输到工作内存中，以便 laod 时使用。 write 作用于主内存的变量，它把 store 操作从工作内存中得到的变量值存入到主内存变量中。  1.3.2 作用于工作内存的操作  load 作用于工作内存的变量，它把 read 操作从主内存中得到的变量值放入工作内存的变量副本中。 use 作用于工作内存的变量，它把一个工作内存中的一个变量的值传递给执行引擎，每当虚拟机遇到一个需要使用的变量的值的字节码执行时会执行这个操作。 assign 作用于工作内存的变量，它把一个执行引擎接收到的值赋给工作内存的变量，每当虚拟机遇到一个变量赋值的字节码执行时执行这个操作。 store 作用于工作内存的变量，它把工作内存中的一个变量的值传送到主内存中，以便随后的 write 操作。  2. JVM是如何划分内存的 垃圾回收机制 对象类型 对象擦除 基本运行原理 </description>
+    </item>
+    
+    <item>
+      <title>Java学习笔记（一）</title>
+      <link>https://lllovol.com/posts/java/2020-07-04-java-note/</link>
+      <pubDate>Sat, 04 Jul 2020 14:07:38 +0000</pubDate>
+      
+      <guid>https://lllovol.com/posts/java/2020-07-04-java-note/</guid>
+      <description>1. volatile volatile是轻量级的同步机制
+ 保证可见性 不保证原子性 禁止指令重排  1.1 JMM内存模型之可见性 JMM（Java Memory Model） Java内存模型
+ Java内存模型
+ </description>
+    </item>
+    
+    <item>
+      <title>Java11新特性的六个实验</title>
+      <link>https://lllovol.com/posts/java/2019-10-16-java11/</link>
+      <pubDate>Wed, 16 Oct 2019 18:41:31 +0000</pubDate>
+      
+      <guid>https://lllovol.com/posts/java/2019-10-16-java11/</guid>
+      <description>前言 最近将java升级到了11，因此学习了一些java11的一些新特性
+一.局部变量类型判断 代码：
+ @Testpublic void testVar() {// 测试局部变量类型判断特性var java11 = &amp;quot;test java11&amp;quot;;var test = 1;System.out.println(java11);System.out.println(test);}输出：
+二.String类的新方法 代码：
+ @Testpublic void testString() {String blank = &amp;quot;&amp;quot;;String strip = &amp;quot; strip &amp;quot;;String lines = &amp;quot;\n\n&amp;quot; +&amp;quot;\n&amp;quot; +&amp;quot;\n&amp;quot;;// 判断字符串是否为空白System.out.println(blank.isBlank());// 去除首尾空格System.out.println(strip.strip());// 去除开头空格System.out.println(strip.stripLeading());// 去除结尾空格System.out.println(strip.stripTrailing());// 重复System.out.println(strip.repeat(0));System.out.println(strip.repeat(1));System.out.println(strip.repeat(2));System.out.println(strip.repeat(3));// 统计行数System.</description>
+    </item>
+    
+    <item>
+      <title>Java8流式编程</title>
+      <link>https://lllovol.com/posts/java/2019-03-21-stream/</link>
+      <pubDate>Thu, 21 Mar 2019 11:08:24 +0000</pubDate>
+      
+      <guid>https://lllovol.com/posts/java/2019-03-21-stream/</guid>
+      <description>前言 在前天的时候，java12都出了，但是我还在用java6的陈旧的编码方式，需要改进到java8的流式编程，此文主要是用来记录流式编程的积累
+ java8 新特性
+ 个人的主要理解 java真正的支持了函数式的编程，同时加入了streamApi来进行支持
+ Java 8 API添加了一个新的抽象称为流Stream，可以让你以一种声明的方式处理数据。 Stream 使用一种类似用 SQL 语句从数据库查询数据的直观方式来提供一种对 Java 集合运算和表达的高阶抽象。 Stream API可以极大提高Java程序员的生产力，让程序员写出高效率、干净、简洁的代码。 这种风格将要处理的元素集合看作一种流， 流在管道中传输， 并且可以在管道的节点上进行处理， 比如筛选， 排序，聚合等。 元素流在管道中经过中间操作（intermediate operation）的处理，最后由最终操作(terminal operation)得到前面处理的结果。 Stream编程
+ 总而言之，流式操作主要分为了中间操作和最终操作
+Intermediate 操作 非最终操作，也就是中间操作
+ map (mapToInt, flatMap 等) filter distinct sorted peek limit skip parallel sequential unordered  Terminal 操作 最终操作
+ forEach forEachOrdered toArray reduce collect min max count anyMatch allMatch noneMatch findFirst findAny iterator  Short-circuiting 操作 短程巡回操作</description>
+    </item>
+    
+    <item>
+      <title>Java中的容器类</title>
+      <link>https://lllovol.com/posts/java/2018-12-16-java/</link>
+      <pubDate>Sun, 16 Dec 2018 22:23:46 +0000</pubDate>
+      
+      <guid>https://lllovol.com/posts/java/2018-12-16-java/</guid>
+      <description>概览 平时学习工作中，总会使用到各种各样的数据结构，map、set、LinkedHashMap等等，虽然在使用的过程中对此有了一定的了解，但是感觉还是不是很通透。故此写一篇blog用于总结java中的数据结构。
+Java的容器类 Java中的容器类按照大的来分，主要可以分为：
+ collection：存储着对象的集合 map：存储着key，value的键值对 接下来的主要就分别以上面两个类别展开进行整理  Collection List    List类别 特点     ArrayList 基于动态数组实现，支持随机访问，允许所有元素包括null   Vector 与ArrayList相似，但是Vector是线程安全的（同步的）   LinkedList 基于双向链表，只能顺序访问，可以快速的再链表中插入和删除元素（栈[Stack]、队列[Queue]、双向队列[Deque]）。没有同步方法   Stack 继承自Vector，实现一个后进先出的堆栈。额外提供了5个方法使得Vector可以被当做堆栈使用：push,pop,peek,empty,search。刚刚创建的时候是空栈     和LinkedList一样，ArrayList也是非同步的（unsynchronized）。一般情况下使用这两个就可以了，因为非同步，所以效率比较高。 如果涉及到堆栈，队列等操作，应该考虑用List，对于需要快速插入，删除元素，应该使用LinkedList，如果需要快速随机访问元素，应该使用ArrayList。 几种java容器
+ 有几个问题
+ ArrayList的扩容操作？  每一次扩容都会扩容到原来的1.5倍，使用grow()方法，第一次添加元素的时候分配10个对象空间，当添加到第11个元素的时候，就会扩容到原来的1.5倍，当添加到16个元素的时候，就会扩容到原来的15*1.5的大小，等等。每一次扩容都是通过Array.copyof(elementData,newCapacity)来实现的，会消耗大量的资源，代价比较大，因此在知道大致对象大小的时候，提前设置好ArrayList的大小是非常明智的选择。（old+old&amp;raquo;1)
+ 为什么Vector是线程安全的？  Set    Set类别 特点     SortSet(TreeSet) 基于红黑树有序，TreeSet是set的一种变体，是可以实现排序等功能的集合 O(logN)   HashSet 基于hash表实现，可以看成一个只有key的HashMap O(1) ，不允许重复，无序，允许存在null(最多一个)   LinkedHashSet 具有HashSet的查找效率，且内部使用了双向链表维护了元素的插入顺序,保证了集合的有序性     写了 HashMap 和 HashSet，然后我们可以看到 HashSet 的方法基本上都是基于 HashMap 来实现的，说白了，HashSet内部的数据结构就是一个 HashMap，其方法的内部几乎就是在调用 HashMap 的方法。 LinkedHashSet 首先我们需要知道的是它是一个 Set 的实现，所以它其中存的肯定不是键值对，而是值。此实现与 HashSet 的不同之处在于，LinkedHashSet 维护着一个运行于所有条目的双重链接列表。此链接列表定义了迭代顺序，该迭代顺序可为插入顺序或是访问顺序。 看到上面的介绍，是不是感觉其与 HashMap 和 LinkedHashMap 的关系很像？LinkedHashSet就是使用LinkedHashMap来实现的。 注意，此实现不是同步的。如果多个线程同时访问链接的哈希Set，而其中至少一个线程修改了该 Set，则它必须保持外部同步。</description>
+    </item>
+    
+  </channel>
+</rss>

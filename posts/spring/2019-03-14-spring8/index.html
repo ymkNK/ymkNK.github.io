@@ -37,7 +37,7 @@ spring 相关书籍推荐 spring boot 编程思想 原生类型，装箱和拆�
   将一个基本类型包装成一个类， 可以使得这个类有很多可以调用的方法 java还不算纯面向对象的语言，真正的面向对象，是没有基本数据类型的 在java的泛型中，基本类型是不能够作为泛型参数的，因此需要使用包装类的类型解决泛型参数的问题 这也是早期java的设计缺陷，基本的数据类型是数据，不是对象，也不是Object的子类，因此需要装箱，才能和其他的Object子类公用一个接口  基本数据类型和对应的包装类    基本数据类型 包装类     int（4字节） Integer   byte（1字节） Byte   short（2字节） Short   long（8字节） Long   float（4字节） Float   double（8字节） Double   char（2字节） Character   boolean（未定） Boolean    装箱和拆箱的过程  装箱过程：通过调用包装器的valueOf方法实现的 拆箱过程：通过调用包装器的xxxValue方法实现的。（xxx代表对应的基本数据类型）。  其他注意点  通过valueOf方法创建Integer对象的时候，如果数值在[-128,127]之间，便返回指向IntegerCache.'>
 <meta property='og:url' content='https://lllovol.com/posts/spring/2019-03-14-spring8/'>
 <meta property='og:site_name' content='lllovol'>
-<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2019-03-14T17:03:05&#43;00:00'/><meta property='article:modified_time' content='2019-03-14T17:03:05&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Spring' /><meta property='article:published_time' content='2019-03-14T17:03:05&#43;00:00'/><meta property='article:modified_time' content='2019-03-14T17:03:05&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg' />
 <meta name="twitter:title" content="SpringBoot开发中的一些小细节(八)装箱与拆箱，基本数据类型与包装类">
 <meta name="twitter:description" content="前言 主要用来记录整理最近一周工作学习中遇到，学到的一些小知识，积少成多，聚沙成塔
 小细节 Swagger-ui显示枚举类型的时候 定义的枚举类型的头上不需要加一些莫名其妙的注解，就可以在Swagger-ui界面自动生成
@@ -368,6 +368,12 @@ spring 相关书籍推荐 spring boot 编程思想 原生类型，装箱和拆�
 
     <footer class="article-footer">
     
+    <section class="article-tags">
+        
+            <a href="/tags/spring/">Spring</a>
+        
+    </section>
+
 
     
     <section class="article-copyright">

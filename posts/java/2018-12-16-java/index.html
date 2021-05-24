@@ -19,7 +19,7 @@ Java的容器类 Java中的容器类按照大的来分，主要可以分为：
  为什么Vector是线程安全的？  Set    Set类别 特点     SortSet(TreeSet) 基于红黑树有序，TreeSet是set的一种变体，是可以实现排序等功能的集合 O(logN)   HashSet 基于hash表实现，可以看成一个只有key的HashMap O(1) ，不允许重复，无序，允许存在null(最多一个)   LinkedHashSet 具有HashSet的查找效率，且内部使用了双向链表维护了元素的插入顺序,保证了集合的有序性     写了 HashMap 和 HashSet，然后我们可以看到 HashSet 的方法基本上都是基于 HashMap 来实现的，说白了，HashSet内部的数据结构就是一个 HashMap，其方法的内部几乎就是在调用 HashMap 的方法。 LinkedHashSet 首先我们需要知道的是它是一个 Set 的实现，所以它其中存的肯定不是键值对，而是值。此实现与 HashSet 的不同之处在于，LinkedHashSet 维护着一个运行于所有条目的双重链接列表。此链接列表定义了迭代顺序，该迭代顺序可为插入顺序或是访问顺序。 看到上面的介绍，是不是感觉其与 HashMap 和 LinkedHashMap 的关系很像？LinkedHashSet就是使用LinkedHashMap来实现的。 注意，此实现不是同步的。如果多个线程同时访问链接的哈希Set，而其中至少一个线程修改了该 Set，则它必须保持外部同步。'>
 <meta property='og:url' content='https://lllovol.com/posts/java/2018-12-16-java/'>
 <meta property='og:site_name' content='lllovol'>
-<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2018-12-16T22:23:46&#43;00:00'/><meta property='article:modified_time' content='2018-12-16T22:23:46&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/1.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Java' /><meta property='article:published_time' content='2018-12-16T22:23:46&#43;00:00'/><meta property='article:modified_time' content='2018-12-16T22:23:46&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/1.jpg' />
 <meta name="twitter:title" content="Java中的容器类">
 <meta name="twitter:description" content="概览 平时学习工作中，总会使用到各种各样的数据结构，map、set、LinkedHashMap等等，虽然在使用的过程中对此有了一定的了解，但是感觉还是不是很通透。故此写一篇blog用于总结java中的数据结构。
 Java的容器类 Java中的容器类按照大的来分，主要可以分为：
@@ -405,6 +405,12 @@ SortedMap mapB = new TreeMap(comparator);
 
     <footer class="article-footer">
     
+    <section class="article-tags">
+        
+            <a href="/tags/java/">Java</a>
+        
+    </section>
+
 
     
     <section class="article-copyright">

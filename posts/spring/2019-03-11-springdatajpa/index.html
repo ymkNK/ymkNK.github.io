@@ -23,7 +23,7 @@ Hibernate  Hibernate是一个开放源代码的对象关系映射框架，它对
  public interface CrudRepository&amp;lt;T, ID&amp;gt; extends Repository&amp;lt;T, ID&amp;gt; {&amp;lt;S extends T&amp;gt; S save(S var1);&amp;lt;S extends T&amp;gt; Iterable&amp;lt;S&amp;gt; saveAll(Iterable&amp;lt;S&amp;gt; var1);Optional&amp;lt;T&amp;gt; findById(ID var1);boolean existsById(ID var1);Iterable&amp;lt;T&amp;gt; findAll();Iterable&amp;lt;T&amp;gt; findAllById(Iterable&amp;lt;ID&amp;gt; var1);long count();void deleteById(ID var1);void delete(T var1);void deleteAll(Iterable&amp;lt;?'>
 <meta property='og:url' content='https://lllovol.com/posts/spring/2019-03-11-springdatajpa/'>
 <meta property='og:site_name' content='lllovol'>
-<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2019-03-11T19:28:16&#43;00:00'/><meta property='article:modified_time' content='2019-03-11T19:28:16&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Spring' /><meta property='article:published_time' content='2019-03-11T19:28:16&#43;00:00'/><meta property='article:modified_time' content='2019-03-11T19:28:16&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg' />
 <meta name="twitter:title" content="源码阅读SpringDataJPA">
 <meta name="twitter:description" content="前言 CRUD是平常业务开发过程中最常接触到的，因此想通过阅读这个最常接触模块的代码，使得自己能够更加深入的了解Spring，提升自己的技术能力，而不是只会CRUD，却都不知道它是怎么实现的。
 Hibernate  Hibernate是一个开放源代码的对象关系映射框架，它对JDBC进行了非常轻量级的对象封装，它将POJO与数据库表建立映射关系，是一个全自动的orm（Object Relational Mapping）框架，hibernate可以自动生成SQL语句，自动执行，使得Java程序员可以随心所欲的使用对象编程思维来操纵数据库。Hibernate可以应用在任何使用JDBC的场合，既可以在Java的客户端程序使用，也可以在Servlet/JSP的Web应用中使用，完成数据持久化的重任。Hibernate百科
@@ -507,6 +507,12 @@ Hibernate  Hibernate是一个开放源代码的对象关系映射框架，它对
 
     <footer class="article-footer">
     
+    <section class="article-tags">
+        
+            <a href="/tags/spring/">Spring</a>
+        
+    </section>
+
 
     
     <section class="article-copyright">

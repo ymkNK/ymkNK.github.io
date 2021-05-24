@@ -21,7 +21,7 @@ Model public class Example { @Id String exampleId; String name; } 看起来没�
 解决方式 查了很久，也看了JPA的部分源码，并没有设置主键长度的地方。最终解决方式，每一次更新的时候，将旧的数据清除，然后将更新的数据和新数据聚合，更新到数据库中去。'>
 <meta property='og:url' content='https://lllovol.com/posts/database/2020-10-28-mongo-bad/'>
 <meta property='og:site_name' content='lllovol'>
-<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2020-10-28T15:03:26&#43;00:00'/><meta property='article:modified_time' content='2020-10-28T15:03:26&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='database' /><meta property='article:published_time' content='2020-10-28T15:03:26&#43;00:00'/><meta property='article:modified_time' content='2020-10-28T15:03:26&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg' />
 <meta name="twitter:title" content="JavaJPA使用Mongo中的坑">
 <meta name="twitter:description" content="背景 由于业务需求将一些数据作为缓存存到Mongo库中，然后在优化这个缓存过程的时候，发现的一个坑。
 主要逻辑 原来的逻辑  获取所有数据 删除库中所有数据 将新数据全部存入库中  初步优化后的逻辑  获取所有数据 获取缓存库中所有数据 将两组数据做一个差值比较，筛选出来需要新建的 需要更新的 需要删除 三组数据 新增的数据进行新增 需要更新的数据进行更新 需要删除的数据进行删除  优化效果 从15000ms优化到230ms，由于数据量很大，但是其实并没有每次所有数据都有更新
@@ -263,6 +263,12 @@ Model public class Example { @Id String exampleId; String name; } 看起来没�
 
     <footer class="article-footer">
     
+    <section class="article-tags">
+        
+            <a href="/tags/database/">database</a>
+        
+    </section>
+
 
     
     <section class="article-copyright">

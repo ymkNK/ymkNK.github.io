@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mysql on lllovol</title>
+    <link>https://lllovol.com/tags/mysql/</link>
+    <description>Recent content in mysql on lllovol</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 27 Jan 2021 14:46:13 +0000</lastBuildDate><atom:link href="https://lllovol.com/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>基础架构：一条SQL更新语句是如何执行的？</title>
+      <link>https://lllovol.com/posts/mysql/2021-01-27-how-a-sql-execute/</link>
+      <pubDate>Wed, 27 Jan 2021 14:46:13 +0000</pubDate>
+      
+      <guid>https://lllovol.com/posts/mysql/2021-01-27-how-a-sql-execute/</guid>
+      <description> 本文是学习笔记，来自极客时间
+ mysql&amp;gt; select * from T where ID=10； 这么一条查询语句是如何执行的呢？
+MySQL基础架构 Server层：
+ 连接器：管理连接，权限认证 分析器：词法语法分析 查询缓存：命中则直接返回结果 优化器：执行计划生成，索引选择 执行器：操作引擎，返回结果 Server层涵盖了MySQL的大多数的核心服务功能，以及所有的内置函数  </description>
+    </item>
+    
+  </channel>
+</rss>

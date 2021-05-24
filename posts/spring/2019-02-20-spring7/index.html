@@ -19,7 +19,7 @@
 @RestController@Slf4j@Api(tags = &amp;quot;11. xxxxx&amp;quot;)@RequestMapping(&amp;quot;/api/v1&amp;quot;)@RequiredArgsConstructorpublic class DataController {private final DataService dataService;@ApiOperation(&amp;quot;11.1 xxxx&amp;quot;)@GetMapping(&amp;quot;/statistics&amp;quot;)public Response&amp;lt;DataDeployDto&amp;gt; deployTask(@Validated DataParam query){log.info(&amp;quot;data Query {}&amp;quot;, JSONObject.toJSON(query));return ResponseUtil.makeSuccess(dataService.deployData(query));}} 在Controller内的传参的注解 @ApiOperation(&amp;quot;1.1 创建业务线&amp;quot;)@PostMapping(&amp;quot;/save&amp;quot;)public Response save(@RequestBody @Validated CustomProductAddParam customProductAddDto) {log.info(&amp;quot;save() {}&amp;quot;, JSONObject.toJSON(customProductAddDto));customProductService.save(customProductAddDto, true);return ResponseUtil.'>
 <meta property='og:url' content='https://lllovol.com/posts/spring/2019-02-20-spring7/'>
 <meta property='og:site_name' content='lllovol'>
-<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2019-02-20T11:35:51&#43;00:00'/><meta property='article:modified_time' content='2019-02-20T11:35:51&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Spring' /><meta property='article:published_time' content='2019-02-20T11:35:51&#43;00:00'/><meta property='article:modified_time' content='2019-02-20T11:35:51&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg' />
 <meta name="twitter:title" content="SpringBoot开发中的一些小细节(七)Controller路由以及分页查询">
 <meta name="twitter:description" content="前言 过年后第一次开始更新啦，这一篇主要就用来总结年后以来有意思，有用的一些信息
 在Controller中的一些注解 Controller的类型 主要有两种，一种是普通的,通常是被使用服务于web页面的。默认，你的controller方法返回的是一个string串，是表示要展示哪个模板页面或者是要跳转到哪里去。
@@ -319,6 +319,12 @@ return new PagerData&lt;&gt;(all, count, param.getPageSize(), param.getPageNo())
 
     <footer class="article-footer">
     
+    <section class="article-tags">
+        
+            <a href="/tags/spring/">Spring</a>
+        
+    </section>
+
 
     
     <section class="article-copyright">
