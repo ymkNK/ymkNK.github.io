@@ -2,7 +2,7 @@
 author: ymkNK
 categories: Android
 date: "2019-06-08T16:49:49Z"
-img: 5.jpg
+img: https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg
 subtitle: Android开发
 tag: Android
 title: Android开发笔记（一)

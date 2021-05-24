@@ -2,7 +2,7 @@
 author: ymkNK
 categories: java
 date: "2020-09-20T18:44:18Z"
-img: 2.jpg
+img: https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg
 subtitle: java basic
 tag: java
 title: Java的部分基础机制

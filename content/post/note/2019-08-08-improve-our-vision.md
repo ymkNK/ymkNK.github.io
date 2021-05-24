@@ -2,7 +2,7 @@
 author: ymkNK
 categories: Note
 date: "2019-08-08T01:14:30Z"
-img: 7.jpg
+img: https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/7.jpg
 subtitle: How to improve our vision on technology?
 tag: Note
 title: 大咖分享-如何提高自己的技术视野

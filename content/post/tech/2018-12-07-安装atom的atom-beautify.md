@@ -2,7 +2,7 @@
 author: ymkNK
 categories: Tech
 date: "2018-12-07T17:03:25Z"
-img: 3.jpg
+img: https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg
 subtitle: 安装atom的atom-beautify
 tag: Tech
 title: 安装atom的atom-beautify

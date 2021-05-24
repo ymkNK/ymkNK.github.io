@@ -2,7 +2,7 @@
 author: ymkNK
 categories: database
 date: "2020-09-20T18:28:53Z"
-img: 7.jpg
+img: https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/7.jpg
 subtitle: null
 tag: database
 title: 为什么加了索引后查询会变快

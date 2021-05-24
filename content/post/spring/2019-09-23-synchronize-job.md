@@ -2,7 +2,7 @@
 author: ymkNK
 categories: Spring
 date: "2019-09-23T17:12:49Z"
-img: 5.jpg
+img: https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg
 subtitle: 从零开始搭建一个同步信息的项目
 tag: Spring
 title: 从零开始搭建AD信息同步的项目

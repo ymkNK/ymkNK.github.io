@@ -2,7 +2,7 @@
 author: ymkNK
 categories: Spring
 date: "2019-03-11T19:28:16Z"
-img: 5.jpg
+img: https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg
 subtitle: 源码阅读SpringDataJPA
 tag: Spring
 title: 源码阅读SpringDataJPA

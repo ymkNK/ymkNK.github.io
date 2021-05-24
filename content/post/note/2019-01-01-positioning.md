@@ -2,7 +2,7 @@
 author: ymkNK
 categories: Note
 date: "2019-01-01T01:29:23Z"
-img: 1.jpg
+img: https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/1.jpg
 subtitle: 《定位》
 tag: Note
 title: 《定位》
