@@ -20,7 +20,7 @@ permalinks:
 
 params:
     mainSections:
-        - post
+        - posts
     featuredImageField: img
     rssFullContent: true
     favicon: https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg
