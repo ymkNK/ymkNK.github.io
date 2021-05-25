@@ -9,37 +9,37 @@
     <lastBuildDate>Mon, 02 Dec 2019 14:23:17 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/microservice/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>从零开始将项目部署到Kubernetes</title>
-      <link>https://lllovol.com/posts/microservice/2019-12-02-minikube/</link>
+      <link>https://lllovol.com/minikube/</link>
       <pubDate>Mon, 02 Dec 2019 14:23:17 +0000</pubDate>
       
-      <guid>https://lllovol.com/posts/microservice/2019-12-02-minikube/</guid>
+      <guid>https://lllovol.com/minikube/</guid>
       <description>一、前言 kubernetes作为一个容器的编排引擎，如今已经相当的火热，日常的工作中也有使用常用的kubernetes的相关的功能，例如滚动发布、扩容等等，但是这都是在公司现成的已经搭建好的kubernetes集群上实践的，因此，本篇文章就是自主探索在本地运行一个kubernetes集群，同时写一个自己的demo，运行到本地的kubernetes集群当中。
 本文主要包含如下几个方面：
  国内条件下如何安装kubernetes（no vpn） 写一个Spring boot 的demo 使用Docker将demo打包成镜像 将demo部署到本地kubernetes集群当中  二、本地安装kubernetes 选择使用minikube 我们想要学习使用kubernetes，首先就是选择一个平台进行操作，比如阿里云、Azure、Google Kubernetes等等
 这里我们选择的就是学习用的minikube
  kubernetes官方文档 minikube操作文档 minikube安装文档
  安装minikube 1.检查能否虚拟化 sysctl -a | grep -E --color &#39;machdep.cpu.features|VMX&#39; vmx被标注出来有颜色，说明就是ok的，这台电脑是支持virtualization的（一般都是支持的,但是我花了88白菜价在腾讯云上买的1年1核1g服务器是不支持的）
-2.安装kubectl brew install kubernetes-cli使用kubectl version能够查看到对应的kubectl版本
+2.安装kubectl brew install kubernetes-cli 使用kubectl version能够查看到对应的kubectl版本
 3.安装Hypervisor（virtual machine monitor） 这个主要就是安装虚拟机了，kvm或者virtualBox二选一
 4.安装minikube 有两种方式,第一种方式就是如下的方式
-curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \&amp;amp;&amp;amp; chmod +x minikube将minikube安装包下载下来，手动进行安装
-sudo mkdir -p /usr/local/bin/sudo install minikube /usr/local/bin/如果是mac用户，直接使用如下的命令就可以了
-brew install minikubebrew link minikube5.启动minikube minikube start就会开始根据本地的virtualBox来下载对应的驱动,中间应该会要求输入一次本机电脑的一次密码,然后会出现这样的错误： Error creating machine: Error in driver during machine creation: hyperkit crashed!</description>
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \ &amp;amp;&amp;amp; chmod +x minikube 将minikube安装包下载下来，手动进行安装
+sudo mkdir -p /usr/local/bin/ sudo install minikube /usr/local/bin/ 如果是mac用户，直接使用如下的命令就可以了
+brew install minikube brew link minikube 5.启动minikube minikube start 就会开始根据本地的virtualBox来下载对应的驱动,中间应该会要求输入一次本机电脑的一次密码,然后会出现这样的错误： Error creating machine: Error in driver during machine creation: hyperkit crashed!</description>
     </item>
     
     <item>
       <title>容器就是一个特殊的进程</title>
-      <link>https://lllovol.com/posts/microservice/2019-07-19-container-is-a-special-process/</link>
+      <link>https://lllovol.com/container-is-a-special-process/</link>
       <pubDate>Fri, 19 Jul 2019 11:56:44 +0000</pubDate>
       
-      <guid>https://lllovol.com/posts/microservice/2019-07-19-container-is-a-special-process/</guid>
+      <guid>https://lllovol.com/container-is-a-special-process/</guid>
       <description>前言 程序的静态表现就是程序，平常的安安静静的躺在硬盘上；但是一旦运行起来，他就变成了计算机里的数据和状态的总和，这就是它的动态表现。 而容器的核心功能，就是通过约束和修改进程的动态表现，从而为其创造出了一个边界。
  Cgroups是用来约束的主要手段。 Namespace是用来修改视图的主要方法。  docker run实验 安装好docker，输入以下命令
-docker run -it busybox /bin/sh这个命令就是告诉docker：帮我启动一个容器
+docker run -it busybox /bin/sh 这个命令就是告诉docker：帮我启动一个容器
 接下来我们可以使用ps指令，来看一看容器和宿主机中的进程信息。 宿主机里的内容： 容器里的内容 Namespace机制 上面的小实验，这就是Linux里的namespace机制实现的， 我们可以看到，我们容器里pid为1的/bin/sh进程，在宿主机中的pid为13193，这就是容器使用了namespace使用了障眼法，让容器里的视角，以为自己就是这个机器的1号员工（pid=1），可是实际上，他还是原来的100号进程。
 namespace其实只是Linux在创建新的进程的时候的一个参数，在Linux系统中创建线程的系统调用是clone()
-int pid=clone(main_function,stack_size,SIGCHLD,NULL);这个系统调用，创建了一个新进程，并且返回一个pid。而我们在创建一个新进程的时候，可以指定CLONE_NEWPID 参数。
-int pid=clone(main_function,stack_size,CLONE_NEWPID | SIGCHLD,NULL);这个新创建的进程就将“看见”一个全新的进程空间，看见它自己在这个进程空间中，他自己的pid为1。这其实只是一个障眼法，在宿主机上，它的pid该是多少，还是多少。
+int pid=clone(main_function,stack_size,SIGCHLD,NULL); 这个系统调用，创建了一个新进程，并且返回一个pid。而我们在创建一个新进程的时候，可以指定CLONE_NEWPID 参数。
+int pid=clone(main_function,stack_size,CLONE_NEWPID | SIGCHLD,NULL); 这个新创建的进程就将“看见”一个全新的进程空间，看见它自己在这个进程空间中，他自己的pid为1。这其实只是一个障眼法，在宿主机上，它的pid该是多少，还是多少。
 Namespace种类 Namespace的种类很多，上文中提到的只是PID Namespace，除此之外，还有如下的Namespaces,这些namespaces用来实现对进程上下文的“障眼法操作”
  MOUNT Namespace， 用来隔离文件系统的挂载点，使得子进程拥有自己独立的挂载点信息。 UTS（UNIX Time-sharing System ）Namespace提供了主机名和域名的隔离,能够使得子进程有独立的主机名和域名(hostname),而不仅仅只是宿主机上的一个进程. IPC Namespace,使划分到不同ipc namespace的进程组通信上隔离，无法通过消息队列、共享内存、信号量方式通信，但没有对所述所有IPC通信方式隔离。 Network Namespace，是实现网络虚拟化的重要功能，它能创建多个隔离的网络空间，它们有独自的网络栈信息。不管是虚拟机还是容器，运行的时候仿佛自己就在独立的网络中。 User Namespace,是Linux3.8新增的一种namespace，用于隔离安全相关的资源，包括user IDs and group IDs，keys,和capabilities。同样一个用户的userID和groupID在不同的user namespace中可以不一样(与PID namespace类似)。换句话说，一个用户可以在一个user namespace中是普通用户，但在另一个user namespace中是超级用户。  通过Namespace这样的方式，容器就只能看见当前Namespace所限定的资源、文件、设备、状态、配置。而对于宿主机和其他不想关的程序，对这个容器（一个进程）来说，就“雨我无瓜了”
 结语 这个原理，就是为什么容器要比虚拟机效能更高的原因，本文是读了张磊前辈的文章后的学习笔记。</description>
@@ -47,10 +47,10 @@ Namespace种类 Namespace的种类很多，上文中提到的只是PID Namespace
     
     <item>
       <title>小鲸鱼的成长史</title>
-      <link>https://lllovol.com/posts/microservice/2019-07-16-docker-history/</link>
+      <link>https://lllovol.com/docker-history/</link>
       <pubDate>Tue, 16 Jul 2019 20:58:05 +0000</pubDate>
       
-      <guid>https://lllovol.com/posts/microservice/2019-07-16-docker-history/</guid>
+      <guid>https://lllovol.com/docker-history/</guid>
       <description>前言 了解一个未知的事物，最好的方式就是去了解这个事物的历史。现在容器化，微服务很火热，有必要去了解一下docker这个小鲸鱼背后的东西。
 最热的服务器端技术 在如今，肯定可以不假思索的说，是容器，因为现在是2019年，如果是2013年，我们可不敢这么说.那时候最火热的是PaaS化。“应用托管”，那时候租了虚拟机之后，用脚本或者手动的在上面部署应用。这样部署应用就会有本地环境和云端环境不一致的问题，因此，那时候的公司，拼的就是，谁能更好的模拟云端的环境。而PaaS项目的出现，就是实现当时这个问题的最佳方案。
 Cloud Foundry 当时最大的开源的PaaS项目。只需要一个命令

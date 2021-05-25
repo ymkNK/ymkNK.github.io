@@ -1,490 +1,0 @@
-<!DOCTYPE html>
-<html lang="en-us">
-    <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='前言 过年后第一次开始更新啦，这一篇主要就用来总结年后以来有意思，有用的一些信息
-在Controller中的一些注解 Controller的类型 主要有两种，一种是普通的,通常是被使用服务于web页面的。默认，你的controller方法返回的是一个string串，是表示要展示哪个模板页面或者是要跳转到哪里去。
-@Controller 另外一种是专门用在编写API的时候，返回一个JSON，或者是XML等等。然后方法返回的是可以是一个对象，或者是一个可以被序列化的对象。
-@RestController 路由的类型 这里的路由就是指http method。（GET,POST,PUT,PATCH,DELETE）。
-@GetMapping@PostMapping@PutMapping@PatchMapping@DeleteMapping 同时，在Controller上面可以加上一个@RequestMapping，可以将所有类型路由的前缀都放在上面
-@RestController@Slf4j@Api(tags = &amp;quot;11. xxxxx&amp;quot;)@RequestMapping(&amp;quot;/api/v1&amp;quot;)@RequiredArgsConstructorpublic class DataController {private final DataService dataService;@ApiOperation(&amp;quot;11.1 xxxx&amp;quot;)@GetMapping(&amp;quot;/statistics&amp;quot;)public Response&amp;lt;DataDeployDto&amp;gt; deployTask(@Validated DataParam query){log.info(&amp;quot;data Query {}&amp;quot;, JSONObject.toJSON(query));return ResponseUtil.makeSuccess(dataService.deployData(query));}} 在Controller内的传参的注解 @ApiOperation(&amp;quot;1.1 创建业务线&amp;quot;)@PostMapping(&amp;quot;/save&amp;quot;)public Response save(@RequestBody @Validated CustomProductAddParam customProductAddDto) {log.info(&amp;quot;save() {}&amp;quot;, JSONObject.toJSON(customProductAddDto));customProductService.save(customProductAddDto, true);return ResponseUtil.'><title>SpringBoot开发中的一些小细节(七)Controller路由以及分页查询</title>
-
-<link rel='canonical' href='https://lllovol.com/posts/spring/2019-02-20-spring7/'>
-
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='SpringBoot开发中的一些小细节(七)Controller路由以及分页查询'>
-<meta property='og:description' content='前言 过年后第一次开始更新啦，这一篇主要就用来总结年后以来有意思，有用的一些信息
-在Controller中的一些注解 Controller的类型 主要有两种，一种是普通的,通常是被使用服务于web页面的。默认，你的controller方法返回的是一个string串，是表示要展示哪个模板页面或者是要跳转到哪里去。
-@Controller 另外一种是专门用在编写API的时候，返回一个JSON，或者是XML等等。然后方法返回的是可以是一个对象，或者是一个可以被序列化的对象。
-@RestController 路由的类型 这里的路由就是指http method。（GET,POST,PUT,PATCH,DELETE）。
-@GetMapping@PostMapping@PutMapping@PatchMapping@DeleteMapping 同时，在Controller上面可以加上一个@RequestMapping，可以将所有类型路由的前缀都放在上面
-@RestController@Slf4j@Api(tags = &amp;quot;11. xxxxx&amp;quot;)@RequestMapping(&amp;quot;/api/v1&amp;quot;)@RequiredArgsConstructorpublic class DataController {private final DataService dataService;@ApiOperation(&amp;quot;11.1 xxxx&amp;quot;)@GetMapping(&amp;quot;/statistics&amp;quot;)public Response&amp;lt;DataDeployDto&amp;gt; deployTask(@Validated DataParam query){log.info(&amp;quot;data Query {}&amp;quot;, JSONObject.toJSON(query));return ResponseUtil.makeSuccess(dataService.deployData(query));}} 在Controller内的传参的注解 @ApiOperation(&amp;quot;1.1 创建业务线&amp;quot;)@PostMapping(&amp;quot;/save&amp;quot;)public Response save(@RequestBody @Validated CustomProductAddParam customProductAddDto) {log.info(&amp;quot;save() {}&amp;quot;, JSONObject.toJSON(customProductAddDto));customProductService.save(customProductAddDto, true);return ResponseUtil.'>
-<meta property='og:url' content='https://lllovol.com/posts/spring/2019-02-20-spring7/'>
-<meta property='og:site_name' content='lllovol'>
-<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Spring' /><meta property='article:published_time' content='2019-02-20T11:35:51&#43;00:00'/><meta property='article:modified_time' content='2019-02-20T11:35:51&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg' />
-<meta name="twitter:title" content="SpringBoot开发中的一些小细节(七)Controller路由以及分页查询">
-<meta name="twitter:description" content="前言 过年后第一次开始更新啦，这一篇主要就用来总结年后以来有意思，有用的一些信息
-在Controller中的一些注解 Controller的类型 主要有两种，一种是普通的,通常是被使用服务于web页面的。默认，你的controller方法返回的是一个string串，是表示要展示哪个模板页面或者是要跳转到哪里去。
-@Controller 另外一种是专门用在编写API的时候，返回一个JSON，或者是XML等等。然后方法返回的是可以是一个对象，或者是一个可以被序列化的对象。
-@RestController 路由的类型 这里的路由就是指http method。（GET,POST,PUT,PATCH,DELETE）。
-@GetMapping@PostMapping@PutMapping@PatchMapping@DeleteMapping 同时，在Controller上面可以加上一个@RequestMapping，可以将所有类型路由的前缀都放在上面
-@RestController@Slf4j@Api(tags = &amp;quot;11. xxxxx&amp;quot;)@RequestMapping(&amp;quot;/api/v1&amp;quot;)@RequiredArgsConstructorpublic class DataController {private final DataService dataService;@ApiOperation(&amp;quot;11.1 xxxx&amp;quot;)@GetMapping(&amp;quot;/statistics&amp;quot;)public Response&amp;lt;DataDeployDto&amp;gt; deployTask(@Validated DataParam query){log.info(&amp;quot;data Query {}&amp;quot;, JSONObject.toJSON(query));return ResponseUtil.makeSuccess(dataService.deployData(query));}} 在Controller内的传参的注解 @ApiOperation(&amp;quot;1.1 创建业务线&amp;quot;)@PostMapping(&amp;quot;/save&amp;quot;)public Response save(@RequestBody @Validated CustomProductAddParam customProductAddDto) {log.info(&amp;quot;save() {}&amp;quot;, JSONObject.toJSON(customProductAddDto));customProductService.save(customProductAddDto, true);return ResponseUtil."><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg' />
-    <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
-
-    </head>
-    <body class="article-page keep-sidebar">
-    <script>
-        (function() {
-            const colorSchemeKey = 'StackColorScheme';
-            if(!localStorage.getItem(colorSchemeKey)){
-                localStorage.setItem(colorSchemeKey, "auto");
-            }
-        })();
-    </script><script>
-    (function() {
-        const colorSchemeKey = 'StackColorScheme';
-        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
-        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
-
-        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
-            
-
-            document.body.dataset.scheme = 'dark';
-        } else {
-            document.body.dataset.scheme = 'light';
-        }
-    })();
-</script><div class="container main-container flex on-phone--column extended ">
-            <aside class="sidebar left-sidebar sticky">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
-        <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-        </span>
-    </button>
-
-    <header class="site-info">
-        
-            <figure class="site-avatar">
-                
-                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
-                
-
-                
-                    <span class="emoji">🍥</span>
-                
-            </figure>
-        
-        <h1 class="site-name"><a href="https://lllovol.com">lllovol</a></h1>
-        <h2 class="site-description">Stay Hungry, Stay Foolish</h2>
-    </header>
-
-    <ol class="menu" id="main-menu">
-        
-        
-        
-
-        <li >
-            <a href='/'>
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="5 12 3 12 12 3 21 12 19 12" />
-  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-</svg>
-
-
-
-                
-                <span>Home</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/about/'>
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="7" r="4" />
-  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-</svg>
-
-
-
-                
-                <span>About</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/archives/'>
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <rect x="3" y="4" width="18" height="4" rx="2" />
-  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
-  <line x1="10" y1="12" x2="14" y2="12" />
-</svg>
-
-
-
-                
-                <span>Archives</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/search/'>
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-                
-                <span>Search</span>
-            </a>
-        </li>
-        
-
-        
-            <li id="dark-mode-toggle">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="8" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="16" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                <span>Dark Mode</span>
-            </li>
-        
-    </ol>
-</aside>
-
-            <main class="main full-width">
-    <article class="main-article">
-    <header class="article-header">
-        <div class="article-image">
-            <a href="/posts/spring/2019-02-20-spring7/">
-                
-                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg" loading="lazy" alt="Featured image of post SpringBoot开发中的一些小细节(七)Controller路由以及分页查询" />
-                
-            </a>
-        </div>
-    
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/spring/" >
-                Spring
-            </a>
-        
-    </header>
-    
-
-    <h2 class="article-title">
-        <a href="/posts/spring/2019-02-20-spring7/">SpringBoot开发中的一些小细节(七)Controller路由以及分页查询</a>
-    </h2>
-
-    <footer class="article-time">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
-</svg>
-
-
-
-        <time class="article-time--published">Feb 20, 2019</time>
-    </footer></div>
-</header>
-
-    <section class="article-content">
-    <h1 id="前言">前言</h1>
-<p>过年后第一次开始更新啦，这一篇主要就用来总结年后以来有意思，有用的一些信息</p>
-<h2 id="在controller中的一些注解">在Controller中的一些注解</h2>
-<h4 id="controller的类型">Controller的类型</h4>
-<p>主要有两种，一种是普通的,通常是被使用服务于web页面的。默认，你的controller方法返回的是一个string串，是表示要展示哪个模板页面或者是要跳转到哪里去。</p>
-<pre><code>@Controller
-</code></pre>
-<p>另外一种是专门用在编写API的时候，返回一个JSON，或者是XML等等。然后方法返回的是可以是一个对象，或者是一个可以被序列化的对象。</p>
-<pre><code>@RestController
-</code></pre>
-<h4 id="路由的类型">路由的类型</h4>
-<p>这里的路由就是指http method。（GET,POST,PUT,PATCH,DELETE）。</p>
-<pre><code>@GetMapping
-@PostMapping
-@PutMapping
-@PatchMapping
-@DeleteMapping
-</code></pre>
-<p>同时，在Controller上面可以加上一个@RequestMapping，可以将所有类型路由的前缀都放在上面</p>
-<pre><code>@RestController
-@Slf4j
-@Api(tags = &quot;11. xxxxx&quot;)
-@RequestMapping(&quot;/api/v1&quot;)
-@RequiredArgsConstructor
-public class DataController {
-
-private final DataService dataService;
-
-@ApiOperation(&quot;11.1 xxxx&quot;)
-@GetMapping(&quot;/statistics&quot;)
-public Response&lt;DataDeployDto&gt; deployTask(@Validated DataParam query){
-      log.info(&quot;data Query {}&quot;, JSONObject.toJSON(query));
-
-      return ResponseUtil.makeSuccess(dataService.deployData(query));
-  }
-}
-</code></pre>
-<h2 id="在controller内的传参的注解">在Controller内的传参的注解</h2>
-<pre><code>@ApiOperation(&quot;1.1 创建业务线&quot;)
-@PostMapping(&quot;/save&quot;)
-public Response save(@RequestBody @Validated CustomProductAddParam customProductAddDto) {
-log.info(&quot;save() {}&quot;, JSONObject.toJSON(customProductAddDto));
-
-customProductService.save(customProductAddDto, true);
-
-return ResponseUtil.makeSuccess(null);
-}
-</code></pre>
-<p><em>@RequestBody</em> 就是要求传的数据是一个json格式的body传入的，这样前端会比较麻烦，因此在不需要的时候可以将这个注解取消掉<br>
-<img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/spring7/41620289.png" alt="有@RequestBody"  />
-<strong>有@RequestBody</strong></p>
-<p><img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/spring7/notRequest.png" alt="无@RequestBody"  />
-<strong>无@RequestBody</strong></p>
-<p><em>@Validated</em> 就是在传参的时候需要判断验证，比如是不是为空什么（NotNull）</p>
-<h2 id="空指针的问题">空指针的问题</h2>
-<p>这是个老问题了，前面什么都没传的时候，到后端的时候是变成的null，CollectionUtils.isEmpty()可以用来判断Collection是空还是null，源码实现如下</p>
-<pre><code>public static boolean isEmpty(Collection coll) {
-  return (coll == null || coll.isEmpty());
-}
-</code></pre>
-<h2 id="int到long的转换">Int到Long的转换</h2>
-<pre><code>Long count = (long) all.size();
-</code></pre>
-<p>强制转换int到long，注意括号里面是小写</p>
-<h2 id="mongodbtemplate的查询分页">MongoDBTemplate的查询分页</h2>
-<pre><code>@Override
-public PagerData&lt;GreyTask&gt; list(GreyTaskListParam param) {
-Criteria criteria = new Criteria();
-
-if (StringUtils.isNotEmpty(param.getName())) {
-    criteria.and(&quot;name&quot;).regex(param.getName());
-}
-if (StringUtils.isNotEmpty(param.getType().toString())) {
-    criteria.and(&quot;type&quot;).is(param.getType());
-}
-
-Query query = new Query();
-query.addCriteria(criteria)
-        .with(new Sort(Sort.Direction.DESC, &quot;createTime&quot;))
-        .skip(param.getSkip()).limit(param.getPageSize());
-
-List&lt;GreyTask&gt; all = greyTaskRepo.findAll(query);
-
-Long count = (long) all.size();
-return new PagerData&lt;&gt;(all, count, param.getPageSize(), param.getPageNo());
-}
-</code></pre>
-<h2 id="阿里云域名备案">阿里云域名备案</h2>
-<p>会有一个验证短信，要自己上网页去验证，不要因为自己疏忽就忘了，然后就被打回来了QAQ，开始以为是什么骚扰短信呢</p>
-<h2 id="kali-linux">Kali Linux</h2>
-<p>黑客专用的系统，有空的时候可以看看，学习一下系统安全知识</p>
-<h2 id="gfw">GFW</h2>
-<p>自己搭的vpn突然用不了，后来发现就是被墙了（ip banned），解决方式，就是换一个ip</p>
-
-</section>
-
-
-    <footer class="article-footer">
-    
-    <section class="article-tags">
-        
-            <a href="/tags/spring/">Spring</a>
-        
-    </section>
-
-
-    
-    <section class="article-copyright">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
-</svg>
-
-
-
-        <span>Licensed under CC BY-NC-SA 4.0</span>
-    </section>
-    </footer>
-
-    
-</article>
-
-     
-        
-    
-
-
-<div id="gitalk-container"></div>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script>
-    const gitalk = new Gitalk({
-        clientID: 'aaf5fc3a72ea9ce81d62',
-        clientSecret: '7792527b47af3239ddbc2274fb5fd141c28d8339',
-        repo: 'ymkNK.github.io',
-        owner: 'ymkNK',
-        admin: ['ymkNK'],
-        id: window.location.pathname,
-        title: document.title,
-        distractionFreeMode: true
-    })
-
-    gitalk.render('gitalk-container')
-</script>
-
-
-
-
-    
-
-    <footer class="site-footer">
-    <section class="copyright">
-        
-        2018 -
-        
-        2021
-        &copy;
-        lllovol
-    </section>
-    
-    <section class="powerby">
-        
-            <b><a href="https://github.com/ymkNK" target="_blank" rel="noopener" data-version="%s">Owner Rainbowly </a></b> <br/>
-        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
-    </section>
-</footer>
-
-    
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-    
-    <div class="pswp__bg"></div>
-
-    
-    <div class="pswp__scroll-wrap">
-
-        
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-
-        
-        <div class="pswp__ui pswp__ui--hidden">
-
-            <div class="pswp__top-bar">
-
-                
-
-                <div class="pswp__counter"></div>
-
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-                <button class="pswp__button pswp__button--share" title="Share"></button>
-
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-                
-                
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                        <div class="pswp__preloader__cut">
-                            <div class="pswp__preloader__donut"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div>
-            </div>
-
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-
-        </div>
-
-    </div>
-
-</div><script 
-                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer="true"
-                >
-            </script><script 
-                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer="true"
-                >
-            </script><link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
-            ><link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
-            >
-
-            </main>
-        </div>
-        <script 
-                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
-                defer="false"
-                >
-            </script><script type="text/javascript" src="/ts/main.js" defer></script>
-<script>
-    (function () {
-        const customFont = document.createElement('link');
-        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
-
-        customFont.type = "text/css";
-        customFont.rel = "stylesheet";
-
-        document.head.appendChild(customFont);
-    }());
-</script>
-
-    </body>
-</html>

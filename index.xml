@@ -6,12 +6,12 @@
         <description>Recent content on lllovol</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Wed, 27 Jan 2021 14:46:13 +0000</lastBuildDate><atom:link href="https://lllovol.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 25 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lllovol.com/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>基础架构：一条SQL更新语句是如何执行的？</title>
-        <link>https://lllovol.com/posts/mysql/2021-01-27-how-a-sql-execute/</link>
+        <link>https://lllovol.com/how-a-sql-executes/</link>
         <pubDate>Wed, 27 Jan 2021 14:46:13 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/mysql/2021-01-27-how-a-sql-execute/</guid>
+        <guid>https://lllovol.com/how-a-sql-executes/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg" alt="Featured image of post 基础架构：一条SQL更新语句是如何执行的？" /&gt;&lt;blockquote&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://time.geekbang.org/column/article/68319&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;本文是学习笔记，来自极客时间&lt;/a&gt;&lt;/p&gt;
@@ -32,10 +32,10 @@ Server层涵盖了MySQL的大多数的核心服务功能，以及所有的内置
         </item>
         <item>
         <title>从零开始的查询优化</title>
-        <link>https://lllovol.com/posts/database/2020-10-30-query-test/</link>
+        <link>https://lllovol.com/query-test/</link>
         <pubDate>Fri, 30 Oct 2020 16:28:10 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/database/2020-10-30-query-test/</guid>
+        <guid>https://lllovol.com/query-test/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg" alt="Featured image of post 从零开始的查询优化" /&gt;&lt;h3 id=&#34;背景&#34;&gt;背景&lt;/h3&gt;
 &lt;p&gt;需要查询到一批部门以及子部门，最终拿到这些部门下的人员信息，我们能够进行的操作如下&lt;/p&gt;
 &lt;ul&gt;
@@ -128,10 +128,10 @@ Server层涵盖了MySQL的大多数的核心服务功能，以及所有的内置
         </item>
         <item>
         <title>JavaJPA使用Mongo中的坑</title>
-        <link>https://lllovol.com/posts/database/2020-10-28-mongo-bad/</link>
+        <link>https://lllovol.com/mongo-bad/</link>
         <pubDate>Wed, 28 Oct 2020 15:03:26 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/database/2020-10-28-mongo-bad/</guid>
+        <guid>https://lllovol.com/mongo-bad/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg" alt="Featured image of post JavaJPA使用Mongo中的坑" /&gt;&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
 &lt;p&gt;由于业务需求将一些数据作为缓存存到Mongo库中，然后在优化这个缓存过程的时候，发现的一个坑。&lt;/p&gt;
 &lt;h2 id=&#34;主要逻辑&#34;&gt;主要逻辑&lt;/h2&gt;
@@ -170,10 +170,10 @@ Server层涵盖了MySQL的大多数的核心服务功能，以及所有的内置
         </item>
         <item>
         <title>Java的部分基础机制</title>
-        <link>https://lllovol.com/posts/java/2020-09-20-java-basic/</link>
+        <link>https://lllovol.com/java-basic/</link>
         <pubDate>Sun, 20 Sep 2020 18:44:18 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/java/2020-09-20-java-basic/</guid>
+        <guid>https://lllovol.com/java-basic/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg" alt="Featured image of post Java的部分基础机制" /&gt;&lt;h2 id=&#34;java内存管理&#34;&gt;Java内存管理&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/steffen/p/11368018.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -213,10 +213,10 @@ Server层涵盖了MySQL的大多数的核心服务功能，以及所有的内置
         </item>
         <item>
         <title>为什么加了索引后查询会变快</title>
-        <link>https://lllovol.com/posts/database/2020-09-20-why-index-faster/</link>
+        <link>https://lllovol.com/why-index-faster/</link>
         <pubDate>Sun, 20 Sep 2020 18:28:53 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/database/2020-09-20-why-index-faster/</guid>
+        <guid>https://lllovol.com/why-index-faster/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/7.jpg" alt="Featured image of post 为什么加了索引后查询会变快" /&gt;&lt;h2 id=&#34;参考&#34;&gt;参考&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/u011277123/article/details/104794991&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -238,10 +238,10 @@ Server层涵盖了MySQL的大多数的核心服务功能，以及所有的内置
         </item>
         <item>
         <title>什么是事务？</title>
-        <link>https://lllovol.com/posts/database/2020-09-18-what-is-transaction/</link>
+        <link>https://lllovol.com/what-is-transaction/</link>
         <pubDate>Fri, 18 Sep 2020 17:27:51 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/database/2020-09-18-what-is-transaction/</guid>
+        <guid>https://lllovol.com/what-is-transaction/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg" alt="Featured image of post 什么是事务？" /&gt;&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
 &lt;p&gt;从实习开始也算是工作了两年了，但是从来没有使用过事务，原因可能是由于一直用的是MongoDB，而不是mysql，但是事物这种&lt;/p&gt;
 &lt;h2 id=&#34;事务的定义&#34;&gt;事务的定义&lt;/h2&gt;
@@ -264,10 +264,10 @@ Server层涵盖了MySQL的大多数的核心服务功能，以及所有的内置
         </item>
         <item>
         <title>SpringBoot开发中的一些小细节(十四）事件监听的使用</title>
-        <link>https://lllovol.com/posts/spring/2020-07-27-spring14/</link>
+        <link>https://lllovol.com/spring14/</link>
         <pubDate>Mon, 27 Jul 2020 15:51:33 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/spring/2020-07-27-spring14/</guid>
+        <guid>https://lllovol.com/spring14/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg" alt="Featured image of post SpringBoot开发中的一些小细节(十四）事件监听的使用" /&gt;&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
 &lt;p&gt;最近在做同步先关的工作，为了提升同步任务的处理效率，减少频繁的mongo数据库查询，因此需要将一些数据统一查询出来，在内存中进行处理。&lt;/p&gt;
 &lt;h2 id=&#34;解决方式&#34;&gt;解决方式&lt;/h2&gt;
@@ -356,10 +356,10 @@ public class PolicyUpdater implements ApplicationListener&amp;lt;ObjectALifecycl
         </item>
         <item>
         <title>Java学习笔记（一）</title>
-        <link>https://lllovol.com/posts/java/2020-07-04-java-note/</link>
+        <link>https://lllovol.com/java-note/</link>
         <pubDate>Sat, 04 Jul 2020 14:07:38 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/java/2020-07-04-java-note/</guid>
+        <guid>https://lllovol.com/java-note/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/9.jpg" alt="Featured image of post Java学习笔记（一）" /&gt;&lt;h2 id=&#34;1-volatile&#34;&gt;1. volatile&lt;/h2&gt;
 &lt;p&gt;volatile是轻量级的同步机制&lt;/p&gt;
 &lt;ul&gt;
@@ -378,10 +378,10 @@ public class PolicyUpdater implements ApplicationListener&amp;lt;ObjectALifecycl
         </item>
         <item>
         <title>单例模式的实现方式</title>
-        <link>https://lllovol.com/posts/spring/2020-07-04-singleton-realization/</link>
+        <link>https://lllovol.com/singleton-realization/</link>
         <pubDate>Sat, 04 Jul 2020 00:34:38 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/spring/2020-07-04-singleton-realization/</guid>
+        <guid>https://lllovol.com/singleton-realization/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg" alt="Featured image of post 单例模式的实现方式" /&gt;&lt;h2 id=&#34;什么是单例模式&#34;&gt;什么是单例模式？&lt;/h2&gt;
 &lt;p&gt;在整个程序运行过程中只会实现一次的对象，例如Runtime类。&lt;br&gt;
 需要满足的条件有以下几点：&lt;/p&gt;
@@ -475,10 +475,10 @@ public class PolicyUpdater implements ApplicationListener&amp;lt;ObjectALifecycl
         </item>
         <item>
         <title>SpringBoot开发中的一些小细节（十三）使用AOP实现权限系统</title>
-        <link>https://lllovol.com/posts/spring/2020-05-12-spring13/</link>
+        <link>https://lllovol.com/spring13/</link>
         <pubDate>Tue, 12 May 2020 15:04:26 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/spring/2020-05-12-spring13/</guid>
+        <guid>https://lllovol.com/spring13/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg" alt="Featured image of post SpringBoot开发中的一些小细节（十三）使用AOP实现权限系统" /&gt;&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
 &lt;p&gt;最近在做一个小工具的权限控制系统，由于是第一次做这方面的工作，而且对权限的控制会非常的详细，比如，需要细致到对每一个对象的控制。在前期有一些调研。&lt;/p&gt;
 &lt;h2 id=&#34;想法&#34;&gt;想法&lt;/h2&gt;
@@ -553,10 +553,10 @@ public class AuthAspect {
         </item>
         <item>
         <title>Structure and Interpretation of Computer Programs 读书笔记 Chapter 1 构造过程抽象 1.1 程序设计的基本元素</title>
-        <link>https://lllovol.com/posts/note/2020-01-17-sicp-chapter1.1/</link>
+        <link>https://lllovol.com/sicp-chapter1.1/</link>
         <pubDate>Fri, 17 Jan 2020 11:13:47 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/note/2020-01-17-sicp-chapter1.1/</guid>
+        <guid>https://lllovol.com/sicp-chapter1.1/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg" alt="Featured image of post Structure and Interpretation of Computer Programs 读书笔记 Chapter 1 构造过程抽象 1.1 程序设计的基本元素" /&gt;&lt;h2 id=&#34;第1章-构造抽象过程&#34;&gt;第1章 构造抽象过程&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;这一张主要学习的是有关&lt;strong&gt;计算过程&lt;/strong&gt;的知识。&lt;/li&gt;
@@ -660,10 +660,10 @@ public class AuthAspect {
         </item>
         <item>
         <title>Structure and Interpretation of Computer Programs 读书笔记 前言</title>
-        <link>https://lllovol.com/posts/note/2020-01-13-sicp/</link>
+        <link>https://lllovol.com/sicp/</link>
         <pubDate>Mon, 13 Jan 2020 15:22:58 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/note/2020-01-13-sicp/</guid>
+        <guid>https://lllovol.com/sicp/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/10.jpg" alt="Featured image of post Structure and Interpretation of Computer Programs 读书笔记 前言" /&gt;&lt;h2 id=&#34;写在最前面&#34;&gt;写在最前面&lt;/h2&gt;
 &lt;p&gt;本文主要用来记录自己再工作之余阅读的这本书籍的读书笔记，在记录的同时，也会加入一些自己的一些思考与总结(括号中的内容)&lt;/p&gt;
 &lt;h2 id=&#34;书籍目录架构&#34;&gt;书籍目录架构&lt;/h2&gt;
@@ -696,10 +696,10 @@ public class AuthAspect {
         </item>
         <item>
         <title>SpringBoot开发中的一些小细节（十二）单元测试</title>
-        <link>https://lllovol.com/posts/spring/2020-01-10-spring12/</link>
+        <link>https://lllovol.com/spring12/</link>
         <pubDate>Fri, 10 Jan 2020 19:07:19 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/spring/2020-01-10-spring12/</guid>
+        <guid>https://lllovol.com/spring12/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg" alt="Featured image of post SpringBoot开发中的一些小细节（十二）单元测试" /&gt;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
 &lt;p&gt;2020将近，已经很久没有更新blog，但是每天的工作笔记都还是有在记录，趁着马上就要过年，没有那么忙碌了，把自己19年Q4的工作中遇到的问题以及一些有用的方法整理一下~&lt;/p&gt;
 &lt;h2 id=&#34;测试的必要性&#34;&gt;测试的必要性&lt;/h2&gt;
@@ -788,10 +788,10 @@ public class ApplicationTests {
         </item>
         <item>
         <title>从零开始将项目部署到Kubernetes</title>
-        <link>https://lllovol.com/posts/microservice/2019-12-02-minikube/</link>
+        <link>https://lllovol.com/minikube/</link>
         <pubDate>Mon, 02 Dec 2019 14:23:17 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/microservice/2019-12-02-minikube/</guid>
+        <guid>https://lllovol.com/minikube/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/4.jpg" alt="Featured image of post 从零开始将项目部署到Kubernetes" /&gt;&lt;h2 id=&#34;一前言&#34;&gt;一、前言&lt;/h2&gt;
 &lt;p&gt;kubernetes作为一个容器的编排引擎，如今已经相当的火热，日常的工作中也有使用常用的kubernetes的相关的功能，例如滚动发布、扩容等等，但是这都是在公司现成的已经搭建好的kubernetes集群上实践的，因此，本篇文章就是自主探索在本地运行一个kubernetes集群，同时写一个自己的demo，运行到本地的kubernetes集群当中。&lt;br&gt;
 本文主要包含如下几个方面：&lt;/p&gt;
@@ -1050,10 +1050,10 @@ status:
         </item>
         <item>
         <title>Java11新特性的六个实验</title>
-        <link>https://lllovol.com/posts/java/2019-10-16-java11/</link>
+        <link>https://lllovol.com/java11/</link>
         <pubDate>Wed, 16 Oct 2019 18:41:31 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/java/2019-10-16-java11/</guid>
+        <guid>https://lllovol.com/java11/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg" alt="Featured image of post Java11新特性的六个实验" /&gt;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
 &lt;p&gt;最近将java升级到了11，因此学习了一些java11的一些新特性&lt;/p&gt;
 &lt;h2 id=&#34;一局部变量类型判断&#34;&gt;一.局部变量类型判断&lt;/h2&gt;
@@ -1167,10 +1167,10 @@ status:
         </item>
         <item>
         <title>从零开始搭建AD信息同步的项目</title>
-        <link>https://lllovol.com/posts/spring/2019-09-23-synchronize-job/</link>
+        <link>https://lllovol.com/synchronize-job/</link>
         <pubDate>Mon, 23 Sep 2019 17:12:49 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/spring/2019-09-23-synchronize-job/</guid>
+        <guid>https://lllovol.com/synchronize-job/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg" alt="Featured image of post 从零开始搭建AD信息同步的项目" /&gt;&lt;h2 id=&#34;一-前言&#34;&gt;一 前言&lt;/h2&gt;
 &lt;p&gt;最近独自完成了一个同步信息的项目，主要工作内容是从第三方的服务端将信息同步到公司的二方AD域当中。本文主要记录本项目的主要实现过程。&lt;/p&gt;
 &lt;h2 id=&#34;二-项目设计&#34;&gt;二 项目设计&lt;/h2&gt;
@@ -1397,10 +1397,10 @@ public class XxxToAdJob {
         </item>
         <item>
         <title>Redis中的常用数据结构</title>
-        <link>https://lllovol.com/posts/tech/2019-08-19-redis/</link>
+        <link>https://lllovol.com/redis/</link>
         <pubDate>Mon, 19 Aug 2019 19:15:50 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/tech/2019-08-19-redis/</guid>
+        <guid>https://lllovol.com/redis/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg" alt="Featured image of post Redis中的常用数据结构" /&gt;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
 &lt;p&gt;Redis在曾经实现用户登录token的时候使用过，但是对其的了解程度，就只是在使用的这个层次。本篇文章主要用于学习记录Redis的常见的一些数据结构。&lt;/p&gt;
 &lt;h2 id=&#34;第一部分-什么是redis&#34;&gt;第一部分 什么是redis？&lt;/h2&gt;
@@ -1505,10 +1505,10 @@ ZSet 小64数量小128 用ziplist 否则用skiplist&lt;/p&gt;
         </item>
         <item>
         <title>大咖分享-如何提高自己的技术视野</title>
-        <link>https://lllovol.com/posts/note/2019-08-08-improve-our-vision/</link>
+        <link>https://lllovol.com/improve-our-vision/</link>
         <pubDate>Thu, 08 Aug 2019 01:14:30 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/note/2019-08-08-improve-our-vision/</guid>
+        <guid>https://lllovol.com/improve-our-vision/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/7.jpg" alt="Featured image of post 大咖分享-如何提高自己的技术视野" /&gt;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
 &lt;p&gt;最近听了一场蔡黎博士关于如何提高我们技术视野的分享，收益良多，其实不仅仅是在技术方面，其实很多道理，在生活中都是有共通点的。分享的主要内容既然是关于如何提高我们的技术视野的，那么他是如何进行分享的呢？他主要将这次分享按照内容分为了三个方面：&lt;/p&gt;
 &lt;ol&gt;
@@ -1598,7 +1598,7 @@ ZSet 小64数量小128 用ziplist 否则用skiplist&lt;/p&gt;
 &lt;p&gt;现在来看，5G真的是90后的机会，5G的出现，这个社会必将发生不小的变化，而绝非下载速度变快这么简单的一件事情&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-205108@2x.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
 &lt;h4 id=&#34;5g的原理就是香农定理&#34;&gt;5G的原理就是香农定理:&lt;/h4&gt;
 &lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-205916@2x.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
-&lt;p&gt;C=Blog2(1+S/N) 
+&lt;p&gt;C=Blog2(1+S/N)
 使用类比的方式来看这个公司&lt;/p&gt;
 &lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;C就是单位时间的载货量&lt;/li&gt;
@@ -1692,10 +1692,10 @@ ps:技术视野还可以赚钱，知道什么地方需求大。比如如果知�
         </item>
         <item>
         <title>Idea代码飘红的问题解决方式</title>
-        <link>https://lllovol.com/posts/tech/2019-08-07-ide-code-error-solution/</link>
+        <link>https://lllovol.com/ide-code-error-solution/</link>
         <pubDate>Wed, 07 Aug 2019 10:08:30 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/tech/2019-08-07-ide-code-error-solution/</guid>
+        <guid>https://lllovol.com/ide-code-error-solution/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/9.jpg" alt="Featured image of post Idea代码飘红的问题解决方式" /&gt;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
 &lt;p&gt;在安装使用Idea Intelli的时候，导入新项目的时候，总会出现代码权限飘红的问题。本篇文章，就是介绍出现这种问题的几种情况和分别的解决方式。
 &lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190807-102252@2x.png&#34; alt=&#34;导入项目代码全线飘红&#34;  /&gt;&lt;/p&gt;
@@ -1722,7 +1722,7 @@ Never write another getter or equals method again, with one annotation your clas
 &lt;h3 id=&#34;解决方式-2&#34;&gt;解决方式&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;关闭项目。&lt;/li&gt;
-&lt;li&gt;Preference &amp;gt; Build, Execution, Deployment &amp;gt; Compiler &amp;gt; Annotation Processors. Check &amp;lsquo;Enable annotation processing&amp;rsquo;. 
+&lt;li&gt;Preference &amp;gt; Build, Execution, Deployment &amp;gt; Compiler &amp;gt; Annotation Processors. Check &amp;lsquo;Enable annotation processing&amp;rsquo;.
 &lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190807-112533.png&#34; alt=&#34;&#34;  /&gt;&lt;/li&gt;
 &lt;li&gt;Open your project. File &amp;gt; Invalidate Caches / Restart&amp;hellip; &amp;gt; Invalidate and Restart 然后等待这个过程完成结束,将会发现一切都将回归平淡，云淡风轻.&lt;/li&gt;
 &lt;/ol&gt;
@@ -1730,10 +1730,10 @@ Never write another getter or equals method again, with one annotation your clas
         </item>
         <item>
         <title>Scala环境搭建</title>
-        <link>https://lllovol.com/posts/scala/2019-08-02-scala1/</link>
+        <link>https://lllovol.com/scala1/</link>
         <pubDate>Fri, 02 Aug 2019 14:50:13 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/scala/2019-08-02-scala1/</guid>
+        <guid>https://lllovol.com/scala1/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/8.jpg" alt="Featured image of post Scala环境搭建" /&gt;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
 &lt;p&gt;最近工作中需要参与一下scala的项目，借此机会学习一下这个心的语言。&lt;/p&gt;
 &lt;h2 id=&#34;环境搭建&#34;&gt;环境搭建&lt;/h2&gt;
@@ -1796,10 +1796,10 @@ Mac:
         </item>
         <item>
         <title>使用Jenkins回调获取状态</title>
-        <link>https://lllovol.com/posts/jenkins/2019-07-26-jenkins-callback/</link>
+        <link>https://lllovol.com/jenkins-callback/</link>
         <pubDate>Fri, 26 Jul 2019 11:01:52 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/jenkins/2019-07-26-jenkins-callback/</guid>
+        <guid>https://lllovol.com/jenkins-callback/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg" alt="Featured image of post 使用Jenkins回调获取状态" /&gt;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
 &lt;p&gt;最近的工作需要使用Jenkins执行一个特定脚本，但是使用FeignClient调用Jenkins的执行接口后，并不能获取到脚本执行之后的结果（成功和失败），本文就将介绍这种问题的其中一种解决方式。&lt;/p&gt;
 &lt;blockquote&gt;
@@ -1847,10 +1847,10 @@ curl &amp;quot;$API_HOST/api/xxx/xxx/xxx/hook&amp;quot; -X POST -d &amp;quot;Id=
         </item>
         <item>
         <title>容器就是一个特殊的进程</title>
-        <link>https://lllovol.com/posts/microservice/2019-07-19-container-is-a-special-process/</link>
+        <link>https://lllovol.com/container-is-a-special-process/</link>
         <pubDate>Fri, 19 Jul 2019 11:56:44 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/microservice/2019-07-19-container-is-a-special-process/</guid>
+        <guid>https://lllovol.com/container-is-a-special-process/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/1.jpg" alt="Featured image of post 容器就是一个特殊的进程" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;程序的静态表现就是程序，平常的安安静静的躺在硬盘上；但是一旦运行起来，他就变成了计算机里的数据和状态的总和，这就是它的动态表现。
 而容器的核心功能，就是通过约束和修改进程的动态表现，从而为其创造出了一个边界。&lt;/p&gt;
@@ -1891,10 +1891,10 @@ curl &amp;quot;$API_HOST/api/xxx/xxx/xxx/hook&amp;quot; -X POST -d &amp;quot;Id=
         </item>
         <item>
         <title>小鲸鱼的成长史</title>
-        <link>https://lllovol.com/posts/microservice/2019-07-16-docker-history/</link>
+        <link>https://lllovol.com/docker-history/</link>
         <pubDate>Tue, 16 Jul 2019 20:58:05 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/microservice/2019-07-16-docker-history/</guid>
+        <guid>https://lllovol.com/docker-history/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/9.jpg" alt="Featured image of post 小鲸鱼的成长史" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;了解一个未知的事物，最好的方式就是去了解这个事物的历史。现在容器化，微服务很火热，有必要去了解一下docker这个小鲸鱼背后的东西。&lt;/p&gt;
 &lt;h1 id=&#34;最热的服务器端技术&#34;&gt;最热的服务器端技术&lt;/h1&gt;
@@ -1936,10 +1936,10 @@ curl &amp;quot;$API_HOST/api/xxx/xxx/xxx/hook&amp;quot; -X POST -d &amp;quot;Id=
         </item>
         <item>
         <title>FeignClient的FallBack处理</title>
-        <link>https://lllovol.com/posts/spring/2019-07-11-feignclient/</link>
+        <link>https://lllovol.com/fallback/</link>
         <pubDate>Thu, 11 Jul 2019 16:31:53 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/spring/2019-07-11-feignclient/</guid>
+        <guid>https://lllovol.com/fallback/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/8.jpg" alt="Featured image of post FeignClient的FallBack处理" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;在使用FeignClient的时候，我们很难保证第三方的调用不会出问题，这个时候，可以写一个FallBack类，来对出错的时候进行处理，可以异常上报，也可以进行打点处理，可以不再单独地去做这些事情。&lt;/p&gt;
 &lt;h1 id=&#34;feignclient的编写&#34;&gt;FeignClient的编写&lt;/h1&gt;
@@ -1997,10 +1997,10 @@ public class GitApiFeignFallBack implements GitApiFeign {
         </item>
         <item>
         <title>SpringBoot开发中的一些小细节(十一)CR笔记、阿里巴巴代码规约</title>
-        <link>https://lllovol.com/posts/spring/2019-07-10-spring11/</link>
+        <link>https://lllovol.com/spring11/</link>
         <pubDate>Wed, 10 Jul 2019 23:36:52 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/spring/2019-07-10-spring11/</guid>
+        <guid>https://lllovol.com/spring11/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/7.jpg" alt="Featured image of post SpringBoot开发中的一些小细节(十一)CR笔记、阿里巴巴代码规约" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;最近正式入职，第一周的事情主要就是进行代码的Code Review,将自己曾经的实习时候写的代码看一看，清掉一部分过时的代码。同时也从前辈们的分享中学习到了不少的小细节。
 以及看了阿里巴巴的开发规范规约，将一些比较重要的地方、原来没有注意到的地方记录一下。&lt;/p&gt;
@@ -2125,7 +2125,7 @@ final boolean existed = (file.open(fileName, &amp;quot;w&amp;quot;) != null) &am
 &lt;li&gt;类、类属性、类方法的注释必须使用Javadoc规范，使用/**内容*/格式，不得使用 // xxx 方式。&lt;/li&gt;
 &lt;li&gt;所有的抽象方法(包括接口中的方法)必须要用Javadoc注释、除了返回值、参数、 异常说明外，还必须指出该方法做什么事情，实现什么功能。 说明:对子类的实现要求，或者调用注意事项，请一并说明。&lt;/li&gt;
 &lt;li&gt;所有的类都必须添加创建者和创建日期。&lt;/li&gt;
-&lt;li&gt;方法内部单行注释，在被注释语句上方另起一行，使用//注释。方法内部多行注释 
+&lt;li&gt;方法内部单行注释，在被注释语句上方另起一行，使用//注释。方法内部多行注释
 使用/* */注释，注意与代码对齐。&lt;/li&gt;
 &lt;li&gt;所有的枚举类型字段必须要有注释，说明每个数据项的用途。&lt;/li&gt;
 &lt;li&gt;避免出现重复的代码(&lt;strong&gt;Don&amp;rsquo;t Repeat Yourself&lt;/strong&gt;)，即DRY原则。说明:随意复制和粘贴代码，必然会导致代码的重复，在以后需要修改时，需要修改所有的副本，容易遗漏。必要时抽取共性方法，或者抽象公共类，甚至是组件化。&lt;/li&gt;
@@ -2143,10 +2143,10 @@ final boolean existed = (file.open(fileName, &amp;quot;w&amp;quot;) != null) &am
         </item>
         <item>
         <title>自定义Snippet提高效率</title>
-        <link>https://lllovol.com/posts/tech/2019-06-16-snippet/</link>
+        <link>https://lllovol.com/snippet/</link>
         <pubDate>Sun, 16 Jun 2019 22:16:35 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/tech/2019-06-16-snippet/</guid>
+        <guid>https://lllovol.com/snippet/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg" alt="Featured image of post 自定义Snippet提高效率" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;在书写markdown文章的时候，往往需要向其中添加图片的链接，从截图到文件的处理，到链接的获取都会很麻烦。在寻找各种图床工具之后，发现其效果都不是很好（比如要收费开通多个云图床的上传权限），因此本文将介绍另外一种较为简便的处理方式。&lt;/p&gt;
 &lt;h1 id=&#34;设置snippet&#34;&gt;设置Snippet&lt;/h1&gt;
@@ -2198,10 +2198,10 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </item>
         <item>
         <title>Android开发笔记（一)</title>
-        <link>https://lllovol.com/posts/android/2019-06-08-android-idea/</link>
+        <link>https://lllovol.com/android-idea/</link>
         <pubDate>Sat, 08 Jun 2019 16:49:49 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/android/2019-06-08-android-idea/</guid>
+        <guid>https://lllovol.com/android-idea/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg" alt="Featured image of post Android开发笔记（一)" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;最近在帮朋友优化一个安卓的应用，使用Android来实现的一个华容道的小游戏。 &lt;a class=&#34;link&#34; href=&#34;https://github.com/MikarLittle/HuaRongDao&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;项目链接&lt;/a&gt;&lt;/p&gt;
@@ -2375,10 +2375,10 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </item>
         <item>
         <title>随笔杂想</title>
-        <link>https://lllovol.com/posts/summary/2019-05-13-aboutsomething/</link>
+        <link>https://lllovol.com/aboutsomething/</link>
         <pubDate>Mon, 13 May 2019 13:02:36 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/summary/2019-05-13-aboutsomething/</guid>
+        <guid>https://lllovol.com/aboutsomething/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/4.jpg" alt="Featured image of post 随笔杂想" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;从公司回到学校，不多不少刚好一个月了。这一个月，自己都做了些什么？完成了什么目标？结果怎么样？&lt;/p&gt;
 &lt;h1 id=&#34;学车&#34;&gt;学车&lt;/h1&gt;
@@ -2396,15 +2396,15 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 冲动是魔鬼，心平气和，就像后来宋教练给我说的，要学会吃话。&lt;br&gt;
 多听，好好听完了别人说什么，抓住重点，再进行反问，不要让自己脑子一热，就做出一些让自己后悔的事情。
 感觉今天的处世方式，真的很像蔡徐坤。仿佛不容别人质疑自己，容不得一点负面的评价，还要去发律师函，愚蠢。&lt;br&gt;
-别人教练再怎么说，都是长辈，然后和别人教练顶撞了过去，没有必要。 
+别人教练再怎么说，都是长辈，然后和别人教练顶撞了过去，没有必要。
 前辈始终是前辈。得罪了这个教练，就算他不负责我，他也始终是教练，得罪了他，对我来讲，能有什么好处？
 没有好处。&lt;/p&gt;
 &lt;p&gt;上善若水，大丈夫，能屈能伸。&lt;/p&gt;
 &lt;h1 id=&#34;对于别人的评价与看法&#34;&gt;对于别人的评价与看法&lt;/h1&gt;
 &lt;p&gt;越来越不喜欢别人对自己的评价，是可爱，而希望是成熟。&lt;br&gt;
-但是这真的很傻，才发现，这种太在意别人评价的事情，才是真的不成熟。 
+但是这真的很傻，才发现，这种太在意别人评价的事情，才是真的不成熟。
 别人能对我有所评价，至少别人是有在关心我（无论正负评价，都是关心，就像明星一样，黑粉也一样是粉丝）。
-那些真正对你不理不睬的，才是真的可怕。 
+那些真正对你不理不睬的，才是真的可怕。
 让所有人都满意，让所有人都对我有很高的评价，真的能做到吗？不能。&lt;br&gt;
 光是做好自己的事情，就已经很不容易了。&lt;br&gt;
 别人将我捧的高，我的实力也不会因为他的夸赞而突飞猛进；&lt;br&gt;
@@ -2418,10 +2418,10 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </item>
         <item>
         <title>SpringBoot开发中的一些小细节(十）泛型、分布式锁</title>
-        <link>https://lllovol.com/posts/spring/2019-03-29-spring10/</link>
+        <link>https://lllovol.com/spring10/</link>
         <pubDate>Fri, 29 Mar 2019 17:19:15 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/spring/2019-03-29-spring10/</guid>
+        <guid>https://lllovol.com/spring10/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg" alt="Featured image of post SpringBoot开发中的一些小细节(十）泛型、分布式锁" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;本文主要记录最近工作中关于开发中的一些小技巧以及感悟&lt;/p&gt;
 &lt;h1 id=&#34;小细节&#34;&gt;小细节&lt;/h1&gt;
@@ -2594,10 +2594,10 @@ percent * 100 / totalWeight&lt;/p&gt;
         </item>
         <item>
         <title>Shuffle</title>
-        <link>https://lllovol.com/posts/algorithm/2019-03-28-shuffle/</link>
+        <link>https://lllovol.com/shuffle/</link>
         <pubDate>Thu, 28 Mar 2019 11:00:40 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/algorithm/2019-03-28-shuffle/</guid>
+        <guid>https://lllovol.com/shuffle/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg" alt="Featured image of post Shuffle" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;排序问题实现过很多次了，但是如何保证随机的乱序呢？这就是洗牌问题了（Shuffle）&lt;/p&gt;
 &lt;blockquote&gt;
@@ -2712,10 +2712,10 @@ percent * 100 / totalWeight&lt;/p&gt;
         </item>
         <item>
         <title>Dynamic Programming-钢条切割问题</title>
-        <link>https://lllovol.com/posts/algorithm/2019-03-27-dynamic-programming/</link>
+        <link>https://lllovol.com/dynamic-programming/</link>
         <pubDate>Wed, 27 Mar 2019 20:38:15 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/algorithm/2019-03-27-dynamic-programming/</guid>
+        <guid>https://lllovol.com/dynamic-programming/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/1.jpg" alt="Featured image of post Dynamic Programming-钢条切割问题" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;动态规划是算法中的一大类，是一个求解最优解的值的问题&lt;/p&gt;
 &lt;blockquote&gt;
@@ -2788,10 +2788,10 @@ percent * 100 / totalWeight&lt;/p&gt;
         </item>
         <item>
         <title>SpringBoot开发中的一些小细节(九）Guava库</title>
-        <link>https://lllovol.com/posts/spring/2019-03-24-spring9/</link>
+        <link>https://lllovol.com/spring9/</link>
         <pubDate>Sun, 24 Mar 2019 17:23:42 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/spring/2019-03-24-spring9/</guid>
+        <guid>https://lllovol.com/spring9/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/9.jpg" alt="Featured image of post SpringBoot开发中的一些小细节(九）Guava库" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;本文主要记录最近工作中关于开发中的一些小技巧以及感悟&lt;/p&gt;
 &lt;h1 id=&#34;小细节&#34;&gt;小细节&lt;/h1&gt;
@@ -2833,10 +2833,10 @@ percent * 100 / totalWeight&lt;/p&gt;
         </item>
         <item>
         <title>Java8流式编程</title>
-        <link>https://lllovol.com/posts/java/2019-03-21-stream/</link>
+        <link>https://lllovol.com/stream/</link>
         <pubDate>Thu, 21 Mar 2019 11:08:24 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/java/2019-03-21-stream/</guid>
+        <guid>https://lllovol.com/stream/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/8.jpg" alt="Featured image of post Java8流式编程" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;在前天的时候，java12都出了，但是我还在用java6的陈旧的编码方式，需要改进到java8的流式编程，此文主要是用来记录流式编程的积累&lt;/p&gt;
 &lt;blockquote&gt;
@@ -2948,10 +2948,10 @@ Stream API可以极大提高Java程序员的生产力，让程序员写出高效
         </item>
         <item>
         <title>RocketMQ源码分享笔记</title>
-        <link>https://lllovol.com/posts/tech/2019-03-19-rocketmq/</link>
+        <link>https://lllovol.com/rocketmq/</link>
         <pubDate>Tue, 19 Mar 2019 10:54:01 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/tech/2019-03-19-rocketmq/</guid>
+        <guid>https://lllovol.com/rocketmq/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/7.jpg" alt="Featured image of post RocketMQ源码分享笔记" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;RocketMQ，是一种延时队列，主要的应用场景，就是消费者可以延时消费消息，比如在双11的时候,一瞬间有太多请求全部打在服务器上，服务器就会瞬间瘫痪，本文主要就是记录前辈分享的Rocket源码的时候笔记和一些感悟&lt;/p&gt;
 &lt;h1 id=&#34;主要功能&#34;&gt;主要功能&lt;/h1&gt;
@@ -3000,10 +3000,10 @@ Stream API可以极大提高Java程序员的生产力，让程序员写出高效
         </item>
         <item>
         <title>SpringBoot开发中的一些小细节(八)装箱与拆箱，基本数据类型与包装类</title>
-        <link>https://lllovol.com/posts/spring/2019-03-14-spring8/</link>
+        <link>https://lllovol.com/spring8/</link>
         <pubDate>Thu, 14 Mar 2019 17:03:05 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/spring/2019-03-14-spring8/</guid>
+        <guid>https://lllovol.com/spring8/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg" alt="Featured image of post SpringBoot开发中的一些小细节(八)装箱与拆箱，基本数据类型与包装类" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;主要用来记录整理最近一周工作学习中遇到，学到的一些小知识，积少成多，聚沙成塔&lt;/p&gt;
 &lt;h1 id=&#34;小细节&#34;&gt;小细节&lt;/h1&gt;
@@ -3123,10 +3123,10 @@ Stream API可以极大提高Java程序员的生产力，让程序员写出高效
         </item>
         <item>
         <title>源码阅读SpringDataJPA</title>
-        <link>https://lllovol.com/posts/spring/2019-03-11-springdatajpa/</link>
+        <link>https://lllovol.com/springdatajpa/</link>
         <pubDate>Mon, 11 Mar 2019 19:28:16 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/spring/2019-03-11-springdatajpa/</guid>
+        <guid>https://lllovol.com/springdatajpa/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg" alt="Featured image of post 源码阅读SpringDataJPA" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;CRUD是平常业务开发过程中最常接触到的，因此想通过阅读这个最常接触模块的代码，使得自己能够更加深入的了解Spring，提升自己的技术能力，而不是只会CRUD，却都不知道它是怎么实现的。&lt;/p&gt;
 &lt;h4 id=&#34;hibernate&#34;&gt;Hibernate&lt;/h4&gt;
@@ -3406,10 +3406,10 @@ Stream API可以极大提高Java程序员的生产力，让程序员写出高效
         </item>
         <item>
         <title>进程间通信的方式</title>
-        <link>https://lllovol.com/posts/tech/2019-03-05-inter-process/</link>
+        <link>https://lllovol.com/inter-process/</link>
         <pubDate>Tue, 05 Mar 2019 16:22:56 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/tech/2019-03-05-inter-process/</guid>
+        <guid>https://lllovol.com/inter-process/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/4.jpg" alt="Featured image of post 进程间通信的方式" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;IPC（Inter-Process Communication，进程间通信）&lt;br&gt;
 有时候我们需要在不同的程序之间，也就是不同的进程之间进行通讯，那么都有些什么方式呢？通过查阅相关资料，主要有信号、管道、消息队列、共享内存等等&lt;/p&gt;
@@ -3433,10 +3433,10 @@ Stream API可以极大提高Java程序员的生产力，让程序员写出高效
         </item>
         <item>
         <title>Yaml和Java对象之间的相互转换</title>
-        <link>https://lllovol.com/posts/tech/2019-02-22-yamlbeans/</link>
+        <link>https://lllovol.com/yamlbeans/</link>
         <pubDate>Fri, 22 Feb 2019 21:46:09 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/tech/2019-02-22-yamlbeans/</guid>
+        <guid>https://lllovol.com/yamlbeans/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg" alt="Featured image of post Yaml和Java对象之间的相互转换" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;最近需要做一个将java对象转换成yaml文件格式的工作，由于手动进行操作的话效率会很低下，因此再找有没有合适的包可以使用。最后找到的工具就是yamlBeans,本文主要是翻译整理yamlBeans中的一部分信息&lt;/p&gt;
 &lt;blockquote&gt;
@@ -3542,10 +3542,10 @@ map.put(&amp;quot;best friend&amp;quot;, contact);
         </item>
         <item>
         <title>SpringBoot开发中的一些小细节(七)Controller路由以及分页查询</title>
-        <link>https://lllovol.com/posts/spring/2019-02-20-spring7/</link>
+        <link>https://lllovol.com/spring7/</link>
         <pubDate>Wed, 20 Feb 2019 11:35:51 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/spring/2019-02-20-spring7/</guid>
+        <guid>https://lllovol.com/spring7/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg" alt="Featured image of post SpringBoot开发中的一些小细节(七)Controller路由以及分页查询" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;过年后第一次开始更新啦，这一篇主要就用来总结年后以来有意思，有用的一些信息&lt;/p&gt;
 &lt;h2 id=&#34;在controller中的一些注解&#34;&gt;在Controller中的一些注解&lt;/h2&gt;
@@ -3643,10 +3643,10 @@ return new PagerData&amp;lt;&amp;gt;(all, count, param.getPageSize(), param.getP
         </item>
         <item>
         <title>《Spring源码深度解析》读后感(二)Bean的标签解析</title>
-        <link>https://lllovol.com/posts/spring/2019-01-17-spring-source-code-2/</link>
+        <link>https://lllovol.com/spring-source-code-2/</link>
         <pubDate>Thu, 17 Jan 2019 11:56:50 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/spring/2019-01-17-spring-source-code-2/</guid>
+        <guid>https://lllovol.com/spring-source-code-2/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/1.jpg" alt="Featured image of post 《Spring源码深度解析》读后感(二)Bean的标签解析" /&gt;&lt;h1 id=&#34;两种标签&#34;&gt;两种标签&lt;/h1&gt;
 &lt;p&gt;Spring中的标签的包括默认的标签和自定义的标签两种，而这两种标签的用法和解析方式存在着很大的不同。&lt;/p&gt;
 &lt;h1 id=&#34;默认标签的解析&#34;&gt;默认标签的解析&lt;/h1&gt;
@@ -5157,10 +5157,10 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
         </item>
         <item>
         <title>《Spring源码深度解析》读后感(一)Spring的容器Bean</title>
-        <link>https://lllovol.com/posts/spring/2019-01-15-spring-source-code/</link>
+        <link>https://lllovol.com/spring-source-code/</link>
         <pubDate>Tue, 15 Jan 2019 17:06:53 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/spring/2019-01-15-spring-source-code/</guid>
+        <guid>https://lllovol.com/spring-source-code/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/8.jpg" alt="Featured image of post 《Spring源码深度解析》读后感(一)Spring的容器Bean" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;这个系列主要是用来记录自己读这本书的一些笔记和想法的记录，不过买书好像买错了，应该买spring boot的相关解读的书籍，这是spring的深入解读的书。吃了一亏，不过这也是spring boot的前身，其中的源码也是有价值的。&lt;br&gt;
 首先开始的，是整个spring当中最核心的用法，但是却十分重要的一个部分&amp;ndash;容器。大道至简，大音希声。&lt;/p&gt;
@@ -5221,10 +5221,10 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
         </item>
         <item>
         <title>SpringBoot开发中的一些小细节(六)JPA</title>
-        <link>https://lllovol.com/posts/spring/2019-01-08-spring6/</link>
+        <link>https://lllovol.com/spring6/</link>
         <pubDate>Tue, 08 Jan 2019 10:51:00 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/spring/2019-01-08-spring6/</guid>
+        <guid>https://lllovol.com/spring6/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/7.jpg" alt="Featured image of post SpringBoot开发中的一些小细节(六)JPA" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;本文主要总结于如下的官方文档的部分内容，如有翻译不当理解不当的地方，欢迎留言指正&lt;br&gt;
 &lt;a class=&#34;link&#34; href=&#34;https://spring.io/docs&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -5409,10 +5409,10 @@ List&amp;lt;User&amp;gt; findTop10ByLastname(String lastname, Pageable pageable)
         </item>
         <item>
         <title>关于吞吐量的一些小知识</title>
-        <link>https://lllovol.com/posts/tech/2019-01-07-qps/</link>
+        <link>https://lllovol.com/qps/</link>
         <pubDate>Mon, 07 Jan 2019 15:23:02 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/tech/2019-01-07-qps/</guid>
+        <guid>https://lllovol.com/qps/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg" alt="Featured image of post 关于吞吐量的一些小知识" /&gt;&lt;h1 id=&#34;rt-响应时间&#34;&gt;RT 响应时间&lt;/h1&gt;
 &lt;p&gt;response time相应时间&lt;br&gt;
 响应时间是提交请求和返回该请求的响应之间使用的时间。&lt;br&gt;
@@ -5439,10 +5439,10 @@ List&amp;lt;User&amp;gt; findTop10ByLastname(String lastname, Pageable pageable)
         </item>
         <item>
         <title>SpringBoot开发中的一些小细节(五)String、StringBuffer和StringBuilder、</title>
-        <link>https://lllovol.com/posts/spring/2019-01-05-spring5/</link>
+        <link>https://lllovol.com/spring5/</link>
         <pubDate>Sat, 05 Jan 2019 17:05:33 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/spring/2019-01-05-spring5/</guid>
+        <guid>https://lllovol.com/spring5/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg" alt="Featured image of post SpringBoot开发中的一些小细节(五)String、StringBuffer和StringBuilder、" /&gt;&lt;h1 id=&#34;code-review&#34;&gt;Code Review&lt;/h1&gt;
 &lt;p&gt;这一周主要是一个前辈的code Review，在此期间能学到很多新的东西，也能看到自己的不足&lt;/p&gt;
 &lt;h1 id=&#34;变量名的命名&#34;&gt;变量名的命名&lt;/h1&gt;
@@ -5518,10 +5518,10 @@ public class CustomizeProjectRepoImpl implements CustomizeProjectRepo {
         </item>
         <item>
         <title>《定位》</title>
-        <link>https://lllovol.com/posts/note/2019-01-01-positioning/</link>
+        <link>https://lllovol.com/positioning/</link>
         <pubDate>Tue, 01 Jan 2019 01:29:23 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/note/2019-01-01-positioning/</guid>
+        <guid>https://lllovol.com/positioning/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/1.jpg" alt="Featured image of post 《定位》" /&gt;&lt;h1 id=&#34;取法于上仅得为中取法为中故为其下&#34;&gt;“取法于上，仅得为中，取法为中，故为其下”。&lt;/h1&gt;
 &lt;p&gt;  在读AI Ries和Jack Trout的这一本《定位》之前，我对“定位”这个词，第一个感觉，就是唐太宗的这句话，当然这只是仅仅是站在个人的层面，对自己的一种定位。在追求探索一件事情的时候，需要将目标放的高与长远一点。在读完《定位》之后，我对定位这个词有了新的理解。&lt;br&gt;
   回想近代社会的发展史，其实也就是人们的定位的一次次的更新和迭代：十八世纪六十年代，瓦特改良了蒸汽机，手工劳动的转变为了大机器生产，是第一次的工业革命，人类的生产力得到了极大的提高，这时候生产力的定位，是靠着有这熟练经验的技工总结而来的；十九世纪下半叶，蒸汽时代逐渐接受，人们逐渐开始进入电气时代，这时候生产力的定位，和第一次有着巨大的不同，是科学技术真正的开始带来生产力的巨大变革；而在第二次世界大战结束之后，人类进入了第三次的生产力革命，信息技术的革命，技术更迭日新月异，瞬息万变的时代，而现在的定位，正是书中所着重介绍的，可以植入人们心智的一种定位。&lt;br&gt;
@@ -5542,10 +5542,10 @@ public class CustomizeProjectRepoImpl implements CustomizeProjectRepo {
         </item>
         <item>
         <title>SpringBoot开发中的一些小细节(四)CR笔记ApplicationListener等等</title>
-        <link>https://lllovol.com/posts/spring/2018-12-28-spring4/</link>
+        <link>https://lllovol.com/spring4/</link>
         <pubDate>Fri, 28 Dec 2018 17:12:32 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/spring/2018-12-28-spring4/</guid>
+        <guid>https://lllovol.com/spring4/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg" alt="Featured image of post SpringBoot开发中的一些小细节(四)CR笔记ApplicationListener等等" /&gt;&lt;h1 id=&#34;code-review&#34;&gt;Code Review&lt;/h1&gt;
 &lt;p&gt;这周被点名来做code view了来着，然后昨天晚上做了一个小时的code review，还是相当紧张，然后今天改了一天代码 特此总结&lt;/p&gt;
 &lt;h1 id=&#34;applicationlistener&#34;&gt;ApplicationListener&lt;/h1&gt;
@@ -5620,10 +5620,10 @@ if (log.isDebugEnabled()) {
         </item>
         <item>
         <title>SpringBoot开发中的一些小细节(三)KubernetesClient的使用与配置</title>
-        <link>https://lllovol.com/posts/spring/2018-12-25-spring3/</link>
+        <link>https://lllovol.com/spring3/</link>
         <pubDate>Tue, 25 Dec 2018 15:08:35 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/spring/2018-12-25-spring3/</guid>
+        <guid>https://lllovol.com/spring3/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/4.jpg" alt="Featured image of post SpringBoot开发中的一些小细节(三)KubernetesClient的使用与配置" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;最近主要在获取到的k8s中的相关service和pod的信息的变化，将原来全量获取数据的方式改进为增量的方式，此篇主要记录使用过程中遇到的坑和相信的解决方式&lt;/p&gt;
 &lt;h2 id=&#34;kubernetesclient的包的依赖的引用&#34;&gt;KubernetesClient的包的依赖的引用&lt;/h2&gt;
@@ -5747,10 +5747,10 @@ public void collectPod() {
         </item>
         <item>
         <title>大咖分享-对游戏的看法</title>
-        <link>https://lllovol.com/posts/note/2018-12-21-share/</link>
+        <link>https://lllovol.com/share/</link>
         <pubDate>Fri, 21 Dec 2018 19:24:46 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/note/2018-12-21-share/</guid>
+        <guid>https://lllovol.com/share/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg" alt="Featured image of post 大咖分享-对游戏的看法" /&gt;&lt;h1 id=&#34;背景&#34;&gt;背景&lt;/h1&gt;
 &lt;p&gt;晚上 青果灵动的CEO刘睿（julao）来到了我们公司进行了一场演讲&lt;br&gt;
 （以下都是按照julao的“我”）&lt;/p&gt;
@@ -5878,10 +5878,10 @@ A:做一个雷达，学习之后增加属性，增加反馈。不过不建议什
         </item>
         <item>
         <title>SpringBoot开发中的一些小细节(二)CR笔记</title>
-        <link>https://lllovol.com/posts/spring/2018-12-20-spring2/</link>
+        <link>https://lllovol.com/spring2/</link>
         <pubDate>Thu, 20 Dec 2018 20:01:33 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/spring/2018-12-20-spring2/</guid>
+        <guid>https://lllovol.com/spring2/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg" alt="Featured image of post SpringBoot开发中的一些小细节(二)CR笔记" /&gt;&lt;h1 id=&#34;code-review&#34;&gt;Code Review&lt;/h1&gt;
 &lt;p&gt;让大家对代码质量的标准是在一个线上，
 是一个相互学习的过程。
@@ -5969,10 +5969,10 @@ mSet是大量的，但是好像没有超时的时间，
         </item>
         <item>
         <title>Java中的容器类</title>
-        <link>https://lllovol.com/posts/java/2018-12-16-java/</link>
+        <link>https://lllovol.com/java/</link>
         <pubDate>Sun, 16 Dec 2018 22:23:46 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/java/2018-12-16-java/</guid>
+        <guid>https://lllovol.com/java/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/1.jpg" alt="Featured image of post Java中的容器类" /&gt;&lt;h1 id=&#34;概览&#34;&gt;概览&lt;/h1&gt;
 &lt;p&gt;平时学习工作中，总会使用到各种各样的数据结构，map、set、LinkedHashMap等等，虽然在使用的过程中对此有了一定的了解，但是感觉还是不是很通透。故此写一篇blog用于总结java中的数据结构。&lt;/p&gt;
 &lt;h1 id=&#34;java的容器类&#34;&gt;Java的容器类&lt;/h1&gt;
@@ -6156,10 +6156,10 @@ SortedMap mapB = new TreeMap(comparator);
         </item>
         <item>
         <title>SpringBoot开发中的一些小细节(一)Slf4J、Post和Get的小技巧</title>
-        <link>https://lllovol.com/posts/spring/2018-12-14-spring1/</link>
+        <link>https://lllovol.com/spring1/</link>
         <pubDate>Fri, 14 Dec 2018 19:13:00 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/spring/2018-12-14-spring1/</guid>
+        <guid>https://lllovol.com/spring1/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg" alt="Featured image of post SpringBoot开发中的一些小细节(一)Slf4J、Post和Get的小技巧" /&gt;&lt;p&gt;原来写的代码被CTO抓出来吐槽，发现确实都是一些当初自己没有注意到的地方，打算将这样的小细节一点一点的收集起来，养成更好的编码习惯。&lt;/p&gt;
 &lt;h1 id=&#34;slf4j&#34;&gt;Slf4j&lt;/h1&gt;
 &lt;blockquote&gt;
@@ -6229,10 +6229,10 @@ SortedMap mapB = new TreeMap(comparator);
         </item>
         <item>
         <title>实习总结与报告</title>
-        <link>https://lllovol.com/posts/summary/2018-12-09-summary/</link>
+        <link>https://lllovol.com/summary/</link>
         <pubDate>Sun, 09 Dec 2018 17:19:50 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/summary/2018-12-09-summary/</guid>
+        <guid>https://lllovol.com/summary/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/how-to-start.jpg" alt="Featured image of post 实习总结与报告" /&gt;&lt;h1 id=&#34;概览&#34;&gt;概览&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;实习工作回顾&lt;/li&gt;
@@ -6348,10 +6348,10 @@ SortedMap mapB = new TreeMap(comparator);
         </item>
         <item>
         <title>安装atom的atom-beautify</title>
-        <link>https://lllovol.com/posts/tech/2018-12-07-%E5%AE%89%E8%A3%85atom%E7%9A%84atom-beautify/</link>
+        <link>https://lllovol.com/%E5%AE%89%E8%A3%85atom%E7%9A%84atom-beautify/</link>
         <pubDate>Fri, 07 Dec 2018 17:03:25 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/tech/2018-12-07-%E5%AE%89%E8%A3%85atom%E7%9A%84atom-beautify/</guid>
+        <guid>https://lllovol.com/%E5%AE%89%E8%A3%85atom%E7%9A%84atom-beautify/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg" alt="Featured image of post 安装atom的atom-beautify" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;想给atom安装beautify的插件
 使用&lt;em&gt;apm install atom-beautify&lt;/em&gt;
@@ -6370,10 +6370,10 @@ SortedMap mapB = new TreeMap(comparator);
         </item>
         <item>
         <title>高效能人士的七个习惯</title>
-        <link>https://lllovol.com/posts/note/2018-12-06-msg/</link>
+        <link>https://lllovol.com/msg/</link>
         <pubDate>Thu, 06 Dec 2018 10:22:08 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/note/2018-12-06-msg/</guid>
+        <guid>https://lllovol.com/msg/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/software.jpg" alt="Featured image of post 高效能人士的七个习惯" /&gt;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
 &lt;p&gt;最近看的一本书的随笔，摘抄与记录&lt;/p&gt;
 &lt;h2 id=&#34;七个习惯的简要的概要&#34;&gt;七个习惯的简要的概要&lt;/h2&gt;
@@ -6405,10 +6405,10 @@ SortedMap mapB = new TreeMap(comparator);
         </item>
         <item>
         <title>基于Gitalk实现文章的评论功能</title>
-        <link>https://lllovol.com/posts/frontend/2018-12-05-gitalk/</link>
+        <link>https://lllovol.com/gitalk/</link>
         <pubDate>Wed, 05 Dec 2018 18:08:38 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/frontend/2018-12-05-gitalk/</guid>
+        <guid>https://lllovol.com/gitalk/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg" alt="Featured image of post 基于Gitalk实现文章的评论功能" /&gt;&lt;h3 id=&#34;前言&#34;&gt;前言&lt;/h3&gt;
 &lt;p&gt;想要在blog中实现文章评论发布功能，网上百度了很多文章，发现DISQUZ国内网访问速度比较慢，网易评论等平台也被关闭，最后发现了github强大功能，Gitalk。&lt;/p&gt;
 &lt;blockquote&gt;
@@ -6477,10 +6477,10 @@ git push
         </item>
         <item>
         <title>使用Rakefile实现文章生成器</title>
-        <link>https://lllovol.com/posts/tech/2018-12-05-rake/</link>
+        <link>https://lllovol.com/rake/</link>
         <pubDate>Wed, 05 Dec 2018 01:23:16 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/tech/2018-12-05-rake/</guid>
+        <guid>https://lllovol.com/rake/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/1.jpg" alt="Featured image of post 使用Rakefile实现文章生成器" /&gt;&lt;h2 id=&#34;使用githubio来写blog&#34;&gt;使用github.io来写blog&lt;/h2&gt;
 &lt;p&gt;本就是件很棒的事情，但是每次在想写新的文章的时候，都需要重新复制title和开头的标签，如果能够自动化地完成这件事就好了（重复性的东西工作）&lt;/p&gt;
 &lt;h2 id=&#34;about-rakefile&#34;&gt;About Rakefile&lt;/h2&gt;
@@ -6509,7 +6509,7 @@ task :new do
     puts &amp;quot;请输入文章的标题：&amp;quot;
     @name = STDIN.gets.chomp
     puts &amp;quot;请输入文章的子标题：&amp;quot;
-    @subtitle = STDIN.gets.chomp
+    @slug = STDIN.gets.chomp
     puts &amp;quot;请输入文章的分类，以空格分隔：&amp;quot;
     @categories = STDIN.gets.chomp
     puts &amp;quot;请输入文章的标签：&amp;quot;
@@ -6526,7 +6526,7 @@ task :new do
             file.puts &amp;quot;---&amp;quot;
             file.puts &amp;quot;layout: post&amp;quot;
             file.puts &amp;quot;title: #{@name}&amp;quot;
-            file.puts &amp;quot;subtitle: #{@subtitle}&amp;quot;
+            file.puts &amp;quot;slug: #{@slug}&amp;quot;
             file.puts &amp;quot;author: ymkNK&amp;quot;
             file.puts &amp;quot;date: #{Time.now}&amp;quot;
             file.puts &amp;quot;categories: #{@categories}&amp;quot;
@@ -6547,10 +6547,10 @@ end
         </item>
         <item>
         <title>Welcome</title>
-        <link>https://lllovol.com/posts/1996-10-14-welcome/</link>
+        <link>https://lllovol.com/welcome/</link>
         <pubDate>Mon, 14 Oct 1996 08:08:08 +0000</pubDate>
         
-        <guid>https://lllovol.com/posts/1996-10-14-welcome/</guid>
+        <guid>https://lllovol.com/welcome/</guid>
         <description>&lt;p&gt;&lt;strong&gt;Just Want to Share and Record Some Useful,Interesting Things !&lt;/strong&gt;&lt;/p&gt;
 </description>
         </item>

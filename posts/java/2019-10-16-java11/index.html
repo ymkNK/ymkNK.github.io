@@ -1,503 +1,0 @@
-<!DOCTYPE html>
-<html lang="en-us">
-    <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='前言 最近将java升级到了11，因此学习了一些java11的一些新特性
-一.局部变量类型判断 代码：
- @Testpublic void testVar() {// 测试局部变量类型判断特性var java11 = &amp;quot;test java11&amp;quot;;var test = 1;System.out.println(java11);System.out.println(test);}输出：
-二.String类的新方法 代码：
- @Testpublic void testString() {String blank = &amp;quot;&amp;quot;;String strip = &amp;quot; strip &amp;quot;;String lines = &amp;quot;\n\n&amp;quot; &#43;&amp;quot;\n&amp;quot; &#43;&amp;quot;\n&amp;quot;;// 判断字符串是否为空白System.out.println(blank.isBlank());// 去除首尾空格System.out.println(strip.strip());// 去除开头空格System.out.println(strip.stripLeading());// 去除结尾空格System.out.println(strip.stripTrailing());// 重复System.out.println(strip.repeat(0));System.out.println(strip.repeat(1));System.out.println(strip.repeat(2));System.out.println(strip.repeat(3));// 统计行数System.'><title>Java11新特性的六个实验</title>
-
-<link rel='canonical' href='https://lllovol.com/posts/java/2019-10-16-java11/'>
-
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Java11新特性的六个实验'>
-<meta property='og:description' content='前言 最近将java升级到了11，因此学习了一些java11的一些新特性
-一.局部变量类型判断 代码：
- @Testpublic void testVar() {// 测试局部变量类型判断特性var java11 = &amp;quot;test java11&amp;quot;;var test = 1;System.out.println(java11);System.out.println(test);}输出：
-二.String类的新方法 代码：
- @Testpublic void testString() {String blank = &amp;quot;&amp;quot;;String strip = &amp;quot; strip &amp;quot;;String lines = &amp;quot;\n\n&amp;quot; &#43;&amp;quot;\n&amp;quot; &#43;&amp;quot;\n&amp;quot;;// 判断字符串是否为空白System.out.println(blank.isBlank());// 去除首尾空格System.out.println(strip.strip());// 去除开头空格System.out.println(strip.stripLeading());// 去除结尾空格System.out.println(strip.stripTrailing());// 重复System.out.println(strip.repeat(0));System.out.println(strip.repeat(1));System.out.println(strip.repeat(2));System.out.println(strip.repeat(3));// 统计行数System.'>
-<meta property='og:url' content='https://lllovol.com/posts/java/2019-10-16-java11/'>
-<meta property='og:site_name' content='lllovol'>
-<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Java' /><meta property='article:published_time' content='2019-10-16T18:41:31&#43;00:00'/><meta property='article:modified_time' content='2019-10-16T18:41:31&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg' />
-<meta name="twitter:title" content="Java11新特性的六个实验">
-<meta name="twitter:description" content="前言 最近将java升级到了11，因此学习了一些java11的一些新特性
-一.局部变量类型判断 代码：
- @Testpublic void testVar() {// 测试局部变量类型判断特性var java11 = &amp;quot;test java11&amp;quot;;var test = 1;System.out.println(java11);System.out.println(test);}输出：
-二.String类的新方法 代码：
- @Testpublic void testString() {String blank = &amp;quot;&amp;quot;;String strip = &amp;quot; strip &amp;quot;;String lines = &amp;quot;\n\n&amp;quot; &#43;&amp;quot;\n&amp;quot; &#43;&amp;quot;\n&amp;quot;;// 判断字符串是否为空白System.out.println(blank.isBlank());// 去除首尾空格System.out.println(strip.strip());// 去除开头空格System.out.println(strip.stripLeading());// 去除结尾空格System.out.println(strip.stripTrailing());// 重复System.out.println(strip.repeat(0));System.out.println(strip.repeat(1));System.out.println(strip.repeat(2));System.out.println(strip.repeat(3));// 统计行数System."><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg' />
-    <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
-
-    </head>
-    <body class="article-page keep-sidebar">
-    <script>
-        (function() {
-            const colorSchemeKey = 'StackColorScheme';
-            if(!localStorage.getItem(colorSchemeKey)){
-                localStorage.setItem(colorSchemeKey, "auto");
-            }
-        })();
-    </script><script>
-    (function() {
-        const colorSchemeKey = 'StackColorScheme';
-        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
-        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
-
-        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
-            
-
-            document.body.dataset.scheme = 'dark';
-        } else {
-            document.body.dataset.scheme = 'light';
-        }
-    })();
-</script><div class="container main-container flex on-phone--column extended ">
-            <aside class="sidebar left-sidebar sticky">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
-        <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-        </span>
-    </button>
-
-    <header class="site-info">
-        
-            <figure class="site-avatar">
-                
-                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
-                
-
-                
-                    <span class="emoji">🍥</span>
-                
-            </figure>
-        
-        <h1 class="site-name"><a href="https://lllovol.com">lllovol</a></h1>
-        <h2 class="site-description">Stay Hungry, Stay Foolish</h2>
-    </header>
-
-    <ol class="menu" id="main-menu">
-        
-        
-        
-
-        <li >
-            <a href='/'>
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="5 12 3 12 12 3 21 12 19 12" />
-  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-</svg>
-
-
-
-                
-                <span>Home</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/about/'>
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="7" r="4" />
-  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-</svg>
-
-
-
-                
-                <span>About</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/archives/'>
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <rect x="3" y="4" width="18" height="4" rx="2" />
-  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
-  <line x1="10" y1="12" x2="14" y2="12" />
-</svg>
-
-
-
-                
-                <span>Archives</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/search/'>
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-                
-                <span>Search</span>
-            </a>
-        </li>
-        
-
-        
-            <li id="dark-mode-toggle">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="8" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="16" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                <span>Dark Mode</span>
-            </li>
-        
-    </ol>
-</aside>
-
-            <main class="main full-width">
-    <article class="main-article">
-    <header class="article-header">
-        <div class="article-image">
-            <a href="/posts/java/2019-10-16-java11/">
-                
-                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg" loading="lazy" alt="Featured image of post Java11新特性的六个实验" />
-                
-            </a>
-        </div>
-    
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/java/" >
-                Java
-            </a>
-        
-    </header>
-    
-
-    <h2 class="article-title">
-        <a href="/posts/java/2019-10-16-java11/">Java11新特性的六个实验</a>
-    </h2>
-
-    <footer class="article-time">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
-</svg>
-
-
-
-        <time class="article-time--published">Oct 16, 2019</time>
-    </footer></div>
-</header>
-
-    <section class="article-content">
-    <h2 id="前言">前言</h2>
-<p>最近将java升级到了11，因此学习了一些java11的一些新特性</p>
-<h2 id="一局部变量类型判断">一.局部变量类型判断</h2>
-<p>代码：</p>
-<pre><code>    @Test
-    public void testVar() {
-        // 测试局部变量类型判断特性
-        var java11 = &quot;test java11&quot;;
-        var test = 1;
-        System.out.println(java11);
-        System.out.println(test);
-    }
-
-</code></pre><p>输出：</p>
-<p><img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191016-190331.png" alt=""  /></p>
-<h2 id="二string类的新方法">二.String类的新方法</h2>
-<p>代码：</p>
-<pre><code> @Test
-    public void testString() {
-        String blank = &quot;&quot;;
-        String strip = &quot; strip &quot;;
-        String lines = &quot;\n\n&quot; +
-                &quot;\n&quot; +
-                &quot;\n&quot;;
-        // 判断字符串是否为空白
-        System.out.println(blank.isBlank());
-
-        // 去除首尾空格
-        System.out.println(strip.strip());
-        // 去除开头空格
-        System.out.println(strip.stripLeading());
-        // 去除结尾空格
-        System.out.println(strip.stripTrailing());
-        // 重复
-        System.out.println(strip.repeat(0));
-        System.out.println(strip.repeat(1));
-        System.out.println(strip.repeat(2));
-        System.out.println(strip.repeat(3));
-        // 统计行数
-        System.out.println(lines.lines().count());
-    }
-</code></pre><p>输出：</p>
-<p><img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191016-190659.png" alt=""  /></p>
-<h2 id="三使用ofcopyof方法创建不可变更的集合">三.使用of、copyOf方法创建不可变更的集合</h2>
-<p>代码：</p>
-<pre><code>@Test
-    public void testList() {
-        // 使用 of copyOf 创建不可变的集合 AbstractImmutableList ImmutableCollections.ListN&lt;&gt;(e1, e2, e3);
-        // 通过这些方式创建出来的集合，是不能进行添加删除操作的，如果使用了就会报java.lang.UnsupportedOperationException异常
-        var list = List.of(&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;);
-        var copy = List.copyOf(list);
-        System.out.println(list == copy);
-        var list1 = new ArrayList&lt;&gt;();
-        var copy1 = List.copyOf(list1);
-        System.out.println(list1 == copy1);
-    }
-</code></pre><p>输出：</p>
-<p><img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191016-190844.png" alt=""  /></p>
-<h2 id="四stream的新方法">四.Stream的新方法</h2>
-<p>代码：</p>
-<pre><code>@Test
-    public void testStream() {
-        // 为stream增加了4个新方法
-        // 1.增加了单个参数的构造方法
-        long count = Stream.ofNullable(null).count();
-        System.out.println(count);
-        // 2.takeWhile 一旦不满足了条件就停止 下面样例输出是123
-        Stream.of(1, 2, 3, 4, 3, 2, 1).takeWhile(n -&gt; n &lt; 4).forEach(System.out::print);
-        System.out.println();
-        // 3.dropWhile 满足条件的时候都扔掉 下面样例输出是4321
-        Stream.of(1, 2, 3, 4, 3, 2, 1).dropWhile(n -&gt; n &lt; 4).forEach(System.out::print);
-        System.out.println();
-        // 4. iterate重载，可以提供一个predicate判断条件来指定什么时候结束迭代。
-    }
-</code></pre><p>输出：</p>
-<p><img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191016-190924.png" alt=""  /></p>
-<h2 id="五更加强大的optional方法">五.更加强大的Optional方法</h2>
-<p>代码：</p>
-<pre><code>@Test
-    public void testOptional() {
-        // 可以很方便的将一个Optional转成一个stream，这个repo需要自己实现或者换个东西进行替代
-        Optional&lt;GreyPolicy&gt; byId = greyPolicyRepo.findById(&quot;&quot;);
-        System.out.println(byId.stream().count());
-        // 或者当optional为空的时候给他一个替代
-        System.out.println(&quot;label:&quot;);
-        byId.ifPresent(greyPolicy -&gt; System.out.println(greyPolicy.getLabel()));
-        Optional&lt;GreyPolicy&gt; replace = byId.or(() -&gt; {
-            GreyPolicy greyPolicy = new GreyPolicy();
-            greyPolicy.setLabel(&quot;replace&quot;);
-            return Optional.of(greyPolicy);
-        });
-        System.out.println(&quot;label:&quot;);
-        replace.ifPresent(greyPolicy -&gt; System.out.println(greyPolicy.getLabel()));
-
-    }
-</code></pre><p>输出：</p>
-<p><img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191016-191042.png" alt=""  /></p>
-<h2 id="六jdk中自带的httpclient">六.JDK中自带的httpClient</h2>
-<p>代码：</p>
-<pre><code>   @Test
-    public void testHttpClient() throws IOException, InterruptedException {
-        // 可以在java.net中找到这个api，jdk自带的 http ClientAPI
-        var request = HttpRequest.newBuilder().uri(URI.create(&quot;https://www.baidu.com&quot;)).GET().build();
-        var httpClient = HttpClient.newHttpClient();
-        HttpResponse&lt;String&gt; response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-		System.out.println(response.body());
-    }
-</code></pre><p>输出：</p>
-<p><img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191016-191153.png" alt=""  /></p>
-
-</section>
-
-
-    <footer class="article-footer">
-    
-    <section class="article-tags">
-        
-            <a href="/tags/java/">Java</a>
-        
-    </section>
-
-
-    
-    <section class="article-copyright">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
-</svg>
-
-
-
-        <span>Licensed under CC BY-NC-SA 4.0</span>
-    </section>
-    </footer>
-
-    
-</article>
-
-     
-        
-    
-
-
-<div id="gitalk-container"></div>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script>
-    const gitalk = new Gitalk({
-        clientID: 'aaf5fc3a72ea9ce81d62',
-        clientSecret: '7792527b47af3239ddbc2274fb5fd141c28d8339',
-        repo: 'ymkNK.github.io',
-        owner: 'ymkNK',
-        admin: ['ymkNK'],
-        id: window.location.pathname,
-        title: document.title,
-        distractionFreeMode: true
-    })
-
-    gitalk.render('gitalk-container')
-</script>
-
-
-
-
-    
-
-    <footer class="site-footer">
-    <section class="copyright">
-        
-        2018 -
-        
-        2021
-        &copy;
-        lllovol
-    </section>
-    
-    <section class="powerby">
-        
-            <b><a href="https://github.com/ymkNK" target="_blank" rel="noopener" data-version="%s">Owner Rainbowly </a></b> <br/>
-        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
-    </section>
-</footer>
-
-    
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-    
-    <div class="pswp__bg"></div>
-
-    
-    <div class="pswp__scroll-wrap">
-
-        
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-
-        
-        <div class="pswp__ui pswp__ui--hidden">
-
-            <div class="pswp__top-bar">
-
-                
-
-                <div class="pswp__counter"></div>
-
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-                <button class="pswp__button pswp__button--share" title="Share"></button>
-
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-                
-                
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                        <div class="pswp__preloader__cut">
-                            <div class="pswp__preloader__donut"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div>
-            </div>
-
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-
-        </div>
-
-    </div>
-
-</div><script 
-                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer="true"
-                >
-            </script><script 
-                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer="true"
-                >
-            </script><link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
-            ><link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
-            >
-
-            </main>
-        </div>
-        <script 
-                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
-                defer="false"
-                >
-            </script><script type="text/javascript" src="/ts/main.js" defer></script>
-<script>
-    (function () {
-        const customFont = document.createElement('link');
-        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
-
-        customFont.type = "text/css";
-        customFont.rel = "stylesheet";
-
-        document.head.appendChild(customFont);
-    }());
-</script>
-
-    </body>
-</html>

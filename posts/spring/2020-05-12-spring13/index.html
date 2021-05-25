@@ -1,476 +1,0 @@
-<!DOCTYPE html>
-<html lang="en-us">
-    <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='背景 最近在做一个小工具的权限控制系统，由于是第一次做这方面的工作，而且对权限的控制会非常的详细，比如，需要细致到对每一个对象的控制。在前期有一些调研。
-想法 我大概实现的思路和设计
- 构建实体类，实现相应的数据存储化，用户可以设置相应的权限策略。权限设置，换一个说法就是主谓宾&amp;ndash;&amp;ldquo;谁&amp;rdquo; &amp;ldquo;能看/不能看&amp;rdquo; &amp;ldquo;什么东西&amp;rdquo;。将这个权限设置抽象为对象，并进行存储。 根据实体类解析用户保存的策略，使之生效。  说起来简单，做起来难。第一点设置权限，其实就是非常简单的单表查询维护。难点在于第二点，如何能让这个策略生效。按照我目前接触和掌握到的技术手段，主要的解决方式有下面几种：
- 写一个intercepor，拦截器。但是这个方式，只能处理请求的控制器和方法，控制不了具体的参数。这一点比较适合用来做整体的系统权限拦截，拦截接口。拦截控制的粒度比较粗糙。 在每一个业务逻辑中，分别添加拦截的逻辑，即每一个返回对象的接口，都需要查询和判断权限表。优点：思路简单。缺点：可维护性差，写完第一次之后，再维护就是噩梦。 使用Aspect，可以自定义切入的点，甚至能细化到拦截什么包什么类的什么方法等等。Perfectly，就是他了。  除了上面的Interceptor和Aspect，还有filter。这三者实际上都是对Aop的具体实现，都可以实现权限检查，日志记录等等的功能。都是对业务逻辑的提取，不同的是，使用的范围 规范、和深度不同。
- Filter、Interceptor、Aop实现与区别
- 实现 由于包含工作的涉密内容，真实实现的代码就不在此展示。而网上的Demo已经相当丰富。
- SpringBooot AOP的使用
- 其中实现权限控制的最简单的demo就是如下的代码
-@Aspect@Component@RequiredArgsConstructor@Slf4jpublic class AuthAspect {@Pointcut(&amp;quot;execution(public * com.company.group.auth.service.AuthService.list(..))&amp;quot;)public void pointCutForListObjective() {}/*** 对list的方法返回值进行拦截处理*/@AfterReturning(pointcut = &amp;quot;pointCutForListObjective()&amp;quot;, returning = &amp;quot;okrResponses&amp;quot;)public void afterReturningListObjective(JoinPoint joinPoint, Object okrResponses) {// 这个地方就能够对返回值直接进行处理}} 定义切点pointCut(),这个地方，就是定义一个我们需要切入的点，我们要进行拦截处理的地方。 对这个切点有很多处理的方式，实现真正的权限拦截控制逻辑  其他的点  对于用户的组织权限的控制，我们可以使用路径的方式来进行判断，类似于一个树，我们每一次，存储的时候，需要将用户所在的组织架构的路径进行存储。这样我们在进行权限判断的时候，就不想要每一次都从库中获取用户的组织架构信息了。 对于model的校验可以写注解来进行实现。这一点，以后会专门写一篇文章来进行分享 Npe问题可谓是开发过程中的一生之敌。在循环迭代过程中，不可以一遍迭代，一边删除list中的值。 使用JPA的时候可以使用 pageable 来直接进行分页，不用再写mongoTemplate这种CustomRepo   @Overridepublic List&amp;lt;Department&amp;gt; listAuthDepartment(String departmentName) {if (Strings.'><title>SpringBoot开发中的一些小细节（十三）使用AOP实现权限系统</title>
-
-<link rel='canonical' href='https://lllovol.com/posts/spring/2020-05-12-spring13/'>
-
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='SpringBoot开发中的一些小细节（十三）使用AOP实现权限系统'>
-<meta property='og:description' content='背景 最近在做一个小工具的权限控制系统，由于是第一次做这方面的工作，而且对权限的控制会非常的详细，比如，需要细致到对每一个对象的控制。在前期有一些调研。
-想法 我大概实现的思路和设计
- 构建实体类，实现相应的数据存储化，用户可以设置相应的权限策略。权限设置，换一个说法就是主谓宾&amp;ndash;&amp;ldquo;谁&amp;rdquo; &amp;ldquo;能看/不能看&amp;rdquo; &amp;ldquo;什么东西&amp;rdquo;。将这个权限设置抽象为对象，并进行存储。 根据实体类解析用户保存的策略，使之生效。  说起来简单，做起来难。第一点设置权限，其实就是非常简单的单表查询维护。难点在于第二点，如何能让这个策略生效。按照我目前接触和掌握到的技术手段，主要的解决方式有下面几种：
- 写一个intercepor，拦截器。但是这个方式，只能处理请求的控制器和方法，控制不了具体的参数。这一点比较适合用来做整体的系统权限拦截，拦截接口。拦截控制的粒度比较粗糙。 在每一个业务逻辑中，分别添加拦截的逻辑，即每一个返回对象的接口，都需要查询和判断权限表。优点：思路简单。缺点：可维护性差，写完第一次之后，再维护就是噩梦。 使用Aspect，可以自定义切入的点，甚至能细化到拦截什么包什么类的什么方法等等。Perfectly，就是他了。  除了上面的Interceptor和Aspect，还有filter。这三者实际上都是对Aop的具体实现，都可以实现权限检查，日志记录等等的功能。都是对业务逻辑的提取，不同的是，使用的范围 规范、和深度不同。
- Filter、Interceptor、Aop实现与区别
- 实现 由于包含工作的涉密内容，真实实现的代码就不在此展示。而网上的Demo已经相当丰富。
- SpringBooot AOP的使用
- 其中实现权限控制的最简单的demo就是如下的代码
-@Aspect@Component@RequiredArgsConstructor@Slf4jpublic class AuthAspect {@Pointcut(&amp;quot;execution(public * com.company.group.auth.service.AuthService.list(..))&amp;quot;)public void pointCutForListObjective() {}/*** 对list的方法返回值进行拦截处理*/@AfterReturning(pointcut = &amp;quot;pointCutForListObjective()&amp;quot;, returning = &amp;quot;okrResponses&amp;quot;)public void afterReturningListObjective(JoinPoint joinPoint, Object okrResponses) {// 这个地方就能够对返回值直接进行处理}} 定义切点pointCut(),这个地方，就是定义一个我们需要切入的点，我们要进行拦截处理的地方。 对这个切点有很多处理的方式，实现真正的权限拦截控制逻辑  其他的点  对于用户的组织权限的控制，我们可以使用路径的方式来进行判断，类似于一个树，我们每一次，存储的时候，需要将用户所在的组织架构的路径进行存储。这样我们在进行权限判断的时候，就不想要每一次都从库中获取用户的组织架构信息了。 对于model的校验可以写注解来进行实现。这一点，以后会专门写一篇文章来进行分享 Npe问题可谓是开发过程中的一生之敌。在循环迭代过程中，不可以一遍迭代，一边删除list中的值。 使用JPA的时候可以使用 pageable 来直接进行分页，不用再写mongoTemplate这种CustomRepo   @Overridepublic List&amp;lt;Department&amp;gt; listAuthDepartment(String departmentName) {if (Strings.'>
-<meta property='og:url' content='https://lllovol.com/posts/spring/2020-05-12-spring13/'>
-<meta property='og:site_name' content='lllovol'>
-<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Spring' /><meta property='article:published_time' content='2020-05-12T15:04:26&#43;00:00'/><meta property='article:modified_time' content='2020-05-12T15:04:26&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg' />
-<meta name="twitter:title" content="SpringBoot开发中的一些小细节（十三）使用AOP实现权限系统">
-<meta name="twitter:description" content="背景 最近在做一个小工具的权限控制系统，由于是第一次做这方面的工作，而且对权限的控制会非常的详细，比如，需要细致到对每一个对象的控制。在前期有一些调研。
-想法 我大概实现的思路和设计
- 构建实体类，实现相应的数据存储化，用户可以设置相应的权限策略。权限设置，换一个说法就是主谓宾&amp;ndash;&amp;ldquo;谁&amp;rdquo; &amp;ldquo;能看/不能看&amp;rdquo; &amp;ldquo;什么东西&amp;rdquo;。将这个权限设置抽象为对象，并进行存储。 根据实体类解析用户保存的策略，使之生效。  说起来简单，做起来难。第一点设置权限，其实就是非常简单的单表查询维护。难点在于第二点，如何能让这个策略生效。按照我目前接触和掌握到的技术手段，主要的解决方式有下面几种：
- 写一个intercepor，拦截器。但是这个方式，只能处理请求的控制器和方法，控制不了具体的参数。这一点比较适合用来做整体的系统权限拦截，拦截接口。拦截控制的粒度比较粗糙。 在每一个业务逻辑中，分别添加拦截的逻辑，即每一个返回对象的接口，都需要查询和判断权限表。优点：思路简单。缺点：可维护性差，写完第一次之后，再维护就是噩梦。 使用Aspect，可以自定义切入的点，甚至能细化到拦截什么包什么类的什么方法等等。Perfectly，就是他了。  除了上面的Interceptor和Aspect，还有filter。这三者实际上都是对Aop的具体实现，都可以实现权限检查，日志记录等等的功能。都是对业务逻辑的提取，不同的是，使用的范围 规范、和深度不同。
- Filter、Interceptor、Aop实现与区别
- 实现 由于包含工作的涉密内容，真实实现的代码就不在此展示。而网上的Demo已经相当丰富。
- SpringBooot AOP的使用
- 其中实现权限控制的最简单的demo就是如下的代码
-@Aspect@Component@RequiredArgsConstructor@Slf4jpublic class AuthAspect {@Pointcut(&amp;quot;execution(public * com.company.group.auth.service.AuthService.list(..))&amp;quot;)public void pointCutForListObjective() {}/*** 对list的方法返回值进行拦截处理*/@AfterReturning(pointcut = &amp;quot;pointCutForListObjective()&amp;quot;, returning = &amp;quot;okrResponses&amp;quot;)public void afterReturningListObjective(JoinPoint joinPoint, Object okrResponses) {// 这个地方就能够对返回值直接进行处理}} 定义切点pointCut(),这个地方，就是定义一个我们需要切入的点，我们要进行拦截处理的地方。 对这个切点有很多处理的方式，实现真正的权限拦截控制逻辑  其他的点  对于用户的组织权限的控制，我们可以使用路径的方式来进行判断，类似于一个树，我们每一次，存储的时候，需要将用户所在的组织架构的路径进行存储。这样我们在进行权限判断的时候，就不想要每一次都从库中获取用户的组织架构信息了。 对于model的校验可以写注解来进行实现。这一点，以后会专门写一篇文章来进行分享 Npe问题可谓是开发过程中的一生之敌。在循环迭代过程中，不可以一遍迭代，一边删除list中的值。 使用JPA的时候可以使用 pageable 来直接进行分页，不用再写mongoTemplate这种CustomRepo   @Overridepublic List&amp;lt;Department&amp;gt; listAuthDepartment(String departmentName) {if (Strings."><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg' />
-    <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
-
-    </head>
-    <body class="article-page keep-sidebar">
-    <script>
-        (function() {
-            const colorSchemeKey = 'StackColorScheme';
-            if(!localStorage.getItem(colorSchemeKey)){
-                localStorage.setItem(colorSchemeKey, "auto");
-            }
-        })();
-    </script><script>
-    (function() {
-        const colorSchemeKey = 'StackColorScheme';
-        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
-        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
-
-        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
-            
-
-            document.body.dataset.scheme = 'dark';
-        } else {
-            document.body.dataset.scheme = 'light';
-        }
-    })();
-</script><div class="container main-container flex on-phone--column extended ">
-            <aside class="sidebar left-sidebar sticky">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
-        <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-        </span>
-    </button>
-
-    <header class="site-info">
-        
-            <figure class="site-avatar">
-                
-                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
-                
-
-                
-                    <span class="emoji">🍥</span>
-                
-            </figure>
-        
-        <h1 class="site-name"><a href="https://lllovol.com">lllovol</a></h1>
-        <h2 class="site-description">Stay Hungry, Stay Foolish</h2>
-    </header>
-
-    <ol class="menu" id="main-menu">
-        
-        
-        
-
-        <li >
-            <a href='/'>
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="5 12 3 12 12 3 21 12 19 12" />
-  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-</svg>
-
-
-
-                
-                <span>Home</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/about/'>
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="7" r="4" />
-  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-</svg>
-
-
-
-                
-                <span>About</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/archives/'>
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <rect x="3" y="4" width="18" height="4" rx="2" />
-  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
-  <line x1="10" y1="12" x2="14" y2="12" />
-</svg>
-
-
-
-                
-                <span>Archives</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/search/'>
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-                
-                <span>Search</span>
-            </a>
-        </li>
-        
-
-        
-            <li id="dark-mode-toggle">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="8" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="16" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                <span>Dark Mode</span>
-            </li>
-        
-    </ol>
-</aside>
-
-            <main class="main full-width">
-    <article class="main-article">
-    <header class="article-header">
-        <div class="article-image">
-            <a href="/posts/spring/2020-05-12-spring13/">
-                
-                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg" loading="lazy" alt="Featured image of post SpringBoot开发中的一些小细节（十三）使用AOP实现权限系统" />
-                
-            </a>
-        </div>
-    
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/spring/" >
-                Spring
-            </a>
-        
-    </header>
-    
-
-    <h2 class="article-title">
-        <a href="/posts/spring/2020-05-12-spring13/">SpringBoot开发中的一些小细节（十三）使用AOP实现权限系统</a>
-    </h2>
-
-    <footer class="article-time">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
-</svg>
-
-
-
-        <time class="article-time--published">May 12, 2020</time>
-    </footer></div>
-</header>
-
-    <section class="article-content">
-    <h2 id="背景">背景</h2>
-<p>最近在做一个小工具的权限控制系统，由于是第一次做这方面的工作，而且对权限的控制会非常的详细，比如，需要细致到对每一个对象的控制。在前期有一些调研。</p>
-<h2 id="想法">想法</h2>
-<p>我大概实现的思路和设计</p>
-<ul>
-<li>构建实体类，实现相应的数据存储化，用户可以设置相应的权限策略。权限设置，换一个说法就是主谓宾&ndash;&ldquo;谁&rdquo; &ldquo;能看/不能看&rdquo; &ldquo;什么东西&rdquo;。将这个权限设置抽象为对象，并进行存储。</li>
-<li>根据实体类解析用户保存的策略，使之生效。</li>
-</ul>
-<p>说起来简单，做起来难。第一点设置权限，其实就是非常简单的单表查询维护。难点在于第二点，如何能让这个策略生效。按照我目前接触和掌握到的技术手段，主要的解决方式有下面几种：</p>
-<ul>
-<li>写一个intercepor，拦截器。但是这个方式，只能处理请求的控制器和方法，控制不了具体的参数。这一点比较适合用来做整体的系统权限拦截，拦截接口。拦截控制的粒度比较粗糙。</li>
-<li>在每一个业务逻辑中，分别添加拦截的逻辑，即每一个返回对象的接口，都需要查询和判断权限表。优点：思路简单。缺点：可维护性差，写完第一次之后，再维护就是噩梦。</li>
-<li>使用Aspect，可以自定义切入的点，甚至能细化到拦截什么包什么类的什么方法等等。Perfectly，就是他了。</li>
-</ul>
-<p>除了上面的Interceptor和Aspect，还有filter。这三者实际上都是对Aop的具体实现，都可以实现权限检查，日志记录等等的功能。都是对业务逻辑的提取，不同的是，使用的范围
-规范、和深度不同。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/11382761-484d129572258d9c.png?imageMogr2/auto-orient/strip%7cimageView2/2/w/1200/format/webp" alt="执行顺序"  /></p>
-<blockquote>
-<p><a class="link" href="https://www.jianshu.com/p/c4ef6d232e8d"  target="_blank" rel="noopener"
-    >Filter、Interceptor、Aop实现与区别</a></p>
-</blockquote>
-<h2 id="实现">实现</h2>
-<p>由于包含工作的涉密内容，真实实现的代码就不在此展示。而网上的Demo已经相当丰富。</p>
-<blockquote>
-<p><a class="link" href="https://juejin.im/post/5c47e4b26fb9a049b50726d8"  target="_blank" rel="noopener"
-    >SpringBooot AOP的使用</a></p>
-</blockquote>
-<p>其中实现权限控制的最简单的demo就是如下的代码</p>
-<pre><code>@Aspect
-@Component
-@RequiredArgsConstructor
-@Slf4j
-public class AuthAspect {
-
-   
-    @Pointcut(&quot;execution(public * com.company.group.auth.service.AuthService.list(..))&quot;)
-    public void pointCutForListObjective() {
-    }
-    
-    /**
-     * 对list的方法返回值进行拦截处理
-     */
-    @AfterReturning(pointcut = &quot;pointCutForListObjective()&quot;, returning = &quot;okrResponses&quot;)
-    public void afterReturningListObjective(JoinPoint joinPoint, Object okrResponses) {
-        // 这个地方就能够对返回值直接进行处理
-    }
-
-}
-
-
-</code></pre><ol>
-<li>定义切点pointCut(),这个地方，就是定义一个我们需要切入的点，我们要进行拦截处理的地方。</li>
-<li>对这个切点有很多处理的方式，实现真正的权限拦截控制逻辑</li>
-</ol>
-<h2 id="其他的点">其他的点</h2>
-<ol>
-<li>对于用户的组织权限的控制，我们可以使用路径的方式来进行判断，类似于一个树，我们每一次，存储的时候，需要将用户所在的组织架构的路径进行存储。这样我们在进行权限判断的时候，就不想要每一次都从库中获取用户的组织架构信息了。</li>
-<li>对于model的校验可以写注解来进行实现。这一点，以后会专门写一篇文章来进行分享</li>
-<li>Npe问题可谓是开发过程中的一生之敌。在循环迭代过程中，不可以一遍迭代，一边删除list中的值。</li>
-<li>使用JPA的时候可以使用 pageable 来直接进行分页，不用再写mongoTemplate这种CustomRepo</li>
-</ol>
-<pre><code>  @Override
-    public List&lt;Department&gt; listAuthDepartment(String departmentName) {
-        if (Strings.isEmpty(departmentName)) {
-            return Lists.newArrayList();
-        }
-        Sort sort = new Sort(Sort.Direction.DESC, &quot;name&quot;);  
-        Pageable pageable = PageRequest.of( 0, 20, sort); // （当前页， 每页记录数， 排序方式）
-        return  departmentRepo.findAllByNameIsLike(departmentName, pageable);
-    }
-</code></pre>
-</section>
-
-
-    <footer class="article-footer">
-    
-    <section class="article-tags">
-        
-            <a href="/tags/spring/">Spring</a>
-        
-    </section>
-
-
-    
-    <section class="article-copyright">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
-</svg>
-
-
-
-        <span>Licensed under CC BY-NC-SA 4.0</span>
-    </section>
-    </footer>
-
-    
-</article>
-
-     
-        
-    
-
-
-<div id="gitalk-container"></div>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script>
-    const gitalk = new Gitalk({
-        clientID: 'aaf5fc3a72ea9ce81d62',
-        clientSecret: '7792527b47af3239ddbc2274fb5fd141c28d8339',
-        repo: 'ymkNK.github.io',
-        owner: 'ymkNK',
-        admin: ['ymkNK'],
-        id: window.location.pathname,
-        title: document.title,
-        distractionFreeMode: true
-    })
-
-    gitalk.render('gitalk-container')
-</script>
-
-
-
-
-    
-
-    <footer class="site-footer">
-    <section class="copyright">
-        
-        2018 -
-        
-        2021
-        &copy;
-        lllovol
-    </section>
-    
-    <section class="powerby">
-        
-            <b><a href="https://github.com/ymkNK" target="_blank" rel="noopener" data-version="%s">Owner Rainbowly </a></b> <br/>
-        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
-    </section>
-</footer>
-
-    
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-    
-    <div class="pswp__bg"></div>
-
-    
-    <div class="pswp__scroll-wrap">
-
-        
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-
-        
-        <div class="pswp__ui pswp__ui--hidden">
-
-            <div class="pswp__top-bar">
-
-                
-
-                <div class="pswp__counter"></div>
-
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-                <button class="pswp__button pswp__button--share" title="Share"></button>
-
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-                
-                
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                        <div class="pswp__preloader__cut">
-                            <div class="pswp__preloader__donut"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div>
-            </div>
-
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-
-        </div>
-
-    </div>
-
-</div><script 
-                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer="true"
-                >
-            </script><script 
-                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer="true"
-                >
-            </script><link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
-            ><link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
-            >
-
-            </main>
-        </div>
-        <script 
-                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
-                defer="false"
-                >
-            </script><script type="text/javascript" src="/ts/main.js" defer></script>
-<script>
-    (function () {
-        const customFont = document.createElement('link');
-        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
-
-        customFont.type = "text/css";
-        customFont.rel = "stylesheet";
-
-        document.head.appendChild(customFont);
-    }());
-</script>
-
-    </body>
-</html>

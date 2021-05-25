@@ -9,38 +9,38 @@
     <lastBuildDate>Mon, 27 Jul 2020 15:51:33 +0000</lastBuildDate><atom:link href="https://lllovol.com/tags/spring/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>SpringBoot开发中的一些小细节(十四）事件监听的使用</title>
-      <link>https://lllovol.com/posts/spring/2020-07-27-spring14/</link>
+      <link>https://lllovol.com/spring14/</link>
       <pubDate>Mon, 27 Jul 2020 15:51:33 +0000</pubDate>
       
-      <guid>https://lllovol.com/posts/spring/2020-07-27-spring14/</guid>
+      <guid>https://lllovol.com/spring14/</guid>
       <description>背景 最近在做同步先关的工作，为了提升同步任务的处理效率，减少频繁的mongo数据库查询，因此需要将一些数据统一查询出来，在内存中进行处理。
 解决方式 在任务执行的之前，就需要将相关的数据查询出来，如何实现呢？使用一个@EventListener进行ApplicationReadyEvent时间的监听，就能在应用启动之后，进行相应的操作
-@EventListener(classes = {ApplicationReadyEvent.class})public void initialMap() {if (CollectionUtils.isEmpty(ridMobileMap)) {List&amp;lt;UserRecord&amp;gt; all = entranceUserRecordRepo.findAll();ridMobileMap = all.stream().filter(userRecord -&amp;gt; StringUtils.isNotEmpty(userRecord.getMobileNo())).collect(Collectors.toMap(UserRecord::getRid, UserRecord::getMobileNo));}}More Application spring application，一般就是spring boot项目中的 Application这个类
-@SpringBootApplication@EnableConfigurationProperties@EnableAutoConfiguration(exclude = {DruidDataSourceAutoConfigure.class, DataSourceAutoConfiguration.class, RedisAutoConfiguration.class})@EnableScheduling@EnableFeignClients(basePackages = {&amp;quot;&amp;quot;})@EnableAspectJAutoProxy(proxyTargetClass = true)@EnableCircuitBreaker@EnableLdapRepositoriespublic class Application {public static void main(String[] args) {SpringApplication.run(Application.class, args);}@BeanLdapTemplate getLdapTemplate(ContextSource contextSource) {LdapTemplate ldapTemplate = new LdapTemplate(contextSource);ldapTemplate.</description>
+@EventListener(classes = {ApplicationReadyEvent.class}) public void initialMap() { if (CollectionUtils.isEmpty(ridMobileMap)) { List&amp;lt;UserRecord&amp;gt; all = entranceUserRecordRepo.findAll(); ridMobileMap = all.stream().filter(userRecord -&amp;gt; StringUtils.isNotEmpty(userRecord.getMobileNo())).collect(Collectors.toMap(UserRecord::getRid, UserRecord::getMobileNo)); } } More Application spring application，一般就是spring boot项目中的 Application这个类
+@SpringBootApplication @EnableConfigurationProperties @EnableAutoConfiguration(exclude = {DruidDataSourceAutoConfigure.class, DataSourceAutoConfiguration.class, RedisAutoConfiguration.class}) @EnableScheduling @EnableFeignClients(basePackages = {&amp;quot;&amp;quot;}) @EnableAspectJAutoProxy(proxyTargetClass = true) @EnableCircuitBreaker @EnableLdapRepositories public class Application { public static void main(String[] args) { SpringApplication.run(Application.class, args); } @Bean LdapTemplate getLdapTemplate(ContextSource contextSource) { LdapTemplate ldapTemplate = new LdapTemplate(contextSource); ldapTemplate.</description>
     </item>
     
     <item>
       <title>单例模式的实现方式</title>
-      <link>https://lllovol.com/posts/spring/2020-07-04-singleton-realization/</link>
+      <link>https://lllovol.com/singleton-realization/</link>
       <pubDate>Sat, 04 Jul 2020 00:34:38 +0000</pubDate>
       
-      <guid>https://lllovol.com/posts/spring/2020-07-04-singleton-realization/</guid>
+      <guid>https://lllovol.com/singleton-realization/</guid>
       <description>什么是单例模式？ 在整个程序运行过程中只会实现一次的对象，例如Runtime类。
 需要满足的条件有以下几点：
  构造器私有化 自行创建，并且用静态变量保存 向外提供这种实例 为了强调这是单例模式，我们可以使用final修饰  常见形式 饿汉式 懒汉式就是直接就实例化了，在程序运行的时候，直接创建，不管是否需要这个对象.不存在线程安全问题
-饿汉式-直接实例化饿汉式 public class Singleton(){public static final INSTANCE=new Singleton();private Singleton(){// 构造器私有化}}饿汉式-枚举式 和上面的效果一模一样
-public enum Singleton(){INSTANCE,;} 静态代码块饿汉式 这种情况和第一种效果也是一样的，但是如果需要配置的话，就需要使用这种方式了
-public class Singleton(){public static final INSTANCE;private String info;static {Properties pro=new Properties();pro.load( Singleton.class.getClassLoader().getResourceAsStream(&amp;quot;src/下面的资源文件&amp;quot;))INSTANCE=new Singleton(pro.getProperty(&amp;quot;info&amp;quot;));}private Singleton(String info){this.info=info;// 构造器私有化}}懒汉式 延迟创建，在需要的时候才创建对象
+饿汉式-直接实例化饿汉式 public class Singleton(){ public static final INSTANCE=new Singleton(); private Singleton(){ // 构造器私有化 } } 饿汉式-枚举式 和上面的效果一模一样
+public enum Singleton(){ INSTANCE, ; } 静态代码块饿汉式 这种情况和第一种效果也是一样的，但是如果需要配置的话，就需要使用这种方式了
+public class Singleton(){ public static final INSTANCE; private String info; static { Properties pro=new Properties(); pro.load( Singleton.class.getClassLoader().getResourceAsStream(&amp;quot;src/下面的资源文件&amp;quot;)) INSTANCE=new Singleton(pro.getProperty(&amp;quot;info&amp;quot;)); } private Singleton(String info){ this.info=info; // 构造器私有化 } } 懒汉式 延迟创建，在需要的时候才创建对象
 线程不安全的懒汉式 这种情况就是会有线程安全的问题
-public class Singleton(){private static final INSTANCE;private Singleton(){// 构造器私有化}public Singleton getInstance(){if(null==INSTANCE){INSTANCE=new Singleton();}return INSTANCE;}}线程安全的懒汉式 加上锁，保证多线程的时候，不会有问题</description>
+public class Singleton(){ private static final INSTANCE; private Singleton(){ // 构造器私有化 } public Singleton getInstance(){ if(null==INSTANCE){ INSTANCE=new Singleton(); } return INSTANCE; } } 线程安全的懒汉式 加上锁，保证多线程的时候，不会有问题</description>
     </item>
     
     <item>
       <title>SpringBoot开发中的一些小细节（十三）使用AOP实现权限系统</title>
-      <link>https://lllovol.com/posts/spring/2020-05-12-spring13/</link>
+      <link>https://lllovol.com/spring13/</link>
       <pubDate>Tue, 12 May 2020 15:04:26 +0000</pubDate>
       
-      <guid>https://lllovol.com/posts/spring/2020-05-12-spring13/</guid>
+      <guid>https://lllovol.com/spring13/</guid>
       <description>背景 最近在做一个小工具的权限控制系统，由于是第一次做这方面的工作，而且对权限的控制会非常的详细，比如，需要细致到对每一个对象的控制。在前期有一些调研。
 想法 我大概实现的思路和设计
  构建实体类，实现相应的数据存储化，用户可以设置相应的权限策略。权限设置，换一个说法就是主谓宾&amp;ndash;&amp;ldquo;谁&amp;rdquo; &amp;ldquo;能看/不能看&amp;rdquo; &amp;ldquo;什么东西&amp;rdquo;。将这个权限设置抽象为对象，并进行存储。 根据实体类解析用户保存的策略，使之生效。  说起来简单，做起来难。第一点设置权限，其实就是非常简单的单表查询维护。难点在于第二点，如何能让这个策略生效。按照我目前接触和掌握到的技术手段，主要的解决方式有下面几种：
@@ -49,15 +49,15 @@ public class Singleton(){private static final INSTANCE;private Singleton(){//
  实现 由于包含工作的涉密内容，真实实现的代码就不在此展示。而网上的Demo已经相当丰富。
  SpringBooot AOP的使用
  其中实现权限控制的最简单的demo就是如下的代码
-@Aspect@Component@RequiredArgsConstructor@Slf4jpublic class AuthAspect {@Pointcut(&amp;quot;execution(public * com.company.group.auth.service.AuthService.list(..))&amp;quot;)public void pointCutForListObjective() {}/*** 对list的方法返回值进行拦截处理*/@AfterReturning(pointcut = &amp;quot;pointCutForListObjective()&amp;quot;, returning = &amp;quot;okrResponses&amp;quot;)public void afterReturningListObjective(JoinPoint joinPoint, Object okrResponses) {// 这个地方就能够对返回值直接进行处理}} 定义切点pointCut(),这个地方，就是定义一个我们需要切入的点，我们要进行拦截处理的地方。 对这个切点有很多处理的方式，实现真正的权限拦截控制逻辑  其他的点  对于用户的组织权限的控制，我们可以使用路径的方式来进行判断，类似于一个树，我们每一次，存储的时候，需要将用户所在的组织架构的路径进行存储。这样我们在进行权限判断的时候，就不想要每一次都从库中获取用户的组织架构信息了。 对于model的校验可以写注解来进行实现。这一点，以后会专门写一篇文章来进行分享 Npe问题可谓是开发过程中的一生之敌。在循环迭代过程中，不可以一遍迭代，一边删除list中的值。 使用JPA的时候可以使用 pageable 来直接进行分页，不用再写mongoTemplate这种CustomRepo   @Overridepublic List&amp;lt;Department&amp;gt; listAuthDepartment(String departmentName) {if (Strings.</description>
+@Aspect @Component @RequiredArgsConstructor @Slf4j public class AuthAspect { @Pointcut(&amp;quot;execution(public * com.company.group.auth.service.AuthService.list(..))&amp;quot;) public void pointCutForListObjective() { } /** * 对list的方法返回值进行拦截处理 */ @AfterReturning(pointcut = &amp;quot;pointCutForListObjective()&amp;quot;, returning = &amp;quot;okrResponses&amp;quot;) public void afterReturningListObjective(JoinPoint joinPoint, Object okrResponses) { // 这个地方就能够对返回值直接进行处理 } }  定义切点pointCut(),这个地方，就是定义一个我们需要切入的点，我们要进行拦截处理的地方。 对这个切点有很多处理的方式，实现真正的权限拦截控制逻辑  其他的点  对于用户的组织权限的控制，我们可以使用路径的方式来进行判断，类似于一个树，我们每一次，存储的时候，需要将用户所在的组织架构的路径进行存储。这样我们在进行权限判断的时候，就不想要每一次都从库中获取用户的组织架构信息了。 对于model的校验可以写注解来进行实现。这一点，以后会专门写一篇文章来进行分享 Npe问题可谓是开发过程中的一生之敌。在循环迭代过程中，不可以一遍迭代，一边删除list中的值。 使用JPA的时候可以使用 pageable 来直接进行分页，不用再写mongoTemplate这种CustomRepo   @Override public List&amp;lt;Department&amp;gt; listAuthDepartment(String departmentName) { if (Strings.</description>
     </item>
     
     <item>
       <title>SpringBoot开发中的一些小细节（十二）单元测试</title>
-      <link>https://lllovol.com/posts/spring/2020-01-10-spring12/</link>
+      <link>https://lllovol.com/spring12/</link>
       <pubDate>Fri, 10 Jan 2020 19:07:19 +0000</pubDate>
       
-      <guid>https://lllovol.com/posts/spring/2020-01-10-spring12/</guid>
+      <guid>https://lllovol.com/spring12/</guid>
       <description>前言 2020将近，已经很久没有更新blog，但是每天的工作笔记都还是有在记录，趁着马上就要过年，没有那么忙碌了，把自己19年Q4的工作中遇到的问题以及一些有用的方法整理一下~
 测试的必要性 在程序员的日常工作中，实际上真正在编写代码的时间，在整个工作时间中所占的比例其实很小的一部分。在写代码之前我们需要撰写需求文档，以及充足的思考，画出uml图（虽然很多经验丰富的大佬都没有画，但是那是建立在经验相当丰富的基础之上的）；在写完代码之后，这个项目需要发布与部署到测试环境，这就是CI/CD所负责的部分了；再之后，我们就需要测试我们的项目，是否能够完成需求文档中的需求，实现了相应的功能。 如果没有进行充分完整的测试，直接上线，这个项目差不多就是穿着皇帝的新衣在大街上到处晃荡了。同样，在互联网高速发展的今天，测试也不再仅仅是人工进行测试，自动化测试的演进又再一次的提升了团队的生产效率。这和敏捷开发、持续集成、持续部署、DevOps是一脉相承的。
 测试金字塔Test Pyramid  图来源于ThoughtWorks
@@ -65,47 +65,47 @@ public class Singleton(){private static final INSTANCE;private Singleton(){//
  UI Tests 项目的ui界面测试，这一层面的测试比较适合在上线之后进行冒烟测试，能够知道项目的整个流程到底是不是有问题。但是通常由于集成的程度太高，不能很快的定位问题。 Service Tests 这一层，用来测试服务是否可用，比如API测试。 Unit Tests 在代码层面进行测试，通常可以针对某一个类，某一个方法进行测试，能够快速定位问题。这个层级的层级能够保证一个系统的每一个基石都能够按照预期的那样进行工作。单元测试的数量应该在测试组合中远远多于其他类型的测试。  Junit 三段式结构 我们通常采用三段式的结构来撰写单元测试
  构造部分。进行对象的构建、赋值等。 逻辑部分。运行方法逻辑对第一部分的数据对象进行运算。 断言部分。判断本次单元测试能否通过。  实例代码 要使用is（）方法首先需要导入hamcrest-library-1.3.jar和hamcrest-core-1.3.jar两个jar包
 依赖配置：
-&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;org.hamcrest&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;hamcrest-library&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;1.3&amp;lt;/version&amp;gt;&amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt;&amp;lt;/dependency&amp;gt;&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;junit&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;junit&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;4.12&amp;lt;/version&amp;gt;&amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt;&amp;lt;/dependency&amp;gt;简单的UT代码实现
-import static org.hamcrest.core.Is.is;import static org.junit.Assert.assertThat;@RunWith(SpringRunner.class)@SpringBootTest@Slf4jpublic class ApplicationTests {@Test@Ignorepublic void contextLoads() {}public Boolean compare(String A, String B) {return A.</description>
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.hamcrest&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;hamcrest-library&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.3&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;junit&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;junit&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4.12&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; 简单的UT代码实现
+import static org.hamcrest.core.Is.is; import static org.junit.Assert.assertThat; @RunWith(SpringRunner.class) @SpringBootTest @Slf4j public class ApplicationTests { @Test @Ignore public void contextLoads() { } public Boolean compare(String A, String B) { return A.</description>
     </item>
     
     <item>
       <title>从零开始搭建AD信息同步的项目</title>
-      <link>https://lllovol.com/posts/spring/2019-09-23-synchronize-job/</link>
+      <link>https://lllovol.com/synchronize-job/</link>
       <pubDate>Mon, 23 Sep 2019 17:12:49 +0000</pubDate>
       
-      <guid>https://lllovol.com/posts/spring/2019-09-23-synchronize-job/</guid>
+      <guid>https://lllovol.com/synchronize-job/</guid>
       <description>一 前言 最近独自完成了一个同步信息的项目，主要工作内容是从第三方的服务端将信息同步到公司的二方AD域当中。本文主要记录本项目的主要实现过程。
 二 项目设计 这是一个并不复杂的项目，因此项目主要涉及到两大部分：
  从第三方服务器端获取到信息数据 将信息数据进行处理，能够存入到公司的二方AD域当中  三 第三方数据获取 1.主要技术 本项目主要获取信息的方式，是通过FeignClient来获取的
-2.主要实现 a.最单纯的feign方式实现 添加pom依赖 	&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;feign-okhttp&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;10.1.0&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;feign-jackson&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;10.1.0&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;定义接收返回值所用到的model对象 这个地方的model定义，需要仔细阅读第三方服务端的api文档，然后根据上面的具体信息来进行定义
+2.主要实现 a.最单纯的feign方式实现 添加pom依赖 	&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;feign-okhttp&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;10.1.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;feign-jackson&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;10.1.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 定义接收返回值所用到的model对象 这个地方的model定义，需要仔细阅读第三方服务端的api文档，然后根据上面的具体信息来进行定义
 eg:
-@Datapublic class XxxApiResponse {private String code;private String message;private String timestamp;private String errcode;private String errmsg;private String detailMsg;}这里的变量名没有按照驼峰的方式进行定义，是因为官方文档返回值当中的字段key值就是这样非驼峰的方式，我们需要保证名字的一致性。
-定义Feign public interface XxxClient {@RequestLine(&amp;quot;GET /v3/xxx/details?param1={param1}&amp;quot;)XxxDetailsResponse getXxxDetails(@Param(&amp;quot;param1&amp;quot;) String param1);}注意这种RequestLine的方式和GetMapping和PostMapping的方式有所区别
-定义Feign的Factory public class XxxClientFactory {private final static String URL = &amp;quot;https://api.</description>
+@Data public class XxxApiResponse { private String code; private String message; private String timestamp; private String errcode; private String errmsg; private String detailMsg; } 这里的变量名没有按照驼峰的方式进行定义，是因为官方文档返回值当中的字段key值就是这样非驼峰的方式，我们需要保证名字的一致性。
+定义Feign public interface XxxClient { @RequestLine(&amp;quot;GET /v3/xxx/details?param1={param1}&amp;quot;) XxxDetailsResponse getXxxDetails(@Param(&amp;quot;param1&amp;quot;) String param1); } 注意这种RequestLine的方式和GetMapping和PostMapping的方式有所区别
+定义Feign的Factory public class XxxClientFactory { private final static String URL = &amp;quot;https://api.</description>
     </item>
     
     <item>
       <title>FeignClient的FallBack处理</title>
-      <link>https://lllovol.com/posts/spring/2019-07-11-feignclient/</link>
+      <link>https://lllovol.com/fallback/</link>
       <pubDate>Thu, 11 Jul 2019 16:31:53 +0000</pubDate>
       
-      <guid>https://lllovol.com/posts/spring/2019-07-11-feignclient/</guid>
+      <guid>https://lllovol.com/fallback/</guid>
       <description>前言 在使用FeignClient的时候，我们很难保证第三方的调用不会出问题，这个时候，可以写一个FallBack类，来对出错的时候进行处理，可以异常上报，也可以进行打点处理，可以不再单独地去做这些事情。
-FeignClient的编写  添加maven依赖。  	&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;spring-cloud-starter-openfeign&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;2.0.2.RELEASE&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;feign-core&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;9.7.0&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;feign-slf4j&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;9.7.0&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;新建一个接口，在上方添加FeignClient注解，在value中使用占位符的方式，对参数进行调用。  	@FeignClient(name = &amp;quot;gitApi&amp;quot;, url = &amp;quot;${api.server.gitlab.url}&amp;quot;,fallback = GitApiFeignFallBack.class)public interface GitApiFeign {@GetMapping(value = &amp;quot;/{namespace}/-/jobs/{jobId}/trace&amp;quot;) JSONObject getTrace(@PathVariable(&amp;quot;namespace&amp;quot;) String namespace,@PathVariable(&amp;quot;jobId&amp;quot;) Integer jobId,@RequestParam(&amp;quot;private_token&amp;quot;) String accessToken);}@Autowired 注解就能对FeignClient进行使用。  @AutowiredGitApiFeign gitApiFeign;FeignClient的Fallback实现 在上方的代码中，可以看见注解中有fallback的选项，这个就是新建这个Client对应的fallback类来实现FeignClient。
+FeignClient的编写  添加maven依赖。  	&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-cloud-starter-openfeign&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.0.2.RELEASE&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;feign-core&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;9.7.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;feign-slf4j&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;9.7.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 新建一个接口，在上方添加FeignClient注解，在value中使用占位符的方式，对参数进行调用。  	@FeignClient(name = &amp;quot;gitApi&amp;quot;, url = &amp;quot;${api.server.gitlab.url}&amp;quot;,fallback = GitApiFeignFallBack.class) public interface GitApiFeign { @GetMapping(value = &amp;quot;/{namespace}/-/jobs/{jobId}/trace&amp;quot;) JSONObject getTrace( @PathVariable(&amp;quot;namespace&amp;quot;) String namespace, @PathVariable(&amp;quot;jobId&amp;quot;) Integer jobId, @RequestParam(&amp;quot;private_token&amp;quot;) String accessToken); } @Autowired 注解就能对FeignClient进行使用。  @Autowired GitApiFeign gitApiFeign; FeignClient的Fallback实现 在上方的代码中，可以看见注解中有fallback的选项，这个就是新建这个Client对应的fallback类来实现FeignClient。
 在fallback类的实现代码大致如下，最简单的实现就是在fallBack类中重写一遍Client中的所有方法。
-@Component@Slf4jpublic class GitApiFeignFallBack implements GitApiFeign {@Overridepublic JSONObject getTrace(String namespace, Integer jobId, String accessToken) {log.</description>
+@Component @Slf4j public class GitApiFeignFallBack implements GitApiFeign { @Override public JSONObject getTrace(String namespace, Integer jobId, String accessToken) { log.</description>
     </item>
     
     <item>
       <title>SpringBoot开发中的一些小细节(十一)CR笔记、阿里巴巴代码规约</title>
-      <link>https://lllovol.com/posts/spring/2019-07-10-spring11/</link>
+      <link>https://lllovol.com/spring11/</link>
       <pubDate>Wed, 10 Jul 2019 23:36:52 +0000</pubDate>
       
-      <guid>https://lllovol.com/posts/spring/2019-07-10-spring11/</guid>
+      <guid>https://lllovol.com/spring11/</guid>
       <description>前言 最近正式入职，第一周的事情主要就是进行代码的Code Review,将自己曾经的实习时候写的代码看一看，清掉一部分过时的代码。同时也从前辈们的分享中学习到了不少的小细节。 以及看了阿里巴巴的开发规范规约，将一些比较重要的地方、原来没有注意到的地方记录一下。
 测试用例   在写Junit的时候，可以写一个BaseTest,以后test直接继承这个类即可，就不用每次都新建一个类然后在上面重新写上好多注解了。
- @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) @RunWith(SpringJUnit4ClassRunner.class) @Slf4j public class BaseTests {}   在写CRUD的测试用例的时候，一定要写成一个闭环，新加了测试用例，最后测试结束的时候一定要删除，防止在数据库中产生脏数据。
+ @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) @RunWith(SpringJUnit4ClassRunner.class) @Slf4j public class BaseTests { }    在写CRUD的测试用例的时候，一定要写成一个闭环，新加了测试用例，最后测试结束的时候一定要删除，防止在数据库中产生脏数据。
   阿里巴巴的规约阅读笔记  外部正在调用或者二方库依赖的接口（二方库就是公司内部各个服务之间相互依赖的库）不允许修改方法的签名，避免对接口调用方造成影响。 接口过时的时候必须加上**@Deprecated**注解。 Object的equals方法容易报NPE，应该使用常量或者确定有值的对象来使用equals方法。   正例:&amp;ldquo;test&amp;rdquo;.equals(object);
 反例:object.equals(&amp;ldquo;test&amp;rdquo;);
  所有整型包装类对象之间值的比较，全部使用equals方法比较。   说明:对于 Integer var = ? 在-128 至 127 范围内的赋值，Integer 对象是在 IntegerCache.cache 产 生，会复用已有对象，这个区间内的 Integer 值可以直接使用==进行判断，但是这个区间之外的所有数 据，都会在堆上产生，并不会复用已有对象，这是一个大坑，推荐使用 equals 方法进行判断。
@@ -115,43 +115,43 @@ FeignClient的编写  添加maven依赖。  	&amp;lt;dependency&amp;gt;&amp;lt;
     
     <item>
       <title>SpringBoot开发中的一些小细节(十）泛型、分布式锁</title>
-      <link>https://lllovol.com/posts/spring/2019-03-29-spring10/</link>
+      <link>https://lllovol.com/spring10/</link>
       <pubDate>Fri, 29 Mar 2019 17:19:15 +0000</pubDate>
       
-      <guid>https://lllovol.com/posts/spring/2019-03-29-spring10/</guid>
+      <guid>https://lllovol.com/spring10/</guid>
       <description>前言 本文主要记录最近工作中关于开发中的一些小技巧以及感悟
 小细节 权重转换百分比的问题 在工作中需要将各个对象所对应的权重转换成百分比，并且要求最后转换出来的百分比，同一类型的相加必须为百分之百，解决思路主要如下
  将各个类型的对象都分别分类 算出各个类型的总权重 算出每个对象在自己类型下的所占百分比 判断每个类型下的对象百分比相加是否等于100 在List处理的时候，可以将List分割成当前类型，和非当前类型 其中需要注意的是，在算百分比的时候，*100应该写在分子  eg: //这样会一直为0，是错误的 //原因是运算符是从左往右计算 //前面除法算出来之后会直接去尾，不足1就是0，所以最后乘以100结果还是0 percent / totalWeight * 100 //这样是正确的 percent * 100 / totalWeight
 code:
- private List&amp;lt;GreyDestination&amp;gt; getDestinationsPercent(List&amp;lt;GreyDestination&amp;gt; tempDestinations) {HashMap&amp;lt;String, Integer&amp;gt; serviceAndTotalWeight = new HashMap&amp;lt;&amp;gt;();HashMap&amp;lt;String, Integer&amp;gt; serviceAndCount = new HashMap&amp;lt;&amp;gt;();getServiceWeightAndCount(tempDestinations, serviceAndTotalWeight, serviceAndCount);List&amp;lt;GreyDestination&amp;gt; finalDestinations = tempDestinations.stream().map(destination -&amp;gt; {String service = destination.getService();Integer count = serviceAndCount.get(service);if (count == 1) {destination.</description>
+ private List&amp;lt;GreyDestination&amp;gt; getDestinationsPercent(List&amp;lt;GreyDestination&amp;gt; tempDestinations) { HashMap&amp;lt;String, Integer&amp;gt; serviceAndTotalWeight = new HashMap&amp;lt;&amp;gt;(); HashMap&amp;lt;String, Integer&amp;gt; serviceAndCount = new HashMap&amp;lt;&amp;gt;(); getServiceWeightAndCount(tempDestinations, serviceAndTotalWeight, serviceAndCount); List&amp;lt;GreyDestination&amp;gt; finalDestinations = tempDestinations.stream().map( destination -&amp;gt; { String service = destination.getService(); Integer count = serviceAndCount.get(service); if (count == 1) { destination.</description>
     </item>
     
     <item>
       <title>SpringBoot开发中的一些小细节(九）Guava库</title>
-      <link>https://lllovol.com/posts/spring/2019-03-24-spring9/</link>
+      <link>https://lllovol.com/spring9/</link>
       <pubDate>Sun, 24 Mar 2019 17:23:42 +0000</pubDate>
       
-      <guid>https://lllovol.com/posts/spring/2019-03-24-spring9/</guid>
+      <guid>https://lllovol.com/spring9/</guid>
       <description>前言 本文主要记录最近工作中关于开发中的一些小技巧以及感悟
 小细节 String转Long 使用Long.parseLong,而不是Long.getLong
 Guava库 Joiner 超好用的Guava库，主要用于字符串的拼接，可以自动在中间加上分隔符
- String yamlStart = &amp;quot;---\n&amp;quot;;String yamlEnd = &amp;quot;...\n&amp;quot;;Joiner joinerContent = Joiner.on(&amp;quot;...\n---\n&amp;quot;).skipNulls();return Joiner.on(&amp;quot;&amp;quot;).join(yamlStart, joinerContent.join(yamlList), yamlEnd); Splitter 可以很方便的将字符串分割成对应的数据结构
- //将source进行处理List&amp;lt;String&amp;gt; tempSource = Splitter.on(&amp;quot;,&amp;quot;).splitToList(param.getSource()); String占位符的用法 原来：
- String title = &amp;quot;[&amp;quot; + characterName + &amp;quot;][&amp;quot; + task.getEnv() + &amp;quot;][&amp;quot; + pipelineStage.getService() + &amp;quot;]&amp;quot;; 改进：
- String title = String.format(&amp;quot;[%s][%s][%s]&amp;quot;, 线程中的问题 不能直接使用Autowired，需要定义了成员变量之后，使用外界已经加载好的service作为入参传入初始化这个线程，如果每一个线程都启一个service的话，资源消耗会很大。 （仅仅是我暂时这么理解，TODO 搞清楚原因）
+ String yamlStart = &amp;quot;---\n&amp;quot;; String yamlEnd = &amp;quot;...\n&amp;quot;; Joiner joinerContent = Joiner.on(&amp;quot;...\n---\n&amp;quot;).skipNulls(); return Joiner.on(&amp;quot;&amp;quot;).join(yamlStart, joinerContent.join(yamlList), yamlEnd);  Splitter 可以很方便的将字符串分割成对应的数据结构
+ //将source进行处理 List&amp;lt;String&amp;gt; tempSource = Splitter.on(&amp;quot;,&amp;quot;).splitToList(param.getSource());  String占位符的用法 原来：
+ String title = &amp;quot;[&amp;quot; + characterName + &amp;quot;][&amp;quot; + task.getEnv() + &amp;quot;][&amp;quot; + pipelineStage.getService() + &amp;quot;]&amp;quot;;  改进：
+ String title = String.format(&amp;quot;[%s][%s][%s]&amp;quot;,  线程中的问题 不能直接使用Autowired，需要定义了成员变量之后，使用外界已经加载好的service作为入参传入初始化这个线程，如果每一个线程都启一个service的话，资源消耗会很大。 （仅仅是我暂时这么理解，TODO 搞清楚原因）
 数据入库的操作 建议先入队列，然后再入库
 Configuration的问题 定义了两个configuration，一个masterClient，一个jobClient 然后有个地方使用了@Autowired来进行配置（一个在外层service，一个是另外一个service），这时候就出现了冲突，开始报错。配置一定要清晰</description>
     </item>
     
     <item>
       <title>SpringBoot开发中的一些小细节(八)装箱与拆箱，基本数据类型与包装类</title>
-      <link>https://lllovol.com/posts/spring/2019-03-14-spring8/</link>
+      <link>https://lllovol.com/spring8/</link>
       <pubDate>Thu, 14 Mar 2019 17:03:05 +0000</pubDate>
       
-      <guid>https://lllovol.com/posts/spring/2019-03-14-spring8/</guid>
+      <guid>https://lllovol.com/spring8/</guid>
       <description>前言 主要用来记录整理最近一周工作学习中遇到，学到的一些小知识，积少成多，聚沙成塔
 小细节 Swagger-ui显示枚举类型的时候 定义的枚举类型的头上不需要加一些莫名其妙的注解，就可以在Swagger-ui界面自动生成
- public enum GreyTaskType {SCALE,PERSON,DEMAND,HOST;} Swagger-ui的参数显示的问题 这个是在帮忙解决朋友的问题的时候发现的，其实就是Getter的问题，他定义了俩Getter，这样就会有俩参数跑出来了。
+ public enum GreyTaskType { SCALE, PERSON, DEMAND, HOST ; }  Swagger-ui的参数显示的问题 这个是在帮忙解决朋友的问题的时候发现的，其实就是Getter的问题，他定义了俩Getter，这样就会有俩参数跑出来了。
 双向的验证 在两个模块相互依赖的时候，一方在进行某些操作的时候，需要判断另一方的状态，同样，另一方在进行某些操作的时候，也需要对这边的状态进行判断。 （主要是在删除和发布操作的时候）
 Burp Suite和Kali系统 能够用于web应用攻击的，主要使用这个工具来进行网络安全方面的测试。而Kali系统主要就是黑客使用的系统了，用于网络渗透
 Spring cloud配置中心 能够使用这个工具，实现项目发布在不同环境的情况下， 自行加载对应环境下的配置，而不再用手动修改
@@ -168,63 +168,63 @@ spring 相关书籍推荐 spring boot 编程思想 原生类型，装箱和拆�
     
     <item>
       <title>源码阅读SpringDataJPA</title>
-      <link>https://lllovol.com/posts/spring/2019-03-11-springdatajpa/</link>
+      <link>https://lllovol.com/springdatajpa/</link>
       <pubDate>Mon, 11 Mar 2019 19:28:16 +0000</pubDate>
       
-      <guid>https://lllovol.com/posts/spring/2019-03-11-springdatajpa/</guid>
+      <guid>https://lllovol.com/springdatajpa/</guid>
       <description>前言 CRUD是平常业务开发过程中最常接触到的，因此想通过阅读这个最常接触模块的代码，使得自己能够更加深入的了解Spring，提升自己的技术能力，而不是只会CRUD，却都不知道它是怎么实现的。
 Hibernate  Hibernate是一个开放源代码的对象关系映射框架，它对JDBC进行了非常轻量级的对象封装，它将POJO与数据库表建立映射关系，是一个全自动的orm（Object Relational Mapping）框架，hibernate可以自动生成SQL语句，自动执行，使得Java程序员可以随心所欲的使用对象编程思维来操纵数据库。Hibernate可以应用在任何使用JDBC的场合，既可以在Java的客户端程序使用，也可以在Servlet/JSP的Web应用中使用，完成数据持久化的重任。Hibernate百科
  JPA  JPA诞生的缘由是为了整合第三方ORM框架，建立一种标准的方式，百度百科说是JDK为了实现ORM的天下归一，目前也是在按照这个方向发展，但是还没能完全实现。在ORM框架中，Hibernate是一支很大的部队，使用很广泛，也很方便，能力也很强，同时Hibernate也是和JPA整合的比较良好，我们可以认为JPA是标准，事实上也是，JPA几乎都是接口，实现都是Hibernate在做，宏观上面看，在JPA的统一之下Hibernate很良好的运行。
 我们都知道，在使用持久化工具的时候，一般都有一个对象来操作数据库，在原生的Hibernate中叫做Session，在JPA中叫做EntityManager，在MyBatis中叫做SqlSession，通过这个对象来操作数据库。我们一般按照三层结构来看的话，Service层做业务逻辑处理，Dao层和数据库打交道，在Dao中，就存在着上面的对象。那么ORM框架本身提供的功能有什么呢？答案是基本的CRUD，所有的基础CRUD框架都提供，我们使用起来感觉很方便，很给力，业务逻辑层面的处理ORM是没有提供的，如果使用原生的框架，业务逻辑代码我们一般会自定义，会自己去写SQL语句，然后执行。在这个时候，Spring-data-jpa的威力就体现出来了，ORM提供的能力他都提供，ORM框架没有提供的业务逻辑功能Spring-data-jpa也提供，全方位的解决用户的需求。使用Spring-data-jpa进行开发的过程中，常用的功能，我们几乎不需要写一条sql语句。
   博文地址 JPA官方文档  应用实例 在大家的日常开发中都用到了很多，再次就不细致列举了，详情可以查看另外一篇博文
  Spring开发的小细节（六）
- 源码解析 Repository  @Indexedpublic interface Repository&amp;lt;T, ID&amp;gt; {} CrudRepository 主要接口 CurdRepository
- public interface CrudRepository&amp;lt;T, ID&amp;gt; extends Repository&amp;lt;T, ID&amp;gt; {&amp;lt;S extends T&amp;gt; S save(S var1);&amp;lt;S extends T&amp;gt; Iterable&amp;lt;S&amp;gt; saveAll(Iterable&amp;lt;S&amp;gt; var1);Optional&amp;lt;T&amp;gt; findById(ID var1);boolean existsById(ID var1);Iterable&amp;lt;T&amp;gt; findAll();Iterable&amp;lt;T&amp;gt; findAllById(Iterable&amp;lt;ID&amp;gt; var1);long count();void deleteById(ID var1);void delete(T var1);void deleteAll(Iterable&amp;lt;?</description>
+ 源码解析 Repository  @Indexed public interface Repository&amp;lt;T, ID&amp;gt; { }  CrudRepository 主要接口 CurdRepository
+ public interface CrudRepository&amp;lt;T, ID&amp;gt; extends Repository&amp;lt;T, ID&amp;gt; { &amp;lt;S extends T&amp;gt; S save(S var1); &amp;lt;S extends T&amp;gt; Iterable&amp;lt;S&amp;gt; saveAll(Iterable&amp;lt;S&amp;gt; var1); Optional&amp;lt;T&amp;gt; findById(ID var1); boolean existsById(ID var1); Iterable&amp;lt;T&amp;gt; findAll(); Iterable&amp;lt;T&amp;gt; findAllById(Iterable&amp;lt;ID&amp;gt; var1); long count(); void deleteById(ID var1); void delete(T var1); void deleteAll(Iterable&amp;lt;?</description>
     </item>
     
     <item>
       <title>SpringBoot开发中的一些小细节(七)Controller路由以及分页查询</title>
-      <link>https://lllovol.com/posts/spring/2019-02-20-spring7/</link>
+      <link>https://lllovol.com/spring7/</link>
       <pubDate>Wed, 20 Feb 2019 11:35:51 +0000</pubDate>
       
-      <guid>https://lllovol.com/posts/spring/2019-02-20-spring7/</guid>
+      <guid>https://lllovol.com/spring7/</guid>
       <description>前言 过年后第一次开始更新啦，这一篇主要就用来总结年后以来有意思，有用的一些信息
 在Controller中的一些注解 Controller的类型 主要有两种，一种是普通的,通常是被使用服务于web页面的。默认，你的controller方法返回的是一个string串，是表示要展示哪个模板页面或者是要跳转到哪里去。
-@Controller 另外一种是专门用在编写API的时候，返回一个JSON，或者是XML等等。然后方法返回的是可以是一个对象，或者是一个可以被序列化的对象。
-@RestController 路由的类型 这里的路由就是指http method。（GET,POST,PUT,PATCH,DELETE）。
-@GetMapping@PostMapping@PutMapping@PatchMapping@DeleteMapping 同时，在Controller上面可以加上一个@RequestMapping，可以将所有类型路由的前缀都放在上面
-@RestController@Slf4j@Api(tags = &amp;quot;11. xxxxx&amp;quot;)@RequestMapping(&amp;quot;/api/v1&amp;quot;)@RequiredArgsConstructorpublic class DataController {private final DataService dataService;@ApiOperation(&amp;quot;11.1 xxxx&amp;quot;)@GetMapping(&amp;quot;/statistics&amp;quot;)public Response&amp;lt;DataDeployDto&amp;gt; deployTask(@Validated DataParam query){log.info(&amp;quot;data Query {}&amp;quot;, JSONObject.toJSON(query));return ResponseUtil.makeSuccess(dataService.deployData(query));}} 在Controller内的传参的注解 @ApiOperation(&amp;quot;1.1 创建业务线&amp;quot;)@PostMapping(&amp;quot;/save&amp;quot;)public Response save(@RequestBody @Validated CustomProductAddParam customProductAddDto) {log.info(&amp;quot;save() {}&amp;quot;, JSONObject.toJSON(customProductAddDto));customProductService.save(customProductAddDto, true);return ResponseUtil.</description>
+@Controller  另外一种是专门用在编写API的时候，返回一个JSON，或者是XML等等。然后方法返回的是可以是一个对象，或者是一个可以被序列化的对象。
+@RestController  路由的类型 这里的路由就是指http method。（GET,POST,PUT,PATCH,DELETE）。
+@GetMapping @PostMapping @PutMapping @PatchMapping @DeleteMapping  同时，在Controller上面可以加上一个@RequestMapping，可以将所有类型路由的前缀都放在上面
+@RestController @Slf4j @Api(tags = &amp;quot;11. xxxxx&amp;quot;) @RequestMapping(&amp;quot;/api/v1&amp;quot;) @RequiredArgsConstructor public class DataController { private final DataService dataService; @ApiOperation(&amp;quot;11.1 xxxx&amp;quot;) @GetMapping(&amp;quot;/statistics&amp;quot;) public Response&amp;lt;DataDeployDto&amp;gt; deployTask(@Validated DataParam query){ log.info(&amp;quot;data Query {}&amp;quot;, JSONObject.toJSON(query)); return ResponseUtil.makeSuccess(dataService.deployData(query)); } }  在Controller内的传参的注解 @ApiOperation(&amp;quot;1.1 创建业务线&amp;quot;) @PostMapping(&amp;quot;/save&amp;quot;) public Response save(@RequestBody @Validated CustomProductAddParam customProductAddDto) { log.info(&amp;quot;save() {}&amp;quot;, JSONObject.toJSON(customProductAddDto)); customProductService.save(customProductAddDto, true); return ResponseUtil.</description>
     </item>
     
     <item>
       <title>《Spring源码深度解析》读后感(二)Bean的标签解析</title>
-      <link>https://lllovol.com/posts/spring/2019-01-17-spring-source-code-2/</link>
+      <link>https://lllovol.com/spring-source-code-2/</link>
       <pubDate>Thu, 17 Jan 2019 11:56:50 +0000</pubDate>
       
-      <guid>https://lllovol.com/posts/spring/2019-01-17-spring-source-code-2/</guid>
+      <guid>https://lllovol.com/spring-source-code-2/</guid>
       <description>两种标签 Spring中的标签的包括默认的标签和自定义的标签两种，而这两种标签的用法和解析方式存在着很大的不同。
 默认标签的解析 默认标签的解析是在parseDefaultElement函数中进行的，函数中的功能逻辑一目了然，分别对4种不同的标签做了不同的处理：
  import alias bean beans  bean标签的解析以及注册 在4种标签的解析中，对bean的解析最为复杂也最为重要。因此由此深入，如果将此标签的解析过程理解了，其他标签的解析自然也会迎刃而解。
-processBeanDefinition（ele,delegate） /*** Process the given bean element, parsing the bean definition* and registering it with the registry.*/protected void processBeanDefinition(Element ele, BeanDefinitionParserDelegate delegate) {BeanDefinitionHolder bdHolder = delegate.parseBeanDefinitionElement(ele);if (bdHolder != null) {bdHolder = delegate.decorateBeanDefinitionIfRequired(ele, bdHolder);try {// Register the final decorated instance.BeanDefinitionReaderUtils.registerBeanDefinition(bdHolder, getReaderContext().getRegistry());}catch (BeanDefinitionStoreException ex) {getReaderContext().error(&amp;quot;Failed to register bean definition with name &#39;&amp;quot; +bdHolder.</description>
+processBeanDefinition（ele,delegate） /** * Process the given bean element, parsing the bean definition * and registering it with the registry. */ protected void processBeanDefinition(Element ele, BeanDefinitionParserDelegate delegate) { BeanDefinitionHolder bdHolder = delegate.parseBeanDefinitionElement(ele); if (bdHolder != null) { bdHolder = delegate.decorateBeanDefinitionIfRequired(ele, bdHolder); try { // Register the final decorated instance. BeanDefinitionReaderUtils.registerBeanDefinition(bdHolder, getReaderContext().getRegistry()); } catch (BeanDefinitionStoreException ex) { getReaderContext().error(&amp;quot;Failed to register bean definition with name &#39;&amp;quot; + bdHolder.</description>
     </item>
     
     <item>
       <title>《Spring源码深度解析》读后感(一)Spring的容器Bean</title>
-      <link>https://lllovol.com/posts/spring/2019-01-15-spring-source-code/</link>
+      <link>https://lllovol.com/spring-source-code/</link>
       <pubDate>Tue, 15 Jan 2019 17:06:53 +0000</pubDate>
       
-      <guid>https://lllovol.com/posts/spring/2019-01-15-spring-source-code/</guid>
+      <guid>https://lllovol.com/spring-source-code/</guid>
       <description>前言 这个系列主要是用来记录自己读这本书的一些笔记和想法的记录，不过买书好像买错了，应该买spring boot的相关解读的书籍，这是spring的深入解读的书。吃了一亏，不过这也是spring boot的前身，其中的源码也是有价值的。
 首先开始的，是整个spring当中最核心的用法，但是却十分重要的一个部分&amp;ndash;容器。大道至简，大音希声。
 容器的基本用法 bean是spring中最核心的东西，因为spring就像一个大水桶，而bean就像是水桶中的水，水桶脱离了水便没有了什么用处。而spring 的目的，就是让我们的bean，能够成为纯粹的POJO（plain ordinary java object）。 需要：
   一个成员属性
   这个属性的getter
   这个属性的setter 然后在配置文件xml当中添加相关的bean
- &amp;lt;bean id=&amp;quot;myTestBean&amp;quot; class=&amp;quot;bean.MyTestBean&amp;quot;/&amp;gt;   然后就可以在测试代码中使用我们所测试的bean了
+ &amp;lt;bean id=&amp;quot;myTestBean&amp;quot; class=&amp;quot;bean.MyTestBean&amp;quot;/&amp;gt;    然后就可以在测试代码中使用我们所测试的bean了
 容器的基础XmlBeanFactory 代码如下
- BeanFactory bf= new XmlBeanFactory(new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;)); 实现流程 首先调用了ClassPathResource的构造函数 来构造了Resource资源文件的实例对象，然后后续的资源处理就可以使用Resource提供的各种服务来操作了。然后当我们有了Resource之后，就可以进行XmlBeanFactory的初始化了。
+ BeanFactory bf= new XmlBeanFactory(new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;));  实现流程 首先调用了ClassPathResource的构造函数 来构造了Resource资源文件的实例对象，然后后续的资源处理就可以使用Resource提供的各种服务来操作了。然后当我们有了Resource之后，就可以进行XmlBeanFactory的初始化了。
 与之同理，对于不同来源的资源文件都有相应的Resource实现。有了Resource接口之后便可以对所有资源文件进行统一的处理。例如
- Resource resource=new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;);InputStream inputStream=resource.getInputStream(); XmlBeanDefinition 然后，当Resource的相关类完成了对配置文件进行封住后配置文件的读取工作就全权交给XmlBeanDefinition来处理了。
+ Resource resource=new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;); InputStream inputStream=resource.getInputStream();  XmlBeanDefinition 然后，当Resource的相关类完成了对配置文件进行封住后配置文件的读取工作就全权交给XmlBeanDefinition来处理了。
 （ignoreDependencyInterface（）函数的主要功能是忽略给定接口的自动装配功能） (时序图书 p20)
  封装资源文件。 获取输入流 通过构造的InputSource实例和Resource实例继续调用函数doLoadbeanDefinitions  支撑着整个Spring容器部分的实现基础 然后就是3个步骤，支撑着整个Spring容器部分的实现基础
  获取对XML文件的验证模式 加载XML文件，并得到对应的Document 根据返回的Document注册Bean信息  doRegisterBeanDefinitions(root) 然后，又通过一系列的处理之后，终于可以到了核心逻辑的底部doRegisterBeanDefinitions(root)
@@ -233,10 +233,10 @@ processBeanDefinition（ele,delegate） /*** Process the given bean element, pa
     
     <item>
       <title>SpringBoot开发中的一些小细节(六)JPA</title>
-      <link>https://lllovol.com/posts/spring/2019-01-08-spring6/</link>
+      <link>https://lllovol.com/spring6/</link>
       <pubDate>Tue, 08 Jan 2019 10:51:00 +0000</pubDate>
       
-      <guid>https://lllovol.com/posts/spring/2019-01-08-spring6/</guid>
+      <guid>https://lllovol.com/spring6/</guid>
       <description>前言 本文主要总结于如下的官方文档的部分内容，如有翻译不当理解不当的地方，欢迎留言指正
 Spring官方文档
 Spring JDBC官方文档
@@ -244,19 +244,19 @@ Spring MongoDB官方文档
 JPA JAVA Persistence API，java持久化的api
  JPA的主要目标之一就是提供更加简单的编程模型：在JPA框架下创建实体和创建Java 类一样简单，没有任何的约束和限制，只需要使用 javax.persistence.Entity进行注释，JPA的框架和接口也都非常简单，没有太多特别的规则和设计模式的要求，开发者可以很容易地掌握。JPA基于非侵入式原则设计，因此可以很容易地和其它框架或者容器集成。
  MongoDB与JDBC mongoDB和JDBC（JAVA DATABASE CONNECTIVITY）最顶级的抽象类CrudRepository有很多相似的地方，下面就来看看CrudRepository和MongoRepository的对比，根据源码来看看两者之间的关系
-MongoRepository @NoRepositoryBeanpublic interface MongoRepository&amp;lt;T, ID&amp;gt; extends PagingAndSortingRepository&amp;lt;T, ID&amp;gt;, QueryByExampleExecutor&amp;lt;T&amp;gt; {@Override&amp;lt;S extends T&amp;gt; List&amp;lt;S&amp;gt; saveAll(Iterable&amp;lt;S&amp;gt; entites);@OverrideList&amp;lt;T&amp;gt; findAll();@OverrideList&amp;lt;T&amp;gt; findAll(Sort sort);&amp;lt;S extends T&amp;gt; S insert(S entity);&amp;lt;S extends T&amp;gt; List&amp;lt;S&amp;gt; insert(Iterable&amp;lt;S&amp;gt; entities);@Override&amp;lt;S extends T&amp;gt; List&amp;lt;S&amp;gt; findAll(Example&amp;lt;S&amp;gt; example);@Override&amp;lt;S extends T&amp;gt; List&amp;lt;S&amp;gt; findAll(Example&amp;lt;S&amp;gt; example, Sort sort);} CrudRepository public interface CrudRepository&amp;lt;T, ID extends Serializable&amp;gt;extends Repository&amp;lt;T, ID&amp;gt; {&amp;lt;S extends T&amp;gt; S save(S entity); Optional&amp;lt;T&amp;gt; findById(ID primaryKey);Iterable&amp;lt;T&amp;gt; findAll(); long count(); void delete(T entity); boolean existsById(ID primaryKey); // … more functionality omitted.</description>
+MongoRepository @NoRepositoryBean public interface MongoRepository&amp;lt;T, ID&amp;gt; extends PagingAndSortingRepository&amp;lt;T, ID&amp;gt;, QueryByExampleExecutor&amp;lt;T&amp;gt; { @Override &amp;lt;S extends T&amp;gt; List&amp;lt;S&amp;gt; saveAll(Iterable&amp;lt;S&amp;gt; entites); @Override List&amp;lt;T&amp;gt; findAll(); @Override List&amp;lt;T&amp;gt; findAll(Sort sort); &amp;lt;S extends T&amp;gt; S insert(S entity); &amp;lt;S extends T&amp;gt; List&amp;lt;S&amp;gt; insert(Iterable&amp;lt;S&amp;gt; entities); @Override &amp;lt;S extends T&amp;gt; List&amp;lt;S&amp;gt; findAll(Example&amp;lt;S&amp;gt; example); @Override &amp;lt;S extends T&amp;gt; List&amp;lt;S&amp;gt; findAll(Example&amp;lt;S&amp;gt; example, Sort sort); }  CrudRepository public interface CrudRepository&amp;lt;T, ID extends Serializable&amp;gt; extends Repository&amp;lt;T, ID&amp;gt; { &amp;lt;S extends T&amp;gt; S save(S entity); Optional&amp;lt;T&amp;gt; findById(ID primaryKey); Iterable&amp;lt;T&amp;gt; findAll(); long count(); void delete(T entity); boolean existsById(ID primaryKey); // … more functionality omitted.</description>
     </item>
     
     <item>
       <title>SpringBoot开发中的一些小细节(五)String、StringBuffer和StringBuilder、</title>
-      <link>https://lllovol.com/posts/spring/2019-01-05-spring5/</link>
+      <link>https://lllovol.com/spring5/</link>
       <pubDate>Sat, 05 Jan 2019 17:05:33 +0000</pubDate>
       
-      <guid>https://lllovol.com/posts/spring/2019-01-05-spring5/</guid>
+      <guid>https://lllovol.com/spring5/</guid>
       <description>Code Review 这一周主要是一个前辈的code Review，在此期间能学到很多新的东西，也能看到自己的不足
 变量名的命名 禁止使用拼音，真的显得很没有水平，而且可读性会非常差，除非这个对象真的只有拼音名字
 关于异常的抛出  异常不要怕抛出的多，有异常一定要打出来，不然出了错都不知道是什么地方出的错 禁止一个Exception就把一大段代码的所有异常给吞了 异常一定要用log.error()将栈给打出来  StringBuffer、StringBuilder和String 运行速度：执行速度，在这方面运行速度快慢为：StringBuilder &amp;gt; StringBuffer &amp;gt; String String为字符串常量，而StringBuilder和StringBuffer均为字符串变量，即String对象一旦创建之后该对象是不可更改的，但后两者的对象是变量，是可以更改的。Java中对String对象进行的操作实际上是一个不断创建新的对象并且将旧的对象回收的一个过程，所以执行速度很慢。而StringBuilder和StringBuffer的对象是变量，对变量进行操作就是直接对该对象进行更改，而不进行创建和回收的操作，所以速度要比String快很多。
-String str=&amp;quot;abc&amp;quot;+&amp;quot;de&amp;quot;;StringBuilder stringBuilder=new StringBuilder().append(&amp;quot;abc&amp;quot;).append(&amp;quot;de&amp;quot;);System.out.println(str);System.out.println(stringBuilder.toString()); 这种情况下除外，String的速度会比StringBuilder要快，因为第一行等价于String str=&amp;ldquo;abcde&amp;rdquo;。
+String str=&amp;quot;abc&amp;quot;+&amp;quot;de&amp;quot;; StringBuilder stringBuilder=new StringBuilder().append(&amp;quot;abc&amp;quot;).append(&amp;quot;de&amp;quot;); System.out.println(str); System.out.println(stringBuilder.toString());  这种情况下除外，String的速度会比StringBuilder要快，因为第一行等价于String str=&amp;ldquo;abcde&amp;rdquo;。
 在线程安全上，StringBuilder是线程不安全的，而StringBuffer是线程安全的 如果一个StringBuffer对象在字符串缓冲区被多个线程使用时，StringBuffer中很多方法可以带有synchronized关键字，所以可以保证线程是安全的，但StringBuilder的方法则没有该关键字，所以不能保证线程安全，有可能会出现一些错误的操作。所以如果要进行的操作是多线程的，那么就要使用StringBuffer，但是在单线程的情况下，还是建议使用速度比较快的StringBuilder。
 使用的情况 String：适用于少量的字符串操作的情况
 StringBuilder：适用于单线程下在字符缓冲区进行大量操作的情况
@@ -267,67 +267,67 @@ Stream流的方式 主要用在将一个list转成另外一个list或者map转ma
 数据库的CRUD 查询的时候注意 不建议使用findAll，最好做一个分页，看一下表有多大，除非是表小，而且不会有爆炸性的数据增长的时候可以用。其他时候最好都有分页
 删除的时候 最好是确认了可以保存了，然后再去删，这个，不应该一来就删了
 profile 想了解应用运行的状态，在什么环境下的，应该去看activity的profile
-spring:profiles:active: debug 上面是在bootstrap.yml中的，下面是如何使用
-@Value(&amp;quot;${spring.profiles.active}&amp;quot;)String active;log.info(&amp;quot;start kubernetes watch,active:{}&amp;quot;,active); 将mongoTemplate改为repo的形式  官方文档
+spring: profiles: active: debug  上面是在bootstrap.yml中的，下面是如何使用
+@Value(&amp;quot;${spring.profiles.active}&amp;quot;) String active; log.info(&amp;quot;start kubernetes watch,active:{}&amp;quot;,active);  将mongoTemplate改为repo的形式  官方文档
  相当的方便，好处就是出问题的时候，可以找到对应的表的对应的repo类，快速排查问题。
 如果想要自定义函数的话，需要自定义一个接口，再实现之后，用repo来继承自定义的接口。</description>
     </item>
     
     <item>
       <title>SpringBoot开发中的一些小细节(四)CR笔记ApplicationListener等等</title>
-      <link>https://lllovol.com/posts/spring/2018-12-28-spring4/</link>
+      <link>https://lllovol.com/spring4/</link>
       <pubDate>Fri, 28 Dec 2018 17:12:32 +0000</pubDate>
       
-      <guid>https://lllovol.com/posts/spring/2018-12-28-spring4/</guid>
+      <guid>https://lllovol.com/spring4/</guid>
       <description>Code Review 这周被点名来做code view了来着，然后昨天晚上做了一个小时的code review，还是相当紧张，然后今天改了一天代码 特此总结
 ApplicationListener 这个地方原来主要实现的功能是spring3中的功能，在启动了整个项目之后，让watch pods和watch service启动并且只启动一次。
 （启动一个单线程，回调函数，生命周期） 原来的做法是使用spring task在应用启动之后，就启动一次然后一直运行
-// @Scheduled(cron = &amp;quot;${schedule.kubeService}&amp;quot;)@Scheduled(fixedDelay = 999999999)protected void gitlabProjectTask() {kubernetesService.collectServices();customServiceService.bindServiceAndProject();kubernetesService.watchServices();}// @Scheduled(cron = &amp;quot;${schedule.kubePod}&amp;quot;)// @Scheduled(cron = &amp;quot;0 0,14 6,18 * * ? &amp;quot;)//taskexecutor// ScheduledExecutorTask// new 一个单线程一直跑就可以了@Scheduled(fixedDelay = 999999999)public void collectPod() {kubernetesService.collectPods();kubernetesService.watchPods();} 现在使用的是ApplicationListener
-public class KubernetesServiceImpl implements KubernetesService, ApplicationListener&amp;lt;ApplicationReadyEvent&amp;gt; {//生命周期@Overridepublic void onApplicationEvent(ApplicationReadyEvent event) {collectServices();customServiceService.</description>
+// @Scheduled(cron = &amp;quot;${schedule.kubeService}&amp;quot;) @Scheduled(fixedDelay = 999999999) protected void gitlabProjectTask() { kubernetesService.collectServices(); customServiceService.bindServiceAndProject(); kubernetesService.watchServices(); } // @Scheduled(cron = &amp;quot;${schedule.kubePod}&amp;quot;) // @Scheduled(cron = &amp;quot;0 0,14 6,18 * * ? &amp;quot;) //taskexecutor // ScheduledExecutorTask // new 一个单线程一直跑就可以了 @Scheduled(fixedDelay = 999999999) public void collectPod() { kubernetesService.collectPods(); kubernetesService.watchPods(); }  现在使用的是ApplicationListener
+public class KubernetesServiceImpl implements KubernetesService, ApplicationListener&amp;lt;ApplicationReadyEvent&amp;gt; { //生命周期 @Override public void onApplicationEvent(ApplicationReadyEvent event) { collectServices(); customServiceService.</description>
     </item>
     
     <item>
       <title>SpringBoot开发中的一些小细节(三)KubernetesClient的使用与配置</title>
-      <link>https://lllovol.com/posts/spring/2018-12-25-spring3/</link>
+      <link>https://lllovol.com/spring3/</link>
       <pubDate>Tue, 25 Dec 2018 15:08:35 +0000</pubDate>
       
-      <guid>https://lllovol.com/posts/spring/2018-12-25-spring3/</guid>
+      <guid>https://lllovol.com/spring3/</guid>
       <description>前言 最近主要在获取到的k8s中的相关service和pod的信息的变化，将原来全量获取数据的方式改进为增量的方式，此篇主要记录使用过程中遇到的坑和相信的解决方式
 KubernetesClient的包的依赖的引用 使用的是fabric8的kubernetes-client，添加如下依赖即可
-&amp;lt;!--在pom.xml文件--&amp;gt;&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;io.fabric8&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;kubernetes-client&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;4.0.5&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt; 配置文件配置相关的属性 application.yml文件 添加k8s集群的主机url,token
-api:server:k8s:key: &amp;quot;kubernetes.auth.token&amp;quot;token: &amp;quot;***********************************&amp;quot;url: &amp;quot;https://10.0.0.0:6443&amp;quot; 这里就有一个坑，就是这个token,由于kubernetes的安全机制，原来获取到的token都只有一天的时效，第二天都需要重新更新一个新的token
+&amp;lt;!--在pom.xml文件--&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.fabric8&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;kubernetes-client&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4.0.5&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt;  配置文件配置相关的属性 application.yml文件 添加k8s集群的主机url,token
+api: server: k8s: key: &amp;quot;kubernetes.auth.token&amp;quot; token: &amp;quot;***********************************&amp;quot; url: &amp;quot;https://10.0.0.0:6443&amp;quot;  这里就有一个坑，就是这个token,由于kubernetes的安全机制，原来获取到的token都只有一天的时效，第二天都需要重新更新一个新的token
 这样是肯定不行的，解决的方式有大概下面几种：
  使用证书的方式，需要三个文件，CaCertFile,ClientCertFile,ClientKeyFile 获取一种长效的永久的token，这个需要的权限比较高，需要找到kubernetes的负责人，拥有的权限比较高的人
 （查看本地的token,cd ~/.kube,然后cat config,就能看到自己本地的token） 使用账号密码进行登录  configuration的实现 在configuration文件夹下面新建一个class，取名为KubernetesConfig
 主要文件内容如下
-@Setter@Configuration@ConfigurationProperties(prefix = &amp;quot;api.server&amp;quot;)public class KubernetesConfig {private K8s k8s;private static final int REQUEST_TIMEOUT = 3 * 1000;private static final int CONNECTION_TIMEOUT = 3 * 1000;@Bean(&amp;quot;kubernetesClient&amp;quot;)public KubernetesClient kubernetesClient() {Config config = new ConfigBuilder().</description>
+@Setter @Configuration @ConfigurationProperties(prefix = &amp;quot;api.server&amp;quot;) public class KubernetesConfig { private K8s k8s; private static final int REQUEST_TIMEOUT = 3 * 1000; private static final int CONNECTION_TIMEOUT = 3 * 1000; @Bean(&amp;quot;kubernetesClient&amp;quot;) public KubernetesClient kubernetesClient() { Config config = new ConfigBuilder() .</description>
     </item>
     
     <item>
       <title>SpringBoot开发中的一些小细节(二)CR笔记</title>
-      <link>https://lllovol.com/posts/spring/2018-12-20-spring2/</link>
+      <link>https://lllovol.com/spring2/</link>
       <pubDate>Thu, 20 Dec 2018 20:01:33 +0000</pubDate>
       
-      <guid>https://lllovol.com/posts/spring/2018-12-20-spring2/</guid>
+      <guid>https://lllovol.com/spring2/</guid>
       <description>Code Review 让大家对代码质量的标准是在一个线上， 是一个相互学习的过程。 blog主要是用来记录当时的笔记与自己的一些感想
 用户中心的接口，需要查用户之前捐过的一些订单 ContextUtil.getUserId(()不建议使用 限制了使用线程的场景，可能每一段代码执行的线程可能不在一起了 讲究的是 变量来源应该是外部的,参数是传入的 swing local ？本地的东西 context 在子线程中是无法工作的，Util这个工具类，不应该涉及到线程这种复杂的东西
-interceptor， implements HandlerMethodargumentResolver，//可以直接解析参数（将token解析的过程，就放到这个里面了）(@LoginUidAttribute String uid) 拿到userId的，isDelete()可以不用判断 解决泛型，warning 加 PageHelper是用的swing local mapper上面的select 一定要体现一个sql,查询条件一定要解耦，不要太复杂了 不要写太多的if OrderBizMapper.xml 这样可以更好的去维护索引
+interceptor， implements HandlerMethodargumentResolver，//可以直接解析参数（将token解析的过程，就放到这个里面了） (@LoginUidAttribute String uid)  拿到userId的，isDelete()可以不用判断 解决泛型，warning 加 PageHelper是用的swing local mapper上面的select 一定要体现一个sql,查询条件一定要解耦，不要太复杂了 不要写太多的if OrderBizMapper.xml 这样可以更好的去维护索引
 不建议使用copyProperties，只要一个属性对不上可能就会 使用long不建议使用int，java中一直诟病的，就是java中的对象看不出来到底是不是long null 新的语言都解决了 null会不会有问题的东西。 创建一个 optional约定就是，可能为null int 是不能为null的 interger是可以为null的 这样可以增加代码的意义的传递，这个就是一种约定 ，使用原生的类型比较好
-链式的一个使用的方式，每一个点放一个行,因为一个点就表示一个操作了 order.stream().map(OrderBizVo::new).collect(Collection.toList())这样会更加java 8一点.map().distinct().collect(Collections.toList()) //就可以 返回给前端最好返回是一个空的集合而不是一个null，这样前端会更好处理一点 每一个表建表的时候都需要加一个 isDelete update 不涉及索引的，不能一味使用 查sql，一般不应该根据sql来加，先是业务来看怎么查的？（冲突与建议）查询的时候只能将sql交给dba，沟通的简洁 连点增加锁的操作，token不用放在数据库中，这种没必要持久化的东西，就放到redis中 为什么是double check? 是处理单例的时候才会使用double check，早起的java处理指令重排的时候，会导致一个check会被跳过去的，所以才处理了double check （在说什么？我怎么开始听不懂了），两次的话，就总有一次会成功
+链式的一个使用的方式，每一个点放一个行,因为一个点就表示一个操作了 order.stream() .map(OrderBizVo::new) .collect(Collection.toList())这样会更加java 8一点 .map() .distinct() .collect(Collections.toList()) //就可以  返回给前端最好返回是一个空的集合而不是一个null，这样前端会更好处理一点 每一个表建表的时候都需要加一个 isDelete update 不涉及索引的，不能一味使用 查sql，一般不应该根据sql来加，先是业务来看怎么查的？（冲突与建议）查询的时候只能将sql交给dba，沟通的简洁 连点增加锁的操作，token不用放在数据库中，这种没必要持久化的东西，就放到redis中 为什么是double check? 是处理单例的时候才会使用double check，早起的java处理指令重排的时候，会导致一个check会被跳过去的，所以才处理了double check （在说什么？我怎么开始听不懂了），两次的话，就总有一次会成功
 e.printStackTrace()是禁止的 使用
-log.error(&amp;quot;&amp;quot;,{},e); token的延长时间 一个是长效token,一个是短效的token,这样子的话会更加安全一点</description>
+log.error(&amp;quot;&amp;quot;,{},e);  token的延长时间 一个是长效token,一个是短效的token,这样子的话会更加安全一点</description>
     </item>
     
     <item>
       <title>SpringBoot开发中的一些小细节(一)Slf4J、Post和Get的小技巧</title>
-      <link>https://lllovol.com/posts/spring/2018-12-14-spring1/</link>
+      <link>https://lllovol.com/spring1/</link>
       <pubDate>Fri, 14 Dec 2018 19:13:00 +0000</pubDate>
       
-      <guid>https://lllovol.com/posts/spring/2018-12-14-spring1/</guid>
+      <guid>https://lllovol.com/spring1/</guid>
       <description>原来写的代码被CTO抓出来吐槽，发现确实都是一些当初自己没有注意到的地方，打算将这样的小细节一点一点的收集起来，养成更好的编码习惯。
 Slf4j  The Simple Logging Facade for Java (SLF4J) serves as a simple facade or abstraction for various logging frameworks (e.g. java.util.logging, logback, log4j) allowing the end user to plug in the desired logging framework at deployment time. 摘自https://www.slf4j.org/
  在编写Spring的代码的时候，只需要在Class上方添加一个@Slf4j的注解即可。slf4j是facade pattern的典型例子（隐藏系统的复杂性，并向客户端提供了一个客户端可以访问系统的接口，又被成为门面模式或者外观模式） 使用的时候，可以使用占位符的方式进行日志的记录，省去了原来自己拼接日志的麻烦。
- log.debug(&amp;quot;wxpushGet() returned: {}&amp;quot; ,result); 但是有一些需要注意的地方。
+ log.debug(&amp;quot;wxpushGet() returned: {}&amp;quot; ,result);  但是有一些需要注意的地方。
  在日常开发调试的时候应该少用log.info()，而应该使用log.debug，不然在上线之后，就会产生很多冗余的信息。 只有在线上部署的时候，关键代码的信息，才使用log.info(),来显示日志的信息。千万不能滥用！ 在catch的抛出错误的时候，使用log.error()。会打印错误以及异常的信息 log.warn(),用于打印潜在的用户的错误可能的信息。  Dto等model的@Data注解 @Data注解，可以实现类的Getter和Setter的同时还有toString方法，没有必要自己再转一次Json(如果只是打印个日志的话)，lombok生成的toString的可读性是很高的
  Lombok 是一种 Java™ 实用工具，可用来帮助开发人员消除 Java 的冗长，尤其是对于简单的 Java 对象（POJO Plain Ordinary Java Object）。它通过注解实现这一目的。</description>
     </item>

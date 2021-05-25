@@ -9,16 +9,16 @@
     <lastBuildDate>Wed, 05 Dec 2018 18:08:38 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/frontend/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>基于Gitalk实现文章的评论功能</title>
-      <link>https://lllovol.com/posts/frontend/2018-12-05-gitalk/</link>
+      <link>https://lllovol.com/gitalk/</link>
       <pubDate>Wed, 05 Dec 2018 18:08:38 +0000</pubDate>
       
-      <guid>https://lllovol.com/posts/frontend/2018-12-05-gitalk/</guid>
+      <guid>https://lllovol.com/gitalk/</guid>
       <description>前言 想要在blog中实现文章评论发布功能，网上百度了很多文章，发现DISQUZ国内网访问速度比较慢，网易评论等平台也被关闭，最后发现了github强大功能，Gitalk。
  Gitalk：一个基于 Github Issue 和 Preact 开发的评论插件 摘自v2ex
  再一次感受到了开源的强大之处，造就了现如今信息技术的高速发展
 设置OAuth github&amp;gt;右上角settings&amp;gt;Developer Settings&amp;gt;new OAuth App 然后依次输入
  Application name : 一个超厉害的名字 Homepage URL : github page的地址（http://yourname.github.io/） Application description : app的描述（随意） Authorization callback URL : Github api回调的地址，与Homepage URL相同  有一些坑需要注意，如果解析到了自己的域名，就在githubpage中的Repository，找到settings，找到github给你的url 即可获取到对应的clientId和clientSecret 修改post.html 然后在修改项目文件中的_layouts的post.html 找到合适的位置添加如下代码
-&amp;lt;!--Gitalk评论start --&amp;gt;{% if site.gitalk.enable %}&amp;lt;!-- 引入Gitalk评论插件 --&amp;gt;&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;https://unpkg.com/gitalk/dist/gitalk.css&amp;quot;&amp;gt;&amp;lt;script src=&amp;quot;https://unpkg.com/gitalk@latest/dist/gitalk.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&amp;lt;div id=&amp;quot;gitalk-container&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;var gitalk = new Gitalk({clientID: &#39;{{site.gitalk.clientID}}&#39;,clientSecret: &#39;{{site.</description>
+&amp;lt;!--Gitalk评论start --&amp;gt; {% if site.gitalk.enable %} &amp;lt;!-- 引入Gitalk评论插件 --&amp;gt; &amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;https://unpkg.com/gitalk/dist/gitalk.css&amp;quot;&amp;gt; &amp;lt;script src=&amp;quot;https://unpkg.com/gitalk@latest/dist/gitalk.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;div id=&amp;quot;gitalk-container&amp;quot;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt; var gitalk = new Gitalk({ clientID: &#39;{{site.gitalk.clientID}}&#39;, clientSecret: &#39;{{site.</description>
     </item>
     
   </channel>
