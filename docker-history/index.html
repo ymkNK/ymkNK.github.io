@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='前言 了解一个未知的事物，最好的方式就是去了解这个事物的历史。现在容器化，微服务很火热，有必要去了解一下docker这个小鲸鱼背后的东西。
+最热的服务器端技术 在如今，肯定可以不假思索的说，是容器，因为现在是2019年，如果是2013年，我们可不敢这么说.那时候最火热的是PaaS化。“应用托管”，那时候租了虚拟机之后，用脚本或者手动的在上面部署应用。这样部署应用就会有本地环境和云端环境不一致的问题，因此，那时候的公司，拼的就是，谁能更好的模拟云端的环境。而PaaS项目的出现，就是实现当时这个问题的最佳方案。
+Cloud Foundry 当时最大的开源的PaaS项目。只需要一个命令
+cf push &amp;quot;我的应用&amp;quot;
+就可以将本地应用部署到云上。这就是实现了应用托管的功能。
+“应用托管”如何是实现？  每一种主流的语言特定方式各自打包，上传（cf push的作用就等同于用户将应用的可执行文件和启动脚本打进了脚本当中，上传到了Cloud Foundry的云存储当中。） 在虚拟机创造各种沙盒隔离环境 Cloud Foundry调度合适的虚拟机下载压缩包 机器上的Agent下载压缩包启动运行  而这个沙盒隔离环境，其实就是现如今所说的“容器”。
+Dot Cloud公司 在随着PaaS的历史长河的流动过程中，dot Cloud这个公司，弱小，可怜又无助，无人问津，差一点就在PaaS的潮流中被抛弃。这个时候，这个公司决定开源一个项目，就是Docker项目。 这个Docker呢，其实同样也是使用了Cgroups和Namespace的方式来创造了容器，和Cloud Foundry等其他的PaaS项目基本没有什么区别，没有什么黑科技，因此那些PaaS平台的大佬也就没有将Docker放在眼里。
+风云变幻 然而，世事无常，短短几个月，Cloud Foundry等其他的PaaS社区，还没有来得及成为Docker的对手，就被Docker直接宣告“出局”。
+原因 先看看Cloud Foundry的一件上传
+ 需要为每种语言、每种框架、甚至应用的每种版本单独维护一个打好的包。 打包过程没有章法 本地跑的好好的应用，需要修改和更改不少配置才能好好的在云端运行 表面一件发布，实际上一波三折、费劲心力  Docker成功，就是靠着Docker镜像，这个看起来无足轻重的一部分，但是却提供了一种非常方便的打包机制
+ 完整操作系统的文件和目录 完全不需要任何配置和修改  这样做了之后，就是docker能够成功的精髓，那就是实现了本地环境和云端环境的高度一致！
+结语 生产力解放之后。PaaS自然就被淘汰，CaaS（Container as a Service）变成了一种新兴的趋势。DotCloud公司也改名为Docker公司。成为了基础设施领域近十年难得一见的技术明星。'><title>小鲸鱼的成长史</title>
+
+<link rel='canonical' href='https://lllovol.com/docker-history/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='小鲸鱼的成长史'>
+<meta property='og:description' content='前言 了解一个未知的事物，最好的方式就是去了解这个事物的历史。现在容器化，微服务很火热，有必要去了解一下docker这个小鲸鱼背后的东西。
+最热的服务器端技术 在如今，肯定可以不假思索的说，是容器，因为现在是2019年，如果是2013年，我们可不敢这么说.那时候最火热的是PaaS化。“应用托管”，那时候租了虚拟机之后，用脚本或者手动的在上面部署应用。这样部署应用就会有本地环境和云端环境不一致的问题，因此，那时候的公司，拼的就是，谁能更好的模拟云端的环境。而PaaS项目的出现，就是实现当时这个问题的最佳方案。
+Cloud Foundry 当时最大的开源的PaaS项目。只需要一个命令
+cf push &amp;quot;我的应用&amp;quot;
+就可以将本地应用部署到云上。这就是实现了应用托管的功能。
+“应用托管”如何是实现？  每一种主流的语言特定方式各自打包，上传（cf push的作用就等同于用户将应用的可执行文件和启动脚本打进了脚本当中，上传到了Cloud Foundry的云存储当中。） 在虚拟机创造各种沙盒隔离环境 Cloud Foundry调度合适的虚拟机下载压缩包 机器上的Agent下载压缩包启动运行  而这个沙盒隔离环境，其实就是现如今所说的“容器”。
+Dot Cloud公司 在随着PaaS的历史长河的流动过程中，dot Cloud这个公司，弱小，可怜又无助，无人问津，差一点就在PaaS的潮流中被抛弃。这个时候，这个公司决定开源一个项目，就是Docker项目。 这个Docker呢，其实同样也是使用了Cgroups和Namespace的方式来创造了容器，和Cloud Foundry等其他的PaaS项目基本没有什么区别，没有什么黑科技，因此那些PaaS平台的大佬也就没有将Docker放在眼里。
+风云变幻 然而，世事无常，短短几个月，Cloud Foundry等其他的PaaS社区，还没有来得及成为Docker的对手，就被Docker直接宣告“出局”。
+原因 先看看Cloud Foundry的一件上传
+ 需要为每种语言、每种框架、甚至应用的每种版本单独维护一个打好的包。 打包过程没有章法 本地跑的好好的应用，需要修改和更改不少配置才能好好的在云端运行 表面一件发布，实际上一波三折、费劲心力  Docker成功，就是靠着Docker镜像，这个看起来无足轻重的一部分，但是却提供了一种非常方便的打包机制
+ 完整操作系统的文件和目录 完全不需要任何配置和修改  这样做了之后，就是docker能够成功的精髓，那就是实现了本地环境和云端环境的高度一致！
+结语 生产力解放之后。PaaS自然就被淘汰，CaaS（Container as a Service）变成了一种新兴的趋势。DotCloud公司也改名为Docker公司。成为了基础设施领域近十年难得一见的技术明星。'>
+<meta property='og:url' content='https://lllovol.com/docker-history/'>
+<meta property='og:site_name' content='lllovol'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='MicroService' /><meta property='article:published_time' content='2019-07-16T20:58:05&#43;00:00'/><meta property='article:modified_time' content='2019-07-16T20:58:05&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/9.jpg' />
+<meta name="twitter:title" content="小鲸鱼的成长史">
+<meta name="twitter:description" content="前言 了解一个未知的事物，最好的方式就是去了解这个事物的历史。现在容器化，微服务很火热，有必要去了解一下docker这个小鲸鱼背后的东西。
+最热的服务器端技术 在如今，肯定可以不假思索的说，是容器，因为现在是2019年，如果是2013年，我们可不敢这么说.那时候最火热的是PaaS化。“应用托管”，那时候租了虚拟机之后，用脚本或者手动的在上面部署应用。这样部署应用就会有本地环境和云端环境不一致的问题，因此，那时候的公司，拼的就是，谁能更好的模拟云端的环境。而PaaS项目的出现，就是实现当时这个问题的最佳方案。
+Cloud Foundry 当时最大的开源的PaaS项目。只需要一个命令
+cf push &amp;quot;我的应用&amp;quot;
+就可以将本地应用部署到云上。这就是实现了应用托管的功能。
+“应用托管”如何是实现？  每一种主流的语言特定方式各自打包，上传（cf push的作用就等同于用户将应用的可执行文件和启动脚本打进了脚本当中，上传到了Cloud Foundry的云存储当中。） 在虚拟机创造各种沙盒隔离环境 Cloud Foundry调度合适的虚拟机下载压缩包 机器上的Agent下载压缩包启动运行  而这个沙盒隔离环境，其实就是现如今所说的“容器”。
+Dot Cloud公司 在随着PaaS的历史长河的流动过程中，dot Cloud这个公司，弱小，可怜又无助，无人问津，差一点就在PaaS的潮流中被抛弃。这个时候，这个公司决定开源一个项目，就是Docker项目。 这个Docker呢，其实同样也是使用了Cgroups和Namespace的方式来创造了容器，和Cloud Foundry等其他的PaaS项目基本没有什么区别，没有什么黑科技，因此那些PaaS平台的大佬也就没有将Docker放在眼里。
+风云变幻 然而，世事无常，短短几个月，Cloud Foundry等其他的PaaS社区，还没有来得及成为Docker的对手，就被Docker直接宣告“出局”。
+原因 先看看Cloud Foundry的一件上传
+ 需要为每种语言、每种框架、甚至应用的每种版本单独维护一个打好的包。 打包过程没有章法 本地跑的好好的应用，需要修改和更改不少配置才能好好的在云端运行 表面一件发布，实际上一波三折、费劲心力  Docker成功，就是靠着Docker镜像，这个看起来无足轻重的一部分，但是却提供了一种非常方便的打包机制
+ 完整操作系统的文件和目录 完全不需要任何配置和修改  这样做了之后，就是docker能够成功的精髓，那就是实现了本地环境和云端环境的高度一致！
+结语 生产力解放之后。PaaS自然就被淘汰，CaaS（Container as a Service）变成了一种新兴的趋势。DotCloud公司也改名为Docker公司。成为了基础设施领域近十年难得一见的技术明星。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/9.jpg' />
+    <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-MK7GTCNC34', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    </head>
+    <body class="">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.body.dataset.scheme = 'dark';
+        } else {
+            document.body.dataset.scheme = 'light';
+        }
+    })();
+</script><div class="container main-container flex on-phone--column extended article-page with-toolbar">
+            <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            <figure class="site-avatar">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+
+                
+                    <span class="emoji">⚖️</span>
+                
+            </figure>
+        
+        <h1 class="site-name"><a href="https://lllovol.com">lllovol</a></h1>
+        <h2 class="site-description">Stay Hungry, Stay Foolish</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/links/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>Dark Mode</span>
+            </li>
+        
+    </ol>
+</aside>
+
+            <main class="main full-width">
+    <div id="article-toolbar">
+        <a href="https://lllovol.com" class="back-home">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+            <span>Back</span>
+        </a>
+    </div>
+
+    <article class="main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/docker-history/">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/9.jpg" loading="lazy" alt="Featured image of post 小鲸鱼的成长史" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/microservice/" >
+                MicroService
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/docker-history/">小鲸鱼的成长史</a>
+    </h2>
+
+    <footer class="article-time">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <time class="article-time--published">Jul 16, 2019</time>
+    </footer></div>
+</header>
+
+    <section class="article-content">
+    <h1 id="前言">前言</h1>
+<p>了解一个未知的事物，最好的方式就是去了解这个事物的历史。现在容器化，微服务很火热，有必要去了解一下docker这个小鲸鱼背后的东西。</p>
+<h1 id="最热的服务器端技术">最热的服务器端技术</h1>
+<p>在如今，肯定可以不假思索的说，是容器，因为现在是2019年，如果是2013年，我们可不敢这么说.那时候最火热的是PaaS化。“应用托管”，那时候租了虚拟机之后，用脚本或者手动的在上面部署应用。这样部署应用就会有本地环境和云端环境不一致的问题，因此，那时候的公司，拼的就是，谁能更好的模拟云端的环境。而PaaS项目的出现，就是实现当时这个问题的最佳方案。</p>
+<h1 id="cloud-foundry">Cloud Foundry</h1>
+<p>当时最大的开源的PaaS项目。只需要一个命令</p>
+<p><code>cf push &quot;我的应用&quot;</code></p>
+<p>就可以将本地应用部署到云上。这就是实现了应用托管的功能。</p>
+<h1 id="应用托管如何是实现">“应用托管”如何是实现？</h1>
+<ol>
+<li>每一种主流的语言特定方式各自打包，上传（cf push的作用就等同于用户将应用的可执行文件和启动脚本打进了脚本当中，上传到了Cloud Foundry的云存储当中。）</li>
+<li>在虚拟机创造各种沙盒隔离环境</li>
+<li>Cloud Foundry调度合适的虚拟机下载压缩包</li>
+<li>机器上的Agent下载压缩包启动运行</li>
+</ol>
+<p>而这个沙盒隔离环境，其实就是现如今所说的“容器”。</p>
+<h1 id="dot-cloud公司">Dot Cloud公司</h1>
+<p>在随着PaaS的历史长河的流动过程中，dot Cloud这个公司，弱小，可怜又无助，无人问津，差一点就在PaaS的潮流中被抛弃。这个时候，这个公司决定开源一个项目，就是Docker项目。
+这个Docker呢，其实同样也是使用了Cgroups和Namespace的方式来创造了容器，和Cloud Foundry等其他的PaaS项目基本没有什么区别，没有什么黑科技，因此那些PaaS平台的大佬也就没有将Docker放在眼里。</p>
+<h1 id="风云变幻">风云变幻</h1>
+<p>然而，世事无常，短短几个月，Cloud Foundry等其他的PaaS社区，还没有来得及成为Docker的对手，就被Docker直接宣告“出局”。</p>
+<h1 id="原因">原因</h1>
+<p>先看看Cloud Foundry的一件上传</p>
+<ol>
+<li>需要为每种语言、每种框架、甚至应用的每种版本单独维护一个打好的包。</li>
+<li>打包过程没有章法</li>
+<li>本地跑的好好的应用，需要修改和更改不少配置才能好好的在云端运行</li>
+<li>表面一件发布，实际上一波三折、费劲心力</li>
+</ol>
+<p>Docker成功，就是靠着Docker镜像，这个看起来无足轻重的一部分，但是却提供了一种非常方便的打包机制</p>
+<ol>
+<li>完整操作系统的文件和目录</li>
+<li>完全不需要任何配置和修改</li>
+</ol>
+<p>这样做了之后，就是docker能够成功的精髓，那就是实现了<strong>本地环境和云端环境的高度一致！</strong></p>
+<h1 id="结语">结语</h1>
+<p>生产力解放之后。PaaS自然就被淘汰，CaaS（Container as a Service）变成了一种新兴的趋势。DotCloud公司也改名为Docker公司。成为了基础设施领域近十年难得一见的技术明星。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/microservice/">MicroService</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="has-image">
+    <a href="/minikube/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/4.jpg" loading="lazy" data-key="minikube" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/4.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">从零开始将项目部署到Kubernetes</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/container-is-a-special-process/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/1.jpg" loading="lazy" data-key="container-is-a-special-process" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/1.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">容器就是一个特殊的进程</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+
+    
+        
+    
+
+
+<div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "aaf5fc3a72ea9ce81d62",
+        clientSecret: "7792527b47af3239ddbc2274fb5fd141c28d8339",
+        repo: "public",
+        owner: "ymkNK",
+        admin: ["ymkNK"],
+        id: window.location.pathname,
+        title: document.title,
+        distractionFreeMode:  true 
+    })
+
+    gitalk.render('gitalk-container')
+</script>
+
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        
+        2018 -
+        
+        2021
+        &copy;
+        lllovol
+    </section>
+    
+    <section class="powerby">
+        
+            <b><a href="https://github.com/ymkNK" target="_blank" rel="noopener" data-version="%s">Owner Rainbowly </a></b> <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MK7GTCNC34"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-MK7GTCNC34');
+</script>
+    </body>
+</html>

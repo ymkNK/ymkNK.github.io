@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='参考  说说为什么用了索引之后，查询就会变快？
+ 个人理解  数据页和数据页之间，组成一个双向链表 每个数据页中的记录，是一个单向链表 每个数据页都根据内部的记录生成一个页目录（Page directory），如果是主键的话，可以在页目录中使用二分法快速定位 如果我们根据一个非主键、非索引列进行查询，那么需要遍历双向链表，找到所在的页；再遍历页内的单向链表；如果表内数据很大的话，这样的查询就会很慢  如果我们根据一个非主键、非索引列进行查询，那么需要遍历双向链表，找到所在的页；再遍历页内的单向链表；如果表内数据很大的话，这样的查询就会很慢。所以没有用索引的时候，需要遍历双向链表来定位对应的页，而有了索引，则可以通过一层层“目录”定位到对应的页上。
+为什么 B&#43; Tree 索引会降低新增、修改、删除的速度 B&#43; Tree 是一颗平衡树，如果对这颗树新增、修改、删除的话，会破坏它的原有结构； 我们在做数据新增、修改、删除的时候，需要花额外的时间去维护索引； 正因为这些额外的开销，导致索引会降低新增、修改、删除的速度。'><title>为什么加了索引后查询会变快</title>
+
+<link rel='canonical' href='https://lllovol.com/why-index-faster/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='为什么加了索引后查询会变快'>
+<meta property='og:description' content='参考  说说为什么用了索引之后，查询就会变快？
+ 个人理解  数据页和数据页之间，组成一个双向链表 每个数据页中的记录，是一个单向链表 每个数据页都根据内部的记录生成一个页目录（Page directory），如果是主键的话，可以在页目录中使用二分法快速定位 如果我们根据一个非主键、非索引列进行查询，那么需要遍历双向链表，找到所在的页；再遍历页内的单向链表；如果表内数据很大的话，这样的查询就会很慢  如果我们根据一个非主键、非索引列进行查询，那么需要遍历双向链表，找到所在的页；再遍历页内的单向链表；如果表内数据很大的话，这样的查询就会很慢。所以没有用索引的时候，需要遍历双向链表来定位对应的页，而有了索引，则可以通过一层层“目录”定位到对应的页上。
+为什么 B&#43; Tree 索引会降低新增、修改、删除的速度 B&#43; Tree 是一颗平衡树，如果对这颗树新增、修改、删除的话，会破坏它的原有结构； 我们在做数据新增、修改、删除的时候，需要花额外的时间去维护索引； 正因为这些额外的开销，导致索引会降低新增、修改、删除的速度。'>
+<meta property='og:url' content='https://lllovol.com/why-index-faster/'>
+<meta property='og:site_name' content='lllovol'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Database' /><meta property='article:published_time' content='2020-09-20T18:28:53&#43;00:00'/><meta property='article:modified_time' content='2020-09-20T18:28:53&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/7.jpg' />
+<meta name="twitter:title" content="为什么加了索引后查询会变快">
+<meta name="twitter:description" content="参考  说说为什么用了索引之后，查询就会变快？
+ 个人理解  数据页和数据页之间，组成一个双向链表 每个数据页中的记录，是一个单向链表 每个数据页都根据内部的记录生成一个页目录（Page directory），如果是主键的话，可以在页目录中使用二分法快速定位 如果我们根据一个非主键、非索引列进行查询，那么需要遍历双向链表，找到所在的页；再遍历页内的单向链表；如果表内数据很大的话，这样的查询就会很慢  如果我们根据一个非主键、非索引列进行查询，那么需要遍历双向链表，找到所在的页；再遍历页内的单向链表；如果表内数据很大的话，这样的查询就会很慢。所以没有用索引的时候，需要遍历双向链表来定位对应的页，而有了索引，则可以通过一层层“目录”定位到对应的页上。
+为什么 B&#43; Tree 索引会降低新增、修改、删除的速度 B&#43; Tree 是一颗平衡树，如果对这颗树新增、修改、删除的话，会破坏它的原有结构； 我们在做数据新增、修改、删除的时候，需要花额外的时间去维护索引； 正因为这些额外的开销，导致索引会降低新增、修改、删除的速度。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/7.jpg' />
+    <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-MK7GTCNC34', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    </head>
+    <body class="">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.body.dataset.scheme = 'dark';
+        } else {
+            document.body.dataset.scheme = 'light';
+        }
+    })();
+</script><div class="container main-container flex on-phone--column extended article-page with-toolbar">
+            <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            <figure class="site-avatar">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+
+                
+                    <span class="emoji">⚖️</span>
+                
+            </figure>
+        
+        <h1 class="site-name"><a href="https://lllovol.com">lllovol</a></h1>
+        <h2 class="site-description">Stay Hungry, Stay Foolish</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/links/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>Dark Mode</span>
+            </li>
+        
+    </ol>
+</aside>
+
+            <main class="main full-width">
+    <div id="article-toolbar">
+        <a href="https://lllovol.com" class="back-home">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+            <span>Back</span>
+        </a>
+    </div>
+
+    <article class="main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/why-index-faster/">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/7.jpg" loading="lazy" alt="Featured image of post 为什么加了索引后查询会变快" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/database/" >
+                Database
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/why-index-faster/">为什么加了索引后查询会变快</a>
+    </h2>
+
+    <footer class="article-time">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <time class="article-time--published">Sep 20, 2020</time>
+    </footer></div>
+</header>
+
+    <section class="article-content">
+    <h2 id="参考">参考</h2>
+<blockquote>
+<p><a class="link" href="https://blog.csdn.net/u011277123/article/details/104794991"  target="_blank" rel="noopener"
+    >说说为什么用了索引之后，查询就会变快？</a></p>
+</blockquote>
+<h2 id="个人理解">个人理解</h2>
+<ul>
+<li>数据页和数据页之间，组成一个双向链表</li>
+<li>每个数据页中的记录，是一个单向链表</li>
+<li>每个数据页都根据内部的记录生成一个页目录（Page directory），如果是主键的话，可以在页目录中使用二分法快速定位</li>
+<li>如果我们根据一个非主键、非索引列进行查询，那么需要遍历双向链表，找到所在的页；再遍历页内的单向链表；如果表内数据很大的话，这样的查询就会很慢</li>
+</ul>
+<p>如果我们根据一个非主键、非索引列进行查询，那么需要遍历双向链表，找到所在的页；再遍历页内的单向链表；如果表内数据很大的话，这样的查询就会很慢。所以没有用索引的时候，需要遍历双向链表来定位对应的页，而有了索引，则可以通过一层层“目录”定位到对应的页上。</p>
+<h2 id="为什么-b-tree-索引会降低新增修改删除的速度">为什么 B+ Tree 索引会降低新增、修改、删除的速度</h2>
+<p>B+ Tree 是一颗平衡树，如果对这颗树新增、修改、删除的话，会破坏它的原有结构；
+我们在做数据新增、修改、删除的时候，需要花额外的时间去维护索引；                                                                              <br>
+正因为这些额外的开销，导致索引会降低新增、修改、删除的速度。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/database/">Database</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="has-image">
+    <a href="/query-test/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg" loading="lazy" data-key="query-test" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">从零开始的查询优化</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/mongo-bad/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg" loading="lazy" data-key="mongo-bad" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">JavaJPA使用Mongo中的坑</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/what-is-transaction/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg" loading="lazy" data-key="what is transaction" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">什么是事务？</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+
+    
+        
+    
+
+
+<div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "aaf5fc3a72ea9ce81d62",
+        clientSecret: "7792527b47af3239ddbc2274fb5fd141c28d8339",
+        repo: "public",
+        owner: "ymkNK",
+        admin: ["ymkNK"],
+        id: window.location.pathname,
+        title: document.title,
+        distractionFreeMode:  true 
+    })
+
+    gitalk.render('gitalk-container')
+</script>
+
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        
+        2018 -
+        
+        2021
+        &copy;
+        lllovol
+    </section>
+    
+    <section class="powerby">
+        
+            <b><a href="https://github.com/ymkNK" target="_blank" rel="noopener" data-version="%s">Owner Rainbowly </a></b> <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MK7GTCNC34"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-MK7GTCNC34');
+</script>
+    </body>
+</html>

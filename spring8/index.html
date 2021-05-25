@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='前言 主要用来记录整理最近一周工作学习中遇到，学到的一些小知识，积少成多，聚沙成塔
+小细节 Swagger-ui显示枚举类型的时候 定义的枚举类型的头上不需要加一些莫名其妙的注解，就可以在Swagger-ui界面自动生成
+ public enum GreyTaskType { SCALE, PERSON, DEMAND, HOST ; }  Swagger-ui的参数显示的问题 这个是在帮忙解决朋友的问题的时候发现的，其实就是Getter的问题，他定义了俩Getter，这样就会有俩参数跑出来了。
+双向的验证 在两个模块相互依赖的时候，一方在进行某些操作的时候，需要判断另一方的状态，同样，另一方在进行某些操作的时候，也需要对这边的状态进行判断。 （主要是在删除和发布操作的时候）
+Burp Suite和Kali系统 能够用于web应用攻击的，主要使用这个工具来进行网络安全方面的测试。而Kali系统主要就是黑客使用的系统了，用于网络渗透
+Spring cloud配置中心 能够使用这个工具，实现项目发布在不同环境的情况下， 自行加载对应环境下的配置，而不再用手动修改
+配置的优先级顺序：  配置中心的/-(env).yml （一般不存在） 配置中心的application-env.yml （一般不存在） 配置中心的 /-test.yml 配置中心的application-test.yml 配置中心的 /.yml 配置中心的application.yml 项目内的application.yml  从上到下，优先级依次降低
+debug的时候的细节 在debug的时候，停到某一行的时候，可以按optional&#43;f8，可以单独对函数进行调试，包括修改参数等等操作
+栈和队列有什么区别 吃多了拉就是队列，吃多了吐就是栈（段子区看到的23333对栈和队列最形象生动的解释了）
+Java中的装箱和拆箱 这个是一个前辈教授于我的，同时还推荐了一些书籍给我
+spring 相关书籍推荐 spring boot 编程思想 原生类型，装箱和拆箱（int 和Integer） https://www.cnblogs.com/dolphin0520/p/3780005.html
+为什么会有装箱和拆箱 我的理解，是将一个基本类型装箱，变成一个类，比如int 比那成Integer，这样做了之后，就能赋予这个类其他的各种方法和函数操作。
+当然这只是我很浅显的理解，下面是我在网上查阅相关的资料所了解到原因
+ 为什么会有装箱和拆箱 深入浅出java装箱和拆箱
+  将一个基本类型包装成一个类， 可以使得这个类有很多可以调用的方法 java还不算纯面向对象的语言，真正的面向对象，是没有基本数据类型的 在java的泛型中，基本类型是不能够作为泛型参数的，因此需要使用包装类的类型解决泛型参数的问题 这也是早期java的设计缺陷，基本的数据类型是数据，不是对象，也不是Object的子类，因此需要装箱，才能和其他的Object子类公用一个接口  基本数据类型和对应的包装类    基本数据类型 包装类     int（4字节） Integer   byte（1字节） Byte   short（2字节） Short   long（8字节） Long   float（4字节） Float   double（8字节） Double   char（2字节） Character   boolean（未定） Boolean    装箱和拆箱的过程  装箱过程：通过调用包装器的valueOf方法实现的 拆箱过程：通过调用包装器的xxxValue方法实现的。（xxx代表对应的基本数据类型）。  其他注意点  通过valueOf方法创建Integer对象的时候，如果数值在[-128,127]之间，便返回指向IntegerCache.'><title>SpringBoot开发中的一些小细节(八)装箱与拆箱，基本数据类型与包装类</title>
+
+<link rel='canonical' href='https://lllovol.com/spring8/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='SpringBoot开发中的一些小细节(八)装箱与拆箱，基本数据类型与包装类'>
+<meta property='og:description' content='前言 主要用来记录整理最近一周工作学习中遇到，学到的一些小知识，积少成多，聚沙成塔
+小细节 Swagger-ui显示枚举类型的时候 定义的枚举类型的头上不需要加一些莫名其妙的注解，就可以在Swagger-ui界面自动生成
+ public enum GreyTaskType { SCALE, PERSON, DEMAND, HOST ; }  Swagger-ui的参数显示的问题 这个是在帮忙解决朋友的问题的时候发现的，其实就是Getter的问题，他定义了俩Getter，这样就会有俩参数跑出来了。
+双向的验证 在两个模块相互依赖的时候，一方在进行某些操作的时候，需要判断另一方的状态，同样，另一方在进行某些操作的时候，也需要对这边的状态进行判断。 （主要是在删除和发布操作的时候）
+Burp Suite和Kali系统 能够用于web应用攻击的，主要使用这个工具来进行网络安全方面的测试。而Kali系统主要就是黑客使用的系统了，用于网络渗透
+Spring cloud配置中心 能够使用这个工具，实现项目发布在不同环境的情况下， 自行加载对应环境下的配置，而不再用手动修改
+配置的优先级顺序：  配置中心的/-(env).yml （一般不存在） 配置中心的application-env.yml （一般不存在） 配置中心的 /-test.yml 配置中心的application-test.yml 配置中心的 /.yml 配置中心的application.yml 项目内的application.yml  从上到下，优先级依次降低
+debug的时候的细节 在debug的时候，停到某一行的时候，可以按optional&#43;f8，可以单独对函数进行调试，包括修改参数等等操作
+栈和队列有什么区别 吃多了拉就是队列，吃多了吐就是栈（段子区看到的23333对栈和队列最形象生动的解释了）
+Java中的装箱和拆箱 这个是一个前辈教授于我的，同时还推荐了一些书籍给我
+spring 相关书籍推荐 spring boot 编程思想 原生类型，装箱和拆箱（int 和Integer） https://www.cnblogs.com/dolphin0520/p/3780005.html
+为什么会有装箱和拆箱 我的理解，是将一个基本类型装箱，变成一个类，比如int 比那成Integer，这样做了之后，就能赋予这个类其他的各种方法和函数操作。
+当然这只是我很浅显的理解，下面是我在网上查阅相关的资料所了解到原因
+ 为什么会有装箱和拆箱 深入浅出java装箱和拆箱
+  将一个基本类型包装成一个类， 可以使得这个类有很多可以调用的方法 java还不算纯面向对象的语言，真正的面向对象，是没有基本数据类型的 在java的泛型中，基本类型是不能够作为泛型参数的，因此需要使用包装类的类型解决泛型参数的问题 这也是早期java的设计缺陷，基本的数据类型是数据，不是对象，也不是Object的子类，因此需要装箱，才能和其他的Object子类公用一个接口  基本数据类型和对应的包装类    基本数据类型 包装类     int（4字节） Integer   byte（1字节） Byte   short（2字节） Short   long（8字节） Long   float（4字节） Float   double（8字节） Double   char（2字节） Character   boolean（未定） Boolean    装箱和拆箱的过程  装箱过程：通过调用包装器的valueOf方法实现的 拆箱过程：通过调用包装器的xxxValue方法实现的。（xxx代表对应的基本数据类型）。  其他注意点  通过valueOf方法创建Integer对象的时候，如果数值在[-128,127]之间，便返回指向IntegerCache.'>
+<meta property='og:url' content='https://lllovol.com/spring8/'>
+<meta property='og:site_name' content='lllovol'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Spring' /><meta property='article:published_time' content='2019-03-14T17:03:05&#43;00:00'/><meta property='article:modified_time' content='2019-03-14T17:03:05&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg' />
+<meta name="twitter:title" content="SpringBoot开发中的一些小细节(八)装箱与拆箱，基本数据类型与包装类">
+<meta name="twitter:description" content="前言 主要用来记录整理最近一周工作学习中遇到，学到的一些小知识，积少成多，聚沙成塔
+小细节 Swagger-ui显示枚举类型的时候 定义的枚举类型的头上不需要加一些莫名其妙的注解，就可以在Swagger-ui界面自动生成
+ public enum GreyTaskType { SCALE, PERSON, DEMAND, HOST ; }  Swagger-ui的参数显示的问题 这个是在帮忙解决朋友的问题的时候发现的，其实就是Getter的问题，他定义了俩Getter，这样就会有俩参数跑出来了。
+双向的验证 在两个模块相互依赖的时候，一方在进行某些操作的时候，需要判断另一方的状态，同样，另一方在进行某些操作的时候，也需要对这边的状态进行判断。 （主要是在删除和发布操作的时候）
+Burp Suite和Kali系统 能够用于web应用攻击的，主要使用这个工具来进行网络安全方面的测试。而Kali系统主要就是黑客使用的系统了，用于网络渗透
+Spring cloud配置中心 能够使用这个工具，实现项目发布在不同环境的情况下， 自行加载对应环境下的配置，而不再用手动修改
+配置的优先级顺序：  配置中心的/-(env).yml （一般不存在） 配置中心的application-env.yml （一般不存在） 配置中心的 /-test.yml 配置中心的application-test.yml 配置中心的 /.yml 配置中心的application.yml 项目内的application.yml  从上到下，优先级依次降低
+debug的时候的细节 在debug的时候，停到某一行的时候，可以按optional&#43;f8，可以单独对函数进行调试，包括修改参数等等操作
+栈和队列有什么区别 吃多了拉就是队列，吃多了吐就是栈（段子区看到的23333对栈和队列最形象生动的解释了）
+Java中的装箱和拆箱 这个是一个前辈教授于我的，同时还推荐了一些书籍给我
+spring 相关书籍推荐 spring boot 编程思想 原生类型，装箱和拆箱（int 和Integer） https://www.cnblogs.com/dolphin0520/p/3780005.html
+为什么会有装箱和拆箱 我的理解，是将一个基本类型装箱，变成一个类，比如int 比那成Integer，这样做了之后，就能赋予这个类其他的各种方法和函数操作。
+当然这只是我很浅显的理解，下面是我在网上查阅相关的资料所了解到原因
+ 为什么会有装箱和拆箱 深入浅出java装箱和拆箱
+  将一个基本类型包装成一个类， 可以使得这个类有很多可以调用的方法 java还不算纯面向对象的语言，真正的面向对象，是没有基本数据类型的 在java的泛型中，基本类型是不能够作为泛型参数的，因此需要使用包装类的类型解决泛型参数的问题 这也是早期java的设计缺陷，基本的数据类型是数据，不是对象，也不是Object的子类，因此需要装箱，才能和其他的Object子类公用一个接口  基本数据类型和对应的包装类    基本数据类型 包装类     int（4字节） Integer   byte（1字节） Byte   short（2字节） Short   long（8字节） Long   float（4字节） Float   double（8字节） Double   char（2字节） Character   boolean（未定） Boolean    装箱和拆箱的过程  装箱过程：通过调用包装器的valueOf方法实现的 拆箱过程：通过调用包装器的xxxValue方法实现的。（xxx代表对应的基本数据类型）。  其他注意点  通过valueOf方法创建Integer对象的时候，如果数值在[-128,127]之间，便返回指向IntegerCache."><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg' />
+    <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-MK7GTCNC34', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    </head>
+    <body class="">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.body.dataset.scheme = 'dark';
+        } else {
+            document.body.dataset.scheme = 'light';
+        }
+    })();
+</script><div class="container main-container flex on-phone--column extended article-page with-toolbar">
+            <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            <figure class="site-avatar">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+
+                
+                    <span class="emoji">⚖️</span>
+                
+            </figure>
+        
+        <h1 class="site-name"><a href="https://lllovol.com">lllovol</a></h1>
+        <h2 class="site-description">Stay Hungry, Stay Foolish</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/links/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>Dark Mode</span>
+            </li>
+        
+    </ol>
+</aside>
+
+            <main class="main full-width">
+    <div id="article-toolbar">
+        <a href="https://lllovol.com" class="back-home">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+            <span>Back</span>
+        </a>
+    </div>
+
+    <article class="main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/spring8/">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg" loading="lazy" alt="Featured image of post SpringBoot开发中的一些小细节(八)装箱与拆箱，基本数据类型与包装类" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/spring/" >
+                Spring
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/spring8/">SpringBoot开发中的一些小细节(八)装箱与拆箱，基本数据类型与包装类</a>
+    </h2>
+
+    <footer class="article-time">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <time class="article-time--published">Mar 14, 2019</time>
+    </footer></div>
+</header>
+
+    <section class="article-content">
+    <h1 id="前言">前言</h1>
+<p>主要用来记录整理最近一周工作学习中遇到，学到的一些小知识，积少成多，聚沙成塔</p>
+<h1 id="小细节">小细节</h1>
+<h4 id="swagger-ui显示枚举类型的时候">Swagger-ui显示枚举类型的时候</h4>
+<p>定义的枚举类型的头上不需要加一些莫名其妙的注解，就可以在Swagger-ui界面自动生成</p>
+<pre><code>    public enum GreyTaskType {
+        SCALE,
+        PERSON,
+        DEMAND,
+        HOST
+        ;
+	}
+</code></pre>
+<p><img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/spring8/1.png" alt="例子"  /></p>
+<h4 id="swagger-ui的参数显示的问题">Swagger-ui的参数显示的问题</h4>
+<p>这个是在帮忙解决朋友的问题的时候发现的，其实就是Getter的问题，他定义了俩Getter，这样就会有俩参数跑出来了。</p>
+<h4 id="双向的验证">双向的验证</h4>
+<p>在两个模块相互依赖的时候，一方在进行某些操作的时候，需要判断另一方的状态，同样，另一方在进行某些操作的时候，也需要对这边的状态进行判断。
+（主要是在删除和发布操作的时候）</p>
+<h4 id="burp-suite和kali系统">Burp Suite和Kali系统</h4>
+<p>能够用于web应用攻击的，主要使用这个工具来进行网络安全方面的测试。而Kali系统主要就是黑客使用的系统了，用于网络渗透</p>
+<h4 id="spring-cloud配置中心">Spring cloud配置中心</h4>
+<p>能够使用这个工具，实现项目发布在不同环境的情况下， 自行加载对应环境下的配置，而不再用手动修改</p>
+<h5 id="配置的优先级顺序">配置的优先级顺序：</h5>
+<ul>
+<li>配置中心的<!-- raw HTML omitted -->/<!-- raw HTML omitted -->-(env).yml （一般不存在）</li>
+<li>配置中心的application-env.yml （一般不存在）</li>
+<li>配置中心的 <!-- raw HTML omitted -->/<!-- raw HTML omitted -->-test.yml</li>
+<li>配置中心的application-test.yml</li>
+<li>配置中心的 <!-- raw HTML omitted -->/<!-- raw HTML omitted -->.yml</li>
+<li>配置中心的application.yml</li>
+<li>项目内的application.yml</li>
+</ul>
+<p>从上到下，优先级依次降低</p>
+<h4 id="debug的时候的细节">debug的时候的细节</h4>
+<p>在debug的时候，停到某一行的时候，可以按optional+f8，可以单独对函数进行调试，包括修改参数等等操作</p>
+<h4 id="栈和队列有什么区别">栈和队列有什么区别</h4>
+<p>吃多了拉就是队列，吃多了吐就是栈（段子区看到的23333对栈和队列最形象生动的解释了）</p>
+<h1 id="java中的装箱和拆箱">Java中的装箱和拆箱</h1>
+<p>这个是一个前辈教授于我的，同时还推荐了一些书籍给我</p>
+<h4 id="spring-相关书籍推荐">spring 相关书籍推荐</h4>
+<p>spring boot 编程思想
+原生类型，装箱和拆箱（int 和Integer）
+<a href="https://www.cnblogs.com/dolphin0520/p/3780005.html">https://www.cnblogs.com/dolphin0520/p/3780005.html</a></p>
+<h6 id="为什么会有装箱和拆箱">为什么会有装箱和拆箱</h6>
+<p>我的理解，是将一个基本类型装箱，变成一个类，比如int 比那成Integer，这样做了之后，就能赋予这个类其他的各种方法和函数操作。<br>
+当然这只是我很浅显的理解，下面是我在网上查阅相关的资料所了解到原因</p>
+<blockquote>
+<p><a class="link" href="https://zhidao.baidu.com/question/306015038512789844.html"  target="_blank" rel="noopener"
+    >为什么会有装箱和拆箱</a>
+<a class="link" href="https://www.cnblogs.com/dolphin0520/p/3780005.html"  target="_blank" rel="noopener"
+    >深入浅出java装箱和拆箱</a></p>
+</blockquote>
+<ul>
+<li>将一个基本类型包装成一个类， 可以使得这个类有很多可以调用的方法</li>
+<li>java还不算纯面向对象的语言，真正的面向对象，是没有基本数据类型的</li>
+<li>在java的泛型中，基本类型是不能够作为泛型参数的，因此需要使用包装类的类型解决泛型参数的问题</li>
+<li>这也是早期java的设计缺陷，基本的数据类型是数据，不是对象，也不是Object的子类，因此需要装箱，才能和其他的Object子类公用一个接口</li>
+</ul>
+<h6 id="基本数据类型和对应的包装类">基本数据类型和对应的包装类</h6>
+<table>
+<thead>
+<tr>
+<th>基本数据类型</th>
+<th>包装类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>int（4字节）</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>byte（1字节）</td>
+<td>Byte</td>
+</tr>
+<tr>
+<td>short（2字节）</td>
+<td>Short</td>
+</tr>
+<tr>
+<td>long（8字节）</td>
+<td>Long</td>
+</tr>
+<tr>
+<td>float（4字节）</td>
+<td>Float</td>
+</tr>
+<tr>
+<td>double（8字节）</td>
+<td>Double</td>
+</tr>
+<tr>
+<td>char（2字节）</td>
+<td>Character</td>
+</tr>
+<tr>
+<td>boolean（未定）</td>
+<td>Boolean</td>
+</tr>
+</tbody>
+</table>
+<h5 id="装箱和拆箱的过程">装箱和拆箱的过程</h5>
+<ul>
+<li>装箱过程：通过调用包装器的valueOf方法实现的</li>
+<li>拆箱过程：通过调用包装器的xxxValue方法实现的。（xxx代表对应的基本数据类型）。</li>
+</ul>
+<h5 id="其他注意点">其他注意点</h5>
+<ul>
+<li>通过valueOf方法创建Integer对象的时候，如果数值在[-128,127]之间，便返回指向IntegerCache.cache中已经存在的对象的引用；否则创建一个新的Integer对象。有面试题考察Integer A=100，B=100，问A==B结果是什么，答案是true，但是如果是200的话，答案就是false。原因就是前面所说的那样。</li>
+<li>Double类的valueOf方法会采用与Integer类的valueOf方法不同的实现，因此上面那一点里面的题，如果是200.0的话，答案都是false。原因是因为，在某个范围内的整型数值的个数是有限的，但是浮点数的个数可以说是无数个。（Integer、Short、Byte、Character、Long这几个类的valueOf方法的实现是类似的。而Double、Float的实现方式是类似的）</li>
+<li>Boolean类型，在遇到上面的问题的时候，答案都是true</li>
+<li>Integer i = new Integer(xxx)和Integer i =xxx;这两种方式的区别，前者不会触发自动装箱，后者会触发自动装箱，其次，在一般情况下，第二种执行方式在执行效率和资源占用方面优于第一种情况</li>
+<li>对于包装类型，equals函数不会触发自动转换，</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/spring/">Spring</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="has-image">
+    <a href="/spring14/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg" loading="lazy" data-key="spring14" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">SpringBoot开发中的一些小细节(十四）事件监听的使用</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/singleton-realization/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg" loading="lazy" data-key="singleton-realization" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">单例模式的实现方式</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/spring13/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg" loading="lazy" data-key="spring13" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">SpringBoot开发中的一些小细节（十三）使用AOP实现权限系统</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/spring12/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg" loading="lazy" data-key="spring12" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">SpringBoot开发中的一些小细节（十二）单元测试</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/synchronize-job/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg" loading="lazy" data-key="synchronize-job" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">从零开始搭建AD信息同步的项目</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+
+    
+        
+    
+
+
+<div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "aaf5fc3a72ea9ce81d62",
+        clientSecret: "7792527b47af3239ddbc2274fb5fd141c28d8339",
+        repo: "public",
+        owner: "ymkNK",
+        admin: ["ymkNK"],
+        id: window.location.pathname,
+        title: document.title,
+        distractionFreeMode:  true 
+    })
+
+    gitalk.render('gitalk-container')
+</script>
+
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        
+        2018 -
+        
+        2021
+        &copy;
+        lllovol
+    </section>
+    
+    <section class="powerby">
+        
+            <b><a href="https://github.com/ymkNK" target="_blank" rel="noopener" data-version="%s">Owner Rainbowly </a></b> <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MK7GTCNC34"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-MK7GTCNC34');
+</script>
+    </body>
+</html>

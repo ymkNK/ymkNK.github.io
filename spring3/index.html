@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='前言 最近主要在获取到的k8s中的相关service和pod的信息的变化，将原来全量获取数据的方式改进为增量的方式，此篇主要记录使用过程中遇到的坑和相信的解决方式
+KubernetesClient的包的依赖的引用 使用的是fabric8的kubernetes-client，添加如下依赖即可
+&amp;lt;!--在pom.xml文件--&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.fabric8&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;kubernetes-client&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4.0.5&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt;  配置文件配置相关的属性 application.yml文件 添加k8s集群的主机url,token
+api: server: k8s: key: &amp;quot;kubernetes.auth.token&amp;quot; token: &amp;quot;***********************************&amp;quot; url: &amp;quot;https://10.0.0.0:6443&amp;quot;  这里就有一个坑，就是这个token,由于kubernetes的安全机制，原来获取到的token都只有一天的时效，第二天都需要重新更新一个新的token
+这样是肯定不行的，解决的方式有大概下面几种：
+ 使用证书的方式，需要三个文件，CaCertFile,ClientCertFile,ClientKeyFile 获取一种长效的永久的token，这个需要的权限比较高，需要找到kubernetes的负责人，拥有的权限比较高的人
+（查看本地的token,cd ~/.kube,然后cat config,就能看到自己本地的token） 使用账号密码进行登录  configuration的实现 在configuration文件夹下面新建一个class，取名为KubernetesConfig
+主要文件内容如下
+@Setter @Configuration @ConfigurationProperties(prefix = &amp;quot;api.server&amp;quot;) public class KubernetesConfig { private K8s k8s; private static final int REQUEST_TIMEOUT = 3 * 1000; private static final int CONNECTION_TIMEOUT = 3 * 1000; @Bean(&amp;quot;kubernetesClient&amp;quot;) public KubernetesClient kubernetesClient() { Config config = new ConfigBuilder() .'><title>SpringBoot开发中的一些小细节(三)KubernetesClient的使用与配置</title>
+
+<link rel='canonical' href='https://lllovol.com/spring3/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='SpringBoot开发中的一些小细节(三)KubernetesClient的使用与配置'>
+<meta property='og:description' content='前言 最近主要在获取到的k8s中的相关service和pod的信息的变化，将原来全量获取数据的方式改进为增量的方式，此篇主要记录使用过程中遇到的坑和相信的解决方式
+KubernetesClient的包的依赖的引用 使用的是fabric8的kubernetes-client，添加如下依赖即可
+&amp;lt;!--在pom.xml文件--&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.fabric8&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;kubernetes-client&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4.0.5&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt;  配置文件配置相关的属性 application.yml文件 添加k8s集群的主机url,token
+api: server: k8s: key: &amp;quot;kubernetes.auth.token&amp;quot; token: &amp;quot;***********************************&amp;quot; url: &amp;quot;https://10.0.0.0:6443&amp;quot;  这里就有一个坑，就是这个token,由于kubernetes的安全机制，原来获取到的token都只有一天的时效，第二天都需要重新更新一个新的token
+这样是肯定不行的，解决的方式有大概下面几种：
+ 使用证书的方式，需要三个文件，CaCertFile,ClientCertFile,ClientKeyFile 获取一种长效的永久的token，这个需要的权限比较高，需要找到kubernetes的负责人，拥有的权限比较高的人
+（查看本地的token,cd ~/.kube,然后cat config,就能看到自己本地的token） 使用账号密码进行登录  configuration的实现 在configuration文件夹下面新建一个class，取名为KubernetesConfig
+主要文件内容如下
+@Setter @Configuration @ConfigurationProperties(prefix = &amp;quot;api.server&amp;quot;) public class KubernetesConfig { private K8s k8s; private static final int REQUEST_TIMEOUT = 3 * 1000; private static final int CONNECTION_TIMEOUT = 3 * 1000; @Bean(&amp;quot;kubernetesClient&amp;quot;) public KubernetesClient kubernetesClient() { Config config = new ConfigBuilder() .'>
+<meta property='og:url' content='https://lllovol.com/spring3/'>
+<meta property='og:site_name' content='lllovol'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Spring' /><meta property='article:published_time' content='2018-12-25T15:08:35&#43;00:00'/><meta property='article:modified_time' content='2018-12-25T15:08:35&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/4.jpg' />
+<meta name="twitter:title" content="SpringBoot开发中的一些小细节(三)KubernetesClient的使用与配置">
+<meta name="twitter:description" content="前言 最近主要在获取到的k8s中的相关service和pod的信息的变化，将原来全量获取数据的方式改进为增量的方式，此篇主要记录使用过程中遇到的坑和相信的解决方式
+KubernetesClient的包的依赖的引用 使用的是fabric8的kubernetes-client，添加如下依赖即可
+&amp;lt;!--在pom.xml文件--&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.fabric8&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;kubernetes-client&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4.0.5&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt;  配置文件配置相关的属性 application.yml文件 添加k8s集群的主机url,token
+api: server: k8s: key: &amp;quot;kubernetes.auth.token&amp;quot; token: &amp;quot;***********************************&amp;quot; url: &amp;quot;https://10.0.0.0:6443&amp;quot;  这里就有一个坑，就是这个token,由于kubernetes的安全机制，原来获取到的token都只有一天的时效，第二天都需要重新更新一个新的token
+这样是肯定不行的，解决的方式有大概下面几种：
+ 使用证书的方式，需要三个文件，CaCertFile,ClientCertFile,ClientKeyFile 获取一种长效的永久的token，这个需要的权限比较高，需要找到kubernetes的负责人，拥有的权限比较高的人
+（查看本地的token,cd ~/.kube,然后cat config,就能看到自己本地的token） 使用账号密码进行登录  configuration的实现 在configuration文件夹下面新建一个class，取名为KubernetesConfig
+主要文件内容如下
+@Setter @Configuration @ConfigurationProperties(prefix = &amp;quot;api.server&amp;quot;) public class KubernetesConfig { private K8s k8s; private static final int REQUEST_TIMEOUT = 3 * 1000; private static final int CONNECTION_TIMEOUT = 3 * 1000; @Bean(&amp;quot;kubernetesClient&amp;quot;) public KubernetesClient kubernetesClient() { Config config = new ConfigBuilder() ."><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/4.jpg' />
+    <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-MK7GTCNC34', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    </head>
+    <body class="">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.body.dataset.scheme = 'dark';
+        } else {
+            document.body.dataset.scheme = 'light';
+        }
+    })();
+</script><div class="container main-container flex on-phone--column extended article-page with-toolbar">
+            <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            <figure class="site-avatar">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+
+                
+                    <span class="emoji">⚖️</span>
+                
+            </figure>
+        
+        <h1 class="site-name"><a href="https://lllovol.com">lllovol</a></h1>
+        <h2 class="site-description">Stay Hungry, Stay Foolish</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/links/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>Dark Mode</span>
+            </li>
+        
+    </ol>
+</aside>
+
+            <main class="main full-width">
+    <div id="article-toolbar">
+        <a href="https://lllovol.com" class="back-home">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+            <span>Back</span>
+        </a>
+    </div>
+
+    <article class="main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/spring3/">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/4.jpg" loading="lazy" alt="Featured image of post SpringBoot开发中的一些小细节(三)KubernetesClient的使用与配置" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/spring/" >
+                Spring
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/spring3/">SpringBoot开发中的一些小细节(三)KubernetesClient的使用与配置</a>
+    </h2>
+
+    <footer class="article-time">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <time class="article-time--published">Dec 25, 2018</time>
+    </footer></div>
+</header>
+
+    <section class="article-content">
+    <h1 id="前言">前言</h1>
+<p>最近主要在获取到的k8s中的相关service和pod的信息的变化，将原来全量获取数据的方式改进为增量的方式，此篇主要记录使用过程中遇到的坑和相信的解决方式</p>
+<h2 id="kubernetesclient的包的依赖的引用">KubernetesClient的包的依赖的引用</h2>
+<p>使用的是fabric8的kubernetes-client，添加如下依赖即可</p>
+<pre><code>&lt;!--在pom.xml文件--&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;io.fabric8&lt;/groupId&gt;
+  &lt;artifactId&gt;kubernetes-client&lt;/artifactId&gt;
+  &lt;version&gt;4.0.5&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<h2 id="配置文件配置相关的属性">配置文件配置相关的属性</h2>
+<h3 id="applicationyml文件">application.yml文件</h3>
+<p>添加k8s集群的主机url,token</p>
+<pre><code>api:
+  server:
+    k8s:
+      key: &quot;kubernetes.auth.token&quot;
+      token: &quot;***********************************&quot;
+      url: &quot;https://10.0.0.0:6443&quot;
+</code></pre>
+<p>这里就有一个坑，就是这个token,由于kubernetes的安全机制，原来获取到的token都只有一天的时效，第二天都需要重新更新一个新的token<br>
+这样是肯定不行的，解决的方式有大概下面几种：</p>
+<ul>
+<li>使用证书的方式，需要三个文件，CaCertFile,ClientCertFile,ClientKeyFile</li>
+<li>获取一种长效的永久的token，这个需要的权限比较高，需要找到kubernetes的负责人，拥有的权限比较高的人<br>
+（查看本地的token,cd ~/.kube,然后cat config,就能看到自己本地的token）</li>
+<li>使用账号密码进行登录</li>
+</ul>
+<h3 id="configuration的实现">configuration的实现</h3>
+<p>在configuration文件夹下面新建一个class，取名为KubernetesConfig<br>
+主要文件内容如下</p>
+<pre><code>@Setter
+@Configuration
+@ConfigurationProperties(prefix = &quot;api.server&quot;)
+public class KubernetesConfig {
+    private K8s k8s;
+
+    private static final int REQUEST_TIMEOUT = 3 * 1000;
+    private static final int CONNECTION_TIMEOUT = 3 * 1000;
+
+    @Bean(&quot;kubernetesClient&quot;)
+    public KubernetesClient kubernetesClient() {
+        Config config = new ConfigBuilder()
+                .withMasterUrl(k8s.getUrl())
+                .withOauthToken(k8s.getToken())
+                .withTrustCerts(true)
+                .removeFromTlsVersions(TlsVersion.TLS_1_0)
+                .removeFromTlsVersions(TlsVersion.TLS_1_1)
+                .removeFromTlsVersions(TlsVersion.TLS_1_2)
+                .withRequestTimeout(REQUEST_TIMEOUT)
+                .withConnectionTimeout(CONNECTION_TIMEOUT)
+                .build();
+        KubernetesClient client = new DefaultKubernetesClient(config);
+        return client;
+    }
+
+    @Bean(&quot;k8s&quot;)
+    public K8s getK8s() {
+        return k8s;
+    }
+
+    @Setter
+    @Getter
+    public static class K8s {
+        private String token;
+        private String key;
+        private String url;
+    }
+
+}
+</code></pre>
+<p>以上是使用的是token的方式，进行的登录</p>
+<h4 id="还可以使用证书的方式">还可以使用证书的方式：</h4>
+<ul>
+<li>
+<p>将需要的三个证书文件放到项目当中，右键copy path,然后删除src前面的路径</p>
+</li>
+<li>
+<p>将上面代码中的.withOauthToken(k8s.getToken())替换为</p>
+<p>.withCaCertFile(&ldquo;src/main/resources/CaCert.crt&rdquo;)<br>
+.withClientCertFile(&ldquo;src/main/resources/ClientCert.crt&rdquo;)<br>
+.withClientKeyFile(&ldquo;src/main/resources/ClientKey.key&rdquo;)</p>
+</li>
+</ul>
+<h4 id="还可以使用账号密码的方式进行登录">还可以使用账号密码的方式进行登录：</h4>
+<ul>
+<li>
+<p>将上面代码中的.withOauthToken(k8s.getToken())替换为</p>
+<p>.withUsername(&ldquo;username&rdquo;)<br>
+.withPassword(&ldquo;password&rdquo;)</p>
+</li>
+</ul>
+<h2 id="使用kubernetesclient实现watch的功能">使用KubernetesClient实现watch的功能</h2>
+<pre><code>kubernetesClient.services().inAnyNamespace().watch(new Watcher&lt;Service&gt;() {
+      @Override
+      public void eventReceived(Action action, Service service) {
+          log.debug(&quot;service watch action:{}&quot;,action);
+          log.debug(&quot;service watch service:{}&quot;,service.toString());
+          log.debug(&quot;                                            &quot;);
+      }
+
+      @Override
+      public void onClose(KubernetesClientException e) {
+
+      }
+  });
+</code></pre>
+<p>主要的功能实现都在这个event类中实现了，如果想watch pod的话，只需要将services()换成pods()即可</p>
+<h3 id="主要的坑是在何处实现">主要的坑是在何处实现？</h3>
+<p>原本的kubernetes中相关的信息收集，是在定时任务中实现的<br>
+但是kubernetes的watch就已经相当于是一个线程了，如果做到让这个功能随着服务的启动而直接就启动了呢？</p>
+<p>我的处理方式，依然是使用的定时任务，不过是将定时任务的时间，设置了一个特别长的间隔，这样就算是只启动了一次了<br>
+代码如下：</p>
+<pre><code>@Scheduled(fixedDelay = 999999999)
+public void collectPod() {
+    kubernetesService.watchPods();
+}
+</code></pre>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/spring/">Spring</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="has-image">
+    <a href="/spring14/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg" loading="lazy" data-key="spring14" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">SpringBoot开发中的一些小细节(十四）事件监听的使用</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/singleton-realization/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg" loading="lazy" data-key="singleton-realization" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">单例模式的实现方式</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/spring13/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg" loading="lazy" data-key="spring13" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">SpringBoot开发中的一些小细节（十三）使用AOP实现权限系统</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/spring12/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg" loading="lazy" data-key="spring12" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">SpringBoot开发中的一些小细节（十二）单元测试</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/synchronize-job/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg" loading="lazy" data-key="synchronize-job" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">从零开始搭建AD信息同步的项目</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+
+    
+        
+    
+
+
+<div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "aaf5fc3a72ea9ce81d62",
+        clientSecret: "7792527b47af3239ddbc2274fb5fd141c28d8339",
+        repo: "public",
+        owner: "ymkNK",
+        admin: ["ymkNK"],
+        id: window.location.pathname,
+        title: document.title,
+        distractionFreeMode:  true 
+    })
+
+    gitalk.render('gitalk-container')
+</script>
+
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        
+        2018 -
+        
+        2021
+        &copy;
+        lllovol
+    </section>
+    
+    <section class="powerby">
+        
+            <b><a href="https://github.com/ymkNK" target="_blank" rel="noopener" data-version="%s">Owner Rainbowly </a></b> <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MK7GTCNC34"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-MK7GTCNC34');
+</script>
+    </body>
+</html>
