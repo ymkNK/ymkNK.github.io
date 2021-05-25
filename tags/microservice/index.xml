@@ -9,10 +9,10 @@
     <lastBuildDate>Mon, 02 Dec 2019 14:23:17 +0000</lastBuildDate><atom:link href="https://lllovol.com/tags/microservice/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>从零开始将项目部署到Kubernetes</title>
-      <link>https://lllovol.com/minikube/</link>
+      <link>https://lllovol.com/p/minikube/</link>
       <pubDate>Mon, 02 Dec 2019 14:23:17 +0000</pubDate>
       
-      <guid>https://lllovol.com/minikube/</guid>
+      <guid>https://lllovol.com/p/minikube/</guid>
       <description>一、前言 kubernetes作为一个容器的编排引擎，如今已经相当的火热，日常的工作中也有使用常用的kubernetes的相关的功能，例如滚动发布、扩容等等，但是这都是在公司现成的已经搭建好的kubernetes集群上实践的，因此，本篇文章就是自主探索在本地运行一个kubernetes集群，同时写一个自己的demo，运行到本地的kubernetes集群当中。
 本文主要包含如下几个方面：
  国内条件下如何安装kubernetes（no vpn） 写一个Spring boot 的demo 使用Docker将demo打包成镜像 将demo部署到本地kubernetes集群当中  二、本地安装kubernetes 选择使用minikube 我们想要学习使用kubernetes，首先就是选择一个平台进行操作，比如阿里云、Azure、Google Kubernetes等等
@@ -29,10 +29,10 @@ brew install minikube brew link minikube 5.启动minikube minikube start 就会�
     
     <item>
       <title>容器就是一个特殊的进程</title>
-      <link>https://lllovol.com/container-is-a-special-process/</link>
+      <link>https://lllovol.com/p/container-is-a-special-process/</link>
       <pubDate>Fri, 19 Jul 2019 11:56:44 +0000</pubDate>
       
-      <guid>https://lllovol.com/container-is-a-special-process/</guid>
+      <guid>https://lllovol.com/p/container-is-a-special-process/</guid>
       <description>前言 程序的静态表现就是程序，平常的安安静静的躺在硬盘上；但是一旦运行起来，他就变成了计算机里的数据和状态的总和，这就是它的动态表现。 而容器的核心功能，就是通过约束和修改进程的动态表现，从而为其创造出了一个边界。
  Cgroups是用来约束的主要手段。 Namespace是用来修改视图的主要方法。  docker run实验 安装好docker，输入以下命令
 docker run -it busybox /bin/sh 这个命令就是告诉docker：帮我启动一个容器
@@ -47,10 +47,10 @@ Namespace种类 Namespace的种类很多，上文中提到的只是PID Namespace
     
     <item>
       <title>小鲸鱼的成长史</title>
-      <link>https://lllovol.com/docker-history/</link>
+      <link>https://lllovol.com/p/docker-history/</link>
       <pubDate>Tue, 16 Jul 2019 20:58:05 +0000</pubDate>
       
-      <guid>https://lllovol.com/docker-history/</guid>
+      <guid>https://lllovol.com/p/docker-history/</guid>
       <description>前言 了解一个未知的事物，最好的方式就是去了解这个事物的历史。现在容器化，微服务很火热，有必要去了解一下docker这个小鲸鱼背后的东西。
 最热的服务器端技术 在如今，肯定可以不假思索的说，是容器，因为现在是2019年，如果是2013年，我们可不敢这么说.那时候最火热的是PaaS化。“应用托管”，那时候租了虚拟机之后，用脚本或者手动的在上面部署应用。这样部署应用就会有本地环境和云端环境不一致的问题，因此，那时候的公司，拼的就是，谁能更好的模拟云端的环境。而PaaS项目的出现，就是实现当时这个问题的最佳方案。
 Cloud Foundry 当时最大的开源的PaaS项目。只需要一个命令

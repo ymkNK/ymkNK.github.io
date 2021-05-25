@@ -9,10 +9,10 @@
     <lastBuildDate>Wed, 05 Dec 2018 18:08:38 +0000</lastBuildDate><atom:link href="https://lllovol.com/tags/frontend/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>基于Gitalk实现文章的评论功能</title>
-      <link>https://lllovol.com/gitalk/</link>
+      <link>https://lllovol.com/p/gitalk/</link>
       <pubDate>Wed, 05 Dec 2018 18:08:38 +0000</pubDate>
       
-      <guid>https://lllovol.com/gitalk/</guid>
+      <guid>https://lllovol.com/p/gitalk/</guid>
       <description>前言 想要在blog中实现文章评论发布功能，网上百度了很多文章，发现DISQUZ国内网访问速度比较慢，网易评论等平台也被关闭，最后发现了github强大功能，Gitalk。
  Gitalk：一个基于 Github Issue 和 Preact 开发的评论插件 摘自v2ex
  再一次感受到了开源的强大之处，造就了现如今信息技术的高速发展

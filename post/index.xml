@@ -9,10 +9,10 @@
     <lastBuildDate>Wed, 27 Jan 2021 14:46:13 +0000</lastBuildDate><atom:link href="https://lllovol.com/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>基础架构：一条SQL更新语句是如何执行的？</title>
-      <link>https://lllovol.com/how-a-sql-executes/</link>
+      <link>https://lllovol.com/p/how-a-sql-executes/</link>
       <pubDate>Wed, 27 Jan 2021 14:46:13 +0000</pubDate>
       
-      <guid>https://lllovol.com/how-a-sql-executes/</guid>
+      <guid>https://lllovol.com/p/how-a-sql-executes/</guid>
       <description> 本文是学习笔记，来自极客时间
  mysql&amp;gt; select * from T where ID=10； 这么一条查询语句是如何执行的呢？
 MySQL基础架构 Server层：
@@ -21,10 +21,10 @@ MySQL基础架构 Server层：
     
     <item>
       <title>从零开始的查询优化</title>
-      <link>https://lllovol.com/query-test/</link>
+      <link>https://lllovol.com/p/query-test/</link>
       <pubDate>Fri, 30 Oct 2020 16:28:10 +0000</pubDate>
       
-      <guid>https://lllovol.com/query-test/</guid>
+      <guid>https://lllovol.com/p/query-test/</guid>
       <description>背景 需要查询到一批部门以及子部门，最终拿到这些部门下的人员信息，我们能够进行的操作如下
  通过部门的目录前缀（前缀树）的方式，能够查询到所有子部门 能够通过部门查询到这个部门（不包含子部门）的所有人员 已经添加索引  方法一 思路 找到每一个需要排除的部门，以及每一个排除的部门的子部门，然后分别查出来需要排除的人,最后通过stream的flatMap进行聚合
 return allDepartment.stream().flatMap(department -&amp;gt; { List&amp;lt;EmployeeDetail&amp;gt; allByDepartmentId = employeeRepo.findAllByDepartmentId(department.getDepartmentId()); return allByDepartmentId.stream(); }).collect(Collectors.toList());  耗费时间 30616ms
@@ -36,10 +36,10 @@ return allDepartment.stream().flatMap(department -&amp;gt; { List&amp;lt;Employe
     
     <item>
       <title>JavaJPA使用Mongo中的坑</title>
-      <link>https://lllovol.com/mongo-bad/</link>
+      <link>https://lllovol.com/p/mongo-bad/</link>
       <pubDate>Wed, 28 Oct 2020 15:03:26 +0000</pubDate>
       
-      <guid>https://lllovol.com/mongo-bad/</guid>
+      <guid>https://lllovol.com/p/mongo-bad/</guid>
       <description>背景 由于业务需求将一些数据作为缓存存到Mongo库中，然后在优化这个缓存过程的时候，发现的一个坑。
 主要逻辑 原来的逻辑  获取所有数据 删除库中所有数据 将新数据全部存入库中  初步优化后的逻辑  获取所有数据 获取缓存库中所有数据 将两组数据做一个差值比较，筛选出来需要新建的 需要更新的 需要删除 三组数据 新增的数据进行新增 需要更新的数据进行更新 需要删除的数据进行删除  优化效果 从15000ms优化到230ms，由于数据量很大，但是其实并没有每次所有数据都有更新
 坑 看起来上面逻辑没有什么问题，但是在执行的时候，发现每一次更新数据的时候，实际在mongo数据库中并不是更新数据，而是从新新建了一条数据！这就导致同一条数据在更新之后出现了两次？？ 但是我明明已经将唯一的Id值作为主键了，为什么还是会被认为是新的呢？
@@ -51,10 +51,10 @@ Model public class Example { @Id String exampleId; String name; } 看起来没�
     
     <item>
       <title>Java的部分基础机制</title>
-      <link>https://lllovol.com/java-basic/</link>
+      <link>https://lllovol.com/p/java-basic/</link>
       <pubDate>Sun, 20 Sep 2020 18:44:18 +0000</pubDate>
       
-      <guid>https://lllovol.com/java-basic/</guid>
+      <guid>https://lllovol.com/p/java-basic/</guid>
       <description>Java内存管理  Java的内存管理机制
  1. JMM java的内存模型
 1.1 主内存和工作内存 Java 内存模型规定了所有的变量都存储在主内存（Main Memory）中，每条线程有自己的工作内存（Working Memory），线程的工作内存中保存了该线程所使用到的变量的内存副本。 不同线程之间无法直接访问其他线程工作内存中的变量，线程间变量的传递都要通过主内存来完成（如下图 2-1所有）。
@@ -65,10 +65,10 @@ Model public class Example { @Id String exampleId; String name; } 看起来没�
     
     <item>
       <title>为什么加了索引后查询会变快</title>
-      <link>https://lllovol.com/why-index-faster/</link>
+      <link>https://lllovol.com/p/why-index-faster/</link>
       <pubDate>Sun, 20 Sep 2020 18:28:53 +0000</pubDate>
       
-      <guid>https://lllovol.com/why-index-faster/</guid>
+      <guid>https://lllovol.com/p/why-index-faster/</guid>
       <description>参考  说说为什么用了索引之后，查询就会变快？
  个人理解  数据页和数据页之间，组成一个双向链表 每个数据页中的记录，是一个单向链表 每个数据页都根据内部的记录生成一个页目录（Page directory），如果是主键的话，可以在页目录中使用二分法快速定位 如果我们根据一个非主键、非索引列进行查询，那么需要遍历双向链表，找到所在的页；再遍历页内的单向链表；如果表内数据很大的话，这样的查询就会很慢  如果我们根据一个非主键、非索引列进行查询，那么需要遍历双向链表，找到所在的页；再遍历页内的单向链表；如果表内数据很大的话，这样的查询就会很慢。所以没有用索引的时候，需要遍历双向链表来定位对应的页，而有了索引，则可以通过一层层“目录”定位到对应的页上。
 为什么 B+ Tree 索引会降低新增、修改、删除的速度 B+ Tree 是一颗平衡树，如果对这颗树新增、修改、删除的话，会破坏它的原有结构； 我们在做数据新增、修改、删除的时候，需要花额外的时间去维护索引； 正因为这些额外的开销，导致索引会降低新增、修改、删除的速度。</description>
@@ -76,10 +76,10 @@ Model public class Example { @Id String exampleId; String name; } 看起来没�
     
     <item>
       <title>什么是事务？</title>
-      <link>https://lllovol.com/what-is-transaction/</link>
+      <link>https://lllovol.com/p/what-is-transaction/</link>
       <pubDate>Fri, 18 Sep 2020 17:27:51 +0000</pubDate>
       
-      <guid>https://lllovol.com/what-is-transaction/</guid>
+      <guid>https://lllovol.com/p/what-is-transaction/</guid>
       <description>背景 从实习开始也算是工作了两年了，但是从来没有使用过事务，原因可能是由于一直用的是MongoDB，而不是mysql，但是事物这种
 事务的定义 可以将事物简单理解为，将一系列的操作整合为一个操作，这些操作只能全部都成功或者全部都执行失败。
 事物的四个特性ACID  原子性(Atomicity):操作这些整合的操作的时候，要当成一条操作来执行，要么全部执行，要么全部不执行，一旦其中一个操作执行失败，那么就需要将数据进行回滚，回到执行事务之前的状态。 一致性(Consistency):事务的执行是让数据从一个状态转换为另外一个状态，但是对于整个数据的完整性保持稳定（比如AB两个账户相互转账，原来的总数是20000元，无论操作多少次，总数都应该还是20000元） 隔离性(Isolation):事务的隔离性是指在并发环境中，并发的事务时相互隔离的，一个事务的执行不能不被其他事务干扰。不同的事务并发操作相同的数据时，每个事务都有各自完成的数据空间，即一个事务内部的操作及使用的数据对其他并发事务时隔离的，并发执行的各个事务之间不能相互干扰。 持久性(Durability):一旦事务提交，那么它对数据库中的对应数据的状态的变更就会永久保存到数据库中。&amp;ndash;即使发生系统崩溃或机器宕机等故障，只要数据库能够重新启动，那么一定能够将其恢复到事务成功结束的状态  事务的好处与事务的实例  事务分析
@@ -88,10 +88,10 @@ Model public class Example { @Id String exampleId; String name; } 看起来没�
     
     <item>
       <title>SpringBoot开发中的一些小细节(十四）事件监听的使用</title>
-      <link>https://lllovol.com/spring14/</link>
+      <link>https://lllovol.com/p/spring14/</link>
       <pubDate>Mon, 27 Jul 2020 15:51:33 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring14/</guid>
+      <guid>https://lllovol.com/p/spring14/</guid>
       <description>背景 最近在做同步先关的工作，为了提升同步任务的处理效率，减少频繁的mongo数据库查询，因此需要将一些数据统一查询出来，在内存中进行处理。
 解决方式 在任务执行的之前，就需要将相关的数据查询出来，如何实现呢？使用一个@EventListener进行ApplicationReadyEvent时间的监听，就能在应用启动之后，进行相应的操作
 @EventListener(classes = {ApplicationReadyEvent.class}) public void initialMap() { if (CollectionUtils.isEmpty(ridMobileMap)) { List&amp;lt;UserRecord&amp;gt; all = entranceUserRecordRepo.findAll(); ridMobileMap = all.stream().filter(userRecord -&amp;gt; StringUtils.isNotEmpty(userRecord.getMobileNo())).collect(Collectors.toMap(UserRecord::getRid, UserRecord::getMobileNo)); } } More Application spring application，一般就是spring boot项目中的 Application这个类
@@ -100,10 +100,10 @@ Model public class Example { @Id String exampleId; String name; } 看起来没�
     
     <item>
       <title>Java学习笔记（一）</title>
-      <link>https://lllovol.com/java-note/</link>
+      <link>https://lllovol.com/p/java-note/</link>
       <pubDate>Sat, 04 Jul 2020 14:07:38 +0000</pubDate>
       
-      <guid>https://lllovol.com/java-note/</guid>
+      <guid>https://lllovol.com/p/java-note/</guid>
       <description>1. volatile volatile是轻量级的同步机制
  保证可见性 不保证原子性 禁止指令重排  1.1 JMM内存模型之可见性 JMM（Java Memory Model） Java内存模型
  Java内存模型
@@ -112,10 +112,10 @@ Model public class Example { @Id String exampleId; String name; } 看起来没�
     
     <item>
       <title>单例模式的实现方式</title>
-      <link>https://lllovol.com/singleton-realization/</link>
+      <link>https://lllovol.com/p/singleton-realization/</link>
       <pubDate>Sat, 04 Jul 2020 00:34:38 +0000</pubDate>
       
-      <guid>https://lllovol.com/singleton-realization/</guid>
+      <guid>https://lllovol.com/p/singleton-realization/</guid>
       <description>什么是单例模式？ 在整个程序运行过程中只会实现一次的对象，例如Runtime类。
 需要满足的条件有以下几点：
  构造器私有化 自行创建，并且用静态变量保存 向外提供这种实例 为了强调这是单例模式，我们可以使用final修饰  常见形式 饿汉式 懒汉式就是直接就实例化了，在程序运行的时候，直接创建，不管是否需要这个对象.不存在线程安全问题
@@ -128,10 +128,10 @@ public class Singleton(){ private static final INSTANCE; private Singleton(){ //
     
     <item>
       <title>SpringBoot开发中的一些小细节（十三）使用AOP实现权限系统</title>
-      <link>https://lllovol.com/spring13/</link>
+      <link>https://lllovol.com/p/spring13/</link>
       <pubDate>Tue, 12 May 2020 15:04:26 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring13/</guid>
+      <guid>https://lllovol.com/p/spring13/</guid>
       <description>背景 最近在做一个小工具的权限控制系统，由于是第一次做这方面的工作，而且对权限的控制会非常的详细，比如，需要细致到对每一个对象的控制。在前期有一些调研。
 想法 我大概实现的思路和设计
  构建实体类，实现相应的数据存储化，用户可以设置相应的权限策略。权限设置，换一个说法就是主谓宾&amp;ndash;&amp;ldquo;谁&amp;rdquo; &amp;ldquo;能看/不能看&amp;rdquo; &amp;ldquo;什么东西&amp;rdquo;。将这个权限设置抽象为对象，并进行存储。 根据实体类解析用户保存的策略，使之生效。  说起来简单，做起来难。第一点设置权限，其实就是非常简单的单表查询维护。难点在于第二点，如何能让这个策略生效。按照我目前接触和掌握到的技术手段，主要的解决方式有下面几种：
@@ -145,10 +145,10 @@ public class Singleton(){ private static final INSTANCE; private Singleton(){ //
     
     <item>
       <title>Structure and Interpretation of Computer Programs 读书笔记 Chapter 1 构造过程抽象 1.1 程序设计的基本元素</title>
-      <link>https://lllovol.com/sicp-chapter1.1/</link>
+      <link>https://lllovol.com/p/sicp-chapter1.1/</link>
       <pubDate>Fri, 17 Jan 2020 11:13:47 +0000</pubDate>
       
-      <guid>https://lllovol.com/sicp-chapter1.1/</guid>
+      <guid>https://lllovol.com/p/sicp-chapter1.1/</guid>
       <description>第1章 构造抽象过程  这一张主要学习的是有关计算过程的知识。   定义：计算过程是存在于计算机的里的一类抽象事物，主要操作一些被称之为&amp;quot;数据&amp;quot;的抽象事物。（就像Java中的各种类中的方法）
    我们指挥这种过程的程序就像是巫师的巫术一样，使用一些诡秘而深奥的程序设计语言，通过符号表达式的形式精心编排而成，他们描述了我们希望相应的计算过程去完成的工作。
   但是幸运的是，我们学习程序的危险性远远小于巫术。但是我们也必须像麻瓜一样，必须去学习、理解、预期我们所使用的咒语（程序）所带来的效果。程序里即使有一个小错误（bug or glitch）,也可能带来无法预料的后果。 真实的程序设计则需要极度细心，需要经验和智慧。
@@ -162,20 +162,20 @@ public class Singleton(){ private static final INSTANCE; private Singleton(){ //
     
     <item>
       <title>Structure and Interpretation of Computer Programs 读书笔记 前言</title>
-      <link>https://lllovol.com/sicp/</link>
+      <link>https://lllovol.com/p/sicp/</link>
       <pubDate>Mon, 13 Jan 2020 15:22:58 +0000</pubDate>
       
-      <guid>https://lllovol.com/sicp/</guid>
+      <guid>https://lllovol.com/p/sicp/</guid>
       <description>写在最前面 本文主要用来记录自己再工作之余阅读的这本书籍的读书笔记，在记录的同时，也会加入一些自己的一些思考与总结(括号中的内容)
 书籍目录架构  构造过程抽象 构造数据抽象 模块化、对象和状态 元语言抽象 寄存机器里的计算  序言部分笔记  程序员必须同时追求具体部分的完美和继承的适宜性。 每一个计算机程序都是现实中或者精神中的某一个过程的模型，通过人的头脑孵化出来。 如果艺术解释了我们的梦想，那么计算机就是以程序的名义执行着他们。 计算机是一位一丝不苟的&amp;quot;工匠&amp;quot;：它的程序必须正确，我们希望的所有东西，都必须表述得准确到每一点细节。 掌握强有力的组织技术，将会提升我们构造大型重要程序的能力。 计算机必须遵守物理定律。如果它们要快速执行，几个纳秒做一次状态转换，那么就必须在很短的距离内传导电子。 计算机永远都不够大也不够快。硬件技术的每一次突破都带来了更大规模的程序设计事业（同时也会带来更大规模的机会，机会总是无处不在的，但是能发现并抓住机会的人却没有那么多） Lisp语言有着非常简单的语法和语义，程序的语法分析可以看做一种很简单的工作。这样，语法分析技术对于Lisp程序几乎就没有价值，语言处理器的构造不会成为大型Lisp系统发展的变化和阻碍。最后，正是这种语法和语义的极端简单性，给所有的Lisp程序员都带来了负担和自由。任何规模的Lisp程序，除了那种寥寥几行的程序外，都包含考虑周到的各种功能。 发明并调整，调整恰当后再去发明！  前言部分笔记  计算机语言并不仅仅是一种让计算机去执行操作的方式，更重要的是，它是一种表述有关方法学的思想的新颖的形式化媒介。因此，程序必须写的能够供人阅读，偶尔地去供计算机执行。 能够对程序设计的风格要素有一种很好的审美观。……知道在什么时候哪些地方不需要去读，哪些东西不需要去理解。应该很有把握地去修改一个程序，同时又能保持原来作者的精神和风格。 计算机革命是关于我们如何去思考，以及如何去表达自己所思考的  </description>
     </item>
     
     <item>
       <title>SpringBoot开发中的一些小细节（十二）单元测试</title>
-      <link>https://lllovol.com/spring12/</link>
+      <link>https://lllovol.com/p/spring12/</link>
       <pubDate>Fri, 10 Jan 2020 19:07:19 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring12/</guid>
+      <guid>https://lllovol.com/p/spring12/</guid>
       <description>前言 2020将近，已经很久没有更新blog，但是每天的工作笔记都还是有在记录，趁着马上就要过年，没有那么忙碌了，把自己19年Q4的工作中遇到的问题以及一些有用的方法整理一下~
 测试的必要性 在程序员的日常工作中，实际上真正在编写代码的时间，在整个工作时间中所占的比例其实很小的一部分。在写代码之前我们需要撰写需求文档，以及充足的思考，画出uml图（虽然很多经验丰富的大佬都没有画，但是那是建立在经验相当丰富的基础之上的）；在写完代码之后，这个项目需要发布与部署到测试环境，这就是CI/CD所负责的部分了；再之后，我们就需要测试我们的项目，是否能够完成需求文档中的需求，实现了相应的功能。 如果没有进行充分完整的测试，直接上线，这个项目差不多就是穿着皇帝的新衣在大街上到处晃荡了。同样，在互联网高速发展的今天，测试也不再仅仅是人工进行测试，自动化测试的演进又再一次的提升了团队的生产效率。这和敏捷开发、持续集成、持续部署、DevOps是一脉相承的。
 测试金字塔Test Pyramid  图来源于ThoughtWorks
@@ -189,10 +189,10 @@ import static org.hamcrest.core.Is.is; import static org.junit.Assert.assertThat
     
     <item>
       <title>从零开始将项目部署到Kubernetes</title>
-      <link>https://lllovol.com/minikube/</link>
+      <link>https://lllovol.com/p/minikube/</link>
       <pubDate>Mon, 02 Dec 2019 14:23:17 +0000</pubDate>
       
-      <guid>https://lllovol.com/minikube/</guid>
+      <guid>https://lllovol.com/p/minikube/</guid>
       <description>一、前言 kubernetes作为一个容器的编排引擎，如今已经相当的火热，日常的工作中也有使用常用的kubernetes的相关的功能，例如滚动发布、扩容等等，但是这都是在公司现成的已经搭建好的kubernetes集群上实践的，因此，本篇文章就是自主探索在本地运行一个kubernetes集群，同时写一个自己的demo，运行到本地的kubernetes集群当中。
 本文主要包含如下几个方面：
  国内条件下如何安装kubernetes（no vpn） 写一个Spring boot 的demo 使用Docker将demo打包成镜像 将demo部署到本地kubernetes集群当中  二、本地安装kubernetes 选择使用minikube 我们想要学习使用kubernetes，首先就是选择一个平台进行操作，比如阿里云、Azure、Google Kubernetes等等
@@ -209,10 +209,10 @@ brew install minikube brew link minikube 5.启动minikube minikube start 就会�
     
     <item>
       <title>Java11新特性的六个实验</title>
-      <link>https://lllovol.com/java11/</link>
+      <link>https://lllovol.com/p/java11/</link>
       <pubDate>Wed, 16 Oct 2019 18:41:31 +0000</pubDate>
       
-      <guid>https://lllovol.com/java11/</guid>
+      <guid>https://lllovol.com/p/java11/</guid>
       <description>前言 最近将java升级到了11，因此学习了一些java11的一些新特性
 一.局部变量类型判断 代码：
  @Test public void testVar() { // 测试局部变量类型判断特性 var java11 = &amp;quot;test java11&amp;quot;; var test = 1; System.out.println(java11); System.out.println(test); } 输出：
@@ -222,10 +222,10 @@ brew install minikube brew link minikube 5.启动minikube minikube start 就会�
     
     <item>
       <title>从零开始搭建AD信息同步的项目</title>
-      <link>https://lllovol.com/synchronize-job/</link>
+      <link>https://lllovol.com/p/synchronize-job/</link>
       <pubDate>Mon, 23 Sep 2019 17:12:49 +0000</pubDate>
       
-      <guid>https://lllovol.com/synchronize-job/</guid>
+      <guid>https://lllovol.com/p/synchronize-job/</guid>
       <description>一 前言 最近独自完成了一个同步信息的项目，主要工作内容是从第三方的服务端将信息同步到公司的二方AD域当中。本文主要记录本项目的主要实现过程。
 二 项目设计 这是一个并不复杂的项目，因此项目主要涉及到两大部分：
  从第三方服务器端获取到信息数据 将信息数据进行处理，能够存入到公司的二方AD域当中  三 第三方数据获取 1.主要技术 本项目主要获取信息的方式，是通过FeignClient来获取的
@@ -238,10 +238,10 @@ eg:
     
     <item>
       <title>Redis中的常用数据结构</title>
-      <link>https://lllovol.com/redis/</link>
+      <link>https://lllovol.com/p/redis/</link>
       <pubDate>Mon, 19 Aug 2019 19:15:50 +0000</pubDate>
       
-      <guid>https://lllovol.com/redis/</guid>
+      <guid>https://lllovol.com/p/redis/</guid>
       <description>前言 Redis在曾经实现用户登录token的时候使用过，但是对其的了解程度，就只是在使用的这个层次。本篇文章主要用于学习记录Redis的常见的一些数据结构。
 第一部分 什么是redis？  是NoSql数据库，非关系型数据库。 是个非关系型数据库。 Key-Value数据库 使用C语言实现的单线程应用，基于内存，读取的速度都超快！ 基于内存存放,使用了rdb （就是redis内存的SNAPSHOT，存到了磁盘当中）和Aof(Append only file 也就是平时操作的命令集合)的机制来保障数据的持久化，宕机的时候可以通过这两种方式来进行数据恢复。 拥有丰富的Value对象，String\Hash\List\Set\ZSet\Stream 拥有多种底层数据结构：SDS，list，dict，zskiplist，intset，ziplist，quicklist，zipmap，stream 支持丰富功能，过期，事物  第二部分 常用Value对象 1 String对象 最常见的类型
 1.1 编码 int，可以自增 embstr，就是单纯的字符串 raw
@@ -258,10 +258,10 @@ eg:
     
     <item>
       <title>大咖分享-如何提高自己的技术视野</title>
-      <link>https://lllovol.com/improve-our-vision/</link>
+      <link>https://lllovol.com/p/improve-our-vision/</link>
       <pubDate>Thu, 08 Aug 2019 01:14:30 +0000</pubDate>
       
-      <guid>https://lllovol.com/improve-our-vision/</guid>
+      <guid>https://lllovol.com/p/improve-our-vision/</guid>
       <description>前言 最近听了一场蔡黎博士关于如何提高我们技术视野的分享，收益良多，其实不仅仅是在技术方面，其实很多道理，在生活中都是有共通点的。分享的主要内容既然是关于如何提高我们的技术视野的，那么他是如何进行分享的呢？他主要将这次分享按照内容分为了三个方面：
  视野 技术 效益  第一部分 视野 用英文来讲，就是Vision，这决定了格局和潜力，也是指的一种远见。
 那么怎样才能看的更远呢？  看得到多远的过去，就能看得到多远的未来。&amp;ndash;丘吉尔  例子一：如今阿里云计算排名第一 中国云计算市场现状：top1阿里云 超过了第2到第8名的总和。 但是如果看看10年前，国内的各个公司都在同一起跑线上，那时候的大佬们对于云计算，看法又都是怎样的呢？
@@ -285,10 +285,10 @@ eg:
     
     <item>
       <title>Idea代码飘红的问题解决方式</title>
-      <link>https://lllovol.com/ide-code-error-solution/</link>
+      <link>https://lllovol.com/p/ide-code-error-solution/</link>
       <pubDate>Wed, 07 Aug 2019 10:08:30 +0000</pubDate>
       
-      <guid>https://lllovol.com/ide-code-error-solution/</guid>
+      <guid>https://lllovol.com/p/ide-code-error-solution/</guid>
       <description>前言 在安装使用Idea Intelli的时候，导入新项目的时候，总会出现代码权限飘红的问题。本篇文章，就是介绍出现这种问题的几种情况和分别的解决方式。 情况一：maven二方库settings没有设置 一般公司内部都会有自己的二方库建设，新人在git下项目之后，总是会出现代码偏红的问题，各种库都没有导入下来，这时候首先应该排查的就是maven的配置是否正确，是否正确连接到了公司内部的二方库。
 解决方式 以Idea Intelli为例: preference -&amp;gt; build,execution,deployment -&amp;gt; build tools -&amp;gt; maven -&amp;gt; User settings file: 勾选上override，改写为二方库settings.xml文件的路径
 情况二：Lombok插件没有安装  Project Lombok is a java library that automatically plugs into your editor and build tools, spicing up your java. Never write another getter or equals method again, with one annotation your class has a fully featured builder, Automate your logging variables, and much more.lombok官网
@@ -298,10 +298,10 @@ eg:
     
     <item>
       <title>Scala环境搭建</title>
-      <link>https://lllovol.com/scala1/</link>
+      <link>https://lllovol.com/p/scala1/</link>
       <pubDate>Fri, 02 Aug 2019 14:50:13 +0000</pubDate>
       
-      <guid>https://lllovol.com/scala1/</guid>
+      <guid>https://lllovol.com/p/scala1/</guid>
       <description>前言 最近工作中需要参与一下scala的项目，借此机会学习一下这个心的语言。
 环境搭建  Java环境 JDK1.5以上  ymk@localhost ~ $ java -version java version &amp;quot;1.8.0_181&amp;quot; Java(TM) SE Runtime Environment (build 1.8.0_181-b13) Java HotSpot(TM) 64-Bit Server VM (build 25.181-b13, mixed mode) 下载安装Scala
 Scala官方下载地址
@@ -312,10 +312,10 @@ Mac: brew install sbt@1  使用命令行搭建第一个Scala项目 本节内容�
     
     <item>
       <title>使用Jenkins回调获取状态</title>
-      <link>https://lllovol.com/jenkins-callback/</link>
+      <link>https://lllovol.com/p/jenkins-callback/</link>
       <pubDate>Fri, 26 Jul 2019 11:01:52 +0000</pubDate>
       
-      <guid>https://lllovol.com/jenkins-callback/</guid>
+      <guid>https://lllovol.com/p/jenkins-callback/</guid>
       <description>前言 最近的工作需要使用Jenkins执行一个特定脚本，但是使用FeignClient调用Jenkins的执行接口后，并不能获取到脚本执行之后的结果（成功和失败），本文就将介绍这种问题的其中一种解决方式。
  Jenkins是开源CI&amp;amp;CD软件领导者，提供超过1000个插件来支持构建、部署、自动化，满足任何项目的需要。Jenkins官网
  关键点 通过调研后，Jenkins在完成构建后，可以添加一个构建后操作。这就可以通过这个构建后操作，将本次构建脚本执行的结果，通过这个构建后操作，传给另外一个job，然后通过这个job将执行的结果通过回调的方式，传给应用服务器。
@@ -327,10 +327,10 @@ Mac: brew install sbt@1  使用命令行搭建第一个Scala项目 本节内容�
     
     <item>
       <title>容器就是一个特殊的进程</title>
-      <link>https://lllovol.com/container-is-a-special-process/</link>
+      <link>https://lllovol.com/p/container-is-a-special-process/</link>
       <pubDate>Fri, 19 Jul 2019 11:56:44 +0000</pubDate>
       
-      <guid>https://lllovol.com/container-is-a-special-process/</guid>
+      <guid>https://lllovol.com/p/container-is-a-special-process/</guid>
       <description>前言 程序的静态表现就是程序，平常的安安静静的躺在硬盘上；但是一旦运行起来，他就变成了计算机里的数据和状态的总和，这就是它的动态表现。 而容器的核心功能，就是通过约束和修改进程的动态表现，从而为其创造出了一个边界。
  Cgroups是用来约束的主要手段。 Namespace是用来修改视图的主要方法。  docker run实验 安装好docker，输入以下命令
 docker run -it busybox /bin/sh 这个命令就是告诉docker：帮我启动一个容器
@@ -345,10 +345,10 @@ Namespace种类 Namespace的种类很多，上文中提到的只是PID Namespace
     
     <item>
       <title>小鲸鱼的成长史</title>
-      <link>https://lllovol.com/docker-history/</link>
+      <link>https://lllovol.com/p/docker-history/</link>
       <pubDate>Tue, 16 Jul 2019 20:58:05 +0000</pubDate>
       
-      <guid>https://lllovol.com/docker-history/</guid>
+      <guid>https://lllovol.com/p/docker-history/</guid>
       <description>前言 了解一个未知的事物，最好的方式就是去了解这个事物的历史。现在容器化，微服务很火热，有必要去了解一下docker这个小鲸鱼背后的东西。
 最热的服务器端技术 在如今，肯定可以不假思索的说，是容器，因为现在是2019年，如果是2013年，我们可不敢这么说.那时候最火热的是PaaS化。“应用托管”，那时候租了虚拟机之后，用脚本或者手动的在上面部署应用。这样部署应用就会有本地环境和云端环境不一致的问题，因此，那时候的公司，拼的就是，谁能更好的模拟云端的环境。而PaaS项目的出现，就是实现当时这个问题的最佳方案。
 Cloud Foundry 当时最大的开源的PaaS项目。只需要一个命令
@@ -365,10 +365,10 @@ Dot Cloud公司 在随着PaaS的历史长河的流动过程中，dot Cloud这个
     
     <item>
       <title>FeignClient的FallBack处理</title>
-      <link>https://lllovol.com/fallback/</link>
+      <link>https://lllovol.com/p/fallback/</link>
       <pubDate>Thu, 11 Jul 2019 16:31:53 +0000</pubDate>
       
-      <guid>https://lllovol.com/fallback/</guid>
+      <guid>https://lllovol.com/p/fallback/</guid>
       <description>前言 在使用FeignClient的时候，我们很难保证第三方的调用不会出问题，这个时候，可以写一个FallBack类，来对出错的时候进行处理，可以异常上报，也可以进行打点处理，可以不再单独地去做这些事情。
 FeignClient的编写  添加maven依赖。  	&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-cloud-starter-openfeign&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.0.2.RELEASE&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;feign-core&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;9.7.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;feign-slf4j&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;9.7.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 新建一个接口，在上方添加FeignClient注解，在value中使用占位符的方式，对参数进行调用。  	@FeignClient(name = &amp;quot;gitApi&amp;quot;, url = &amp;quot;${api.server.gitlab.url}&amp;quot;,fallback = GitApiFeignFallBack.class) public interface GitApiFeign { @GetMapping(value = &amp;quot;/{namespace}/-/jobs/{jobId}/trace&amp;quot;) JSONObject getTrace( @PathVariable(&amp;quot;namespace&amp;quot;) String namespace, @PathVariable(&amp;quot;jobId&amp;quot;) Integer jobId, @RequestParam(&amp;quot;private_token&amp;quot;) String accessToken); } @Autowired 注解就能对FeignClient进行使用。  @Autowired GitApiFeign gitApiFeign; FeignClient的Fallback实现 在上方的代码中，可以看见注解中有fallback的选项，这个就是新建这个Client对应的fallback类来实现FeignClient。
 在fallback类的实现代码大致如下，最简单的实现就是在fallBack类中重写一遍Client中的所有方法。
@@ -377,10 +377,10 @@ FeignClient的编写  添加maven依赖。  	&amp;lt;dependency&amp;gt; &amp;lt;
     
     <item>
       <title>SpringBoot开发中的一些小细节(十一)CR笔记、阿里巴巴代码规约</title>
-      <link>https://lllovol.com/spring11/</link>
+      <link>https://lllovol.com/p/spring11/</link>
       <pubDate>Wed, 10 Jul 2019 23:36:52 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring11/</guid>
+      <guid>https://lllovol.com/p/spring11/</guid>
       <description>前言 最近正式入职，第一周的事情主要就是进行代码的Code Review,将自己曾经的实习时候写的代码看一看，清掉一部分过时的代码。同时也从前辈们的分享中学习到了不少的小细节。 以及看了阿里巴巴的开发规范规约，将一些比较重要的地方、原来没有注意到的地方记录一下。
 测试用例   在写Junit的时候，可以写一个BaseTest,以后test直接继承这个类即可，就不用每次都新建一个类然后在上面重新写上好多注解了。
  @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) @RunWith(SpringJUnit4ClassRunner.class) @Slf4j public class BaseTests { }    在写CRUD的测试用例的时候，一定要写成一个闭环，新加了测试用例，最后测试结束的时候一定要删除，防止在数据库中产生脏数据。
@@ -393,10 +393,10 @@ FeignClient的编写  添加maven依赖。  	&amp;lt;dependency&amp;gt; &amp;lt;
     
     <item>
       <title>自定义Snippet提高效率</title>
-      <link>https://lllovol.com/snippet/</link>
+      <link>https://lllovol.com/p/snippet/</link>
       <pubDate>Sun, 16 Jun 2019 22:16:35 +0000</pubDate>
       
-      <guid>https://lllovol.com/snippet/</guid>
+      <guid>https://lllovol.com/p/snippet/</guid>
       <description>前言 在书写markdown文章的时候，往往需要向其中添加图片的链接，从截图到文件的处理，到链接的获取都会很麻烦。在寻找各种图床工具之后，发现其效果都不是很好（比如要收费开通多个云图床的上传权限），因此本文将介绍另外一种较为简便的处理方式。
 设置Snippet snippet是短文的意思，在ide中常常是指可以通过一小串的命令生成一大段代码或者文字的方式。例如，在sublime中输入lorem+tab。就会生成一大段样例文字
 lorem+tab ==&amp;gt; Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
@@ -404,10 +404,10 @@ lorem+tab ==&amp;gt; Lorem ipsum dolor sit amet, consectetur adipisicing elit, s
     
     <item>
       <title>Android开发笔记（一)</title>
-      <link>https://lllovol.com/android-idea/</link>
+      <link>https://lllovol.com/p/android-idea/</link>
       <pubDate>Sat, 08 Jun 2019 16:49:49 +0000</pubDate>
       
-      <guid>https://lllovol.com/android-idea/</guid>
+      <guid>https://lllovol.com/p/android-idea/</guid>
       <description>前言 最近在帮朋友优化一个安卓的应用，使用Android来实现的一个华容道的小游戏。 项目链接
 Android Studio的开发项目文件结构图 主要显示的是src文件夹下的结构
  . ├── AndroidManifest.xml ├── java │ └── com │ └── example │ └── huarongdao │ ├── AboutActivity.java │ ├── Block.java │ ├── Dimension.java │ ├── Klotski.java │ ├── KlotskiMapParser.java │ ├── L.java │ ├── Level1Activity.java │ ├── Level2Activity.java │ ├── Level3Activity.java │ ├── Level4Activity.java │ ├── LevelActivity.java │ ├── MainActivity.java │ └── Screen.java └── res ├── drawable ├── drawable-v24 ├── layout ├── mipmap-anydpi-v26 ├── mipmap-hdpi ├── mipmap-mdpi ├── mipmap-xhdpi ├── mipmap-xxhdpi ├── mipmap-xxxhdpi ├── temp-mipmap └── values  AndroidManifest.</description>
@@ -415,10 +415,10 @@ Android Studio的开发项目文件结构图 主要显示的是src文件夹下�
     
     <item>
       <title>随笔杂想</title>
-      <link>https://lllovol.com/aboutsomething/</link>
+      <link>https://lllovol.com/p/aboutsomething/</link>
       <pubDate>Mon, 13 May 2019 13:02:36 +0000</pubDate>
       
-      <guid>https://lllovol.com/aboutsomething/</guid>
+      <guid>https://lllovol.com/p/aboutsomething/</guid>
       <description>前言 从公司回到学校，不多不少刚好一个月了。这一个月，自己都做了些什么？完成了什么目标？结果怎么样？
 学车 真的有点操之过急，四月之前报名的话，就不用刷学时。但是也为时不晚，仔细想一想，等到真正工作上班之后，哪里还会有这么多的时间来练车，工作上的事情也是一堆一堆的。
  科二，要慢，记准确每一个点。 科三，还没有学，但是一定要好好跟着教练练习。  心境 感觉自己最近总是很容易着急，今天在驾校和隔壁教练起了冲突。
@@ -439,10 +439,10 @@ Android Studio的开发项目文件结构图 主要显示的是src文件夹下�
     
     <item>
       <title>SpringBoot开发中的一些小细节(十）泛型、分布式锁</title>
-      <link>https://lllovol.com/spring10/</link>
+      <link>https://lllovol.com/p/spring10/</link>
       <pubDate>Fri, 29 Mar 2019 17:19:15 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring10/</guid>
+      <guid>https://lllovol.com/p/spring10/</guid>
       <description>前言 本文主要记录最近工作中关于开发中的一些小技巧以及感悟
 小细节 权重转换百分比的问题 在工作中需要将各个对象所对应的权重转换成百分比，并且要求最后转换出来的百分比，同一类型的相加必须为百分之百，解决思路主要如下
  将各个类型的对象都分别分类 算出各个类型的总权重 算出每个对象在自己类型下的所占百分比 判断每个类型下的对象百分比相加是否等于100 在List处理的时候，可以将List分割成当前类型，和非当前类型 其中需要注意的是，在算百分比的时候，*100应该写在分子  eg: //这样会一直为0，是错误的 //原因是运算符是从左往右计算 //前面除法算出来之后会直接去尾，不足1就是0，所以最后乘以100结果还是0 percent / totalWeight * 100 //这样是正确的 percent * 100 / totalWeight
@@ -452,10 +452,10 @@ code:
     
     <item>
       <title>Shuffle</title>
-      <link>https://lllovol.com/shuffle/</link>
+      <link>https://lllovol.com/p/shuffle/</link>
       <pubDate>Thu, 28 Mar 2019 11:00:40 +0000</pubDate>
       
-      <guid>https://lllovol.com/shuffle/</guid>
+      <guid>https://lllovol.com/p/shuffle/</guid>
       <description>前言 排序问题实现过很多次了，但是如何保证随机的乱序呢？这就是洗牌问题了（Shuffle）
  洗牌算法FisherYates原理
  洗牌问题 Fisher-Yates shuffle算法 首先来看看Collection里面的方法 code：
@@ -465,10 +465,10 @@ code:
     
     <item>
       <title>Dynamic Programming-钢条切割问题</title>
-      <link>https://lllovol.com/dynamic-programming/</link>
+      <link>https://lllovol.com/p/dynamic-programming/</link>
       <pubDate>Wed, 27 Mar 2019 20:38:15 +0000</pubDate>
       
-      <guid>https://lllovol.com/dynamic-programming/</guid>
+      <guid>https://lllovol.com/p/dynamic-programming/</guid>
       <description>前言 动态规划是算法中的一大类，是一个求解最优解的值的问题
  本文内容主要来自于 《算法导论第三版第四部分第15章 动态规划》
  四个基本步骤 我们通常需要四个步骤来设计一个动态规划算法：
@@ -485,10 +485,10 @@ code:
     
     <item>
       <title>SpringBoot开发中的一些小细节(九）Guava库</title>
-      <link>https://lllovol.com/spring9/</link>
+      <link>https://lllovol.com/p/spring9/</link>
       <pubDate>Sun, 24 Mar 2019 17:23:42 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring9/</guid>
+      <guid>https://lllovol.com/p/spring9/</guid>
       <description>前言 本文主要记录最近工作中关于开发中的一些小技巧以及感悟
 小细节 String转Long 使用Long.parseLong,而不是Long.getLong
 Guava库 Joiner 超好用的Guava库，主要用于字符串的拼接，可以自动在中间加上分隔符
@@ -502,10 +502,10 @@ Configuration的问题 定义了两个configuration，一个masterClient，一�
     
     <item>
       <title>Java8流式编程</title>
-      <link>https://lllovol.com/stream/</link>
+      <link>https://lllovol.com/p/stream/</link>
       <pubDate>Thu, 21 Mar 2019 11:08:24 +0000</pubDate>
       
-      <guid>https://lllovol.com/stream/</guid>
+      <guid>https://lllovol.com/p/stream/</guid>
       <description>前言 在前天的时候，java12都出了，但是我还在用java6的陈旧的编码方式，需要改进到java8的流式编程，此文主要是用来记录流式编程的积累
  java8 新特性
  个人的主要理解 java真正的支持了函数式的编程，同时加入了streamApi来进行支持
@@ -518,10 +518,10 @@ Intermediate 操作 非最终操作，也就是中间操作
     
     <item>
       <title>RocketMQ源码分享笔记</title>
-      <link>https://lllovol.com/rocketmq/</link>
+      <link>https://lllovol.com/p/rocketmq/</link>
       <pubDate>Tue, 19 Mar 2019 10:54:01 +0000</pubDate>
       
-      <guid>https://lllovol.com/rocketmq/</guid>
+      <guid>https://lllovol.com/p/rocketmq/</guid>
       <description>前言 RocketMQ，是一种延时队列，主要的应用场景，就是消费者可以延时消费消息，比如在双11的时候,一瞬间有太多请求全部打在服务器上，服务器就会瞬间瘫痪，本文主要就是记录前辈分享的Rocket源码的时候笔记和一些感悟
 主要功能  负载均衡 消费模式 消费拉取 消费进度反馈 消费过滤 延迟队列  分享主要内容笔记 打字速度有限，只能记录下简单的一些片段供参考
  有一个架构，轮询，可用性高，一致性要求没那么高 消息的一个流程：生产者发了一个消息，到了breaker之后，到了commitlog。有一个G的大小，实际发送的大小，顺序写的，io性能会很好，会被放到消费者的queue里面 ，小了之后，总要发到某一个topic里面 发一个消息的话，需要新建一个主题，需要制定一个queue的数量，每一个queue就是一个负载均衡，表示当前这个queue，消费到什么位置了。集群消息，一人拿一个。被负载的queue，同一个topic下的消息都是不同的 消费者可以对同一个topic下面的某几个队列进行消费，多个不同的consumer 设置min是核心线程数，是固定的，但是她的队列是无限的，所以这个地方没有什么用 缓存超过10000个，会改变线程池的大小，会做对应的限制 msgListener就是传的一个回调 会有一个offsetStore会存，存到本地和远程 还有消息的消费逻辑，注册到客户端的，生成clientId 封装了一些拉取消息的api，通过路由信息 worker发出请求，然后又一个线程池，来进行序列化和相应，消费的话会再七环到对应consumer的线程池 有各种组件，然后讲讲启动之后，都做了哪些事情 基本上都是通过定时消息去驱动的，很少是通过事件去驱动的， 找nameserver,然后去找server的信息 更新consumer消费的一个队列offset 都不是实时的更新的，是每一个五秒钟才刷新一次的 广播消费的，消费的queue是全部，订阅，不是分发，每一个rebalance里面，都处理了一个queue，实现了一个拍照 如果没有存，就是首次消费，如果是last，就会从，rocket是经常清消息的，发消息，然后消费 消费，就是拉取消息，就是放一条消息，就可以进行拉取，会先做一些验证，然后做一些限流，只不过限流是做一些delay，顺序消息，需要设置一下是不是第一次，然后获取订阅信息，然后调用对应的pullapi，然后去发一条消息，拉倒请求之后，就会有callback，去封装一下，找到了消息了，然后有一个真正的消息处理类 处理的流程 如果全部消费成功了之后，就会找到maxOffset，如果没有的话，就会去更新最小的那一个，这就是整个的一个消费流程  自行延展 MQ是高并发系统的核心组件之一，能够提高业务效率和系统的稳定性，主流的MQ有Rocketmq、kafka、Rabbitmq
@@ -531,10 +531,10 @@ Intermediate 操作 非最终操作，也就是中间操作
     
     <item>
       <title>SpringBoot开发中的一些小细节(八)装箱与拆箱，基本数据类型与包装类</title>
-      <link>https://lllovol.com/spring8/</link>
+      <link>https://lllovol.com/p/spring8/</link>
       <pubDate>Thu, 14 Mar 2019 17:03:05 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring8/</guid>
+      <guid>https://lllovol.com/p/spring8/</guid>
       <description>前言 主要用来记录整理最近一周工作学习中遇到，学到的一些小知识，积少成多，聚沙成塔
 小细节 Swagger-ui显示枚举类型的时候 定义的枚举类型的头上不需要加一些莫名其妙的注解，就可以在Swagger-ui界面自动生成
  public enum GreyTaskType { SCALE, PERSON, DEMAND, HOST ; }  Swagger-ui的参数显示的问题 这个是在帮忙解决朋友的问题的时候发现的，其实就是Getter的问题，他定义了俩Getter，这样就会有俩参数跑出来了。
@@ -554,10 +554,10 @@ spring 相关书籍推荐 spring boot 编程思想 原生类型，装箱和拆�
     
     <item>
       <title>源码阅读SpringDataJPA</title>
-      <link>https://lllovol.com/springdatajpa/</link>
+      <link>https://lllovol.com/p/springdatajpa/</link>
       <pubDate>Mon, 11 Mar 2019 19:28:16 +0000</pubDate>
       
-      <guid>https://lllovol.com/springdatajpa/</guid>
+      <guid>https://lllovol.com/p/springdatajpa/</guid>
       <description>前言 CRUD是平常业务开发过程中最常接触到的，因此想通过阅读这个最常接触模块的代码，使得自己能够更加深入的了解Spring，提升自己的技术能力，而不是只会CRUD，却都不知道它是怎么实现的。
 Hibernate  Hibernate是一个开放源代码的对象关系映射框架，它对JDBC进行了非常轻量级的对象封装，它将POJO与数据库表建立映射关系，是一个全自动的orm（Object Relational Mapping）框架，hibernate可以自动生成SQL语句，自动执行，使得Java程序员可以随心所欲的使用对象编程思维来操纵数据库。Hibernate可以应用在任何使用JDBC的场合，既可以在Java的客户端程序使用，也可以在Servlet/JSP的Web应用中使用，完成数据持久化的重任。Hibernate百科
  JPA  JPA诞生的缘由是为了整合第三方ORM框架，建立一种标准的方式，百度百科说是JDK为了实现ORM的天下归一，目前也是在按照这个方向发展，但是还没能完全实现。在ORM框架中，Hibernate是一支很大的部队，使用很广泛，也很方便，能力也很强，同时Hibernate也是和JPA整合的比较良好，我们可以认为JPA是标准，事实上也是，JPA几乎都是接口，实现都是Hibernate在做，宏观上面看，在JPA的统一之下Hibernate很良好的运行。
@@ -570,10 +570,10 @@ Hibernate  Hibernate是一个开放源代码的对象关系映射框架，它对
     
     <item>
       <title>进程间通信的方式</title>
-      <link>https://lllovol.com/inter-process/</link>
+      <link>https://lllovol.com/p/inter-process/</link>
       <pubDate>Tue, 05 Mar 2019 16:22:56 +0000</pubDate>
       
-      <guid>https://lllovol.com/inter-process/</guid>
+      <guid>https://lllovol.com/p/inter-process/</guid>
       <description>前言 IPC（Inter-Process Communication，进程间通信）
 有时候我们需要在不同的程序之间，也就是不同的进程之间进行通讯，那么都有些什么方式呢？通过查阅相关资料，主要有信号、管道、消息队列、共享内存等等
  进程间通信的方式
@@ -583,10 +583,10 @@ Hibernate  Hibernate是一个开放源代码的对象关系映射框架，它对
     
     <item>
       <title>Yaml和Java对象之间的相互转换</title>
-      <link>https://lllovol.com/yamlbeans/</link>
+      <link>https://lllovol.com/p/yamlbeans/</link>
       <pubDate>Fri, 22 Feb 2019 21:46:09 +0000</pubDate>
       
-      <guid>https://lllovol.com/yamlbeans/</guid>
+      <guid>https://lllovol.com/p/yamlbeans/</guid>
       <description>前言 最近需要做一个将java对象转换成yaml文件格式的工作，由于手动进行操作的话效率会很低下，因此再找有没有合适的包可以使用。最后找到的工具就是yamlBeans,本文主要是翻译整理yamlBeans中的一部分信息
  yamlBeans官网
 yaml文档的学习
@@ -601,10 +601,10 @@ name: Nathan Sweet age: 28 public class Contact { public String name; public int
     
     <item>
       <title>SpringBoot开发中的一些小细节(七)Controller路由以及分页查询</title>
-      <link>https://lllovol.com/spring7/</link>
+      <link>https://lllovol.com/p/spring7/</link>
       <pubDate>Wed, 20 Feb 2019 11:35:51 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring7/</guid>
+      <guid>https://lllovol.com/p/spring7/</guid>
       <description>前言 过年后第一次开始更新啦，这一篇主要就用来总结年后以来有意思，有用的一些信息
 在Controller中的一些注解 Controller的类型 主要有两种，一种是普通的,通常是被使用服务于web页面的。默认，你的controller方法返回的是一个string串，是表示要展示哪个模板页面或者是要跳转到哪里去。
 @Controller  另外一种是专门用在编写API的时候，返回一个JSON，或者是XML等等。然后方法返回的是可以是一个对象，或者是一个可以被序列化的对象。
@@ -615,10 +615,10 @@ name: Nathan Sweet age: 28 public class Contact { public String name; public int
     
     <item>
       <title>《Spring源码深度解析》读后感(二)Bean的标签解析</title>
-      <link>https://lllovol.com/spring-source-code-2/</link>
+      <link>https://lllovol.com/p/spring-source-code-2/</link>
       <pubDate>Thu, 17 Jan 2019 11:56:50 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring-source-code-2/</guid>
+      <guid>https://lllovol.com/p/spring-source-code-2/</guid>
       <description>两种标签 Spring中的标签的包括默认的标签和自定义的标签两种，而这两种标签的用法和解析方式存在着很大的不同。
 默认标签的解析 默认标签的解析是在parseDefaultElement函数中进行的，函数中的功能逻辑一目了然，分别对4种不同的标签做了不同的处理：
  import alias bean beans  bean标签的解析以及注册 在4种标签的解析中，对bean的解析最为复杂也最为重要。因此由此深入，如果将此标签的解析过程理解了，其他标签的解析自然也会迎刃而解。
@@ -627,10 +627,10 @@ processBeanDefinition（ele,delegate） /** * Process the given bean element, pa
     
     <item>
       <title>《Spring源码深度解析》读后感(一)Spring的容器Bean</title>
-      <link>https://lllovol.com/spring-source-code/</link>
+      <link>https://lllovol.com/p/spring-source-code/</link>
       <pubDate>Tue, 15 Jan 2019 17:06:53 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring-source-code/</guid>
+      <guid>https://lllovol.com/p/spring-source-code/</guid>
       <description>前言 这个系列主要是用来记录自己读这本书的一些笔记和想法的记录，不过买书好像买错了，应该买spring boot的相关解读的书籍，这是spring的深入解读的书。吃了一亏，不过这也是spring boot的前身，其中的源码也是有价值的。
 首先开始的，是整个spring当中最核心的用法，但是却十分重要的一个部分&amp;ndash;容器。大道至简，大音希声。
 容器的基本用法 bean是spring中最核心的东西，因为spring就像一个大水桶，而bean就像是水桶中的水，水桶脱离了水便没有了什么用处。而spring 的目的，就是让我们的bean，能够成为纯粹的POJO（plain ordinary java object）。 需要：
@@ -650,10 +650,10 @@ processBeanDefinition（ele,delegate） /** * Process the given bean element, pa
     
     <item>
       <title>SpringBoot开发中的一些小细节(六)JPA</title>
-      <link>https://lllovol.com/spring6/</link>
+      <link>https://lllovol.com/p/spring6/</link>
       <pubDate>Tue, 08 Jan 2019 10:51:00 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring6/</guid>
+      <guid>https://lllovol.com/p/spring6/</guid>
       <description>前言 本文主要总结于如下的官方文档的部分内容，如有翻译不当理解不当的地方，欢迎留言指正
 Spring官方文档
 Spring JDBC官方文档
@@ -666,10 +666,10 @@ MongoRepository @NoRepositoryBean public interface MongoRepository&amp;lt;T, ID&
     
     <item>
       <title>关于吞吐量的一些小知识</title>
-      <link>https://lllovol.com/qps/</link>
+      <link>https://lllovol.com/p/qps/</link>
       <pubDate>Mon, 07 Jan 2019 15:23:02 +0000</pubDate>
       
-      <guid>https://lllovol.com/qps/</guid>
+      <guid>https://lllovol.com/p/qps/</guid>
       <description>RT 响应时间 response time相应时间
 响应时间是提交请求和返回该请求的响应之间使用的时间。
 主要包括：
@@ -683,10 +683,10 @@ QPS 每秒查询数量 Query Per Second
     
     <item>
       <title>SpringBoot开发中的一些小细节(五)String、StringBuffer和StringBuilder、</title>
-      <link>https://lllovol.com/spring5/</link>
+      <link>https://lllovol.com/p/spring5/</link>
       <pubDate>Sat, 05 Jan 2019 17:05:33 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring5/</guid>
+      <guid>https://lllovol.com/p/spring5/</guid>
       <description>Code Review 这一周主要是一个前辈的code Review，在此期间能学到很多新的东西，也能看到自己的不足
 变量名的命名 禁止使用拼音，真的显得很没有水平，而且可读性会非常差，除非这个对象真的只有拼音名字
 关于异常的抛出  异常不要怕抛出的多，有异常一定要打出来，不然出了错都不知道是什么地方出的错 禁止一个Exception就把一大段代码的所有异常给吞了 异常一定要用log.error()将栈给打出来  StringBuffer、StringBuilder和String 运行速度：执行速度，在这方面运行速度快慢为：StringBuilder &amp;gt; StringBuffer &amp;gt; String String为字符串常量，而StringBuilder和StringBuffer均为字符串变量，即String对象一旦创建之后该对象是不可更改的，但后两者的对象是变量，是可以更改的。Java中对String对象进行的操作实际上是一个不断创建新的对象并且将旧的对象回收的一个过程，所以执行速度很慢。而StringBuilder和StringBuffer的对象是变量，对变量进行操作就是直接对该对象进行更改，而不进行创建和回收的操作，所以速度要比String快很多。
@@ -709,10 +709,10 @@ spring: profiles: active: debug  上面是在bootstrap.yml中的，下面是如�
     
     <item>
       <title>《定位》</title>
-      <link>https://lllovol.com/positioning/</link>
+      <link>https://lllovol.com/p/positioning/</link>
       <pubDate>Tue, 01 Jan 2019 01:29:23 +0000</pubDate>
       
-      <guid>https://lllovol.com/positioning/</guid>
+      <guid>https://lllovol.com/p/positioning/</guid>
       <description>“取法于上，仅得为中，取法为中，故为其下”。  在读AI Ries和Jack Trout的这一本《定位》之前，我对“定位”这个词，第一个感觉，就是唐太宗的这句话，当然这只是仅仅是站在个人的层面，对自己的一种定位。在追求探索一件事情的时候，需要将目标放的高与长远一点。在读完《定位》之后，我对定位这个词有了新的理解。
 回想近代社会的发展史，其实也就是人们的定位的一次次的更新和迭代：十八世纪六十年代，瓦特改良了蒸汽机，手工劳动的转变为了大机器生产，是第一次的工业革命，人类的生产力得到了极大的提高，这时候生产力的定位，是靠着有这熟练经验的技工总结而来的；十九世纪下半叶，蒸汽时代逐渐接受，人们逐渐开始进入电气时代，这时候生产力的定位，和第一次有着巨大的不同，是科学技术真正的开始带来生产力的巨大变革；而在第二次世界大战结束之后，人类进入了第三次的生产力革命，信息技术的革命，技术更迭日新月异，瞬息万变的时代，而现在的定位，正是书中所着重介绍的，可以植入人们心智的一种定位。
 因此书中举了很多关于企业的例子，美国的香烟品牌如何使用定位抢占市场份额，航空公司的成长，福特公司生产汽车优劣等等。虽然这本书的作者，Jack Trout最早是在上个世纪70年代的时候提出来的定位这个概念，书中有不少例子都不是那么的新，甚至还会存在打脸的情况，但是最后的结果都在印证书中的观点的正确性。例如《TIME》的名字，作者最开始并不那么看好，认为这名字不是很好，销量不如《每周周刊》，虽然随着时间的不断积累，展示出来的结果恰恰相反，但是也在一定程度上印证了书中的观点，有一个好名字的重要性。预测失误只是当时的作者并不认为这是一个好的名字。
@@ -727,10 +727,10 @@ spring: profiles: active: debug  上面是在bootstrap.yml中的，下面是如�
     
     <item>
       <title>SpringBoot开发中的一些小细节(四)CR笔记ApplicationListener等等</title>
-      <link>https://lllovol.com/spring4/</link>
+      <link>https://lllovol.com/p/spring4/</link>
       <pubDate>Fri, 28 Dec 2018 17:12:32 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring4/</guid>
+      <guid>https://lllovol.com/p/spring4/</guid>
       <description>Code Review 这周被点名来做code view了来着，然后昨天晚上做了一个小时的code review，还是相当紧张，然后今天改了一天代码 特此总结
 ApplicationListener 这个地方原来主要实现的功能是spring3中的功能，在启动了整个项目之后，让watch pods和watch service启动并且只启动一次。
 （启动一个单线程，回调函数，生命周期） 原来的做法是使用spring task在应用启动之后，就启动一次然后一直运行
@@ -740,10 +740,10 @@ public class KubernetesServiceImpl implements KubernetesService, ApplicationList
     
     <item>
       <title>SpringBoot开发中的一些小细节(三)KubernetesClient的使用与配置</title>
-      <link>https://lllovol.com/spring3/</link>
+      <link>https://lllovol.com/p/spring3/</link>
       <pubDate>Tue, 25 Dec 2018 15:08:35 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring3/</guid>
+      <guid>https://lllovol.com/p/spring3/</guid>
       <description>前言 最近主要在获取到的k8s中的相关service和pod的信息的变化，将原来全量获取数据的方式改进为增量的方式，此篇主要记录使用过程中遇到的坑和相信的解决方式
 KubernetesClient的包的依赖的引用 使用的是fabric8的kubernetes-client，添加如下依赖即可
 &amp;lt;!--在pom.xml文件--&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.fabric8&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;kubernetes-client&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4.0.5&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt;  配置文件配置相关的属性 application.yml文件 添加k8s集群的主机url,token
@@ -757,10 +757,10 @@ api: server: k8s: key: &amp;quot;kubernetes.auth.token&amp;quot; token: &amp;quo
     
     <item>
       <title>大咖分享-对游戏的看法</title>
-      <link>https://lllovol.com/share/</link>
+      <link>https://lllovol.com/p/share/</link>
       <pubDate>Fri, 21 Dec 2018 19:24:46 +0000</pubDate>
       
-      <guid>https://lllovol.com/share/</guid>
+      <guid>https://lllovol.com/p/share/</guid>
       <description>背景 晚上 青果灵动的CEO刘睿（julao）来到了我们公司进行了一场演讲
 （以下都是按照julao的“我”）
 正题 其实是周三
@@ -799,10 +799,10 @@ p6 游戏是积极的！ 玩游戏超过12小时的举手！但是玩游戏是�
     
     <item>
       <title>SpringBoot开发中的一些小细节(二)CR笔记</title>
-      <link>https://lllovol.com/spring2/</link>
+      <link>https://lllovol.com/p/spring2/</link>
       <pubDate>Thu, 20 Dec 2018 20:01:33 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring2/</guid>
+      <guid>https://lllovol.com/p/spring2/</guid>
       <description>Code Review 让大家对代码质量的标准是在一个线上， 是一个相互学习的过程。 blog主要是用来记录当时的笔记与自己的一些感想
 用户中心的接口，需要查用户之前捐过的一些订单 ContextUtil.getUserId(()不建议使用 限制了使用线程的场景，可能每一段代码执行的线程可能不在一起了 讲究的是 变量来源应该是外部的,参数是传入的 swing local ？本地的东西 context 在子线程中是无法工作的，Util这个工具类，不应该涉及到线程这种复杂的东西
 interceptor， implements HandlerMethodargumentResolver，//可以直接解析参数（将token解析的过程，就放到这个里面了） (@LoginUidAttribute String uid)  拿到userId的，isDelete()可以不用判断 解决泛型，warning 加 PageHelper是用的swing local mapper上面的select 一定要体现一个sql,查询条件一定要解耦，不要太复杂了 不要写太多的if OrderBizMapper.xml 这样可以更好的去维护索引
@@ -814,10 +814,10 @@ log.error(&amp;quot;&amp;quot;,{},e);  token的延长时间 一个是长效token
     
     <item>
       <title>Java中的容器类</title>
-      <link>https://lllovol.com/java/</link>
+      <link>https://lllovol.com/p/java/</link>
       <pubDate>Sun, 16 Dec 2018 22:23:46 +0000</pubDate>
       
-      <guid>https://lllovol.com/java/</guid>
+      <guid>https://lllovol.com/p/java/</guid>
       <description>概览 平时学习工作中，总会使用到各种各样的数据结构，map、set、LinkedHashMap等等，虽然在使用的过程中对此有了一定的了解，但是感觉还是不是很通透。故此写一篇blog用于总结java中的数据结构。
 Java的容器类 Java中的容器类按照大的来分，主要可以分为：
  collection：存储着对象的集合 map：存储着key，value的键值对 接下来的主要就分别以上面两个类别展开进行整理  Collection List    List类别 特点     ArrayList 基于动态数组实现，支持随机访问，允许所有元素包括null   Vector 与ArrayList相似，但是Vector是线程安全的（同步的）   LinkedList 基于双向链表，只能顺序访问，可以快速的再链表中插入和删除元素（栈[Stack]、队列[Queue]、双向队列[Deque]）。没有同步方法   Stack 继承自Vector，实现一个后进先出的堆栈。额外提供了5个方法使得Vector可以被当做堆栈使用：push,pop,peek,empty,search。刚刚创建的时候是空栈     和LinkedList一样，ArrayList也是非同步的（unsynchronized）。一般情况下使用这两个就可以了，因为非同步，所以效率比较高。 如果涉及到堆栈，队列等操作，应该考虑用List，对于需要快速插入，删除元素，应该使用LinkedList，如果需要快速随机访问元素，应该使用ArrayList。 几种java容器
@@ -828,10 +828,10 @@ Java的容器类 Java中的容器类按照大的来分，主要可以分为：
     
     <item>
       <title>SpringBoot开发中的一些小细节(一)Slf4J、Post和Get的小技巧</title>
-      <link>https://lllovol.com/spring1/</link>
+      <link>https://lllovol.com/p/spring1/</link>
       <pubDate>Fri, 14 Dec 2018 19:13:00 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring1/</guid>
+      <guid>https://lllovol.com/p/spring1/</guid>
       <description>原来写的代码被CTO抓出来吐槽，发现确实都是一些当初自己没有注意到的地方，打算将这样的小细节一点一点的收集起来，养成更好的编码习惯。
 Slf4j  The Simple Logging Facade for Java (SLF4J) serves as a simple facade or abstraction for various logging frameworks (e.g. java.util.logging, logback, log4j) allowing the end user to plug in the desired logging framework at deployment time. 摘自https://www.slf4j.org/
  在编写Spring的代码的时候，只需要在Class上方添加一个@Slf4j的注解即可。slf4j是facade pattern的典型例子（隐藏系统的复杂性，并向客户端提供了一个客户端可以访问系统的接口，又被成为门面模式或者外观模式） 使用的时候，可以使用占位符的方式进行日志的记录，省去了原来自己拼接日志的麻烦。
@@ -842,10 +842,10 @@ Slf4j  The Simple Logging Facade for Java (SLF4J) serves as a simple facade or a
     
     <item>
       <title>实习总结与报告</title>
-      <link>https://lllovol.com/summary/</link>
+      <link>https://lllovol.com/p/summary/</link>
       <pubDate>Sun, 09 Dec 2018 17:19:50 +0000</pubDate>
       
-      <guid>https://lllovol.com/summary/</guid>
+      <guid>https://lllovol.com/p/summary/</guid>
       <description>概览  实习工作回顾 实习主要产出 没做好的地方 做的好的地方 成长以及收获 个人成长计划  实习工作回顾 从9月17号入职，实习至今，已将近有三个月的时间，全勤，认真负责的完成份内的工作，并且主动承担自己力所能及的其他任务。在海洋前辈的指导下，开发了nintendo，并且独立完成了运维的部分的自动化运维工具。
 实习主要产出 Devops Nintendo平台 从零开始搭建的公司内部自研devops平台
  负责了gitlab方面的数据收集以及处理部分  获取gitlab的group，project，tag，commit，job分别持久化存储到MongoDb当中，实现相应的CRUD,以及返回数据的分页。 产品线的CRUD。 增加字段判断服务是不是公共服务，是不是需要部署，将服务与产品线相关联。 nintendo增量更新信息，使用gitlab的webhook回调更新tag信息，再通过SpringTask定时任务更新新增的project，并为新的project自动添加hook，实现数据的自动化更新。 通过pipeline，tag，定位到job，取得要运行的jobid，进行发版，实现部署发布服务的最初版本的接口（后期前辈改用了线程去实现，异步的去执行）。 获取gitlab执行job后的日志并进行处理，返回到前端。 改进接口，不传env的显示所有的服务，这样实现同一业务线下的服务可以部署到不同的环境下。   集成ldap，实现了用户的登录与登出，将用户登录状态记录在缓存中并返回一个token，使用redis实现，将来流量大的时候能够解决分布式问题。 nintendo的intercepter拦截器实现，同时记录下用户的操作日志，并且提供了用户的操作日志的模糊查询以及分页。 实现一个服务的tag和commit相关联，使得用户能够知道本次发布都更新了那些信息。 集成企业微信，并与上一个功能结合起来，实现用户发布服务之后，将服务发布的状态与信息发送给相关联的用户。  优化改进企业微信为卡片信息显示的样子。 卡片信息可以直接跳转到指定的服务日志地址进行查看，并且生成对应用户自带的token，实现免登陆直接查看，提高了用户体验。   平台信息显示的优化，将用户从拼音的显示转化为真正的名字来进行显示。 nintendo平台的历史功能部署实现。  每个人发布的tag，会帮他筛选出最近部署的5个服务，显示出最近发布的版本。 使用redis来进行存储对应的username,tag,service。 添加tag push类型的webhook，在tag进行更新的时候，更新对应user的对应的service信息。   nintendo平台一键部署到多环境的功能实现。  Autotool自动化运维工具  Ldap中rds组用户的自动化添加：基于LDAP自身的数据实现，每隔一段时间，遍历各个department，将符合条件的人员放进一个Set,再与rds中原来的用户进行比对，将新的用户添加到rds的members当中。 jumpserver的grey log_select test的跳板机权限的自动化添加：基于ldap和rds组和jumpserver的用户组实现，如果rds的用户组中出现了jumpserver中不存在的用户，自动为其创建一个账户，并且添加test log_select test的权限。  aaa项目升级与完善  将项目升级到Spring Boot 2.0，并且修复由于升级而造成的bug。 给aaa项目添加swagger-ui 企业微信消息发送Api的依赖封装与接口实现。  实现获取Token的接口，使得其他业务的同事能够使用这个token进行文件上传的功能 实现发送普通消息的接口 实现发送卡片信息的接口 实现发送文件信息的接口    没做好的地方  处理问题的方式不够完善和全面，在实现给每个project添加hook的时候，不小心多加了几条重复的数据，第一想法是将所有的hook全部删除，然后被海洋前辈及时制止：* “如果有的项目本身就有一些hook呢？你不能全部都删了。” * 最后改进，在删除的时候，判断是不是需要删除的url，如果匹配成功才执行删除操作。 查询日志的时候，不应该以当前的时间往前倒退一天，正常的操作应该是以一个零点作为时间点来进行查询。 jumpserver自动化运维工具所使用的账号，不应该是我个人的账号，由于原本使用的个人账号，后期因为我更改了密码，导致工具在一段时间内失效。 构建模板样式的工作没有放在值对象外面,这样的设计换不了模板，后来将api的包改为了单纯封装http请求，这样才能保证代码的可维护性和可拓展性。 升级aaa的时候，由于依赖版本的更新，更改代码之后没有进行逻辑方面的测试，就上线发版，导致了新入职的人员没有及时的同步与更新。以后对于线上的操作要万分慎重，无论多么小的改动，都需要进行仔细的测试，再进行提交。  做的好的地方  将公司的核心价值观牢记于心，并且贯彻落实到生活工作中。  用户第一 追求极致 开放心态 拥抱变化 诚信严谨 勤俭敬业   在不明白的地方及时的请教前辈，深知团队协作才能发挥1+1&amp;gt;2的能量。 对于学习工作中学习到的新的知识，会将其记录下来，深知好记性不如烂笔头的道理。 能够积极主动去承担工作中的任务。 对新事物永远保有一颗探索与发现的心，不断学习充实自己。  成长以及收获  熟悉了SpringBoot的框架，Initializer的使用和Swagger的使用，以及Spring的各种映射注解的使用（例如使用@Getter @Setter或者@Data，而不是原来每一次都generate Getter and Setter,一旦成员变量有一些变动，就需要维护很多地方），使用注解调动配置文件中的信息等等。 更加熟练地掌握了java代码的编写，更加熟悉了了解其中HashSet,HashMap以及有序的LinkedHashMap等数据结构（例如使用HashMap实现空间换取时间），使用了mock数据给前端进行同步开发，使用枚举类型来避免魔法数的产生等很多的细节。 更好的代码习惯养成，例如尽量重用对象，尽量使用局部对象，尽量减少对变量的重复计算，减少对象的IO，优化代码的体积等等。 更加熟悉了解了MongoDb这样的非关系型数据库。 更加熟悉了解了redis这样的分布式缓存。 更加熟悉了解了LDAP。 docker以及Kubernetes等关于微服务的相关知识，常用的命令行指令查看pods状态信息和日志。 CI/CD（Continuous Integration/ Continuous Deployment）方面的了解，熟悉了一个项目发布流程和整个生产的生命周期 gitlab,github等团队项目管理工具的使用。 maven构建项目，以及nexus公司私服服务器的使用。 AOP的面向切面的编程思想，将为业务逻辑所公用的逻辑封装起来，减少系统的重复代码，降低模块之间的耦合度，有利于未来的可操作性和可维护性。 提升了对各种官方文档的阅读能力和理解能力。 从刚进公司的龟速一指禅打字，到现在40wpm左右的规范指法打字。 OKR的这种聚焦的工作管理方式。  个人成长计划 不断积累方方面面的知识，主攻后端，也可以懂一点前端知识，也可以懂服务器的搭建，项目的发布等运维相关的知识，也可以懂DBA等等，希望自己能够成为一个全栈复合型的人才。虽然这难度很大，但是也正因为有挑战，才会更有价值。海洋前辈给我说，坚持每周写至少一篇技术型的文档，这将对自己的能力提升有很大帮助，我深表赞同，并将坚持下去。</description>
@@ -853,10 +853,10 @@ Slf4j  The Simple Logging Facade for Java (SLF4J) serves as a simple facade or a
     
     <item>
       <title>安装atom的atom-beautify</title>
-      <link>https://lllovol.com/%E5%AE%89%E8%A3%85atom%E7%9A%84atom-beautify/</link>
+      <link>https://lllovol.com/p/%E5%AE%89%E8%A3%85atom%E7%9A%84atom-beautify/</link>
       <pubDate>Fri, 07 Dec 2018 17:03:25 +0000</pubDate>
       
-      <guid>https://lllovol.com/%E5%AE%89%E8%A3%85atom%E7%9A%84atom-beautify/</guid>
+      <guid>https://lllovol.com/p/%E5%AE%89%E8%A3%85atom%E7%9A%84atom-beautify/</guid>
       <description>前言 想给atom安装beautify的插件 使用apm install atom-beautify 和是用preference中的插件安装都失败了
 Start 使用github 克隆到本地，然后安装
  cd ~/.atom/packages git clone https://github.com/Glavin001/atom-beautify.git cd atom-beautify npm install  Success 使用control + alt + b 组合键 即可</description>
@@ -864,10 +864,10 @@ Start 使用github 克隆到本地，然后安装
     
     <item>
       <title>高效能人士的七个习惯</title>
-      <link>https://lllovol.com/msg/</link>
+      <link>https://lllovol.com/p/msg/</link>
       <pubDate>Thu, 06 Dec 2018 10:22:08 +0000</pubDate>
       
-      <guid>https://lllovol.com/msg/</guid>
+      <guid>https://lllovol.com/p/msg/</guid>
       <description>前言 最近看的一本书的随笔，摘抄与记录
 七个习惯的简要的概要  习惯一，积极主动。由内而外的改变，积极面对一切 习惯二，以终为始。所有的事物都经过了两次创造，先在脑海中酝酿，其次才是实质的创造 习惯三，要事第一。次要的事情不必摆在第一，要事不能放在第二 习惯四，双赢思维。无论工作伙伴还是家庭成员，要从互赖式的角度思考 习惯五，知彼解己。舍弃回答心，改以了解心去聆听别人 习惯六，统合综效。创造第三种选择，是互相尊重的成果，创造式的合作，1+1&amp;gt;2的方式 习惯七，不断更新。身体、精神、智力、社会，不断更新自己  变化的世界不变的原则  恐惧感和不安全感：在现代社会有太多的人保守不安全感的折磨，担心自己失业，担心自己无力养家，也因此助长了一种现象就是：人们不论是在工作还是生活中，都倾向于选择一种零风险的生活，并且逃避和他人互相依赖和合作。（不能说这种想法就是错的，就像元素守恒的道理是一样的，风险和收益往往都是成正比例的，高回报的同时也伴随着高风险，而低风险往往伴随着平平淡淡；而合作的好处更是不言而喻，例如，在现代的敏捷软件开发过程中，出现了pair programming，可以增加纪律性，写出更加优秀的代码。就如同书中所说，我们生活在一个相互依赖的社会中，最辉煌的成就都是靠着互相依赖和合作才能成就的，远远不是个人能力了就能够企及的。） 我现在就想得到：我们必须训练头脑，大量投入，不断磨练，提升自己的竞争力，以免被社会所淘汰。绝对不能就满足于学校的教育。人生处处皆高考，这是我高中班主任最常给我们传授的一句话，而现实也正是如此。 缺乏人生平衡：懂得轻重缓急，抓住生活的重点，客观面对现实 我的定位在哪儿：真正的大事业，通常只会由思维开阔、内涵丰富的头脑，经由忘我的合作精神&amp;ndash;互敬和双赢取得的 渴望理解：想要获得其他人的理解，那么自己需要成为一个聆听着，学会去理解他人 冲突与分歧：采用创造性的合作，找到比双方最初想法都要好的解决方法。  产能平衡的原则 秉承自己内心的价值观，产生自己的自尊自重与自制力，以自己内在的价值标准，而不是以别人的好恶或者与别人的评价的结果，来衡量自己。事情的对错与别人是否发现无关。
 不再让别人影响自己的情绪，反而会更加容易接受变化，因为可以有一些恒久不变的内在的本质，可以作为支柱
@@ -878,10 +878,10 @@ Start 使用github 克隆到本地，然后安装
     
     <item>
       <title>基于Gitalk实现文章的评论功能</title>
-      <link>https://lllovol.com/gitalk/</link>
+      <link>https://lllovol.com/p/gitalk/</link>
       <pubDate>Wed, 05 Dec 2018 18:08:38 +0000</pubDate>
       
-      <guid>https://lllovol.com/gitalk/</guid>
+      <guid>https://lllovol.com/p/gitalk/</guid>
       <description>前言 想要在blog中实现文章评论发布功能，网上百度了很多文章，发现DISQUZ国内网访问速度比较慢，网易评论等平台也被关闭，最后发现了github强大功能，Gitalk。
  Gitalk：一个基于 Github Issue 和 Preact 开发的评论插件 摘自v2ex
  再一次感受到了开源的强大之处，造就了现如今信息技术的高速发展
@@ -892,10 +892,10 @@ Start 使用github 克隆到本地，然后安装
     
     <item>
       <title>使用Rakefile实现文章生成器</title>
-      <link>https://lllovol.com/rake/</link>
+      <link>https://lllovol.com/p/rake/</link>
       <pubDate>Wed, 05 Dec 2018 01:23:16 +0000</pubDate>
       
-      <guid>https://lllovol.com/rake/</guid>
+      <guid>https://lllovol.com/p/rake/</guid>
       <description>使用github.io来写blog 本就是件很棒的事情，但是每次在想写新的文章的时候，都需要重新复制title和开头的标签，如果能够自动化地完成这件事就好了（重复性的东西工作）
 About Rakefile  Rake is a Make-like program implemented in Ruby. Tasks and dependencies are specified in standard Ruby syntax.
  摘自http://docs.seattlerb.org/rake/
@@ -907,10 +907,10 @@ task :default =&amp;gt; :new require &#39;fileutils&#39; desc &amp;quot;创建�
     
     <item>
       <title>Welcome</title>
-      <link>https://lllovol.com/welcome/</link>
+      <link>https://lllovol.com/p/welcome/</link>
       <pubDate>Mon, 14 Oct 1996 08:08:08 +0000</pubDate>
       
-      <guid>https://lllovol.com/welcome/</guid>
+      <guid>https://lllovol.com/p/welcome/</guid>
       <description>Just Want to Share and Record Some Useful,Interesting Things !</description>
     </item>
     

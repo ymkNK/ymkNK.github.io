@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='概览 平时学习工作中，总会使用到各种各样的数据结构，map、set、LinkedHashMap等等，虽然在使用的过程中对此有了一定的了解，但是感觉还是不是很通透。故此写一篇blog用于总结java中的数据结构。
+Java的容器类 Java中的容器类按照大的来分，主要可以分为：
+ collection：存储着对象的集合 map：存储着key，value的键值对 接下来的主要就分别以上面两个类别展开进行整理  Collection List    List类别 特点     ArrayList 基于动态数组实现，支持随机访问，允许所有元素包括null   Vector 与ArrayList相似，但是Vector是线程安全的（同步的）   LinkedList 基于双向链表，只能顺序访问，可以快速的再链表中插入和删除元素（栈[Stack]、队列[Queue]、双向队列[Deque]）。没有同步方法   Stack 继承自Vector，实现一个后进先出的堆栈。额外提供了5个方法使得Vector可以被当做堆栈使用：push,pop,peek,empty,search。刚刚创建的时候是空栈     和LinkedList一样，ArrayList也是非同步的（unsynchronized）。一般情况下使用这两个就可以了，因为非同步，所以效率比较高。 如果涉及到堆栈，队列等操作，应该考虑用List，对于需要快速插入，删除元素，应该使用LinkedList，如果需要快速随机访问元素，应该使用ArrayList。 几种java容器
+ 有几个问题
+ ArrayList的扩容操作？  每一次扩容都会扩容到原来的1.5倍，使用grow()方法，第一次添加元素的时候分配10个对象空间，当添加到第11个元素的时候，就会扩容到原来的1.5倍，当添加到16个元素的时候，就会扩容到原来的15*1.5的大小，等等。每一次扩容都是通过Array.copyof(elementData,newCapacity)来实现的，会消耗大量的资源，代价比较大，因此在知道大致对象大小的时候，提前设置好ArrayList的大小是非常明智的选择。（old&#43;old&amp;raquo;1)
+ 为什么Vector是线程安全的？  Set    Set类别 特点     SortSet(TreeSet) 基于红黑树有序，TreeSet是set的一种变体，是可以实现排序等功能的集合 O(logN)   HashSet 基于hash表实现，可以看成一个只有key的HashMap O(1) ，不允许重复，无序，允许存在null(最多一个)   LinkedHashSet 具有HashSet的查找效率，且内部使用了双向链表维护了元素的插入顺序,保证了集合的有序性     写了 HashMap 和 HashSet，然后我们可以看到 HashSet 的方法基本上都是基于 HashMap 来实现的，说白了，HashSet内部的数据结构就是一个 HashMap，其方法的内部几乎就是在调用 HashMap 的方法。 LinkedHashSet 首先我们需要知道的是它是一个 Set 的实现，所以它其中存的肯定不是键值对，而是值。此实现与 HashSet 的不同之处在于，LinkedHashSet 维护着一个运行于所有条目的双重链接列表。此链接列表定义了迭代顺序，该迭代顺序可为插入顺序或是访问顺序。 看到上面的介绍，是不是感觉其与 HashMap 和 LinkedHashMap 的关系很像？LinkedHashSet就是使用LinkedHashMap来实现的。 注意，此实现不是同步的。如果多个线程同时访问链接的哈希Set，而其中至少一个线程修改了该 Set，则它必须保持外部同步。'><title>Java中的容器类</title>
+
+<link rel='canonical' href='https://lllovol.com/p/java/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Java中的容器类'>
+<meta property='og:description' content='概览 平时学习工作中，总会使用到各种各样的数据结构，map、set、LinkedHashMap等等，虽然在使用的过程中对此有了一定的了解，但是感觉还是不是很通透。故此写一篇blog用于总结java中的数据结构。
+Java的容器类 Java中的容器类按照大的来分，主要可以分为：
+ collection：存储着对象的集合 map：存储着key，value的键值对 接下来的主要就分别以上面两个类别展开进行整理  Collection List    List类别 特点     ArrayList 基于动态数组实现，支持随机访问，允许所有元素包括null   Vector 与ArrayList相似，但是Vector是线程安全的（同步的）   LinkedList 基于双向链表，只能顺序访问，可以快速的再链表中插入和删除元素（栈[Stack]、队列[Queue]、双向队列[Deque]）。没有同步方法   Stack 继承自Vector，实现一个后进先出的堆栈。额外提供了5个方法使得Vector可以被当做堆栈使用：push,pop,peek,empty,search。刚刚创建的时候是空栈     和LinkedList一样，ArrayList也是非同步的（unsynchronized）。一般情况下使用这两个就可以了，因为非同步，所以效率比较高。 如果涉及到堆栈，队列等操作，应该考虑用List，对于需要快速插入，删除元素，应该使用LinkedList，如果需要快速随机访问元素，应该使用ArrayList。 几种java容器
+ 有几个问题
+ ArrayList的扩容操作？  每一次扩容都会扩容到原来的1.5倍，使用grow()方法，第一次添加元素的时候分配10个对象空间，当添加到第11个元素的时候，就会扩容到原来的1.5倍，当添加到16个元素的时候，就会扩容到原来的15*1.5的大小，等等。每一次扩容都是通过Array.copyof(elementData,newCapacity)来实现的，会消耗大量的资源，代价比较大，因此在知道大致对象大小的时候，提前设置好ArrayList的大小是非常明智的选择。（old&#43;old&amp;raquo;1)
+ 为什么Vector是线程安全的？  Set    Set类别 特点     SortSet(TreeSet) 基于红黑树有序，TreeSet是set的一种变体，是可以实现排序等功能的集合 O(logN)   HashSet 基于hash表实现，可以看成一个只有key的HashMap O(1) ，不允许重复，无序，允许存在null(最多一个)   LinkedHashSet 具有HashSet的查找效率，且内部使用了双向链表维护了元素的插入顺序,保证了集合的有序性     写了 HashMap 和 HashSet，然后我们可以看到 HashSet 的方法基本上都是基于 HashMap 来实现的，说白了，HashSet内部的数据结构就是一个 HashMap，其方法的内部几乎就是在调用 HashMap 的方法。 LinkedHashSet 首先我们需要知道的是它是一个 Set 的实现，所以它其中存的肯定不是键值对，而是值。此实现与 HashSet 的不同之处在于，LinkedHashSet 维护着一个运行于所有条目的双重链接列表。此链接列表定义了迭代顺序，该迭代顺序可为插入顺序或是访问顺序。 看到上面的介绍，是不是感觉其与 HashMap 和 LinkedHashMap 的关系很像？LinkedHashSet就是使用LinkedHashMap来实现的。 注意，此实现不是同步的。如果多个线程同时访问链接的哈希Set，而其中至少一个线程修改了该 Set，则它必须保持外部同步。'>
+<meta property='og:url' content='https://lllovol.com/p/java/'>
+<meta property='og:site_name' content='lllovol'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Java' /><meta property='article:published_time' content='2018-12-16T22:23:46&#43;00:00'/><meta property='article:modified_time' content='2018-12-16T22:23:46&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/1.jpg' />
+<meta name="twitter:title" content="Java中的容器类">
+<meta name="twitter:description" content="概览 平时学习工作中，总会使用到各种各样的数据结构，map、set、LinkedHashMap等等，虽然在使用的过程中对此有了一定的了解，但是感觉还是不是很通透。故此写一篇blog用于总结java中的数据结构。
+Java的容器类 Java中的容器类按照大的来分，主要可以分为：
+ collection：存储着对象的集合 map：存储着key，value的键值对 接下来的主要就分别以上面两个类别展开进行整理  Collection List    List类别 特点     ArrayList 基于动态数组实现，支持随机访问，允许所有元素包括null   Vector 与ArrayList相似，但是Vector是线程安全的（同步的）   LinkedList 基于双向链表，只能顺序访问，可以快速的再链表中插入和删除元素（栈[Stack]、队列[Queue]、双向队列[Deque]）。没有同步方法   Stack 继承自Vector，实现一个后进先出的堆栈。额外提供了5个方法使得Vector可以被当做堆栈使用：push,pop,peek,empty,search。刚刚创建的时候是空栈     和LinkedList一样，ArrayList也是非同步的（unsynchronized）。一般情况下使用这两个就可以了，因为非同步，所以效率比较高。 如果涉及到堆栈，队列等操作，应该考虑用List，对于需要快速插入，删除元素，应该使用LinkedList，如果需要快速随机访问元素，应该使用ArrayList。 几种java容器
+ 有几个问题
+ ArrayList的扩容操作？  每一次扩容都会扩容到原来的1.5倍，使用grow()方法，第一次添加元素的时候分配10个对象空间，当添加到第11个元素的时候，就会扩容到原来的1.5倍，当添加到16个元素的时候，就会扩容到原来的15*1.5的大小，等等。每一次扩容都是通过Array.copyof(elementData,newCapacity)来实现的，会消耗大量的资源，代价比较大，因此在知道大致对象大小的时候，提前设置好ArrayList的大小是非常明智的选择。（old&#43;old&amp;raquo;1)
+ 为什么Vector是线程安全的？  Set    Set类别 特点     SortSet(TreeSet) 基于红黑树有序，TreeSet是set的一种变体，是可以实现排序等功能的集合 O(logN)   HashSet 基于hash表实现，可以看成一个只有key的HashMap O(1) ，不允许重复，无序，允许存在null(最多一个)   LinkedHashSet 具有HashSet的查找效率，且内部使用了双向链表维护了元素的插入顺序,保证了集合的有序性     写了 HashMap 和 HashSet，然后我们可以看到 HashSet 的方法基本上都是基于 HashMap 来实现的，说白了，HashSet内部的数据结构就是一个 HashMap，其方法的内部几乎就是在调用 HashMap 的方法。 LinkedHashSet 首先我们需要知道的是它是一个 Set 的实现，所以它其中存的肯定不是键值对，而是值。此实现与 HashSet 的不同之处在于，LinkedHashSet 维护着一个运行于所有条目的双重链接列表。此链接列表定义了迭代顺序，该迭代顺序可为插入顺序或是访问顺序。 看到上面的介绍，是不是感觉其与 HashMap 和 LinkedHashMap 的关系很像？LinkedHashSet就是使用LinkedHashMap来实现的。 注意，此实现不是同步的。如果多个线程同时访问链接的哈希Set，而其中至少一个线程修改了该 Set，则它必须保持外部同步。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/1.jpg' />
+    <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-MK7GTCNC34', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    </head>
+    <body class="">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.body.dataset.scheme = 'dark';
+        } else {
+            document.body.dataset.scheme = 'light';
+        }
+    })();
+</script><div class="container main-container flex on-phone--column extended article-page with-toolbar">
+            <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            <figure class="site-avatar">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+
+                
+                    <span class="emoji">⚖️</span>
+                
+            </figure>
+        
+        <h1 class="site-name"><a href="https://lllovol.com">lllovol</a></h1>
+        <h2 class="site-description">Stay Hungry, Stay Foolish</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/links/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>Dark Mode</span>
+            </li>
+        
+    </ol>
+</aside>
+
+            <main class="main full-width">
+    <div id="article-toolbar">
+        <a href="https://lllovol.com" class="back-home">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+            <span>Back</span>
+        </a>
+    </div>
+
+    <article class="main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/java/">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/1.jpg" loading="lazy" alt="Featured image of post Java中的容器类" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/java/" >
+                Java
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/p/java/">Java中的容器类</a>
+    </h2>
+
+    <footer class="article-time">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <time class="article-time--published">Dec 16, 2018</time>
+    </footer></div>
+</header>
+
+    <section class="article-content">
+    <h1 id="概览">概览</h1>
+<p>平时学习工作中，总会使用到各种各样的数据结构，map、set、LinkedHashMap等等，虽然在使用的过程中对此有了一定的了解，但是感觉还是不是很通透。故此写一篇blog用于总结java中的数据结构。</p>
+<h1 id="java的容器类">Java的容器类</h1>
+<p>Java中的容器类按照大的来分，主要可以分为：</p>
+<ul>
+<li>collection：存储着对象的集合</li>
+<li>map：存储着key，value的键值对
+接下来的主要就分别以上面两个类别展开进行整理</li>
+</ul>
+<h1 id="collection">Collection</h1>
+<h3 id="list">List</h3>
+<table>
+<thead>
+<tr>
+<th>List类别</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ArrayList</td>
+<td>基于动态数组实现，支持随机访问，允许所有元素包括null</td>
+</tr>
+<tr>
+<td>Vector</td>
+<td>与ArrayList相似，但是Vector是线程安全的（同步的）</td>
+</tr>
+<tr>
+<td>LinkedList</td>
+<td>基于双向链表，只能顺序访问，可以快速的再链表中插入和删除元素（栈[Stack]、队列[Queue]、双向队列[Deque]）。没有同步方法</td>
+</tr>
+<tr>
+<td>Stack</td>
+<td>继承自Vector，实现一个后进先出的堆栈。额外提供了5个方法使得Vector可以被当做堆栈使用：push,pop,peek,empty,search。刚刚创建的时候是空栈</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>和LinkedList一样，ArrayList也是非同步的（unsynchronized）。一般情况下使用这两个就可以了，因为非同步，所以效率比较高。
+如果涉及到堆栈，队列等操作，应该考虑用List，对于需要快速插入，删除元素，应该使用LinkedList，如果需要快速随机访问元素，应该使用ArrayList。
+<a class="link" href="https://blog.csdn.net/dengpeng0419/article/details/47983033"  target="_blank" rel="noopener"
+    >几种java容器</a></p>
+</blockquote>
+<p>有几个问题</p>
+<ul>
+<li>ArrayList的扩容操作？</li>
+</ul>
+<p>每一次扩容都会扩容到原来的1.5倍，使用grow()方法，第一次添加元素的时候分配10个对象空间，当添加到第11个元素的时候，就会扩容到原来的1.5倍，当添加到16个元素的时候，就会扩容到原来的15*1.5的大小，等等。每一次扩容都是通过Array.copyof(elementData,newCapacity)来实现的，会消耗大量的资源，代价比较大，因此在知道大致对象大小的时候，提前设置好ArrayList的大小是非常明智的选择。（old+old&raquo;1)</p>
+<ul>
+<li>为什么Vector是线程安全的？</li>
+</ul>
+<h3 id="set">Set</h3>
+<table>
+<thead>
+<tr>
+<th>Set类别</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SortSet(TreeSet)</td>
+<td>基于红黑树有序，TreeSet是set的一种变体，是可以实现排序等功能的集合 O(logN)</td>
+</tr>
+<tr>
+<td>HashSet</td>
+<td>基于hash表实现，可以看成一个只有key的HashMap O(1) ，不允许重复，无序，允许存在null(最多一个)</td>
+</tr>
+<tr>
+<td>LinkedHashSet</td>
+<td>具有HashSet的查找效率，且内部使用了双向链表维护了元素的插入顺序,保证了集合的有序性</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>写了 HashMap 和 HashSet，然后我们可以看到 HashSet 的方法基本上都是基于 HashMap 来实现的，说白了，HashSet内部的数据结构就是一个 HashMap，其方法的内部几乎就是在调用 HashMap 的方法。
+LinkedHashSet 首先我们需要知道的是它是一个 Set 的实现，所以它其中存的肯定不是键值对，而是值。此实现与 HashSet 的不同之处在于，LinkedHashSet 维护着一个运行于所有条目的双重链接列表。此链接列表定义了迭代顺序，该迭代顺序可为插入顺序或是访问顺序。
+看到上面的介绍，是不是感觉其与 HashMap 和 LinkedHashMap 的关系很像？LinkedHashSet就是使用LinkedHashMap来实现的。
+注意，此实现不是同步的。如果多个线程同时访问链接的哈希Set，而其中至少一个线程修改了该 Set，则它必须保持外部同步。</p>
+</blockquote>
+<h3 id="queue">Queue</h3>
+<p>队列与Stack的区别在于，Stack的删除与添加都在队尾进行，而Queue删除在队头，添加在队尾</p>
+<table>
+<thead>
+<tr>
+<th>Queue类别</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LinkedList</td>
+<td>基于双向链表，只能顺序访问，可以快速的再链表中插入和删除元素</td>
+</tr>
+<tr>
+<td>PriorityQueue</td>
+<td>基于堆结构实现，可以用来实现优先队列</td>
+</tr>
+</tbody>
+</table>
+<h1 id="map">Map</h1>
+<h3 id="hashmap">HashMap</h3>
+<p>HashMap实际上就是java中最基本的两个结构所实现的：数组和指针。通俗的说，就是数组和链表的结合体。（HashMap如何实现）</p>
+<ul>
+<li>每一个Entry的结构中包含了 key,value, int hash,和下一个Entry的指针next</li>
+<li>然后构造HashMap的时候，会初始化一个数组 table=new Entry[capacity]</li>
+<li>由此看来，entry就是键值对，另外还包含了写一个next的Entry指针，由此构成了链表</li>
+<li>在我们想要查找某一个元素的时候，只需要key和hash值，就能知道这个元素在什么位置，而不用去遍历链表，优化了查询的效率</li>
+<li>HashMap的底层数组总是2的n次幂，这样的好处是可以让不同的key算出来的index相同的几率较小，那么数据在数组上的分布就会比较均匀</li>
+<li>从HashMap中get元素的时候，先计算出key的hashcode，然后找到数组中对应位置的某一元素，然后通过key的equals方法在对应的位置链表中找到需要的元素</li>
+</ul>
+<blockquote>
+<p>当 HashMap 中的元素越来越多的时候，hash 冲突的几率也就越来越高，因为数组的长度是固定的。所以为了提高查询的效率，就要对 HashMap 的数组进行扩容，数组扩容这个操作也会出现在 ArrayList 中，这是一个常用的操作，而在 HashMap 数组扩容之后，最消耗性能的点就出现了：原数组中的数据必须重新计算其在新数组中的位置，并放进去，这就是 resize。</p>
+</blockquote>
+<blockquote>
+<p>那么 HashMap 什么时候进行扩容呢？当 HashMap 中的元素个数超过数组大小 *loadFactor时，就会进行数组扩容，loadFactor的默认值为 0.75，这是一个折中的取值。也就是说，默认情况下，数组大小为 16，那么当 HashMap 中元素个数超过 16<em>0.75=12 的时候，就把数组的大小扩展为 2</em>16=32，即扩大一倍，然后重新计算每个元素在数组中的位置，而这是一个非常消耗性能的操作，所以如果我们已经预知 HashMap 中元素的个数，那么预设元素的个数能够有效的提高 HashMap 的性能。</p>
+</blockquote>
+<p>初始容量为16，负载因此为0.75，只要超过了16*0.75=12的时候，就会进行扩容到原来的两倍<br>
+遍历的时候最好使用map.entrySet().iterator()的方式，效率比较高
+HashMap是非同步的。</p>
+<p>解决hash冲突的方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>开放地址法</td>
+<td>按照一定的次序，从哈希表中找到一个空闲的单元。然后把发生冲突的元素存入到该单元的一种方法。开放定址法需要的表长度要大于等于所需要存放的元素（线性探查法、平方探查法、双散列函数探查法）</td>
+</tr>
+<tr>
+<td>链地址法（拉链法）</td>
+<td>jdk1.7 全都是单链表来存储同义词，jdk1.8之后，如果链表的长度大于8，会转换为红黑树来存储</td>
+</tr>
+<tr>
+<td>再哈希法</td>
+<td>同时构造多个不同的哈希函数，直到冲突不再产生，但是增加了计算时间</td>
+</tr>
+<tr>
+<td>建立公共溢出区</td>
+<td>将哈希表分为公共表和溢出表，当溢出发生的时候，将所有的溢出输出统一放到溢出区</td>
+</tr>
+</tbody>
+</table>
+<h3 id="hashtable">HashTable</h3>
+<ul>
+<li>与HashMap特别的相似，但是HashTable是线程安全的（如果想使用一个线程安全的HashMap,可以使用Collections类中的synchronizedMap()方法）</li>
+<li>HashTable不允许null（key value 都不行），HashMap允许一个null的key,若干的value的null</li>
+</ul>
+<h3 id="linkedhashmap">LinkedHashMap</h3>
+<p>LinkedHashMap是HashMap的一个子类，它保留了插入时候的顺序，如果需要在输出的时候保持和输入的顺序时相同，就使用本结构（一言：有序的HashMap）</p>
+<ul>
+<li>维护着一个云星宇所有条目的双重链接列表。这个链接定义了迭代顺序，可以是插入顺序或者是访问顺序</li>
+<li>和HashMap一样，都是不同步的</li>
+<li>可以实现LRU缓存（Least Recently Used),把最近最少使用的数据溢出，让给最新读取的数据。</li>
+</ul>
+<h3 id="concurrenthashmap">ConcurrentHashMap</h3>
+<p>ConcurrentHashMap 是一个并发散列映射表的实现，它允许完全并发的读取，并且支持给定数量的并发更新。相比于 HashTable 和用同步包装器包装的 HashMap（Collections.synchronizedMap(new HashMap())），ConcurrentHashMap 拥有更高的并发性。在 HashTable 和由同步包装器包装的 HashMap 中，使用一个全局的锁来同步不同线程间的并发访问。（基于java的内存机制（mark））(没有ConcurrentHashTable这个类)</p>
+<h3 id="sortedmaptreemap">SortedMap(TreeMap)</h3>
+<pre><code>SortedMap mapA = new TreeMap();
+
+Comparator comparator = new MyComparator();
+SortedMap mapB = new TreeMap(comparator);
+</code></pre>
+<p>能够自然排序的一个map，用的并不是那么多</p>
+<h1 id="参考网站">参考网站</h1>
+<blockquote>
+</blockquote>
+<ul>
+<li><a class="link" href="https://mp.weixin.qq.com/s?__biz=MzU0OTE4MzYzMw==&amp;mid=2247485577&amp;idx=1&amp;sn=60809425511e9354fbcf3d2d42f43898&amp;chksm=fbb28177ccc508611c86951b617c6f7125212915ff125c144bc778142399666b6ff791e980db&amp;mpshare=1&amp;scene=1&amp;srcid=1207LEbl5tAzCy4pKL8QMzBu&amp;rd2werd=1#wechat_redirect"  target="_blank" rel="noopener"
+    >动画演绎Java常用数据结构</a></li>
+<li><a class="link" href="http://wiki.jikexueyuan.com/project/java-collection/hashmap.html"  target="_blank" rel="noopener"
+    >java集合学习指南</a></li>
+<li><a class="link" href="https://www.jianshu.com/p/4d3cb99d7580"  target="_blank" rel="noopener"
+    >解决哈希冲突的常用方法</a></li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/java/">Java</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="has-image">
+    <a href="/p/java-basic/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg" loading="lazy" data-key="java basic" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Java的部分基础机制</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/java-note/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/9.jpg" loading="lazy" data-key="java-note" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/9.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Java学习笔记（一）</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/java11/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg" loading="lazy" data-key="Java11" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Java11新特性的六个实验</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/stream/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/8.jpg" loading="lazy" data-key="stream" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/8.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Java8流式编程</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+
+    
+        
+    
+
+
+<div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "aaf5fc3a72ea9ce81d62",
+        clientSecret: "7792527b47af3239ddbc2274fb5fd141c28d8339",
+        repo: "ymkNK.github.io",
+        owner: "ymkNK",
+        admin: "ymkNK",
+        id: window.location.pathname,
+        title: document.title,
+        distractionFreeMode:  true 
+    })
+
+    gitalk.render('gitalk-container')
+</script>
+
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        
+        2018 -
+        
+        2021
+        &copy;
+        lllovol
+    </section>
+    
+    <section class="powerby">
+        
+            <b><a href="https://github.com/ymkNK" target="_blank" rel="noopener" data-version="%s">Owner Rainbowly </a></b> <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MK7GTCNC34"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-MK7GTCNC34');
+</script>
+    </body>
+</html>

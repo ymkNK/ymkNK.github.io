@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='一、前言 kubernetes作为一个容器的编排引擎，如今已经相当的火热，日常的工作中也有使用常用的kubernetes的相关的功能，例如滚动发布、扩容等等，但是这都是在公司现成的已经搭建好的kubernetes集群上实践的，因此，本篇文章就是自主探索在本地运行一个kubernetes集群，同时写一个自己的demo，运行到本地的kubernetes集群当中。
+本文主要包含如下几个方面：
+ 国内条件下如何安装kubernetes（no vpn） 写一个Spring boot 的demo 使用Docker将demo打包成镜像 将demo部署到本地kubernetes集群当中  二、本地安装kubernetes 选择使用minikube 我们想要学习使用kubernetes，首先就是选择一个平台进行操作，比如阿里云、Azure、Google Kubernetes等等
+这里我们选择的就是学习用的minikube
+ kubernetes官方文档 minikube操作文档 minikube安装文档
+ 安装minikube 1.检查能否虚拟化 sysctl -a | grep -E --color &#39;machdep.cpu.features|VMX&#39; vmx被标注出来有颜色，说明就是ok的，这台电脑是支持virtualization的（一般都是支持的,但是我花了88白菜价在腾讯云上买的1年1核1g服务器是不支持的）
+2.安装kubectl brew install kubernetes-cli 使用kubectl version能够查看到对应的kubectl版本
+3.安装Hypervisor（virtual machine monitor） 这个主要就是安装虚拟机了，kvm或者virtualBox二选一
+4.安装minikube 有两种方式,第一种方式就是如下的方式
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \ &amp;amp;&amp;amp; chmod &#43;x minikube 将minikube安装包下载下来，手动进行安装
+sudo mkdir -p /usr/local/bin/ sudo install minikube /usr/local/bin/ 如果是mac用户，直接使用如下的命令就可以了
+brew install minikube brew link minikube 5.启动minikube minikube start 就会开始根据本地的virtualBox来下载对应的驱动,中间应该会要求输入一次本机电脑的一次密码,然后会出现这样的错误： Error creating machine: Error in driver during machine creation: hyperkit crashed!'><title>从零开始将项目部署到Kubernetes</title>
+
+<link rel='canonical' href='https://lllovol.com/p/minikube/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='从零开始将项目部署到Kubernetes'>
+<meta property='og:description' content='一、前言 kubernetes作为一个容器的编排引擎，如今已经相当的火热，日常的工作中也有使用常用的kubernetes的相关的功能，例如滚动发布、扩容等等，但是这都是在公司现成的已经搭建好的kubernetes集群上实践的，因此，本篇文章就是自主探索在本地运行一个kubernetes集群，同时写一个自己的demo，运行到本地的kubernetes集群当中。
+本文主要包含如下几个方面：
+ 国内条件下如何安装kubernetes（no vpn） 写一个Spring boot 的demo 使用Docker将demo打包成镜像 将demo部署到本地kubernetes集群当中  二、本地安装kubernetes 选择使用minikube 我们想要学习使用kubernetes，首先就是选择一个平台进行操作，比如阿里云、Azure、Google Kubernetes等等
+这里我们选择的就是学习用的minikube
+ kubernetes官方文档 minikube操作文档 minikube安装文档
+ 安装minikube 1.检查能否虚拟化 sysctl -a | grep -E --color &#39;machdep.cpu.features|VMX&#39; vmx被标注出来有颜色，说明就是ok的，这台电脑是支持virtualization的（一般都是支持的,但是我花了88白菜价在腾讯云上买的1年1核1g服务器是不支持的）
+2.安装kubectl brew install kubernetes-cli 使用kubectl version能够查看到对应的kubectl版本
+3.安装Hypervisor（virtual machine monitor） 这个主要就是安装虚拟机了，kvm或者virtualBox二选一
+4.安装minikube 有两种方式,第一种方式就是如下的方式
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \ &amp;amp;&amp;amp; chmod &#43;x minikube 将minikube安装包下载下来，手动进行安装
+sudo mkdir -p /usr/local/bin/ sudo install minikube /usr/local/bin/ 如果是mac用户，直接使用如下的命令就可以了
+brew install minikube brew link minikube 5.启动minikube minikube start 就会开始根据本地的virtualBox来下载对应的驱动,中间应该会要求输入一次本机电脑的一次密码,然后会出现这样的错误： Error creating machine: Error in driver during machine creation: hyperkit crashed!'>
+<meta property='og:url' content='https://lllovol.com/p/minikube/'>
+<meta property='og:site_name' content='lllovol'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='MicroService' /><meta property='article:published_time' content='2019-12-02T14:23:17&#43;00:00'/><meta property='article:modified_time' content='2019-12-02T14:23:17&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/4.jpg' />
+<meta name="twitter:title" content="从零开始将项目部署到Kubernetes">
+<meta name="twitter:description" content="一、前言 kubernetes作为一个容器的编排引擎，如今已经相当的火热，日常的工作中也有使用常用的kubernetes的相关的功能，例如滚动发布、扩容等等，但是这都是在公司现成的已经搭建好的kubernetes集群上实践的，因此，本篇文章就是自主探索在本地运行一个kubernetes集群，同时写一个自己的demo，运行到本地的kubernetes集群当中。
+本文主要包含如下几个方面：
+ 国内条件下如何安装kubernetes（no vpn） 写一个Spring boot 的demo 使用Docker将demo打包成镜像 将demo部署到本地kubernetes集群当中  二、本地安装kubernetes 选择使用minikube 我们想要学习使用kubernetes，首先就是选择一个平台进行操作，比如阿里云、Azure、Google Kubernetes等等
+这里我们选择的就是学习用的minikube
+ kubernetes官方文档 minikube操作文档 minikube安装文档
+ 安装minikube 1.检查能否虚拟化 sysctl -a | grep -E --color &#39;machdep.cpu.features|VMX&#39; vmx被标注出来有颜色，说明就是ok的，这台电脑是支持virtualization的（一般都是支持的,但是我花了88白菜价在腾讯云上买的1年1核1g服务器是不支持的）
+2.安装kubectl brew install kubernetes-cli 使用kubectl version能够查看到对应的kubectl版本
+3.安装Hypervisor（virtual machine monitor） 这个主要就是安装虚拟机了，kvm或者virtualBox二选一
+4.安装minikube 有两种方式,第一种方式就是如下的方式
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \ &amp;amp;&amp;amp; chmod &#43;x minikube 将minikube安装包下载下来，手动进行安装
+sudo mkdir -p /usr/local/bin/ sudo install minikube /usr/local/bin/ 如果是mac用户，直接使用如下的命令就可以了
+brew install minikube brew link minikube 5.启动minikube minikube start 就会开始根据本地的virtualBox来下载对应的驱动,中间应该会要求输入一次本机电脑的一次密码,然后会出现这样的错误： Error creating machine: Error in driver during machine creation: hyperkit crashed!"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/4.jpg' />
+    <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-MK7GTCNC34', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    </head>
+    <body class="">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.body.dataset.scheme = 'dark';
+        } else {
+            document.body.dataset.scheme = 'light';
+        }
+    })();
+</script><div class="container main-container flex on-phone--column extended article-page with-toolbar">
+            <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            <figure class="site-avatar">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+
+                
+                    <span class="emoji">⚖️</span>
+                
+            </figure>
+        
+        <h1 class="site-name"><a href="https://lllovol.com">lllovol</a></h1>
+        <h2 class="site-description">Stay Hungry, Stay Foolish</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/links/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>Dark Mode</span>
+            </li>
+        
+    </ol>
+</aside>
+
+            <main class="main full-width">
+    <div id="article-toolbar">
+        <a href="https://lllovol.com" class="back-home">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+            <span>Back</span>
+        </a>
+    </div>
+
+    <article class="main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/minikube/">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/4.jpg" loading="lazy" alt="Featured image of post 从零开始将项目部署到Kubernetes" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/microservice/" >
+                MicroService
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/p/minikube/">从零开始将项目部署到Kubernetes</a>
+    </h2>
+
+    <footer class="article-time">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <time class="article-time--published">Dec 02, 2019</time>
+    </footer></div>
+</header>
+
+    <section class="article-content">
+    <h2 id="一前言">一、前言</h2>
+<p>kubernetes作为一个容器的编排引擎，如今已经相当的火热，日常的工作中也有使用常用的kubernetes的相关的功能，例如滚动发布、扩容等等，但是这都是在公司现成的已经搭建好的kubernetes集群上实践的，因此，本篇文章就是自主探索在本地运行一个kubernetes集群，同时写一个自己的demo，运行到本地的kubernetes集群当中。<br>
+本文主要包含如下几个方面：</p>
+<ul>
+<li>国内条件下如何安装kubernetes（no vpn）</li>
+<li>写一个Spring boot 的demo</li>
+<li>使用Docker将demo打包成镜像</li>
+<li>将demo部署到本地kubernetes集群当中</li>
+</ul>
+<h2 id="二本地安装kubernetes">二、本地安装kubernetes</h2>
+<h3 id="选择使用minikube">选择使用minikube</h3>
+<p>我们想要学习使用kubernetes，首先就是选择一个平台进行操作，比如阿里云、Azure、Google Kubernetes等等<br>
+<img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-151024.png" alt=""  />
+这里我们选择的就是学习用的minikube</p>
+<blockquote>
+<p><a class="link" href="https://kubernetes.io/docs/home/"  target="_blank" rel="noopener"
+    >kubernetes官方文档</a>
+<a class="link" href="https://kubernetes.io/docs/setup/learning-environment/minikube/"  target="_blank" rel="noopener"
+    >minikube操作文档</a>
+<a class="link" href="https://kubernetes.io/docs/tasks/tools/install-minikube/"  target="_blank" rel="noopener"
+    >minikube安装文档</a></p>
+</blockquote>
+<h3 id="安装minikube">安装minikube</h3>
+<h4 id="1检查能否虚拟化">1.检查能否虚拟化</h4>
+<pre><code>sysctl -a | grep -E --color 'machdep.cpu.features|VMX' 
+</code></pre><p><img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-152029.png" alt=""  />
+vmx被标注出来有颜色，说明就是ok的，这台电脑是支持virtualization的（一般都是支持的,但是我花了88白菜价在腾讯云上买的1年1核1g服务器是不支持的）</p>
+<h4 id="2安装kubectl">2.安装kubectl</h4>
+<pre><code>brew install kubernetes-cli
+</code></pre><p>使用<code>kubectl version</code>能够查看到对应的kubectl版本</p>
+<h4 id="3安装hypervisorvirtual-machine-monitor">3.安装Hypervisor（virtual machine monitor）</h4>
+<p>这个主要就是安装虚拟机了，<a class="link" href="https://www.linux-kvm.org/page/Main_Page"  target="_blank" rel="noopener"
+    >kvm</a>或者<a class="link" href="https://www.virtualbox.org/wiki/Downloads"  target="_blank" rel="noopener"
+    >virtualBox</a>二选一</p>
+<h4 id="4安装minikube">4.安装minikube</h4>
+<p>有两种方式,第一种方式就是如下的方式</p>
+<pre><code>curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
+	&amp;&amp; chmod +x minikube
+</code></pre><p>将minikube安装包下载下来，手动进行安装</p>
+<pre><code>sudo mkdir -p /usr/local/bin/
+sudo install minikube /usr/local/bin/
+</code></pre><p><img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-153329.png" alt=""  />
+如果是mac用户，直接使用如下的命令就可以了</p>
+<pre><code>brew install minikube
+brew link minikube
+</code></pre><h4 id="5启动minikube">5.启动minikube</h4>
+<pre><code>minikube start
+</code></pre><p><img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-153624.png" alt=""  />
+就会开始根据本地的virtualBox来下载对应的驱动,中间应该会要求输入一次本机电脑的一次密码,然后会出现这样的错误：
+<code>Error creating machine: Error in driver during machine creation: hyperkit crashed!</code>  我们可以使用<code>minikube start -help</code>查看到这个命令的一些参数:
+例如<code>--cpus=2</code>我们可以设置为4,<code>--disk-size</code>等等都可以进行测试。由于按照官网的操作一步一步来做，发现依然会出错？然后我发现本地已经有了hyperkit，装的virtualBox没有什么用，因此我<code>brew reinstall hyperkit</code>重新安装了一下，这时候再来一次<code>minikube start</code>,这一次似乎终于是成功了。<br>
+<img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-154002.png" alt=""  />
+<img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-154155.png" alt=""  />
+然后就开始下载kubernetes的相关的各种组件dns、kube-proxy\kube-addon-manager等等，但是可能是由于被墙的原因下载不下来，这个时候我进行了以下的几种处理方式：</p>
+<ol>
+<li>科学上网,ok科学上网之后，再来看看，但是发现依然还是不行</li>
+<li>设置国内的代理&ndash;image-repository……ok还是一样的错</li>
+</ol>
+<pre><code>minikube start --registry-mirror=https://registry.docker-cn.com
+</code></pre><ol start="3">
+<li>换一个虚拟机来进行安装，改用vmware来进行安装,当然也是没有什么作用的</li>
+</ol>
+<pre><code>brew install docker-machine-driver-vmware
+minikube start --vm-driver=vmware
+</code></pre><ol start="4">
+<li>关键的问题就在于<code>VM is unable to access k8s.gcr.io, you may need to configure a proxy or set --image-repository</code>,因此我找到了kubernetes minikube的github仓库，找到了其issue区，看看有没有仁兄有我一样的情况。功夫不负有心人，找到了<a class="link" href="https://github.com/kubernetes/minikube/issues/3860"  target="_blank" rel="noopener"
+    >issue 3860</a>，我们可以使用国内的阿里云镜像<code>egistry.cn-hangzhou.aliyuncs.com/google_containers</code></li>
+</ol>
+<pre><code>rm -rf ~/.minikube
+minikube start --image-repository=registry.cn-hangzhou.aliyuncs.com/google_containers --vm-driver=vmware
+</code></pre><p><img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-154759.png" alt=""  />
+看一看minikube都有些什么namespace
+<img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-154823.png" alt=""  />
+成功了！</p>
+<h2 id="三编写demo">三、编写Demo</h2>
+<p>接下来我们新建一个demo，使用Spring框架写一个简单的controller</p>
+<blockquote>
+<p><a class="link" href="https://github.com/ymkNK/IstioTestDemo"  target="_blank" rel="noopener"
+    >TestDemo</a></p>
+</blockquote>
+<h3 id="1使用官方的initializer脚手架初始化一个demo">1.使用官方的Initializer脚手架初始化一个demo</h3>
+<blockquote>
+<p><a class="link" href="https://start.spring.io/"  target="_blank" rel="noopener"
+    >https://start.spring.io/</a></p>
+</blockquote>
+<h3 id="2在项目中添加需要的restcontroller和swagger的依赖">2.在项目中添加需要的RestController和swagger的依赖</h3>
+<p>RestController有关的依赖</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+    &lt;version&gt;2.1.8.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;
+    &lt;version&gt;2.0.5.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p>与swagger有关的依赖</p>
+<pre><code>&lt;dependency&gt;
+            &lt;groupId&gt;io.springfox&lt;/groupId&gt;
+            &lt;artifactId&gt;springfox-swagger2&lt;/artifactId&gt;
+            &lt;version&gt;${io.springfox.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.springfox&lt;/groupId&gt;
+            &lt;artifactId&gt;springfox-swagger-ui&lt;/artifactId&gt;
+            &lt;version&gt;${io.springfox.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.springfox&lt;/groupId&gt;
+            &lt;artifactId&gt;springfox-swagger-common&lt;/artifactId&gt;
+            &lt;version&gt;${io.springfox.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.springfox&lt;/groupId&gt;
+            &lt;artifactId&gt;springfox-spring-web&lt;/artifactId&gt;
+            &lt;version&gt;${io.springfox.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.springfox&lt;/groupId&gt;
+            &lt;artifactId&gt;springfox-spi&lt;/artifactId&gt;
+            &lt;version&gt;${io.springfox.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.springfox&lt;/groupId&gt;
+            &lt;artifactId&gt;springfox-schema&lt;/artifactId&gt;
+            &lt;version&gt;${io.springfox.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.springfox&lt;/groupId&gt;
+            &lt;artifactId&gt;springfox-core&lt;/artifactId&gt;
+            &lt;version&gt;${io.springfox.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.springfox&lt;/groupId&gt;
+            &lt;artifactId&gt;springfox-bean-validators&lt;/artifactId&gt;
+            &lt;version&gt;${io.springfox.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.swagger&lt;/groupId&gt;
+            &lt;artifactId&gt;swagger-annotations&lt;/artifactId&gt;
+            &lt;version&gt;1.5.21&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.swagger&lt;/groupId&gt;
+            &lt;artifactId&gt;swagger-models&lt;/artifactId&gt;
+            &lt;version&gt;1.5.21&lt;/version&gt;
+        &lt;/dependency&gt;
+
+</code></pre><p>同时我们还需要在Application类中@EnableSwagger2</p>
+<h3 id="3创建controller">3.创建controller</h3>
+<p>首先在application.properties文件中添加一条配置</p>
+<pre><code>version=@project.version@
+</code></pre><p>然后添加controller</p>
+<pre><code>package com.example.demo.controller;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * Created by Yangmingkai on 2019-11-11.
+ */
+@RestController
+@Api(&quot;用于istio测试&quot;)
+@RequestMapping(&quot;/demo&quot;)
+public class IstioController {
+
+    @Value(&quot;${version}&quot;)
+    private String version;
+
+    @GetMapping(&quot;/version&quot;)
+    @ApiOperation(&quot;获取当前版本&quot;)
+    public String getVersion() {
+
+        return String.format(&quot;This is version %s&quot;, version);
+    }
+}
+</code></pre><h3 id="4运行">4.运行</h3>
+<p><img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-155916.png" alt=""  /></p>
+<p><img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-155943.png" alt=""  /></p>
+<h2 id="四将demo打包成镜像">四、将Demo打包成镜像</h2>
+<h3 id="1打包成jar包">1.打包成jar包</h3>
+<p>进入pom.xml文件目录，运行命令<code>mvn clean install -Dmaven.test.skip=true</code>执行打包
+<img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-161743.png" alt=""  /></p>
+<h3 id="2利用dockerfile打包成镜像">2.利用dockerFile打包成镜像</h3>
+<p>编写docker file</p>
+<pre><code># 拉取JDK11的系统镜像
+From openjdk:11
+# 设置时区
+ENV TZ=Asia/Shanghai
+# 时区写入系统文件
+RUN ln -snf /usr/share/zoneinfo/$TZ  /etc/localtime &amp;&amp; echo $TZ &gt; /etc/timezone
+
+VOLUME /tmp
+# 加入打包好的jar文件(xxxxx改为自己文件名)
+ADD ./target/demo-0.0.1-SNAPSHOT.jar /
+
+ENTRYPOINT [&quot;java&quot;,&quot;-Djava.security.egd=file:/dev/./urandom&quot;,&quot;-jar&quot;,&quot;/demo-0.0.1-SNAPSHOT.jar&quot;]
+</code></pre><p>运行命令<code>docker build -t 自定义镜像名称 .</code>（注意后面有个 . 不要漏掉）,如果需要将该镜像加入我本地的harbor仓库（需要自己搭建），则镜像名称需要为：
+仓库地址/名称:v版本号</p>
+<blockquote>
+<p>如：192.168.123.45:8000/library/data_lake:v1.0</p>
+</blockquote>
+<p>这里我们docker builde一下</p>
+<pre><code>docker build -t my-demo .
+</code></pre><h3 id="3在本地docker运行打包好的镜像">3.在本地docker运行打包好的镜像</h3>
+<p>使用命令docker run 运行镜像</p>
+<pre><code>docker run -d --name test -p 8080:8080 my-demo
+</code></pre><p>然后可以使用<code>docker ps</code>查看运行中的docker镜像
+<img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-162318.png" alt=""  />
+使用<code>docker stop</code>加上对应的容器的id就能够停止对应的镜像的运行</p>
+<h3 id="4将docker推向镜像仓库">4.将docker推向镜像仓库</h3>
+<p>首先我们需要创建一个docker的账号，就能拥有一个docker远端的镜像仓库。我们给我们的镜像打一个tag,使用docker tag将本地原来的镜像推</p>
+<pre><code> docker tag my-demo yangdocker1118/my-demo
+</code></pre><p>然后使用docker push将本地的镜像推向远端</p>
+<pre><code>docker push yangdocker1118/my-demo
+</code></pre><p><img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-163228.png" alt=""  /></p>
+<h2 id="五将demo镜像部署到kubernetes集群当中">五、将demo镜像部署到kubernetes集群当中</h2>
+<h3 id="1创建一个namespace">1.创建一个namespace</h3>
+<p>创建namespace也有两种方式</p>
+<ol>
+<li>使用yaml文件编写配置来进行创建</li>
+</ol>
+<pre><code>apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    istio-injection: enabled
+  name: zelda
+status:
+  phase: Active
+</code></pre><p>然后使用<code>kc apply -f namespace.yaml</code>就能创建一个名为zelda的namespace
+2. kubectl create namespace命令直接创建</p>
+<h3 id="2创建deployment">2.创建deployment</h3>
+<p>这里我们同样也可以使用yaml配置的方式来创建deployment，也可以直接使用下面命令行的方式直接创建deployment拉取镜像进行部署（推荐还是本地自己重新搭建一个镜像仓库harbor，使用docker官方的镜像仓库拉镜像的速度太慢了）</p>
+<pre><code>kubectl create deployment my-demo --image=yangdocker1118/my-demo -n zelda
+</code></pre><p><img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-163713.png" alt=""  /></p>
+<p><img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-163742@2x.png" alt=""  /></p>
+<p>成功！Done!</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/microservice/">MicroService</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="has-image">
+    <a href="/p/container-is-a-special-process/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/1.jpg" loading="lazy" data-key="container-is-a-special-process" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/1.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">容器就是一个特殊的进程</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/docker-history/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/9.jpg" loading="lazy" data-key="docker-history" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/9.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">小鲸鱼的成长史</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+
+    
+        
+    
+
+
+<div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "aaf5fc3a72ea9ce81d62",
+        clientSecret: "7792527b47af3239ddbc2274fb5fd141c28d8339",
+        repo: "ymkNK.github.io",
+        owner: "ymkNK",
+        admin: "ymkNK",
+        id: window.location.pathname,
+        title: document.title,
+        distractionFreeMode:  true 
+    })
+
+    gitalk.render('gitalk-container')
+</script>
+
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        
+        2018 -
+        
+        2021
+        &copy;
+        lllovol
+    </section>
+    
+    <section class="powerby">
+        
+            <b><a href="https://github.com/ymkNK" target="_blank" rel="noopener" data-version="%s">Owner Rainbowly </a></b> <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MK7GTCNC34"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-MK7GTCNC34');
+</script>
+    </body>
+</html>

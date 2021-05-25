@@ -9,10 +9,10 @@
     <lastBuildDate>Wed, 27 Jan 2021 14:46:13 +0000</lastBuildDate><atom:link href="https://lllovol.com/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>基础架构：一条SQL更新语句是如何执行的？</title>
-      <link>https://lllovol.com/how-a-sql-executes/</link>
+      <link>https://lllovol.com/p/how-a-sql-executes/</link>
       <pubDate>Wed, 27 Jan 2021 14:46:13 +0000</pubDate>
       
-      <guid>https://lllovol.com/how-a-sql-executes/</guid>
+      <guid>https://lllovol.com/p/how-a-sql-executes/</guid>
       <description> 本文是学习笔记，来自极客时间
  mysql&amp;gt; select * from T where ID=10； 这么一条查询语句是如何执行的呢？
 MySQL基础架构 Server层：

@@ -9,10 +9,10 @@
     <lastBuildDate>Mon, 27 Jul 2020 15:51:33 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/spring/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>SpringBoot开发中的一些小细节(十四）事件监听的使用</title>
-      <link>https://lllovol.com/spring14/</link>
+      <link>https://lllovol.com/p/spring14/</link>
       <pubDate>Mon, 27 Jul 2020 15:51:33 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring14/</guid>
+      <guid>https://lllovol.com/p/spring14/</guid>
       <description>背景 最近在做同步先关的工作，为了提升同步任务的处理效率，减少频繁的mongo数据库查询，因此需要将一些数据统一查询出来，在内存中进行处理。
 解决方式 在任务执行的之前，就需要将相关的数据查询出来，如何实现呢？使用一个@EventListener进行ApplicationReadyEvent时间的监听，就能在应用启动之后，进行相应的操作
 @EventListener(classes = {ApplicationReadyEvent.class}) public void initialMap() { if (CollectionUtils.isEmpty(ridMobileMap)) { List&amp;lt;UserRecord&amp;gt; all = entranceUserRecordRepo.findAll(); ridMobileMap = all.stream().filter(userRecord -&amp;gt; StringUtils.isNotEmpty(userRecord.getMobileNo())).collect(Collectors.toMap(UserRecord::getRid, UserRecord::getMobileNo)); } } More Application spring application，一般就是spring boot项目中的 Application这个类
@@ -21,10 +21,10 @@
     
     <item>
       <title>单例模式的实现方式</title>
-      <link>https://lllovol.com/singleton-realization/</link>
+      <link>https://lllovol.com/p/singleton-realization/</link>
       <pubDate>Sat, 04 Jul 2020 00:34:38 +0000</pubDate>
       
-      <guid>https://lllovol.com/singleton-realization/</guid>
+      <guid>https://lllovol.com/p/singleton-realization/</guid>
       <description>什么是单例模式？ 在整个程序运行过程中只会实现一次的对象，例如Runtime类。
 需要满足的条件有以下几点：
  构造器私有化 自行创建，并且用静态变量保存 向外提供这种实例 为了强调这是单例模式，我们可以使用final修饰  常见形式 饿汉式 懒汉式就是直接就实例化了，在程序运行的时候，直接创建，不管是否需要这个对象.不存在线程安全问题
@@ -37,10 +37,10 @@ public class Singleton(){ private static final INSTANCE; private Singleton(){ //
     
     <item>
       <title>SpringBoot开发中的一些小细节（十三）使用AOP实现权限系统</title>
-      <link>https://lllovol.com/spring13/</link>
+      <link>https://lllovol.com/p/spring13/</link>
       <pubDate>Tue, 12 May 2020 15:04:26 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring13/</guid>
+      <guid>https://lllovol.com/p/spring13/</guid>
       <description>背景 最近在做一个小工具的权限控制系统，由于是第一次做这方面的工作，而且对权限的控制会非常的详细，比如，需要细致到对每一个对象的控制。在前期有一些调研。
 想法 我大概实现的思路和设计
  构建实体类，实现相应的数据存储化，用户可以设置相应的权限策略。权限设置，换一个说法就是主谓宾&amp;ndash;&amp;ldquo;谁&amp;rdquo; &amp;ldquo;能看/不能看&amp;rdquo; &amp;ldquo;什么东西&amp;rdquo;。将这个权限设置抽象为对象，并进行存储。 根据实体类解析用户保存的策略，使之生效。  说起来简单，做起来难。第一点设置权限，其实就是非常简单的单表查询维护。难点在于第二点，如何能让这个策略生效。按照我目前接触和掌握到的技术手段，主要的解决方式有下面几种：
@@ -54,10 +54,10 @@ public class Singleton(){ private static final INSTANCE; private Singleton(){ //
     
     <item>
       <title>SpringBoot开发中的一些小细节（十二）单元测试</title>
-      <link>https://lllovol.com/spring12/</link>
+      <link>https://lllovol.com/p/spring12/</link>
       <pubDate>Fri, 10 Jan 2020 19:07:19 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring12/</guid>
+      <guid>https://lllovol.com/p/spring12/</guid>
       <description>前言 2020将近，已经很久没有更新blog，但是每天的工作笔记都还是有在记录，趁着马上就要过年，没有那么忙碌了，把自己19年Q4的工作中遇到的问题以及一些有用的方法整理一下~
 测试的必要性 在程序员的日常工作中，实际上真正在编写代码的时间，在整个工作时间中所占的比例其实很小的一部分。在写代码之前我们需要撰写需求文档，以及充足的思考，画出uml图（虽然很多经验丰富的大佬都没有画，但是那是建立在经验相当丰富的基础之上的）；在写完代码之后，这个项目需要发布与部署到测试环境，这就是CI/CD所负责的部分了；再之后，我们就需要测试我们的项目，是否能够完成需求文档中的需求，实现了相应的功能。 如果没有进行充分完整的测试，直接上线，这个项目差不多就是穿着皇帝的新衣在大街上到处晃荡了。同样，在互联网高速发展的今天，测试也不再仅仅是人工进行测试，自动化测试的演进又再一次的提升了团队的生产效率。这和敏捷开发、持续集成、持续部署、DevOps是一脉相承的。
 测试金字塔Test Pyramid  图来源于ThoughtWorks
@@ -71,10 +71,10 @@ import static org.hamcrest.core.Is.is; import static org.junit.Assert.assertThat
     
     <item>
       <title>从零开始搭建AD信息同步的项目</title>
-      <link>https://lllovol.com/synchronize-job/</link>
+      <link>https://lllovol.com/p/synchronize-job/</link>
       <pubDate>Mon, 23 Sep 2019 17:12:49 +0000</pubDate>
       
-      <guid>https://lllovol.com/synchronize-job/</guid>
+      <guid>https://lllovol.com/p/synchronize-job/</guid>
       <description>一 前言 最近独自完成了一个同步信息的项目，主要工作内容是从第三方的服务端将信息同步到公司的二方AD域当中。本文主要记录本项目的主要实现过程。
 二 项目设计 这是一个并不复杂的项目，因此项目主要涉及到两大部分：
  从第三方服务器端获取到信息数据 将信息数据进行处理，能够存入到公司的二方AD域当中  三 第三方数据获取 1.主要技术 本项目主要获取信息的方式，是通过FeignClient来获取的
@@ -87,10 +87,10 @@ eg:
     
     <item>
       <title>FeignClient的FallBack处理</title>
-      <link>https://lllovol.com/fallback/</link>
+      <link>https://lllovol.com/p/fallback/</link>
       <pubDate>Thu, 11 Jul 2019 16:31:53 +0000</pubDate>
       
-      <guid>https://lllovol.com/fallback/</guid>
+      <guid>https://lllovol.com/p/fallback/</guid>
       <description>前言 在使用FeignClient的时候，我们很难保证第三方的调用不会出问题，这个时候，可以写一个FallBack类，来对出错的时候进行处理，可以异常上报，也可以进行打点处理，可以不再单独地去做这些事情。
 FeignClient的编写  添加maven依赖。  	&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-cloud-starter-openfeign&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.0.2.RELEASE&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;feign-core&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;9.7.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;feign-slf4j&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;9.7.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 新建一个接口，在上方添加FeignClient注解，在value中使用占位符的方式，对参数进行调用。  	@FeignClient(name = &amp;quot;gitApi&amp;quot;, url = &amp;quot;${api.server.gitlab.url}&amp;quot;,fallback = GitApiFeignFallBack.class) public interface GitApiFeign { @GetMapping(value = &amp;quot;/{namespace}/-/jobs/{jobId}/trace&amp;quot;) JSONObject getTrace( @PathVariable(&amp;quot;namespace&amp;quot;) String namespace, @PathVariable(&amp;quot;jobId&amp;quot;) Integer jobId, @RequestParam(&amp;quot;private_token&amp;quot;) String accessToken); } @Autowired 注解就能对FeignClient进行使用。  @Autowired GitApiFeign gitApiFeign; FeignClient的Fallback实现 在上方的代码中，可以看见注解中有fallback的选项，这个就是新建这个Client对应的fallback类来实现FeignClient。
 在fallback类的实现代码大致如下，最简单的实现就是在fallBack类中重写一遍Client中的所有方法。
@@ -99,10 +99,10 @@ FeignClient的编写  添加maven依赖。  	&amp;lt;dependency&amp;gt; &amp;lt;
     
     <item>
       <title>SpringBoot开发中的一些小细节(十一)CR笔记、阿里巴巴代码规约</title>
-      <link>https://lllovol.com/spring11/</link>
+      <link>https://lllovol.com/p/spring11/</link>
       <pubDate>Wed, 10 Jul 2019 23:36:52 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring11/</guid>
+      <guid>https://lllovol.com/p/spring11/</guid>
       <description>前言 最近正式入职，第一周的事情主要就是进行代码的Code Review,将自己曾经的实习时候写的代码看一看，清掉一部分过时的代码。同时也从前辈们的分享中学习到了不少的小细节。 以及看了阿里巴巴的开发规范规约，将一些比较重要的地方、原来没有注意到的地方记录一下。
 测试用例   在写Junit的时候，可以写一个BaseTest,以后test直接继承这个类即可，就不用每次都新建一个类然后在上面重新写上好多注解了。
  @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) @RunWith(SpringJUnit4ClassRunner.class) @Slf4j public class BaseTests { }    在写CRUD的测试用例的时候，一定要写成一个闭环，新加了测试用例，最后测试结束的时候一定要删除，防止在数据库中产生脏数据。
@@ -115,10 +115,10 @@ FeignClient的编写  添加maven依赖。  	&amp;lt;dependency&amp;gt; &amp;lt;
     
     <item>
       <title>SpringBoot开发中的一些小细节(十）泛型、分布式锁</title>
-      <link>https://lllovol.com/spring10/</link>
+      <link>https://lllovol.com/p/spring10/</link>
       <pubDate>Fri, 29 Mar 2019 17:19:15 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring10/</guid>
+      <guid>https://lllovol.com/p/spring10/</guid>
       <description>前言 本文主要记录最近工作中关于开发中的一些小技巧以及感悟
 小细节 权重转换百分比的问题 在工作中需要将各个对象所对应的权重转换成百分比，并且要求最后转换出来的百分比，同一类型的相加必须为百分之百，解决思路主要如下
  将各个类型的对象都分别分类 算出各个类型的总权重 算出每个对象在自己类型下的所占百分比 判断每个类型下的对象百分比相加是否等于100 在List处理的时候，可以将List分割成当前类型，和非当前类型 其中需要注意的是，在算百分比的时候，*100应该写在分子  eg: //这样会一直为0，是错误的 //原因是运算符是从左往右计算 //前面除法算出来之后会直接去尾，不足1就是0，所以最后乘以100结果还是0 percent / totalWeight * 100 //这样是正确的 percent * 100 / totalWeight
@@ -128,10 +128,10 @@ code:
     
     <item>
       <title>SpringBoot开发中的一些小细节(九）Guava库</title>
-      <link>https://lllovol.com/spring9/</link>
+      <link>https://lllovol.com/p/spring9/</link>
       <pubDate>Sun, 24 Mar 2019 17:23:42 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring9/</guid>
+      <guid>https://lllovol.com/p/spring9/</guid>
       <description>前言 本文主要记录最近工作中关于开发中的一些小技巧以及感悟
 小细节 String转Long 使用Long.parseLong,而不是Long.getLong
 Guava库 Joiner 超好用的Guava库，主要用于字符串的拼接，可以自动在中间加上分隔符
@@ -145,10 +145,10 @@ Configuration的问题 定义了两个configuration，一个masterClient，一�
     
     <item>
       <title>SpringBoot开发中的一些小细节(八)装箱与拆箱，基本数据类型与包装类</title>
-      <link>https://lllovol.com/spring8/</link>
+      <link>https://lllovol.com/p/spring8/</link>
       <pubDate>Thu, 14 Mar 2019 17:03:05 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring8/</guid>
+      <guid>https://lllovol.com/p/spring8/</guid>
       <description>前言 主要用来记录整理最近一周工作学习中遇到，学到的一些小知识，积少成多，聚沙成塔
 小细节 Swagger-ui显示枚举类型的时候 定义的枚举类型的头上不需要加一些莫名其妙的注解，就可以在Swagger-ui界面自动生成
  public enum GreyTaskType { SCALE, PERSON, DEMAND, HOST ; }  Swagger-ui的参数显示的问题 这个是在帮忙解决朋友的问题的时候发现的，其实就是Getter的问题，他定义了俩Getter，这样就会有俩参数跑出来了。
@@ -168,10 +168,10 @@ spring 相关书籍推荐 spring boot 编程思想 原生类型，装箱和拆�
     
     <item>
       <title>源码阅读SpringDataJPA</title>
-      <link>https://lllovol.com/springdatajpa/</link>
+      <link>https://lllovol.com/p/springdatajpa/</link>
       <pubDate>Mon, 11 Mar 2019 19:28:16 +0000</pubDate>
       
-      <guid>https://lllovol.com/springdatajpa/</guid>
+      <guid>https://lllovol.com/p/springdatajpa/</guid>
       <description>前言 CRUD是平常业务开发过程中最常接触到的，因此想通过阅读这个最常接触模块的代码，使得自己能够更加深入的了解Spring，提升自己的技术能力，而不是只会CRUD，却都不知道它是怎么实现的。
 Hibernate  Hibernate是一个开放源代码的对象关系映射框架，它对JDBC进行了非常轻量级的对象封装，它将POJO与数据库表建立映射关系，是一个全自动的orm（Object Relational Mapping）框架，hibernate可以自动生成SQL语句，自动执行，使得Java程序员可以随心所欲的使用对象编程思维来操纵数据库。Hibernate可以应用在任何使用JDBC的场合，既可以在Java的客户端程序使用，也可以在Servlet/JSP的Web应用中使用，完成数据持久化的重任。Hibernate百科
  JPA  JPA诞生的缘由是为了整合第三方ORM框架，建立一种标准的方式，百度百科说是JDK为了实现ORM的天下归一，目前也是在按照这个方向发展，但是还没能完全实现。在ORM框架中，Hibernate是一支很大的部队，使用很广泛，也很方便，能力也很强，同时Hibernate也是和JPA整合的比较良好，我们可以认为JPA是标准，事实上也是，JPA几乎都是接口，实现都是Hibernate在做，宏观上面看，在JPA的统一之下Hibernate很良好的运行。
@@ -184,10 +184,10 @@ Hibernate  Hibernate是一个开放源代码的对象关系映射框架，它对
     
     <item>
       <title>SpringBoot开发中的一些小细节(七)Controller路由以及分页查询</title>
-      <link>https://lllovol.com/spring7/</link>
+      <link>https://lllovol.com/p/spring7/</link>
       <pubDate>Wed, 20 Feb 2019 11:35:51 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring7/</guid>
+      <guid>https://lllovol.com/p/spring7/</guid>
       <description>前言 过年后第一次开始更新啦，这一篇主要就用来总结年后以来有意思，有用的一些信息
 在Controller中的一些注解 Controller的类型 主要有两种，一种是普通的,通常是被使用服务于web页面的。默认，你的controller方法返回的是一个string串，是表示要展示哪个模板页面或者是要跳转到哪里去。
 @Controller  另外一种是专门用在编写API的时候，返回一个JSON，或者是XML等等。然后方法返回的是可以是一个对象，或者是一个可以被序列化的对象。
@@ -198,10 +198,10 @@ Hibernate  Hibernate是一个开放源代码的对象关系映射框架，它对
     
     <item>
       <title>《Spring源码深度解析》读后感(二)Bean的标签解析</title>
-      <link>https://lllovol.com/spring-source-code-2/</link>
+      <link>https://lllovol.com/p/spring-source-code-2/</link>
       <pubDate>Thu, 17 Jan 2019 11:56:50 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring-source-code-2/</guid>
+      <guid>https://lllovol.com/p/spring-source-code-2/</guid>
       <description>两种标签 Spring中的标签的包括默认的标签和自定义的标签两种，而这两种标签的用法和解析方式存在着很大的不同。
 默认标签的解析 默认标签的解析是在parseDefaultElement函数中进行的，函数中的功能逻辑一目了然，分别对4种不同的标签做了不同的处理：
  import alias bean beans  bean标签的解析以及注册 在4种标签的解析中，对bean的解析最为复杂也最为重要。因此由此深入，如果将此标签的解析过程理解了，其他标签的解析自然也会迎刃而解。
@@ -210,10 +210,10 @@ processBeanDefinition（ele,delegate） /** * Process the given bean element, pa
     
     <item>
       <title>《Spring源码深度解析》读后感(一)Spring的容器Bean</title>
-      <link>https://lllovol.com/spring-source-code/</link>
+      <link>https://lllovol.com/p/spring-source-code/</link>
       <pubDate>Tue, 15 Jan 2019 17:06:53 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring-source-code/</guid>
+      <guid>https://lllovol.com/p/spring-source-code/</guid>
       <description>前言 这个系列主要是用来记录自己读这本书的一些笔记和想法的记录，不过买书好像买错了，应该买spring boot的相关解读的书籍，这是spring的深入解读的书。吃了一亏，不过这也是spring boot的前身，其中的源码也是有价值的。
 首先开始的，是整个spring当中最核心的用法，但是却十分重要的一个部分&amp;ndash;容器。大道至简，大音希声。
 容器的基本用法 bean是spring中最核心的东西，因为spring就像一个大水桶，而bean就像是水桶中的水，水桶脱离了水便没有了什么用处。而spring 的目的，就是让我们的bean，能够成为纯粹的POJO（plain ordinary java object）。 需要：
@@ -233,10 +233,10 @@ processBeanDefinition（ele,delegate） /** * Process the given bean element, pa
     
     <item>
       <title>SpringBoot开发中的一些小细节(六)JPA</title>
-      <link>https://lllovol.com/spring6/</link>
+      <link>https://lllovol.com/p/spring6/</link>
       <pubDate>Tue, 08 Jan 2019 10:51:00 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring6/</guid>
+      <guid>https://lllovol.com/p/spring6/</guid>
       <description>前言 本文主要总结于如下的官方文档的部分内容，如有翻译不当理解不当的地方，欢迎留言指正
 Spring官方文档
 Spring JDBC官方文档
@@ -249,10 +249,10 @@ MongoRepository @NoRepositoryBean public interface MongoRepository&amp;lt;T, ID&
     
     <item>
       <title>SpringBoot开发中的一些小细节(五)String、StringBuffer和StringBuilder、</title>
-      <link>https://lllovol.com/spring5/</link>
+      <link>https://lllovol.com/p/spring5/</link>
       <pubDate>Sat, 05 Jan 2019 17:05:33 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring5/</guid>
+      <guid>https://lllovol.com/p/spring5/</guid>
       <description>Code Review 这一周主要是一个前辈的code Review，在此期间能学到很多新的东西，也能看到自己的不足
 变量名的命名 禁止使用拼音，真的显得很没有水平，而且可读性会非常差，除非这个对象真的只有拼音名字
 关于异常的抛出  异常不要怕抛出的多，有异常一定要打出来，不然出了错都不知道是什么地方出的错 禁止一个Exception就把一大段代码的所有异常给吞了 异常一定要用log.error()将栈给打出来  StringBuffer、StringBuilder和String 运行速度：执行速度，在这方面运行速度快慢为：StringBuilder &amp;gt; StringBuffer &amp;gt; String String为字符串常量，而StringBuilder和StringBuffer均为字符串变量，即String对象一旦创建之后该对象是不可更改的，但后两者的对象是变量，是可以更改的。Java中对String对象进行的操作实际上是一个不断创建新的对象并且将旧的对象回收的一个过程，所以执行速度很慢。而StringBuilder和StringBuffer的对象是变量，对变量进行操作就是直接对该对象进行更改，而不进行创建和回收的操作，所以速度要比String快很多。
@@ -275,10 +275,10 @@ spring: profiles: active: debug  上面是在bootstrap.yml中的，下面是如�
     
     <item>
       <title>SpringBoot开发中的一些小细节(四)CR笔记ApplicationListener等等</title>
-      <link>https://lllovol.com/spring4/</link>
+      <link>https://lllovol.com/p/spring4/</link>
       <pubDate>Fri, 28 Dec 2018 17:12:32 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring4/</guid>
+      <guid>https://lllovol.com/p/spring4/</guid>
       <description>Code Review 这周被点名来做code view了来着，然后昨天晚上做了一个小时的code review，还是相当紧张，然后今天改了一天代码 特此总结
 ApplicationListener 这个地方原来主要实现的功能是spring3中的功能，在启动了整个项目之后，让watch pods和watch service启动并且只启动一次。
 （启动一个单线程，回调函数，生命周期） 原来的做法是使用spring task在应用启动之后，就启动一次然后一直运行
@@ -288,10 +288,10 @@ public class KubernetesServiceImpl implements KubernetesService, ApplicationList
     
     <item>
       <title>SpringBoot开发中的一些小细节(三)KubernetesClient的使用与配置</title>
-      <link>https://lllovol.com/spring3/</link>
+      <link>https://lllovol.com/p/spring3/</link>
       <pubDate>Tue, 25 Dec 2018 15:08:35 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring3/</guid>
+      <guid>https://lllovol.com/p/spring3/</guid>
       <description>前言 最近主要在获取到的k8s中的相关service和pod的信息的变化，将原来全量获取数据的方式改进为增量的方式，此篇主要记录使用过程中遇到的坑和相信的解决方式
 KubernetesClient的包的依赖的引用 使用的是fabric8的kubernetes-client，添加如下依赖即可
 &amp;lt;!--在pom.xml文件--&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.fabric8&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;kubernetes-client&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4.0.5&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt;  配置文件配置相关的属性 application.yml文件 添加k8s集群的主机url,token
@@ -305,10 +305,10 @@ api: server: k8s: key: &amp;quot;kubernetes.auth.token&amp;quot; token: &amp;quo
     
     <item>
       <title>SpringBoot开发中的一些小细节(二)CR笔记</title>
-      <link>https://lllovol.com/spring2/</link>
+      <link>https://lllovol.com/p/spring2/</link>
       <pubDate>Thu, 20 Dec 2018 20:01:33 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring2/</guid>
+      <guid>https://lllovol.com/p/spring2/</guid>
       <description>Code Review 让大家对代码质量的标准是在一个线上， 是一个相互学习的过程。 blog主要是用来记录当时的笔记与自己的一些感想
 用户中心的接口，需要查用户之前捐过的一些订单 ContextUtil.getUserId(()不建议使用 限制了使用线程的场景，可能每一段代码执行的线程可能不在一起了 讲究的是 变量来源应该是外部的,参数是传入的 swing local ？本地的东西 context 在子线程中是无法工作的，Util这个工具类，不应该涉及到线程这种复杂的东西
 interceptor， implements HandlerMethodargumentResolver，//可以直接解析参数（将token解析的过程，就放到这个里面了） (@LoginUidAttribute String uid)  拿到userId的，isDelete()可以不用判断 解决泛型，warning 加 PageHelper是用的swing local mapper上面的select 一定要体现一个sql,查询条件一定要解耦，不要太复杂了 不要写太多的if OrderBizMapper.xml 这样可以更好的去维护索引
@@ -320,10 +320,10 @@ log.error(&amp;quot;&amp;quot;,{},e);  token的延长时间 一个是长效token
     
     <item>
       <title>SpringBoot开发中的一些小细节(一)Slf4J、Post和Get的小技巧</title>
-      <link>https://lllovol.com/spring1/</link>
+      <link>https://lllovol.com/p/spring1/</link>
       <pubDate>Fri, 14 Dec 2018 19:13:00 +0000</pubDate>
       
-      <guid>https://lllovol.com/spring1/</guid>
+      <guid>https://lllovol.com/p/spring1/</guid>
       <description>原来写的代码被CTO抓出来吐槽，发现确实都是一些当初自己没有注意到的地方，打算将这样的小细节一点一点的收集起来，养成更好的编码习惯。
 Slf4j  The Simple Logging Facade for Java (SLF4J) serves as a simple facade or abstraction for various logging frameworks (e.g. java.util.logging, logback, log4j) allowing the end user to plug in the desired logging framework at deployment time. 摘自https://www.slf4j.org/
  在编写Spring的代码的时候，只需要在Class上方添加一个@Slf4j的注解即可。slf4j是facade pattern的典型例子（隐藏系统的复杂性，并向客户端提供了一个客户端可以访问系统的接口，又被成为门面模式或者外观模式） 使用的时候，可以使用占位符的方式进行日志的记录，省去了原来自己拼接日志的麻烦。
