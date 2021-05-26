@@ -17,10 +17,10 @@
     <loc>https://lllovol.com/categories/</loc>
     <lastmod>2021-01-27T14:46:13+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/tags/mysql/</loc>
+    <loc>https://lllovol.com/categories/mysql/</loc>
     <lastmod>2021-01-27T14:46:13+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/categories/mysql/</loc>
+    <loc>https://lllovol.com/tags/mysql/</loc>
     <lastmod>2021-01-27T14:46:13+00:00</lastmod>
   </url><url>
     <loc>https://lllovol.com/post/</loc>
@@ -32,10 +32,10 @@
     <loc>https://lllovol.com/p/how-a-sql-executes/</loc>
     <lastmod>2021-01-27T14:46:13+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/tags/database/</loc>
+    <loc>https://lllovol.com/categories/database/</loc>
     <lastmod>2020-10-30T16:28:10+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/categories/database/</loc>
+    <loc>https://lllovol.com/tags/database/</loc>
     <lastmod>2020-10-30T16:28:10+00:00</lastmod>
   </url><url>
     <loc>https://lllovol.com/p/query-test/</loc>
@@ -44,10 +44,10 @@
     <loc>https://lllovol.com/p/mongo-bad/</loc>
     <lastmod>2020-10-28T15:03:26+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/tags/java/</loc>
+    <loc>https://lllovol.com/categories/java/</loc>
     <lastmod>2020-09-20T18:44:18+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/categories/java/</loc>
+    <loc>https://lllovol.com/tags/java/</loc>
     <lastmod>2020-09-20T18:44:18+00:00</lastmod>
   </url><url>
     <loc>https://lllovol.com/p/java-basic/</loc>
@@ -59,10 +59,10 @@
     <loc>https://lllovol.com/p/what-is-transaction/</loc>
     <lastmod>2020-09-18T17:27:51+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/tags/spring/</loc>
+    <loc>https://lllovol.com/categories/spring/</loc>
     <lastmod>2020-07-27T15:51:33+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/categories/spring/</loc>
+    <loc>https://lllovol.com/tags/spring/</loc>
     <lastmod>2020-07-27T15:51:33+00:00</lastmod>
   </url><url>
     <loc>https://lllovol.com/p/spring14/</loc>
@@ -77,10 +77,10 @@
     <loc>https://lllovol.com/p/spring13/</loc>
     <lastmod>2020-05-12T15:04:26+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/tags/note/</loc>
+    <loc>https://lllovol.com/categories/note/</loc>
     <lastmod>2020-01-17T11:13:47+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/categories/note/</loc>
+    <loc>https://lllovol.com/tags/note/</loc>
     <lastmod>2020-01-17T11:13:47+00:00</lastmod>
   </url><url>
     <loc>https://lllovol.com/p/sicp-chapter1.1/</loc>
@@ -92,10 +92,10 @@
     <loc>https://lllovol.com/p/spring12/</loc>
     <lastmod>2020-01-10T19:07:19+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/tags/microservice/</loc>
+    <loc>https://lllovol.com/categories/microservice/</loc>
     <lastmod>2019-12-02T14:23:17+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/categories/microservice/</loc>
+    <loc>https://lllovol.com/tags/microservice/</loc>
     <lastmod>2019-12-02T14:23:17+00:00</lastmod>
   </url><url>
     <loc>https://lllovol.com/p/minikube/</loc>
@@ -113,10 +113,10 @@
     <loc>https://lllovol.com/p/redis/</loc>
     <lastmod>2019-08-19T19:15:50+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/tags/tech/</loc>
+    <loc>https://lllovol.com/categories/tech/</loc>
     <lastmod>2019-08-19T19:15:50+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/categories/tech/</loc>
+    <loc>https://lllovol.com/tags/tech/</loc>
     <lastmod>2019-08-19T19:15:50+00:00</lastmod>
   </url><url>
     <loc>https://lllovol.com/p/improve-our-vision/</loc>
@@ -125,10 +125,10 @@
     <loc>https://lllovol.com/p/ide-code-error-solution/</loc>
     <lastmod>2019-08-07T10:08:30+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/tags/scala/</loc>
+    <loc>https://lllovol.com/categories/scala/</loc>
     <lastmod>2019-08-02T14:50:13+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/categories/scala/</loc>
+    <loc>https://lllovol.com/tags/scala/</loc>
     <lastmod>2019-08-02T14:50:13+00:00</lastmod>
   </url><url>
     <loc>https://lllovol.com/p/scala1/</loc>
@@ -155,19 +155,19 @@
     <loc>https://lllovol.com/p/snippet/</loc>
     <lastmod>2019-06-16T22:16:35+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/tags/android/</loc>
+    <loc>https://lllovol.com/categories/android/</loc>
     <lastmod>2019-06-08T16:49:49+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/categories/android/</loc>
+    <loc>https://lllovol.com/tags/android/</loc>
     <lastmod>2019-06-08T16:49:49+00:00</lastmod>
   </url><url>
     <loc>https://lllovol.com/p/android-idea/</loc>
     <lastmod>2019-06-08T16:49:49+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/tags/summary/</loc>
+    <loc>https://lllovol.com/categories/summary/</loc>
     <lastmod>2019-05-13T13:02:36+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/categories/summary/</loc>
+    <loc>https://lllovol.com/tags/summary/</loc>
     <lastmod>2019-05-13T13:02:36+00:00</lastmod>
   </url><url>
     <loc>https://lllovol.com/p/aboutsomething/</loc>
@@ -176,10 +176,10 @@
     <loc>https://lllovol.com/p/spring10/</loc>
     <lastmod>2019-03-29T17:19:15+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/tags/algorithm/</loc>
+    <loc>https://lllovol.com/categories/algorithm/</loc>
     <lastmod>2019-03-28T11:00:40+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/categories/algorithm/</loc>
+    <loc>https://lllovol.com/tags/algorithm/</loc>
     <lastmod>2019-03-28T11:00:40+00:00</lastmod>
   </url><url>
     <loc>https://lllovol.com/p/shuffle/</loc>
@@ -257,10 +257,10 @@
     <loc>https://lllovol.com/p/msg/</loc>
     <lastmod>2018-12-06T10:22:08+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/tags/frontend/</loc>
+    <loc>https://lllovol.com/categories/frontend/</loc>
     <lastmod>2018-12-05T18:08:38+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/categories/frontend/</loc>
+    <loc>https://lllovol.com/tags/frontend/</loc>
     <lastmod>2018-12-05T18:08:38+00:00</lastmod>
   </url><url>
     <loc>https://lllovol.com/p/gitalk/</loc>
@@ -269,13 +269,13 @@
     <loc>https://lllovol.com/p/rake/</loc>
     <lastmod>2018-12-05T01:23:16+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/tags/welcome/</loc>
-    <lastmod>1996-10-14T08:08:08+00:00</lastmod>
-  </url><url>
     <loc>https://lllovol.com/categories/welcome/</loc>
     <lastmod>1996-10-14T08:08:08+00:00</lastmod>
   </url><url>
     <loc>https://lllovol.com/p/welcome/</loc>
+    <lastmod>1996-10-14T08:08:08+00:00</lastmod>
+  </url><url>
+    <loc>https://lllovol.com/tags/welcome/</loc>
     <lastmod>1996-10-14T08:08:08+00:00</lastmod>
   </url><url>
     <loc>https://lllovol.com/about/</loc>
