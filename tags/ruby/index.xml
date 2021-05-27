@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ruby on lllovol</title>
+    <link>https://lllovol.com/tags/ruby/</link>
+    <description>Recent content in Ruby on lllovol</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 05 Dec 2018 01:23:16 +0000</lastBuildDate><atom:link href="https://lllovol.com/tags/ruby/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用Rakefile实现文章生成器</title>
+      <link>https://lllovol.com/p/rake/</link>
+      <pubDate>Wed, 05 Dec 2018 01:23:16 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/rake/</guid>
+      <description>使用github.io来写blog 本就是件很棒的事情，但是每次在想写新的文章的时候，都需要重新复制title和开头的标签，如果能够自动化地完成这件事就好了（重复性的东西工作）
+About Rakefile  Rake is a Make-like program implemented in Ruby. Tasks and dependencies are specified in standard Ruby syntax.
+ 摘自http://docs.seattlerb.org/rake/
+安装Rake sudo gem install rake  即可
+创建Rakefile 在项目的根目录下
+touch Rakefile vim Rakefile  然后添加如下代码
+task :default =&amp;gt; :new require &#39;fileutils&#39; desc &amp;quot;创建新 post&amp;quot; task :new do puts &amp;quot;请输入要创建的文章文件文件名字：&amp;quot; @url = STDIN.gets.chomp puts &amp;quot;请输入文章的标题：&amp;quot; @name = STDIN.gets.chomp puts &amp;quot;请输入文章的子标题：&amp;quot; @slug = STDIN.gets.chomp puts &amp;quot;请输入文章的分类，以空格分隔：&amp;quot; @categories = STDIN.</description>
+    </item>
+    
+  </channel>
+</rss>
