@@ -6,7 +6,34 @@
     <description>Recent content in Tags on lllovol</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 27 Jan 2021 14:46:13 +0000</lastBuildDate><atom:link href="https://lllovol.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 27 May 2021 19:52:17 +0800</lastBuildDate><atom:link href="https://lllovol.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hugo</title>
+      <link>https://lllovol.com/tags/hugo/</link>
+      <pubDate>Thu, 27 May 2021 19:52:17 +0800</pubDate>
+      
+      <guid>https://lllovol.com/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ruby</title>
+      <link>https://lllovol.com/tags/ruby/</link>
+      <pubDate>Thu, 27 May 2021 19:52:17 +0800</pubDate>
+      
+      <guid>https://lllovol.com/tags/ruby/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tech</title>
+      <link>https://lllovol.com/tags/tech/</link>
+      <pubDate>Thu, 27 May 2021 19:52:17 +0800</pubDate>
+      
+      <guid>https://lllovol.com/tags/tech/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>MySQL</title>
       <link>https://lllovol.com/tags/mysql/</link>
@@ -71,15 +98,6 @@
     </item>
     
     <item>
-      <title>Tech</title>
-      <link>https://lllovol.com/tags/tech/</link>
-      <pubDate>Mon, 19 Aug 2019 19:15:50 +0000</pubDate>
-      
-      <guid>https://lllovol.com/tags/tech/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Scala</title>
       <link>https://lllovol.com/tags/scala/</link>
       <pubDate>Fri, 02 Aug 2019 14:50:13 +0000</pubDate>
@@ -130,15 +148,6 @@
       <pubDate>Wed, 05 Dec 2018 18:08:38 +0000</pubDate>
       
       <guid>https://lllovol.com/tags/frontend/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ruby</title>
-      <link>https://lllovol.com/tags/ruby/</link>
-      <pubDate>Wed, 05 Dec 2018 01:23:16 +0000</pubDate>
-      
-      <guid>https://lllovol.com/tags/ruby/</guid>
       <description></description>
     </item>
     
