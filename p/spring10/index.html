@@ -5,7 +5,7 @@
 小细节 权重转换百分比的问题 在工作中需要将各个对象所对应的权重转换成百分比，并且要求最后转换出来的百分比，同一类型的相加必须为百分之百，解决思路主要如下
  将各个类型的对象都分别分类 算出各个类型的总权重 算出每个对象在自己类型下的所占百分比 判断每个类型下的对象百分比相加是否等于100 在List处理的时候，可以将List分割成当前类型，和非当前类型 其中需要注意的是，在算百分比的时候，*100应该写在分子  eg: //这样会一直为0，是错误的 //原因是运算符是从左往右计算 //前面除法算出来之后会直接去尾，不足1就是0，所以最后乘以100结果还是0 percent / totalWeight * 100 //这样是正确的 percent * 100 / totalWeight
 code:
- private List&amp;lt;GreyDestination&amp;gt; getDestinationsPercent(List&amp;lt;GreyDestination&amp;gt; tempDestinations) { HashMap&amp;lt;String, Integer&amp;gt; serviceAndTotalWeight = new HashMap&amp;lt;&amp;gt;(); HashMap&amp;lt;String, Integer&amp;gt; serviceAndCount = new HashMap&amp;lt;&amp;gt;(); getServiceWeightAndCount(tempDestinations, serviceAndTotalWeight, serviceAndCount); List&amp;lt;GreyDestination&amp;gt; finalDestinations = tempDestinations.stream().map( destination -&amp;gt; { String service = destination.getService(); Integer count = serviceAndCount.get(service); if (count == 1) { destination.'><title>SpringBoot开发中的一些小细节(十）泛型、分布式锁</title>
+ private List&amp;lt;GreyDestination&amp;gt; getDestinationsPercent(List&amp;lt;GreyDestination&amp;gt; tempDestinations) {HashMap&amp;lt;String, Integer&amp;gt; serviceAndTotalWeight = new HashMap&amp;lt;&amp;gt;();HashMap&amp;lt;String, Integer&amp;gt; serviceAndCount = new HashMap&amp;lt;&amp;gt;();getServiceWeightAndCount(tempDestinations, serviceAndTotalWeight, serviceAndCount);List&amp;lt;GreyDestination&amp;gt; finalDestinations = tempDestinations.stream().map(destination -&amp;gt; {String service = destination.getService();Integer count = serviceAndCount.get(service);if (count == 1) {destination.'><title>SpringBoot开发中的一些小细节(十）泛型、分布式锁</title>
 
 <link rel='canonical' href='https://lllovol.com/p/spring10/'>
 
@@ -14,7 +14,7 @@ code:
 小细节 权重转换百分比的问题 在工作中需要将各个对象所对应的权重转换成百分比，并且要求最后转换出来的百分比，同一类型的相加必须为百分之百，解决思路主要如下
  将各个类型的对象都分别分类 算出各个类型的总权重 算出每个对象在自己类型下的所占百分比 判断每个类型下的对象百分比相加是否等于100 在List处理的时候，可以将List分割成当前类型，和非当前类型 其中需要注意的是，在算百分比的时候，*100应该写在分子  eg: //这样会一直为0，是错误的 //原因是运算符是从左往右计算 //前面除法算出来之后会直接去尾，不足1就是0，所以最后乘以100结果还是0 percent / totalWeight * 100 //这样是正确的 percent * 100 / totalWeight
 code:
- private List&amp;lt;GreyDestination&amp;gt; getDestinationsPercent(List&amp;lt;GreyDestination&amp;gt; tempDestinations) { HashMap&amp;lt;String, Integer&amp;gt; serviceAndTotalWeight = new HashMap&amp;lt;&amp;gt;(); HashMap&amp;lt;String, Integer&amp;gt; serviceAndCount = new HashMap&amp;lt;&amp;gt;(); getServiceWeightAndCount(tempDestinations, serviceAndTotalWeight, serviceAndCount); List&amp;lt;GreyDestination&amp;gt; finalDestinations = tempDestinations.stream().map( destination -&amp;gt; { String service = destination.getService(); Integer count = serviceAndCount.get(service); if (count == 1) { destination.'>
+ private List&amp;lt;GreyDestination&amp;gt; getDestinationsPercent(List&amp;lt;GreyDestination&amp;gt; tempDestinations) {HashMap&amp;lt;String, Integer&amp;gt; serviceAndTotalWeight = new HashMap&amp;lt;&amp;gt;();HashMap&amp;lt;String, Integer&amp;gt; serviceAndCount = new HashMap&amp;lt;&amp;gt;();getServiceWeightAndCount(tempDestinations, serviceAndTotalWeight, serviceAndCount);List&amp;lt;GreyDestination&amp;gt; finalDestinations = tempDestinations.stream().map(destination -&amp;gt; {String service = destination.getService();Integer count = serviceAndCount.get(service);if (count == 1) {destination.'>
 <meta property='og:url' content='https://lllovol.com/p/spring10/'>
 <meta property='og:site_name' content='lllovol'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Spring' /><meta property='article:published_time' content='2019-03-29T17:19:15&#43;00:00'/><meta property='article:modified_time' content='2019-03-29T17:19:15&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg' />
@@ -23,23 +23,25 @@ code:
 小细节 权重转换百分比的问题 在工作中需要将各个对象所对应的权重转换成百分比，并且要求最后转换出来的百分比，同一类型的相加必须为百分之百，解决思路主要如下
  将各个类型的对象都分别分类 算出各个类型的总权重 算出每个对象在自己类型下的所占百分比 判断每个类型下的对象百分比相加是否等于100 在List处理的时候，可以将List分割成当前类型，和非当前类型 其中需要注意的是，在算百分比的时候，*100应该写在分子  eg: //这样会一直为0，是错误的 //原因是运算符是从左往右计算 //前面除法算出来之后会直接去尾，不足1就是0，所以最后乘以100结果还是0 percent / totalWeight * 100 //这样是正确的 percent * 100 / totalWeight
 code:
- private List&amp;lt;GreyDestination&amp;gt; getDestinationsPercent(List&amp;lt;GreyDestination&amp;gt; tempDestinations) { HashMap&amp;lt;String, Integer&amp;gt; serviceAndTotalWeight = new HashMap&amp;lt;&amp;gt;(); HashMap&amp;lt;String, Integer&amp;gt; serviceAndCount = new HashMap&amp;lt;&amp;gt;(); getServiceWeightAndCount(tempDestinations, serviceAndTotalWeight, serviceAndCount); List&amp;lt;GreyDestination&amp;gt; finalDestinations = tempDestinations.stream().map( destination -&amp;gt; { String service = destination.getService(); Integer count = serviceAndCount.get(service); if (count == 1) { destination."><meta name="twitter:card" content="summary_large_image">
+ private List&amp;lt;GreyDestination&amp;gt; getDestinationsPercent(List&amp;lt;GreyDestination&amp;gt; tempDestinations) {HashMap&amp;lt;String, Integer&amp;gt; serviceAndTotalWeight = new HashMap&amp;lt;&amp;gt;();HashMap&amp;lt;String, Integer&amp;gt; serviceAndCount = new HashMap&amp;lt;&amp;gt;();getServiceWeightAndCount(tempDestinations, serviceAndTotalWeight, serviceAndCount);List&amp;lt;GreyDestination&amp;gt; finalDestinations = tempDestinations.stream().map(destination -&amp;gt; {String service = destination.getService();Integer count = serviceAndCount.get(service);if (count == 1) {destination."><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg' />
     <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
 
-<script type="application/javascript">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MK7GTCNC34"></script>
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'G-MK7GTCNC34', 'auto');
-	
-	ga('send', 'pageview');
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-MK7GTCNC34', { 'anonymize_ip': false });
 }
 </script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
 
     </head>
-    <body class="">
+    <body class="
+    article-page 
+">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -56,13 +58,19 @@ if (!doNotTrack) {
         if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
             
 
-            document.body.dataset.scheme = 'dark';
+            document.documentElement.dataset.scheme = 'dark';
         } else {
-            document.body.dataset.scheme = 'light';
+            document.documentElement.dataset.scheme = 'light';
         }
     })();
-</script><div class="container main-container flex on-phone--column extended article-page with-toolbar">
-            <aside class="sidebar left-sidebar sticky">
+</script>
+<div class="container main-container flex 
+    
+        on-phone--column extended
+    
+">
+    
+        <aside class="sidebar left-sidebar sticky">
     <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
@@ -71,6 +79,7 @@ if (!doNotTrack) {
 
     <header class="site-info">
         
+            
             <figure class="site-avatar">
                 
                     <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
@@ -80,6 +89,7 @@ if (!doNotTrack) {
                     <span class="emoji">⚖️</span>
                 
             </figure>
+            
         
         <h1 class="site-name"><a href="https://lllovol.com">lllovol</a></h1>
         <h2 class="site-description">Stay hungry, stay foolish.</h2>
@@ -205,20 +215,8 @@ if (!doNotTrack) {
     </ol>
 </aside>
 
-            <main class="main full-width">
-    <div id="article-toolbar">
-        <a href="https://lllovol.com" class="back-home">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="15 6 9 12 15 18" />
-</svg>
-
-
-
-            <span>Back</span>
-        </a>
-    </div>
-
+    
+<main class="main full-width">
     <article class="main-article">
     <header class="article-header">
         <div class="article-image">
@@ -245,17 +243,29 @@ if (!doNotTrack) {
         <a href="/p/spring10/">SpringBoot开发中的一些小细节(十）泛型、分布式锁</a>
     </h2>
 
+    
+
+    
     <footer class="article-time">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
 </svg>
+                <time class="article-time--published">Mar 29, 2019</time>
+            </div>
+        
 
-
-
-        <time class="article-time--published">Mar 29, 2019</time>
-    </footer></div>
+        
+    </footer>
+    
+</div>
 </header>
 
     <section class="article-content">
@@ -454,16 +464,17 @@ percent * 100 / totalWeight</p>
     </section>
     </footer>
 
+
     
         <link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css"integrity="sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn"crossorigin="anonymous"
             ><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"crossorigin="anonymous"
+                src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.js"integrity="sha384-pK1WpvzWVBQiP0/GjnvRxV4mOb0oxFuyRxJlk6vVw146n3egcN5C925NCP7a7BY8"crossorigin="anonymous"
                 defer="true"
                 >
             </script><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"crossorigin="anonymous"
+                src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/contrib/auto-render.min.js"integrity="sha384-vZTG03m&#43;2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"crossorigin="anonymous"
                 defer="true"
                 >
             </script><script>
@@ -582,8 +593,8 @@ percent * 100 / totalWeight</p>
     
 </aside>
 
-
-    
+     
+     
         
     
 
@@ -628,6 +639,8 @@ percent * 100 / totalWeight</p>
         Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
+
+    
 <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
 
     
@@ -704,7 +717,10 @@ percent * 100 / totalWeight</p>
                 rel="stylesheet" 
                 href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
             >
+
             </main>
+    
+
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"

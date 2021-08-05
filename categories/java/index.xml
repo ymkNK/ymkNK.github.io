@@ -41,9 +41,9 @@
       <guid>https://lllovol.com/p/java11/</guid>
       <description>前言 最近将java升级到了11，因此学习了一些java11的一些新特性
 一.局部变量类型判断 代码：
- @Test public void testVar() { // 测试局部变量类型判断特性 var java11 = &amp;quot;test java11&amp;quot;; var test = 1; System.out.println(java11); System.out.println(test); } 输出：
+ @Testpublic void testVar() {// 测试局部变量类型判断特性var java11 = &amp;quot;test java11&amp;quot;;var test = 1;System.out.println(java11);System.out.println(test);}输出：
 二.String类的新方法 代码：
- @Test public void testString() { String blank = &amp;quot;&amp;quot;; String strip = &amp;quot; strip &amp;quot;; String lines = &amp;quot;\n\n&amp;quot; + &amp;quot;\n&amp;quot; + &amp;quot;\n&amp;quot;; // 判断字符串是否为空白 System.out.println(blank.isBlank()); // 去除首尾空格 System.out.println(strip.strip()); // 去除开头空格 System.out.println(strip.stripLeading()); // 去除结尾空格 System.out.println(strip.stripTrailing()); // 重复 System.out.println(strip.repeat(0)); System.out.println(strip.repeat(1)); System.out.println(strip.repeat(2)); System.out.println(strip.repeat(3)); // 统计行数 System.</description>
+ @Testpublic void testString() {String blank = &amp;quot;&amp;quot;;String strip = &amp;quot; strip &amp;quot;;String lines = &amp;quot;\n\n&amp;quot; +&amp;quot;\n&amp;quot; +&amp;quot;\n&amp;quot;;// 判断字符串是否为空白System.out.println(blank.isBlank());// 去除首尾空格System.out.println(strip.strip());// 去除开头空格System.out.println(strip.stripLeading());// 去除结尾空格System.out.println(strip.stripTrailing());// 重复System.out.println(strip.repeat(0));System.out.println(strip.repeat(1));System.out.println(strip.repeat(2));System.out.println(strip.repeat(3));// 统计行数System.</description>
     </item>
     
     <item>

@@ -18,7 +18,7 @@
 这里想主要讲一下主题的适配，hugo的主题样式主要是由layouts这个文件夹下的样式作为模板，themes下所使用的模板中的layouts也会生效，因此我们可以利用这个特性，在站点项目下面的layouts重写同名的布局文件。 （本博客的gitalk就是利用了这一特性对主题进行了个性化配置）。
 撰写文章 不同的hugo主题可能会有不同的文章存放策略，但是一定都是放在contents目录下，本文是放在contents/post目录下
 markdown文件的头格式如下
---- title: 从Jekyll迁移至Hugo author: ymkNK categories: [Tech] tags: [Ruby,Tech,Hugo] date: 2021-05-27 19:52:17 +0800 img: https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/26.jpeg slug: 2021/5/rake-file-usage ---  用---和+++包围都可以，只是内容的格式要求有所区别，前者使用yaml的格式，后者使用toml的格式
+---title: 从Jekyll迁移至Hugoauthor: ymkNKcategories: [Tech]tags: [Ruby,Tech,Hugo]date: 2021-05-27 19:52:17 +0800img: https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/26.jpegslug: 2021/5/rake-file-usage--- 用---和+++包围都可以，只是内容的格式要求有所区别，前者使用yaml的格式，后者使用toml的格式
 Rakefile 可以使用hugo new 快速创建文章，但是如果像我这样有定制化需求的创建（比如本博客的文章图片，以及目录格式等等），就需要手动进行处理，因此我使用了rakefile来通过简单的命令快速创建生成文章以及Tag
 rake new 快速创建文章，并且可以随机生成oss图片库中的随机一个图片链接作为封面，按照创建的时间，自动放在content/post/#{@year}/#{@month}的目录下，方便归档（后期有考虑同时快速创建tags与categories）
 rake git 快速执行git，一键提交本次更改的内容
@@ -67,7 +67,7 @@ rake hugo 快速构建生成hugo的静态网页，public文件夹下就是站点
       <guid>https://lllovol.com/p/snippet/</guid>
       <description>前言 在书写markdown文章的时候，往往需要向其中添加图片的链接，从截图到文件的处理，到链接的获取都会很麻烦。在寻找各种图床工具之后，发现其效果都不是很好（比如要收费开通多个云图床的上传权限），因此本文将介绍另外一种较为简便的处理方式。
 设置Snippet snippet是短文的意思，在ide中常常是指可以通过一小串的命令生成一大段代码或者文字的方式。例如，在sublime中输入lorem+tab。就会生成一大段样例文字
-lorem+tab ==&amp;gt; Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+lorem+tab==&amp;gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmodtempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodoconsequat. Duis aute irure dolor in reprehenderit in voluptate velit essecillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
     </item>
     
     <item>
@@ -106,12 +106,12 @@ lorem+tab ==&amp;gt; Lorem ipsum dolor sit amet, consectetur adipisicing elit, s
  yamlBeans官网
 yaml文档的学习
  添加依赖 将下列代码添加到pom文件当中
-&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.esotericsoftware.yamlbeans&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;yamlbeans&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.12&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt;  Yaml反序列化为常见数据结构 所谓的反序列化，就是将yaml格式的文件，转换为java的常见数据结构 主要使用的类是YamlReader，然后可以将yaml文档转换为HashMap，ArrayList,还有Strings类型。
+&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;com.esotericsoftware.yamlbeans&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;yamlbeans&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;1.12&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt; Yaml反序列化为常见数据结构 所谓的反序列化，就是将yaml格式的文件，转换为java的常见数据结构 主要使用的类是YamlReader，然后可以将yaml文档转换为HashMap，ArrayList,还有Strings类型。
 yaml：
-name: Nathan Sweet age: 28 address: 4011 16th Ave S phone numbers: - name: Home number: 206-555-5138 - name: Work number: 425-555-2306  code:
-YamlReader reader = new YamlReader(new FileReader(&amp;quot;contact.yml&amp;quot;)); Object object = reader.read(); System.out.println(object); Map map = (Map)object; System.out.println(map.get(&amp;quot;address&amp;quot;));  Yaml反序列化为POJO 将yaml文档反序列化为pojo(plain ordinary java object)
+name: Nathan Sweetage: 28address: 4011 16th Ave Sphone numbers:- name: Homenumber: 206-555-5138- name: Worknumber: 425-555-2306 code:
+YamlReader reader = new YamlReader(new FileReader(&amp;quot;contact.yml&amp;quot;));Object object = reader.read();System.out.println(object);Map map = (Map)object;System.out.println(map.get(&amp;quot;address&amp;quot;)); Yaml反序列化为POJO 将yaml文档反序列化为pojo(plain ordinary java object)
 Yaml and java class:
-name: Nathan Sweet age: 28 public class Contact { public String name; public int age; }  Code:</description>
+name: Nathan Sweetage: 28public class Contact {public String name;public int age;} Code:</description>
     </item>
     
     <item>
@@ -139,7 +139,7 @@ QPS 每秒查询数量 Query Per Second
       <guid>https://lllovol.com/p/%E5%AE%89%E8%A3%85atom%E7%9A%84atom-beautify/</guid>
       <description>前言 想给atom安装beautify的插件 使用apm install atom-beautify 和是用preference中的插件安装都失败了
 Start 使用github 克隆到本地，然后安装
- cd ~/.atom/packages git clone https://github.com/Glavin001/atom-beautify.git cd atom-beautify npm install  Success 使用control + alt + b 组合键 即可</description>
+ cd ~/.atom/packagesgit clone https://github.com/Glavin001/atom-beautify.gitcd atom-beautifynpm install Success 使用control + alt + b 组合键 即可</description>
     </item>
     
     <item>
@@ -151,10 +151,10 @@ Start 使用github 克隆到本地，然后安装
       <description>使用github.io来写blog 本就是件很棒的事情，但是每次在想写新的文章的时候，都需要重新复制title和开头的标签，如果能够自动化地完成这件事就好了（重复性的东西工作）
 About Rakefile  Rake is a Make-like program implemented in Ruby. Tasks and dependencies are specified in standard Ruby syntax.
  摘自http://docs.seattlerb.org/rake/
-安装Rake sudo gem install rake  即可
+安装Rake sudo gem install rake 即可
 创建Rakefile 在项目的根目录下
-touch Rakefile vim Rakefile  然后添加如下代码
-task :default =&amp;gt; :new require &#39;fileutils&#39; desc &amp;quot;创建新 post&amp;quot; task :new do puts &amp;quot;请输入要创建的文章文件文件名字：&amp;quot; @url = STDIN.gets.chomp puts &amp;quot;请输入文章的标题：&amp;quot; @name = STDIN.gets.chomp puts &amp;quot;请输入文章的子标题：&amp;quot; @slug = STDIN.gets.chomp puts &amp;quot;请输入文章的分类，以空格分隔：&amp;quot; @categories = STDIN.</description>
+touch Rakefilevim Rakefile 然后添加如下代码
+task :default =&amp;gt; :newrequire &#39;fileutils&#39;desc &amp;quot;创建新 post&amp;quot;task :new doputs &amp;quot;请输入要创建的文章文件文件名字：&amp;quot;@url = STDIN.gets.chompputs &amp;quot;请输入文章的标题：&amp;quot;@name = STDIN.gets.chompputs &amp;quot;请输入文章的子标题：&amp;quot;@slug = STDIN.gets.chompputs &amp;quot;请输入文章的分类，以空格分隔：&amp;quot;@categories = STDIN.</description>
     </item>
     
   </channel>

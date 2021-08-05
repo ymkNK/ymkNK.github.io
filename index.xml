@@ -1803,7 +1803,7 @@ ZSet 小64数量小128 用ziplist 否则用skiplist&lt;/p&gt;
 &lt;p&gt;现在来看，5G真的是90后的机会，5G的出现，这个社会必将发生不小的变化，而绝非下载速度变快这么简单的一件事情&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-205108@2x.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
 &lt;h4 id=&#34;5g的原理就是香农定理&#34;&gt;5G的原理就是香农定理:&lt;/h4&gt;
 &lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-205916@2x.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
-&lt;p&gt;C=Blog2(1+S/N)
+&lt;p&gt;C=Blog2(1+S/N) 
 使用类比的方式来看这个公司&lt;/p&gt;
 &lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;C就是单位时间的载货量&lt;/li&gt;
@@ -1927,7 +1927,7 @@ Never write another getter or equals method again, with one annotation your clas
 &lt;h3 id=&#34;解决方式-2&#34;&gt;解决方式&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;关闭项目。&lt;/li&gt;
-&lt;li&gt;Preference &amp;gt; Build, Execution, Deployment &amp;gt; Compiler &amp;gt; Annotation Processors. Check &amp;lsquo;Enable annotation processing&amp;rsquo;.
+&lt;li&gt;Preference &amp;gt; Build, Execution, Deployment &amp;gt; Compiler &amp;gt; Annotation Processors. Check &amp;lsquo;Enable annotation processing&amp;rsquo;. 
 &lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190807-112533.png&#34; alt=&#34;&#34;  /&gt;&lt;/li&gt;
 &lt;li&gt;Open your project. File &amp;gt; Invalidate Caches / Restart&amp;hellip; &amp;gt; Invalidate and Restart 然后等待这个过程完成结束,将会发现一切都将回归平淡，云淡风轻.&lt;/li&gt;
 &lt;/ol&gt;
@@ -2330,7 +2330,7 @@ final boolean existed = (file.open(fileName, &amp;quot;w&amp;quot;) != null) &am
 &lt;li&gt;类、类属性、类方法的注释必须使用Javadoc规范，使用/**内容*/格式，不得使用 // xxx 方式。&lt;/li&gt;
 &lt;li&gt;所有的抽象方法(包括接口中的方法)必须要用Javadoc注释、除了返回值、参数、 异常说明外，还必须指出该方法做什么事情，实现什么功能。 说明:对子类的实现要求，或者调用注意事项，请一并说明。&lt;/li&gt;
 &lt;li&gt;所有的类都必须添加创建者和创建日期。&lt;/li&gt;
-&lt;li&gt;方法内部单行注释，在被注释语句上方另起一行，使用//注释。方法内部多行注释
+&lt;li&gt;方法内部单行注释，在被注释语句上方另起一行，使用//注释。方法内部多行注释 
 使用/* */注释，注意与代码对齐。&lt;/li&gt;
 &lt;li&gt;所有的枚举类型字段必须要有注释，说明每个数据项的用途。&lt;/li&gt;
 &lt;li&gt;避免出现重复的代码(&lt;strong&gt;Don&amp;rsquo;t Repeat Yourself&lt;/strong&gt;)，即DRY原则。说明:随意复制和粘贴代码，必然会导致代码的重复，在以后需要修改时，需要修改所有的副本，容易遗漏。必要时抽取共性方法，或者抽象公共类，甚至是组件化。&lt;/li&gt;
@@ -2601,15 +2601,15 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 冲动是魔鬼，心平气和，就像后来宋教练给我说的，要学会吃话。&lt;br&gt;
 多听，好好听完了别人说什么，抓住重点，再进行反问，不要让自己脑子一热，就做出一些让自己后悔的事情。
 感觉今天的处世方式，真的很像蔡徐坤。仿佛不容别人质疑自己，容不得一点负面的评价，还要去发律师函，愚蠢。&lt;br&gt;
-别人教练再怎么说，都是长辈，然后和别人教练顶撞了过去，没有必要。
+别人教练再怎么说，都是长辈，然后和别人教练顶撞了过去，没有必要。 
 前辈始终是前辈。得罪了这个教练，就算他不负责我，他也始终是教练，得罪了他，对我来讲，能有什么好处？
 没有好处。&lt;/p&gt;
 &lt;p&gt;上善若水，大丈夫，能屈能伸。&lt;/p&gt;
 &lt;h1 id=&#34;对于别人的评价与看法&#34;&gt;对于别人的评价与看法&lt;/h1&gt;
 &lt;p&gt;越来越不喜欢别人对自己的评价，是可爱，而希望是成熟。&lt;br&gt;
-但是这真的很傻，才发现，这种太在意别人评价的事情，才是真的不成熟。
+但是这真的很傻，才发现，这种太在意别人评价的事情，才是真的不成熟。 
 别人能对我有所评价，至少别人是有在关心我（无论正负评价，都是关心，就像明星一样，黑粉也一样是粉丝）。
-那些真正对你不理不睬的，才是真的可怕。
+那些真正对你不理不睬的，才是真的可怕。 
 让所有人都满意，让所有人都对我有很高的评价，真的能做到吗？不能。&lt;br&gt;
 光是做好自己的事情，就已经很不容易了。&lt;br&gt;
 别人将我捧的高，我的实力也不会因为他的夸赞而突飞猛进；&lt;br&gt;

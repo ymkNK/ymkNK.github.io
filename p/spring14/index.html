@@ -3,40 +3,42 @@
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='背景 最近在做同步先关的工作，为了提升同步任务的处理效率，减少频繁的mongo数据库查询，因此需要将一些数据统一查询出来，在内存中进行处理。
 解决方式 在任务执行的之前，就需要将相关的数据查询出来，如何实现呢？使用一个@EventListener进行ApplicationReadyEvent时间的监听，就能在应用启动之后，进行相应的操作
-@EventListener(classes = {ApplicationReadyEvent.class}) public void initialMap() { if (CollectionUtils.isEmpty(ridMobileMap)) { List&amp;lt;UserRecord&amp;gt; all = entranceUserRecordRepo.findAll(); ridMobileMap = all.stream().filter(userRecord -&amp;gt; StringUtils.isNotEmpty(userRecord.getMobileNo())).collect(Collectors.toMap(UserRecord::getRid, UserRecord::getMobileNo)); } } More Application spring application，一般就是spring boot项目中的 Application这个类
-@SpringBootApplication @EnableConfigurationProperties @EnableAutoConfiguration(exclude = {DruidDataSourceAutoConfigure.class, DataSourceAutoConfiguration.class, RedisAutoConfiguration.class}) @EnableScheduling @EnableFeignClients(basePackages = {&amp;quot;&amp;quot;}) @EnableAspectJAutoProxy(proxyTargetClass = true) @EnableCircuitBreaker @EnableLdapRepositories public class Application { public static void main(String[] args) { SpringApplication.run(Application.class, args); } @Bean LdapTemplate getLdapTemplate(ContextSource contextSource) { LdapTemplate ldapTemplate = new LdapTemplate(contextSource); ldapTemplate.'><title>SpringBoot开发中的一些小细节(十四）事件监听的使用</title>
+@EventListener(classes = {ApplicationReadyEvent.class})public void initialMap() {if (CollectionUtils.isEmpty(ridMobileMap)) {List&amp;lt;UserRecord&amp;gt; all = entranceUserRecordRepo.findAll();ridMobileMap = all.stream().filter(userRecord -&amp;gt; StringUtils.isNotEmpty(userRecord.getMobileNo())).collect(Collectors.toMap(UserRecord::getRid, UserRecord::getMobileNo));}}More Application spring application，一般就是spring boot项目中的 Application这个类
+@SpringBootApplication@EnableConfigurationProperties@EnableAutoConfiguration(exclude = {DruidDataSourceAutoConfigure.class, DataSourceAutoConfiguration.class, RedisAutoConfiguration.class})@EnableScheduling@EnableFeignClients(basePackages = {&amp;quot;&amp;quot;})@EnableAspectJAutoProxy(proxyTargetClass = true)@EnableCircuitBreaker@EnableLdapRepositoriespublic class Application {public static void main(String[] args) {SpringApplication.run(Application.class, args);}@BeanLdapTemplate getLdapTemplate(ContextSource contextSource) {LdapTemplate ldapTemplate = new LdapTemplate(contextSource);ldapTemplate.'><title>SpringBoot开发中的一些小细节(十四）事件监听的使用</title>
 
 <link rel='canonical' href='https://lllovol.com/p/spring14/'>
 
 <link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='SpringBoot开发中的一些小细节(十四）事件监听的使用'>
 <meta property='og:description' content='背景 最近在做同步先关的工作，为了提升同步任务的处理效率，减少频繁的mongo数据库查询，因此需要将一些数据统一查询出来，在内存中进行处理。
 解决方式 在任务执行的之前，就需要将相关的数据查询出来，如何实现呢？使用一个@EventListener进行ApplicationReadyEvent时间的监听，就能在应用启动之后，进行相应的操作
-@EventListener(classes = {ApplicationReadyEvent.class}) public void initialMap() { if (CollectionUtils.isEmpty(ridMobileMap)) { List&amp;lt;UserRecord&amp;gt; all = entranceUserRecordRepo.findAll(); ridMobileMap = all.stream().filter(userRecord -&amp;gt; StringUtils.isNotEmpty(userRecord.getMobileNo())).collect(Collectors.toMap(UserRecord::getRid, UserRecord::getMobileNo)); } } More Application spring application，一般就是spring boot项目中的 Application这个类
-@SpringBootApplication @EnableConfigurationProperties @EnableAutoConfiguration(exclude = {DruidDataSourceAutoConfigure.class, DataSourceAutoConfiguration.class, RedisAutoConfiguration.class}) @EnableScheduling @EnableFeignClients(basePackages = {&amp;quot;&amp;quot;}) @EnableAspectJAutoProxy(proxyTargetClass = true) @EnableCircuitBreaker @EnableLdapRepositories public class Application { public static void main(String[] args) { SpringApplication.run(Application.class, args); } @Bean LdapTemplate getLdapTemplate(ContextSource contextSource) { LdapTemplate ldapTemplate = new LdapTemplate(contextSource); ldapTemplate.'>
+@EventListener(classes = {ApplicationReadyEvent.class})public void initialMap() {if (CollectionUtils.isEmpty(ridMobileMap)) {List&amp;lt;UserRecord&amp;gt; all = entranceUserRecordRepo.findAll();ridMobileMap = all.stream().filter(userRecord -&amp;gt; StringUtils.isNotEmpty(userRecord.getMobileNo())).collect(Collectors.toMap(UserRecord::getRid, UserRecord::getMobileNo));}}More Application spring application，一般就是spring boot项目中的 Application这个类
+@SpringBootApplication@EnableConfigurationProperties@EnableAutoConfiguration(exclude = {DruidDataSourceAutoConfigure.class, DataSourceAutoConfiguration.class, RedisAutoConfiguration.class})@EnableScheduling@EnableFeignClients(basePackages = {&amp;quot;&amp;quot;})@EnableAspectJAutoProxy(proxyTargetClass = true)@EnableCircuitBreaker@EnableLdapRepositoriespublic class Application {public static void main(String[] args) {SpringApplication.run(Application.class, args);}@BeanLdapTemplate getLdapTemplate(ContextSource contextSource) {LdapTemplate ldapTemplate = new LdapTemplate(contextSource);ldapTemplate.'>
 <meta property='og:url' content='https://lllovol.com/p/spring14/'>
 <meta property='og:site_name' content='lllovol'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Spring' /><meta property='article:published_time' content='2020-07-27T15:51:33&#43;00:00'/><meta property='article:modified_time' content='2020-07-27T15:51:33&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg' />
 <meta name="twitter:title" content="SpringBoot开发中的一些小细节(十四）事件监听的使用">
 <meta name="twitter:description" content="背景 最近在做同步先关的工作，为了提升同步任务的处理效率，减少频繁的mongo数据库查询，因此需要将一些数据统一查询出来，在内存中进行处理。
 解决方式 在任务执行的之前，就需要将相关的数据查询出来，如何实现呢？使用一个@EventListener进行ApplicationReadyEvent时间的监听，就能在应用启动之后，进行相应的操作
-@EventListener(classes = {ApplicationReadyEvent.class}) public void initialMap() { if (CollectionUtils.isEmpty(ridMobileMap)) { List&amp;lt;UserRecord&amp;gt; all = entranceUserRecordRepo.findAll(); ridMobileMap = all.stream().filter(userRecord -&amp;gt; StringUtils.isNotEmpty(userRecord.getMobileNo())).collect(Collectors.toMap(UserRecord::getRid, UserRecord::getMobileNo)); } } More Application spring application，一般就是spring boot项目中的 Application这个类
-@SpringBootApplication @EnableConfigurationProperties @EnableAutoConfiguration(exclude = {DruidDataSourceAutoConfigure.class, DataSourceAutoConfiguration.class, RedisAutoConfiguration.class}) @EnableScheduling @EnableFeignClients(basePackages = {&amp;quot;&amp;quot;}) @EnableAspectJAutoProxy(proxyTargetClass = true) @EnableCircuitBreaker @EnableLdapRepositories public class Application { public static void main(String[] args) { SpringApplication.run(Application.class, args); } @Bean LdapTemplate getLdapTemplate(ContextSource contextSource) { LdapTemplate ldapTemplate = new LdapTemplate(contextSource); ldapTemplate."><meta name="twitter:card" content="summary_large_image">
+@EventListener(classes = {ApplicationReadyEvent.class})public void initialMap() {if (CollectionUtils.isEmpty(ridMobileMap)) {List&amp;lt;UserRecord&amp;gt; all = entranceUserRecordRepo.findAll();ridMobileMap = all.stream().filter(userRecord -&amp;gt; StringUtils.isNotEmpty(userRecord.getMobileNo())).collect(Collectors.toMap(UserRecord::getRid, UserRecord::getMobileNo));}}More Application spring application，一般就是spring boot项目中的 Application这个类
+@SpringBootApplication@EnableConfigurationProperties@EnableAutoConfiguration(exclude = {DruidDataSourceAutoConfigure.class, DataSourceAutoConfiguration.class, RedisAutoConfiguration.class})@EnableScheduling@EnableFeignClients(basePackages = {&amp;quot;&amp;quot;})@EnableAspectJAutoProxy(proxyTargetClass = true)@EnableCircuitBreaker@EnableLdapRepositoriespublic class Application {public static void main(String[] args) {SpringApplication.run(Application.class, args);}@BeanLdapTemplate getLdapTemplate(ContextSource contextSource) {LdapTemplate ldapTemplate = new LdapTemplate(contextSource);ldapTemplate."><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg' />
     <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
 
-<script type="application/javascript">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MK7GTCNC34"></script>
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'G-MK7GTCNC34', 'auto');
-	
-	ga('send', 'pageview');
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-MK7GTCNC34', { 'anonymize_ip': false });
 }
 </script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
 
     </head>
-    <body class="">
+    <body class="
+    article-page 
+">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -53,13 +55,19 @@ if (!doNotTrack) {
         if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
             
 
-            document.body.dataset.scheme = 'dark';
+            document.documentElement.dataset.scheme = 'dark';
         } else {
-            document.body.dataset.scheme = 'light';
+            document.documentElement.dataset.scheme = 'light';
         }
     })();
-</script><div class="container main-container flex on-phone--column extended article-page with-toolbar">
-            <aside class="sidebar left-sidebar sticky">
+</script>
+<div class="container main-container flex 
+    
+        on-phone--column extended
+    
+">
+    
+        <aside class="sidebar left-sidebar sticky">
     <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
@@ -68,6 +76,7 @@ if (!doNotTrack) {
 
     <header class="site-info">
         
+            
             <figure class="site-avatar">
                 
                     <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
@@ -77,6 +86,7 @@ if (!doNotTrack) {
                     <span class="emoji">⚖️</span>
                 
             </figure>
+            
         
         <h1 class="site-name"><a href="https://lllovol.com">lllovol</a></h1>
         <h2 class="site-description">Stay hungry, stay foolish.</h2>
@@ -202,20 +212,8 @@ if (!doNotTrack) {
     </ol>
 </aside>
 
-            <main class="main full-width">
-    <div id="article-toolbar">
-        <a href="https://lllovol.com" class="back-home">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="15 6 9 12 15 18" />
-</svg>
-
-
-
-            <span>Back</span>
-        </a>
-    </div>
-
+    
+<main class="main full-width">
     <article class="main-article">
     <header class="article-header">
         <div class="article-image">
@@ -242,17 +240,29 @@ if (!doNotTrack) {
         <a href="/p/spring14/">SpringBoot开发中的一些小细节(十四）事件监听的使用</a>
     </h2>
 
+    
+
+    
     <footer class="article-time">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
 </svg>
+                <time class="article-time--published">Jul 27, 2020</time>
+            </div>
+        
 
-
-
-        <time class="article-time--published">Jul 27, 2020</time>
-    </footer></div>
+        
+    </footer>
+    
+</div>
 </header>
 
     <section class="article-content">
@@ -367,16 +377,17 @@ public class PolicyUpdater implements ApplicationListener&lt;ObjectALifecycleEve
     </section>
     </footer>
 
+
     
         <link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css"integrity="sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn"crossorigin="anonymous"
             ><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"crossorigin="anonymous"
+                src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.js"integrity="sha384-pK1WpvzWVBQiP0/GjnvRxV4mOb0oxFuyRxJlk6vVw146n3egcN5C925NCP7a7BY8"crossorigin="anonymous"
                 defer="true"
                 >
             </script><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"crossorigin="anonymous"
+                src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/contrib/auto-render.min.js"integrity="sha384-vZTG03m&#43;2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"crossorigin="anonymous"
                 defer="true"
                 >
             </script><script>
@@ -495,8 +506,8 @@ public class PolicyUpdater implements ApplicationListener&lt;ObjectALifecycleEve
     
 </aside>
 
-
-    
+     
+     
         
     
 
@@ -541,6 +552,8 @@ public class PolicyUpdater implements ApplicationListener&lt;ObjectALifecycleEve
         Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
+
+    
 <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
 
     
@@ -617,7 +630,10 @@ public class PolicyUpdater implements ApplicationListener&lt;ObjectALifecycleEve
                 rel="stylesheet" 
                 href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
             >
+
             </main>
+    
+
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"

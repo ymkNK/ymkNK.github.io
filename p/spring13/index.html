@@ -9,7 +9,7 @@
  实现 由于包含工作的涉密内容，真实实现的代码就不在此展示。而网上的Demo已经相当丰富。
  SpringBooot AOP的使用
  其中实现权限控制的最简单的demo就是如下的代码
-@Aspect @Component @RequiredArgsConstructor @Slf4j public class AuthAspect { @Pointcut(&amp;quot;execution(public * com.company.group.auth.service.AuthService.list(..))&amp;quot;) public void pointCutForListObjective() { } /** * 对list的方法返回值进行拦截处理 */ @AfterReturning(pointcut = &amp;quot;pointCutForListObjective()&amp;quot;, returning = &amp;quot;okrResponses&amp;quot;) public void afterReturningListObjective(JoinPoint joinPoint, Object okrResponses) { // 这个地方就能够对返回值直接进行处理 } }  定义切点pointCut(),这个地方，就是定义一个我们需要切入的点，我们要进行拦截处理的地方。 对这个切点有很多处理的方式，实现真正的权限拦截控制逻辑  其他的点  对于用户的组织权限的控制，我们可以使用路径的方式来进行判断，类似于一个树，我们每一次，存储的时候，需要将用户所在的组织架构的路径进行存储。这样我们在进行权限判断的时候，就不想要每一次都从库中获取用户的组织架构信息了。 对于model的校验可以写注解来进行实现。这一点，以后会专门写一篇文章来进行分享 Npe问题可谓是开发过程中的一生之敌。在循环迭代过程中，不可以一遍迭代，一边删除list中的值。 使用JPA的时候可以使用 pageable 来直接进行分页，不用再写mongoTemplate这种CustomRepo   @Override public List&amp;lt;Department&amp;gt; listAuthDepartment(String departmentName) { if (Strings.'><title>SpringBoot开发中的一些小细节（十三）使用AOP实现权限系统</title>
+@Aspect@Component@RequiredArgsConstructor@Slf4jpublic class AuthAspect {@Pointcut(&amp;quot;execution(public * com.company.group.auth.service.AuthService.list(..))&amp;quot;)public void pointCutForListObjective() {}/*** 对list的方法返回值进行拦截处理*/@AfterReturning(pointcut = &amp;quot;pointCutForListObjective()&amp;quot;, returning = &amp;quot;okrResponses&amp;quot;)public void afterReturningListObjective(JoinPoint joinPoint, Object okrResponses) {// 这个地方就能够对返回值直接进行处理}} 定义切点pointCut(),这个地方，就是定义一个我们需要切入的点，我们要进行拦截处理的地方。 对这个切点有很多处理的方式，实现真正的权限拦截控制逻辑  其他的点  对于用户的组织权限的控制，我们可以使用路径的方式来进行判断，类似于一个树，我们每一次，存储的时候，需要将用户所在的组织架构的路径进行存储。这样我们在进行权限判断的时候，就不想要每一次都从库中获取用户的组织架构信息了。 对于model的校验可以写注解来进行实现。这一点，以后会专门写一篇文章来进行分享 Npe问题可谓是开发过程中的一生之敌。在循环迭代过程中，不可以一遍迭代，一边删除list中的值。 使用JPA的时候可以使用 pageable 来直接进行分页，不用再写mongoTemplate这种CustomRepo   @Overridepublic List&amp;lt;Department&amp;gt; listAuthDepartment(String departmentName) {if (Strings.'><title>SpringBoot开发中的一些小细节（十三）使用AOP实现权限系统</title>
 
 <link rel='canonical' href='https://lllovol.com/p/spring13/'>
 
@@ -22,7 +22,7 @@
  实现 由于包含工作的涉密内容，真实实现的代码就不在此展示。而网上的Demo已经相当丰富。
  SpringBooot AOP的使用
  其中实现权限控制的最简单的demo就是如下的代码
-@Aspect @Component @RequiredArgsConstructor @Slf4j public class AuthAspect { @Pointcut(&amp;quot;execution(public * com.company.group.auth.service.AuthService.list(..))&amp;quot;) public void pointCutForListObjective() { } /** * 对list的方法返回值进行拦截处理 */ @AfterReturning(pointcut = &amp;quot;pointCutForListObjective()&amp;quot;, returning = &amp;quot;okrResponses&amp;quot;) public void afterReturningListObjective(JoinPoint joinPoint, Object okrResponses) { // 这个地方就能够对返回值直接进行处理 } }  定义切点pointCut(),这个地方，就是定义一个我们需要切入的点，我们要进行拦截处理的地方。 对这个切点有很多处理的方式，实现真正的权限拦截控制逻辑  其他的点  对于用户的组织权限的控制，我们可以使用路径的方式来进行判断，类似于一个树，我们每一次，存储的时候，需要将用户所在的组织架构的路径进行存储。这样我们在进行权限判断的时候，就不想要每一次都从库中获取用户的组织架构信息了。 对于model的校验可以写注解来进行实现。这一点，以后会专门写一篇文章来进行分享 Npe问题可谓是开发过程中的一生之敌。在循环迭代过程中，不可以一遍迭代，一边删除list中的值。 使用JPA的时候可以使用 pageable 来直接进行分页，不用再写mongoTemplate这种CustomRepo   @Override public List&amp;lt;Department&amp;gt; listAuthDepartment(String departmentName) { if (Strings.'>
+@Aspect@Component@RequiredArgsConstructor@Slf4jpublic class AuthAspect {@Pointcut(&amp;quot;execution(public * com.company.group.auth.service.AuthService.list(..))&amp;quot;)public void pointCutForListObjective() {}/*** 对list的方法返回值进行拦截处理*/@AfterReturning(pointcut = &amp;quot;pointCutForListObjective()&amp;quot;, returning = &amp;quot;okrResponses&amp;quot;)public void afterReturningListObjective(JoinPoint joinPoint, Object okrResponses) {// 这个地方就能够对返回值直接进行处理}} 定义切点pointCut(),这个地方，就是定义一个我们需要切入的点，我们要进行拦截处理的地方。 对这个切点有很多处理的方式，实现真正的权限拦截控制逻辑  其他的点  对于用户的组织权限的控制，我们可以使用路径的方式来进行判断，类似于一个树，我们每一次，存储的时候，需要将用户所在的组织架构的路径进行存储。这样我们在进行权限判断的时候，就不想要每一次都从库中获取用户的组织架构信息了。 对于model的校验可以写注解来进行实现。这一点，以后会专门写一篇文章来进行分享 Npe问题可谓是开发过程中的一生之敌。在循环迭代过程中，不可以一遍迭代，一边删除list中的值。 使用JPA的时候可以使用 pageable 来直接进行分页，不用再写mongoTemplate这种CustomRepo   @Overridepublic List&amp;lt;Department&amp;gt; listAuthDepartment(String departmentName) {if (Strings.'>
 <meta property='og:url' content='https://lllovol.com/p/spring13/'>
 <meta property='og:site_name' content='lllovol'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Spring' /><meta property='article:published_time' content='2020-05-12T15:04:26&#43;00:00'/><meta property='article:modified_time' content='2020-05-12T15:04:26&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg' />
@@ -35,23 +35,25 @@
  实现 由于包含工作的涉密内容，真实实现的代码就不在此展示。而网上的Demo已经相当丰富。
  SpringBooot AOP的使用
  其中实现权限控制的最简单的demo就是如下的代码
-@Aspect @Component @RequiredArgsConstructor @Slf4j public class AuthAspect { @Pointcut(&amp;quot;execution(public * com.company.group.auth.service.AuthService.list(..))&amp;quot;) public void pointCutForListObjective() { } /** * 对list的方法返回值进行拦截处理 */ @AfterReturning(pointcut = &amp;quot;pointCutForListObjective()&amp;quot;, returning = &amp;quot;okrResponses&amp;quot;) public void afterReturningListObjective(JoinPoint joinPoint, Object okrResponses) { // 这个地方就能够对返回值直接进行处理 } }  定义切点pointCut(),这个地方，就是定义一个我们需要切入的点，我们要进行拦截处理的地方。 对这个切点有很多处理的方式，实现真正的权限拦截控制逻辑  其他的点  对于用户的组织权限的控制，我们可以使用路径的方式来进行判断，类似于一个树，我们每一次，存储的时候，需要将用户所在的组织架构的路径进行存储。这样我们在进行权限判断的时候，就不想要每一次都从库中获取用户的组织架构信息了。 对于model的校验可以写注解来进行实现。这一点，以后会专门写一篇文章来进行分享 Npe问题可谓是开发过程中的一生之敌。在循环迭代过程中，不可以一遍迭代，一边删除list中的值。 使用JPA的时候可以使用 pageable 来直接进行分页，不用再写mongoTemplate这种CustomRepo   @Override public List&amp;lt;Department&amp;gt; listAuthDepartment(String departmentName) { if (Strings."><meta name="twitter:card" content="summary_large_image">
+@Aspect@Component@RequiredArgsConstructor@Slf4jpublic class AuthAspect {@Pointcut(&amp;quot;execution(public * com.company.group.auth.service.AuthService.list(..))&amp;quot;)public void pointCutForListObjective() {}/*** 对list的方法返回值进行拦截处理*/@AfterReturning(pointcut = &amp;quot;pointCutForListObjective()&amp;quot;, returning = &amp;quot;okrResponses&amp;quot;)public void afterReturningListObjective(JoinPoint joinPoint, Object okrResponses) {// 这个地方就能够对返回值直接进行处理}} 定义切点pointCut(),这个地方，就是定义一个我们需要切入的点，我们要进行拦截处理的地方。 对这个切点有很多处理的方式，实现真正的权限拦截控制逻辑  其他的点  对于用户的组织权限的控制，我们可以使用路径的方式来进行判断，类似于一个树，我们每一次，存储的时候，需要将用户所在的组织架构的路径进行存储。这样我们在进行权限判断的时候，就不想要每一次都从库中获取用户的组织架构信息了。 对于model的校验可以写注解来进行实现。这一点，以后会专门写一篇文章来进行分享 Npe问题可谓是开发过程中的一生之敌。在循环迭代过程中，不可以一遍迭代，一边删除list中的值。 使用JPA的时候可以使用 pageable 来直接进行分页，不用再写mongoTemplate这种CustomRepo   @Overridepublic List&amp;lt;Department&amp;gt; listAuthDepartment(String departmentName) {if (Strings."><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg' />
     <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
 
-<script type="application/javascript">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MK7GTCNC34"></script>
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'G-MK7GTCNC34', 'auto');
-	
-	ga('send', 'pageview');
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-MK7GTCNC34', { 'anonymize_ip': false });
 }
 </script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
 
     </head>
-    <body class="">
+    <body class="
+    article-page 
+">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -68,13 +70,19 @@ if (!doNotTrack) {
         if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
             
 
-            document.body.dataset.scheme = 'dark';
+            document.documentElement.dataset.scheme = 'dark';
         } else {
-            document.body.dataset.scheme = 'light';
+            document.documentElement.dataset.scheme = 'light';
         }
     })();
-</script><div class="container main-container flex on-phone--column extended article-page with-toolbar">
-            <aside class="sidebar left-sidebar sticky">
+</script>
+<div class="container main-container flex 
+    
+        on-phone--column extended
+    
+">
+    
+        <aside class="sidebar left-sidebar sticky">
     <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
@@ -83,6 +91,7 @@ if (!doNotTrack) {
 
     <header class="site-info">
         
+            
             <figure class="site-avatar">
                 
                     <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
@@ -92,6 +101,7 @@ if (!doNotTrack) {
                     <span class="emoji">⚖️</span>
                 
             </figure>
+            
         
         <h1 class="site-name"><a href="https://lllovol.com">lllovol</a></h1>
         <h2 class="site-description">Stay hungry, stay foolish.</h2>
@@ -217,20 +227,8 @@ if (!doNotTrack) {
     </ol>
 </aside>
 
-            <main class="main full-width">
-    <div id="article-toolbar">
-        <a href="https://lllovol.com" class="back-home">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="15 6 9 12 15 18" />
-</svg>
-
-
-
-            <span>Back</span>
-        </a>
-    </div>
-
+    
+<main class="main full-width">
     <article class="main-article">
     <header class="article-header">
         <div class="article-image">
@@ -257,17 +255,29 @@ if (!doNotTrack) {
         <a href="/p/spring13/">SpringBoot开发中的一些小细节（十三）使用AOP实现权限系统</a>
     </h2>
 
+    
+
+    
     <footer class="article-time">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
 </svg>
+                <time class="article-time--published">May 12, 2020</time>
+            </div>
+        
 
-
-
-        <time class="article-time--published">May 12, 2020</time>
-    </footer></div>
+        
+    </footer>
+    
+</div>
 </header>
 
     <section class="article-content">
@@ -368,16 +378,17 @@ public class AuthAspect {
     </section>
     </footer>
 
+
     
         <link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css"integrity="sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn"crossorigin="anonymous"
             ><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"crossorigin="anonymous"
+                src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.js"integrity="sha384-pK1WpvzWVBQiP0/GjnvRxV4mOb0oxFuyRxJlk6vVw146n3egcN5C925NCP7a7BY8"crossorigin="anonymous"
                 defer="true"
                 >
             </script><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"crossorigin="anonymous"
+                src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/contrib/auto-render.min.js"integrity="sha384-vZTG03m&#43;2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"crossorigin="anonymous"
                 defer="true"
                 >
             </script><script>
@@ -496,8 +507,8 @@ public class AuthAspect {
     
 </aside>
 
-
-    
+     
+     
         
     
 
@@ -542,6 +553,8 @@ public class AuthAspect {
         Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
+
+    
 <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
 
     
@@ -618,7 +631,10 @@ public class AuthAspect {
                 rel="stylesheet" 
                 href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
             >
+
             </main>
+    
+
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
