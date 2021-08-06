@@ -4,8 +4,8 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Code Review 这周被点名来做code view了来着，然后昨天晚上做了一个小时的code review，还是相当紧张，然后今天改了一天代码 特此总结
 ApplicationListener 这个地方原来主要实现的功能是spring3中的功能，在启动了整个项目之后，让watch pods和watch service启动并且只启动一次。
 （启动一个单线程，回调函数，生命周期） 原来的做法是使用spring task在应用启动之后，就启动一次然后一直运行
-// @Scheduled(cron = &amp;quot;${schedule.kubeService}&amp;quot;)@Scheduled(fixedDelay = 999999999)protected void gitlabProjectTask() {kubernetesService.collectServices();customServiceService.bindServiceAndProject();kubernetesService.watchServices();}// @Scheduled(cron = &amp;quot;${schedule.kubePod}&amp;quot;)// @Scheduled(cron = &amp;quot;0 0,14 6,18 * * ? &amp;quot;)//taskexecutor// ScheduledExecutorTask// new 一个单线程一直跑就可以了@Scheduled(fixedDelay = 999999999)public void collectPod() {kubernetesService.collectPods();kubernetesService.watchPods();} 现在使用的是ApplicationListener
-public class KubernetesServiceImpl implements KubernetesService, ApplicationListener&amp;lt;ApplicationReadyEvent&amp;gt; {//生命周期@Overridepublic void onApplicationEvent(ApplicationReadyEvent event) {collectServices();customServiceService.'><title>SpringBoot开发中的一些小细节(四)CR笔记ApplicationListener等等</title>
+// @Scheduled(cron = &amp;quot;${schedule.kubeService}&amp;quot;) @Scheduled(fixedDelay = 999999999) protected void gitlabProjectTask() { kubernetesService.collectServices(); customServiceService.bindServiceAndProject(); kubernetesService.watchServices(); } // @Scheduled(cron = &amp;quot;${schedule.kubePod}&amp;quot;) // @Scheduled(cron = &amp;quot;0 0,14 6,18 * * ? &amp;quot;) //taskexecutor // ScheduledExecutorTask // new 一个单线程一直跑就可以了 @Scheduled(fixedDelay = 999999999) public void collectPod() { kubernetesService.collectPods(); kubernetesService.watchPods(); }  现在使用的是ApplicationListener
+public class KubernetesServiceImpl implements KubernetesService, ApplicationListener&amp;lt;ApplicationReadyEvent&amp;gt; { //生命周期 @Override public void onApplicationEvent(ApplicationReadyEvent event) { collectServices(); customServiceService.'><title>SpringBoot开发中的一些小细节(四)CR笔记ApplicationListener等等</title>
 
 <link rel='canonical' href='https://lllovol.com/p/spring4/'>
 
@@ -13,8 +13,8 @@ public class KubernetesServiceImpl implements KubernetesService, ApplicationList
 <meta property='og:description' content='Code Review 这周被点名来做code view了来着，然后昨天晚上做了一个小时的code review，还是相当紧张，然后今天改了一天代码 特此总结
 ApplicationListener 这个地方原来主要实现的功能是spring3中的功能，在启动了整个项目之后，让watch pods和watch service启动并且只启动一次。
 （启动一个单线程，回调函数，生命周期） 原来的做法是使用spring task在应用启动之后，就启动一次然后一直运行
-// @Scheduled(cron = &amp;quot;${schedule.kubeService}&amp;quot;)@Scheduled(fixedDelay = 999999999)protected void gitlabProjectTask() {kubernetesService.collectServices();customServiceService.bindServiceAndProject();kubernetesService.watchServices();}// @Scheduled(cron = &amp;quot;${schedule.kubePod}&amp;quot;)// @Scheduled(cron = &amp;quot;0 0,14 6,18 * * ? &amp;quot;)//taskexecutor// ScheduledExecutorTask// new 一个单线程一直跑就可以了@Scheduled(fixedDelay = 999999999)public void collectPod() {kubernetesService.collectPods();kubernetesService.watchPods();} 现在使用的是ApplicationListener
-public class KubernetesServiceImpl implements KubernetesService, ApplicationListener&amp;lt;ApplicationReadyEvent&amp;gt; {//生命周期@Overridepublic void onApplicationEvent(ApplicationReadyEvent event) {collectServices();customServiceService.'>
+// @Scheduled(cron = &amp;quot;${schedule.kubeService}&amp;quot;) @Scheduled(fixedDelay = 999999999) protected void gitlabProjectTask() { kubernetesService.collectServices(); customServiceService.bindServiceAndProject(); kubernetesService.watchServices(); } // @Scheduled(cron = &amp;quot;${schedule.kubePod}&amp;quot;) // @Scheduled(cron = &amp;quot;0 0,14 6,18 * * ? &amp;quot;) //taskexecutor // ScheduledExecutorTask // new 一个单线程一直跑就可以了 @Scheduled(fixedDelay = 999999999) public void collectPod() { kubernetesService.collectPods(); kubernetesService.watchPods(); }  现在使用的是ApplicationListener
+public class KubernetesServiceImpl implements KubernetesService, ApplicationListener&amp;lt;ApplicationReadyEvent&amp;gt; { //生命周期 @Override public void onApplicationEvent(ApplicationReadyEvent event) { collectServices(); customServiceService.'>
 <meta property='og:url' content='https://lllovol.com/p/spring4/'>
 <meta property='og:site_name' content='lllovol'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Spring' /><meta property='article:published_time' content='2018-12-28T17:12:32&#43;00:00'/><meta property='article:modified_time' content='2018-12-28T17:12:32&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg' />
@@ -22,26 +22,24 @@ public class KubernetesServiceImpl implements KubernetesService, ApplicationList
 <meta name="twitter:description" content="Code Review 这周被点名来做code view了来着，然后昨天晚上做了一个小时的code review，还是相当紧张，然后今天改了一天代码 特此总结
 ApplicationListener 这个地方原来主要实现的功能是spring3中的功能，在启动了整个项目之后，让watch pods和watch service启动并且只启动一次。
 （启动一个单线程，回调函数，生命周期） 原来的做法是使用spring task在应用启动之后，就启动一次然后一直运行
-// @Scheduled(cron = &amp;quot;${schedule.kubeService}&amp;quot;)@Scheduled(fixedDelay = 999999999)protected void gitlabProjectTask() {kubernetesService.collectServices();customServiceService.bindServiceAndProject();kubernetesService.watchServices();}// @Scheduled(cron = &amp;quot;${schedule.kubePod}&amp;quot;)// @Scheduled(cron = &amp;quot;0 0,14 6,18 * * ? &amp;quot;)//taskexecutor// ScheduledExecutorTask// new 一个单线程一直跑就可以了@Scheduled(fixedDelay = 999999999)public void collectPod() {kubernetesService.collectPods();kubernetesService.watchPods();} 现在使用的是ApplicationListener
-public class KubernetesServiceImpl implements KubernetesService, ApplicationListener&amp;lt;ApplicationReadyEvent&amp;gt; {//生命周期@Overridepublic void onApplicationEvent(ApplicationReadyEvent event) {collectServices();customServiceService."><meta name="twitter:card" content="summary_large_image">
+// @Scheduled(cron = &amp;quot;${schedule.kubeService}&amp;quot;) @Scheduled(fixedDelay = 999999999) protected void gitlabProjectTask() { kubernetesService.collectServices(); customServiceService.bindServiceAndProject(); kubernetesService.watchServices(); } // @Scheduled(cron = &amp;quot;${schedule.kubePod}&amp;quot;) // @Scheduled(cron = &amp;quot;0 0,14 6,18 * * ? &amp;quot;) //taskexecutor // ScheduledExecutorTask // new 一个单线程一直跑就可以了 @Scheduled(fixedDelay = 999999999) public void collectPod() { kubernetesService.collectPods(); kubernetesService.watchPods(); }  现在使用的是ApplicationListener
+public class KubernetesServiceImpl implements KubernetesService, ApplicationListener&amp;lt;ApplicationReadyEvent&amp;gt; { //生命周期 @Override public void onApplicationEvent(ApplicationReadyEvent event) { collectServices(); customServiceService."><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg' />
     <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-MK7GTCNC34"></script>
-<script>
+<script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-MK7GTCNC34', { 'anonymize_ip': false });
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-MK7GTCNC34', 'auto');
+	
+	ga('send', 'pageview');
 }
 </script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
 
     </head>
-    <body class="
-    article-page 
-">
+    <body class="">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -58,19 +56,13 @@ if (!doNotTrack) {
         if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
             
 
-            document.documentElement.dataset.scheme = 'dark';
+            document.body.dataset.scheme = 'dark';
         } else {
-            document.documentElement.dataset.scheme = 'light';
+            document.body.dataset.scheme = 'light';
         }
     })();
-</script>
-<div class="container main-container flex 
-    
-        on-phone--column extended
-    
-">
-    
-        <aside class="sidebar left-sidebar sticky">
+</script><div class="container main-container flex on-phone--column extended article-page with-toolbar">
+            <aside class="sidebar left-sidebar sticky">
     <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
@@ -79,7 +71,6 @@ if (!doNotTrack) {
 
     <header class="site-info">
         
-            
             <figure class="site-avatar">
                 
                     <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
@@ -89,7 +80,6 @@ if (!doNotTrack) {
                     <span class="emoji">⚖️</span>
                 
             </figure>
-            
         
         <h1 class="site-name"><a href="https://lllovol.com">lllovol</a></h1>
         <h2 class="site-description">Stay hungry, stay foolish.</h2>
@@ -215,8 +205,20 @@ if (!doNotTrack) {
     </ol>
 </aside>
 
-    
-<main class="main full-width">
+            <main class="main full-width">
+    <div id="article-toolbar">
+        <a href="https://lllovol.com" class="back-home">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+            <span>Back</span>
+        </a>
+    </div>
+
     <article class="main-article">
     <header class="article-header">
         <div class="article-image">
@@ -243,29 +245,17 @@ if (!doNotTrack) {
         <a href="/p/spring4/">SpringBoot开发中的一些小细节(四)CR笔记ApplicationListener等等</a>
     </h2>
 
-    
-
-    
     <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
 </svg>
-                <time class="article-time--published">Dec 28, 2018</time>
-            </div>
-        
 
-        
-    </footer>
-    
-</div>
+
+
+        <time class="article-time--published">Dec 28, 2018</time>
+    </footer></div>
 </header>
 
     <section class="article-content">
@@ -366,17 +356,16 @@ if (log.isDebugEnabled()) {
     </section>
     </footer>
 
-
     
         <link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css"integrity="sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn"crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"crossorigin="anonymous"
             ><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.js"integrity="sha384-pK1WpvzWVBQiP0/GjnvRxV4mOb0oxFuyRxJlk6vVw146n3egcN5C925NCP7a7BY8"crossorigin="anonymous"
+                src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"crossorigin="anonymous"
                 defer="true"
                 >
             </script><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/contrib/auto-render.min.js"integrity="sha384-vZTG03m&#43;2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"crossorigin="anonymous"
+                src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"crossorigin="anonymous"
                 defer="true"
                 >
             </script><script>
@@ -495,8 +484,8 @@ if (log.isDebugEnabled()) {
     
 </aside>
 
-     
-     
+
+    
         
     
 
@@ -541,8 +530,6 @@ if (log.isDebugEnabled()) {
         Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
-
-    
 <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
 
     
@@ -619,10 +606,7 @@ if (log.isDebugEnabled()) {
                 rel="stylesheet" 
                 href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
             >
-
             </main>
-    
-
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
