@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='前言 为什么我们需要设计模式呢？我们日常的设计应该对手头的问题有针对性，同时对将来的问题也要有足够的通用性，同时我们也需要避免重复设计或者尽可能的减少重复设计。但是想以一下子就得到复用性和灵活性好的设计，其实是相当困难的。 而设计模式，就是将对面向对象软件的设计经验作为设计模式记录下来。
+设计模式的四个基本要素  模式名称 一个助记的名称 问题 描述了应该在什么时候使用设计模式 解决方案 描述了设计的组成成分，它们之间的相互关系和各自的职责和协作方式 效果 描述了模式应用的效果以及使用模式应该权衡的问题  设计模式的三大分类 我们主要通过两个准则对各种设计模式进行分类：
+ 目的准则 这个模式是用来完成什么工作的 范围准则 这个模式用于类还是用于对象的   面向对象的六大原则  单一功能原则 一个类只做一件事情 开闭原则 一个软件实体类，模块和函数应该对扩展开放，对修改关闭 里氏替换原则 子类可以扩展父类的功能，但不能改变父类原有的功能 依赖倒置原则 抽象不应该依赖细节，细节应该依赖于抽象，换一句话说，就是要针对接口编程，不要对实现编程 接口分离原则 系统解开耦合，从而容易重构，更改和重新部署 迪米特原则 一个类应该对自己需要耦合或者调用的类知道得最少，这有点类似于接口隔离原则中的最小接口的概念  Strategy 策略模式 意图 定义一系列的算法，把他们一个个封装起来，并且使他们可以互相替换。同时本模式可以使得算法可以独立于使用它的客户变化而变化
+别名 Policy 政策模式
+动机 当我们需要对一个正文流进行处理，需要使用许多不同的算法。这个时候，将这些算法那硬编码进使用它们的类当中是不可取的，原因如下：
+ 客户程序异常庞大同时难以维护 不同的时候需要不同的算法，我们不想支持我们并不使用的算法 当其中某些算法是客户程序难以分割的算法的时候，增加新的算法或者改变现有的算法将十分困难  适用性  许多相关的类只是行为有不同 可以使用多个行为中的一个行为来配置一个类 需要使用一个算法的不同变体 可能会定义一些反映了不同时间、空间等因素权衡的算法，将这些变体实现为类层次 算法使用了客户不应该知道的数据 避免暴露负责的、与算法相关的数据结构 一个类定义了多种行为，并且这些行为在这个类的操作中以多个条件语句的形式出现。将相关的条件分支移入它们各自的Strategy类当中来代替这些条件语句  结构 参与者  Strategy  定义所有支持的算法的公共接口。Context使用这个接口来调用某个ConcreteStrategy定义的算法   ConcreteStrategy  以Strategy为策略是实现某具体的算法   Context  用一个ConcreteStrategy对象来配置 维护一个对Strategy对象的引用 可定义一个接口来让Strategy访问它的数据    协作  Strategy和Context相互作用以实现选定的算法  Context将算法所需要的数据传递给Strategy Context也可以将自身作为一个参数传递给Strategy，Strategy就可以在需要的时候回调Context   Context将客户的请求转发给它的Strategy。通常创建并传递一个ConcreteStrategy对象给Context。客户只需要和Context交互。  效果 优点  相关算法系列 Strategy类层次为Context定义了一系列可供重用的算法或者行为。有助于析取出这些算法的公共功能 一个替代继承的方法 可以使用继承生成Context的子类，给予它们不同的行为，但是这就会将行为硬编码到Context当中，将算法的实现和Context的实现混淆，使得Context难以理解、难以维护、难以扩展，还不能动态改变算法。将算法封装在独立的Strategy类中，使得我们可以独立于Context改变它，易于切换、易于理解、易于扩展 消除了一些条件语句 将不同行为堆砌在一个类当中的时候，很难避免使用条件语句来选择合适的行为。将行为封装成一个个独立的Strategy类中可以消除这些条件语句（含有许多条件语句的代码通常意味着需要使用策略模式） 实现的选择 可以为相同行为提供不同的实现，可以根据不同的时间、空间权衡取舍要求从不同的策略中进行选择  缺点  客户必须要了解不同的Strategy 本模式一个潜在的缺点，客户选择一个Strategy必须要知道这些Strategy有何不同，此时可能不得不向客户暴露实现。因此只有不同行为变体与客户相关的行为时，才需要使用Strategy Strategy和Context的通信开销 无论具体的ConcreteStrategy是简单还是负责，都共享Strategy定义的接口。因此很可能某一些简单的ConcreteStrategy可能不会使用所有通过这个接口传递给他们的信息。 增加了对象的数目 Strategy增加了一个应用中对象的数目。有时候可以将Strategy实现为可供各个Context共享的无状态对象来减少这一个开销。其余任何状态都由Context来维护  实现  定义Strategy接口和Context接口 必须传递所有实现需要的数据，也可以将Context自身作为参数进行传递 将Strategy作为模板参数 （Go里没有，这就不展开了） 让Strategy对象成为可选的 访问前先判断是否存在，如果存在，就使用它；如果没有，就执行缺省的行为  代码示例  回调事件处理  相关模式 Flyweight（享元模式）： Strategy对象通常是很好的轻量级对象'><title>设计模式-Strategy策略模式学习笔记</title>
+
+<link rel='canonical' href='https://lllovol.com/p/2021/8/strategy/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='设计模式-Strategy策略模式学习笔记'>
+<meta property='og:description' content='前言 为什么我们需要设计模式呢？我们日常的设计应该对手头的问题有针对性，同时对将来的问题也要有足够的通用性，同时我们也需要避免重复设计或者尽可能的减少重复设计。但是想以一下子就得到复用性和灵活性好的设计，其实是相当困难的。 而设计模式，就是将对面向对象软件的设计经验作为设计模式记录下来。
+设计模式的四个基本要素  模式名称 一个助记的名称 问题 描述了应该在什么时候使用设计模式 解决方案 描述了设计的组成成分，它们之间的相互关系和各自的职责和协作方式 效果 描述了模式应用的效果以及使用模式应该权衡的问题  设计模式的三大分类 我们主要通过两个准则对各种设计模式进行分类：
+ 目的准则 这个模式是用来完成什么工作的 范围准则 这个模式用于类还是用于对象的   面向对象的六大原则  单一功能原则 一个类只做一件事情 开闭原则 一个软件实体类，模块和函数应该对扩展开放，对修改关闭 里氏替换原则 子类可以扩展父类的功能，但不能改变父类原有的功能 依赖倒置原则 抽象不应该依赖细节，细节应该依赖于抽象，换一句话说，就是要针对接口编程，不要对实现编程 接口分离原则 系统解开耦合，从而容易重构，更改和重新部署 迪米特原则 一个类应该对自己需要耦合或者调用的类知道得最少，这有点类似于接口隔离原则中的最小接口的概念  Strategy 策略模式 意图 定义一系列的算法，把他们一个个封装起来，并且使他们可以互相替换。同时本模式可以使得算法可以独立于使用它的客户变化而变化
+别名 Policy 政策模式
+动机 当我们需要对一个正文流进行处理，需要使用许多不同的算法。这个时候，将这些算法那硬编码进使用它们的类当中是不可取的，原因如下：
+ 客户程序异常庞大同时难以维护 不同的时候需要不同的算法，我们不想支持我们并不使用的算法 当其中某些算法是客户程序难以分割的算法的时候，增加新的算法或者改变现有的算法将十分困难  适用性  许多相关的类只是行为有不同 可以使用多个行为中的一个行为来配置一个类 需要使用一个算法的不同变体 可能会定义一些反映了不同时间、空间等因素权衡的算法，将这些变体实现为类层次 算法使用了客户不应该知道的数据 避免暴露负责的、与算法相关的数据结构 一个类定义了多种行为，并且这些行为在这个类的操作中以多个条件语句的形式出现。将相关的条件分支移入它们各自的Strategy类当中来代替这些条件语句  结构 参与者  Strategy  定义所有支持的算法的公共接口。Context使用这个接口来调用某个ConcreteStrategy定义的算法   ConcreteStrategy  以Strategy为策略是实现某具体的算法   Context  用一个ConcreteStrategy对象来配置 维护一个对Strategy对象的引用 可定义一个接口来让Strategy访问它的数据    协作  Strategy和Context相互作用以实现选定的算法  Context将算法所需要的数据传递给Strategy Context也可以将自身作为一个参数传递给Strategy，Strategy就可以在需要的时候回调Context   Context将客户的请求转发给它的Strategy。通常创建并传递一个ConcreteStrategy对象给Context。客户只需要和Context交互。  效果 优点  相关算法系列 Strategy类层次为Context定义了一系列可供重用的算法或者行为。有助于析取出这些算法的公共功能 一个替代继承的方法 可以使用继承生成Context的子类，给予它们不同的行为，但是这就会将行为硬编码到Context当中，将算法的实现和Context的实现混淆，使得Context难以理解、难以维护、难以扩展，还不能动态改变算法。将算法封装在独立的Strategy类中，使得我们可以独立于Context改变它，易于切换、易于理解、易于扩展 消除了一些条件语句 将不同行为堆砌在一个类当中的时候，很难避免使用条件语句来选择合适的行为。将行为封装成一个个独立的Strategy类中可以消除这些条件语句（含有许多条件语句的代码通常意味着需要使用策略模式） 实现的选择 可以为相同行为提供不同的实现，可以根据不同的时间、空间权衡取舍要求从不同的策略中进行选择  缺点  客户必须要了解不同的Strategy 本模式一个潜在的缺点，客户选择一个Strategy必须要知道这些Strategy有何不同，此时可能不得不向客户暴露实现。因此只有不同行为变体与客户相关的行为时，才需要使用Strategy Strategy和Context的通信开销 无论具体的ConcreteStrategy是简单还是负责，都共享Strategy定义的接口。因此很可能某一些简单的ConcreteStrategy可能不会使用所有通过这个接口传递给他们的信息。 增加了对象的数目 Strategy增加了一个应用中对象的数目。有时候可以将Strategy实现为可供各个Context共享的无状态对象来减少这一个开销。其余任何状态都由Context来维护  实现  定义Strategy接口和Context接口 必须传递所有实现需要的数据，也可以将Context自身作为参数进行传递 将Strategy作为模板参数 （Go里没有，这就不展开了） 让Strategy对象成为可选的 访问前先判断是否存在，如果存在，就使用它；如果没有，就执行缺省的行为  代码示例  回调事件处理  相关模式 Flyweight（享元模式）： Strategy对象通常是很好的轻量级对象'>
+<meta property='og:url' content='https://lllovol.com/p/2021/8/strategy/'>
+<meta property='og:site_name' content='lllovol'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Note' /><meta property='article:tag' content='Tech' /><meta property='article:tag' content='DesignPattern' /><meta property='article:published_time' content='2021-08-15T02:12:03&#43;00:00'/><meta property='article:modified_time' content='2021-08-15T02:12:03&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/5.jpeg' />
+<meta name="twitter:title" content="设计模式-Strategy策略模式学习笔记">
+<meta name="twitter:description" content="前言 为什么我们需要设计模式呢？我们日常的设计应该对手头的问题有针对性，同时对将来的问题也要有足够的通用性，同时我们也需要避免重复设计或者尽可能的减少重复设计。但是想以一下子就得到复用性和灵活性好的设计，其实是相当困难的。 而设计模式，就是将对面向对象软件的设计经验作为设计模式记录下来。
+设计模式的四个基本要素  模式名称 一个助记的名称 问题 描述了应该在什么时候使用设计模式 解决方案 描述了设计的组成成分，它们之间的相互关系和各自的职责和协作方式 效果 描述了模式应用的效果以及使用模式应该权衡的问题  设计模式的三大分类 我们主要通过两个准则对各种设计模式进行分类：
+ 目的准则 这个模式是用来完成什么工作的 范围准则 这个模式用于类还是用于对象的   面向对象的六大原则  单一功能原则 一个类只做一件事情 开闭原则 一个软件实体类，模块和函数应该对扩展开放，对修改关闭 里氏替换原则 子类可以扩展父类的功能，但不能改变父类原有的功能 依赖倒置原则 抽象不应该依赖细节，细节应该依赖于抽象，换一句话说，就是要针对接口编程，不要对实现编程 接口分离原则 系统解开耦合，从而容易重构，更改和重新部署 迪米特原则 一个类应该对自己需要耦合或者调用的类知道得最少，这有点类似于接口隔离原则中的最小接口的概念  Strategy 策略模式 意图 定义一系列的算法，把他们一个个封装起来，并且使他们可以互相替换。同时本模式可以使得算法可以独立于使用它的客户变化而变化
+别名 Policy 政策模式
+动机 当我们需要对一个正文流进行处理，需要使用许多不同的算法。这个时候，将这些算法那硬编码进使用它们的类当中是不可取的，原因如下：
+ 客户程序异常庞大同时难以维护 不同的时候需要不同的算法，我们不想支持我们并不使用的算法 当其中某些算法是客户程序难以分割的算法的时候，增加新的算法或者改变现有的算法将十分困难  适用性  许多相关的类只是行为有不同 可以使用多个行为中的一个行为来配置一个类 需要使用一个算法的不同变体 可能会定义一些反映了不同时间、空间等因素权衡的算法，将这些变体实现为类层次 算法使用了客户不应该知道的数据 避免暴露负责的、与算法相关的数据结构 一个类定义了多种行为，并且这些行为在这个类的操作中以多个条件语句的形式出现。将相关的条件分支移入它们各自的Strategy类当中来代替这些条件语句  结构 参与者  Strategy  定义所有支持的算法的公共接口。Context使用这个接口来调用某个ConcreteStrategy定义的算法   ConcreteStrategy  以Strategy为策略是实现某具体的算法   Context  用一个ConcreteStrategy对象来配置 维护一个对Strategy对象的引用 可定义一个接口来让Strategy访问它的数据    协作  Strategy和Context相互作用以实现选定的算法  Context将算法所需要的数据传递给Strategy Context也可以将自身作为一个参数传递给Strategy，Strategy就可以在需要的时候回调Context   Context将客户的请求转发给它的Strategy。通常创建并传递一个ConcreteStrategy对象给Context。客户只需要和Context交互。  效果 优点  相关算法系列 Strategy类层次为Context定义了一系列可供重用的算法或者行为。有助于析取出这些算法的公共功能 一个替代继承的方法 可以使用继承生成Context的子类，给予它们不同的行为，但是这就会将行为硬编码到Context当中，将算法的实现和Context的实现混淆，使得Context难以理解、难以维护、难以扩展，还不能动态改变算法。将算法封装在独立的Strategy类中，使得我们可以独立于Context改变它，易于切换、易于理解、易于扩展 消除了一些条件语句 将不同行为堆砌在一个类当中的时候，很难避免使用条件语句来选择合适的行为。将行为封装成一个个独立的Strategy类中可以消除这些条件语句（含有许多条件语句的代码通常意味着需要使用策略模式） 实现的选择 可以为相同行为提供不同的实现，可以根据不同的时间、空间权衡取舍要求从不同的策略中进行选择  缺点  客户必须要了解不同的Strategy 本模式一个潜在的缺点，客户选择一个Strategy必须要知道这些Strategy有何不同，此时可能不得不向客户暴露实现。因此只有不同行为变体与客户相关的行为时，才需要使用Strategy Strategy和Context的通信开销 无论具体的ConcreteStrategy是简单还是负责，都共享Strategy定义的接口。因此很可能某一些简单的ConcreteStrategy可能不会使用所有通过这个接口传递给他们的信息。 增加了对象的数目 Strategy增加了一个应用中对象的数目。有时候可以将Strategy实现为可供各个Context共享的无状态对象来减少这一个开销。其余任何状态都由Context来维护  实现  定义Strategy接口和Context接口 必须传递所有实现需要的数据，也可以将Context自身作为参数进行传递 将Strategy作为模板参数 （Go里没有，这就不展开了） 让Strategy对象成为可选的 访问前先判断是否存在，如果存在，就使用它；如果没有，就执行缺省的行为  代码示例  回调事件处理  相关模式 Flyweight（享元模式）： Strategy对象通常是很好的轻量级对象"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/5.jpeg' />
+    <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MK7GTCNC34"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-MK7GTCNC34', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="https://lllovol.com" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>返回</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/2021/8/strategy/">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/5.jpeg" loading="lazy" alt="Featured image of post 设计模式-Strategy策略模式学习笔记" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/note/" style="background-color: ; color: ;">
+                Note
+            </a>
+        
+            <a href="/categories/tech/" style="background-color: ; color: ;">
+                Tech
+            </a>
+        
+            <a href="/categories/designpattern/" style="background-color: ; color: ;">
+                DesignPattern
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/p/2021/8/strategy/">设计模式-Strategy策略模式学习笔记</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 15, 2021</time>
+            </div>
+        
+
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    <h1 id="前言">前言</h1>
+<p>为什么我们需要设计模式呢？我们日常的设计应该对手头的问题有针对性，同时对将来的问题也要有足够的通用性，同时我们也需要避免重复设计或者尽可能的减少重复设计。但是想以一下子就得到复用性和灵活性好的设计，其实是相当困难的。
+而设计模式，就是将对面向对象软件的设计经验作为设计模式记录下来。</p>
+<h2 id="设计模式的四个基本要素">设计模式的四个基本要素</h2>
+<ol>
+<li><strong>模式名称</strong> 一个助记的名称</li>
+<li><strong>问题</strong> 描述了应该在什么时候使用设计模式</li>
+<li><strong>解决方案</strong> 描述了设计的组成成分，它们之间的相互关系和各自的职责和协作方式</li>
+<li><strong>效果</strong> 描述了模式应用的效果以及使用模式应该权衡的问题</li>
+</ol>
+<h2 id="设计模式的三大分类">设计模式的三大分类</h2>
+<p>我们主要通过两个准则对各种设计模式进行分类：</p>
+<ol>
+<li><strong>目的准则</strong> 这个模式是用来完成什么工作的</li>
+<li><strong>范围准则</strong> 这个模式用于类还是用于对象的
+<img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/screenshot-20210816-013825.png" alt="设计模式分类"  /></li>
+</ol>
+<h2 id="面向对象的六大原则">面向对象的六大原则</h2>
+<ol>
+<li><strong>单一功能原则</strong> 一个类只做一件事情</li>
+<li><strong>开闭原则</strong> 一个软件实体类，模块和函数应该对扩展开放，对修改关闭</li>
+<li><strong>里氏替换原则</strong> 子类可以扩展父类的功能，但不能改变父类原有的功能</li>
+<li><strong>依赖倒置原则</strong> 抽象不应该依赖细节，细节应该依赖于抽象，换一句话说，就是要针对接口编程，不要对实现编程</li>
+<li><strong>接口分离原则</strong> 系统解开耦合，从而容易重构，更改和重新部署</li>
+<li><strong>迪米特原则</strong> 一个类应该对自己需要耦合或者调用的类知道得最少，这有点类似于接口隔离原则中的最小接口的概念</li>
+</ol>
+<h1 id="strategy-策略模式">Strategy 策略模式</h1>
+<h2 id="意图">意图</h2>
+<p>定义一系列的算法，把他们一个个封装起来，并且使他们可以互相替换。同时本模式可以使得算法可以独立于使用它的客户变化而变化</p>
+<h2 id="别名">别名</h2>
+<p>Policy 政策模式</p>
+<h2 id="动机">动机</h2>
+<p>当我们需要对一个正文流进行处理，需要使用许多不同的算法。这个时候，将这些算法那硬编码进使用它们的类当中是不可取的，原因如下：</p>
+<ul>
+<li>客户程序异常庞大同时难以维护</li>
+<li>不同的时候需要不同的算法，我们不想支持我们并不使用的算法</li>
+<li>当其中某些算法是客户程序难以分割的算法的时候，增加新的算法或者改变现有的算法将十分困难</li>
+</ul>
+<h2 id="适用性">适用性</h2>
+<ul>
+<li><strong>许多相关的类只是行为有不同</strong> 可以使用多个行为中的一个行为来配置一个类</li>
+<li><strong>需要使用一个算法的不同变体</strong> 可能会定义一些反映了不同时间、空间等因素权衡的算法，将这些变体实现为类层次</li>
+<li><strong>算法使用了客户不应该知道的数据</strong> 避免暴露负责的、与算法相关的数据结构</li>
+<li><strong>一个类定义了多种行为</strong>，并且这些行为在这个类的操作中以多个条件语句的形式出现。将相关的条件分支移入它们各自的Strategy类当中来代替这些条件语句</li>
+</ul>
+<h2 id="结构">结构</h2>
+<p><img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/UML%20%E5%9B%BE.jpg" alt="图"  /></p>
+<h2 id="参与者">参与者</h2>
+<ol>
+<li><strong>Strategy</strong>
+<ol>
+<li>定义所有支持的算法的公共接口。Context使用这个接口来调用某个ConcreteStrategy定义的算法</li>
+</ol>
+</li>
+<li><strong>ConcreteStrategy</strong>
+<ol>
+<li>以Strategy为策略是实现某具体的算法</li>
+</ol>
+</li>
+<li><strong>Context</strong>
+<ol>
+<li>用一个ConcreteStrategy对象来配置</li>
+<li>维护一个对Strategy对象的引用</li>
+<li>可定义一个接口来让Strategy访问它的数据</li>
+</ol>
+</li>
+</ol>
+<h2 id="协作">协作</h2>
+<ol>
+<li>Strategy和Context相互作用以实现选定的算法
+<ol>
+<li>Context将算法所需要的数据传递给Strategy</li>
+<li>Context也可以将自身作为一个参数传递给Strategy，Strategy就可以在需要的时候回调Context</li>
+</ol>
+</li>
+<li>Context将客户的请求转发给它的Strategy。通常创建并传递一个ConcreteStrategy对象给Context。客户只需要和Context交互。</li>
+</ol>
+<h2 id="效果">效果</h2>
+<h3 id="优点">优点</h3>
+<ol>
+<li><strong>相关算法系列</strong> Strategy类层次为Context定义了一系列可供重用的算法或者行为。有助于析取出这些算法的公共功能</li>
+<li><strong>一个替代继承的方法</strong> 可以使用继承生成Context的子类，给予它们不同的行为，但是这就会将行为硬编码到Context当中，将算法的实现和Context的实现混淆，使得Context难以理解、难以维护、难以扩展，还不能动态改变算法。将算法封装在独立的Strategy类中，使得我们可以独立于Context改变它，易于切换、易于理解、易于扩展</li>
+<li><strong>消除了一些条件语句</strong> 将不同行为堆砌在一个类当中的时候，很难避免使用条件语句来选择合适的行为。将行为封装成一个个独立的Strategy类中可以消除这些条件语句（含有许多条件语句的代码通常意味着需要使用策略模式）</li>
+<li><strong>实现的选择</strong> 可以为相同行为提供不同的实现，可以根据不同的时间、空间权衡取舍要求从不同的策略中进行选择</li>
+</ol>
+<h3 id="缺点">缺点</h3>
+<ol>
+<li><strong>客户必须要了解不同的Strategy</strong> 本模式一个潜在的缺点，客户选择一个Strategy必须要知道这些Strategy有何不同，此时可能不得不向客户暴露实现。因此只有不同行为变体与客户相关的行为时，才需要使用Strategy</li>
+<li><strong>Strategy和Context的通信开销</strong> 无论具体的ConcreteStrategy是简单还是负责，都共享Strategy定义的接口。因此很可能某一些简单的ConcreteStrategy可能不会使用所有通过这个接口传递给他们的信息。</li>
+<li><strong>增加了对象的数目</strong> Strategy增加了一个应用中对象的数目。有时候可以将Strategy实现为可供各个Context共享的无状态对象来减少这一个开销。其余任何状态都由Context来维护</li>
+</ol>
+<h2 id="实现">实现</h2>
+<ol>
+<li><strong>定义Strategy接口和Context接口</strong> 必须传递所有实现需要的数据，也可以将Context自身作为参数进行传递</li>
+<li><strong>将Strategy作为模板参数</strong> （Go里没有，这就不展开了）</li>
+<li><strong>让Strategy对象成为可选的</strong> 访问前先判断是否存在，如果存在，就使用它；如果没有，就执行缺省的行为</li>
+</ol>
+<h2 id="代码示例">代码示例</h2>
+<ol>
+<li>回调事件处理</li>
+</ol>
+<h2 id="相关模式">相关模式</h2>
+<p>Flyweight（享元模式）： Strategy对象通常是很好的轻量级对象</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/note/">Note</a>
+        
+            <a href="/tags/tech/">Tech</a>
+        
+            <a href="/tags/designpattern/">DesignPattern</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css"integrity="sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.js"integrity="sha384-pK1WpvzWVBQiP0/GjnvRxV4mOb0oxFuyRxJlk6vVw146n3egcN5C925NCP7a7BY8"crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/contrib/auto-render.min.js"integrity="sha384-vZTG03m&#43;2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">相关文章</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="has-image">
+    <a href="/p/2021/5/rake-file-usage/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/26.jpeg" loading="lazy" data-key="2021/5/rake-file-usage" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/26.jpeg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">从Jekyll迁移至Hugo</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/sicp-chapter1.1/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg" loading="lazy" data-key="sicp-chapter1.1" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Structure and Interpretation of Computer Programs 读书笔记 Chapter 1 构造过程抽象 1.1 程序设计的基本元素</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/sicp/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/10.jpg" loading="lazy" data-key="sicp" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/10.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Structure and Interpretation of Computer Programs 读书笔记 前言</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/redis/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg" loading="lazy" data-key="redis" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Redis中的常用数据结构</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/improve-our-vision/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/7.jpg" loading="lazy" data-key="improve-our-vision" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/7.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">大咖分享-如何提高自己的技术视野</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+     
+        
+    
+
+
+<div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "aaf5fc3a72ea9ce81d62",
+        clientSecret: "7792527b47af3239ddbc2274fb5fd141c28d8339",
+        repo: "ymkNK.github.io",
+        owner: "ymkNK",
+        admin: "ymkNK",
+        id: window.location.pathname,
+        title: document.title,
+        distractionFreeMode:  true 
+    })
+
+    gitalk.render('gitalk-container')
+</script>
+
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        
+        2018 -
+        
+        2021
+        &copy;
+        lllovol
+    </section>
+    
+    <section class="powerby">
+        
+            <b><a href="https://github.com/ymkNK" target="_blank" rel="noopener" data-version="%s">Owner Rainbowly </a></b> <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">目录</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#设计模式的四个基本要素">设计模式的四个基本要素</a></li>
+    <li><a href="#设计模式的三大分类">设计模式的三大分类</a></li>
+    <li><a href="#面向对象的六大原则">面向对象的六大原则</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#意图">意图</a></li>
+    <li><a href="#别名">别名</a></li>
+    <li><a href="#动机">动机</a></li>
+    <li><a href="#适用性">适用性</a></li>
+    <li><a href="#结构">结构</a></li>
+    <li><a href="#参与者">参与者</a></li>
+    <li><a href="#协作">协作</a></li>
+    <li><a href="#效果">效果</a>
+      <ul>
+        <li><a href="#优点">优点</a></li>
+        <li><a href="#缺点">缺点</a></li>
+      </ul>
+    </li>
+    <li><a href="#实现">实现</a></li>
+    <li><a href="#代码示例">代码示例</a></li>
+    <li><a href="#相关模式">相关模式</a></li>
+  </ul>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MK7GTCNC34"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-MK7GTCNC34');
+</script>
+    </body>
+</html>

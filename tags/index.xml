@@ -6,11 +6,38 @@
     <description>Recent content in Tags on lllovol</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 27 May 2021 19:52:17 +0800</lastBuildDate><atom:link href="https://lllovol.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 15 Aug 2021 02:12:03 +0000</lastBuildDate><atom:link href="https://lllovol.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DesignPattern</title>
+      <link>https://lllovol.com/tags/designpattern/</link>
+      <pubDate>Sun, 15 Aug 2021 02:12:03 +0000</pubDate>
+      
+      <guid>https://lllovol.com/tags/designpattern/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Note</title>
+      <link>https://lllovol.com/tags/note/</link>
+      <pubDate>Sun, 15 Aug 2021 02:12:03 +0000</pubDate>
+      
+      <guid>https://lllovol.com/tags/note/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tech</title>
+      <link>https://lllovol.com/tags/tech/</link>
+      <pubDate>Sun, 15 Aug 2021 02:12:03 +0000</pubDate>
+      
+      <guid>https://lllovol.com/tags/tech/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Hugo</title>
       <link>https://lllovol.com/tags/hugo/</link>
-      <pubDate>Thu, 27 May 2021 19:52:17 +0800</pubDate>
+      <pubDate>Thu, 27 May 2021 19:52:17 +0000</pubDate>
       
       <guid>https://lllovol.com/tags/hugo/</guid>
       <description></description>
@@ -19,18 +46,9 @@
     <item>
       <title>Ruby</title>
       <link>https://lllovol.com/tags/ruby/</link>
-      <pubDate>Thu, 27 May 2021 19:52:17 +0800</pubDate>
+      <pubDate>Thu, 27 May 2021 19:52:17 +0000</pubDate>
       
       <guid>https://lllovol.com/tags/ruby/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Tech</title>
-      <link>https://lllovol.com/tags/tech/</link>
-      <pubDate>Thu, 27 May 2021 19:52:17 +0800</pubDate>
-      
-      <guid>https://lllovol.com/tags/tech/</guid>
       <description></description>
     </item>
     
@@ -67,15 +85,6 @@
       <pubDate>Mon, 27 Jul 2020 15:51:33 +0000</pubDate>
       
       <guid>https://lllovol.com/tags/spring/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Note</title>
-      <link>https://lllovol.com/tags/note/</link>
-      <pubDate>Fri, 17 Jan 2020 11:13:47 +0000</pubDate>
-      
-      <guid>https://lllovol.com/tags/note/</guid>
       <description></description>
     </item>
     

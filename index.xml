@@ -6,10 +6,121 @@
         <description>Recent content on lllovol</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Thu, 27 May 2021 19:52:17 +0800</lastBuildDate><atom:link href="https://lllovol.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 15 Aug 2021 02:12:03 +0000</lastBuildDate><atom:link href="https://lllovol.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>设计模式-Strategy策略模式学习笔记</title>
+        <link>https://lllovol.com/p/2021/8/strategy/</link>
+        <pubDate>Sun, 15 Aug 2021 02:12:03 +0000</pubDate>
+        
+        <guid>https://lllovol.com/p/2021/8/strategy/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/5.jpeg" alt="Featured image of post 设计模式-Strategy策略模式学习笔记" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
+&lt;p&gt;为什么我们需要设计模式呢？我们日常的设计应该对手头的问题有针对性，同时对将来的问题也要有足够的通用性，同时我们也需要避免重复设计或者尽可能的减少重复设计。但是想以一下子就得到复用性和灵活性好的设计，其实是相当困难的。
+而设计模式，就是将对面向对象软件的设计经验作为设计模式记录下来。&lt;/p&gt;
+&lt;h2 id=&#34;设计模式的四个基本要素&#34;&gt;设计模式的四个基本要素&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;模式名称&lt;/strong&gt; 一个助记的名称&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;问题&lt;/strong&gt; 描述了应该在什么时候使用设计模式&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;解决方案&lt;/strong&gt; 描述了设计的组成成分，它们之间的相互关系和各自的职责和协作方式&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;效果&lt;/strong&gt; 描述了模式应用的效果以及使用模式应该权衡的问题&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;设计模式的三大分类&#34;&gt;设计模式的三大分类&lt;/h2&gt;
+&lt;p&gt;我们主要通过两个准则对各种设计模式进行分类：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;目的准则&lt;/strong&gt; 这个模式是用来完成什么工作的&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;范围准则&lt;/strong&gt; 这个模式用于类还是用于对象的
+&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/screenshot-20210816-013825.png&#34; alt=&#34;设计模式分类&#34;  /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;面向对象的六大原则&#34;&gt;面向对象的六大原则&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;单一功能原则&lt;/strong&gt; 一个类只做一件事情&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;开闭原则&lt;/strong&gt; 一个软件实体类，模块和函数应该对扩展开放，对修改关闭&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;里氏替换原则&lt;/strong&gt; 子类可以扩展父类的功能，但不能改变父类原有的功能&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;依赖倒置原则&lt;/strong&gt; 抽象不应该依赖细节，细节应该依赖于抽象，换一句话说，就是要针对接口编程，不要对实现编程&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;接口分离原则&lt;/strong&gt; 系统解开耦合，从而容易重构，更改和重新部署&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;迪米特原则&lt;/strong&gt; 一个类应该对自己需要耦合或者调用的类知道得最少，这有点类似于接口隔离原则中的最小接口的概念&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;strategy-策略模式&#34;&gt;Strategy 策略模式&lt;/h1&gt;
+&lt;h2 id=&#34;意图&#34;&gt;意图&lt;/h2&gt;
+&lt;p&gt;定义一系列的算法，把他们一个个封装起来，并且使他们可以互相替换。同时本模式可以使得算法可以独立于使用它的客户变化而变化&lt;/p&gt;
+&lt;h2 id=&#34;别名&#34;&gt;别名&lt;/h2&gt;
+&lt;p&gt;Policy 政策模式&lt;/p&gt;
+&lt;h2 id=&#34;动机&#34;&gt;动机&lt;/h2&gt;
+&lt;p&gt;当我们需要对一个正文流进行处理，需要使用许多不同的算法。这个时候，将这些算法那硬编码进使用它们的类当中是不可取的，原因如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;客户程序异常庞大同时难以维护&lt;/li&gt;
+&lt;li&gt;不同的时候需要不同的算法，我们不想支持我们并不使用的算法&lt;/li&gt;
+&lt;li&gt;当其中某些算法是客户程序难以分割的算法的时候，增加新的算法或者改变现有的算法将十分困难&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;适用性&#34;&gt;适用性&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;许多相关的类只是行为有不同&lt;/strong&gt; 可以使用多个行为中的一个行为来配置一个类&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;需要使用一个算法的不同变体&lt;/strong&gt; 可能会定义一些反映了不同时间、空间等因素权衡的算法，将这些变体实现为类层次&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;算法使用了客户不应该知道的数据&lt;/strong&gt; 避免暴露负责的、与算法相关的数据结构&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;一个类定义了多种行为&lt;/strong&gt;，并且这些行为在这个类的操作中以多个条件语句的形式出现。将相关的条件分支移入它们各自的Strategy类当中来代替这些条件语句&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;结构&#34;&gt;结构&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/UML%20%E5%9B%BE.jpg&#34; alt=&#34;图&#34;  /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;参与者&#34;&gt;参与者&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Strategy&lt;/strong&gt;
+&lt;ol&gt;
+&lt;li&gt;定义所有支持的算法的公共接口。Context使用这个接口来调用某个ConcreteStrategy定义的算法&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ConcreteStrategy&lt;/strong&gt;
+&lt;ol&gt;
+&lt;li&gt;以Strategy为策略是实现某具体的算法&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Context&lt;/strong&gt;
+&lt;ol&gt;
+&lt;li&gt;用一个ConcreteStrategy对象来配置&lt;/li&gt;
+&lt;li&gt;维护一个对Strategy对象的引用&lt;/li&gt;
+&lt;li&gt;可定义一个接口来让Strategy访问它的数据&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;协作&#34;&gt;协作&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Strategy和Context相互作用以实现选定的算法
+&lt;ol&gt;
+&lt;li&gt;Context将算法所需要的数据传递给Strategy&lt;/li&gt;
+&lt;li&gt;Context也可以将自身作为一个参数传递给Strategy，Strategy就可以在需要的时候回调Context&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Context将客户的请求转发给它的Strategy。通常创建并传递一个ConcreteStrategy对象给Context。客户只需要和Context交互。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;效果&#34;&gt;效果&lt;/h2&gt;
+&lt;h3 id=&#34;优点&#34;&gt;优点&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;相关算法系列&lt;/strong&gt; Strategy类层次为Context定义了一系列可供重用的算法或者行为。有助于析取出这些算法的公共功能&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;一个替代继承的方法&lt;/strong&gt; 可以使用继承生成Context的子类，给予它们不同的行为，但是这就会将行为硬编码到Context当中，将算法的实现和Context的实现混淆，使得Context难以理解、难以维护、难以扩展，还不能动态改变算法。将算法封装在独立的Strategy类中，使得我们可以独立于Context改变它，易于切换、易于理解、易于扩展&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;消除了一些条件语句&lt;/strong&gt; 将不同行为堆砌在一个类当中的时候，很难避免使用条件语句来选择合适的行为。将行为封装成一个个独立的Strategy类中可以消除这些条件语句（含有许多条件语句的代码通常意味着需要使用策略模式）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实现的选择&lt;/strong&gt; 可以为相同行为提供不同的实现，可以根据不同的时间、空间权衡取舍要求从不同的策略中进行选择&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;缺点&#34;&gt;缺点&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;客户必须要了解不同的Strategy&lt;/strong&gt; 本模式一个潜在的缺点，客户选择一个Strategy必须要知道这些Strategy有何不同，此时可能不得不向客户暴露实现。因此只有不同行为变体与客户相关的行为时，才需要使用Strategy&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Strategy和Context的通信开销&lt;/strong&gt; 无论具体的ConcreteStrategy是简单还是负责，都共享Strategy定义的接口。因此很可能某一些简单的ConcreteStrategy可能不会使用所有通过这个接口传递给他们的信息。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;增加了对象的数目&lt;/strong&gt; Strategy增加了一个应用中对象的数目。有时候可以将Strategy实现为可供各个Context共享的无状态对象来减少这一个开销。其余任何状态都由Context来维护&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;实现&#34;&gt;实现&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;定义Strategy接口和Context接口&lt;/strong&gt; 必须传递所有实现需要的数据，也可以将Context自身作为参数进行传递&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;将Strategy作为模板参数&lt;/strong&gt; （Go里没有，这就不展开了）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;让Strategy对象成为可选的&lt;/strong&gt; 访问前先判断是否存在，如果存在，就使用它；如果没有，就执行缺省的行为&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;代码示例&#34;&gt;代码示例&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;回调事件处理&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;相关模式&#34;&gt;相关模式&lt;/h2&gt;
+&lt;p&gt;Flyweight（享元模式）： Strategy对象通常是很好的轻量级对象&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>从Jekyll迁移至Hugo</title>
         <link>https://lllovol.com/p/2021/5/rake-file-usage/</link>
-        <pubDate>Thu, 27 May 2021 19:52:17 +0800</pubDate>
+        <pubDate>Thu, 27 May 2021 19:52:17 +0000</pubDate>
         
         <guid>https://lllovol.com/p/2021/5/rake-file-usage/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/26.jpeg" alt="Featured image of post 从Jekyll迁移至Hugo" /&gt;&lt;p&gt;最近将博客背后的静态引擎，从Jekyll框架切换为了Hugo。也折腾了不少时间，现在总结一下其中的过程吧&lt;/p&gt;
@@ -50,7 +161,7 @@ slug: 2021/5/rake-file-usage
 &lt;h4 id=&#34;rake-hugo&#34;&gt;rake hugo&lt;/h4&gt;
 &lt;p&gt;快速构建生成hugo的静态网页，public文件夹下就是站点项目，本博客托管在github，因此可以直接push到仓库，进行直接发布&lt;/p&gt;
 &lt;h4 id=&#34;源代码&#34;&gt;源代码&lt;/h4&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Ruby&#34; data-lang=&#34;Ruby&#34;&gt;&lt;span class=&#34;n&#34;&gt;task&lt;/span&gt; &lt;span class=&#34;ss&#34;&gt;:default&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;ss&#34;&gt;:new&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Ruby&#34; data-lang=&#34;Ruby&#34;&gt;&lt;span class=&#34;n&#34;&gt;task&lt;/span&gt; &lt;span class=&#34;ss&#34;&gt;:default&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;ss&#34;&gt;:new&lt;/span&gt;
 
 &lt;span class=&#34;nb&#34;&gt;require&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;fileutils&amp;#39;&lt;/span&gt;
 
@@ -361,7 +472,7 @@ Server层涵盖了MySQL的大多数的核心服务功能，以及所有的内置
 &lt;p&gt;看起来上面逻辑没有什么问题，但是在执行的时候，发现每一次更新数据的时候，实际在mongo数据库中并不是更新数据，而是从新新建了一条数据！这就导致同一条数据在更新之后出现了两次？？
 但是我明明已经将唯一的Id值作为主键了，为什么还是会被认为是新的呢？&lt;/p&gt;
 &lt;h3 id=&#34;model&#34;&gt;Model&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Example&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Example&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
     &lt;span class=&#34;nd&#34;&gt;@Id&lt;/span&gt;
     &lt;span class=&#34;n&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;exampleId&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
     &lt;span class=&#34;n&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
@@ -3252,7 +3363,8 @@ Stream API可以极大提高Java程序员的生产力，让程序员写出高效
 &lt;h4 id=&#34;spring-相关书籍推荐&#34;&gt;spring 相关书籍推荐&lt;/h4&gt;
 &lt;p&gt;spring boot 编程思想
 原生类型，装箱和拆箱（int 和Integer）
-&lt;a href=&#34;https://www.cnblogs.com/dolphin0520/p/3780005.html&#34;&gt;https://www.cnblogs.com/dolphin0520/p/3780005.html&lt;/a&gt;&lt;/p&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/dolphin0520/p/3780005.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.cnblogs.com/dolphin0520/p/3780005.html&lt;/a&gt;&lt;/p&gt;
 &lt;h6 id=&#34;为什么会有装箱和拆箱&#34;&gt;为什么会有装箱和拆箱&lt;/h6&gt;
 &lt;p&gt;我的理解，是将一个基本类型装箱，变成一个类，比如int 比那成Integer，这样做了之后，就能赋予这个类其他的各种方法和函数操作。&lt;br&gt;
 当然这只是我很浅显的理解，下面是我在网上查阅相关的资料所了解到原因&lt;/p&gt;

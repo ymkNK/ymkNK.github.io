@@ -6,11 +6,11 @@
     <description>Recent content in Hugo on lllovol</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 27 May 2021 19:52:17 +0800</lastBuildDate><atom:link href="https://lllovol.com/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 27 May 2021 19:52:17 +0000</lastBuildDate><atom:link href="https://lllovol.com/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>从Jekyll迁移至Hugo</title>
       <link>https://lllovol.com/p/2021/5/rake-file-usage/</link>
-      <pubDate>Thu, 27 May 2021 19:52:17 +0800</pubDate>
+      <pubDate>Thu, 27 May 2021 19:52:17 +0000</pubDate>
       
       <guid>https://lllovol.com/p/2021/5/rake-file-usage/</guid>
       <description>最近将博客背后的静态引擎，从Jekyll框架切换为了Hugo。也折腾了不少时间，现在总结一下其中的过程吧
