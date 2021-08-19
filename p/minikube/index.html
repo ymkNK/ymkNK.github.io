@@ -7,12 +7,12 @@
 这里我们选择的就是学习用的minikube
  kubernetes官方文档 minikube操作文档 minikube安装文档
  安装minikube 1.检查能否虚拟化 sysctl -a | grep -E --color &#39;machdep.cpu.features|VMX&#39; vmx被标注出来有颜色，说明就是ok的，这台电脑是支持virtualization的（一般都是支持的,但是我花了88白菜价在腾讯云上买的1年1核1g服务器是不支持的）
-2.安装kubectl brew install kubernetes-cli使用kubectl version能够查看到对应的kubectl版本
+2.安装kubectl brew install kubernetes-cli 使用kubectl version能够查看到对应的kubectl版本
 3.安装Hypervisor（virtual machine monitor） 这个主要就是安装虚拟机了，kvm或者virtualBox二选一
 4.安装minikube 有两种方式,第一种方式就是如下的方式
-curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \&amp;amp;&amp;amp; chmod &#43;x minikube将minikube安装包下载下来，手动进行安装
-sudo mkdir -p /usr/local/bin/sudo install minikube /usr/local/bin/如果是mac用户，直接使用如下的命令就可以了
-brew install minikubebrew link minikube5.启动minikube minikube start就会开始根据本地的virtualBox来下载对应的驱动,中间应该会要求输入一次本机电脑的一次密码,然后会出现这样的错误： Error creating machine: Error in driver during machine creation: hyperkit crashed!'><title>从零开始将项目部署到Kubernetes</title>
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \ &amp;amp;&amp;amp; chmod &#43;x minikube 将minikube安装包下载下来，手动进行安装
+sudo mkdir -p /usr/local/bin/ sudo install minikube /usr/local/bin/ 如果是mac用户，直接使用如下的命令就可以了
+brew install minikube brew link minikube 5.启动minikube minikube start 就会开始根据本地的virtualBox来下载对应的驱动,中间应该会要求输入一次本机电脑的一次密码,然后会出现这样的错误： Error creating machine: Error in driver during machine creation: hyperkit crashed!'><title>从零开始将项目部署到Kubernetes</title>
 
 <link rel='canonical' href='https://lllovol.com/p/minikube/'>
 
@@ -23,12 +23,12 @@ brew install minikubebrew link minikube5.启动minikube minikube start就会�
 这里我们选择的就是学习用的minikube
  kubernetes官方文档 minikube操作文档 minikube安装文档
  安装minikube 1.检查能否虚拟化 sysctl -a | grep -E --color &#39;machdep.cpu.features|VMX&#39; vmx被标注出来有颜色，说明就是ok的，这台电脑是支持virtualization的（一般都是支持的,但是我花了88白菜价在腾讯云上买的1年1核1g服务器是不支持的）
-2.安装kubectl brew install kubernetes-cli使用kubectl version能够查看到对应的kubectl版本
+2.安装kubectl brew install kubernetes-cli 使用kubectl version能够查看到对应的kubectl版本
 3.安装Hypervisor（virtual machine monitor） 这个主要就是安装虚拟机了，kvm或者virtualBox二选一
 4.安装minikube 有两种方式,第一种方式就是如下的方式
-curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \&amp;amp;&amp;amp; chmod &#43;x minikube将minikube安装包下载下来，手动进行安装
-sudo mkdir -p /usr/local/bin/sudo install minikube /usr/local/bin/如果是mac用户，直接使用如下的命令就可以了
-brew install minikubebrew link minikube5.启动minikube minikube start就会开始根据本地的virtualBox来下载对应的驱动,中间应该会要求输入一次本机电脑的一次密码,然后会出现这样的错误： Error creating machine: Error in driver during machine creation: hyperkit crashed!'>
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \ &amp;amp;&amp;amp; chmod &#43;x minikube 将minikube安装包下载下来，手动进行安装
+sudo mkdir -p /usr/local/bin/ sudo install minikube /usr/local/bin/ 如果是mac用户，直接使用如下的命令就可以了
+brew install minikube brew link minikube 5.启动minikube minikube start 就会开始根据本地的virtualBox来下载对应的驱动,中间应该会要求输入一次本机电脑的一次密码,然后会出现这样的错误： Error creating machine: Error in driver during machine creation: hyperkit crashed!'>
 <meta property='og:url' content='https://lllovol.com/p/minikube/'>
 <meta property='og:site_name' content='lllovol'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='MicroService' /><meta property='article:published_time' content='2019-12-02T14:23:17&#43;00:00'/><meta property='article:modified_time' content='2019-12-02T14:23:17&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/4.jpg' />
@@ -39,12 +39,12 @@ brew install minikubebrew link minikube5.启动minikube minikube start就会�
 这里我们选择的就是学习用的minikube
  kubernetes官方文档 minikube操作文档 minikube安装文档
  安装minikube 1.检查能否虚拟化 sysctl -a | grep -E --color &#39;machdep.cpu.features|VMX&#39; vmx被标注出来有颜色，说明就是ok的，这台电脑是支持virtualization的（一般都是支持的,但是我花了88白菜价在腾讯云上买的1年1核1g服务器是不支持的）
-2.安装kubectl brew install kubernetes-cli使用kubectl version能够查看到对应的kubectl版本
+2.安装kubectl brew install kubernetes-cli 使用kubectl version能够查看到对应的kubectl版本
 3.安装Hypervisor（virtual machine monitor） 这个主要就是安装虚拟机了，kvm或者virtualBox二选一
 4.安装minikube 有两种方式,第一种方式就是如下的方式
-curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \&amp;amp;&amp;amp; chmod &#43;x minikube将minikube安装包下载下来，手动进行安装
-sudo mkdir -p /usr/local/bin/sudo install minikube /usr/local/bin/如果是mac用户，直接使用如下的命令就可以了
-brew install minikubebrew link minikube5.启动minikube minikube start就会开始根据本地的virtualBox来下载对应的驱动,中间应该会要求输入一次本机电脑的一次密码,然后会出现这样的错误： Error creating machine: Error in driver during machine creation: hyperkit crashed!"><meta name="twitter:card" content="summary_large_image">
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \ &amp;amp;&amp;amp; chmod &#43;x minikube 将minikube安装包下载下来，手动进行安装
+sudo mkdir -p /usr/local/bin/ sudo install minikube /usr/local/bin/ 如果是mac用户，直接使用如下的命令就可以了
+brew install minikube brew link minikube 5.启动minikube minikube start 就会开始根据本地的virtualBox来下载对应的驱动,中间应该会要求输入一次本机电脑的一次密码,然后会出现这样的错误： Error creating machine: Error in driver during machine creation: hyperkit crashed!"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/4.jpg' />
     <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
 

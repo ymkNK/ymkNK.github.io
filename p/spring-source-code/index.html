@@ -7,11 +7,11 @@
   一个成员属性
   这个属性的getter
   这个属性的setter 然后在配置文件xml当中添加相关的bean
- &amp;lt;bean id=&amp;quot;myTestBean&amp;quot; class=&amp;quot;bean.MyTestBean&amp;quot;/&amp;gt;   然后就可以在测试代码中使用我们所测试的bean了
+ &amp;lt;bean id=&amp;quot;myTestBean&amp;quot; class=&amp;quot;bean.MyTestBean&amp;quot;/&amp;gt;    然后就可以在测试代码中使用我们所测试的bean了
 容器的基础XmlBeanFactory 代码如下
- BeanFactory bf= new XmlBeanFactory(new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;)); 实现流程 首先调用了ClassPathResource的构造函数 来构造了Resource资源文件的实例对象，然后后续的资源处理就可以使用Resource提供的各种服务来操作了。然后当我们有了Resource之后，就可以进行XmlBeanFactory的初始化了。
+ BeanFactory bf= new XmlBeanFactory(new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;));  实现流程 首先调用了ClassPathResource的构造函数 来构造了Resource资源文件的实例对象，然后后续的资源处理就可以使用Resource提供的各种服务来操作了。然后当我们有了Resource之后，就可以进行XmlBeanFactory的初始化了。
 与之同理，对于不同来源的资源文件都有相应的Resource实现。有了Resource接口之后便可以对所有资源文件进行统一的处理。例如
- Resource resource=new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;);InputStream inputStream=resource.getInputStream(); XmlBeanDefinition 然后，当Resource的相关类完成了对配置文件进行封住后配置文件的读取工作就全权交给XmlBeanDefinition来处理了。
+ Resource resource=new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;); InputStream inputStream=resource.getInputStream();  XmlBeanDefinition 然后，当Resource的相关类完成了对配置文件进行封住后配置文件的读取工作就全权交给XmlBeanDefinition来处理了。
 （ignoreDependencyInterface（）函数的主要功能是忽略给定接口的自动装配功能） (时序图书 p20)
  封装资源文件。 获取输入流 通过构造的InputSource实例和Resource实例继续调用函数doLoadbeanDefinitions  支撑着整个Spring容器部分的实现基础 然后就是3个步骤，支撑着整个Spring容器部分的实现基础
  获取对XML文件的验证模式 加载XML文件，并得到对应的Document 根据返回的Document注册Bean信息  doRegisterBeanDefinitions(root) 然后，又通过一系列的处理之后，终于可以到了核心逻辑的底部doRegisterBeanDefinitions(root)
@@ -26,11 +26,11 @@
   一个成员属性
   这个属性的getter
   这个属性的setter 然后在配置文件xml当中添加相关的bean
- &amp;lt;bean id=&amp;quot;myTestBean&amp;quot; class=&amp;quot;bean.MyTestBean&amp;quot;/&amp;gt;   然后就可以在测试代码中使用我们所测试的bean了
+ &amp;lt;bean id=&amp;quot;myTestBean&amp;quot; class=&amp;quot;bean.MyTestBean&amp;quot;/&amp;gt;    然后就可以在测试代码中使用我们所测试的bean了
 容器的基础XmlBeanFactory 代码如下
- BeanFactory bf= new XmlBeanFactory(new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;)); 实现流程 首先调用了ClassPathResource的构造函数 来构造了Resource资源文件的实例对象，然后后续的资源处理就可以使用Resource提供的各种服务来操作了。然后当我们有了Resource之后，就可以进行XmlBeanFactory的初始化了。
+ BeanFactory bf= new XmlBeanFactory(new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;));  实现流程 首先调用了ClassPathResource的构造函数 来构造了Resource资源文件的实例对象，然后后续的资源处理就可以使用Resource提供的各种服务来操作了。然后当我们有了Resource之后，就可以进行XmlBeanFactory的初始化了。
 与之同理，对于不同来源的资源文件都有相应的Resource实现。有了Resource接口之后便可以对所有资源文件进行统一的处理。例如
- Resource resource=new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;);InputStream inputStream=resource.getInputStream(); XmlBeanDefinition 然后，当Resource的相关类完成了对配置文件进行封住后配置文件的读取工作就全权交给XmlBeanDefinition来处理了。
+ Resource resource=new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;); InputStream inputStream=resource.getInputStream();  XmlBeanDefinition 然后，当Resource的相关类完成了对配置文件进行封住后配置文件的读取工作就全权交给XmlBeanDefinition来处理了。
 （ignoreDependencyInterface（）函数的主要功能是忽略给定接口的自动装配功能） (时序图书 p20)
  封装资源文件。 获取输入流 通过构造的InputSource实例和Resource实例继续调用函数doLoadbeanDefinitions  支撑着整个Spring容器部分的实现基础 然后就是3个步骤，支撑着整个Spring容器部分的实现基础
  获取对XML文件的验证模式 加载XML文件，并得到对应的Document 根据返回的Document注册Bean信息  doRegisterBeanDefinitions(root) 然后，又通过一系列的处理之后，终于可以到了核心逻辑的底部doRegisterBeanDefinitions(root)
@@ -45,11 +45,11 @@
   一个成员属性
   这个属性的getter
   这个属性的setter 然后在配置文件xml当中添加相关的bean
- &amp;lt;bean id=&amp;quot;myTestBean&amp;quot; class=&amp;quot;bean.MyTestBean&amp;quot;/&amp;gt;   然后就可以在测试代码中使用我们所测试的bean了
+ &amp;lt;bean id=&amp;quot;myTestBean&amp;quot; class=&amp;quot;bean.MyTestBean&amp;quot;/&amp;gt;    然后就可以在测试代码中使用我们所测试的bean了
 容器的基础XmlBeanFactory 代码如下
- BeanFactory bf= new XmlBeanFactory(new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;)); 实现流程 首先调用了ClassPathResource的构造函数 来构造了Resource资源文件的实例对象，然后后续的资源处理就可以使用Resource提供的各种服务来操作了。然后当我们有了Resource之后，就可以进行XmlBeanFactory的初始化了。
+ BeanFactory bf= new XmlBeanFactory(new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;));  实现流程 首先调用了ClassPathResource的构造函数 来构造了Resource资源文件的实例对象，然后后续的资源处理就可以使用Resource提供的各种服务来操作了。然后当我们有了Resource之后，就可以进行XmlBeanFactory的初始化了。
 与之同理，对于不同来源的资源文件都有相应的Resource实现。有了Resource接口之后便可以对所有资源文件进行统一的处理。例如
- Resource resource=new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;);InputStream inputStream=resource.getInputStream(); XmlBeanDefinition 然后，当Resource的相关类完成了对配置文件进行封住后配置文件的读取工作就全权交给XmlBeanDefinition来处理了。
+ Resource resource=new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;); InputStream inputStream=resource.getInputStream();  XmlBeanDefinition 然后，当Resource的相关类完成了对配置文件进行封住后配置文件的读取工作就全权交给XmlBeanDefinition来处理了。
 （ignoreDependencyInterface（）函数的主要功能是忽略给定接口的自动装配功能） (时序图书 p20)
  封装资源文件。 获取输入流 通过构造的InputSource实例和Resource实例继续调用函数doLoadbeanDefinitions  支撑着整个Spring容器部分的实现基础 然后就是3个步骤，支撑着整个Spring容器部分的实现基础
  获取对XML文件的验证模式 加载XML文件，并得到对应的Document 根据返回的Document注册Bean信息  doRegisterBeanDefinitions(root) 然后，又通过一系列的处理之后，终于可以到了核心逻辑的底部doRegisterBeanDefinitions(root)

@@ -4,10 +4,10 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='前言 本文主要记录最近工作中关于开发中的一些小技巧以及感悟
 小细节 String转Long 使用Long.parseLong,而不是Long.getLong
 Guava库 Joiner 超好用的Guava库，主要用于字符串的拼接，可以自动在中间加上分隔符
- String yamlStart = &amp;quot;---\n&amp;quot;;String yamlEnd = &amp;quot;...\n&amp;quot;;Joiner joinerContent = Joiner.on(&amp;quot;...\n---\n&amp;quot;).skipNulls();return Joiner.on(&amp;quot;&amp;quot;).join(yamlStart, joinerContent.join(yamlList), yamlEnd); Splitter 可以很方便的将字符串分割成对应的数据结构
- //将source进行处理List&amp;lt;String&amp;gt; tempSource = Splitter.on(&amp;quot;,&amp;quot;).splitToList(param.getSource()); String占位符的用法 原来：
- String title = &amp;quot;[&amp;quot; &#43; characterName &#43; &amp;quot;][&amp;quot; &#43; task.getEnv() &#43; &amp;quot;][&amp;quot; &#43; pipelineStage.getService() &#43; &amp;quot;]&amp;quot;; 改进：
- String title = String.format(&amp;quot;[%s][%s][%s]&amp;quot;, 线程中的问题 不能直接使用Autowired，需要定义了成员变量之后，使用外界已经加载好的service作为入参传入初始化这个线程，如果每一个线程都启一个service的话，资源消耗会很大。 （仅仅是我暂时这么理解，TODO 搞清楚原因）
+ String yamlStart = &amp;quot;---\n&amp;quot;; String yamlEnd = &amp;quot;...\n&amp;quot;; Joiner joinerContent = Joiner.on(&amp;quot;...\n---\n&amp;quot;).skipNulls(); return Joiner.on(&amp;quot;&amp;quot;).join(yamlStart, joinerContent.join(yamlList), yamlEnd);  Splitter 可以很方便的将字符串分割成对应的数据结构
+ //将source进行处理 List&amp;lt;String&amp;gt; tempSource = Splitter.on(&amp;quot;,&amp;quot;).splitToList(param.getSource());  String占位符的用法 原来：
+ String title = &amp;quot;[&amp;quot; &#43; characterName &#43; &amp;quot;][&amp;quot; &#43; task.getEnv() &#43; &amp;quot;][&amp;quot; &#43; pipelineStage.getService() &#43; &amp;quot;]&amp;quot;;  改进：
+ String title = String.format(&amp;quot;[%s][%s][%s]&amp;quot;,  线程中的问题 不能直接使用Autowired，需要定义了成员变量之后，使用外界已经加载好的service作为入参传入初始化这个线程，如果每一个线程都启一个service的话，资源消耗会很大。 （仅仅是我暂时这么理解，TODO 搞清楚原因）
 数据入库的操作 建议先入队列，然后再入库
 Configuration的问题 定义了两个configuration，一个masterClient，一个jobClient 然后有个地方使用了@Autowired来进行配置（一个在外层service，一个是另外一个service），这时候就出现了冲突，开始报错。配置一定要清晰'><title>SpringBoot开发中的一些小细节(九）Guava库</title>
 
@@ -17,10 +17,10 @@ Configuration的问题 定义了两个configuration，一个masterClient，一�
 <meta property='og:description' content='前言 本文主要记录最近工作中关于开发中的一些小技巧以及感悟
 小细节 String转Long 使用Long.parseLong,而不是Long.getLong
 Guava库 Joiner 超好用的Guava库，主要用于字符串的拼接，可以自动在中间加上分隔符
- String yamlStart = &amp;quot;---\n&amp;quot;;String yamlEnd = &amp;quot;...\n&amp;quot;;Joiner joinerContent = Joiner.on(&amp;quot;...\n---\n&amp;quot;).skipNulls();return Joiner.on(&amp;quot;&amp;quot;).join(yamlStart, joinerContent.join(yamlList), yamlEnd); Splitter 可以很方便的将字符串分割成对应的数据结构
- //将source进行处理List&amp;lt;String&amp;gt; tempSource = Splitter.on(&amp;quot;,&amp;quot;).splitToList(param.getSource()); String占位符的用法 原来：
- String title = &amp;quot;[&amp;quot; &#43; characterName &#43; &amp;quot;][&amp;quot; &#43; task.getEnv() &#43; &amp;quot;][&amp;quot; &#43; pipelineStage.getService() &#43; &amp;quot;]&amp;quot;; 改进：
- String title = String.format(&amp;quot;[%s][%s][%s]&amp;quot;, 线程中的问题 不能直接使用Autowired，需要定义了成员变量之后，使用外界已经加载好的service作为入参传入初始化这个线程，如果每一个线程都启一个service的话，资源消耗会很大。 （仅仅是我暂时这么理解，TODO 搞清楚原因）
+ String yamlStart = &amp;quot;---\n&amp;quot;; String yamlEnd = &amp;quot;...\n&amp;quot;; Joiner joinerContent = Joiner.on(&amp;quot;...\n---\n&amp;quot;).skipNulls(); return Joiner.on(&amp;quot;&amp;quot;).join(yamlStart, joinerContent.join(yamlList), yamlEnd);  Splitter 可以很方便的将字符串分割成对应的数据结构
+ //将source进行处理 List&amp;lt;String&amp;gt; tempSource = Splitter.on(&amp;quot;,&amp;quot;).splitToList(param.getSource());  String占位符的用法 原来：
+ String title = &amp;quot;[&amp;quot; &#43; characterName &#43; &amp;quot;][&amp;quot; &#43; task.getEnv() &#43; &amp;quot;][&amp;quot; &#43; pipelineStage.getService() &#43; &amp;quot;]&amp;quot;;  改进：
+ String title = String.format(&amp;quot;[%s][%s][%s]&amp;quot;,  线程中的问题 不能直接使用Autowired，需要定义了成员变量之后，使用外界已经加载好的service作为入参传入初始化这个线程，如果每一个线程都启一个service的话，资源消耗会很大。 （仅仅是我暂时这么理解，TODO 搞清楚原因）
 数据入库的操作 建议先入队列，然后再入库
 Configuration的问题 定义了两个configuration，一个masterClient，一个jobClient 然后有个地方使用了@Autowired来进行配置（一个在外层service，一个是另外一个service），这时候就出现了冲突，开始报错。配置一定要清晰'>
 <meta property='og:url' content='https://lllovol.com/p/spring9/'>
@@ -30,10 +30,10 @@ Configuration的问题 定义了两个configuration，一个masterClient，一�
 <meta name="twitter:description" content="前言 本文主要记录最近工作中关于开发中的一些小技巧以及感悟
 小细节 String转Long 使用Long.parseLong,而不是Long.getLong
 Guava库 Joiner 超好用的Guava库，主要用于字符串的拼接，可以自动在中间加上分隔符
- String yamlStart = &amp;quot;---\n&amp;quot;;String yamlEnd = &amp;quot;...\n&amp;quot;;Joiner joinerContent = Joiner.on(&amp;quot;...\n---\n&amp;quot;).skipNulls();return Joiner.on(&amp;quot;&amp;quot;).join(yamlStart, joinerContent.join(yamlList), yamlEnd); Splitter 可以很方便的将字符串分割成对应的数据结构
- //将source进行处理List&amp;lt;String&amp;gt; tempSource = Splitter.on(&amp;quot;,&amp;quot;).splitToList(param.getSource()); String占位符的用法 原来：
- String title = &amp;quot;[&amp;quot; &#43; characterName &#43; &amp;quot;][&amp;quot; &#43; task.getEnv() &#43; &amp;quot;][&amp;quot; &#43; pipelineStage.getService() &#43; &amp;quot;]&amp;quot;; 改进：
- String title = String.format(&amp;quot;[%s][%s][%s]&amp;quot;, 线程中的问题 不能直接使用Autowired，需要定义了成员变量之后，使用外界已经加载好的service作为入参传入初始化这个线程，如果每一个线程都启一个service的话，资源消耗会很大。 （仅仅是我暂时这么理解，TODO 搞清楚原因）
+ String yamlStart = &amp;quot;---\n&amp;quot;; String yamlEnd = &amp;quot;...\n&amp;quot;; Joiner joinerContent = Joiner.on(&amp;quot;...\n---\n&amp;quot;).skipNulls(); return Joiner.on(&amp;quot;&amp;quot;).join(yamlStart, joinerContent.join(yamlList), yamlEnd);  Splitter 可以很方便的将字符串分割成对应的数据结构
+ //将source进行处理 List&amp;lt;String&amp;gt; tempSource = Splitter.on(&amp;quot;,&amp;quot;).splitToList(param.getSource());  String占位符的用法 原来：
+ String title = &amp;quot;[&amp;quot; &#43; characterName &#43; &amp;quot;][&amp;quot; &#43; task.getEnv() &#43; &amp;quot;][&amp;quot; &#43; pipelineStage.getService() &#43; &amp;quot;]&amp;quot;;  改进：
+ String title = String.format(&amp;quot;[%s][%s][%s]&amp;quot;,  线程中的问题 不能直接使用Autowired，需要定义了成员变量之后，使用外界已经加载好的service作为入参传入初始化这个线程，如果每一个线程都启一个service的话，资源消耗会很大。 （仅仅是我暂时这么理解，TODO 搞清楚原因）
 数据入库的操作 建议先入队列，然后再入库
 Configuration的问题 定义了两个configuration，一个masterClient，一个jobClient 然后有个地方使用了@Autowired来进行配置（一个在外层service，一个是另外一个service），这时候就出现了冲突，开始报错。配置一定要清晰"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/9.jpg' />

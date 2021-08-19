@@ -7,8 +7,8 @@ Hibernate  Hibernate是一个开放源代码的对象关系映射框架，它对
 我们都知道，在使用持久化工具的时候，一般都有一个对象来操作数据库，在原生的Hibernate中叫做Session，在JPA中叫做EntityManager，在MyBatis中叫做SqlSession，通过这个对象来操作数据库。我们一般按照三层结构来看的话，Service层做业务逻辑处理，Dao层和数据库打交道，在Dao中，就存在着上面的对象。那么ORM框架本身提供的功能有什么呢？答案是基本的CRUD，所有的基础CRUD框架都提供，我们使用起来感觉很方便，很给力，业务逻辑层面的处理ORM是没有提供的，如果使用原生的框架，业务逻辑代码我们一般会自定义，会自己去写SQL语句，然后执行。在这个时候，Spring-data-jpa的威力就体现出来了，ORM提供的能力他都提供，ORM框架没有提供的业务逻辑功能Spring-data-jpa也提供，全方位的解决用户的需求。使用Spring-data-jpa进行开发的过程中，常用的功能，我们几乎不需要写一条sql语句。
   博文地址 JPA官方文档  应用实例 在大家的日常开发中都用到了很多，再次就不细致列举了，详情可以查看另外一篇博文
  Spring开发的小细节（六）
- 源码解析 Repository  @Indexedpublic interface Repository&amp;lt;T, ID&amp;gt; {} CrudRepository 主要接口 CurdRepository
- public interface CrudRepository&amp;lt;T, ID&amp;gt; extends Repository&amp;lt;T, ID&amp;gt; {&amp;lt;S extends T&amp;gt; S save(S var1);&amp;lt;S extends T&amp;gt; Iterable&amp;lt;S&amp;gt; saveAll(Iterable&amp;lt;S&amp;gt; var1);Optional&amp;lt;T&amp;gt; findById(ID var1);boolean existsById(ID var1);Iterable&amp;lt;T&amp;gt; findAll();Iterable&amp;lt;T&amp;gt; findAllById(Iterable&amp;lt;ID&amp;gt; var1);long count();void deleteById(ID var1);void delete(T var1);void deleteAll(Iterable&amp;lt;?'><title>源码阅读SpringDataJPA</title>
+ 源码解析 Repository  @Indexed public interface Repository&amp;lt;T, ID&amp;gt; { }  CrudRepository 主要接口 CurdRepository
+ public interface CrudRepository&amp;lt;T, ID&amp;gt; extends Repository&amp;lt;T, ID&amp;gt; { &amp;lt;S extends T&amp;gt; S save(S var1); &amp;lt;S extends T&amp;gt; Iterable&amp;lt;S&amp;gt; saveAll(Iterable&amp;lt;S&amp;gt; var1); Optional&amp;lt;T&amp;gt; findById(ID var1); boolean existsById(ID var1); Iterable&amp;lt;T&amp;gt; findAll(); Iterable&amp;lt;T&amp;gt; findAllById(Iterable&amp;lt;ID&amp;gt; var1); long count(); void deleteById(ID var1); void delete(T var1); void deleteAll(Iterable&amp;lt;?'><title>源码阅读SpringDataJPA</title>
 
 <link rel='canonical' href='https://lllovol.com/p/springdatajpa/'>
 
@@ -19,8 +19,8 @@ Hibernate  Hibernate是一个开放源代码的对象关系映射框架，它对
 我们都知道，在使用持久化工具的时候，一般都有一个对象来操作数据库，在原生的Hibernate中叫做Session，在JPA中叫做EntityManager，在MyBatis中叫做SqlSession，通过这个对象来操作数据库。我们一般按照三层结构来看的话，Service层做业务逻辑处理，Dao层和数据库打交道，在Dao中，就存在着上面的对象。那么ORM框架本身提供的功能有什么呢？答案是基本的CRUD，所有的基础CRUD框架都提供，我们使用起来感觉很方便，很给力，业务逻辑层面的处理ORM是没有提供的，如果使用原生的框架，业务逻辑代码我们一般会自定义，会自己去写SQL语句，然后执行。在这个时候，Spring-data-jpa的威力就体现出来了，ORM提供的能力他都提供，ORM框架没有提供的业务逻辑功能Spring-data-jpa也提供，全方位的解决用户的需求。使用Spring-data-jpa进行开发的过程中，常用的功能，我们几乎不需要写一条sql语句。
   博文地址 JPA官方文档  应用实例 在大家的日常开发中都用到了很多，再次就不细致列举了，详情可以查看另外一篇博文
  Spring开发的小细节（六）
- 源码解析 Repository  @Indexedpublic interface Repository&amp;lt;T, ID&amp;gt; {} CrudRepository 主要接口 CurdRepository
- public interface CrudRepository&amp;lt;T, ID&amp;gt; extends Repository&amp;lt;T, ID&amp;gt; {&amp;lt;S extends T&amp;gt; S save(S var1);&amp;lt;S extends T&amp;gt; Iterable&amp;lt;S&amp;gt; saveAll(Iterable&amp;lt;S&amp;gt; var1);Optional&amp;lt;T&amp;gt; findById(ID var1);boolean existsById(ID var1);Iterable&amp;lt;T&amp;gt; findAll();Iterable&amp;lt;T&amp;gt; findAllById(Iterable&amp;lt;ID&amp;gt; var1);long count();void deleteById(ID var1);void delete(T var1);void deleteAll(Iterable&amp;lt;?'>
+ 源码解析 Repository  @Indexed public interface Repository&amp;lt;T, ID&amp;gt; { }  CrudRepository 主要接口 CurdRepository
+ public interface CrudRepository&amp;lt;T, ID&amp;gt; extends Repository&amp;lt;T, ID&amp;gt; { &amp;lt;S extends T&amp;gt; S save(S var1); &amp;lt;S extends T&amp;gt; Iterable&amp;lt;S&amp;gt; saveAll(Iterable&amp;lt;S&amp;gt; var1); Optional&amp;lt;T&amp;gt; findById(ID var1); boolean existsById(ID var1); Iterable&amp;lt;T&amp;gt; findAll(); Iterable&amp;lt;T&amp;gt; findAllById(Iterable&amp;lt;ID&amp;gt; var1); long count(); void deleteById(ID var1); void delete(T var1); void deleteAll(Iterable&amp;lt;?'>
 <meta property='og:url' content='https://lllovol.com/p/springdatajpa/'>
 <meta property='og:site_name' content='lllovol'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Spring' /><meta property='article:published_time' content='2019-03-11T19:28:16&#43;00:00'/><meta property='article:modified_time' content='2019-03-11T19:28:16&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg' />
@@ -31,8 +31,8 @@ Hibernate  Hibernate是一个开放源代码的对象关系映射框架，它对
 我们都知道，在使用持久化工具的时候，一般都有一个对象来操作数据库，在原生的Hibernate中叫做Session，在JPA中叫做EntityManager，在MyBatis中叫做SqlSession，通过这个对象来操作数据库。我们一般按照三层结构来看的话，Service层做业务逻辑处理，Dao层和数据库打交道，在Dao中，就存在着上面的对象。那么ORM框架本身提供的功能有什么呢？答案是基本的CRUD，所有的基础CRUD框架都提供，我们使用起来感觉很方便，很给力，业务逻辑层面的处理ORM是没有提供的，如果使用原生的框架，业务逻辑代码我们一般会自定义，会自己去写SQL语句，然后执行。在这个时候，Spring-data-jpa的威力就体现出来了，ORM提供的能力他都提供，ORM框架没有提供的业务逻辑功能Spring-data-jpa也提供，全方位的解决用户的需求。使用Spring-data-jpa进行开发的过程中，常用的功能，我们几乎不需要写一条sql语句。
   博文地址 JPA官方文档  应用实例 在大家的日常开发中都用到了很多，再次就不细致列举了，详情可以查看另外一篇博文
  Spring开发的小细节（六）
- 源码解析 Repository  @Indexedpublic interface Repository&amp;lt;T, ID&amp;gt; {} CrudRepository 主要接口 CurdRepository
- public interface CrudRepository&amp;lt;T, ID&amp;gt; extends Repository&amp;lt;T, ID&amp;gt; {&amp;lt;S extends T&amp;gt; S save(S var1);&amp;lt;S extends T&amp;gt; Iterable&amp;lt;S&amp;gt; saveAll(Iterable&amp;lt;S&amp;gt; var1);Optional&amp;lt;T&amp;gt; findById(ID var1);boolean existsById(ID var1);Iterable&amp;lt;T&amp;gt; findAll();Iterable&amp;lt;T&amp;gt; findAllById(Iterable&amp;lt;ID&amp;gt; var1);long count();void deleteById(ID var1);void delete(T var1);void deleteAll(Iterable&amp;lt;?"><meta name="twitter:card" content="summary_large_image">
+ 源码解析 Repository  @Indexed public interface Repository&amp;lt;T, ID&amp;gt; { }  CrudRepository 主要接口 CurdRepository
+ public interface CrudRepository&amp;lt;T, ID&amp;gt; extends Repository&amp;lt;T, ID&amp;gt; { &amp;lt;S extends T&amp;gt; S save(S var1); &amp;lt;S extends T&amp;gt; Iterable&amp;lt;S&amp;gt; saveAll(Iterable&amp;lt;S&amp;gt; var1); Optional&amp;lt;T&amp;gt; findById(ID var1); boolean existsById(ID var1); Iterable&amp;lt;T&amp;gt; findAll(); Iterable&amp;lt;T&amp;gt; findAllById(Iterable&amp;lt;ID&amp;gt; var1); long count(); void deleteById(ID var1); void delete(T var1); void deleteAll(Iterable&amp;lt;?"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg' />
     <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
 

@@ -7,7 +7,7 @@
 整个流程  服务器端创建一条记录，获取到记录的id，与需要执行的job所需要的参数还有回调所需要用到的apiHost一同存入到map当中，转换为JSON格式，通过FeignClient调用Jenkins对应的脚本。   服务器端应用可能会部署在不同的环境下，连接不同的数据库，因此可以在application.yml中配置当前apiHost的值，通过ConfigServer可以更改为当前环境所对应的值。
   在Jenkins端进行对应的job执行。
   通过构建后操作的trigger parameterized build on other projects功能。   根据本次构建的成功与否，分别执行不同的构建后操作，传递给回调job对应的参数。   回调job将获取到的信息，通过一个shell脚本，通过curl传递给服务器端。
-  echo &amp;quot;${ID}&amp;quot;echo &amp;quot;${API_HOST}&amp;quot;echo &amp;quot;${BUILD_NO}&amp;quot;echo &amp;quot;${RESULT}&amp;quot;curl &amp;quot;$API_HOST/api/xxx/xxx/xxx/hook&amp;quot; -X POST -d &amp;quot;Id=$ID&amp;amp;buildNo=$BUILD_NO&amp;amp;result=$RESULT&amp;quot; 服务器端拿到数据进行更新和处理。  结语 有时候只是想要一条小小的消息，却不知道要辗转多少次，才能到达该去的地方'><title>使用Jenkins回调获取状态</title>
+  echo &amp;quot;${ID}&amp;quot; echo &amp;quot;${API_HOST}&amp;quot; echo &amp;quot;${BUILD_NO}&amp;quot; echo &amp;quot;${RESULT}&amp;quot; curl &amp;quot;$API_HOST/api/xxx/xxx/xxx/hook&amp;quot; -X POST -d &amp;quot;Id=$ID&amp;amp;buildNo=$BUILD_NO&amp;amp;result=$RESULT&amp;quot; 服务器端拿到数据进行更新和处理。  结语 有时候只是想要一条小小的消息，却不知道要辗转多少次，才能到达该去的地方'><title>使用Jenkins回调获取状态</title>
 
 <link rel='canonical' href='https://lllovol.com/p/jenkins-callback/'>
 
@@ -18,7 +18,7 @@
 整个流程  服务器端创建一条记录，获取到记录的id，与需要执行的job所需要的参数还有回调所需要用到的apiHost一同存入到map当中，转换为JSON格式，通过FeignClient调用Jenkins对应的脚本。   服务器端应用可能会部署在不同的环境下，连接不同的数据库，因此可以在application.yml中配置当前apiHost的值，通过ConfigServer可以更改为当前环境所对应的值。
   在Jenkins端进行对应的job执行。
   通过构建后操作的trigger parameterized build on other projects功能。   根据本次构建的成功与否，分别执行不同的构建后操作，传递给回调job对应的参数。   回调job将获取到的信息，通过一个shell脚本，通过curl传递给服务器端。
-  echo &amp;quot;${ID}&amp;quot;echo &amp;quot;${API_HOST}&amp;quot;echo &amp;quot;${BUILD_NO}&amp;quot;echo &amp;quot;${RESULT}&amp;quot;curl &amp;quot;$API_HOST/api/xxx/xxx/xxx/hook&amp;quot; -X POST -d &amp;quot;Id=$ID&amp;amp;buildNo=$BUILD_NO&amp;amp;result=$RESULT&amp;quot; 服务器端拿到数据进行更新和处理。  结语 有时候只是想要一条小小的消息，却不知道要辗转多少次，才能到达该去的地方'>
+  echo &amp;quot;${ID}&amp;quot; echo &amp;quot;${API_HOST}&amp;quot; echo &amp;quot;${BUILD_NO}&amp;quot; echo &amp;quot;${RESULT}&amp;quot; curl &amp;quot;$API_HOST/api/xxx/xxx/xxx/hook&amp;quot; -X POST -d &amp;quot;Id=$ID&amp;amp;buildNo=$BUILD_NO&amp;amp;result=$RESULT&amp;quot; 服务器端拿到数据进行更新和处理。  结语 有时候只是想要一条小小的消息，却不知道要辗转多少次，才能到达该去的地方'>
 <meta property='og:url' content='https://lllovol.com/p/jenkins-callback/'>
 <meta property='og:site_name' content='lllovol'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Jenkins' /><meta property='article:published_time' content='2019-07-26T11:01:52&#43;00:00'/><meta property='article:modified_time' content='2019-07-26T11:01:52&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg' />
@@ -29,7 +29,7 @@
 整个流程  服务器端创建一条记录，获取到记录的id，与需要执行的job所需要的参数还有回调所需要用到的apiHost一同存入到map当中，转换为JSON格式，通过FeignClient调用Jenkins对应的脚本。   服务器端应用可能会部署在不同的环境下，连接不同的数据库，因此可以在application.yml中配置当前apiHost的值，通过ConfigServer可以更改为当前环境所对应的值。
   在Jenkins端进行对应的job执行。
   通过构建后操作的trigger parameterized build on other projects功能。   根据本次构建的成功与否，分别执行不同的构建后操作，传递给回调job对应的参数。   回调job将获取到的信息，通过一个shell脚本，通过curl传递给服务器端。
-  echo &amp;quot;${ID}&amp;quot;echo &amp;quot;${API_HOST}&amp;quot;echo &amp;quot;${BUILD_NO}&amp;quot;echo &amp;quot;${RESULT}&amp;quot;curl &amp;quot;$API_HOST/api/xxx/xxx/xxx/hook&amp;quot; -X POST -d &amp;quot;Id=$ID&amp;amp;buildNo=$BUILD_NO&amp;amp;result=$RESULT&amp;quot; 服务器端拿到数据进行更新和处理。  结语 有时候只是想要一条小小的消息，却不知道要辗转多少次，才能到达该去的地方"><meta name="twitter:card" content="summary_large_image">
+  echo &amp;quot;${ID}&amp;quot; echo &amp;quot;${API_HOST}&amp;quot; echo &amp;quot;${BUILD_NO}&amp;quot; echo &amp;quot;${RESULT}&amp;quot; curl &amp;quot;$API_HOST/api/xxx/xxx/xxx/hook&amp;quot; -X POST -d &amp;quot;Id=$ID&amp;amp;buildNo=$BUILD_NO&amp;amp;result=$RESULT&amp;quot; 服务器端拿到数据进行更新和处理。  结语 有时候只是想要一条小小的消息，却不知道要辗转多少次，才能到达该去的地方"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg' />
     <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
 
