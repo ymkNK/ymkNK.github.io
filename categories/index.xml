@@ -6,7 +6,16 @@
     <description>Recent content in Categories on lllovol</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 15 Aug 2021 02:12:03 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 20 Aug 2021 14:25:43 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Summary</title>
+      <link>https://lllovol.com/categories/summary/</link>
+      <pubDate>Fri, 20 Aug 2021 14:25:43 +0000</pubDate>
+      
+      <guid>https://lllovol.com/categories/summary/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>DesignPattern</title>
       <link>https://lllovol.com/categories/designpattern/</link>
@@ -94,15 +103,6 @@
       <pubDate>Sat, 08 Jun 2019 16:49:49 +0000</pubDate>
       
       <guid>https://lllovol.com/categories/android/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Summary</title>
-      <link>https://lllovol.com/categories/summary/</link>
-      <pubDate>Mon, 13 May 2019 13:02:36 +0000</pubDate>
-      
-      <guid>https://lllovol.com/categories/summary/</guid>
       <description></description>
     </item>
     
