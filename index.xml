@@ -7,12 +7,12 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <lastBuildDate>Fri, 20 Aug 2021 14:25:43 +0000</lastBuildDate><atom:link href="https://lllovol.com/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>2021年8月20日工作中的思考记录2021年8月20日</title>
+        <title>工作中的思考记录2021年8月20日</title>
         <link>https://lllovol.com/p/2021/8/work-summary/</link>
         <pubDate>Fri, 20 Aug 2021 14:25:43 +0000</pubDate>
         
         <guid>https://lllovol.com/p/2021/8/work-summary/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/22.jpeg" alt="Featured image of post 2021年8月20日工作中的思考记录2021年8月20日" /&gt;&lt;ol&gt;
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/22.jpeg" alt="Featured image of post 工作中的思考记录2021年8月20日" /&gt;&lt;ol&gt;
 &lt;li&gt;代码精益：学习并思考写出更加优雅的代码&lt;/li&gt;
 &lt;li&gt;主动判断：在日常处理中的时候，需要主动思考，主动去判断，业务的快速迭代与我们追求的系统稳定存在一定的冲突，需要具体情况具体分析。在处理问题的过程中，注意需求的收集与共同问题的需求抽象&lt;/li&gt;
 &lt;li&gt;日积月累：保证自己学习的状态，养成一种习惯，有时候是主动，有时候是强迫自己去学习，总之，都要让自己的技术积累有一定的增量突破。看10篇文章，可能每一篇就记住了10分之一，但是后面再不断学习的过程中，各个学习的点，就会穿成一条线，慢慢的，线就会编制成一个面&lt;/li&gt;
