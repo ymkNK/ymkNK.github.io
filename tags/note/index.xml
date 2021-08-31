@@ -6,7 +6,20 @@
     <description>Recent content in Note on lllovol</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 15 Aug 2021 02:12:03 +0000</lastBuildDate><atom:link href="https://lllovol.com/tags/note/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 24 Aug 2021 21:55:29 +0000</lastBuildDate><atom:link href="https://lllovol.com/tags/note/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Google SRE解密笔记(一)</title>
+      <link>https://lllovol.com/p/2021/8/google-sre/</link>
+      <pubDate>Tue, 24 Aug 2021 21:55:29 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/8/google-sre/</guid>
+      <description>拥抱风险 百分百可靠的服务，是不现实也是没有必要的。 可靠性到达一定值之后，会带来成本的大幅度提升：过分要求稳定性会限制新产品的开发速度和交付速度。
+用于对于高可靠性和极端可靠性的感知几乎是没有的。
+基于这一点，SRE追求快速创新和高效的服务运营业务之间的风险的平衡，而不是简单的将服务在线时间最大化。
+平衡系统的功能、服务和性能
+管理风险 </description>
+    </item>
+    
     <item>
       <title>设计模式-Strategy策略模式学习笔记</title>
       <link>https://lllovol.com/p/2021/8/strategy/</link>

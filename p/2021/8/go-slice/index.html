@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='问题 如下代码
+func Test(t *testing.T) { PatchConvey(&amp;#34;test&amp;#34;, t, func () { //your mock code... PatchConvey(&amp;#34;test case1&amp;#34;, func () { var s []int s = append(s, 1, 2, 3) a := s[len(s):] b := s[len(s)] c := s[len(s)&#43;1:] println(a) println(b) println(c) }) }) } 有几个问题：
+ a不会报错 b会panic c会panic  原因  b的[len(s)]肯定越界 [:]切割Slice的方式是左闭右开的，  冒号左边如果为空, 默认是0 冒号右边如果为空, 默认是字符串len(s)   a中冒号左边的是len(s), 没有超过右边默认的len(s), 所以不会panic, 这样切出来的就是一个空的slice c中的冒号左边len(s)&#43;1, 超过了右边默认的len(s), 所以会panic  其他知识  如果slice有扩容操作, 那么就会使用新的内存; 如果没有扩容操作, 使用旧的内存 append扩容的时候, slice的cap值会随着go的版本不同而略有不同（1.'><title>Go Slice切割边界问题</title>
+
+<link rel='canonical' href='https://lllovol.com/p/2021/8/go-slice/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Go Slice切割边界问题'>
+<meta property='og:description' content='问题 如下代码
+func Test(t *testing.T) { PatchConvey(&amp;#34;test&amp;#34;, t, func () { //your mock code... PatchConvey(&amp;#34;test case1&amp;#34;, func () { var s []int s = append(s, 1, 2, 3) a := s[len(s):] b := s[len(s)] c := s[len(s)&#43;1:] println(a) println(b) println(c) }) }) } 有几个问题：
+ a不会报错 b会panic c会panic  原因  b的[len(s)]肯定越界 [:]切割Slice的方式是左闭右开的，  冒号左边如果为空, 默认是0 冒号右边如果为空, 默认是字符串len(s)   a中冒号左边的是len(s), 没有超过右边默认的len(s), 所以不会panic, 这样切出来的就是一个空的slice c中的冒号左边len(s)&#43;1, 超过了右边默认的len(s), 所以会panic  其他知识  如果slice有扩容操作, 那么就会使用新的内存; 如果没有扩容操作, 使用旧的内存 append扩容的时候, slice的cap值会随着go的版本不同而略有不同（1.'>
+<meta property='og:url' content='https://lllovol.com/p/2021/8/go-slice/'>
+<meta property='og:site_name' content='lllovol'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Go' /><meta property='article:tag' content='Tech' /><meta property='article:published_time' content='2021-08-31T21:41:05&#43;00:00'/><meta property='article:modified_time' content='2021-08-31T21:41:05&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/9.jpeg' />
+<meta name="twitter:title" content="Go Slice切割边界问题">
+<meta name="twitter:description" content="问题 如下代码
+func Test(t *testing.T) { PatchConvey(&amp;#34;test&amp;#34;, t, func () { //your mock code... PatchConvey(&amp;#34;test case1&amp;#34;, func () { var s []int s = append(s, 1, 2, 3) a := s[len(s):] b := s[len(s)] c := s[len(s)&#43;1:] println(a) println(b) println(c) }) }) } 有几个问题：
+ a不会报错 b会panic c会panic  原因  b的[len(s)]肯定越界 [:]切割Slice的方式是左闭右开的，  冒号左边如果为空, 默认是0 冒号右边如果为空, 默认是字符串len(s)   a中冒号左边的是len(s), 没有超过右边默认的len(s), 所以不会panic, 这样切出来的就是一个空的slice c中的冒号左边len(s)&#43;1, 超过了右边默认的len(s), 所以会panic  其他知识  如果slice有扩容操作, 那么就会使用新的内存; 如果没有扩容操作, 使用旧的内存 append扩容的时候, slice的cap值会随着go的版本不同而略有不同（1."><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/9.jpeg' />
+    <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MK7GTCNC34"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-MK7GTCNC34', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="https://lllovol.com" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>返回</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/2021/8/go-slice/">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/9.jpeg" loading="lazy" alt="Featured image of post Go Slice切割边界问题" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/go/" style="background-color: ; color: ;">
+                Go
+            </a>
+        
+            <a href="/categories/tech/" style="background-color: ; color: ;">
+                Tech
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/p/2021/8/go-slice/">Go Slice切割边界问题</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 31, 2021</time>
+            </div>
+        
+
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    <h2 id="问题">问题</h2>
+<p>如下代码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">Test</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+<span class="nf">PatchConvey</span><span class="p">(</span><span class="s">&#34;test&#34;</span><span class="p">,</span> <span class="nx">t</span><span class="p">,</span> <span class="kd">func</span> <span class="p">()</span> <span class="p">{</span>
+<span class="c1">//your mock code...
+</span><span class="c1"></span><span class="nf">PatchConvey</span><span class="p">(</span><span class="s">&#34;test case1&#34;</span><span class="p">,</span> <span class="kd">func</span> <span class="p">()</span> <span class="p">{</span>
+<span class="kd">var</span> <span class="nx">s</span> <span class="p">[]</span><span class="kt">int</span>
+
+<span class="nx">s</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="nx">a</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">):]</span>
+<span class="nx">b</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">)]</span>
+<span class="nx">c</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
+
+<span class="nb">println</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+<span class="nb">println</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span>
+<span class="nb">println</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div><p>有几个问题：</p>
+<ol>
+<li>a不会报错</li>
+<li>b会panic</li>
+<li>c会panic</li>
+</ol>
+<h2 id="原因">原因</h2>
+<ol>
+<li>b的[len(s)]肯定越界</li>
+<li>[:]切割Slice的方式是左闭右开的，
+<ul>
+<li>冒号左边如果为空, 默认是0</li>
+<li>冒号右边如果为空, 默认是字符串len(s)</li>
+</ul>
+</li>
+<li>a中冒号左边的是len(s), 没有超过右边默认的len(s), 所以不会panic, 这样切出来的就是一个空的slice</li>
+<li>c中的冒号左边len(s)+1, 超过了右边默认的len(s), 所以会panic</li>
+</ol>
+<h2 id="其他知识">其他知识</h2>
+<ol>
+<li>如果slice有扩容操作, 那么就会使用新的内存; 如果没有扩容操作, 使用旧的内存</li>
+<li>append扩容的时候, slice的cap值会随着go的版本不同而略有不同（1.5版本下, s的cap为4; 1.6的版本下, s的cap为3）</li>
+</ol>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/go/">Go</a>
+        
+            <a href="/tags/tech/">Tech</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css"integrity="sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.js"integrity="sha384-pK1WpvzWVBQiP0/GjnvRxV4mOb0oxFuyRxJlk6vVw146n3egcN5C925NCP7a7BY8"crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/contrib/auto-render.min.js"integrity="sha384-vZTG03m&#43;2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">相关文章</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="has-image">
+    <a href="/p/2021/8/google-sre/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/8.jpeg" loading="lazy" data-key="2021/8/google-sre" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/8.jpeg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Google SRE解密笔记(一)</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/2021/8/strategy/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/5.jpeg" loading="lazy" data-key="2021/8/strategy" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/5.jpeg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">设计模式-Strategy策略模式学习笔记</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/2021/5/rake-file-usage/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/26.jpeg" loading="lazy" data-key="2021/5/rake-file-usage" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/26.jpeg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">从Jekyll迁移至Hugo</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/redis/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg" loading="lazy" data-key="redis" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Redis中的常用数据结构</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/ide-code-error-solution/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/9.jpg" loading="lazy" data-key="ide-code-error-solution" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/9.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Idea代码飘红的问题解决方式</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+     
+        
+    
+
+
+<div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "aaf5fc3a72ea9ce81d62",
+        clientSecret: "7792527b47af3239ddbc2274fb5fd141c28d8339",
+        repo: "ymkNK.github.io",
+        owner: "ymkNK",
+        admin: "ymkNK",
+        id: window.location.pathname,
+        title: document.title,
+        distractionFreeMode:  true 
+    })
+
+    gitalk.render('gitalk-container')
+</script>
+
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        
+        2018 -
+        
+        2021
+        &copy;
+        lllovol
+    </section>
+    
+    <section class="powerby">
+        
+            <b><a href="https://github.com/ymkNK" target="_blank" rel="noopener" data-version="%s">Owner Rainbowly </a></b> <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">目录</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#问题">问题</a></li>
+    <li><a href="#原因">原因</a></li>
+    <li><a href="#其他知识">其他知识</a></li>
+  </ul>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MK7GTCNC34"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-MK7GTCNC34');
+</script>
+    </body>
+</html>

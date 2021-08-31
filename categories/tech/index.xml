@@ -6,7 +6,31 @@
     <description>Recent content in Tech on lllovol</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 15 Aug 2021 02:12:03 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/tech/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 31 Aug 2021 21:41:05 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go Slice切割边界问题</title>
+      <link>https://lllovol.com/p/2021/8/go-slice/</link>
+      <pubDate>Tue, 31 Aug 2021 21:41:05 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/8/go-slice/</guid>
+      <description>问题 如下代码
+func Test(t *testing.T) { PatchConvey(&amp;#34;test&amp;#34;, t, func () { //your mock code... PatchConvey(&amp;#34;test case1&amp;#34;, func () { var s []int s = append(s, 1, 2, 3) a := s[len(s):] b := s[len(s)] c := s[len(s)+1:] println(a) println(b) println(c) }) }) } 有几个问题：
+ a不会报错 b会panic c会panic  原因  b的[len(s)]肯定越界 [:]切割Slice的方式是左闭右开的，  冒号左边如果为空, 默认是0 冒号右边如果为空, 默认是字符串len(s)   a中冒号左边的是len(s), 没有超过右边默认的len(s), 所以不会panic, 这样切出来的就是一个空的slice c中的冒号左边len(s)+1, 超过了右边默认的len(s), 所以会panic  其他知识  如果slice有扩容操作, 那么就会使用新的内存; 如果没有扩容操作, 使用旧的内存 append扩容的时候, slice的cap值会随着go的版本不同而略有不同（1.</description>
+    </item>
+    
+    <item>
+      <title>Google SRE解密笔记(一)</title>
+      <link>https://lllovol.com/p/2021/8/google-sre/</link>
+      <pubDate>Tue, 24 Aug 2021 21:55:29 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/8/google-sre/</guid>
+      <description>拥抱风险 百分百可靠的服务，是不现实也是没有必要的。 可靠性到达一定值之后，会带来成本的大幅度提升：过分要求稳定性会限制新产品的开发速度和交付速度。
+用于对于高可靠性和极端可靠性的感知几乎是没有的。
+基于这一点，SRE追求快速创新和高效的服务运营业务之间的风险的平衡，而不是简单的将服务在线时间最大化。
+平衡系统的功能、服务和性能
+管理风险 </description>
+    </item>
+    
     <item>
       <title>设计模式-Strategy策略模式学习笔记</title>
       <link>https://lllovol.com/p/2021/8/strategy/</link>
