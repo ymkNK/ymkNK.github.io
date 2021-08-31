@@ -140,19 +140,19 @@ if (!doNotTrack) {
 <span class="nf">PatchConvey</span><span class="p">(</span><span class="s">&#34;test&#34;</span><span class="p">,</span> <span class="nx">t</span><span class="p">,</span> <span class="kd">func</span> <span class="p">()</span> <span class="p">{</span>
 <span class="c1">//your mock code...
 </span><span class="c1"></span><span class="nf">PatchConvey</span><span class="p">(</span><span class="s">&#34;test case1&#34;</span><span class="p">,</span> <span class="kd">func</span> <span class="p">()</span> <span class="p">{</span>
-<span class="kd">var</span> <span class="nx">s</span> <span class="p">[]</span><span class="kt">int</span>
-
-<span class="nx">s</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-
-<span class="nx">a</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">):]</span>
-<span class="nx">b</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">)]</span>
-<span class="nx">c</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
-
-<span class="nb">println</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
-<span class="nb">println</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span>
-<span class="nb">println</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>
-<span class="p">})</span>
-<span class="p">})</span>
+            <span class="kd">var</span> <span class="nx">s</span> <span class="p">[]</span><span class="kt">int</span>
+            
+            <span class="nx">s</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+            
+            <span class="nx">a</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">):]</span>
+            <span class="nx">b</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">)]</span>
+            <span class="nx">c</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
+            
+            <span class="nb">println</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+            <span class="nb">println</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span>
+            <span class="nb">println</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>
+        <span class="p">})</span>
+    <span class="p">})</span>
 <span class="p">}</span>
 </code></pre></div><p>有几个问题：</p>
 <ol>
