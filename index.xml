@@ -6,7 +6,34 @@
         <description>Recent content on lllovol</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Tue, 31 Aug 2021 21:41:05 +0000</lastBuildDate><atom:link href="https://lllovol.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 02 Sep 2021 15:50:47 +0000</lastBuildDate><atom:link href="https://lllovol.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>设计模式-Singleton单例模式学习笔记</title>
+        <link>https://lllovol.com/p/2021/9/design-pattern-singleton/</link>
+        <pubDate>Thu, 02 Sep 2021 15:50:47 +0000</pubDate>
+        
+        <guid>https://lllovol.com/p/2021/9/design-pattern-singleton/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/27.jpeg" alt="Featured image of post 设计模式-Singleton单例模式学习笔记" /&gt;&lt;h2 id=&#34;概要&#34;&gt;概要&lt;/h2&gt;
+&lt;p&gt;保证一个类只有一个实例，保证一个进程中，某个类有且仅有一个实例&lt;/p&gt;
+&lt;h2 id=&#34;方案&#34;&gt;方案：&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;构造函数私有化&lt;/li&gt;
+&lt;li&gt;新建静态构造方法作为构造函数&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;饿汉式&#34;&gt;饿汉式&lt;/h2&gt;
+&lt;p&gt;类加载的时候，就实例化。&lt;/p&gt;
+&lt;h2 id=&#34;懒汉式&#34;&gt;懒汉式&lt;/h2&gt;
+&lt;p&gt;第一次使用的时候，再实例化。节省资源，但是需要注意线程安全问题&lt;/p&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
+&lt;h3 id=&#34;优点&#34;&gt;优点&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;只有一个实例，避免了重复的内存开销&lt;/li&gt;
+&lt;li&gt;避免对资源的重复占用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;缺点&#34;&gt;缺点&lt;/h3&gt;
+&lt;p&gt;可以理解为一个全局变量，没有接口，不能继承。违背了SRP职责&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Go Slice切割边界问题</title>
         <link>https://lllovol.com/p/2021/8/go-slice/</link>
         <pubDate>Tue, 31 Aug 2021 21:41:05 +0000</pubDate>
