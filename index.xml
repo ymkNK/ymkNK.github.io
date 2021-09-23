@@ -6,7 +6,52 @@
         <description>Recent content on lllovol</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Thu, 09 Sep 2021 15:31:14 +0000</lastBuildDate><atom:link href="https://lllovol.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 23 Sep 2021 15:21:54 +0000</lastBuildDate><atom:link href="https://lllovol.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>设计模式-Prototype原型模式</title>
+        <link>https://lllovol.com/p/2021/9/prototype/</link>
+        <pubDate>Thu, 23 Sep 2021 15:21:54 +0000</pubDate>
+        
+        <guid>https://lllovol.com/p/2021/9/prototype/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/5.jpeg" alt="Featured image of post 设计模式-Prototype原型模式" /&gt;&lt;h2 id=&#34;场景&#34;&gt;场景&lt;/h2&gt;
+&lt;p&gt;有一个object，想要生成与之完全相同的复制品，该如何是实现？
+问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;私有数据&lt;/li&gt;
+&lt;li&gt;不想包含具体的包&lt;/li&gt;
+&lt;li&gt;如果原始的对象只是一个接口，具体类都不知道，怎么处理呢？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;方案&#34;&gt;方案&lt;/h2&gt;
+&lt;p&gt;将克隆过程，委派给被克隆的实际对象，由实际对象负责clone
+因此，只要实现了clone()方法的，就是原型模式&lt;/p&gt;
+&lt;h2 id=&#34;实现&#34;&gt;实现&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;原型（Prototype）接口对clone方法做一个申明，绝大部分情况下，里面只有一个名为clone的方法&lt;/li&gt;
+&lt;li&gt;具体原型（ConcretePrototype）类实现接口&lt;/li&gt;
+&lt;li&gt;客户端（Client）可以复制实现了原型接口的任何对象&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;应用&#34;&gt;应用&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;将自身作为构造函数的参数传入
+复制数组&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;如果需要复制一些对象，同时又希望代码独立于这些对象所属的具体类&lt;/li&gt;
+&lt;li&gt;如果子类的区别仅在于对象的初始化方式，那么可以使用该模式减少子类的数量，别人创建这些子类的目的可能只是为了创建特定的对象。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;优点&#34;&gt;优点&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;克隆时 无需与所属的具体类耦合&lt;/li&gt;
+&lt;li&gt;克隆原型 防止反复运行初始化&lt;/li&gt;
+&lt;li&gt;更方便的生成复杂对象&lt;/li&gt;
+&lt;li&gt;可以用继承以外的方式来处理复杂对象的不同配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;缺点&#34;&gt;缺点&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;克隆博涵循环引用的复杂对象可能会非常麻烦&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>设计模式-Factory工厂模式学习笔记</title>
         <link>https://lllovol.com/p/2021/9/design-pattern-factory/</link>
         <pubDate>Thu, 09 Sep 2021 15:31:14 +0000</pubDate>
