@@ -6,7 +6,16 @@
     <description>Recent content in DesignPattern on lllovol</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 02 Sep 2021 15:50:47 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/designpattern/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 09 Sep 2021 15:31:14 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/designpattern/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>设计模式-Factory工厂模式学习笔记</title>
+      <link>https://lllovol.com/p/2021/9/design-pattern-factory/</link>
+      <pubDate>Thu, 09 Sep 2021 15:31:14 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/9/design-pattern-factory/</guid>
+      <description>工厂模式 有点忙，先看看吧</description>
+    </item>
+    
     <item>
       <title>设计模式-Singleton单例模式学习笔记</title>
       <link>https://lllovol.com/p/2021/9/design-pattern-singleton/</link>
