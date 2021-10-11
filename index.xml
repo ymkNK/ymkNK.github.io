@@ -6,7 +6,34 @@
         <description>Recent content on lllovol</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Thu, 23 Sep 2021 15:21:54 +0000</lastBuildDate><atom:link href="https://lllovol.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 11 Oct 2021 11:33:32 +0000</lastBuildDate><atom:link href="https://lllovol.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Goland全局替换正则技巧</title>
+        <link>https://lllovol.com/p/2021/10/goland-tips/</link>
+        <pubDate>Mon, 11 Oct 2021 11:33:32 +0000</pubDate>
+        
+        <guid>https://lllovol.com/p/2021/10/goland-tips/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/20.jpeg" alt="Featured image of post Goland全局替换正则技巧" /&gt;&lt;h1 id=&#34;使用goland的全局替换&#34;&gt;使用Goland的全局替换&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;单文件
+使用&lt;code&gt;Command+R&lt;/code&gt;进行替换&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;多文件
+使用&lt;code&gt;Shift+Command+R&lt;/code&gt;进行替换&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;正则替换&#34;&gt;正则替换&lt;/h1&gt;
+&lt;p&gt;可以使用正则表达式进行替换
+例如，我们想为DoFunction这个方法添加一个ctx作为第一个参数&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;打开Regex的开关&lt;/li&gt;
+&lt;li&gt;搜索：&lt;code&gt;DoFunction((.*?)\)&lt;/code&gt;，其中 &lt;code&gt;(.*?)&lt;/code&gt; 表示正则 group，会取到这个函数的参数&lt;/li&gt;
+&lt;li&gt;替换：&lt;code&gt;DoFunction(ctx, $1)&lt;/code&gt;，其中 $1 表示上一步匹配到的第一个参数&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>设计模式-Prototype原型模式</title>
         <link>https://lllovol.com/p/2021/9/prototype/</link>
         <pubDate>Thu, 23 Sep 2021 15:21:54 +0000</pubDate>

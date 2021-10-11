@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html lang="en-us">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='概要 保证一个类只有一个实例，保证一个进程中，某个类有且仅有一个实例
-方案：  构造函数私有化 新建静态构造方法作为构造函数  饿汉式 类加载的时候，就实例化。
-懒汉式 第一次使用的时候，再实例化。节省资源，但是需要注意线程安全问题
-总结 优点  只有一个实例，避免了重复的内存开销 避免对资源的重复占用  缺点 可以理解为一个全局变量，没有接口，不能继承。违背了SRP职责'><title>设计模式-Singleton单例模式学习笔记</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='使用Goland的全局替换   单文件 使用Command&#43;R进行替换
+  多文件 使用Shift&#43;Command&#43;R进行替换
+  正则替换 可以使用正则表达式进行替换 例如，我们想为DoFunction这个方法添加一个ctx作为第一个参数
+ 打开Regex的开关 搜索：DoFunction((.*?)\)，其中 (.*?) 表示正则 group，会取到这个函数的参数 替换：DoFunction(ctx, $1)，其中 $1 表示上一步匹配到的第一个参数  '><title>Goland全局替换正则技巧</title>
 
-<link rel='canonical' href='https://lllovol.com/p/2021/9/design-pattern-singleton/'>
+<link rel='canonical' href='https://lllovol.com/p/2021/10/goland-tips/'>
 
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='设计模式-Singleton单例模式学习笔记'>
-<meta property='og:description' content='概要 保证一个类只有一个实例，保证一个进程中，某个类有且仅有一个实例
-方案：  构造函数私有化 新建静态构造方法作为构造函数  饿汉式 类加载的时候，就实例化。
-懒汉式 第一次使用的时候，再实例化。节省资源，但是需要注意线程安全问题
-总结 优点  只有一个实例，避免了重复的内存开销 避免对资源的重复占用  缺点 可以理解为一个全局变量，没有接口，不能继承。违背了SRP职责'>
-<meta property='og:url' content='https://lllovol.com/p/2021/9/design-pattern-singleton/'>
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Goland全局替换正则技巧'>
+<meta property='og:description' content='使用Goland的全局替换   单文件 使用Command&#43;R进行替换
+  多文件 使用Shift&#43;Command&#43;R进行替换
+  正则替换 可以使用正则表达式进行替换 例如，我们想为DoFunction这个方法添加一个ctx作为第一个参数
+ 打开Regex的开关 搜索：DoFunction((.*?)\)，其中 (.*?) 表示正则 group，会取到这个函数的参数 替换：DoFunction(ctx, $1)，其中 $1 表示上一步匹配到的第一个参数  '>
+<meta property='og:url' content='https://lllovol.com/p/2021/10/goland-tips/'>
 <meta property='og:site_name' content='lllovol'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Note' /><meta property='article:tag' content='Tech' /><meta property='article:tag' content='DesignPattern' /><meta property='article:published_time' content='2021-09-02T15:50:47&#43;00:00'/><meta property='article:modified_time' content='2021-09-02T15:50:47&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/27.jpeg' />
-<meta name="twitter:title" content="设计模式-Singleton单例模式学习笔记">
-<meta name="twitter:description" content="概要 保证一个类只有一个实例，保证一个进程中，某个类有且仅有一个实例
-方案：  构造函数私有化 新建静态构造方法作为构造函数  饿汉式 类加载的时候，就实例化。
-懒汉式 第一次使用的时候，再实例化。节省资源，但是需要注意线程安全问题
-总结 优点  只有一个实例，避免了重复的内存开销 避免对资源的重复占用  缺点 可以理解为一个全局变量，没有接口，不能继承。违背了SRP职责"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/27.jpeg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Note' /><meta property='article:published_time' content='2021-10-11T11:33:32&#43;00:00'/><meta property='article:modified_time' content='2021-10-11T11:33:32&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/20.jpeg' />
+<meta name="twitter:title" content="Goland全局替换正则技巧">
+<meta name="twitter:description" content="使用Goland的全局替换   单文件 使用Command&#43;R进行替换
+  多文件 使用Shift&#43;Command&#43;R进行替换
+  正则替换 可以使用正则表达式进行替换 例如，我们想为DoFunction这个方法添加一个ctx作为第一个参数
+ 打开Regex的开关 搜索：DoFunction((.*?)\)，其中 (.*?) 表示正则 group，会取到这个函数的参数 替换：DoFunction(ctx, $1)，其中 $1 表示上一步匹配到的第一个参数  "><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/20.jpeg' />
     <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-MK7GTCNC34"></script>
@@ -37,7 +37,7 @@ if (!doNotTrack) {
 
     </head>
     <body class="
-    article-page has-toc
+    article-page 
 ">
     <script>
         (function() {
@@ -63,30 +63,163 @@ if (!doNotTrack) {
 </script>
 <div class="container main-container flex 
     
-        extended
+        on-phone--column extended
     
 ">
     
-        <div id="article-toolbar">
-            <a href="https://lllovol.com" class="back-home">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            
+            <figure class="site-avatar">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+
+                
+                    <span class="emoji">⚖️</span>
+                
+            </figure>
+            
+        
+        <h1 class="site-name"><a href="https://lllovol.com">lllovol</a></h1>
+        <h2 class="site-description">Stay hungry, stay foolish.</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="15 6 9 12 15 18" />
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
 </svg>
 
 
 
-                <span>返回</span>
+                
+                <span>主页</span>
             </a>
-        </div>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/links/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>暗色模式</span>
+            </li>
+        
+    </ol>
+</aside>
+
     
 <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/2021/9/design-pattern-singleton/">
+            <a href="/p/2021/10/goland-tips/">
                 
-                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/27.jpeg" loading="lazy" alt="Featured image of post 设计模式-Singleton单例模式学习笔记" />
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/20.jpeg" loading="lazy" alt="Featured image of post Goland全局替换正则技巧" />
                 
             </a>
         </div>
@@ -100,19 +233,11 @@ if (!doNotTrack) {
                 Note
             </a>
         
-            <a href="/categories/tech/" style="background-color: ; color: ;">
-                Tech
-            </a>
-        
-            <a href="/categories/designpattern/" style="background-color: ; color: ;">
-                DesignPattern
-            </a>
-        
     </header>
     
 
     <h2 class="article-title">
-        <a href="/p/2021/9/design-pattern-singleton/">设计模式-Singleton单例模式学习笔记</a>
+        <a href="/p/2021/10/goland-tips/">Goland全局替换正则技巧</a>
     </h2>
 
     
@@ -130,7 +255,7 @@ if (!doNotTrack) {
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Sep 02, 2021</time>
+                <time class="article-time--published">Oct 11, 2021</time>
             </div>
         
 
@@ -141,25 +266,25 @@ if (!doNotTrack) {
 </header>
 
     <section class="article-content">
-    <h2 id="概要">概要</h2>
-<p>保证一个类只有一个实例，保证一个进程中，某个类有且仅有一个实例</p>
-<h2 id="方案">方案：</h2>
+    <h1 id="使用goland的全局替换">使用Goland的全局替换</h1>
 <ol>
-<li>构造函数私有化</li>
-<li>新建静态构造方法作为构造函数</li>
+<li>
+<p>单文件
+使用<code>Command+R</code>进行替换</p>
+</li>
+<li>
+<p>多文件
+使用<code>Shift+Command+R</code>进行替换</p>
+</li>
 </ol>
-<h2 id="饿汉式">饿汉式</h2>
-<p>类加载的时候，就实例化。</p>
-<h2 id="懒汉式">懒汉式</h2>
-<p>第一次使用的时候，再实例化。节省资源，但是需要注意线程安全问题</p>
-<h2 id="总结">总结</h2>
-<h3 id="优点">优点</h3>
-<ol>
-<li>只有一个实例，避免了重复的内存开销</li>
-<li>避免对资源的重复占用</li>
-</ol>
-<h3 id="缺点">缺点</h3>
-<p>可以理解为一个全局变量，没有接口，不能继承。违背了SRP职责</p>
+<h1 id="正则替换">正则替换</h1>
+<p>可以使用正则表达式进行替换
+例如，我们想为DoFunction这个方法添加一个ctx作为第一个参数</p>
+<ul>
+<li>打开Regex的开关</li>
+<li>搜索：<code>DoFunction((.*?)\)</code>，其中 <code>(.*?)</code> 表示正则 group，会取到这个函数的参数</li>
+<li>替换：<code>DoFunction(ctx, $1)</code>，其中 $1 表示上一步匹配到的第一个参数</li>
+</ul>
 
 </section>
 
@@ -169,10 +294,6 @@ if (!doNotTrack) {
     <section class="article-tags">
         
             <a href="/tags/note/">Note</a>
-        
-            <a href="/tags/tech/">Tech</a>
-        
-            <a href="/tags/designpattern/">DesignPattern</a>
         
     </section>
 
@@ -263,18 +384,18 @@ if (!doNotTrack) {
                 
                     
 <article class="has-image">
-    <a href="/p/2021/8/strategy/">
+    <a href="/p/2021/9/design-pattern-singleton/">
         
         
             <div class="article-image">
                 
-                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/5.jpeg" loading="lazy" data-key="2021/8/strategy" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/5.jpeg"/>
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/27.jpeg" loading="lazy" data-key="2021/9/design-pattern-singleton" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/27.jpeg"/>
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">设计模式-Strategy策略模式学习笔记</h2>
+            <h2 class="article-title">设计模式-Singleton单例模式学习笔记</h2>
         </div>
     </a>
 </article>
@@ -299,18 +420,18 @@ if (!doNotTrack) {
                 
                     
 <article class="has-image">
-    <a href="/p/2021/10/goland-tips/">
+    <a href="/p/2021/8/strategy/">
         
         
             <div class="article-image">
                 
-                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/20.jpeg" loading="lazy" data-key="2021/10/goland-tips" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/20.jpeg"/>
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/5.jpeg" loading="lazy" data-key="2021/8/strategy" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/5.jpeg"/>
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">Goland全局替换正则技巧</h2>
+            <h2 class="article-title">设计模式-Strategy策略模式学习笔记</h2>
         </div>
     </a>
 </article>
@@ -446,41 +567,6 @@ if (!doNotTrack) {
             >
 
             </main>
-    
-        <aside class="sidebar right-sidebar sticky">
-            <section class="widget archives">
-                <div class="widget-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-                </div>
-                <h2 class="widget-title section-title">目录</h2>
-                
-                <div class="widget--toc">
-                    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#概要">概要</a></li>
-    <li><a href="#方案">方案：</a></li>
-    <li><a href="#饿汉式">饿汉式</a></li>
-    <li><a href="#懒汉式">懒汉式</a></li>
-    <li><a href="#总结">总结</a>
-      <ul>
-        <li><a href="#优点">优点</a></li>
-        <li><a href="#缺点">缺点</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-                </div>
-            </section>
-        </aside>
     
 
         </div>

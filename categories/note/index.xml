@@ -6,7 +6,19 @@
     <description>Recent content in Note on lllovol</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Sep 2021 15:21:54 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/note/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 11 Oct 2021 11:33:32 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/note/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Goland全局替换正则技巧</title>
+      <link>https://lllovol.com/p/2021/10/goland-tips/</link>
+      <pubDate>Mon, 11 Oct 2021 11:33:32 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/10/goland-tips/</guid>
+      <description>使用Goland的全局替换   单文件 使用Command+R进行替换
+  多文件 使用Shift+Command+R进行替换
+  正则替换 可以使用正则表达式进行替换 例如，我们想为DoFunction这个方法添加一个ctx作为第一个参数
+ 打开Regex的开关 搜索：DoFunction((.*?)\)，其中 (.*?) 表示正则 group，会取到这个函数的参数 替换：DoFunction(ctx, $1)，其中 $1 表示上一步匹配到的第一个参数  </description>
+    </item>
+    
     <item>
       <title>设计模式-Prototype原型模式</title>
       <link>https://lllovol.com/p/2021/9/prototype/</link>
