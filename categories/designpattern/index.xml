@@ -6,7 +6,19 @@
     <description>Recent content in DesignPattern on lllovol</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Sep 2021 15:21:54 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/designpattern/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 14 Oct 2021 15:40:55 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/designpattern/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>设计模式-Proxy代理模式</title>
+      <link>https://lllovol.com/p/2021/10/proxy-pattern/</link>
+      <pubDate>Thu, 14 Oct 2021 15:40:55 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/10/proxy-pattern/</guid>
+      <description>简介 代理是一种结构型设计模式，让你能够提供对象的替代品或其占位符。 代理控制着对于原对象的访问，并允许在将请求提交给对象前后进行一些处理。
+原理 代理模式建议新建一个与原服务对象接口相同的代理类， 然后更新应用以将代理对象传递给所有原始对象客户端。 代理类接收到客户端请求后会创建实际的服务对象， 并将所有工作委派给它。
+类比 信用卡是银行账户的代理，银行账户则是一大捆现金的代理。 它们都实现了同样的接口，均可用于进行支付。
+结构  服务接口(ServiceInterface)：申明服务接口，代理必须实现这个接口才能伪装成Service 服务(Service)：提供服务的真实业务逻辑 代理(Proxy)：代理完成代理的任务后，然后将请求传递给服务对象 客户端(Client): 能通过同一接口与服务或代理进行交互，可在一切需要服务对象的代码中使用代理  应用场景  延迟初始化（虚拟代理） 访问控制（保护代理） 本地执行远程服务（远程代理） 记录日志请求（日志记录代理） 缓存请求结果（缓存代理） 只能引用：客户端不调用的时候直接销毁服务对象  优缺点 优点  在客户端毫无察觉的情况下控制服务对象 如果客户端对服务对象的生命周期没有特殊要求， 你可以对 生命周期进行管理 即使服务对象还未准备好或不存在， 代理也可以正常工作 开闭原则。 你可以在不对服务或客户端做出修改的情况下创建新代理  缺点  代码变复杂 请求时间延迟增加  </description>
+    </item>
+    
     <item>
       <title>设计模式-Prototype原型模式</title>
       <link>https://lllovol.com/p/2021/9/prototype/</link>

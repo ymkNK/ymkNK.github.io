@@ -3,10 +3,25 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://lllovol.com/categories/</loc>
-    <lastmod>2021-10-12T17:05:49+00:00</lastmod>
+    <lastmod>2021-10-14T15:40:55+00:00</lastmod>
+  </url><url>
+    <loc>https://lllovol.com/categories/designpattern/</loc>
+    <lastmod>2021-10-14T15:40:55+00:00</lastmod>
+  </url><url>
+    <loc>https://lllovol.com/tags/designpattern/</loc>
+    <lastmod>2021-10-14T15:40:55+00:00</lastmod>
   </url><url>
     <loc>https://lllovol.com/</loc>
-    <lastmod>2021-10-12T17:05:49+00:00</lastmod>
+    <lastmod>2021-10-14T15:40:55+00:00</lastmod>
+  </url><url>
+    <loc>https://lllovol.com/post/</loc>
+    <lastmod>2021-10-14T15:40:55+00:00</lastmod>
+  </url><url>
+    <loc>https://lllovol.com/tags/</loc>
+    <lastmod>2021-10-14T15:40:55+00:00</lastmod>
+  </url><url>
+    <loc>https://lllovol.com/p/2021/10/proxy-pattern/</loc>
+    <lastmod>2021-10-14T15:40:55+00:00</lastmod>
   </url><url>
     <loc>https://lllovol.com/categories/note/</loc>
     <lastmod>2021-10-12T17:05:49+00:00</lastmod>
@@ -14,23 +29,11 @@
     <loc>https://lllovol.com/tags/note/</loc>
     <lastmod>2021-10-12T17:05:49+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/post/</loc>
-    <lastmod>2021-10-12T17:05:49+00:00</lastmod>
-  </url><url>
-    <loc>https://lllovol.com/tags/</loc>
-    <lastmod>2021-10-12T17:05:49+00:00</lastmod>
-  </url><url>
     <loc>https://lllovol.com/p/2021/10/mindfulness/</loc>
     <lastmod>2021-10-12T17:05:49+00:00</lastmod>
   </url><url>
     <loc>https://lllovol.com/p/2021/10/goland-tips/</loc>
     <lastmod>2021-10-11T11:33:32+00:00</lastmod>
-  </url><url>
-    <loc>https://lllovol.com/categories/designpattern/</loc>
-    <lastmod>2021-09-23T15:21:54+00:00</lastmod>
-  </url><url>
-    <loc>https://lllovol.com/tags/designpattern/</loc>
-    <lastmod>2021-09-23T15:21:54+00:00</lastmod>
   </url><url>
     <loc>https://lllovol.com/categories/tech/</loc>
     <lastmod>2021-09-23T15:21:54+00:00</lastmod>
