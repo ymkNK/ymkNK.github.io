@@ -6,7 +6,19 @@
     <description>Recent content in DesignPattern on lllovol</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 14 Oct 2021 15:40:55 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/designpattern/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 21 Oct 2021 15:45:04 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/designpattern/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>设计模式-Bridge桥接模式</title>
+      <link>https://lllovol.com/p/2021/10/bridge/</link>
+      <pubDate>Thu, 21 Oct 2021 15:45:04 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/10/bridge/</guid>
+      <description>简介 桥接是一种结构型设计模式，可将一个大类或一系列紧密，相关的类拆分为抽象和实现两个独立的层次结构，从而能在开发时分别使用。
+问题 同一套服务界面，想在不同的操作系统下实现
+解决方案 让我们试着用桥接模式来解决这个问题。该模式建议将类拆分为两个类层次结构:
+ 抽象部分:程序的GUI层 实现部分:操作系统的API  结构  抽象部分(Abstraction)提供高层控制逻辑，依赖于完成底层实际工作的实现对象。 实现部分(Implementation)为所有具体实现声明通用接口。抽象部分仅能通过在这里声明的方法与实现对象交互。 具体实现(Concrete Implementations)中包括特定于平台的代码。 精确抽象(Refined Abstraction)提供控制逻辑的变体。与其父类一样，它们通过通用实现接口与不同的实现进行交互。 通常情况下，客户端(Client)仅关心如何与抽象部分合作。但是，客户端需要将抽象对象与一个实现对象连接起来。  适合应用场景  如果你想要拆分或重组一个具有多重功能的庞杂类(例如能与多个数据库服务器进行交互的类)，可以使用桥接模式。 如果你希望在几个独立维度上扩展一个类，可使用该模式。 如果你需要在运行时切换不同实现方法，可使用桥接模式。  优缺点  你可以创建与平台无关的类和程序。 客户端代码仅与高层抽象部分进行互动，不会接触到平台的详细信息。 开闭原则。你可以新增抽象部分和实现部分，且它们之间不会相互影响。 单一职责原则。抽象部分专注于处理高层逻辑，实现部分处理平台细节。 对高内聚的类使用该模式可能会让代码更加复杂。  </description>
+    </item>
+    
     <item>
       <title>设计模式-Proxy代理模式</title>
       <link>https://lllovol.com/p/2021/10/proxy-pattern/</link>
