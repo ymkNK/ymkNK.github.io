@@ -6,7 +6,67 @@
         <description>Recent content on lllovol</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Thu, 21 Oct 2021 15:45:04 +0000</lastBuildDate><atom:link href="https://lllovol.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 04 Nov 2021 15:25:25 +0000</lastBuildDate><atom:link href="https://lllovol.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>设计模式-Adapter适配器模式</title>
+        <link>https://lllovol.com/p/2021/11/design-pattern-adapter/</link>
+        <pubDate>Thu, 04 Nov 2021 15:25:25 +0000</pubDate>
+        
+        <guid>https://lllovol.com/p/2021/11/design-pattern-adapter/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/30.jpeg" alt="Featured image of post 设计模式-Adapter适配器模式" /&gt;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+&lt;p&gt;本文内容来源于宽哥分享&lt;/p&gt;
+&lt;h2 id=&#34;问题场景化&#34;&gt;问题场景化&lt;/h2&gt;
+&lt;p&gt;问题场景化：适配器（电源转接头）就是把一个类的接口（不同国家的新电源插口）转换成使用方（笔记本电脑）所能接受的另一种接口（笔记本电脑当地的电源插口），从而使因为两个接口（电脑电源无法插入新的电源插口）本身不匹配而无法一起工作的两个类能够在一起工作&lt;/p&gt;
+&lt;h3 id=&#34;其他例子&#34;&gt;其他例子&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;浏览器&lt;/li&gt;
+&lt;li&gt;HTTP&lt;/li&gt;
+&lt;li&gt;数据库驱动&lt;/li&gt;
+&lt;li&gt;报警平台适配的多数据源&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;角色&#34;&gt;角色&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Target（目标接口）：所要转换的目的接口&lt;/li&gt;
+&lt;li&gt;Adaptee（源角色/源接口）：需要适配的接口&lt;/li&gt;
+&lt;li&gt;Adapter（适配器）：将源接口适配成目标接口，&amp;ldquo;实现目标接口&amp;rdquo;，实现的方式有两种形式，一种是适配器本身实现目标接口，另一种是使用时获取&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;实现逻辑&#34;&gt;实现逻辑&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;确保至少有两个类的接口不兼容：
+&lt;ul&gt;
+&lt;li&gt;一个无法修改 （通常是第三方、 遗留系统或者存在众多已有依赖的类） 的功能性服务类&lt;/li&gt;
+&lt;li&gt;一个或多个将受益于使用服务类的客户端类&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;声明客户端接口， 描述客户端如何与服务交互&lt;/li&gt;
+&lt;li&gt;创建遵循客户端接口的适配器类，所有方法暂时都为空&lt;/li&gt;
+&lt;li&gt;在适配器类中添加一个成员变量用于保存对于服务对象的引用。 通常情况下会通过构造函数对该成员变量进行初始化， 但有时在调用其方法时将该变量传递给适配器会更方便&lt;/li&gt;
+&lt;li&gt;依次实现适配器类客户端接口的所有方法：适配器会将实际工作委派给服务对象， 自身只负责接口或数据格式的转换&lt;/li&gt;
+&lt;li&gt;客户端必须通过客户端接口使用适配器：这样一来，就可以在不影响客户端代码的情况下修改或扩展适配器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;优缺点&#34;&gt;优缺点&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;优点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;单一职责原则：你可以将接口从程序主要业务逻辑中分离&lt;/li&gt;
+&lt;li&gt;开闭原则：只要客户端代码通过客户端接口与适配器进行交互，你就能在不修改现有客户端代码的情况下在程序中添加新类型的适配器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;缺点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;代码整体复杂度增加：因为你需要新增一系列接口和类，有时直接更改服务类使其与其他代码兼容会更简单&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;比较&#34;&gt;比较&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;适配器模式可以对已有对象的接口&lt;strong&gt;进行修改&lt;/strong&gt;， 装饰模式则能在不改变对象接口的前提下&lt;strong&gt;强化对象功能&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;适配器模式能为被封装对象提供不同的接口， 代理模式能为对象提供相同的接口， 装饰模式则能为对象提供加强的接口&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>设计模式-Bridge桥接模式</title>
         <link>https://lllovol.com/p/2021/10/bridge/</link>
         <pubDate>Thu, 21 Oct 2021 15:45:04 +0000</pubDate>

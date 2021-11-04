@@ -6,7 +6,20 @@
     <description>Recent content in Posts on lllovol</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 21 Oct 2021 15:45:04 +0000</lastBuildDate><atom:link href="https://lllovol.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 04 Nov 2021 15:25:25 +0000</lastBuildDate><atom:link href="https://lllovol.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>设计模式-Adapter适配器模式</title>
+      <link>https://lllovol.com/p/2021/11/design-pattern-adapter/</link>
+      <pubDate>Thu, 04 Nov 2021 15:25:25 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/11/design-pattern-adapter/</guid>
+      <description>前言 本文内容来源于宽哥分享
+问题场景化 问题场景化：适配器（电源转接头）就是把一个类的接口（不同国家的新电源插口）转换成使用方（笔记本电脑）所能接受的另一种接口（笔记本电脑当地的电源插口），从而使因为两个接口（电脑电源无法插入新的电源插口）本身不匹配而无法一起工作的两个类能够在一起工作
+其他例子  浏览器 HTTP 数据库驱动 报警平台适配的多数据源  角色  Target（目标接口）：所要转换的目的接口 Adaptee（源角色/源接口）：需要适配的接口 Adapter（适配器）：将源接口适配成目标接口，&amp;ldquo;实现目标接口&amp;rdquo;，实现的方式有两种形式，一种是适配器本身实现目标接口，另一种是使用时获取  实现逻辑  确保至少有两个类的接口不兼容：  一个无法修改 （通常是第三方、 遗留系统或者存在众多已有依赖的类） 的功能性服务类 一个或多个将受益于使用服务类的客户端类   声明客户端接口， 描述客户端如何与服务交互 创建遵循客户端接口的适配器类，所有方法暂时都为空 在适配器类中添加一个成员变量用于保存对于服务对象的引用。 通常情况下会通过构造函数对该成员变量进行初始化， 但有时在调用其方法时将该变量传递给适配器会更方便 依次实现适配器类客户端接口的所有方法：适配器会将实际工作委派给服务对象， 自身只负责接口或数据格式的转换 客户端必须通过客户端接口使用适配器：这样一来，就可以在不影响客户端代码的情况下修改或扩展适配器  优缺点   优点：
+ 单一职责原则：你可以将接口从程序主要业务逻辑中分离 开闭原则：只要客户端代码通过客户端接口与适配器进行交互，你就能在不修改现有客户端代码的情况下在程序中添加新类型的适配器    缺点：
+ 代码整体复杂度增加：因为你需要新增一系列接口和类，有时直接更改服务类使其与其他代码兼容会更简单    比较  适配器模式可以对已有对象的接口进行修改， 装饰模式则能在不改变对象接口的前提下强化对象功能 适配器模式能为被封装对象提供不同的接口， 代理模式能为对象提供相同的接口， 装饰模式则能为对象提供加强的接口  </description>
+    </item>
+    
     <item>
       <title>设计模式-Bridge桥接模式</title>
       <link>https://lllovol.com/p/2021/10/bridge/</link>
