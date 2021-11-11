@@ -1,30 +1,33 @@
 <!DOCTYPE html>
 <html lang="en-us">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='前言 本文内容来源于宽哥分享
-问题场景化 问题场景化：适配器（电源转接头）就是把一个类的接口（不同国家的新电源插口）转换成使用方（笔记本电脑）所能接受的另一种接口（笔记本电脑当地的电源插口），从而使因为两个接口（电脑电源无法插入新的电源插口）本身不匹配而无法一起工作的两个类能够在一起工作
-其他例子  浏览器 HTTP 数据库驱动 报警平台适配的多数据源  角色  Target（目标接口）：所要转换的目的接口 Adaptee（源角色/源接口）：需要适配的接口 Adapter（适配器）：将源接口适配成目标接口，&amp;ldquo;实现目标接口&amp;rdquo;，实现的方式有两种形式，一种是适配器本身实现目标接口，另一种是使用时获取  实现逻辑  确保至少有两个类的接口不兼容：  一个无法修改 （通常是第三方、 遗留系统或者存在众多已有依赖的类） 的功能性服务类 一个或多个将受益于使用服务类的客户端类   声明客户端接口， 描述客户端如何与服务交互 创建遵循客户端接口的适配器类，所有方法暂时都为空 在适配器类中添加一个成员变量用于保存对于服务对象的引用。 通常情况下会通过构造函数对该成员变量进行初始化， 但有时在调用其方法时将该变量传递给适配器会更方便 依次实现适配器类客户端接口的所有方法：适配器会将实际工作委派给服务对象， 自身只负责接口或数据格式的转换 客户端必须通过客户端接口使用适配器：这样一来，就可以在不影响客户端代码的情况下修改或扩展适配器  优缺点   优点：
- 单一职责原则：你可以将接口从程序主要业务逻辑中分离 开闭原则：只要客户端代码通过客户端接口与适配器进行交互，你就能在不修改现有客户端代码的情况下在程序中添加新类型的适配器    缺点：
- 代码整体复杂度增加：因为你需要新增一系列接口和类，有时直接更改服务类使其与其他代码兼容会更简单    比较  适配器模式可以对已有对象的接口进行修改， 装饰模式则能在不改变对象接口的前提下强化对象功能 适配器模式能为被封装对象提供不同的接口， 代理模式能为对象提供相同的接口， 装饰模式则能为对象提供加强的接口  '><title>设计模式-Adapter适配器模式</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='前言 树状组合模式，结构型设计模式
+例子 纸盒箱 -&amp;gt;可以包含产品 -&amp;gt;可以包含更小的盒子
+解决方案 组合模式建议使用一个通用接口来和产品盒子进行交互
+实现方式  模型能够以树状展示 申明组件接口 创建叶子节点（简单元素） 创建容器节点（复杂元素） 容器可以添加和删除元素  代码演示 画图功能  通用接口定义：draw() move() 叶子节点实现接口 容器节点实现接口，并且支持add()、remove()  文件系统  文件（叶子节点，能够执行） 文件夹（容器节点，可以包含文件和文件夹）  适用场景  树状场景 希望客户端代码以相同方式处理简单和复杂元素  优缺点 优点：
+ 可以使用多态、递归 开闭原则 无需更改代码  缺点：
+ 对于功能差异较大的类，提供公共接口或许会有困难 在特定情况下，需要过度一般化组件接口，使其变得令人难以理解 不容易限制容器中的构件  '><title>设计模式-Composite组合模式</title>
 
-<link rel='canonical' href='https://lllovol.com/p/2021/11/design-pattern-adapter/'>
+<link rel='canonical' href='https://lllovol.com/p/2021/11/design-pattern-composite/'>
 
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='设计模式-Adapter适配器模式'>
-<meta property='og:description' content='前言 本文内容来源于宽哥分享
-问题场景化 问题场景化：适配器（电源转接头）就是把一个类的接口（不同国家的新电源插口）转换成使用方（笔记本电脑）所能接受的另一种接口（笔记本电脑当地的电源插口），从而使因为两个接口（电脑电源无法插入新的电源插口）本身不匹配而无法一起工作的两个类能够在一起工作
-其他例子  浏览器 HTTP 数据库驱动 报警平台适配的多数据源  角色  Target（目标接口）：所要转换的目的接口 Adaptee（源角色/源接口）：需要适配的接口 Adapter（适配器）：将源接口适配成目标接口，&amp;ldquo;实现目标接口&amp;rdquo;，实现的方式有两种形式，一种是适配器本身实现目标接口，另一种是使用时获取  实现逻辑  确保至少有两个类的接口不兼容：  一个无法修改 （通常是第三方、 遗留系统或者存在众多已有依赖的类） 的功能性服务类 一个或多个将受益于使用服务类的客户端类   声明客户端接口， 描述客户端如何与服务交互 创建遵循客户端接口的适配器类，所有方法暂时都为空 在适配器类中添加一个成员变量用于保存对于服务对象的引用。 通常情况下会通过构造函数对该成员变量进行初始化， 但有时在调用其方法时将该变量传递给适配器会更方便 依次实现适配器类客户端接口的所有方法：适配器会将实际工作委派给服务对象， 自身只负责接口或数据格式的转换 客户端必须通过客户端接口使用适配器：这样一来，就可以在不影响客户端代码的情况下修改或扩展适配器  优缺点   优点：
- 单一职责原则：你可以将接口从程序主要业务逻辑中分离 开闭原则：只要客户端代码通过客户端接口与适配器进行交互，你就能在不修改现有客户端代码的情况下在程序中添加新类型的适配器    缺点：
- 代码整体复杂度增加：因为你需要新增一系列接口和类，有时直接更改服务类使其与其他代码兼容会更简单    比较  适配器模式可以对已有对象的接口进行修改， 装饰模式则能在不改变对象接口的前提下强化对象功能 适配器模式能为被封装对象提供不同的接口， 代理模式能为对象提供相同的接口， 装饰模式则能为对象提供加强的接口  '>
-<meta property='og:url' content='https://lllovol.com/p/2021/11/design-pattern-adapter/'>
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='设计模式-Composite组合模式'>
+<meta property='og:description' content='前言 树状组合模式，结构型设计模式
+例子 纸盒箱 -&amp;gt;可以包含产品 -&amp;gt;可以包含更小的盒子
+解决方案 组合模式建议使用一个通用接口来和产品盒子进行交互
+实现方式  模型能够以树状展示 申明组件接口 创建叶子节点（简单元素） 创建容器节点（复杂元素） 容器可以添加和删除元素  代码演示 画图功能  通用接口定义：draw() move() 叶子节点实现接口 容器节点实现接口，并且支持add()、remove()  文件系统  文件（叶子节点，能够执行） 文件夹（容器节点，可以包含文件和文件夹）  适用场景  树状场景 希望客户端代码以相同方式处理简单和复杂元素  优缺点 优点：
+ 可以使用多态、递归 开闭原则 无需更改代码  缺点：
+ 对于功能差异较大的类，提供公共接口或许会有困难 在特定情况下，需要过度一般化组件接口，使其变得令人难以理解 不容易限制容器中的构件  '>
+<meta property='og:url' content='https://lllovol.com/p/2021/11/design-pattern-composite/'>
 <meta property='og:site_name' content='lllovol'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='DesignPattern' /><meta property='article:published_time' content='2021-11-04T15:25:25&#43;00:00'/><meta property='article:modified_time' content='2021-11-04T15:25:25&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/30.jpeg' />
-<meta name="twitter:title" content="设计模式-Adapter适配器模式">
-<meta name="twitter:description" content="前言 本文内容来源于宽哥分享
-问题场景化 问题场景化：适配器（电源转接头）就是把一个类的接口（不同国家的新电源插口）转换成使用方（笔记本电脑）所能接受的另一种接口（笔记本电脑当地的电源插口），从而使因为两个接口（电脑电源无法插入新的电源插口）本身不匹配而无法一起工作的两个类能够在一起工作
-其他例子  浏览器 HTTP 数据库驱动 报警平台适配的多数据源  角色  Target（目标接口）：所要转换的目的接口 Adaptee（源角色/源接口）：需要适配的接口 Adapter（适配器）：将源接口适配成目标接口，&amp;ldquo;实现目标接口&amp;rdquo;，实现的方式有两种形式，一种是适配器本身实现目标接口，另一种是使用时获取  实现逻辑  确保至少有两个类的接口不兼容：  一个无法修改 （通常是第三方、 遗留系统或者存在众多已有依赖的类） 的功能性服务类 一个或多个将受益于使用服务类的客户端类   声明客户端接口， 描述客户端如何与服务交互 创建遵循客户端接口的适配器类，所有方法暂时都为空 在适配器类中添加一个成员变量用于保存对于服务对象的引用。 通常情况下会通过构造函数对该成员变量进行初始化， 但有时在调用其方法时将该变量传递给适配器会更方便 依次实现适配器类客户端接口的所有方法：适配器会将实际工作委派给服务对象， 自身只负责接口或数据格式的转换 客户端必须通过客户端接口使用适配器：这样一来，就可以在不影响客户端代码的情况下修改或扩展适配器  优缺点   优点：
- 单一职责原则：你可以将接口从程序主要业务逻辑中分离 开闭原则：只要客户端代码通过客户端接口与适配器进行交互，你就能在不修改现有客户端代码的情况下在程序中添加新类型的适配器    缺点：
- 代码整体复杂度增加：因为你需要新增一系列接口和类，有时直接更改服务类使其与其他代码兼容会更简单    比较  适配器模式可以对已有对象的接口进行修改， 装饰模式则能在不改变对象接口的前提下强化对象功能 适配器模式能为被封装对象提供不同的接口， 代理模式能为对象提供相同的接口， 装饰模式则能为对象提供加强的接口  "><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/30.jpeg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='DesignPattern' /><meta property='article:published_time' content='2021-11-11T15:32:55&#43;00:00'/><meta property='article:modified_time' content='2021-11-11T15:32:55&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/1.jpeg' />
+<meta name="twitter:title" content="设计模式-Composite组合模式">
+<meta name="twitter:description" content="前言 树状组合模式，结构型设计模式
+例子 纸盒箱 -&amp;gt;可以包含产品 -&amp;gt;可以包含更小的盒子
+解决方案 组合模式建议使用一个通用接口来和产品盒子进行交互
+实现方式  模型能够以树状展示 申明组件接口 创建叶子节点（简单元素） 创建容器节点（复杂元素） 容器可以添加和删除元素  代码演示 画图功能  通用接口定义：draw() move() 叶子节点实现接口 容器节点实现接口，并且支持add()、remove()  文件系统  文件（叶子节点，能够执行） 文件夹（容器节点，可以包含文件和文件夹）  适用场景  树状场景 希望客户端代码以相同方式处理简单和复杂元素  优缺点 优点：
+ 可以使用多态、递归 开闭原则 无需更改代码  缺点：
+ 对于功能差异较大的类，提供公共接口或许会有困难 在特定情况下，需要过度一般化组件接口，使其变得令人难以理解 不容易限制容器中的构件  "><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/1.jpeg' />
     <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-MK7GTCNC34"></script>
@@ -87,9 +90,9 @@ if (!doNotTrack) {
     <article class="main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/2021/11/design-pattern-adapter/">
+            <a href="/p/2021/11/design-pattern-composite/">
                 
-                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/30.jpeg" loading="lazy" alt="Featured image of post 设计模式-Adapter适配器模式" />
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/1.jpeg" loading="lazy" alt="Featured image of post 设计模式-Composite组合模式" />
                 
             </a>
         </div>
@@ -107,7 +110,7 @@ if (!doNotTrack) {
     
 
     <h2 class="article-title">
-        <a href="/p/2021/11/design-pattern-adapter/">设计模式-Adapter适配器模式</a>
+        <a href="/p/2021/11/design-pattern-composite/">设计模式-Composite组合模式</a>
     </h2>
 
     
@@ -125,7 +128,7 @@ if (!doNotTrack) {
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Nov 04, 2021</time>
+                <time class="article-time--published">Nov 11, 2021</time>
             </div>
         
 
@@ -137,56 +140,49 @@ if (!doNotTrack) {
 
     <section class="article-content">
     <h2 id="前言">前言</h2>
-<p>本文内容来源于宽哥分享</p>
-<h2 id="问题场景化">问题场景化</h2>
-<p>问题场景化：适配器（电源转接头）就是把一个类的接口（不同国家的新电源插口）转换成使用方（笔记本电脑）所能接受的另一种接口（笔记本电脑当地的电源插口），从而使因为两个接口（电脑电源无法插入新的电源插口）本身不匹配而无法一起工作的两个类能够在一起工作</p>
-<h3 id="其他例子">其他例子</h3>
+<p>树状组合模式，结构型设计模式</p>
+<h2 id="例子">例子</h2>
+<p>纸盒箱
+-&gt;可以包含产品
+-&gt;可以包含更小的盒子</p>
+<h2 id="解决方案">解决方案</h2>
+<p>组合模式建议使用一个通用接口来和产品盒子进行交互</p>
+<h2 id="实现方式">实现方式</h2>
+<ol>
+<li>模型能够以树状展示</li>
+<li>申明组件接口</li>
+<li>创建叶子节点（简单元素）</li>
+<li>创建容器节点（复杂元素）</li>
+<li>容器可以添加和删除元素</li>
+</ol>
+<h2 id="代码演示">代码演示</h2>
+<h3 id="画图功能">画图功能</h3>
 <ul>
-<li>浏览器</li>
-<li>HTTP</li>
-<li>数据库驱动</li>
-<li>报警平台适配的多数据源</li>
+<li>通用接口定义：draw() move()</li>
+<li>叶子节点实现接口</li>
+<li>容器节点实现接口，并且支持add()、remove()</li>
 </ul>
-<h2 id="角色">角色</h2>
+<h3 id="文件系统">文件系统</h3>
 <ul>
-<li>Target（目标接口）：所要转换的目的接口</li>
-<li>Adaptee（源角色/源接口）：需要适配的接口</li>
-<li>Adapter（适配器）：将源接口适配成目标接口，&ldquo;实现目标接口&rdquo;，实现的方式有两种形式，一种是适配器本身实现目标接口，另一种是使用时获取</li>
+<li>文件（叶子节点，能够执行）</li>
+<li>文件夹（容器节点，可以包含文件和文件夹）</li>
 </ul>
-<h2 id="实现逻辑">实现逻辑</h2>
+<h2 id="适用场景">适用场景</h2>
 <ul>
-<li>确保至少有两个类的接口不兼容：
-<ul>
-<li>一个无法修改 （通常是第三方、 遗留系统或者存在众多已有依赖的类） 的功能性服务类</li>
-<li>一个或多个将受益于使用服务类的客户端类</li>
-</ul>
-</li>
-<li>声明客户端接口， 描述客户端如何与服务交互</li>
-<li>创建遵循客户端接口的适配器类，所有方法暂时都为空</li>
-<li>在适配器类中添加一个成员变量用于保存对于服务对象的引用。 通常情况下会通过构造函数对该成员变量进行初始化， 但有时在调用其方法时将该变量传递给适配器会更方便</li>
-<li>依次实现适配器类客户端接口的所有方法：适配器会将实际工作委派给服务对象， 自身只负责接口或数据格式的转换</li>
-<li>客户端必须通过客户端接口使用适配器：这样一来，就可以在不影响客户端代码的情况下修改或扩展适配器</li>
+<li>树状场景</li>
+<li>希望客户端代码以相同方式处理简单和复杂元素</li>
 </ul>
 <h2 id="优缺点">优缺点</h2>
-<ul>
-<li>
 <p>优点：</p>
 <ul>
-<li>单一职责原则：你可以将接口从程序主要业务逻辑中分离</li>
-<li>开闭原则：只要客户端代码通过客户端接口与适配器进行交互，你就能在不修改现有客户端代码的情况下在程序中添加新类型的适配器</li>
+<li>可以使用多态、递归</li>
+<li>开闭原则 无需更改代码</li>
 </ul>
-</li>
-<li>
 <p>缺点：</p>
 <ul>
-<li>代码整体复杂度增加：因为你需要新增一系列接口和类，有时直接更改服务类使其与其他代码兼容会更简单</li>
-</ul>
-</li>
-</ul>
-<h2 id="比较">比较</h2>
-<ul>
-<li>适配器模式可以对已有对象的接口<strong>进行修改</strong>， 装饰模式则能在不改变对象接口的前提下<strong>强化对象功能</strong></li>
-<li>适配器模式能为被封装对象提供不同的接口， 代理模式能为对象提供相同的接口， 装饰模式则能为对象提供加强的接口</li>
+<li>对于功能差异较大的类，提供公共接口或许会有困难</li>
+<li>在特定情况下，需要过度一般化组件接口，使其变得令人难以理解</li>
+<li>不容易限制容器中的构件</li>
 </ul>
 
 </section>
@@ -251,18 +247,18 @@ if (!doNotTrack) {
                 
                     
 <article class="has-image">
-    <a href="/p/2021/11/design-pattern-composite/">
+    <a href="/p/2021/11/design-pattern-adapter/">
         
         
             <div class="article-image">
                 
-                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/1.jpeg" loading="lazy" data-key="2021/11/design-pattern-composite" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/1.jpeg"/>
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/30.jpeg" loading="lazy" data-key="2021/11/design-pattern-adapter" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/30.jpeg"/>
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">设计模式-Composite组合模式</h2>
+            <h2 class="article-title">设计模式-Adapter适配器模式</h2>
         </div>
     </a>
 </article>
@@ -491,15 +487,17 @@ if (!doNotTrack) {
                     <nav id="TableOfContents">
   <ul>
     <li><a href="#前言">前言</a></li>
-    <li><a href="#问题场景化">问题场景化</a>
+    <li><a href="#例子">例子</a></li>
+    <li><a href="#解决方案">解决方案</a></li>
+    <li><a href="#实现方式">实现方式</a></li>
+    <li><a href="#代码演示">代码演示</a>
       <ul>
-        <li><a href="#其他例子">其他例子</a></li>
+        <li><a href="#画图功能">画图功能</a></li>
+        <li><a href="#文件系统">文件系统</a></li>
       </ul>
     </li>
-    <li><a href="#角色">角色</a></li>
-    <li><a href="#实现逻辑">实现逻辑</a></li>
+    <li><a href="#适用场景">适用场景</a></li>
     <li><a href="#优缺点">优缺点</a></li>
-    <li><a href="#比较">比较</a></li>
   </ul>
 </nav>
                 </div>

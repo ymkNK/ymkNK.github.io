@@ -6,7 +6,21 @@
     <description>Recent content in DesignPattern on lllovol</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 04 Nov 2021 15:25:25 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/designpattern/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 11 Nov 2021 15:32:55 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/designpattern/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>设计模式-Composite组合模式</title>
+      <link>https://lllovol.com/p/2021/11/design-pattern-composite/</link>
+      <pubDate>Thu, 11 Nov 2021 15:32:55 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/11/design-pattern-composite/</guid>
+      <description>前言 树状组合模式，结构型设计模式
+例子 纸盒箱 -&amp;gt;可以包含产品 -&amp;gt;可以包含更小的盒子
+解决方案 组合模式建议使用一个通用接口来和产品盒子进行交互
+实现方式  模型能够以树状展示 申明组件接口 创建叶子节点（简单元素） 创建容器节点（复杂元素） 容器可以添加和删除元素  代码演示 画图功能  通用接口定义：draw() move() 叶子节点实现接口 容器节点实现接口，并且支持add()、remove()  文件系统  文件（叶子节点，能够执行） 文件夹（容器节点，可以包含文件和文件夹）  适用场景  树状场景 希望客户端代码以相同方式处理简单和复杂元素  优缺点 优点：
+ 可以使用多态、递归 开闭原则 无需更改代码  缺点：
+ 对于功能差异较大的类，提供公共接口或许会有困难 在特定情况下，需要过度一般化组件接口，使其变得令人难以理解 不容易限制容器中的构件  </description>
+    </item>
+    
     <item>
       <title>设计模式-Adapter适配器模式</title>
       <link>https://lllovol.com/p/2021/11/design-pattern-adapter/</link>

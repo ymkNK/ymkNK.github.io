@@ -6,7 +6,60 @@
         <description>Recent content on lllovol</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Thu, 04 Nov 2021 15:25:25 +0000</lastBuildDate><atom:link href="https://lllovol.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 11 Nov 2021 15:32:55 +0000</lastBuildDate><atom:link href="https://lllovol.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>设计模式-Composite组合模式</title>
+        <link>https://lllovol.com/p/2021/11/design-pattern-composite/</link>
+        <pubDate>Thu, 11 Nov 2021 15:32:55 +0000</pubDate>
+        
+        <guid>https://lllovol.com/p/2021/11/design-pattern-composite/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/1.jpeg" alt="Featured image of post 设计模式-Composite组合模式" /&gt;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+&lt;p&gt;树状组合模式，结构型设计模式&lt;/p&gt;
+&lt;h2 id=&#34;例子&#34;&gt;例子&lt;/h2&gt;
+&lt;p&gt;纸盒箱
+-&amp;gt;可以包含产品
+-&amp;gt;可以包含更小的盒子&lt;/p&gt;
+&lt;h2 id=&#34;解决方案&#34;&gt;解决方案&lt;/h2&gt;
+&lt;p&gt;组合模式建议使用一个通用接口来和产品盒子进行交互&lt;/p&gt;
+&lt;h2 id=&#34;实现方式&#34;&gt;实现方式&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;模型能够以树状展示&lt;/li&gt;
+&lt;li&gt;申明组件接口&lt;/li&gt;
+&lt;li&gt;创建叶子节点（简单元素）&lt;/li&gt;
+&lt;li&gt;创建容器节点（复杂元素）&lt;/li&gt;
+&lt;li&gt;容器可以添加和删除元素&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;代码演示&#34;&gt;代码演示&lt;/h2&gt;
+&lt;h3 id=&#34;画图功能&#34;&gt;画图功能&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;通用接口定义：draw() move()&lt;/li&gt;
+&lt;li&gt;叶子节点实现接口&lt;/li&gt;
+&lt;li&gt;容器节点实现接口，并且支持add()、remove()&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;文件系统&#34;&gt;文件系统&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;文件（叶子节点，能够执行）&lt;/li&gt;
+&lt;li&gt;文件夹（容器节点，可以包含文件和文件夹）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;适用场景&#34;&gt;适用场景&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;树状场景&lt;/li&gt;
+&lt;li&gt;希望客户端代码以相同方式处理简单和复杂元素&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;优缺点&#34;&gt;优缺点&lt;/h2&gt;
+&lt;p&gt;优点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;可以使用多态、递归&lt;/li&gt;
+&lt;li&gt;开闭原则 无需更改代码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;缺点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对于功能差异较大的类，提供公共接口或许会有困难&lt;/li&gt;
+&lt;li&gt;在特定情况下，需要过度一般化组件接口，使其变得令人难以理解&lt;/li&gt;
+&lt;li&gt;不容易限制容器中的构件&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>设计模式-Adapter适配器模式</title>
         <link>https://lllovol.com/p/2021/11/design-pattern-adapter/</link>
         <pubDate>Thu, 04 Nov 2021 15:25:25 +0000</pubDate>
