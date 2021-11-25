@@ -33,6 +33,7 @@
 &lt;ul&gt;
 &lt;li&gt;没有完全解耦，可能会存在循环依赖&lt;/li&gt;
 &lt;li&gt;性能损耗&lt;/li&gt;
+&lt;li&gt;通知顺序是随机的&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         </item>
