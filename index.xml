@@ -23,6 +23,8 @@
 &lt;/ul&gt;
 &lt;h2 id=&#34;使用场景&#34;&gt;使用场景&lt;/h2&gt;
 &lt;p&gt;需要监听某种事件的变化，然后通知会对这种变化感兴趣的对象&lt;/p&gt;
+&lt;h2 id=&#34;实现方式&#34;&gt;实现方式&lt;/h2&gt;
+&lt;p&gt;略&lt;/p&gt;
 &lt;h2 id=&#34;优缺点&#34;&gt;优缺点&lt;/h2&gt;
 &lt;p&gt;优点&lt;/p&gt;
 &lt;ul&gt;
@@ -33,7 +35,7 @@
 &lt;ul&gt;
 &lt;li&gt;没有完全解耦，可能会存在循环依赖&lt;/li&gt;
 &lt;li&gt;性能损耗&lt;/li&gt;
-&lt;li&gt;通知顺序是随机的&lt;/li&gt;
+&lt;li&gt;通知顺序是随机的(可以改变具体的实现方式)&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         </item>
