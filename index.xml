@@ -6,7 +6,37 @@
         <description>Recent content on lllovol</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Thu, 11 Nov 2021 15:32:55 +0000</lastBuildDate><atom:link href="https://lllovol.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 25 Nov 2021 15:21:43 +0000</lastBuildDate><atom:link href="https://lllovol.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>设计模式-Observer观察者模式</title>
+        <link>https://lllovol.com/p/2021/11/observer/</link>
+        <pubDate>Thu, 25 Nov 2021 15:21:43 +0000</pubDate>
+        
+        <guid>https://lllovol.com/p/2021/11/observer/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/5.jpeg" alt="Featured image of post 设计模式-Observer观察者模式" /&gt;&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
+&lt;p&gt;行为型设计模式&lt;/p&gt;
+&lt;h2 id=&#34;组成部分&#34;&gt;组成部分&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;发布者 接口&lt;/li&gt;
+&lt;li&gt;订阅者 接口&lt;/li&gt;
+&lt;li&gt;具体订阅者 实现&lt;/li&gt;
+&lt;li&gt;客户端&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;使用场景&#34;&gt;使用场景&lt;/h2&gt;
+&lt;p&gt;需要监听某种事件的变化，然后通知会对这种变化感兴趣的对象&lt;/p&gt;
+&lt;h2 id=&#34;优缺点&#34;&gt;优缺点&lt;/h2&gt;
+&lt;p&gt;优点&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;减少发布者和订阅者的耦合&lt;/li&gt;
+&lt;li&gt;支持开闭原则&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;缺点&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;没有完全解耦，可能会存在循环依赖&lt;/li&gt;
+&lt;li&gt;性能损耗&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>设计模式-Composite组合模式</title>
         <link>https://lllovol.com/p/2021/11/design-pattern-composite/</link>
         <pubDate>Thu, 11 Nov 2021 15:32:55 +0000</pubDate>

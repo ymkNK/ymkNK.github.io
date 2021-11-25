@@ -6,7 +6,20 @@
     <description>Recent content in DesignPattern on lllovol</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 11 Nov 2021 15:32:55 +0000</lastBuildDate><atom:link href="https://lllovol.com/tags/designpattern/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 25 Nov 2021 15:21:43 +0000</lastBuildDate><atom:link href="https://lllovol.com/tags/designpattern/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>设计模式-Observer观察者模式</title>
+      <link>https://lllovol.com/p/2021/11/observer/</link>
+      <pubDate>Thu, 25 Nov 2021 15:21:43 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/11/observer/</guid>
+      <description>简介 行为型设计模式
+组成部分  发布者 接口 订阅者 接口 具体订阅者 实现 客户端  使用场景 需要监听某种事件的变化，然后通知会对这种变化感兴趣的对象
+优缺点 优点
+ 减少发布者和订阅者的耦合 支持开闭原则  缺点
+ 没有完全解耦，可能会存在循环依赖 性能损耗  </description>
+    </item>
+    
     <item>
       <title>设计模式-Composite组合模式</title>
       <link>https://lllovol.com/p/2021/11/design-pattern-composite/</link>
