@@ -6,7 +6,49 @@
         <description>Recent content on lllovol</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Thu, 25 Nov 2021 15:21:43 +0000</lastBuildDate><atom:link href="https://lllovol.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 02 Dec 2021 15:55:10 +0000</lastBuildDate><atom:link href="https://lllovol.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>设计模式-Facade门面模式</title>
+        <link>https://lllovol.com/p/2021/12/design-pattern-facade/</link>
+        <pubDate>Thu, 02 Dec 2021 15:55:10 +0000</pubDate>
+        
+        <guid>https://lllovol.com/p/2021/12/design-pattern-facade/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/17.jpeg" alt="Featured image of post 设计模式-Facade门面模式" /&gt;&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
+&lt;p&gt;结构型设计模式&lt;/p&gt;
+&lt;h2 id=&#34;组成部分&#34;&gt;组成部分&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;门面接口&lt;/li&gt;
+&lt;li&gt;复杂子系统&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;真实场景&#34;&gt;真实场景&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;银行柜员&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;使用场景&#34;&gt;使用场景&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;底层是复杂的子系统，对外暴露提供的就只是一个简单的接口&lt;/li&gt;
+&lt;li&gt;构建多层系统结构，利用门面模式最为每一层的入口，简化层间调用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;实现方式&#34;&gt;实现方式&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;新增&lt;/li&gt;
+&lt;li&gt;维护、变更&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;优缺点&#34;&gt;优缺点&lt;/h2&gt;
+&lt;p&gt;优点&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;简化调用逻辑&lt;/li&gt;
+&lt;li&gt;高内聚低耦合&lt;/li&gt;
+&lt;li&gt;更好的划分层次，提高了安全性&lt;/li&gt;
+&lt;li&gt;符合迪米特法则，最少知道原则&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;缺点&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;有可能成为所有类型都耦合的上帝对象&lt;/li&gt;
+&lt;li&gt;不符合开闭原则：增加子系统需要对原有系统进行修改&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>设计模式-Observer观察者模式</title>
         <link>https://lllovol.com/p/2021/11/observer/</link>
         <pubDate>Thu, 25 Nov 2021 15:21:43 +0000</pubDate>
