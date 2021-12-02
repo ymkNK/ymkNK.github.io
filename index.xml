@@ -14,14 +14,14 @@
         <guid>https://lllovol.com/p/2021/12/design-pattern-facade/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/17.jpeg" alt="Featured image of post 设计模式-Facade门面模式" /&gt;&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
 &lt;p&gt;结构型设计模式&lt;/p&gt;
+&lt;h2 id=&#34;真实场景&#34;&gt;真实场景&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;银行柜员&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&#34;组成部分&#34;&gt;组成部分&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;门面接口&lt;/li&gt;
 &lt;li&gt;复杂子系统&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;真实场景&#34;&gt;真实场景&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;银行柜员&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;使用场景&#34;&gt;使用场景&lt;/h2&gt;
 &lt;ul&gt;

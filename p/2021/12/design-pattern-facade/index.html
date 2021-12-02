@@ -2,7 +2,7 @@
 <html lang="en-us">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='简介 结构型设计模式
-组成部分  门面接口 复杂子系统  真实场景  银行柜员  使用场景  底层是复杂的子系统，对外暴露提供的就只是一个简单的接口 构建多层系统结构，利用门面模式最为每一层的入口，简化层间调用  实现方式  新增 维护、变更  优缺点 优点
+真实场景  银行柜员  组成部分  门面接口 复杂子系统  使用场景  底层是复杂的子系统，对外暴露提供的就只是一个简单的接口 构建多层系统结构，利用门面模式最为每一层的入口，简化层间调用  实现方式  新增 维护、变更  优缺点 优点
  简化调用逻辑 高内聚低耦合 更好的划分层次，提高了安全性 符合迪米特法则，最少知道原则  缺点
  有可能成为所有类型都耦合的上帝对象 不符合开闭原则：增加子系统需要对原有系统进行修改  '><title>设计模式-Facade门面模式</title>
 
@@ -10,7 +10,7 @@
 
 <link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='设计模式-Facade门面模式'>
 <meta property='og:description' content='简介 结构型设计模式
-组成部分  门面接口 复杂子系统  真实场景  银行柜员  使用场景  底层是复杂的子系统，对外暴露提供的就只是一个简单的接口 构建多层系统结构，利用门面模式最为每一层的入口，简化层间调用  实现方式  新增 维护、变更  优缺点 优点
+真实场景  银行柜员  组成部分  门面接口 复杂子系统  使用场景  底层是复杂的子系统，对外暴露提供的就只是一个简单的接口 构建多层系统结构，利用门面模式最为每一层的入口，简化层间调用  实现方式  新增 维护、变更  优缺点 优点
  简化调用逻辑 高内聚低耦合 更好的划分层次，提高了安全性 符合迪米特法则，最少知道原则  缺点
  有可能成为所有类型都耦合的上帝对象 不符合开闭原则：增加子系统需要对原有系统进行修改  '>
 <meta property='og:url' content='https://lllovol.com/p/2021/12/design-pattern-facade/'>
@@ -18,7 +18,7 @@
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='DesignPattern' /><meta property='article:published_time' content='2021-12-02T15:55:10&#43;00:00'/><meta property='article:modified_time' content='2021-12-02T15:55:10&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/17.jpeg' />
 <meta name="twitter:title" content="设计模式-Facade门面模式">
 <meta name="twitter:description" content="简介 结构型设计模式
-组成部分  门面接口 复杂子系统  真实场景  银行柜员  使用场景  底层是复杂的子系统，对外暴露提供的就只是一个简单的接口 构建多层系统结构，利用门面模式最为每一层的入口，简化层间调用  实现方式  新增 维护、变更  优缺点 优点
+真实场景  银行柜员  组成部分  门面接口 复杂子系统  使用场景  底层是复杂的子系统，对外暴露提供的就只是一个简单的接口 构建多层系统结构，利用门面模式最为每一层的入口，简化层间调用  实现方式  新增 维护、变更  优缺点 优点
  简化调用逻辑 高内聚低耦合 更好的划分层次，提高了安全性 符合迪米特法则，最少知道原则  缺点
  有可能成为所有类型都耦合的上帝对象 不符合开闭原则：增加子系统需要对原有系统进行修改  "><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/17.jpeg' />
@@ -135,14 +135,14 @@ if (!doNotTrack) {
     <section class="article-content">
     <h2 id="简介">简介</h2>
 <p>结构型设计模式</p>
+<h2 id="真实场景">真实场景</h2>
+<ul>
+<li>银行柜员</li>
+</ul>
 <h2 id="组成部分">组成部分</h2>
 <ul>
 <li>门面接口</li>
 <li>复杂子系统</li>
-</ul>
-<h2 id="真实场景">真实场景</h2>
-<ul>
-<li>银行柜员</li>
 </ul>
 <h2 id="使用场景">使用场景</h2>
 <ul>
@@ -470,8 +470,8 @@ if (!doNotTrack) {
                     <nav id="TableOfContents">
   <ul>
     <li><a href="#简介">简介</a></li>
-    <li><a href="#组成部分">组成部分</a></li>
     <li><a href="#真实场景">真实场景</a></li>
+    <li><a href="#组成部分">组成部分</a></li>
     <li><a href="#使用场景">使用场景</a></li>
     <li><a href="#实现方式">实现方式</a></li>
     <li><a href="#优缺点">优缺点</a></li>
