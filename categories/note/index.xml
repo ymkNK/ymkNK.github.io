@@ -6,7 +6,17 @@
     <description>Recent content in Note on lllovol</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 12 Oct 2021 17:05:49 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/note/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 07 Dec 2021 21:05:58 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/note/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>《重构》-重构的原则</title>
+      <link>https://lllovol.com/p/2021/12/refactoring-principles/</link>
+      <pubDate>Tue, 07 Dec 2021 21:05:58 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/12/refactoring-principles/</guid>
+      <description>前言 本文是一篇关于Martin Fowler《重构：改善既有代码的设计》的第二章读书笔记与总结。
+何谓重构 重构这个词在</description>
+    </item>
+    
     <item>
       <title>正念</title>
       <link>https://lllovol.com/p/2021/10/mindfulness/</link>

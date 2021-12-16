@@ -3,22 +3,40 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://lllovol.com/categories/</loc>
-    <lastmod>2021-12-02T15:55:10+00:00</lastmod>
+    <lastmod>2021-12-16T15:42:40+00:00</lastmod>
   </url><url>
     <loc>https://lllovol.com/categories/designpattern/</loc>
-    <lastmod>2021-12-02T15:55:10+00:00</lastmod>
+    <lastmod>2021-12-16T15:42:40+00:00</lastmod>
   </url><url>
     <loc>https://lllovol.com/tags/designpattern/</loc>
-    <lastmod>2021-12-02T15:55:10+00:00</lastmod>
+    <lastmod>2021-12-16T15:42:40+00:00</lastmod>
   </url><url>
     <loc>https://lllovol.com/</loc>
-    <lastmod>2021-12-02T15:55:10+00:00</lastmod>
+    <lastmod>2021-12-16T15:42:40+00:00</lastmod>
   </url><url>
     <loc>https://lllovol.com/post/</loc>
-    <lastmod>2021-12-02T15:55:10+00:00</lastmod>
+    <lastmod>2021-12-16T15:42:40+00:00</lastmod>
   </url><url>
     <loc>https://lllovol.com/tags/</loc>
-    <lastmod>2021-12-02T15:55:10+00:00</lastmod>
+    <lastmod>2021-12-16T15:42:40+00:00</lastmod>
+  </url><url>
+    <loc>https://lllovol.com/p/2021/12/design-pattern-flyweight/</loc>
+    <lastmod>2021-12-16T15:42:40+00:00</lastmod>
+  </url><url>
+    <loc>https://lllovol.com/categories/note/</loc>
+    <lastmod>2021-12-07T21:05:58+00:00</lastmod>
+  </url><url>
+    <loc>https://lllovol.com/tags/note/</loc>
+    <lastmod>2021-12-07T21:05:58+00:00</lastmod>
+  </url><url>
+    <loc>https://lllovol.com/tags/refactoring/</loc>
+    <lastmod>2021-12-07T21:05:58+00:00</lastmod>
+  </url><url>
+    <loc>https://lllovol.com/categories/refactoring/</loc>
+    <lastmod>2021-12-07T21:05:58+00:00</lastmod>
+  </url><url>
+    <loc>https://lllovol.com/p/2021/12/refactoring-principles/</loc>
+    <lastmod>2021-12-07T21:05:58+00:00</lastmod>
   </url><url>
     <loc>https://lllovol.com/p/2021/12/design-pattern-facade/</loc>
     <lastmod>2021-12-02T15:55:10+00:00</lastmod>
@@ -37,12 +55,6 @@
   </url><url>
     <loc>https://lllovol.com/p/2021/10/proxy-pattern/</loc>
     <lastmod>2021-10-14T15:40:55+00:00</lastmod>
-  </url><url>
-    <loc>https://lllovol.com/categories/note/</loc>
-    <lastmod>2021-10-12T17:05:49+00:00</lastmod>
-  </url><url>
-    <loc>https://lllovol.com/tags/note/</loc>
-    <lastmod>2021-10-12T17:05:49+00:00</lastmod>
   </url><url>
     <loc>https://lllovol.com/p/2021/10/mindfulness/</loc>
     <lastmod>2021-10-12T17:05:49+00:00</lastmod>

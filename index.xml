@@ -6,7 +6,52 @@
         <description>Recent content on lllovol</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Thu, 02 Dec 2021 15:55:10 +0000</lastBuildDate><atom:link href="https://lllovol.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 16 Dec 2021 15:42:40 +0000</lastBuildDate><atom:link href="https://lllovol.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>设计模式-FlyWeight享元模式</title>
+        <link>https://lllovol.com/p/2021/12/design-pattern-flyweight/</link>
+        <pubDate>Thu, 16 Dec 2021 15:42:40 +0000</pubDate>
+        
+        <guid>https://lllovol.com/p/2021/12/design-pattern-flyweight/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/29.jpeg" alt="Featured image of post 设计模式-FlyWeight享元模式" /&gt;&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
+&lt;p&gt;大量创建对象的场景，会耗费大量的资源，使用享元模式能共享一些内部的状态。&lt;/p&gt;
+&lt;h2 id=&#34;定义&#34;&gt;定义&lt;/h2&gt;
+&lt;p&gt;运用共享技术有效地支持大量细粒度对象的复用。系统只使用少量的对象，而这些对象都很相似，状态变化很小，可以实现对象的多次复用。由于享元模式要求能够共享的对象必须是细粒度对象，因此它又称为轻量级模式，它是一种对象结构型模式。&lt;/p&gt;
+&lt;h2 id=&#34;实现&#34;&gt;实现&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;定义一个享元的interface&lt;/li&gt;
+&lt;li&gt;定义一个享元的工厂&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;适用场景&#34;&gt;适用场景&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;系统有大量相似对象&lt;/li&gt;
+&lt;li&gt;需要缓冲池的场景&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;优缺点&#34;&gt;优缺点&lt;/h2&gt;
+&lt;h3 id=&#34;优点&#34;&gt;优点&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;能够大大减少内存中对象的数量，内存中只保存一份相同或相似的对象，从而可以节约系统资源，提高系统性能。&lt;/li&gt;
+&lt;li&gt;享元模式的外部状态相对独立，而且不会影响其内部状态，从而使得享元对象可以在不同的环境中被共享。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;缺点&#34;&gt;缺点&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;享元模式使得系统更加复杂，需要分离出内部状态和外部状态，这使得程序的逻辑复杂化。&lt;/li&gt;
+&lt;li&gt;为了使对象可以共享，享元模式需要将享元对象的状态外部化，而读取外部状态使得运行时间变长。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>《重构》-重构的原则</title>
+        <link>https://lllovol.com/p/2021/12/refactoring-principles/</link>
+        <pubDate>Tue, 07 Dec 2021 21:05:58 +0000</pubDate>
+        
+        <guid>https://lllovol.com/p/2021/12/refactoring-principles/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/6.jpeg" alt="Featured image of post 《重构》-重构的原则" /&gt;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+&lt;p&gt;本文是一篇关于Martin Fowler《重构：改善既有代码的设计》的第二章读书笔记与总结。&lt;/p&gt;
+&lt;h2 id=&#34;何谓重构&#34;&gt;何谓重构&lt;/h2&gt;
+&lt;p&gt;重构这个词在&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>设计模式-Facade门面模式</title>
         <link>https://lllovol.com/p/2021/12/design-pattern-facade/</link>
         <pubDate>Thu, 02 Dec 2021 15:55:10 +0000</pubDate>
