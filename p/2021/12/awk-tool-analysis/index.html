@@ -2,19 +2,19 @@
 <html lang="en-us">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='背景 使用awk快速统计查看自己的常用命令
-指令 history --i | awk &#39;{print $4}&#39; | sort | uniq -c | sort -k1,1nr | head -20 解析  history -i 查看所有的历史记录 awk &#39;{print $4}&#39; 使用awk分词整理，取到每一行的第四个参数，也就是我们常用的命令 sort 排序 uniq -c 去重计数 sort -k1,1nr 排序 head -20 取前20  效果  ~  history --i | awk &#39;{print $4}&#39; | sort | uniq -c | sort -k1,1nr | head -20 4570 git 578 rake 174 ****test 132 ls 122 cd 118 go 80 testcover 61 sshymk 52 vim 35 source 28 kinitymk 27 goimports 22 gofumpt 20 sudo 17 brew 17 kinit 17 open 16 echo 15 ssh '><title>常用命令行统计指令</title>
+指令 history --i | awk &#39;{print $4}&#39; | sort | uniq -c | sort -k1,1nr | head -20 解析  history -i 查看所有的历史记录 awk &#39;{print $4}&#39; 使用awk分词整理，取到每一行的第四个参数，也就是我们常用的命令 sort 排序 uniq -c 去重计数 sort -k1,1nr 排序 head -20 取前20  效果  ~ &amp;gt; history --i | awk &#39;{print $4}&#39; | sort | uniq -c | sort -k1,1nr | head -20 4570 git 578 rake 174 ****test 132 ls 122 cd 118 go 80 testcover 61 ssh*** 52 vim 35 source 28 kinit 27 goimports 22 gofumpt 20 sudo 17 brew 17 open 16 echo 15 ssh '><title>常用命令行统计指令</title>
 
 <link rel='canonical' href='https://lllovol.com/p/2021/12/awk-tool-analysis/'>
 
 <link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='常用命令行统计指令'>
 <meta property='og:description' content='背景 使用awk快速统计查看自己的常用命令
-指令 history --i | awk &#39;{print $4}&#39; | sort | uniq -c | sort -k1,1nr | head -20 解析  history -i 查看所有的历史记录 awk &#39;{print $4}&#39; 使用awk分词整理，取到每一行的第四个参数，也就是我们常用的命令 sort 排序 uniq -c 去重计数 sort -k1,1nr 排序 head -20 取前20  效果  ~  history --i | awk &#39;{print $4}&#39; | sort | uniq -c | sort -k1,1nr | head -20 4570 git 578 rake 174 ****test 132 ls 122 cd 118 go 80 testcover 61 sshymk 52 vim 35 source 28 kinitymk 27 goimports 22 gofumpt 20 sudo 17 brew 17 kinit 17 open 16 echo 15 ssh '>
+指令 history --i | awk &#39;{print $4}&#39; | sort | uniq -c | sort -k1,1nr | head -20 解析  history -i 查看所有的历史记录 awk &#39;{print $4}&#39; 使用awk分词整理，取到每一行的第四个参数，也就是我们常用的命令 sort 排序 uniq -c 去重计数 sort -k1,1nr 排序 head -20 取前20  效果  ~ &amp;gt; history --i | awk &#39;{print $4}&#39; | sort | uniq -c | sort -k1,1nr | head -20 4570 git 578 rake 174 ****test 132 ls 122 cd 118 go 80 testcover 61 ssh*** 52 vim 35 source 28 kinit 27 goimports 22 gofumpt 20 sudo 17 brew 17 open 16 echo 15 ssh '>
 <meta property='og:url' content='https://lllovol.com/p/2021/12/awk-tool-analysis/'>
 <meta property='og:site_name' content='lllovol'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Tech' /><meta property='article:published_time' content='2021-12-21T14:12:16&#43;00:00'/><meta property='article:modified_time' content='2021-12-21T14:12:16&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/20.jpeg' />
 <meta name="twitter:title" content="常用命令行统计指令">
 <meta name="twitter:description" content="背景 使用awk快速统计查看自己的常用命令
-指令 history --i | awk &#39;{print $4}&#39; | sort | uniq -c | sort -k1,1nr | head -20 解析  history -i 查看所有的历史记录 awk &#39;{print $4}&#39; 使用awk分词整理，取到每一行的第四个参数，也就是我们常用的命令 sort 排序 uniq -c 去重计数 sort -k1,1nr 排序 head -20 取前20  效果  ~  history --i | awk &#39;{print $4}&#39; | sort | uniq -c | sort -k1,1nr | head -20 4570 git 578 rake 174 ****test 132 ls 122 cd 118 go 80 testcover 61 sshymk 52 vim 35 source 28 kinitymk 27 goimports 22 gofumpt 20 sudo 17 brew 17 kinit 17 open 16 echo 15 ssh "><meta name="twitter:card" content="summary_large_image">
+指令 history --i | awk &#39;{print $4}&#39; | sort | uniq -c | sort -k1,1nr | head -20 解析  history -i 查看所有的历史记录 awk &#39;{print $4}&#39; 使用awk分词整理，取到每一行的第四个参数，也就是我们常用的命令 sort 排序 uniq -c 去重计数 sort -k1,1nr 排序 head -20 取前20  效果  ~ &amp;gt; history --i | awk &#39;{print $4}&#39; | sort | uniq -c | sort -k1,1nr | head -20 4570 git 578 rake 174 ****test 132 ls 122 cd 118 go 80 testcover 61 ssh*** 52 vim 35 source 28 kinit 27 goimports 22 gofumpt 20 sudo 17 brew 17 open 16 echo 15 ssh "><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/20.jpeg' />
     <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
 
@@ -141,7 +141,7 @@ if (!doNotTrack) {
 <li><code>head -20</code> 取前20</li>
 </ol>
 <h3 id="效果">效果</h3>
-<pre><code> ~  history --i | awk '{print $4}' | sort | uniq -c | sort -k1,1nr | head -20
+<pre><code> ~ &gt; history --i | awk '{print $4}' | sort | uniq -c | sort -k1,1nr | head -20
 4570 git
  578 rake
  174 ****test
@@ -149,15 +149,14 @@ if (!doNotTrack) {
  122 cd
  118 go
   80 testcover
-  61 sshymk
+  61 ssh***
   52 vim
   35 source
-  28 kinitymk
+  28 kinit
   27 goimports
   22 gofumpt
   20 sudo
   17 brew
-  17 kinit
   17 open
   16 echo
   15 ssh

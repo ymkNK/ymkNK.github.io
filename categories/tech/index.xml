@@ -14,7 +14,7 @@
       
       <guid>https://lllovol.com/p/2021/12/awk-tool-analysis/</guid>
       <description>背景 使用awk快速统计查看自己的常用命令
-指令 history --i | awk &#39;{print $4}&#39; | sort | uniq -c | sort -k1,1nr | head -20 解析  history -i 查看所有的历史记录 awk &#39;{print $4}&#39; 使用awk分词整理，取到每一行的第四个参数，也就是我们常用的命令 sort 排序 uniq -c 去重计数 sort -k1,1nr 排序 head -20 取前20  效果  ~  history --i | awk &#39;{print $4}&#39; | sort | uniq -c | sort -k1,1nr | head -20 4570 git 578 rake 174 ****test 132 ls 122 cd 118 go 80 testcover 61 sshymk 52 vim 35 source 28 kinitymk 27 goimports 22 gofumpt 20 sudo 17 brew 17 kinit 17 open 16 echo 15 ssh </description>
+指令 history --i | awk &#39;{print $4}&#39; | sort | uniq -c | sort -k1,1nr | head -20 解析  history -i 查看所有的历史记录 awk &#39;{print $4}&#39; 使用awk分词整理，取到每一行的第四个参数，也就是我们常用的命令 sort 排序 uniq -c 去重计数 sort -k1,1nr 排序 head -20 取前20  效果  ~ &amp;gt; history --i | awk &#39;{print $4}&#39; | sort | uniq -c | sort -k1,1nr | head -20 4570 git 578 rake 174 ****test 132 ls 122 cd 118 go 80 testcover 61 ssh*** 52 vim 35 source 28 kinit 27 goimports 22 gofumpt 20 sudo 17 brew 17 open 16 echo 15 ssh </description>
     </item>
     
     <item>

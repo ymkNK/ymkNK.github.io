@@ -26,7 +26,7 @@
 &lt;li&gt;&lt;code&gt;head -20&lt;/code&gt; 取前20&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;效果&#34;&gt;效果&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt; ~  history --i | awk &#39;{print $4}&#39; | sort | uniq -c | sort -k1,1nr | head -20
+&lt;pre&gt;&lt;code&gt; ~ &amp;gt; history --i | awk &#39;{print $4}&#39; | sort | uniq -c | sort -k1,1nr | head -20
 4570 git
  578 rake
  174 ****test
@@ -34,15 +34,14 @@
  122 cd
  118 go
   80 testcover
-  61 sshymk
+  61 ssh***
   52 vim
   35 source
-  28 kinitymk
+  28 kinit
   27 goimports
   22 gofumpt
   20 sudo
   17 brew
-  17 kinit
   17 open
   16 echo
   15 ssh
