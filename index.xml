@@ -6,7 +6,49 @@
         <description>Recent content on lllovol</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Thu, 16 Dec 2021 15:42:40 +0000</lastBuildDate><atom:link href="https://lllovol.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 21 Dec 2021 14:12:16 +0000</lastBuildDate><atom:link href="https://lllovol.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>常用命令行统计指令</title>
+        <link>https://lllovol.com/p/2021/12/awk-tool-analysis/</link>
+        <pubDate>Tue, 21 Dec 2021 14:12:16 +0000</pubDate>
+        
+        <guid>https://lllovol.com/p/2021/12/awk-tool-analysis/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/20.jpeg" alt="Featured image of post 常用命令行统计指令" /&gt;&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
+&lt;p&gt;使用awk快速统计查看自己的常用命令&lt;/p&gt;
+&lt;h2 id=&#34;指令&#34;&gt;指令&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;history --i | awk &#39;{print $4}&#39; | sort | uniq -c | sort -k1,1nr | head -20
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;解析&#34;&gt;解析&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;history -i&lt;/code&gt; 查看所有的历史记录&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;awk &#39;{print $4}&#39;&lt;/code&gt; 使用awk分词整理，取到每一行的第四个参数，也就是我们常用的命令&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sort&lt;/code&gt; 排序&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;uniq -c&lt;/code&gt; 去重计数&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sort -k1,1nr&lt;/code&gt; 排序&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;head -20&lt;/code&gt; 取前20&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;效果&#34;&gt;效果&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt; ~  history --i | awk &#39;{print $4}&#39; | sort | uniq -c | sort -k1,1nr | head -20
+4570 git
+ 578 rake
+ 174 ****test
+ 132 ls
+ 122 cd
+ 118 go
+  80 testcover
+  61 sshymk
+  52 vim
+  35 source
+  28 kinitymk
+  27 goimports
+  22 gofumpt
+  20 sudo
+  17 brew
+  17 kinit
+  17 open
+  16 echo
+  15 ssh
+&lt;/code&gt;&lt;/pre&gt;</description>
+        </item>
+        <item>
         <title>设计模式-FlyWeight享元模式</title>
         <link>https://lllovol.com/p/2021/12/design-pattern-flyweight/</link>
         <pubDate>Thu, 16 Dec 2021 15:42:40 +0000</pubDate>
