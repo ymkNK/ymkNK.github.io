@@ -6,7 +6,20 @@
     <description>Recent content in DesignPattern on lllovol</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 16 Dec 2021 15:42:40 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/designpattern/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 23 Dec 2021 15:54:21 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/designpattern/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>设计模式-TemplateMethod模板方法模式</title>
+      <link>https://lllovol.com/p/2021/12/design-pattern-template/</link>
+      <pubDate>Thu, 23 Dec 2021 15:54:21 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/12/design-pattern-template/</guid>
+      <description>定义 模板方法是一种行为设计模式，它在超类中定义了一个算法的框架，允许子类在不修改结构的情况下重写算法的特定步骤
+解决方案 模板方法模式建议将算法分解为一系列步骤，然后将这些步骤改写为方法，最后在“模板方法”中依次调用这些方法。步骤可以是抽象的，也可以有一些默认的实现。为了能够使用算法，客户端需要自行提供子类并实现所有的抽象步骤。如有必要还需重写一些步骤(但这一步中不包括模板方法自身)。
+ 抽象步骤必须由各个子类来实现 可选步骤已有一些默认实现， 但仍可在需要时进行重写  真实世界类比 模板方法可用于建造大量房屋。标准房屋建造方案中可提供几个扩展点，允许潜在房屋业主调整成品房屋的部分细节。 比如每个建造步骤(例如打地基、建造框架、建造墙壁和安装水电管线等)都能进行微调，这使得成品房屋会略有不同。
+结构 1.抽象类(AbstractClass)会声明作为算法步骤的方法，以及依次调用它们的实际模板方法。算法步骤可以被声明为抽象类型，也可以提供一些默认实现。 2.具体类(ConcreteClass)可以重写所有步骤，但不能重写模板方法自身。
+优缺点 优点  你可仅允许客户端重写一个大型算法中的特定部分，使得算法其他部分修改对其所造成的影响减小。 你可将重复代码提取到一个超类中。  缺点  部分客户端可能会受到算法框架的限制。 通过子类抑制默认步骤实现可能会导致违反_里氏替换原则_。 模板方法中的步骤越多，其维护工作就可能会越困难。  </description>
+    </item>
+    
     <item>
       <title>设计模式-FlyWeight享元模式</title>
       <link>https://lllovol.com/p/2021/12/design-pattern-flyweight/</link>
