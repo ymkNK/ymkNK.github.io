@@ -3,7 +3,8 @@
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=' 本文是学习笔记，来自极客时间
  mysql&amp;gt; select * from T where ID=10； 这么一条查询语句是如何执行的呢？
-MySQL基础架构 Server层：
+MySQL基础架构 
+Server层：
  连接器：管理连接，权限认证 分析器：词法语法分析 查询缓存：命中则直接返回结果 优化器：执行计划生成，索引选择 执行器：操作引擎，返回结果 Server层涵盖了MySQL的大多数的核心服务功能，以及所有的内置函数  '><title>基础架构：一条SQL更新语句是如何执行的？</title>
 
 <link rel='canonical' href='https://lllovol.com/p/how-a-sql-executes/'>
@@ -11,7 +12,8 @@ MySQL基础架构 Server层：
 <link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='基础架构：一条SQL更新语句是如何执行的？'>
 <meta property='og:description' content=' 本文是学习笔记，来自极客时间
  mysql&amp;gt; select * from T where ID=10； 这么一条查询语句是如何执行的呢？
-MySQL基础架构 Server层：
+MySQL基础架构 
+Server层：
  连接器：管理连接，权限认证 分析器：词法语法分析 查询缓存：命中则直接返回结果 优化器：执行计划生成，索引选择 执行器：操作引擎，返回结果 Server层涵盖了MySQL的大多数的核心服务功能，以及所有的内置函数  '>
 <meta property='og:url' content='https://lllovol.com/p/how-a-sql-executes/'>
 <meta property='og:site_name' content='lllovol'>
@@ -19,7 +21,8 @@ MySQL基础架构 Server层：
 <meta name="twitter:title" content="基础架构：一条SQL更新语句是如何执行的？">
 <meta name="twitter:description" content=" 本文是学习笔记，来自极客时间
  mysql&amp;gt; select * from T where ID=10； 这么一条查询语句是如何执行的呢？
-MySQL基础架构 Server层：
+MySQL基础架构 
+Server层：
  连接器：管理连接，权限认证 分析器：词法语法分析 查询缓存：命中则直接返回结果 优化器：执行计划生成，索引选择 执行器：操作引擎，返回结果 Server层涵盖了MySQL的大多数的核心服务功能，以及所有的内置函数  "><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg' />
     <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
@@ -88,9 +91,9 @@ if (!doNotTrack) {
             </figure>
             
         
-        <h1 class="site-name"><a href="https://lllovol.com">lllovol</a></h1>
-        <h2 class="site-description">Stay hungry, stay foolish.</h2>
-    </header>
+        
+        <h1 class="site-name"><a href="/">lllovol</a></h1>
+        <h2 class="site-description">Stay hungry, stay foolish.</h2></header>
 
     <ol class="menu" id="main-menu">
         
@@ -99,6 +102,10 @@ if (!doNotTrack) {
 
         <li >
             <a href='/' >
+                
+                
+                    
+                
                 
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
@@ -119,6 +126,10 @@ if (!doNotTrack) {
         <li >
             <a href='/about/' >
                 
+                
+                    
+                
+                
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="12" cy="7" r="4" />
@@ -136,6 +147,10 @@ if (!doNotTrack) {
 
         <li >
             <a href='/archives/' >
+                
+                
+                    
+                
                 
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
@@ -156,6 +171,10 @@ if (!doNotTrack) {
         <li >
             <a href='/links/' >
                 
+                
+                    
+                
+                
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
@@ -173,6 +192,10 @@ if (!doNotTrack) {
 
         <li >
             <a href='/search/' >
+                
+                
+                    
+                
                 
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
@@ -260,6 +283,20 @@ if (!doNotTrack) {
         
 
         
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 1 分钟
+                </time>
+            </div>
+        
     </footer>
     
 </div>
@@ -272,7 +309,18 @@ if (!doNotTrack) {
 </blockquote>
 <p><code>mysql&gt; select * from T where ID=10；</code> 这么一条查询语句是如何执行的呢？</p>
 <p>MySQL基础架构
-<img src="https://lllovol.oss-cn-beijing.aliyuncs.com/oss/mysql%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt=""  /></p>
+<figure 
+	>
+	<a href="https://lllovol.oss-cn-beijing.aliyuncs.com/oss/mysql%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.png" >
+		<img src="https://lllovol.oss-cn-beijing.aliyuncs.com/oss/mysql%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.png"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
 <p>Server层：</p>
 <ul>
 <li>连接器：管理连接，权限认证</li>
@@ -342,7 +390,7 @@ Server层涵盖了MySQL的大多数的核心服务功能，以及所有的内置
 </aside>
 
      
-     
+    
         
     
 

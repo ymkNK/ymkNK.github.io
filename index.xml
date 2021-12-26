@@ -123,7 +123,24 @@
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/6.jpeg" alt="Featured image of post 《重构》-重构的原则" /&gt;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
 &lt;p&gt;本文是一篇关于Martin Fowler《重构：改善既有代码的设计》的第二章读书笔记与总结。&lt;/p&gt;
 &lt;h2 id=&#34;何谓重构&#34;&gt;何谓重构&lt;/h2&gt;
-&lt;p&gt;重构这个词在&lt;/p&gt;
+&lt;p&gt;很多一线的实践者会非常随意的使用重构这个词，但是作者会非常严谨地使用重构。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;重构（名词）：对软件内部的结构的一种调整，目的是在不改变可观察行为的前提下，提高其可理解性，降低其修改成本&lt;/li&gt;
+&lt;li&gt;重构（动词）：使用一系列重构手法，在不改变可观察行为的前提下，调整其结构。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;重构的关键在于&lt;strong&gt;运用大量微且保持软件行为的步骤，一步步达成大规模的修改。&lt;/strong&gt; 
+每个单独的重构呀么很小，要么由若干个小步骤组合而成。这样的好处是，即使重构没有完成，也可以在任何时刻停下来，代码很少进入到不可工作的状态。&lt;/p&gt;
+&lt;h3 id=&#34;重构与性能优化&#34;&gt;重构与性能优化&lt;/h3&gt;
+&lt;p&gt;二者有很多相似之处&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;都需要修改代码&lt;/li&gt;
+&lt;li&gt;都不会改变程序的整体功能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;区别&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;重构是为了让代码更容易理解，更易于修改。这可能会让程序运行的更快，也可能运行的更慢。&lt;/li&gt;
+&lt;li&gt;性能优化时，只关心如何让代码程序运行得更快，最终得到的代码有可能更难理解和维护，对此需要有心理准备。&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
@@ -365,8 +382,8 @@
 代理控制着对于原对象的访问，并允许在将请求提交给对象前后进行一些处理。&lt;/p&gt;
 &lt;h2 id=&#34;原理&#34;&gt;原理&lt;/h2&gt;
 &lt;p&gt;代理模式建议新建一个与原服务对象接口相同的代理类，
-然后更新应用以将代理对象传递给所有原始对象客户端。
-代理类接收到客户端请求后会创建实际的服务对象，
+然后更新应用以将代理对象传递给所有原始对象客户端。 
+代理类接收到客户端请求后会创建实际的服务对象， 
 并将所有工作委派给它。&lt;/p&gt;
 &lt;h2 id=&#34;类比&#34;&gt;类比&lt;/h2&gt;
 &lt;p&gt;信用卡是银行账户的代理，银行账户则是一大捆现金的代理。
@@ -650,7 +667,20 @@
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;目的准则&lt;/strong&gt; 这个模式是用来完成什么工作的&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;范围准则&lt;/strong&gt; 这个模式用于类还是用于对象的
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/screenshot-20210816-013825.png&#34; alt=&#34;设计模式分类&#34;  /&gt;&lt;/li&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/screenshot-20210816-013825.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/screenshot-20210816-013825.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			alt=&#34;设计模式分类&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;设计模式分类&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;面向对象的六大原则&#34;&gt;面向对象的六大原则&lt;/h2&gt;
 &lt;ol&gt;
@@ -681,7 +711,20 @@
 &lt;li&gt;&lt;strong&gt;一个类定义了多种行为&lt;/strong&gt;，并且这些行为在这个类的操作中以多个条件语句的形式出现。将相关的条件分支移入它们各自的Strategy类当中来代替这些条件语句&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;结构&#34;&gt;结构&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/UML%20%E5%9B%BE.jpg&#34; alt=&#34;图&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/UML%20%E5%9B%BE.jpg&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/UML%20%E5%9B%BE.jpg&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			alt=&#34;图&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;图&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;h2 id=&#34;参与者&#34;&gt;参与者&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;Strategy&lt;/strong&gt;
@@ -966,7 +1009,18 @@ slug: 2021/5/rake-file-usage
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;code&gt;mysql&amp;gt; select * from T where ID=10；&lt;/code&gt; 这么一条查询语句是如何执行的呢？&lt;/p&gt;
 &lt;p&gt;MySQL基础架构
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/oss/mysql%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/oss/mysql%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/oss/mysql%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;Server层：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;连接器：管理连接，权限认证&lt;/li&gt;
@@ -1132,7 +1186,20 @@ Server层涵盖了MySQL的大多数的核心服务功能，以及所有的内置
 &lt;h4 id=&#34;11-主内存和工作内存&#34;&gt;1.1 主内存和工作内存&lt;/h4&gt;
 &lt;p&gt;Java 内存模型规定了所有的变量都存储在主内存（Main Memory）中，每条线程有自己的工作内存（Working Memory），线程的工作内存中保存了该线程所使用到的变量的内存副本。
 不同线程之间无法直接访问其他线程工作内存中的变量，线程间变量的传递都要通过主内存来完成（如下图 2-1所有）。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/Java%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/648037-20190817202020256-687819291.png&#34; alt=&#34;java内存模型&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/Java%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/648037-20190817202020256-687819291.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/Java%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/648037-20190817202020256-687819291.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			alt=&#34;java内存模型&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;java内存模型&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;h4 id=&#34;12-执行引擎&#34;&gt;1.2 执行引擎&lt;/h4&gt;
 &lt;p&gt;执行引擎，就是一个运算器，能够识别输入的指令，并根据输入的指令执行一套特定的逻辑。&lt;/p&gt;
 &lt;h4 id=&#34;13-主内存和工作内存的交互模型&#34;&gt;1.3 主内存和工作内存的交互模型&lt;/h4&gt;
@@ -1320,7 +1387,20 @@ public class PolicyUpdater implements ApplicationListener&amp;lt;ObjectALifecycl
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.jianshu.com/p/15106e9c4bf3&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Java内存模型&lt;/a&gt;&lt;br&gt;
-&lt;img src=&#34;https://upload-images.jianshu.io/upload_images/4899162-66736384361f6b8b.png?imageMogr2/auto-orient/strip%7cimageView2/2/w/812/format/webp&#34; alt=&#34;java内存模型&#34;  /&gt;&lt;/p&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://upload-images.jianshu.io/upload_images/4899162-66736384361f6b8b.png?imageMogr2/auto-orient/strip%7cimageView2/2/w/812/format/webp&#34; &gt;
+		&lt;img src=&#34;https://upload-images.jianshu.io/upload_images/4899162-66736384361f6b8b.png?imageMogr2/auto-orient/strip%7cimageView2/2/w/812/format/webp&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			alt=&#34;java内存模型&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;java内存模型&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 </description>
         </item>
@@ -1443,7 +1523,20 @@ public class PolicyUpdater implements ApplicationListener&amp;lt;ObjectALifecycl
 &lt;/ul&gt;
 &lt;p&gt;除了上面的Interceptor和Aspect，还有filter。这三者实际上都是对Aop的具体实现，都可以实现权限检查，日志记录等等的功能。都是对业务逻辑的提取，不同的是，使用的范围
 规范、和深度不同。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://upload-images.jianshu.io/upload_images/11382761-484d129572258d9c.png?imageMogr2/auto-orient/strip%7cimageView2/2/w/1200/format/webp&#34; alt=&#34;执行顺序&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://upload-images.jianshu.io/upload_images/11382761-484d129572258d9c.png?imageMogr2/auto-orient/strip%7cimageView2/2/w/1200/format/webp&#34; &gt;
+		&lt;img src=&#34;https://upload-images.jianshu.io/upload_images/11382761-484d129572258d9c.png?imageMogr2/auto-orient/strip%7cimageView2/2/w/1200/format/webp&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			alt=&#34;执行顺序&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;执行顺序&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.jianshu.com/p/c4ef6d232e8d&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Filter、Interceptor、Aop实现与区别&lt;/a&gt;&lt;/p&gt;
@@ -1653,7 +1746,20 @@ public class AuthAspect {
 &lt;h2 id=&#34;测试的必要性&#34;&gt;测试的必要性&lt;/h2&gt;
 &lt;p&gt;在程序员的日常工作中，实际上真正在编写代码的时间，在整个工作时间中所占的比例其实很小的一部分。在写代码之前我们需要撰写需求文档，以及充足的思考，画出uml图（虽然很多经验丰富的大佬都没有画，但是那是建立在经验相当丰富的基础之上的）；在写完代码之后，这个项目需要发布与部署到测试环境，这就是CI/CD所负责的部分了；再之后，我们就需要测试我们的项目，是否能够完成需求文档中的需求，实现了相应的功能。 如果没有进行充分完整的测试，直接上线，这个项目差不多就是穿着皇帝的新衣在大街上到处晃荡了。同样，在互联网高速发展的今天，测试也不再仅仅是人工进行测试，自动化测试的演进又再一次的提升了团队的生产效率。这和敏捷开发、持续集成、持续部署、DevOps是一脉相承的。&lt;/p&gt;
 &lt;h2 id=&#34;测试金字塔test-pyramid&#34;&gt;测试金字塔Test Pyramid&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;https://insights.thoughtworks.cn/wp-content/uploads/2018/10/3.png&#34; alt=&#34;测试金字塔&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://insights.thoughtworks.cn/wp-content/uploads/2018/10/3.png&#34; &gt;
+		&lt;img src=&#34;https://insights.thoughtworks.cn/wp-content/uploads/2018/10/3.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			alt=&#34;测试金字塔&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;测试金字塔&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://insights.thoughtworks.cn/practical-test-pyramid/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;图来源于ThoughtWorks&lt;/a&gt;&lt;/p&gt;
@@ -1752,7 +1858,18 @@ public class ApplicationTests {
 &lt;h2 id=&#34;二本地安装kubernetes&#34;&gt;二、本地安装kubernetes&lt;/h2&gt;
 &lt;h3 id=&#34;选择使用minikube&#34;&gt;选择使用minikube&lt;/h3&gt;
 &lt;p&gt;我们想要学习使用kubernetes，首先就是选择一个平台进行操作，比如阿里云、Azure、Google Kubernetes等等&lt;br&gt;
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-151024.png&#34; alt=&#34;&#34;  /&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-151024.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-151024.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;
 这里我们选择的就是学习用的minikube&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://kubernetes.io/docs/home/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -1765,7 +1882,18 @@ public class ApplicationTests {
 &lt;h3 id=&#34;安装minikube&#34;&gt;安装minikube&lt;/h3&gt;
 &lt;h4 id=&#34;1检查能否虚拟化&#34;&gt;1.检查能否虚拟化&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;sysctl -a | grep -E --color &#39;machdep.cpu.features|VMX&#39; 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-152029.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-152029.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-152029.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;
 vmx被标注出来有颜色，说明就是ok的，这台电脑是支持virtualization的（一般都是支持的,但是我花了88白菜价在腾讯云上买的1年1核1g服务器是不支持的）&lt;/p&gt;
 &lt;h4 id=&#34;2安装kubectl&#34;&gt;2.安装kubectl&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;brew install kubernetes-cli
@@ -1781,18 +1909,62 @@ vmx被标注出来有颜色，说明就是ok的，这台电脑是支持virtualiz
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;将minikube安装包下载下来，手动进行安装&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;sudo mkdir -p /usr/local/bin/
 sudo install minikube /usr/local/bin/
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-153329.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-153329.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-153329.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;
 如果是mac用户，直接使用如下的命令就可以了&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;brew install minikube
 brew link minikube
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;5启动minikube&#34;&gt;5.启动minikube&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;minikube start
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-153624.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-153624.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-153624.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;
 就会开始根据本地的virtualBox来下载对应的驱动,中间应该会要求输入一次本机电脑的一次密码,然后会出现这样的错误：
 &lt;code&gt;Error creating machine: Error in driver during machine creation: hyperkit crashed!&lt;/code&gt;  我们可以使用&lt;code&gt;minikube start -help&lt;/code&gt;查看到这个命令的一些参数:
 例如&lt;code&gt;--cpus=2&lt;/code&gt;我们可以设置为4,&lt;code&gt;--disk-size&lt;/code&gt;等等都可以进行测试。由于按照官网的操作一步一步来做，发现依然会出错？然后我发现本地已经有了hyperkit，装的virtualBox没有什么用，因此我&lt;code&gt;brew reinstall hyperkit&lt;/code&gt;重新安装了一下，这时候再来一次&lt;code&gt;minikube start&lt;/code&gt;,这一次似乎终于是成功了。&lt;br&gt;
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-154002.png&#34; alt=&#34;&#34;  /&gt;
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-154155.png&#34; alt=&#34;&#34;  /&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-154002.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-154002.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-154155.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-154155.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;
 然后就开始下载kubernetes的相关的各种组件dns、kube-proxy\kube-addon-manager等等，但是可能是由于被墙的原因下载不下来，这个时候我进行了以下的几种处理方式：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;科学上网,ok科学上网之后，再来看看，但是发现依然还是不行&lt;/li&gt;
@@ -1810,9 +1982,31 @@ minikube start --vm-driver=vmware
 &lt;/ol&gt;
 &lt;pre&gt;&lt;code&gt;rm -rf ~/.minikube
 minikube start --image-repository=registry.cn-hangzhou.aliyuncs.com/google_containers --vm-driver=vmware
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-154759.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-154759.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-154759.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;
 看一看minikube都有些什么namespace
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-154823.png&#34; alt=&#34;&#34;  /&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-154823.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-154823.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;
 成功了！&lt;/p&gt;
 &lt;h2 id=&#34;三编写demo&#34;&gt;三、编写Demo&lt;/h2&gt;
 &lt;p&gt;接下来我们新建一个demo，使用Spring框架写一个简单的controller&lt;/p&gt;
@@ -1933,12 +2127,45 @@ public class IstioController {
     }
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;4运行&#34;&gt;4.运行&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-155916.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-155943.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-155916.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-155916.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-155943.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-155943.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;h2 id=&#34;四将demo打包成镜像&#34;&gt;四、将Demo打包成镜像&lt;/h2&gt;
 &lt;h3 id=&#34;1打包成jar包&#34;&gt;1.打包成jar包&lt;/h3&gt;
 &lt;p&gt;进入pom.xml文件目录，运行命令&lt;code&gt;mvn clean install -Dmaven.test.skip=true&lt;/code&gt;执行打包
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-161743.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-161743.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-161743.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;h3 id=&#34;2利用dockerfile打包成镜像&#34;&gt;2.利用dockerFile打包成镜像&lt;/h3&gt;
 &lt;p&gt;编写docker file&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;# 拉取JDK11的系统镜像
@@ -1964,14 +2191,36 @@ ENTRYPOINT [&amp;quot;java&amp;quot;,&amp;quot;-Djava.security.egd=file:/dev/./u
 &lt;p&gt;使用命令docker run 运行镜像&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;docker run -d --name test -p 8080:8080 my-demo
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后可以使用&lt;code&gt;docker ps&lt;/code&gt;查看运行中的docker镜像
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-162318.png&#34; alt=&#34;&#34;  /&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-162318.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-162318.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;
 使用&lt;code&gt;docker stop&lt;/code&gt;加上对应的容器的id就能够停止对应的镜像的运行&lt;/p&gt;
 &lt;h3 id=&#34;4将docker推向镜像仓库&#34;&gt;4.将docker推向镜像仓库&lt;/h3&gt;
 &lt;p&gt;首先我们需要创建一个docker的账号，就能拥有一个docker远端的镜像仓库。我们给我们的镜像打一个tag,使用docker tag将本地原来的镜像推&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt; docker tag my-demo yangdocker1118/my-demo
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后使用docker push将本地的镜像推向远端&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;docker push yangdocker1118/my-demo
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-163228.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-163228.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-163228.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;h2 id=&#34;五将demo镜像部署到kubernetes集群当中&#34;&gt;五、将demo镜像部署到kubernetes集群当中&lt;/h2&gt;
 &lt;h3 id=&#34;1创建一个namespace&#34;&gt;1.创建一个namespace&lt;/h3&gt;
 &lt;p&gt;创建namespace也有两种方式&lt;/p&gt;
@@ -1991,8 +2240,30 @@ status:
 &lt;h3 id=&#34;2创建deployment&#34;&gt;2.创建deployment&lt;/h3&gt;
 &lt;p&gt;这里我们同样也可以使用yaml配置的方式来创建deployment，也可以直接使用下面命令行的方式直接创建deployment拉取镜像进行部署（推荐还是本地自己重新搭建一个镜像仓库harbor，使用docker官方的镜像仓库拉镜像的速度太慢了）&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;kubectl create deployment my-demo --image=yangdocker1118/my-demo -n zelda
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-163713.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-163742@2x.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-163713.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-163713.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-163742@2x.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-163742@2x.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;成功！Done!&lt;/p&gt;
 </description>
         </item>
@@ -2016,7 +2287,18 @@ status:
     }
 
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;输出：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191016-190331.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191016-190331.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191016-190331.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;h2 id=&#34;二string类的新方法&#34;&gt;二.String类的新方法&lt;/h2&gt;
 &lt;p&gt;代码：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt; @Test
@@ -2044,7 +2326,18 @@ status:
         System.out.println(lines.lines().count());
     }
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;输出：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191016-190659.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191016-190659.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191016-190659.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;h2 id=&#34;三使用ofcopyof方法创建不可变更的集合&#34;&gt;三.使用of、copyOf方法创建不可变更的集合&lt;/h2&gt;
 &lt;p&gt;代码：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;@Test
@@ -2059,7 +2352,18 @@ status:
         System.out.println(list1 == copy1);
     }
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;输出：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191016-190844.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191016-190844.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191016-190844.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;h2 id=&#34;四stream的新方法&#34;&gt;四.Stream的新方法&lt;/h2&gt;
 &lt;p&gt;代码：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;@Test
@@ -2077,7 +2381,18 @@ status:
         // 4. iterate重载，可以提供一个predicate判断条件来指定什么时候结束迭代。
     }
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;输出：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191016-190924.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191016-190924.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191016-190924.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;h2 id=&#34;五更加强大的optional方法&#34;&gt;五.更加强大的Optional方法&lt;/h2&gt;
 &lt;p&gt;代码：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;@Test
@@ -2098,7 +2413,18 @@ status:
 
     }
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;输出：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191016-191042.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191016-191042.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191016-191042.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;h2 id=&#34;六jdk中自带的httpclient&#34;&gt;六.JDK中自带的httpClient&lt;/h2&gt;
 &lt;p&gt;代码：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;   @Test
@@ -2110,7 +2436,18 @@ status:
 		System.out.println(response.body());
     }
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;输出：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191016-191153.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191016-191153.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191016-191153.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -2469,7 +2806,18 @@ ZSet 小64数量小128 用ziplist 否则用skiplist&lt;/p&gt;
 &lt;h3 id=&#34;那么怎样才能看的更远呢&#34;&gt;那么怎样才能看的更远呢？&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;看得到多远的过去，就能看得到多远的未来。&amp;ndash;丘吉尔
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190811-185950@2x.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190811-185950@2x.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190811-185950@2x.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;例子一如今阿里云计算排名第一&#34;&gt;例子一：如今阿里云计算排名第一&lt;/h3&gt;
 &lt;p&gt;中国云计算市场现状：top1阿里云 超过了第2到第8名的总和。
@@ -2483,8 +2831,34 @@ ZSet 小64数量小128 用ziplist 否则用skiplist&lt;/p&gt;
 因为云计算其实是数据时代的公共基础设施，那么那时候的阿里，是通过什么样的方式发现这样的一个原因呢？10年前，能看到如今的未来嘛？答案是肯定的。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;我们回顾一下第二次工业革命，电的出现之后，是如何发展的呢？&lt;/strong&gt;&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;最开始-分散发电模式&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-201125@2x.png&#34; alt=&#34;分散发电模式&#34;  /&gt;
-到现在-集中发电模式&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-200724@2x.png&#34; alt=&#34;集中发电模式&#34;  /&gt;
+&lt;p&gt;最开始-分散发电模式&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-201125@2x.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-201125@2x.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			alt=&#34;分散发电模式&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;分散发电模式&lt;/figcaption&gt;
+	
+&lt;/figure&gt;
+到现在-集中发电模式&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-200724@2x.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-200724@2x.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			alt=&#34;集中发电模式&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;集中发电模式&lt;/figcaption&gt;
+	
+&lt;/figure&gt;
 我们可以看到，在电出现了之后，最开始，都是分散发电的模式，工厂都用着自己的发电机来进行发电，实现电量的自给自足。再看看现在，都是国家电网，集中发电的集中发电形式。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;通过类比的方式可以发现，其实和发电的形式是相当相似的&lt;/p&gt;
@@ -2500,8 +2874,30 @@ ZSet 小64数量小128 用ziplist 否则用skiplist&lt;/p&gt;
 （看看pc，毛利才14%，那时候手机毛利3倍是多么的夸张，但是其实最开始的pc也没有几个人能买得起）第一个标准化，第二个是薄利多销，雷军他所看见的手机未来的发展趋势，其实就是pc行业发展的规律。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;blockquote&gt;
-&lt;p&gt;第一波浪潮-pc&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-202524@2x.png&#34; alt=&#34;&#34;  /&gt;
-第二波浪潮-手机&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-202638@2x.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;第一波浪潮-pc&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-202524@2x.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-202524@2x.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;
+第二波浪潮-手机&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-202638@2x.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-202638@2x.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;这就是个历史规律，科技的趋势是普惠的。&lt;/p&gt;
 &lt;ul&gt;
@@ -2514,11 +2910,44 @@ ZSet 小64数量小128 用ziplist 否则用skiplist&lt;/p&gt;
 &lt;p&gt;为什么要在手机上芯片重新开发一遍？&lt;strong&gt;因为功耗更小&lt;/strong&gt;&lt;br&gt;
 差了几倍呢？&lt;strong&gt;10倍&lt;/strong&gt;&lt;br&gt;
 价格呢？&lt;strong&gt;便宜了10倍&lt;/strong&gt;&lt;br&gt;
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-203155@2x.png&#34; alt=&#34;&#34;  /&gt;
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-203228@2x.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-203155@2x.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-203155@2x.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-203228@2x.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-203228@2x.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;h4 id=&#34;10倍因素的新技术某个指标产生这种变化的时候那么可能就是革命要出现了&#34;&gt;10倍因素的新技术，某个指标产生这种变化的时候，那么可能就是革命要出现了&lt;/h4&gt;
 &lt;blockquote&gt;
-&lt;p&gt;你必须保持敏感，否则当新技术作为10倍数因素席卷而来的时候，猝不及防只能轰然倒塌。同时，对新技术的追逐可能不在盈利，而在于可以使得企业在必要的时候迅速转向。毕竟，只有早早行动，才有希望争取未来的胜利，改变不利的命运&amp;ndash;英特尔公司前CEO安迪·葛洛夫 &lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-203413@2x.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;你必须保持敏感，否则当新技术作为10倍数因素席卷而来的时候，猝不及防只能轰然倒塌。同时，对新技术的追逐可能不在盈利，而在于可以使得企业在必要的时候迅速转向。毕竟，只有早早行动，才有希望争取未来的胜利，改变不利的命运&amp;ndash;英特尔公司前CEO安迪·葛洛夫 &lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-203413@2x.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-203413@2x.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;水滴公司CEO沈鹏，是美团的第十号员工，他在带领团队做美团外卖的时候，也是在13年的时候，看见了一个10倍因素的场景，外卖出现了一个爆发的机会。
 是什么呢？最开始的外卖机制，都需要店家在店里装一台二手电脑，用于接收订单的信息，相当的不方便。但是那时候，安卓手机的人人普及，提升了沟通的效率，也提高了配送的稳定性。外卖就是这么做出来的，稳定性就此提升，从而改变了这个产业。（饿了嘛 那时候已经做了5年左右，那时候都是用二手电脑来做的外卖生意，
@@ -2535,7 +2964,18 @@ ZSet 小64数量小128 用ziplist 否则用skiplist&lt;/p&gt;
 &lt;strong&gt;技术=自然现象+目的+组合&lt;/strong&gt;&lt;/p&gt;
 &lt;h3 id=&#34;技术肯定是来自于自然现象的&#34;&gt;技术肯定是来自于自然现象的&lt;/h3&gt;
 &lt;blockquote&gt;
-&lt;p&gt;数学是上帝描述自然的符号 &amp;ndash; 黑格尔 &lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-204925@2x.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;数学是上帝描述自然的符号 &amp;ndash; 黑格尔 &lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-204925@2x.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-204925@2x.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;基础理论才是突破创新的最根本的基石&#34;&gt;基础理论才是突破创新的最根本的基石&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;技术来源于自然现象 技术的极限也受这些自然现象约束，除非发现新的自然现象&lt;/strong&gt;&lt;/p&gt;
@@ -2543,10 +2983,32 @@ ZSet 小64数量小128 用ziplist 否则用skiplist&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;华为现在的水平尚停留在工程教学、物理算法等工程科学的创新层面，尚未真正进入基础理论研究。随着逐步逼近香农定理、摩尔定律的极限，而对大流量、低时延的理论还未创造出来，华为已感到前途茫茫、找不到方向。华为已前进在迷航中。重大创新是无人区的生存法则，没有理论突破，没有技术突破，没有大量的技术积累，是不可能产生爆发性创新的&amp;ndash;任正非&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;现在来看，5G真的是90后的机会，5G的出现，这个社会必将发生不小的变化，而绝非下载速度变快这么简单的一件事情&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-205108@2x.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;现在来看，5G真的是90后的机会，5G的出现，这个社会必将发生不小的变化，而绝非下载速度变快这么简单的一件事情&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-205108@2x.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-205108@2x.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;h4 id=&#34;5g的原理就是香农定理&#34;&gt;5G的原理就是香农定理:&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-205916@2x.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
-&lt;p&gt;C=Blog2(1+S/N)
+&lt;p&gt;&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-205916@2x.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-205916@2x.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;C=Blog2(1+S/N) 
 使用类比的方式来看这个公司&lt;/p&gt;
 &lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;C就是单位时间的载货量&lt;/li&gt;
@@ -2560,7 +3022,18 @@ ZSet 小64数量小128 用ziplist 否则用skiplist&lt;/p&gt;
 &lt;li&gt;使用多输入多输出，全双工技术，变宽车道&lt;/li&gt;
 &lt;li&gt;波束赋形，使得道路更加平整&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-210436@2x.png&#34; alt=&#34;&#34;  /&gt;
+&lt;p&gt;&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-210436@2x.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-210436@2x.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;
 而华为，投入了数以万计的工程师，才能将这些基础的东西结合起来，带给了我们5G&lt;br&gt;
 ps:技术视野还可以赚钱，知道什么地方需求大。比如如果知道了5G发展的趋势，可以提前买小基站公司的股票，可以大赚一笔。&lt;/p&gt;
 &lt;h2 id=&#34;第三部分-效益&#34;&gt;第三部分 效益&lt;/h2&gt;
@@ -2569,7 +3042,18 @@ ps:技术视野还可以赚钱，知道什么地方需求大。比如如果知�
 一般的工程师，最关注的是什么？&lt;br&gt;
 一般都是在做将成本的降低。&lt;/p&gt;
 &lt;h3 id=&#34;什么技术能使得全球运输成本下降90&#34;&gt;什么技术能使得全球运输成本下降90%?&lt;/h3&gt;
-&lt;p&gt;集装箱 &lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-211138@2x.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;集装箱 &lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-211138@2x.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-211138@2x.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;麦克莱恩认识到，降低货运成本所要求的不仅仅是一只金属箱子，而是一整套货物处理的新方法。这个系统的每一个组成部分，港口、轮船、起重机、储存设施、卡车、火车以及发货人自身的操作等等，都必须做出改变。他的这种认识几乎要比当时运输业中的每一个人都超前很多年。这些见识所引发的变革如此富有戏剧性，以至于连几十年来一直在推动集装箱运输的国际集装箱局的专家们都为之震惊。 &amp;ndash;摘编自《集装箱改变世界》&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -2607,7 +3091,18 @@ ps:技术视野还可以赚钱，知道什么地方需求大。比如如果知�
 &lt;p&gt;任何在我出生时已经有的科技都是稀松平常的世界本来秩序的一部分；
 任何在我15-35岁之间诞生的科技都是将会改变世界的革命性产物；
 任何在我35岁之后诞生的科技都是违反自然规律要遭天谴的。——英国科幻作家道格拉斯·亚当斯&lt;br&gt;
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-212047@2x.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-212047@2x.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-212047@2x.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;推荐书籍&#34;&gt;推荐书籍&lt;/h3&gt;
 &lt;ul&gt;
@@ -2646,13 +3141,39 @@ ps:技术视野还可以赚钱，知道什么地方需求大。比如如果知�
         <guid>https://lllovol.com/p/ide-code-error-solution/</guid>
         <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/9.jpg" alt="Featured image of post Idea代码飘红的问题解决方式" /&gt;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
 &lt;p&gt;在安装使用Idea Intelli的时候，导入新项目的时候，总会出现代码权限飘红的问题。本篇文章，就是介绍出现这种问题的几种情况和分别的解决方式。
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190807-102252@2x.png&#34; alt=&#34;导入项目代码全线飘红&#34;  /&gt;&lt;/p&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190807-102252@2x.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190807-102252@2x.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			alt=&#34;导入项目代码全线飘红&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;导入项目代码全线飘红&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;h2 id=&#34;情况一maven二方库settings没有设置&#34;&gt;情况一：maven二方库settings没有设置&lt;/h2&gt;
 &lt;p&gt;一般公司内部都会有自己的二方库建设，新人在git下项目之后，总是会出现代码偏红的问题，各种库都没有导入下来，这时候首先应该排查的就是maven的配置是否正确，是否正确连接到了公司内部的二方库。&lt;/p&gt;
 &lt;h3 id=&#34;解决方式&#34;&gt;解决方式&lt;/h3&gt;
 &lt;p&gt;以Idea Intelli为例:
 &lt;strong&gt;preference -&amp;gt; build,execution,deployment -&amp;gt; build tools -&amp;gt; maven -&amp;gt; User settings file: 勾选上override，改写为二方库settings.xml文件的路径&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190807-105505.png&#34; alt=&#34;设置maven settings&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190807-105505.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190807-105505.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			alt=&#34;设置maven settings&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;设置maven settings&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;h2 id=&#34;情况二lombok插件没有安装&#34;&gt;情况二：Lombok插件没有安装&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Project Lombok is a java library that automatically plugs into your editor and build tools, spicing up your java.
@@ -2663,15 +3184,48 @@ Never write another getter or equals method again, with one annotation your clas
 &lt;h3 id=&#34;解决方式-1&#34;&gt;解决方式&lt;/h3&gt;
 &lt;p&gt;安装Lombok的插件：
 ** preference -&amp;gt; Plugins -&amp;gt; Install lombok -&amp;gt; restart **
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190807-111529.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190807-111529.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190807-111529.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;h2 id=&#34;问题三注解未开启&#34;&gt;问题三：注解未开启&lt;/h2&gt;
 &lt;p&gt;在安装好了 Lombok之后，发现运行还是报错
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190807-112144@2x.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190807-112144@2x.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190807-112144@2x.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;h3 id=&#34;解决方式-2&#34;&gt;解决方式&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;关闭项目。&lt;/li&gt;
-&lt;li&gt;Preference &amp;gt; Build, Execution, Deployment &amp;gt; Compiler &amp;gt; Annotation Processors. Check &amp;lsquo;Enable annotation processing&amp;rsquo;.
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190807-112533.png&#34; alt=&#34;&#34;  /&gt;&lt;/li&gt;
+&lt;li&gt;Preference &amp;gt; Build, Execution, Deployment &amp;gt; Compiler &amp;gt; Annotation Processors. Check &amp;lsquo;Enable annotation processing&amp;rsquo;. 
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190807-112533.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190807-112533.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/li&gt;
 &lt;li&gt;Open your project. File &amp;gt; Invalidate Caches / Restart&amp;hellip; &amp;gt; Invalidate and Restart 然后等待这个过程完成结束,将会发现一切都将回归平淡，云淡风轻.&lt;/li&gt;
 &lt;/ol&gt;
 </description>
@@ -2728,7 +3282,18 @@ Mac:
 &lt;ol&gt;
 &lt;li&gt;&lt;code&gt;cd&lt;/code&gt;进入对应的scala项目。&lt;/li&gt;
 &lt;li&gt;使用&lt;code&gt;sbt&lt;/code&gt;,这将打开对应项目的sbt的命令行。
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190802-154645@2x.png&#34; alt=&#34;&#34;  /&gt;&lt;/li&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190802-154645@2x.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190802-154645@2x.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/li&gt;
 &lt;li&gt;使用&lt;code&gt;~run&lt;/code&gt;指令，&lt;code&gt;~&lt;/code&gt;指令可以让sbt在每次文件更改保存后，重新run一次，可以用在快速编辑、快速启动、以及debug上。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;编辑代码&#34;&gt;编辑代码&lt;/h3&gt;
@@ -2755,7 +3320,18 @@ Mac:
     &gt;Jenkins官网&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;关键点&#34;&gt;关键点&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190726-115622@2x.png&#34; alt=&#34;&#34;  /&gt;
+&lt;p&gt;&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190726-115622@2x.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190726-115622@2x.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;
 通过调研后，Jenkins在完成构建后，可以添加一个构建后操作。这就可以通过这个构建后操作，将本次构建脚本执行的结果，通过这个构建后操作，传给另外一个job，然后通过这个job将执行的结果通过回调的方式，传给应用服务器。&lt;/p&gt;
 &lt;h2 id=&#34;整个流程&#34;&gt;整个流程&lt;/h2&gt;
 &lt;ol&gt;
@@ -2770,12 +3346,45 @@ Mac:
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;通过构建后操作的trigger parameterized build on other projects功能。
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190726-150927@2x.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190726-150927@2x.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190726-150927@2x.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;根据本次构建的成功与否，分别执行不同的构建后操作，传递给回调job对应的参数。
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190726-145102@2x.png&#34; alt=&#34;&#34;  /&gt;
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190726-145131@2x.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190726-145102@2x.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190726-145102@2x.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190726-145131@2x.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190726-145131@2x.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;回调job将获取到的信息，通过一个shell脚本，通过curl传递给服务器端。&lt;/p&gt;
@@ -2812,9 +3421,31 @@ curl &amp;quot;$API_HOST/api/xxx/xxx/xxx/hook&amp;quot; -X POST -d &amp;quot;Id=
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这个命令就是告诉docker：帮我启动一个容器&lt;br&gt;
 接下来我们可以使用ps指令，来看一看容器和宿主机中的进程信息。
 宿主机里的内容：
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190719-120700@2x.png&#34; alt=&#34;&#34;  /&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190719-120700@2x.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190719-120700@2x.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;
 容器里的内容
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190719-120743@2x.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190719-120743@2x.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190719-120743@2x.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;h1 id=&#34;namespace机制&#34;&gt;Namespace机制&lt;/h1&gt;
 &lt;p&gt;上面的小实验，这就是Linux里的namespace机制实现的，
 我们可以看到，我们容器里pid为1的/bin/sh进程，在宿主机中的pid为13193，这就是容器使用了namespace使用了障眼法，让容器里的视角，以为自己就是这个机器的1号员工（pid=1），可是实际上，他还是原来的100号进程。&lt;/p&gt;
@@ -3073,7 +3704,7 @@ final boolean existed = (file.open(fileName, &amp;quot;w&amp;quot;) != null) &am
 &lt;li&gt;类、类属性、类方法的注释必须使用Javadoc规范，使用/**内容*/格式，不得使用 // xxx 方式。&lt;/li&gt;
 &lt;li&gt;所有的抽象方法(包括接口中的方法)必须要用Javadoc注释、除了返回值、参数、 异常说明外，还必须指出该方法做什么事情，实现什么功能。 说明:对子类的实现要求，或者调用注意事项，请一并说明。&lt;/li&gt;
 &lt;li&gt;所有的类都必须添加创建者和创建日期。&lt;/li&gt;
-&lt;li&gt;方法内部单行注释，在被注释语句上方另起一行，使用//注释。方法内部多行注释
+&lt;li&gt;方法内部单行注释，在被注释语句上方另起一行，使用//注释。方法内部多行注释 
 使用/* */注释，注意与代码对齐。&lt;/li&gt;
 &lt;li&gt;所有的枚举类型字段必须要有注释，说明每个数据项的用途。&lt;/li&gt;
 &lt;li&gt;避免出现重复的代码(&lt;strong&gt;Don&amp;rsquo;t Repeat Yourself&lt;/strong&gt;)，即DRY原则。说明:随意复制和粘贴代码，必然会导致代码的重复，在以后需要修改时，需要修改所有的副本，容易遗漏。必要时抽取共性方法，或者抽象公共类，甚至是组件化。&lt;/li&gt;
@@ -3109,9 +3740,31 @@ cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;而接下来要做的就是要自定义一个snippet：在sublime中，Tools&amp;ndash;&amp;gt;Developer&amp;ndash;&amp;gt;New Snippet
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190616-235826@2x.png&#34; alt=&#34;&#34;  /&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190616-235826@2x.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190616-235826@2x.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;
 然后就能得到如下的新建snippet
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190617-000803@2x.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190617-000803@2x.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190617-000803@2x.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;写入自己自定义的代码&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;&amp;lt;snippet&amp;gt;
 	&amp;lt;content&amp;gt;&amp;lt;![CDATA[
@@ -3129,7 +3782,18 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 &lt;li&gt;$1表示占位符，这就是在生成的代码最后光标所在的位置&lt;/li&gt;
 &lt;li&gt;tabTrigger表示触发的条件&lt;/li&gt;
 &lt;li&gt;scope表示的时候这个snippet的作用域（获取方式Tools&amp;ndash;&amp;gt;Developer&amp;ndash;&amp;gt;Show Scope Name）
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190617-001852@2x.png&#34; alt=&#34;&#34;  /&gt;&lt;/li&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190617-001852@2x.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190617-001852@2x.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;然后保存在sublime的默认目录下，即可生效了&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;macOS的目录如下
@@ -3344,15 +4008,15 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 冲动是魔鬼，心平气和，就像后来宋教练给我说的，要学会吃话。&lt;br&gt;
 多听，好好听完了别人说什么，抓住重点，再进行反问，不要让自己脑子一热，就做出一些让自己后悔的事情。
 感觉今天的处世方式，真的很像蔡徐坤。仿佛不容别人质疑自己，容不得一点负面的评价，还要去发律师函，愚蠢。&lt;br&gt;
-别人教练再怎么说，都是长辈，然后和别人教练顶撞了过去，没有必要。
+别人教练再怎么说，都是长辈，然后和别人教练顶撞了过去，没有必要。 
 前辈始终是前辈。得罪了这个教练，就算他不负责我，他也始终是教练，得罪了他，对我来讲，能有什么好处？
 没有好处。&lt;/p&gt;
 &lt;p&gt;上善若水，大丈夫，能屈能伸。&lt;/p&gt;
 &lt;h1 id=&#34;对于别人的评价与看法&#34;&gt;对于别人的评价与看法&lt;/h1&gt;
 &lt;p&gt;越来越不喜欢别人对自己的评价，是可爱，而希望是成熟。&lt;br&gt;
-但是这真的很傻，才发现，这种太在意别人评价的事情，才是真的不成熟。
+但是这真的很傻，才发现，这种太在意别人评价的事情，才是真的不成熟。 
 别人能对我有所评价，至少别人是有在关心我（无论正负评价，都是关心，就像明星一样，黑粉也一样是粉丝）。
-那些真正对你不理不睬的，才是真的可怕。
+那些真正对你不理不睬的，才是真的可怕。 
 让所有人都满意，让所有人都对我有很高的评价，真的能做到吗？不能。&lt;br&gt;
 光是做好自己的事情，就已经很不容易了。&lt;br&gt;
 别人将我捧的高，我的实力也不会因为他的夸赞而突飞猛进；&lt;br&gt;
@@ -3613,7 +4277,18 @@ percent * 100 / totalWeight&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h4 id=&#34;为什么优秀&#34;&gt;为什么优秀？&lt;/h4&gt;
 &lt;p&gt;如果简单粗暴的随机抽取不够好呢？这就和昨天的钢条问题一样，在简单随机抽取的过程中就有可能出现重复的位置，就等于浪费了一次抽取。而使用了Fisher-Yates方法之所以优秀，就是在原理上保证了不会出现浪费次数，每一次抽卡的范围都在慢慢变小
-&lt;img src=&#34;https://images0.cnblogs.com/blog2015/734743/201505/071802188601847.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://images0.cnblogs.com/blog2015/734743/201505/071802188601847.png&#34; &gt;
+		&lt;img src=&#34;https://images0.cnblogs.com/blog2015/734743/201505/071802188601847.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;h2 id=&#34;自己实现&#34;&gt;自己实现&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;    package Shuffle;
 	import com.google.common.base.Joiner;
@@ -3942,7 +4617,20 @@ Stream API可以极大提高Java程序员的生产力，让程序员写出高效
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.jianshu.com/p/2838890f3284&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Rocketmq原理&amp;amp;最佳实践&lt;/a&gt;
 主要对比如下&lt;br&gt;
-&lt;img src=&#34;https://upload-images.jianshu.io/upload_images/12619159-ebd12b24d5ae33d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/974/format/webp&#34; alt=&#34;对比&#34;  /&gt;&lt;/p&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://upload-images.jianshu.io/upload_images/12619159-ebd12b24d5ae33d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/974/format/webp&#34; &gt;
+		&lt;img src=&#34;https://upload-images.jianshu.io/upload_images/12619159-ebd12b24d5ae33d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/974/format/webp&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			alt=&#34;对比&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;对比&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 </description>
         </item>
@@ -3965,7 +4653,20 @@ Stream API可以极大提高Java程序员的生产力，让程序员写出高效
         ;
 	}
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/spring8/1.png&#34; alt=&#34;例子&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/spring8/1.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/spring8/1.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			alt=&#34;例子&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;例子&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;h4 id=&#34;swagger-ui的参数显示的问题&#34;&gt;Swagger-ui的参数显示的问题&lt;/h4&gt;
 &lt;p&gt;这个是在帮忙解决朋友的问题的时候发现的，其实就是Getter的问题，他定义了俩Getter，这样就会有俩参数跑出来了。&lt;/p&gt;
 &lt;h4 id=&#34;双向的验证&#34;&gt;双向的验证&lt;/h4&gt;
@@ -4456,7 +5157,20 @@ return yaml;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;上方的是我自己写的例子，YamlWriter的构造函数所需要的参数，是一个writer（可以是fileWriter也可以是StringWriter，当然其他类型的writer也是可以的）&lt;/p&gt;
 &lt;p&gt;输出的图像如下(fileWriter的)：
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/yamlBeans/yamlWriter.png&#34; alt=&#34;YamlWriter&#34;  /&gt;&lt;/p&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/yamlBeans/yamlWriter.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/yamlBeans/yamlWriter.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			alt=&#34;YamlWriter&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;YamlWriter&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;h4 id=&#34;设置tag&#34;&gt;设置tag&lt;/h4&gt;
 &lt;p&gt;有的时候tag会特别长，这个时候，就可以将自定义设置tag&lt;/p&gt;
 &lt;p&gt;code:&lt;/p&gt;
@@ -4544,9 +5258,35 @@ return ResponseUtil.makeSuccess(null);
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;em&gt;@RequestBody&lt;/em&gt; 就是要求传的数据是一个json格式的body传入的，这样前端会比较麻烦，因此在不需要的时候可以将这个注解取消掉&lt;br&gt;
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/spring7/41620289.png&#34; alt=&#34;有@RequestBody&#34;  /&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/spring7/41620289.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/spring7/41620289.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			alt=&#34;有@RequestBody&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;有@RequestBody&lt;/figcaption&gt;
+	
+&lt;/figure&gt;
 &lt;strong&gt;有@RequestBody&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/spring7/notRequest.png&#34; alt=&#34;无@RequestBody&#34;  /&gt;
+&lt;p&gt;&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/spring7/notRequest.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/spring7/notRequest.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			alt=&#34;无@RequestBody&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;无@RequestBody&lt;/figcaption&gt;
+	
+&lt;/figure&gt;
 &lt;strong&gt;无@RequestBody&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;@Validated&lt;/em&gt; 就是在传参的时候需要判断验证，比如是不是为空什么（NotNull）&lt;/p&gt;
 &lt;h2 id=&#34;空指针的问题&#34;&gt;空指针的问题&lt;/h2&gt;
@@ -4793,7 +5533,20 @@ public BeanDefinitionHolder parseBeanDefinitionElement(Element ele) {
 &lt;p&gt;BeanDefinition是一个接口，在Spring中存在三种实现：RootBeanDefinition，ChildBeanDefinition,GenericBeanDefinition。三种实现方式均集成了AbstractBeanDefinition，其中BeanDefinition是配置文件&lt;!-- raw HTML omitted --&gt;元素标签的内部表示形式。（&lt;!-- raw HTML omitted --&gt;元素标签拥有class、scope、lazy-init等配置属性，而BeanDefinition咋提供了相应的beanClass、scope、LazyInit属性，BeanDefinition和&lt;!-- raw HTML omitted --&gt;中的属性是一一对应的。其中RootBeanDefinition是最常用的实现类）。&lt;br&gt;
 在配置文件中可以定义父&lt;!-- raw HTML omitted --&gt;和子&lt;!-- raw HTML omitted --&gt;，父&lt;!-- raw HTML omitted --&gt;使用RootBeanDefinition来表示，子&lt;!-- raw HTML omitted --&gt;使用ChildBeanDefinition来表示，而没有父&lt;!-- raw HTML omitted --&gt;的&lt;!-- raw HTML omitted --&gt;就用RootBeanDefinition来表示。AbstractBeanDefinition对两者共同的类信息进行抽象。
 Spring通过BeanDefinition将配置文件中的&lt;!-- raw HTML omitted --&gt;配置信息转化为容器的内部表示，然后将这些BeanDefinition注册到BeanDefinitionRegistry当中。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/%e3%80%8aSpring%e6%ba%90%e7%a0%81%e6%b7%b1%e5%ba%a6%e8%a7%a3%e6%9e%90%e3%80%8b%e8%af%bb%e5%90%8e%e6%84%9f%28%e4%ba%8c%29_files/64484741.png&#34; alt=&#34;64484741.png&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/%e3%80%8aSpring%e6%ba%90%e7%a0%81%e6%b7%b1%e5%ba%a6%e8%a7%a3%e6%9e%90%e3%80%8b%e8%af%bb%e5%90%8e%e6%84%9f%28%e4%ba%8c%29_files/64484741.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/%e3%80%8aSpring%e6%ba%90%e7%a0%81%e6%b7%b1%e5%ba%a6%e8%a7%a3%e6%9e%90%e3%80%8b%e8%af%bb%e5%90%8e%e6%84%9f%28%e4%ba%8c%29_files/64484741.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			alt=&#34;64484741.png&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;64484741.png&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;要解析属性，首先要创建用于承载属性的实例，也就是创建GenericBeanDefinition类型的实例，而  AbstractBeanDefinition bd = createBeanDefinition(className, parent);就是实现这个功能&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;/**
   * Create a new GenericBeanDefinition for the given parent name and class name,
@@ -7172,8 +7925,34 @@ SortedMap mapB = new TreeMap(comparator);
 &lt;li&gt;get的长度限制，主要是浏览器服务器等，为了防止一些黑客的攻击来进行的限制，和get、post的无关。&lt;/li&gt;
 &lt;li&gt;可以在get的车里放data,也可以在post车外面放data,但是这样很蠢&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/SpringBoot%e5%bc%80%e5%8f%91%e4%b8%ad%e7%9a%84%e4%b8%80%e4%ba%9b%e5%b0%8f%e7%bb%86%e8%8a%82%ef%bc%88%e4%b8%80%ef%bc%89_files/64122226.png&#34; alt=&#34;64122226.png&#34;  /&gt;
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/SpringBoot%e5%bc%80%e5%8f%91%e4%b8%ad%e7%9a%84%e4%b8%80%e4%ba%9b%e5%b0%8f%e7%bb%86%e8%8a%82%ef%bc%88%e4%b8%80%ef%bc%89_files/64276701.png&#34; alt=&#34;64276701.png&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/SpringBoot%e5%bc%80%e5%8f%91%e4%b8%ad%e7%9a%84%e4%b8%80%e4%ba%9b%e5%b0%8f%e7%bb%86%e8%8a%82%ef%bc%88%e4%b8%80%ef%bc%89_files/64122226.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/SpringBoot%e5%bc%80%e5%8f%91%e4%b8%ad%e7%9a%84%e4%b8%80%e4%ba%9b%e5%b0%8f%e7%bb%86%e8%8a%82%ef%bc%88%e4%b8%80%ef%bc%89_files/64122226.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			alt=&#34;64122226.png&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;64122226.png&lt;/figcaption&gt;
+	
+&lt;/figure&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/SpringBoot%e5%bc%80%e5%8f%91%e4%b8%ad%e7%9a%84%e4%b8%80%e4%ba%9b%e5%b0%8f%e7%bb%86%e8%8a%82%ef%bc%88%e4%b8%80%ef%bc%89_files/64276701.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/SpringBoot%e5%bc%80%e5%8f%91%e4%b8%ad%e7%9a%84%e4%b8%80%e4%ba%9b%e5%b0%8f%e7%bb%86%e8%8a%82%ef%bc%88%e4%b8%80%ef%bc%89_files/64276701.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			alt=&#34;64276701.png&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;64276701.png&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -7312,7 +8091,20 @@ SortedMap mapB = new TreeMap(comparator);
  cd atom-beautify
  npm install
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/%e5%ae%89%e8%a3%85atom%e7%9a%84atom-beautify_files/59469635.png&#34; alt=&#34;59469635.png&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/%e5%ae%89%e8%a3%85atom%e7%9a%84atom-beautify_files/59469635.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/%e5%ae%89%e8%a3%85atom%e7%9a%84atom-beautify_files/59469635.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			alt=&#34;59469635.png&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;59469635.png&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;h1 id=&#34;success&#34;&gt;Success&lt;/h1&gt;
 &lt;p&gt;使用control + alt + b 组合键 即可&lt;/p&gt;
 </description>
@@ -7376,10 +8168,43 @@ SortedMap mapB = new TreeMap(comparator);
 &lt;li&gt;Authorization callback URL : Github api回调的地址，与Homepage URL相同&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;有一些坑需要注意，如果解析到了自己的域名，就在githubpage中的Repository，找到settings，找到github给你的url
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/BF70070C-3B46-4045-B222-AB0F67941A4C.png&#34; alt=&#34;&#34;  /&gt;
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/WX20181205-185017@2x.png&#34; alt=&#34;&#34;  /&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/BF70070C-3B46-4045-B222-AB0F67941A4C.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/BF70070C-3B46-4045-B222-AB0F67941A4C.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/WX20181205-185017@2x.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/WX20181205-185017@2x.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;
 即可获取到对应的clientId和clientSecret
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/WX20181205-185240@2x.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/WX20181205-185240@2x.png&#34; &gt;
+		&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/WX20181205-185240@2x.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
 &lt;h3 id=&#34;修改posthtml&#34;&gt;修改post.html&lt;/h3&gt;
 &lt;p&gt;然后在修改项目文件中的_layouts的post.html
 找到合适的位置添加如下代码&lt;/p&gt;
