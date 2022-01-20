@@ -8,7 +8,7 @@
     <language>en-us</language>
     <lastBuildDate>Thu, 20 Jan 2022 20:07:33 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/go/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Go并发编程学习笔记</title>
+      <title>Go并发编程学习笔记-WaitGroup和Mutex</title>
       <link>https://lllovol.com/p/2022/1/go-concurrency/</link>
       <pubDate>Thu, 20 Jan 2022 20:07:33 +0000</pubDate>
       
@@ -16,7 +16,8 @@
       <description>原则 不要用共享内存来通信，而是使用通信来共享内存
 注意  内存重排，机器码执行的顺序可能并不是代码的顺序 Go的锁，不要使用值传递，不然每次都是复制新的值，这样的锁是失效的。这类bug可以被go vet检测出来（Go的所有的传递，都是值传递）  sync.WaitGroup debug.SetMaxThread(1)
 func main() { var wg sync.WaitGroup var x int32 = 0 for i := 0; i &amp;lt; 100; i++ { go func() { // wg.Add不应该放在这里，应该放在循坏外面  wg.Add(1) atomic.AddInt32(&amp;amp;x, 1) wg.Done() }() } fmt.Println(&amp;#34;等待片刻...&amp;#34;) wg.Wait() fmt.Println(atomic.LoadInt32(&amp;amp;x)) } 这样写代码是不行，add放在主线程，done放在子协程中
-如何实现 简单思路  Add() 内置count记录多少任务完成，通过加锁来保证安全 Done() 完成后count&amp;ndash;，加锁操作 Wait() 通过for循环加锁读取当前count，直到值为0  实际实现 type WaitGroup struct { // https://golang.org/issues/8005#issuecomment-190753527  // 使用时只能使用指针来传递，使用值传递会被go vet 检验出来  noCopy noCopy // count Add()时增加这个值  // wait Wait() 时增加这个值  // sema 信号量，与此相关的有两个操作，增加信号量，协程挂起；减少信号量，唤醒协程  state1 [3]uint32 }  WaitGroup使用CASatomic.</description>
+如何实现  详解Go中WaitGroup设计
+ 简单思路  Add() 内置count记录多少任务完成，通过加锁来保证安全 Done() 完成后count&amp;ndash;，加锁操作 Wait() 通过for循环加锁读取当前count，直到值为0  实际实现 type WaitGroup struct { // https://golang.org/issues/8005#issuecomment-190753527  // 使用时只能使用指针来传递，使用值传递会被go vet 检验出来  noCopy noCopy // count Add()时增加这个值  // wait Wait() 时增加这个值  // semap 信号量，与此相关的有两个操作，增加信号量，协程挂起；减少信号量，唤醒协程  state1 [3]uint32 }  WaitGroup使用CASatomic.</description>
     </item>
     
     <item>
