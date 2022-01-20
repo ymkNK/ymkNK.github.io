@@ -5,12 +5,11 @@
 想法 我大概实现的思路和设计
  构建实体类，实现相应的数据存储化，用户可以设置相应的权限策略。权限设置，换一个说法就是主谓宾&amp;ndash;&amp;ldquo;谁&amp;rdquo; &amp;ldquo;能看/不能看&amp;rdquo; &amp;ldquo;什么东西&amp;rdquo;。将这个权限设置抽象为对象，并进行存储。 根据实体类解析用户保存的策略，使之生效。  说起来简单，做起来难。第一点设置权限，其实就是非常简单的单表查询维护。难点在于第二点，如何能让这个策略生效。按照我目前接触和掌握到的技术手段，主要的解决方式有下面几种：
  写一个intercepor，拦截器。但是这个方式，只能处理请求的控制器和方法，控制不了具体的参数。这一点比较适合用来做整体的系统权限拦截，拦截接口。拦截控制的粒度比较粗糙。 在每一个业务逻辑中，分别添加拦截的逻辑，即每一个返回对象的接口，都需要查询和判断权限表。优点：思路简单。缺点：可维护性差，写完第一次之后，再维护就是噩梦。 使用Aspect，可以自定义切入的点，甚至能细化到拦截什么包什么类的什么方法等等。Perfectly，就是他了。  除了上面的Interceptor和Aspect，还有filter。这三者实际上都是对Aop的具体实现，都可以实现权限检查，日志记录等等的功能。都是对业务逻辑的提取，不同的是，使用的范围 规范、和深度不同。
-执行顺序
  Filter、Interceptor、Aop实现与区别
  实现 由于包含工作的涉密内容，真实实现的代码就不在此展示。而网上的Demo已经相当丰富。
  SpringBooot AOP的使用
  其中实现权限控制的最简单的demo就是如下的代码
-@Aspect@Component@RequiredArgsConstructor@Slf4jpublic class AuthAspect {@Pointcut(&amp;quot;execution(public * com.company.group.auth.service.AuthService.list(..))&amp;quot;)public void pointCutForListObjective() {}/*** 对list的方法返回值进行拦截处理*/@AfterReturning(pointcut = &amp;quot;pointCutForListObjective()&amp;quot;, returning = &amp;quot;okrResponses&amp;quot;)public void afterReturningListObjective(JoinPoint joinPoint, Object okrResponses) {// 这个地方就能够对返回值直接进行处理}} 定义切点pointCut(),这个地方，就是定义一个我们需要切入的点，我们要进行拦截处理的地方。 对这个切点有很多处理的方式，实现真正的权限拦截控制逻辑  其他的点  对于用户的组织权限的控制，我们可以使用路径的方式来进行判断，类似于一个树，我们每一次，存储的时候，需要将用户所在的组织架构的路径进行存储。这样我们在进行权限判断的时候，就不想要每一次都从库中获取用户的组织架构信息了。 对于model的校验可以写注解来进行实现。这一点，以后会专门写一篇文章来进行分享 Npe问题可谓是开发过程中的一生之敌。在循环迭代过程中，不可以一遍迭代，一边删除list中的值。 使用JPA的时候可以使用 pageable 来直接进行分页，不用再写mongoTemplate这种CustomRepo   @Overridepublic List&amp;lt;Department&amp;gt; listAuthDepartment(String departmentName) {if (Strings.'><title>SpringBoot开发中的一些小细节（十三）使用AOP实现权限系统</title>
+@Aspect @Component @RequiredArgsConstructor @Slf4j public class AuthAspect { @Pointcut(&amp;quot;execution(public * com.company.group.auth.service.AuthService.list(..))&amp;quot;) public void pointCutForListObjective() { } /** * 对list的方法返回值进行拦截处理 */ @AfterReturning(pointcut = &amp;quot;pointCutForListObjective()&amp;quot;, returning = &amp;quot;okrResponses&amp;quot;) public void afterReturningListObjective(JoinPoint joinPoint, Object okrResponses) { // 这个地方就能够对返回值直接进行处理 } }  定义切点pointCut(),这个地方，就是定义一个我们需要切入的点，我们要进行拦截处理的地方。 对这个切点有很多处理的方式，实现真正的权限拦截控制逻辑  其他的点  对于用户的组织权限的控制，我们可以使用路径的方式来进行判断，类似于一个树，我们每一次，存储的时候，需要将用户所在的组织架构的路径进行存储。这样我们在进行权限判断的时候，就不想要每一次都从库中获取用户的组织架构信息了。 对于model的校验可以写注解来进行实现。这一点，以后会专门写一篇文章来进行分享 Npe问题可谓是开发过程中的一生之敌。在循环迭代过程中，不可以一遍迭代，一边删除list中的值。 使用JPA的时候可以使用 pageable 来直接进行分页，不用再写mongoTemplate这种CustomRepo   @Override public List&amp;lt;Department&amp;gt; listAuthDepartment(String departmentName) { if (Strings.'><title>SpringBoot开发中的一些小细节（十三）使用AOP实现权限系统</title>
 
 <link rel='canonical' href='https://lllovol.com/p/spring13/'>
 
@@ -19,12 +18,11 @@
 想法 我大概实现的思路和设计
  构建实体类，实现相应的数据存储化，用户可以设置相应的权限策略。权限设置，换一个说法就是主谓宾&amp;ndash;&amp;ldquo;谁&amp;rdquo; &amp;ldquo;能看/不能看&amp;rdquo; &amp;ldquo;什么东西&amp;rdquo;。将这个权限设置抽象为对象，并进行存储。 根据实体类解析用户保存的策略，使之生效。  说起来简单，做起来难。第一点设置权限，其实就是非常简单的单表查询维护。难点在于第二点，如何能让这个策略生效。按照我目前接触和掌握到的技术手段，主要的解决方式有下面几种：
  写一个intercepor，拦截器。但是这个方式，只能处理请求的控制器和方法，控制不了具体的参数。这一点比较适合用来做整体的系统权限拦截，拦截接口。拦截控制的粒度比较粗糙。 在每一个业务逻辑中，分别添加拦截的逻辑，即每一个返回对象的接口，都需要查询和判断权限表。优点：思路简单。缺点：可维护性差，写完第一次之后，再维护就是噩梦。 使用Aspect，可以自定义切入的点，甚至能细化到拦截什么包什么类的什么方法等等。Perfectly，就是他了。  除了上面的Interceptor和Aspect，还有filter。这三者实际上都是对Aop的具体实现，都可以实现权限检查，日志记录等等的功能。都是对业务逻辑的提取，不同的是，使用的范围 规范、和深度不同。
-执行顺序
  Filter、Interceptor、Aop实现与区别
  实现 由于包含工作的涉密内容，真实实现的代码就不在此展示。而网上的Demo已经相当丰富。
  SpringBooot AOP的使用
  其中实现权限控制的最简单的demo就是如下的代码
-@Aspect@Component@RequiredArgsConstructor@Slf4jpublic class AuthAspect {@Pointcut(&amp;quot;execution(public * com.company.group.auth.service.AuthService.list(..))&amp;quot;)public void pointCutForListObjective() {}/*** 对list的方法返回值进行拦截处理*/@AfterReturning(pointcut = &amp;quot;pointCutForListObjective()&amp;quot;, returning = &amp;quot;okrResponses&amp;quot;)public void afterReturningListObjective(JoinPoint joinPoint, Object okrResponses) {// 这个地方就能够对返回值直接进行处理}} 定义切点pointCut(),这个地方，就是定义一个我们需要切入的点，我们要进行拦截处理的地方。 对这个切点有很多处理的方式，实现真正的权限拦截控制逻辑  其他的点  对于用户的组织权限的控制，我们可以使用路径的方式来进行判断，类似于一个树，我们每一次，存储的时候，需要将用户所在的组织架构的路径进行存储。这样我们在进行权限判断的时候，就不想要每一次都从库中获取用户的组织架构信息了。 对于model的校验可以写注解来进行实现。这一点，以后会专门写一篇文章来进行分享 Npe问题可谓是开发过程中的一生之敌。在循环迭代过程中，不可以一遍迭代，一边删除list中的值。 使用JPA的时候可以使用 pageable 来直接进行分页，不用再写mongoTemplate这种CustomRepo   @Overridepublic List&amp;lt;Department&amp;gt; listAuthDepartment(String departmentName) {if (Strings.'>
+@Aspect @Component @RequiredArgsConstructor @Slf4j public class AuthAspect { @Pointcut(&amp;quot;execution(public * com.company.group.auth.service.AuthService.list(..))&amp;quot;) public void pointCutForListObjective() { } /** * 对list的方法返回值进行拦截处理 */ @AfterReturning(pointcut = &amp;quot;pointCutForListObjective()&amp;quot;, returning = &amp;quot;okrResponses&amp;quot;) public void afterReturningListObjective(JoinPoint joinPoint, Object okrResponses) { // 这个地方就能够对返回值直接进行处理 } }  定义切点pointCut(),这个地方，就是定义一个我们需要切入的点，我们要进行拦截处理的地方。 对这个切点有很多处理的方式，实现真正的权限拦截控制逻辑  其他的点  对于用户的组织权限的控制，我们可以使用路径的方式来进行判断，类似于一个树，我们每一次，存储的时候，需要将用户所在的组织架构的路径进行存储。这样我们在进行权限判断的时候，就不想要每一次都从库中获取用户的组织架构信息了。 对于model的校验可以写注解来进行实现。这一点，以后会专门写一篇文章来进行分享 Npe问题可谓是开发过程中的一生之敌。在循环迭代过程中，不可以一遍迭代，一边删除list中的值。 使用JPA的时候可以使用 pageable 来直接进行分页，不用再写mongoTemplate这种CustomRepo   @Override public List&amp;lt;Department&amp;gt; listAuthDepartment(String departmentName) { if (Strings.'>
 <meta property='og:url' content='https://lllovol.com/p/spring13/'>
 <meta property='og:site_name' content='lllovol'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Spring' /><meta property='article:published_time' content='2020-05-12T15:04:26&#43;00:00'/><meta property='article:modified_time' content='2020-05-12T15:04:26&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg' />
@@ -33,12 +31,11 @@
 想法 我大概实现的思路和设计
  构建实体类，实现相应的数据存储化，用户可以设置相应的权限策略。权限设置，换一个说法就是主谓宾&amp;ndash;&amp;ldquo;谁&amp;rdquo; &amp;ldquo;能看/不能看&amp;rdquo; &amp;ldquo;什么东西&amp;rdquo;。将这个权限设置抽象为对象，并进行存储。 根据实体类解析用户保存的策略，使之生效。  说起来简单，做起来难。第一点设置权限，其实就是非常简单的单表查询维护。难点在于第二点，如何能让这个策略生效。按照我目前接触和掌握到的技术手段，主要的解决方式有下面几种：
  写一个intercepor，拦截器。但是这个方式，只能处理请求的控制器和方法，控制不了具体的参数。这一点比较适合用来做整体的系统权限拦截，拦截接口。拦截控制的粒度比较粗糙。 在每一个业务逻辑中，分别添加拦截的逻辑，即每一个返回对象的接口，都需要查询和判断权限表。优点：思路简单。缺点：可维护性差，写完第一次之后，再维护就是噩梦。 使用Aspect，可以自定义切入的点，甚至能细化到拦截什么包什么类的什么方法等等。Perfectly，就是他了。  除了上面的Interceptor和Aspect，还有filter。这三者实际上都是对Aop的具体实现，都可以实现权限检查，日志记录等等的功能。都是对业务逻辑的提取，不同的是，使用的范围 规范、和深度不同。
-执行顺序
  Filter、Interceptor、Aop实现与区别
  实现 由于包含工作的涉密内容，真实实现的代码就不在此展示。而网上的Demo已经相当丰富。
  SpringBooot AOP的使用
  其中实现权限控制的最简单的demo就是如下的代码
-@Aspect@Component@RequiredArgsConstructor@Slf4jpublic class AuthAspect {@Pointcut(&amp;quot;execution(public * com.company.group.auth.service.AuthService.list(..))&amp;quot;)public void pointCutForListObjective() {}/*** 对list的方法返回值进行拦截处理*/@AfterReturning(pointcut = &amp;quot;pointCutForListObjective()&amp;quot;, returning = &amp;quot;okrResponses&amp;quot;)public void afterReturningListObjective(JoinPoint joinPoint, Object okrResponses) {// 这个地方就能够对返回值直接进行处理}} 定义切点pointCut(),这个地方，就是定义一个我们需要切入的点，我们要进行拦截处理的地方。 对这个切点有很多处理的方式，实现真正的权限拦截控制逻辑  其他的点  对于用户的组织权限的控制，我们可以使用路径的方式来进行判断，类似于一个树，我们每一次，存储的时候，需要将用户所在的组织架构的路径进行存储。这样我们在进行权限判断的时候，就不想要每一次都从库中获取用户的组织架构信息了。 对于model的校验可以写注解来进行实现。这一点，以后会专门写一篇文章来进行分享 Npe问题可谓是开发过程中的一生之敌。在循环迭代过程中，不可以一遍迭代，一边删除list中的值。 使用JPA的时候可以使用 pageable 来直接进行分页，不用再写mongoTemplate这种CustomRepo   @Overridepublic List&amp;lt;Department&amp;gt; listAuthDepartment(String departmentName) {if (Strings."><meta name="twitter:card" content="summary_large_image">
+@Aspect @Component @RequiredArgsConstructor @Slf4j public class AuthAspect { @Pointcut(&amp;quot;execution(public * com.company.group.auth.service.AuthService.list(..))&amp;quot;) public void pointCutForListObjective() { } /** * 对list的方法返回值进行拦截处理 */ @AfterReturning(pointcut = &amp;quot;pointCutForListObjective()&amp;quot;, returning = &amp;quot;okrResponses&amp;quot;) public void afterReturningListObjective(JoinPoint joinPoint, Object okrResponses) { // 这个地方就能够对返回值直接进行处理 } }  定义切点pointCut(),这个地方，就是定义一个我们需要切入的点，我们要进行拦截处理的地方。 对这个切点有很多处理的方式，实现真正的权限拦截控制逻辑  其他的点  对于用户的组织权限的控制，我们可以使用路径的方式来进行判断，类似于一个树，我们每一次，存储的时候，需要将用户所在的组织架构的路径进行存储。这样我们在进行权限判断的时候，就不想要每一次都从库中获取用户的组织架构信息了。 对于model的校验可以写注解来进行实现。这一点，以后会专门写一篇文章来进行分享 Npe问题可谓是开发过程中的一生之敌。在循环迭代过程中，不可以一遍迭代，一边删除list中的值。 使用JPA的时候可以使用 pageable 来直接进行分页，不用再写mongoTemplate这种CustomRepo   @Override public List&amp;lt;Department&amp;gt; listAuthDepartment(String departmentName) { if (Strings."><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg' />
     <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
 
@@ -55,7 +52,7 @@ if (!doNotTrack) {
 
     </head>
     <body class="
-    article-page has-toc
+    article-page 
 ">
     <script>
         (function() {
@@ -81,22 +78,155 @@ if (!doNotTrack) {
 </script>
 <div class="container main-container flex 
     
-        extended
+        on-phone--column extended
     
 ">
     
-        <div id="article-toolbar">
-            <a href="/" class="back-home">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            
+            <figure class="site-avatar">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+
+                
+                    <span class="emoji">⚖️</span>
+                
+            </figure>
+            
+        
+        <h1 class="site-name"><a href="https://lllovol.com">lllovol</a></h1>
+        <h2 class="site-description">Stay hungry, stay foolish.</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="15 6 9 12 15 18" />
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
 </svg>
 
 
 
-                <span>返回</span>
+                
+                <span>主页</span>
             </a>
-        </div>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/links/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>暗色模式</span>
+            </li>
+        
+    </ol>
+</aside>
+
     
 <main class="main full-width">
     <article class="main-article">
@@ -145,20 +275,6 @@ if (!doNotTrack) {
         
 
         
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
-</svg>
-
-
-
-                <time class="article-time--reading">
-                    阅读时长: 1 分钟
-                </time>
-            </div>
-        
     </footer>
     
 </div>
@@ -181,20 +297,7 @@ if (!doNotTrack) {
 </ul>
 <p>除了上面的Interceptor和Aspect，还有filter。这三者实际上都是对Aop的具体实现，都可以实现权限检查，日志记录等等的功能。都是对业务逻辑的提取，不同的是，使用的范围
 规范、和深度不同。</p>
-<p><figure 
-	>
-	<a href="https://upload-images.jianshu.io/upload_images/11382761-484d129572258d9c.png?imageMogr2/auto-orient/strip%7cimageView2/2/w/1200/format/webp" >
-		<img src="https://upload-images.jianshu.io/upload_images/11382761-484d129572258d9c.png?imageMogr2/auto-orient/strip%7cimageView2/2/w/1200/format/webp"
-			
-			
-			
-			loading="lazy"
-			alt="执行顺序">
-	</a>
-	
-	<figcaption>执行顺序</figcaption>
-	
-</figure></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/11382761-484d129572258d9c.png?imageMogr2/auto-orient/strip%7cimageView2/2/w/1200/format/webp" alt="执行顺序"  /></p>
 <blockquote>
 <p><a class="link" href="https://www.jianshu.com/p/c4ef6d232e8d"  target="_blank" rel="noopener"
     >Filter、Interceptor、Aop实现与区别</a></p>
@@ -405,7 +508,7 @@ public class AuthAspect {
 </aside>
 
      
-    
+     
         
     
 
@@ -438,7 +541,7 @@ public class AuthAspect {
         
         2018 -
         
-        2021
+        2022
         &copy;
         lllovol
     </section>
@@ -530,35 +633,6 @@ public class AuthAspect {
             >
 
             </main>
-    
-        <aside class="sidebar right-sidebar sticky">
-            <section class="widget archives">
-                <div class="widget-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-                </div>
-                <h2 class="widget-title section-title">目录</h2>
-                
-                <div class="widget--toc">
-                    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#背景">背景</a></li>
-    <li><a href="#想法">想法</a></li>
-    <li><a href="#实现">实现</a></li>
-    <li><a href="#其他的点">其他的点</a></li>
-  </ul>
-</nav>
-                </div>
-            </section>
-        </aside>
     
 
         </div>

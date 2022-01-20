@@ -6,11 +6,20 @@
     <description>Recent content in Categories on lllovol</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Dec 2021 15:54:21 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 20 Jan 2022 20:07:33 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go</title>
+      <link>https://lllovol.com/categories/go/</link>
+      <pubDate>Thu, 20 Jan 2022 20:07:33 +0000</pubDate>
+      
+      <guid>https://lllovol.com/categories/go/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>DesignPattern</title>
       <link>https://lllovol.com/categories/designpattern/</link>
-      <pubDate>Thu, 23 Dec 2021 15:54:21 +0000</pubDate>
+      <pubDate>Thu, 06 Jan 2022 15:41:40 +0000</pubDate>
       
       <guid>https://lllovol.com/categories/designpattern/</guid>
       <description></description>
@@ -40,15 +49,6 @@
       <pubDate>Tue, 07 Dec 2021 21:05:58 +0000</pubDate>
       
       <guid>https://lllovol.com/categories/refactoring/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Go</title>
-      <link>https://lllovol.com/categories/go/</link>
-      <pubDate>Tue, 31 Aug 2021 21:41:05 +0000</pubDate>
-      
-      <guid>https://lllovol.com/categories/go/</guid>
       <description></description>
     </item>
     

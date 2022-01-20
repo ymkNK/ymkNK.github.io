@@ -14,7 +14,7 @@
       
       <guid>https://lllovol.com/p/2021/12/awk-tool-analysis/</guid>
       <description>背景 使用awk快速统计查看自己的常用命令
-指令 history --i | awk &#39;{print $4}&#39; | sort | uniq -c | sort -k1,1nr | head -20解析  history -i 查看所有的历史记录 awk &#39;{print $4}&#39; 使用awk分词整理，取到每一行的第四个参数，也就是我们常用的命令 sort 排序 uniq -c 去重计数 sort -k1,1nr 排序 head -20 取前20  效果  ~ &amp;gt; history --i | awk &#39;{print $4}&#39; | sort | uniq -c | sort -k1,1nr | head -204570 git578 rake174 ****test132 ls122 cd118 go80 testcover61 ssh***52 vim35 source28 kinit27 goimports22 gofumpt20 sudo17 brew17 open16 echo15 ssh</description>
+指令 history --i | awk &#39;{print $4}&#39; | sort | uniq -c | sort -k1,1nr | head -20 解析  history -i 查看所有的历史记录 awk &#39;{print $4}&#39; 使用awk分词整理，取到每一行的第四个参数，也就是我们常用的命令 sort 排序 uniq -c 去重计数 sort -k1,1nr 排序 head -20 取前20  效果  ~ &amp;gt; history --i | awk &#39;{print $4}&#39; | sort | uniq -c | sort -k1,1nr | head -20 4570 git 578 rake 174 ****test 132 ls 122 cd 118 go 80 testcover 61 ssh*** 52 vim 35 source 28 kinit 27 goimports 22 gofumpt 20 sudo 17 brew 17 open 16 echo 15 ssh </description>
     </item>
     
     <item>
@@ -82,11 +82,10 @@ func Test(t *testing.T) { PatchConvey(&amp;#34;test&amp;#34;, t, func () { //you
       <guid>https://lllovol.com/p/2021/8/strategy/</guid>
       <description>前言 为什么我们需要设计模式呢？我们日常的设计应该对手头的问题有针对性，同时对将来的问题也要有足够的通用性，同时我们也需要避免重复设计或者尽可能的减少重复设计。但是想以一下子就得到复用性和灵活性好的设计，其实是相当困难的。 而设计模式，就是将对面向对象软件的设计经验作为设计模式记录下来。
 设计模式的四个基本要素  模式名称 一个助记的名称 问题 描述了应该在什么时候使用设计模式 解决方案 描述了设计的组成成分，它们之间的相互关系和各自的职责和协作方式 效果 描述了模式应用的效果以及使用模式应该权衡的问题  设计模式的三大分类 我们主要通过两个准则对各种设计模式进行分类：
- 目的准则 这个模式是用来完成什么工作的 范围准则 这个模式用于类还是用于对象的 设计模式分类  面向对象的六大原则  单一功能原则 一个类只做一件事情 开闭原则 一个软件实体类，模块和函数应该对扩展开放，对修改关闭 里氏替换原则 子类可以扩展父类的功能，但不能改变父类原有的功能 依赖倒置原则 抽象不应该依赖细节，细节应该依赖于抽象，换一句话说，就是要针对接口编程，不要对实现编程 接口分离原则 系统解开耦合，从而容易重构，更改和重新部署 迪米特原则 一个类应该对自己需要耦合或者调用的类知道得最少，这有点类似于接口隔离原则中的最小接口的概念  Strategy 策略模式 意图 定义一系列的算法，把他们一个个封装起来，并且使他们可以互相替换。同时本模式可以使得算法可以独立于使用它的客户变化而变化
+ 目的准则 这个模式是用来完成什么工作的 范围准则 这个模式用于类还是用于对象的   面向对象的六大原则  单一功能原则 一个类只做一件事情 开闭原则 一个软件实体类，模块和函数应该对扩展开放，对修改关闭 里氏替换原则 子类可以扩展父类的功能，但不能改变父类原有的功能 依赖倒置原则 抽象不应该依赖细节，细节应该依赖于抽象，换一句话说，就是要针对接口编程，不要对实现编程 接口分离原则 系统解开耦合，从而容易重构，更改和重新部署 迪米特原则 一个类应该对自己需要耦合或者调用的类知道得最少，这有点类似于接口隔离原则中的最小接口的概念  Strategy 策略模式 意图 定义一系列的算法，把他们一个个封装起来，并且使他们可以互相替换。同时本模式可以使得算法可以独立于使用它的客户变化而变化
 别名 Policy 政策模式
 动机 当我们需要对一个正文流进行处理，需要使用许多不同的算法。这个时候，将这些算法那硬编码进使用它们的类当中是不可取的，原因如下：
- 客户程序异常庞大同时难以维护 不同的时候需要不同的算法，我们不想支持我们并不使用的算法 当其中某些算法是客户程序难以分割的算法的时候，增加新的算法或者改变现有的算法将十分困难  适用性  许多相关的类只是行为有不同 可以使用多个行为中的一个行为来配置一个类 需要使用一个算法的不同变体 可能会定义一些反映了不同时间、空间等因素权衡的算法，将这些变体实现为类层次 算法使用了客户不应该知道的数据 避免暴露负责的、与算法相关的数据结构 一个类定义了多种行为，并且这些行为在这个类的操作中以多个条件语句的形式出现。将相关的条件分支移入它们各自的Strategy类当中来代替这些条件语句  结构 图
-参与者  Strategy  定义所有支持的算法的公共接口。Context使用这个接口来调用某个ConcreteStrategy定义的算法   ConcreteStrategy  以Strategy为策略是实现某具体的算法   Context  用一个ConcreteStrategy对象来配置 维护一个对Strategy对象的引用 可定义一个接口来让Strategy访问它的数据    协作  Strategy和Context相互作用以实现选定的算法  Context将算法所需要的数据传递给Strategy Context也可以将自身作为一个参数传递给Strategy，Strategy就可以在需要的时候回调Context   Context将客户的请求转发给它的Strategy。通常创建并传递一个ConcreteStrategy对象给Context。客户只需要和Context交互。  效果 优点  相关算法系列 Strategy类层次为Context定义了一系列可供重用的算法或者行为。有助于析取出这些算法的公共功能 一个替代继承的方法 可以使用继承生成Context的子类，给予它们不同的行为，但是这就会将行为硬编码到Context当中，将算法的实现和Context的实现混淆，使得Context难以理解、难以维护、难以扩展，还不能动态改变算法。将算法封装在独立的Strategy类中，使得我们可以独立于Context改变它，易于切换、易于理解、易于扩展 消除了一些条件语句 将不同行为堆砌在一个类当中的时候，很难避免使用条件语句来选择合适的行为。将行为封装成一个个独立的Strategy类中可以消除这些条件语句（含有许多条件语句的代码通常意味着需要使用策略模式） 实现的选择 可以为相同行为提供不同的实现，可以根据不同的时间、空间权衡取舍要求从不同的策略中进行选择  缺点  客户必须要了解不同的Strategy 本模式一个潜在的缺点，客户选择一个Strategy必须要知道这些Strategy有何不同，此时可能不得不向客户暴露实现。因此只有不同行为变体与客户相关的行为时，才需要使用Strategy Strategy和Context的通信开销 无论具体的ConcreteStrategy是简单还是负责，都共享Strategy定义的接口。因此很可能某一些简单的ConcreteStrategy可能不会使用所有通过这个接口传递给他们的信息。 增加了对象的数目 Strategy增加了一个应用中对象的数目。有时候可以将Strategy实现为可供各个Context共享的无状态对象来减少这一个开销。其余任何状态都由Context来维护  实现  定义Strategy接口和Context接口 必须传递所有实现需要的数据，也可以将Context自身作为参数进行传递 将Strategy作为模板参数 （Go里没有，这就不展开了） 让Strategy对象成为可选的 访问前先判断是否存在，如果存在，就使用它；如果没有，就执行缺省的行为  代码示例  回调事件处理  相关模式 Flyweight（享元模式）： Strategy对象通常是很好的轻量级对象</description>
+ 客户程序异常庞大同时难以维护 不同的时候需要不同的算法，我们不想支持我们并不使用的算法 当其中某些算法是客户程序难以分割的算法的时候，增加新的算法或者改变现有的算法将十分困难  适用性  许多相关的类只是行为有不同 可以使用多个行为中的一个行为来配置一个类 需要使用一个算法的不同变体 可能会定义一些反映了不同时间、空间等因素权衡的算法，将这些变体实现为类层次 算法使用了客户不应该知道的数据 避免暴露负责的、与算法相关的数据结构 一个类定义了多种行为，并且这些行为在这个类的操作中以多个条件语句的形式出现。将相关的条件分支移入它们各自的Strategy类当中来代替这些条件语句  结构 参与者  Strategy  定义所有支持的算法的公共接口。Context使用这个接口来调用某个ConcreteStrategy定义的算法   ConcreteStrategy  以Strategy为策略是实现某具体的算法   Context  用一个ConcreteStrategy对象来配置 维护一个对Strategy对象的引用 可定义一个接口来让Strategy访问它的数据    协作  Strategy和Context相互作用以实现选定的算法  Context将算法所需要的数据传递给Strategy Context也可以将自身作为一个参数传递给Strategy，Strategy就可以在需要的时候回调Context   Context将客户的请求转发给它的Strategy。通常创建并传递一个ConcreteStrategy对象给Context。客户只需要和Context交互。  效果 优点  相关算法系列 Strategy类层次为Context定义了一系列可供重用的算法或者行为。有助于析取出这些算法的公共功能 一个替代继承的方法 可以使用继承生成Context的子类，给予它们不同的行为，但是这就会将行为硬编码到Context当中，将算法的实现和Context的实现混淆，使得Context难以理解、难以维护、难以扩展，还不能动态改变算法。将算法封装在独立的Strategy类中，使得我们可以独立于Context改变它，易于切换、易于理解、易于扩展 消除了一些条件语句 将不同行为堆砌在一个类当中的时候，很难避免使用条件语句来选择合适的行为。将行为封装成一个个独立的Strategy类中可以消除这些条件语句（含有许多条件语句的代码通常意味着需要使用策略模式） 实现的选择 可以为相同行为提供不同的实现，可以根据不同的时间、空间权衡取舍要求从不同的策略中进行选择  缺点  客户必须要了解不同的Strategy 本模式一个潜在的缺点，客户选择一个Strategy必须要知道这些Strategy有何不同，此时可能不得不向客户暴露实现。因此只有不同行为变体与客户相关的行为时，才需要使用Strategy Strategy和Context的通信开销 无论具体的ConcreteStrategy是简单还是负责，都共享Strategy定义的接口。因此很可能某一些简单的ConcreteStrategy可能不会使用所有通过这个接口传递给他们的信息。 增加了对象的数目 Strategy增加了一个应用中对象的数目。有时候可以将Strategy实现为可供各个Context共享的无状态对象来减少这一个开销。其余任何状态都由Context来维护  实现  定义Strategy接口和Context接口 必须传递所有实现需要的数据，也可以将Context自身作为参数进行传递 将Strategy作为模板参数 （Go里没有，这就不展开了） 让Strategy对象成为可选的 访问前先判断是否存在，如果存在，就使用它；如果没有，就执行缺省的行为  代码示例  回调事件处理  相关模式 Flyweight（享元模式）： Strategy对象通常是很好的轻量级对象</description>
     </item>
     
     <item>
@@ -100,7 +99,7 @@ func Test(t *testing.T) { PatchConvey(&amp;#34;test&amp;#34;, t, func () { //you
 这里想主要讲一下主题的适配，hugo的主题样式主要是由layouts这个文件夹下的样式作为模板，themes下所使用的模板中的layouts也会生效，因此我们可以利用这个特性，在站点项目下面的layouts重写同名的布局文件。 （本博客的gitalk就是利用了这一特性对主题进行了个性化配置）。
 撰写文章 不同的hugo主题可能会有不同的文章存放策略，但是一定都是放在contents目录下，本文是放在contents/post目录下
 markdown文件的头格式如下
----title: 从Jekyll迁移至Hugoauthor: ymkNKcategories: [Tech]tags: [Ruby,Tech,Hugo]date: 2021-05-27 19:52:17 +0800img: https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/26.jpegslug: 2021/5/rake-file-usage--- 用---和+++包围都可以，只是内容的格式要求有所区别，前者使用yaml的格式，后者使用toml的格式
+--- title: 从Jekyll迁移至Hugo author: ymkNK categories: [Tech] tags: [Ruby,Tech,Hugo] date: 2021-05-27 19:52:17 +0800 img: https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/26.jpeg slug: 2021/5/rake-file-usage ---  用---和+++包围都可以，只是内容的格式要求有所区别，前者使用yaml的格式，后者使用toml的格式
 Rakefile 可以使用hugo new 快速创建文章，但是如果像我这样有定制化需求的创建（比如本博客的文章图片，以及目录格式等等），就需要手动进行处理，因此我使用了rakefile来通过简单的命令快速创建生成文章以及Tag
 rake new 快速创建文章，并且可以随机生成oss图片库中的随机一个图片链接作为封面，按照创建的时间，自动放在content/post/#{@year}/#{@month}的目录下，方便归档（后期有考虑同时快速创建tags与categories）
 rake git 快速执行git，一键提交本次更改的内容
@@ -134,11 +133,11 @@ rake hugo 快速构建生成hugo的静态网页，public文件夹下就是站点
       <pubDate>Wed, 07 Aug 2019 10:08:30 +0000</pubDate>
       
       <guid>https://lllovol.com/p/ide-code-error-solution/</guid>
-      <description>前言 在安装使用Idea Intelli的时候，导入新项目的时候，总会出现代码权限飘红的问题。本篇文章，就是介绍出现这种问题的几种情况和分别的解决方式。 导入项目代码全线飘红
-情况一：maven二方库settings没有设置 一般公司内部都会有自己的二方库建设，新人在git下项目之后，总是会出现代码偏红的问题，各种库都没有导入下来，这时候首先应该排查的就是maven的配置是否正确，是否正确连接到了公司内部的二方库。
+      <description>前言 在安装使用Idea Intelli的时候，导入新项目的时候，总会出现代码权限飘红的问题。本篇文章，就是介绍出现这种问题的几种情况和分别的解决方式。 情况一：maven二方库settings没有设置 一般公司内部都会有自己的二方库建设，新人在git下项目之后，总是会出现代码偏红的问题，各种库都没有导入下来，这时候首先应该排查的就是maven的配置是否正确，是否正确连接到了公司内部的二方库。
 解决方式 以Idea Intelli为例: preference -&amp;gt; build,execution,deployment -&amp;gt; build tools -&amp;gt; maven -&amp;gt; User settings file: 勾选上override，改写为二方库settings.xml文件的路径
-设置maven settings
-情况二：Lombok插件没有安装  Project Lombok is a java library that automatically plugs into your editor and build tools, spicing up your java. Never write another getter or equals method again, with one annotation your class has a fully featured builder, Automate your logging variables, and much more.</description>
+情况二：Lombok插件没有安装  Project Lombok is a java library that automatically plugs into your editor and build tools, spicing up your java. Never write another getter or equals method again, with one annotation your class has a fully featured builder, Automate your logging variables, and much more.lombok官网
+ Lombok可以让我们的Java代码更加简洁，不用再去写那些Getter和Setter。然而这个强大的功能，在初次安装idea的时候，并不会内置的给我们安装Lombok插件，因此这个时候，同样也会出现大片代码报错的问题。
+解决方式 安装Lombok的插件： ** preference -&amp;gt; Plugins -&amp;gt; Install lombok -&amp;gt; restart ** 问题三：注解未开启 在安装好了 Lombok之后，发现运行还是报错 解决方式  关闭项目。 Preference &amp;gt; Build, Execution, Deployment &amp;gt; Compiler &amp;gt; Annotation Processors.</description>
     </item>
     
     <item>
@@ -149,7 +148,7 @@ rake hugo 快速构建生成hugo的静态网页，public文件夹下就是站点
       <guid>https://lllovol.com/p/snippet/</guid>
       <description>前言 在书写markdown文章的时候，往往需要向其中添加图片的链接，从截图到文件的处理，到链接的获取都会很麻烦。在寻找各种图床工具之后，发现其效果都不是很好（比如要收费开通多个云图床的上传权限），因此本文将介绍另外一种较为简便的处理方式。
 设置Snippet snippet是短文的意思，在ide中常常是指可以通过一小串的命令生成一大段代码或者文字的方式。例如，在sublime中输入lorem+tab。就会生成一大段样例文字
-lorem+tab==&amp;gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmodtempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodoconsequat. Duis aute irure dolor in reprehenderit in voluptate velit essecillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+lorem+tab ==&amp;gt; Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
     </item>
     
     <item>
@@ -162,7 +161,6 @@ lorem+tab==&amp;gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, s
 主要功能  负载均衡 消费模式 消费拉取 消费进度反馈 消费过滤 延迟队列  分享主要内容笔记 打字速度有限，只能记录下简单的一些片段供参考
  有一个架构，轮询，可用性高，一致性要求没那么高 消息的一个流程：生产者发了一个消息，到了breaker之后，到了commitlog。有一个G的大小，实际发送的大小，顺序写的，io性能会很好，会被放到消费者的queue里面 ，小了之后，总要发到某一个topic里面 发一个消息的话，需要新建一个主题，需要制定一个queue的数量，每一个queue就是一个负载均衡，表示当前这个queue，消费到什么位置了。集群消息，一人拿一个。被负载的queue，同一个topic下的消息都是不同的 消费者可以对同一个topic下面的某几个队列进行消费，多个不同的consumer 设置min是核心线程数，是固定的，但是她的队列是无限的，所以这个地方没有什么用 缓存超过10000个，会改变线程池的大小，会做对应的限制 msgListener就是传的一个回调 会有一个offsetStore会存，存到本地和远程 还有消息的消费逻辑，注册到客户端的，生成clientId 封装了一些拉取消息的api，通过路由信息 worker发出请求，然后又一个线程池，来进行序列化和相应，消费的话会再七环到对应consumer的线程池 有各种组件，然后讲讲启动之后，都做了哪些事情 基本上都是通过定时消息去驱动的，很少是通过事件去驱动的， 找nameserver,然后去找server的信息 更新consumer消费的一个队列offset 都不是实时的更新的，是每一个五秒钟才刷新一次的 广播消费的，消费的queue是全部，订阅，不是分发，每一个rebalance里面，都处理了一个queue，实现了一个拍照 如果没有存，就是首次消费，如果是last，就会从，rocket是经常清消息的，发消息，然后消费 消费，就是拉取消息，就是放一条消息，就可以进行拉取，会先做一些验证，然后做一些限流，只不过限流是做一些delay，顺序消息，需要设置一下是不是第一次，然后获取订阅信息，然后调用对应的pullapi，然后去发一条消息，拉倒请求之后，就会有callback，去封装一下，找到了消息了，然后有一个真正的消息处理类 处理的流程 如果全部消费成功了之后，就会找到maxOffset，如果没有的话，就会去更新最小的那一个，这就是整个的一个消费流程  自行延展 MQ是高并发系统的核心组件之一，能够提高业务效率和系统的稳定性，主流的MQ有Rocketmq、kafka、Rabbitmq
  Rocketmq原理&amp;amp;最佳实践 主要对比如下
-对比
  </description>
     </item>
     
@@ -189,12 +187,12 @@ lorem+tab==&amp;gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, s
  yamlBeans官网
 yaml文档的学习
  添加依赖 将下列代码添加到pom文件当中
-&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;com.esotericsoftware.yamlbeans&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;yamlbeans&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;1.12&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt; Yaml反序列化为常见数据结构 所谓的反序列化，就是将yaml格式的文件，转换为java的常见数据结构 主要使用的类是YamlReader，然后可以将yaml文档转换为HashMap，ArrayList,还有Strings类型。
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.esotericsoftware.yamlbeans&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;yamlbeans&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.12&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt;  Yaml反序列化为常见数据结构 所谓的反序列化，就是将yaml格式的文件，转换为java的常见数据结构 主要使用的类是YamlReader，然后可以将yaml文档转换为HashMap，ArrayList,还有Strings类型。
 yaml：
-name: Nathan Sweetage: 28address: 4011 16th Ave Sphone numbers:- name: Homenumber: 206-555-5138- name: Worknumber: 425-555-2306 code:
-YamlReader reader = new YamlReader(new FileReader(&amp;quot;contact.yml&amp;quot;));Object object = reader.read();System.out.println(object);Map map = (Map)object;System.out.println(map.get(&amp;quot;address&amp;quot;)); Yaml反序列化为POJO 将yaml文档反序列化为pojo(plain ordinary java object)
+name: Nathan Sweet age: 28 address: 4011 16th Ave S phone numbers: - name: Home number: 206-555-5138 - name: Work number: 425-555-2306  code:
+YamlReader reader = new YamlReader(new FileReader(&amp;quot;contact.yml&amp;quot;)); Object object = reader.read(); System.out.println(object); Map map = (Map)object; System.out.println(map.get(&amp;quot;address&amp;quot;));  Yaml反序列化为POJO 将yaml文档反序列化为pojo(plain ordinary java object)
 Yaml and java class:
-name: Nathan Sweetage: 28public class Contact {public String name;public int age;} Code:</description>
+name: Nathan Sweet age: 28 public class Contact { public String name; public int age; }  Code:</description>
     </item>
     
     <item>
@@ -222,8 +220,7 @@ QPS 每秒查询数量 Query Per Second
       <guid>https://lllovol.com/p/%E5%AE%89%E8%A3%85atom%E7%9A%84atom-beautify/</guid>
       <description>前言 想给atom安装beautify的插件 使用apm install atom-beautify 和是用preference中的插件安装都失败了
 Start 使用github 克隆到本地，然后安装
- cd ~/.atom/packagesgit clone https://github.com/Glavin001/atom-beautify.gitcd atom-beautifynpm install 59469635.png
-Success 使用control + alt + b 组合键 即可</description>
+ cd ~/.atom/packages git clone https://github.com/Glavin001/atom-beautify.git cd atom-beautify npm install  Success 使用control + alt + b 组合键 即可</description>
     </item>
     
     <item>
@@ -235,10 +232,10 @@ Success 使用control + alt + b 组合键 即可</description>
       <description>使用github.io来写blog 本就是件很棒的事情，但是每次在想写新的文章的时候，都需要重新复制title和开头的标签，如果能够自动化地完成这件事就好了（重复性的东西工作）
 About Rakefile  Rake is a Make-like program implemented in Ruby. Tasks and dependencies are specified in standard Ruby syntax.
  摘自http://docs.seattlerb.org/rake/
-安装Rake sudo gem install rake 即可
+安装Rake sudo gem install rake  即可
 创建Rakefile 在项目的根目录下
-touch Rakefilevim Rakefile 然后添加如下代码
-task :default =&amp;gt; :newrequire &#39;fileutils&#39;desc &amp;quot;创建新 post&amp;quot;task :new doputs &amp;quot;请输入要创建的文章文件文件名字：&amp;quot;@url = STDIN.gets.chompputs &amp;quot;请输入文章的标题：&amp;quot;@name = STDIN.gets.chompputs &amp;quot;请输入文章的子标题：&amp;quot;@slug = STDIN.gets.chompputs &amp;quot;请输入文章的分类，以空格分隔：&amp;quot;@categories = STDIN.</description>
+touch Rakefile vim Rakefile  然后添加如下代码
+task :default =&amp;gt; :new require &#39;fileutils&#39; desc &amp;quot;创建新 post&amp;quot; task :new do puts &amp;quot;请输入要创建的文章文件文件名字：&amp;quot; @url = STDIN.gets.chomp puts &amp;quot;请输入文章的标题：&amp;quot; @name = STDIN.gets.chomp puts &amp;quot;请输入文章的子标题：&amp;quot; @slug = STDIN.gets.chomp puts &amp;quot;请输入文章的分类，以空格分隔：&amp;quot; @categories = STDIN.</description>
     </item>
     
   </channel>

@@ -15,7 +15,7 @@
       <guid>https://lllovol.com/p/android-idea/</guid>
       <description>前言 最近在帮朋友优化一个安卓的应用，使用Android来实现的一个华容道的小游戏。 项目链接
 Android Studio的开发项目文件结构图 主要显示的是src文件夹下的结构
- .├── AndroidManifest.xml ├── java│ └── com│ └── example│ └── huarongdao│ ├── AboutActivity.java│ ├── Block.java│ ├── Dimension.java│ ├── Klotski.java│ ├── KlotskiMapParser.java│ ├── L.java│ ├── Level1Activity.java│ ├── Level2Activity.java│ ├── Level3Activity.java│ ├── Level4Activity.java│ ├── LevelActivity.java│ ├── MainActivity.java│ └── Screen.java└── res├── drawable├── drawable-v24├── layout├── mipmap-anydpi-v26├── mipmap-hdpi├── mipmap-mdpi├── mipmap-xhdpi├── mipmap-xxhdpi├── mipmap-xxxhdpi├── temp-mipmap└── values AndroidManifest.</description>
+ . ├── AndroidManifest.xml ├── java │ └── com │ └── example │ └── huarongdao │ ├── AboutActivity.java │ ├── Block.java │ ├── Dimension.java │ ├── Klotski.java │ ├── KlotskiMapParser.java │ ├── L.java │ ├── Level1Activity.java │ ├── Level2Activity.java │ ├── Level3Activity.java │ ├── Level4Activity.java │ ├── LevelActivity.java │ ├── MainActivity.java │ └── Screen.java └── res ├── drawable ├── drawable-v24 ├── layout ├── mipmap-anydpi-v26 ├── mipmap-hdpi ├── mipmap-mdpi ├── mipmap-xhdpi ├── mipmap-xxhdpi ├── mipmap-xxxhdpi ├── temp-mipmap └── values  AndroidManifest.</description>
     </item>
     
   </channel>

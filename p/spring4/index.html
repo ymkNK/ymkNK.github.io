@@ -4,8 +4,8 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Code Review 这周被点名来做code view了来着，然后昨天晚上做了一个小时的code review，还是相当紧张，然后今天改了一天代码 特此总结
 ApplicationListener 这个地方原来主要实现的功能是spring3中的功能，在启动了整个项目之后，让watch pods和watch service启动并且只启动一次。
 （启动一个单线程，回调函数，生命周期） 原来的做法是使用spring task在应用启动之后，就启动一次然后一直运行
-// @Scheduled(cron = &amp;quot;${schedule.kubeService}&amp;quot;)@Scheduled(fixedDelay = 999999999)protected void gitlabProjectTask() {kubernetesService.collectServices();customServiceService.bindServiceAndProject();kubernetesService.watchServices();}// @Scheduled(cron = &amp;quot;${schedule.kubePod}&amp;quot;)// @Scheduled(cron = &amp;quot;0 0,14 6,18 * * ? &amp;quot;)//taskexecutor// ScheduledExecutorTask// new 一个单线程一直跑就可以了@Scheduled(fixedDelay = 999999999)public void collectPod() {kubernetesService.collectPods();kubernetesService.watchPods();} 现在使用的是ApplicationListener
-public class KubernetesServiceImpl implements KubernetesService, ApplicationListener&amp;lt;ApplicationReadyEvent&amp;gt; {//生命周期@Overridepublic void onApplicationEvent(ApplicationReadyEvent event) {collectServices();customServiceService.'><title>SpringBoot开发中的一些小细节(四)CR笔记ApplicationListener等等</title>
+// @Scheduled(cron = &amp;quot;${schedule.kubeService}&amp;quot;) @Scheduled(fixedDelay = 999999999) protected void gitlabProjectTask() { kubernetesService.collectServices(); customServiceService.bindServiceAndProject(); kubernetesService.watchServices(); } // @Scheduled(cron = &amp;quot;${schedule.kubePod}&amp;quot;) // @Scheduled(cron = &amp;quot;0 0,14 6,18 * * ? &amp;quot;) //taskexecutor // ScheduledExecutorTask // new 一个单线程一直跑就可以了 @Scheduled(fixedDelay = 999999999) public void collectPod() { kubernetesService.collectPods(); kubernetesService.watchPods(); }  现在使用的是ApplicationListener
+public class KubernetesServiceImpl implements KubernetesService, ApplicationListener&amp;lt;ApplicationReadyEvent&amp;gt; { //生命周期 @Override public void onApplicationEvent(ApplicationReadyEvent event) { collectServices(); customServiceService.'><title>SpringBoot开发中的一些小细节(四)CR笔记ApplicationListener等等</title>
 
 <link rel='canonical' href='https://lllovol.com/p/spring4/'>
 
@@ -13,8 +13,8 @@ public class KubernetesServiceImpl implements KubernetesService, ApplicationList
 <meta property='og:description' content='Code Review 这周被点名来做code view了来着，然后昨天晚上做了一个小时的code review，还是相当紧张，然后今天改了一天代码 特此总结
 ApplicationListener 这个地方原来主要实现的功能是spring3中的功能，在启动了整个项目之后，让watch pods和watch service启动并且只启动一次。
 （启动一个单线程，回调函数，生命周期） 原来的做法是使用spring task在应用启动之后，就启动一次然后一直运行
-// @Scheduled(cron = &amp;quot;${schedule.kubeService}&amp;quot;)@Scheduled(fixedDelay = 999999999)protected void gitlabProjectTask() {kubernetesService.collectServices();customServiceService.bindServiceAndProject();kubernetesService.watchServices();}// @Scheduled(cron = &amp;quot;${schedule.kubePod}&amp;quot;)// @Scheduled(cron = &amp;quot;0 0,14 6,18 * * ? &amp;quot;)//taskexecutor// ScheduledExecutorTask// new 一个单线程一直跑就可以了@Scheduled(fixedDelay = 999999999)public void collectPod() {kubernetesService.collectPods();kubernetesService.watchPods();} 现在使用的是ApplicationListener
-public class KubernetesServiceImpl implements KubernetesService, ApplicationListener&amp;lt;ApplicationReadyEvent&amp;gt; {//生命周期@Overridepublic void onApplicationEvent(ApplicationReadyEvent event) {collectServices();customServiceService.'>
+// @Scheduled(cron = &amp;quot;${schedule.kubeService}&amp;quot;) @Scheduled(fixedDelay = 999999999) protected void gitlabProjectTask() { kubernetesService.collectServices(); customServiceService.bindServiceAndProject(); kubernetesService.watchServices(); } // @Scheduled(cron = &amp;quot;${schedule.kubePod}&amp;quot;) // @Scheduled(cron = &amp;quot;0 0,14 6,18 * * ? &amp;quot;) //taskexecutor // ScheduledExecutorTask // new 一个单线程一直跑就可以了 @Scheduled(fixedDelay = 999999999) public void collectPod() { kubernetesService.collectPods(); kubernetesService.watchPods(); }  现在使用的是ApplicationListener
+public class KubernetesServiceImpl implements KubernetesService, ApplicationListener&amp;lt;ApplicationReadyEvent&amp;gt; { //生命周期 @Override public void onApplicationEvent(ApplicationReadyEvent event) { collectServices(); customServiceService.'>
 <meta property='og:url' content='https://lllovol.com/p/spring4/'>
 <meta property='og:site_name' content='lllovol'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Spring' /><meta property='article:published_time' content='2018-12-28T17:12:32&#43;00:00'/><meta property='article:modified_time' content='2018-12-28T17:12:32&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg' />
@@ -22,8 +22,8 @@ public class KubernetesServiceImpl implements KubernetesService, ApplicationList
 <meta name="twitter:description" content="Code Review 这周被点名来做code view了来着，然后昨天晚上做了一个小时的code review，还是相当紧张，然后今天改了一天代码 特此总结
 ApplicationListener 这个地方原来主要实现的功能是spring3中的功能，在启动了整个项目之后，让watch pods和watch service启动并且只启动一次。
 （启动一个单线程，回调函数，生命周期） 原来的做法是使用spring task在应用启动之后，就启动一次然后一直运行
-// @Scheduled(cron = &amp;quot;${schedule.kubeService}&amp;quot;)@Scheduled(fixedDelay = 999999999)protected void gitlabProjectTask() {kubernetesService.collectServices();customServiceService.bindServiceAndProject();kubernetesService.watchServices();}// @Scheduled(cron = &amp;quot;${schedule.kubePod}&amp;quot;)// @Scheduled(cron = &amp;quot;0 0,14 6,18 * * ? &amp;quot;)//taskexecutor// ScheduledExecutorTask// new 一个单线程一直跑就可以了@Scheduled(fixedDelay = 999999999)public void collectPod() {kubernetesService.collectPods();kubernetesService.watchPods();} 现在使用的是ApplicationListener
-public class KubernetesServiceImpl implements KubernetesService, ApplicationListener&amp;lt;ApplicationReadyEvent&amp;gt; {//生命周期@Overridepublic void onApplicationEvent(ApplicationReadyEvent event) {collectServices();customServiceService."><meta name="twitter:card" content="summary_large_image">
+// @Scheduled(cron = &amp;quot;${schedule.kubeService}&amp;quot;) @Scheduled(fixedDelay = 999999999) protected void gitlabProjectTask() { kubernetesService.collectServices(); customServiceService.bindServiceAndProject(); kubernetesService.watchServices(); } // @Scheduled(cron = &amp;quot;${schedule.kubePod}&amp;quot;) // @Scheduled(cron = &amp;quot;0 0,14 6,18 * * ? &amp;quot;) //taskexecutor // ScheduledExecutorTask // new 一个单线程一直跑就可以了 @Scheduled(fixedDelay = 999999999) public void collectPod() { kubernetesService.collectPods(); kubernetesService.watchPods(); }  现在使用的是ApplicationListener
+public class KubernetesServiceImpl implements KubernetesService, ApplicationListener&amp;lt;ApplicationReadyEvent&amp;gt; { //生命周期 @Override public void onApplicationEvent(ApplicationReadyEvent event) { collectServices(); customServiceService."><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg' />
     <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
 
@@ -91,9 +91,9 @@ if (!doNotTrack) {
             </figure>
             
         
-        
-        <h1 class="site-name"><a href="/">lllovol</a></h1>
-        <h2 class="site-description">Stay hungry, stay foolish.</h2></header>
+        <h1 class="site-name"><a href="https://lllovol.com">lllovol</a></h1>
+        <h2 class="site-description">Stay hungry, stay foolish.</h2>
+    </header>
 
     <ol class="menu" id="main-menu">
         
@@ -102,10 +102,6 @@ if (!doNotTrack) {
 
         <li >
             <a href='/' >
-                
-                
-                    
-                
                 
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
@@ -126,10 +122,6 @@ if (!doNotTrack) {
         <li >
             <a href='/about/' >
                 
-                
-                    
-                
-                
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="12" cy="7" r="4" />
@@ -147,10 +139,6 @@ if (!doNotTrack) {
 
         <li >
             <a href='/archives/' >
-                
-                
-                    
-                
                 
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
@@ -171,10 +159,6 @@ if (!doNotTrack) {
         <li >
             <a href='/links/' >
                 
-                
-                    
-                
-                
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
@@ -192,10 +176,6 @@ if (!doNotTrack) {
 
         <li >
             <a href='/search/' >
-                
-                
-                    
-                
                 
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
@@ -282,20 +262,6 @@ if (!doNotTrack) {
             </div>
         
 
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
-</svg>
-
-
-
-                <time class="article-time--reading">
-                    阅读时长: 1 分钟
-                </time>
-            </div>
         
     </footer>
     
@@ -530,7 +496,7 @@ if (log.isDebugEnabled()) {
 </aside>
 
      
-    
+     
         
     
 
@@ -563,7 +529,7 @@ if (log.isDebugEnabled()) {
         
         2018 -
         
-        2021
+        2022
         &copy;
         lllovol
     </section>

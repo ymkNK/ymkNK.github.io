@@ -15,8 +15,7 @@
       <guid>https://lllovol.com/p/how-a-sql-executes/</guid>
       <description> 本文是学习笔记，来自极客时间
  mysql&amp;gt; select * from T where ID=10； 这么一条查询语句是如何执行的呢？
-MySQL基础架构 
-Server层：
+MySQL基础架构 Server层：
  连接器：管理连接，权限认证 分析器：词法语法分析 查询缓存：命中则直接返回结果 优化器：执行计划生成，索引选择 执行器：操作引擎，返回结果 Server层涵盖了MySQL的大多数的核心服务功能，以及所有的内置函数  </description>
     </item>
     
