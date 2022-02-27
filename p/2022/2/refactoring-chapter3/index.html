@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='神秘命名 整洁代码最重要的一环就是好的名字，所以我们会深思熟虑如何给函数、模块、变量和类命名，使他们能清晰表面自己的功能和用法。
+ 需要考虑取一个好的名字  重复代码 如果你在一个以上的地点看到相同的代码结构，那么可以肯定：设法将它们合而为一，程序会变得更好。
+ 抽取重复代码，使之能够复用  过长函数 据我们的经验，活得最长、最好的程序，其中的函数都比较短。
+短的函数具有更好的阐释力、更易于分享、更多的选择。
+函数越长，就越难理解。
+每当感觉需要以注释来说明点什么的时候，我们就把需要说明的东西写进一个独立函数中，并以其用途（而非实现手法）命名。
+条件表达式和循环常常也是提炼的信号。
+ 可以考虑使用横屏显示器进行开发，这样潜意识里就不会把一个函数写的过长  过长的参数列表 过长的参数列表本身也经常令人迷惑。
+如果可以向某个参数发起查询而获得另一个参数的值，那么就可以使用以查询取代参数去掉第二个参数。
+使用类可以有效地缩短参数列表。
+ Go中可以使用struct的方式，来传入较多的参数  全局数据 全局数据是最刺鼻的坏味道之一。
+一次又一次，全局数据造成了哪些诡异的bug，而问题的根源却在遥远的别处，想要找到出错的代码难于登天。
+良药与毒药的却别在于剂量。有少量的全局数据或许无妨，但数量越多，处理的难度就会指数上升。
+ 尽量少使用全局变量  可变数据 对数据的修改经常导致出乎意料的结果和难以发现的bug。
+如果可变数据的值能在其他地方计算出来，这就是一个特别刺鼻的坏味道。
+发散式变化 一旦需要修改，我们希望能够跳到系统的某一点进行修改，只在此处进行修改。如果不能做到这一点，你就能嗅出两种紧密相关的刺鼻味道中的一种了。
+ 一个类受多种变化的影响  散弹式修改 如果遇到某种变化，你都必须在许多不同的类内做出许多小修改，你所面临的坏味道就是散弹式修改。
+ 一种变化引发多个类对应改动  依恋情结 所谓模块化，就是力求将代码分出区域，最大化区域内部的交互、最小化跨区域的交互。
+如果一个函数跟另一个模块的函数或者数据交流格外频繁，远胜于在自己所处模块内的交流，这就是依恋情结的典型情况。
+ 函数对某个类的兴趣高过对自己所处类的兴趣  数据泥团 你常常可以在很多地方看到相同的三四项数据：两个类中相同的字段、许多函数签名中相同的参数。
+ 两个类中同样的字段、很多函数签名中同样的參数 这种情况汪汪和历史遗留问题相关  基本类型偏执 大多数编程环境都大量使用基本类型，即整数、浮点数和字符串等。
+一个有趣的现象：很多程序员不愿意创建对自己的问题域有用的基本类型。
+字符串是这种坏味道的最佳培养皿，比如，电话号码不只是一串字符。
+重复的switch 我们现在更关注重复的switch：在不同的地方反复使用同样的switch逻辑（可能是以switch/case语句的形式，也可能是以连续的if/else语句的形式）。应该以多态取代条件表达式消除掉。
+ 例如可以使用策略模式等方式  循环语句 函数作为一等公民以及得到广泛的支持，因此我们可以使用以管道取代循环来让这些老古董退休。
+管道操作（如 filter和map）可以帮助我们更快地看清被处理的元素以及他们的动作.'><title>《重构》-代码的坏味道</title>
+
+<link rel='canonical' href='https://lllovol.com/p/2022/2/refactoring-chapter3/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='《重构》-代码的坏味道'>
+<meta property='og:description' content='神秘命名 整洁代码最重要的一环就是好的名字，所以我们会深思熟虑如何给函数、模块、变量和类命名，使他们能清晰表面自己的功能和用法。
+ 需要考虑取一个好的名字  重复代码 如果你在一个以上的地点看到相同的代码结构，那么可以肯定：设法将它们合而为一，程序会变得更好。
+ 抽取重复代码，使之能够复用  过长函数 据我们的经验，活得最长、最好的程序，其中的函数都比较短。
+短的函数具有更好的阐释力、更易于分享、更多的选择。
+函数越长，就越难理解。
+每当感觉需要以注释来说明点什么的时候，我们就把需要说明的东西写进一个独立函数中，并以其用途（而非实现手法）命名。
+条件表达式和循环常常也是提炼的信号。
+ 可以考虑使用横屏显示器进行开发，这样潜意识里就不会把一个函数写的过长  过长的参数列表 过长的参数列表本身也经常令人迷惑。
+如果可以向某个参数发起查询而获得另一个参数的值，那么就可以使用以查询取代参数去掉第二个参数。
+使用类可以有效地缩短参数列表。
+ Go中可以使用struct的方式，来传入较多的参数  全局数据 全局数据是最刺鼻的坏味道之一。
+一次又一次，全局数据造成了哪些诡异的bug，而问题的根源却在遥远的别处，想要找到出错的代码难于登天。
+良药与毒药的却别在于剂量。有少量的全局数据或许无妨，但数量越多，处理的难度就会指数上升。
+ 尽量少使用全局变量  可变数据 对数据的修改经常导致出乎意料的结果和难以发现的bug。
+如果可变数据的值能在其他地方计算出来，这就是一个特别刺鼻的坏味道。
+发散式变化 一旦需要修改，我们希望能够跳到系统的某一点进行修改，只在此处进行修改。如果不能做到这一点，你就能嗅出两种紧密相关的刺鼻味道中的一种了。
+ 一个类受多种变化的影响  散弹式修改 如果遇到某种变化，你都必须在许多不同的类内做出许多小修改，你所面临的坏味道就是散弹式修改。
+ 一种变化引发多个类对应改动  依恋情结 所谓模块化，就是力求将代码分出区域，最大化区域内部的交互、最小化跨区域的交互。
+如果一个函数跟另一个模块的函数或者数据交流格外频繁，远胜于在自己所处模块内的交流，这就是依恋情结的典型情况。
+ 函数对某个类的兴趣高过对自己所处类的兴趣  数据泥团 你常常可以在很多地方看到相同的三四项数据：两个类中相同的字段、许多函数签名中相同的参数。
+ 两个类中同样的字段、很多函数签名中同样的參数 这种情况汪汪和历史遗留问题相关  基本类型偏执 大多数编程环境都大量使用基本类型，即整数、浮点数和字符串等。
+一个有趣的现象：很多程序员不愿意创建对自己的问题域有用的基本类型。
+字符串是这种坏味道的最佳培养皿，比如，电话号码不只是一串字符。
+重复的switch 我们现在更关注重复的switch：在不同的地方反复使用同样的switch逻辑（可能是以switch/case语句的形式，也可能是以连续的if/else语句的形式）。应该以多态取代条件表达式消除掉。
+ 例如可以使用策略模式等方式  循环语句 函数作为一等公民以及得到广泛的支持，因此我们可以使用以管道取代循环来让这些老古董退休。
+管道操作（如 filter和map）可以帮助我们更快地看清被处理的元素以及他们的动作.'>
+<meta property='og:url' content='https://lllovol.com/p/2022/2/refactoring-chapter3/'>
+<meta property='og:site_name' content='lllovol'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Refactoring' /><meta property='article:tag' content='Note' /><meta property='article:published_time' content='2022-02-07T20:17:32&#43;00:00'/><meta property='article:modified_time' content='2022-02-07T20:17:32&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/2.jpeg' />
+<meta name="twitter:title" content="《重构》-代码的坏味道">
+<meta name="twitter:description" content="神秘命名 整洁代码最重要的一环就是好的名字，所以我们会深思熟虑如何给函数、模块、变量和类命名，使他们能清晰表面自己的功能和用法。
+ 需要考虑取一个好的名字  重复代码 如果你在一个以上的地点看到相同的代码结构，那么可以肯定：设法将它们合而为一，程序会变得更好。
+ 抽取重复代码，使之能够复用  过长函数 据我们的经验，活得最长、最好的程序，其中的函数都比较短。
+短的函数具有更好的阐释力、更易于分享、更多的选择。
+函数越长，就越难理解。
+每当感觉需要以注释来说明点什么的时候，我们就把需要说明的东西写进一个独立函数中，并以其用途（而非实现手法）命名。
+条件表达式和循环常常也是提炼的信号。
+ 可以考虑使用横屏显示器进行开发，这样潜意识里就不会把一个函数写的过长  过长的参数列表 过长的参数列表本身也经常令人迷惑。
+如果可以向某个参数发起查询而获得另一个参数的值，那么就可以使用以查询取代参数去掉第二个参数。
+使用类可以有效地缩短参数列表。
+ Go中可以使用struct的方式，来传入较多的参数  全局数据 全局数据是最刺鼻的坏味道之一。
+一次又一次，全局数据造成了哪些诡异的bug，而问题的根源却在遥远的别处，想要找到出错的代码难于登天。
+良药与毒药的却别在于剂量。有少量的全局数据或许无妨，但数量越多，处理的难度就会指数上升。
+ 尽量少使用全局变量  可变数据 对数据的修改经常导致出乎意料的结果和难以发现的bug。
+如果可变数据的值能在其他地方计算出来，这就是一个特别刺鼻的坏味道。
+发散式变化 一旦需要修改，我们希望能够跳到系统的某一点进行修改，只在此处进行修改。如果不能做到这一点，你就能嗅出两种紧密相关的刺鼻味道中的一种了。
+ 一个类受多种变化的影响  散弹式修改 如果遇到某种变化，你都必须在许多不同的类内做出许多小修改，你所面临的坏味道就是散弹式修改。
+ 一种变化引发多个类对应改动  依恋情结 所谓模块化，就是力求将代码分出区域，最大化区域内部的交互、最小化跨区域的交互。
+如果一个函数跟另一个模块的函数或者数据交流格外频繁，远胜于在自己所处模块内的交流，这就是依恋情结的典型情况。
+ 函数对某个类的兴趣高过对自己所处类的兴趣  数据泥团 你常常可以在很多地方看到相同的三四项数据：两个类中相同的字段、许多函数签名中相同的参数。
+ 两个类中同样的字段、很多函数签名中同样的參数 这种情况汪汪和历史遗留问题相关  基本类型偏执 大多数编程环境都大量使用基本类型，即整数、浮点数和字符串等。
+一个有趣的现象：很多程序员不愿意创建对自己的问题域有用的基本类型。
+字符串是这种坏味道的最佳培养皿，比如，电话号码不只是一串字符。
+重复的switch 我们现在更关注重复的switch：在不同的地方反复使用同样的switch逻辑（可能是以switch/case语句的形式，也可能是以连续的if/else语句的形式）。应该以多态取代条件表达式消除掉。
+ 例如可以使用策略模式等方式  循环语句 函数作为一等公民以及得到广泛的支持，因此我们可以使用以管道取代循环来让这些老古董退休。
+管道操作（如 filter和map）可以帮助我们更快地看清被处理的元素以及他们的动作."><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/2.jpeg' />
+    <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MK7GTCNC34"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-MK7GTCNC34', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page 
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        on-phone--column extended
+    
+">
+    
+        <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            
+            <figure class="site-avatar">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+
+                
+                    <span class="emoji">⚖️</span>
+                
+            </figure>
+            
+        
+        
+        <h1 class="site-name"><a href="/">lllovol</a></h1>
+        <h2 class="site-description">Stay hungry, stay foolish.</h2></header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/links/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>暗色模式</span>
+            </li>
+        
+    </ol>
+</aside>
+
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/2022/2/refactoring-chapter3/">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/2.jpeg" loading="lazy" alt="Featured image of post 《重构》-代码的坏味道" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/refactoring/" >
+                Refactoring
+            </a>
+        
+            <a href="/categories/note/" style="background-color: ; color: ;">
+                Note
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/p/2022/2/refactoring-chapter3/">《重构》-代码的坏味道</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 07, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 1 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    <h1 id="神秘命名">神秘命名</h1>
+<p>整洁代码最重要的一环就是好的名字，所以我们会深思熟虑如何给函数、模块、变量和类命名，使他们能清晰表面自己的功能和用法。</p>
+<ul>
+<li>需要考虑取一个好的名字</li>
+</ul>
+<h1 id="重复代码">重复代码</h1>
+<p>如果你在一个以上的地点看到相同的代码结构，那么可以肯定：设法将它们合而为一，程序会变得更好。</p>
+<ul>
+<li>抽取重复代码，使之能够复用</li>
+</ul>
+<h1 id="过长函数">过长函数</h1>
+<p>据我们的经验，活得最长、最好的程序，其中的函数都比较短。</p>
+<p>短的函数具有更好的阐释力、更易于分享、更多的选择。</p>
+<p>函数越长，就越难理解。</p>
+<p>每当感觉需要以注释来说明点什么的时候，我们就把需要说明的东西写进一个独立函数中，并以其用途（而非实现手法）命名。</p>
+<p>条件表达式和循环常常也是提炼的信号。</p>
+<ul>
+<li>可以考虑使用横屏显示器进行开发，这样潜意识里就不会把一个函数写的过长</li>
+</ul>
+<h1 id="过长的参数列表">过长的参数列表</h1>
+<p>过长的参数列表本身也经常令人迷惑。</p>
+<p>如果可以向某个参数发起查询而获得另一个参数的值，那么就可以使用以查询取代参数去掉第二个参数。</p>
+<p>使用类可以有效地缩短参数列表。</p>
+<ul>
+<li>Go中可以使用struct的方式，来传入较多的参数</li>
+</ul>
+<h1 id="全局数据">全局数据</h1>
+<p>全局数据是最刺鼻的坏味道之一。</p>
+<p>一次又一次，全局数据造成了哪些诡异的bug，而问题的根源却在遥远的别处，想要找到出错的代码难于登天。</p>
+<p>良药与毒药的却别在于剂量。有少量的全局数据或许无妨，但数量越多，处理的难度就会指数上升。</p>
+<ul>
+<li>尽量少使用全局变量</li>
+</ul>
+<h1 id="可变数据">可变数据</h1>
+<p>对数据的修改经常导致出乎意料的结果和难以发现的bug。</p>
+<p>如果可变数据的值能在其他地方计算出来，这就是一个特别刺鼻的坏味道。</p>
+<h1 id="发散式变化">发散式变化</h1>
+<p>一旦需要修改，我们希望能够跳到系统的某一点进行修改，只在此处进行修改。如果不能做到这一点，你就能嗅出两种紧密相关的刺鼻味道中的一种了。</p>
+<ul>
+<li>一个类受多种变化的影响</li>
+</ul>
+<h1 id="散弹式修改">散弹式修改</h1>
+<p>如果遇到某种变化，你都必须在许多不同的类内做出许多小修改，你所面临的坏味道就是散弹式修改。</p>
+<ul>
+<li>一种变化引发多个类对应改动</li>
+</ul>
+<h1 id="依恋情结">依恋情结</h1>
+<p>所谓模块化，就是力求将代码分出区域，最大化区域内部的交互、最小化跨区域的交互。</p>
+<p>如果一个函数跟另一个模块的函数或者数据交流格外频繁，远胜于在自己所处模块内的交流，这就是依恋情结的典型情况。</p>
+<ul>
+<li>函数对某个类的兴趣高过对自己所处类的兴趣</li>
+</ul>
+<h1 id="数据泥团">数据泥团</h1>
+<p>你常常可以在很多地方看到相同的三四项数据：两个类中相同的字段、许多函数签名中相同的参数。</p>
+<ul>
+<li>两个类中同样的字段、很多函数签名中同样的參数</li>
+<li>这种情况汪汪和历史遗留问题相关</li>
+</ul>
+<h1 id="基本类型偏执">基本类型偏执</h1>
+<p>大多数编程环境都大量使用基本类型，即整数、浮点数和字符串等。</p>
+<p>一个有趣的现象：很多程序员不愿意创建对自己的问题域有用的基本类型。</p>
+<p>字符串是这种坏味道的最佳培养皿，比如，电话号码不只是一串字符。</p>
+<h1 id="重复的switch">重复的switch</h1>
+<p>我们现在更关注重复的switch：在不同的地方反复使用同样的switch逻辑（可能是以switch/case语句的形式，也可能是以连续的if/else语句的形式）。应该以多态取代条件表达式消除掉。</p>
+<ul>
+<li>例如可以使用策略模式等方式</li>
+</ul>
+<h1 id="循环语句">循环语句</h1>
+<p>函数作为一等公民以及得到广泛的支持，因此我们可以使用以管道取代循环来让这些老古董退休。</p>
+<p>管道操作（如 filter和map）可以帮助我们更快地看清被处理的元素以及他们的动作.</p>
+<h1 id="冗赘的元素">冗赘的元素</h1>
+<p>程序元素（如类和函数）能给代码增加结构，从而支持变化、促进复用或者哪怕只提供更好的名字也好，但有时我们真的不需要这层额外的结构。</p>
+<ul>
+<li>可能有这样一个函数，他的名字就跟实现代码看起来一模一样。</li>
+<li>可能有这样一个类，根本就是一个简单的函数。</li>
+</ul>
+<h1 id="夸夸其谈通用性">夸夸其谈通用性</h1>
+<p>如果函数或类的唯一用户是测试用例，这就飘出了这个坏味道。
+如果发现这样的函数或类，可以先删掉测试用例，然后移除死代码。</p>
+<h1 id="临时字段">临时字段</h1>
+<p>某个字段仅为某种特定情况而设。这样的代码让人不易理解，因为你通常认为对象在所有时候都需要它的所有字段。在字段未使用的情况下猜测当初设置它的目的，会让你发疯。</p>
+<h1 id="过长的消息链">过长的消息链</h1>
+<p>如果你看到用户向一个对象请求另一个对象，然后再向后者请求另一个对象，然后再请求另一个对象——这就是消息链。</p>
+<p>在实际代码中你看到的可能是一长串取值函数或者一长串临时变量。</p>
+<h1 id="中间人">中间人</h1>
+<p>对象的基本特征之一就是封装——对外部世界隐藏其内部细节。</p>
+<p>封装往往伴随着委托。</p>
+<p>但是人们可能过度运用委托。你也许会看到某个类的接口有一半的函数都委托给其他类，这样就是过度运用。</p>
+<h1 id="内幕交易">内幕交易</h1>
+<p>如果两个模块总是窃窃私语，就应该用搬移函数和搬移字段减少它们的私下交流，把这种交易都放到明面上来。</p>
+<p>如果两个模块有共同的兴趣，可以尝试再新建一个模块，把这些公用的数据放在一个管理良好的地方。</p>
+<h1 id="过大的类">过大的类</h1>
+<p>如果想利用单个类做太多事情，其内往往就会出现太多字段。一旦如此，重复代码也就接踵而至了。</p>
+<h1 id="异曲同工的类">异曲同工的类</h1>
+<p>使用类的好处之一在于可以替换：今天用这个类，未来可以换成另一个类。</p>
+<h1 id="纯数据类">纯数据类</h1>
+<p>所谓纯数据类是指：他们拥有一些字段，以及用于访问（读写）这些字段的函数，除此之外一无长物。</p>
+<p>如果发生这种情况，你应该在别人注意到之前，立刻运用封装记录将他们封装起来。</p>
+<h1 id="被拒绝的遗赠">被拒绝的遗赠</h1>
+<p>子类应该继承超类的函数和数据。但如果他们不想或不需要继承，又该怎么办呢？他们得到所有礼物，却只从中挑选几样来玩！</p>
+<p>这种情况就不要虚情假意地糊弄继承体系，应该运用委托取代子类或者委托取代超类彻底划清界限。</p>
+<h1 id="注释">注释</h1>
+<p>别担心，不是说你不该写注释。</p>
+<p>有写注释存在是因为代码很糟糕，这种情况的发生次数之多，实在令人吃惊。</p>
+<p>注释可以带我们找到本章先前提到的各种坏味道。</p>
+<p>当你感觉需要撰写注释时，请先尝试重构，试着让所有注释都变得多余。
+如果你需要注释来解释一块代码做了什么，试试提炼函数。如果函数已经提炼出来，试试用改变函数声明为它改名，再或者引入断言。如果你实在不知道该做什么，这才是注释的良好运用时机。</p>
+<p>除了用来记述将来的打算之外，注释还可以用来标记你并无十足把握的区域，比如你可以在注释里写下自己“为什么做某某事”。这类信息可以帮助将来的修改者，尤其是那些健忘的家伙。</p>
+<h1 id="其他">其他</h1>
+<p>本文笔记原链接：https://blog.csdn.net/u014779536/article/details/107309260
+其内容也主要出自《重构-改善既有代码的设计》</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/refactoring/">Refactoring</a>
+        
+            <a href="/tags/note/">Note</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css"integrity="sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.js"integrity="sha384-pK1WpvzWVBQiP0/GjnvRxV4mOb0oxFuyRxJlk6vVw146n3egcN5C925NCP7a7BY8"crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/contrib/auto-render.min.js"integrity="sha384-vZTG03m&#43;2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">相关文章</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="has-image">
+    <a href="/p/2021/12/refactoring-chapter2/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/6.jpeg" loading="lazy" data-key="2021/12/refactoring-chapter2" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/6.jpeg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">《重构》-重构的原则</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/2021/10/mindfulness/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/10.jpeg" loading="lazy" data-key="2021/10/mindfulness" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/10.jpeg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">正念</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/2021/10/goland-tips/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/20.jpeg" loading="lazy" data-key="2021/10/goland-tips" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/20.jpeg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Goland全局替换正则技巧</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/2021/9/prototype/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/5.jpeg" loading="lazy" data-key="2021/9/prototype" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/5.jpeg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">设计模式-Prototype原型模式</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/2021/9/design-pattern-factory/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/30.jpeg" loading="lazy" data-key="2021/9/design-pattern-factory" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/30.jpeg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">设计模式-Factory工厂模式学习笔记</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+    
+        
+    
+
+
+<div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "aaf5fc3a72ea9ce81d62",
+        clientSecret: "7792527b47af3239ddbc2274fb5fd141c28d8339",
+        repo: "ymkNK.github.io",
+        owner: "ymkNK",
+        admin: "ymkNK",
+        id: window.location.pathname,
+        title: document.title,
+        distractionFreeMode:  true 
+    })
+
+    gitalk.render('gitalk-container')
+</script>
+
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        
+        2018 -
+        
+        2022
+        &copy;
+        lllovol
+    </section>
+    
+    <section class="powerby">
+        
+            <b><a href="https://github.com/ymkNK" target="_blank" rel="noopener" data-version="%s">Owner Rainbowly </a></b> <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MK7GTCNC34"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-MK7GTCNC34');
+</script>
+    </body>
+</html>

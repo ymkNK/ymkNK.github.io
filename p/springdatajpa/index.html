@@ -7,8 +7,8 @@ Hibernate  Hibernate是一个开放源代码的对象关系映射框架，它对
 我们都知道，在使用持久化工具的时候，一般都有一个对象来操作数据库，在原生的Hibernate中叫做Session，在JPA中叫做EntityManager，在MyBatis中叫做SqlSession，通过这个对象来操作数据库。我们一般按照三层结构来看的话，Service层做业务逻辑处理，Dao层和数据库打交道，在Dao中，就存在着上面的对象。那么ORM框架本身提供的功能有什么呢？答案是基本的CRUD，所有的基础CRUD框架都提供，我们使用起来感觉很方便，很给力，业务逻辑层面的处理ORM是没有提供的，如果使用原生的框架，业务逻辑代码我们一般会自定义，会自己去写SQL语句，然后执行。在这个时候，Spring-data-jpa的威力就体现出来了，ORM提供的能力他都提供，ORM框架没有提供的业务逻辑功能Spring-data-jpa也提供，全方位的解决用户的需求。使用Spring-data-jpa进行开发的过程中，常用的功能，我们几乎不需要写一条sql语句。
   博文地址 JPA官方文档  应用实例 在大家的日常开发中都用到了很多，再次就不细致列举了，详情可以查看另外一篇博文
  Spring开发的小细节（六）
- 源码解析 Repository  @Indexed public interface Repository&amp;lt;T, ID&amp;gt; { }  CrudRepository 主要接口 CurdRepository
- public interface CrudRepository&amp;lt;T, ID&amp;gt; extends Repository&amp;lt;T, ID&amp;gt; { &amp;lt;S extends T&amp;gt; S save(S var1); &amp;lt;S extends T&amp;gt; Iterable&amp;lt;S&amp;gt; saveAll(Iterable&amp;lt;S&amp;gt; var1); Optional&amp;lt;T&amp;gt; findById(ID var1); boolean existsById(ID var1); Iterable&amp;lt;T&amp;gt; findAll(); Iterable&amp;lt;T&amp;gt; findAllById(Iterable&amp;lt;ID&amp;gt; var1); long count(); void deleteById(ID var1); void delete(T var1); void deleteAll(Iterable&amp;lt;?'><title>源码阅读SpringDataJPA</title>
+ 源码解析 Repository  @Indexedpublic interface Repository&amp;lt;T, ID&amp;gt; {} CrudRepository 主要接口 CurdRepository
+ public interface CrudRepository&amp;lt;T, ID&amp;gt; extends Repository&amp;lt;T, ID&amp;gt; {&amp;lt;S extends T&amp;gt; S save(S var1);&amp;lt;S extends T&amp;gt; Iterable&amp;lt;S&amp;gt; saveAll(Iterable&amp;lt;S&amp;gt; var1);Optional&amp;lt;T&amp;gt; findById(ID var1);boolean existsById(ID var1);Iterable&amp;lt;T&amp;gt; findAll();Iterable&amp;lt;T&amp;gt; findAllById(Iterable&amp;lt;ID&amp;gt; var1);long count();void deleteById(ID var1);void delete(T var1);void deleteAll(Iterable&amp;lt;?'><title>源码阅读SpringDataJPA</title>
 
 <link rel='canonical' href='https://lllovol.com/p/springdatajpa/'>
 
@@ -19,8 +19,8 @@ Hibernate  Hibernate是一个开放源代码的对象关系映射框架，它对
 我们都知道，在使用持久化工具的时候，一般都有一个对象来操作数据库，在原生的Hibernate中叫做Session，在JPA中叫做EntityManager，在MyBatis中叫做SqlSession，通过这个对象来操作数据库。我们一般按照三层结构来看的话，Service层做业务逻辑处理，Dao层和数据库打交道，在Dao中，就存在着上面的对象。那么ORM框架本身提供的功能有什么呢？答案是基本的CRUD，所有的基础CRUD框架都提供，我们使用起来感觉很方便，很给力，业务逻辑层面的处理ORM是没有提供的，如果使用原生的框架，业务逻辑代码我们一般会自定义，会自己去写SQL语句，然后执行。在这个时候，Spring-data-jpa的威力就体现出来了，ORM提供的能力他都提供，ORM框架没有提供的业务逻辑功能Spring-data-jpa也提供，全方位的解决用户的需求。使用Spring-data-jpa进行开发的过程中，常用的功能，我们几乎不需要写一条sql语句。
   博文地址 JPA官方文档  应用实例 在大家的日常开发中都用到了很多，再次就不细致列举了，详情可以查看另外一篇博文
  Spring开发的小细节（六）
- 源码解析 Repository  @Indexed public interface Repository&amp;lt;T, ID&amp;gt; { }  CrudRepository 主要接口 CurdRepository
- public interface CrudRepository&amp;lt;T, ID&amp;gt; extends Repository&amp;lt;T, ID&amp;gt; { &amp;lt;S extends T&amp;gt; S save(S var1); &amp;lt;S extends T&amp;gt; Iterable&amp;lt;S&amp;gt; saveAll(Iterable&amp;lt;S&amp;gt; var1); Optional&amp;lt;T&amp;gt; findById(ID var1); boolean existsById(ID var1); Iterable&amp;lt;T&amp;gt; findAll(); Iterable&amp;lt;T&amp;gt; findAllById(Iterable&amp;lt;ID&amp;gt; var1); long count(); void deleteById(ID var1); void delete(T var1); void deleteAll(Iterable&amp;lt;?'>
+ 源码解析 Repository  @Indexedpublic interface Repository&amp;lt;T, ID&amp;gt; {} CrudRepository 主要接口 CurdRepository
+ public interface CrudRepository&amp;lt;T, ID&amp;gt; extends Repository&amp;lt;T, ID&amp;gt; {&amp;lt;S extends T&amp;gt; S save(S var1);&amp;lt;S extends T&amp;gt; Iterable&amp;lt;S&amp;gt; saveAll(Iterable&amp;lt;S&amp;gt; var1);Optional&amp;lt;T&amp;gt; findById(ID var1);boolean existsById(ID var1);Iterable&amp;lt;T&amp;gt; findAll();Iterable&amp;lt;T&amp;gt; findAllById(Iterable&amp;lt;ID&amp;gt; var1);long count();void deleteById(ID var1);void delete(T var1);void deleteAll(Iterable&amp;lt;?'>
 <meta property='og:url' content='https://lllovol.com/p/springdatajpa/'>
 <meta property='og:site_name' content='lllovol'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Spring' /><meta property='article:published_time' content='2019-03-11T19:28:16&#43;00:00'/><meta property='article:modified_time' content='2019-03-11T19:28:16&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg' />
@@ -31,8 +31,8 @@ Hibernate  Hibernate是一个开放源代码的对象关系映射框架，它对
 我们都知道，在使用持久化工具的时候，一般都有一个对象来操作数据库，在原生的Hibernate中叫做Session，在JPA中叫做EntityManager，在MyBatis中叫做SqlSession，通过这个对象来操作数据库。我们一般按照三层结构来看的话，Service层做业务逻辑处理，Dao层和数据库打交道，在Dao中，就存在着上面的对象。那么ORM框架本身提供的功能有什么呢？答案是基本的CRUD，所有的基础CRUD框架都提供，我们使用起来感觉很方便，很给力，业务逻辑层面的处理ORM是没有提供的，如果使用原生的框架，业务逻辑代码我们一般会自定义，会自己去写SQL语句，然后执行。在这个时候，Spring-data-jpa的威力就体现出来了，ORM提供的能力他都提供，ORM框架没有提供的业务逻辑功能Spring-data-jpa也提供，全方位的解决用户的需求。使用Spring-data-jpa进行开发的过程中，常用的功能，我们几乎不需要写一条sql语句。
   博文地址 JPA官方文档  应用实例 在大家的日常开发中都用到了很多，再次就不细致列举了，详情可以查看另外一篇博文
  Spring开发的小细节（六）
- 源码解析 Repository  @Indexed public interface Repository&amp;lt;T, ID&amp;gt; { }  CrudRepository 主要接口 CurdRepository
- public interface CrudRepository&amp;lt;T, ID&amp;gt; extends Repository&amp;lt;T, ID&amp;gt; { &amp;lt;S extends T&amp;gt; S save(S var1); &amp;lt;S extends T&amp;gt; Iterable&amp;lt;S&amp;gt; saveAll(Iterable&amp;lt;S&amp;gt; var1); Optional&amp;lt;T&amp;gt; findById(ID var1); boolean existsById(ID var1); Iterable&amp;lt;T&amp;gt; findAll(); Iterable&amp;lt;T&amp;gt; findAllById(Iterable&amp;lt;ID&amp;gt; var1); long count(); void deleteById(ID var1); void delete(T var1); void deleteAll(Iterable&amp;lt;?"><meta name="twitter:card" content="summary_large_image">
+ 源码解析 Repository  @Indexedpublic interface Repository&amp;lt;T, ID&amp;gt; {} CrudRepository 主要接口 CurdRepository
+ public interface CrudRepository&amp;lt;T, ID&amp;gt; extends Repository&amp;lt;T, ID&amp;gt; {&amp;lt;S extends T&amp;gt; S save(S var1);&amp;lt;S extends T&amp;gt; Iterable&amp;lt;S&amp;gt; saveAll(Iterable&amp;lt;S&amp;gt; var1);Optional&amp;lt;T&amp;gt; findById(ID var1);boolean existsById(ID var1);Iterable&amp;lt;T&amp;gt; findAll();Iterable&amp;lt;T&amp;gt; findAllById(Iterable&amp;lt;ID&amp;gt; var1);long count();void deleteById(ID var1);void delete(T var1);void deleteAll(Iterable&amp;lt;?"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg' />
     <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
 
@@ -49,7 +49,7 @@ if (!doNotTrack) {
 
     </head>
     <body class="
-    article-page 
+    article-page has-toc
 ">
     <script>
         (function() {
@@ -75,155 +75,22 @@ if (!doNotTrack) {
 </script>
 <div class="container main-container flex 
     
-        on-phone--column extended
+        extended
     
 ">
     
-        <aside class="sidebar left-sidebar sticky">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
-        <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-        </span>
-    </button>
-
-    <header class="site-info">
-        
-            
-            <figure class="site-avatar">
-                
-                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
-                
-
-                
-                    <span class="emoji">⚖️</span>
-                
-            </figure>
-            
-        
-        <h1 class="site-name"><a href="https://lllovol.com">lllovol</a></h1>
-        <h2 class="site-description">Stay hungry, stay foolish.</h2>
-    </header>
-
-    <ol class="menu" id="main-menu">
-        
-        
-        
-
-        <li >
-            <a href='/' >
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <div id="article-toolbar">
+            <a href="/" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="5 12 3 12 12 3 21 12 19 12" />
-  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+  <polyline points="15 6 9 12 15 18" />
 </svg>
 
 
 
-                
-                <span>主页</span>
+                <span>返回</span>
             </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/about/' >
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="7" r="4" />
-  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-</svg>
-
-
-
-                
-                <span>关于</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/archives/' >
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <rect x="3" y="4" width="18" height="4" rx="2" />
-  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
-  <line x1="10" y1="12" x2="14" y2="12" />
-</svg>
-
-
-
-                
-                <span>归档</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/links/' >
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
-  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
-</svg>
-
-
-
-                
-                <span>链接</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/search/' >
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-                
-                <span>搜索</span>
-            </a>
-        </li>
-        
-
-        
-            <li id="dark-mode-toggle">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="8" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="16" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                <span>暗色模式</span>
-            </li>
-        
-    </ol>
-</aside>
-
+        </div>
     
 <main class="main full-width">
     <article class="main-article">
@@ -271,6 +138,20 @@ if (!doNotTrack) {
             </div>
         
 
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 4 分钟
+                </time>
+            </div>
         
     </footer>
     
@@ -710,7 +591,7 @@ if (!doNotTrack) {
 </aside>
 
      
-     
+    
         
     
 
@@ -835,6 +716,45 @@ if (!doNotTrack) {
             >
 
             </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">目录</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#repository">Repository</a></li>
+    <li><a href="#crudrepository">CrudRepository</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </div>
+            </section>
+        </aside>
     
 
         </div>

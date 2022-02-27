@@ -6,7 +6,41 @@
     <description>Recent content in Posts on lllovol</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 21 Jan 2022 21:58:39 +0000</lastBuildDate><atom:link href="https://lllovol.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 07 Feb 2022 20:17:32 +0000</lastBuildDate><atom:link href="https://lllovol.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>《重构》-代码的坏味道</title>
+      <link>https://lllovol.com/p/2022/2/refactoring-chapter3/</link>
+      <pubDate>Mon, 07 Feb 2022 20:17:32 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2022/2/refactoring-chapter3/</guid>
+      <description>神秘命名 整洁代码最重要的一环就是好的名字，所以我们会深思熟虑如何给函数、模块、变量和类命名，使他们能清晰表面自己的功能和用法。
+ 需要考虑取一个好的名字  重复代码 如果你在一个以上的地点看到相同的代码结构，那么可以肯定：设法将它们合而为一，程序会变得更好。
+ 抽取重复代码，使之能够复用  过长函数 据我们的经验，活得最长、最好的程序，其中的函数都比较短。
+短的函数具有更好的阐释力、更易于分享、更多的选择。
+函数越长，就越难理解。
+每当感觉需要以注释来说明点什么的时候，我们就把需要说明的东西写进一个独立函数中，并以其用途（而非实现手法）命名。
+条件表达式和循环常常也是提炼的信号。
+ 可以考虑使用横屏显示器进行开发，这样潜意识里就不会把一个函数写的过长  过长的参数列表 过长的参数列表本身也经常令人迷惑。
+如果可以向某个参数发起查询而获得另一个参数的值，那么就可以使用以查询取代参数去掉第二个参数。
+使用类可以有效地缩短参数列表。
+ Go中可以使用struct的方式，来传入较多的参数  全局数据 全局数据是最刺鼻的坏味道之一。
+一次又一次，全局数据造成了哪些诡异的bug，而问题的根源却在遥远的别处，想要找到出错的代码难于登天。
+良药与毒药的却别在于剂量。有少量的全局数据或许无妨，但数量越多，处理的难度就会指数上升。
+ 尽量少使用全局变量  可变数据 对数据的修改经常导致出乎意料的结果和难以发现的bug。
+如果可变数据的值能在其他地方计算出来，这就是一个特别刺鼻的坏味道。
+发散式变化 一旦需要修改，我们希望能够跳到系统的某一点进行修改，只在此处进行修改。如果不能做到这一点，你就能嗅出两种紧密相关的刺鼻味道中的一种了。
+ 一个类受多种变化的影响  散弹式修改 如果遇到某种变化，你都必须在许多不同的类内做出许多小修改，你所面临的坏味道就是散弹式修改。
+ 一种变化引发多个类对应改动  依恋情结 所谓模块化，就是力求将代码分出区域，最大化区域内部的交互、最小化跨区域的交互。
+如果一个函数跟另一个模块的函数或者数据交流格外频繁，远胜于在自己所处模块内的交流，这就是依恋情结的典型情况。
+ 函数对某个类的兴趣高过对自己所处类的兴趣  数据泥团 你常常可以在很多地方看到相同的三四项数据：两个类中相同的字段、许多函数签名中相同的参数。
+ 两个类中同样的字段、很多函数签名中同样的參数 这种情况汪汪和历史遗留问题相关  基本类型偏执 大多数编程环境都大量使用基本类型，即整数、浮点数和字符串等。
+一个有趣的现象：很多程序员不愿意创建对自己的问题域有用的基本类型。
+字符串是这种坏味道的最佳培养皿，比如，电话号码不只是一串字符。
+重复的switch 我们现在更关注重复的switch：在不同的地方反复使用同样的switch逻辑（可能是以switch/case语句的形式，也可能是以连续的if/else语句的形式）。应该以多态取代条件表达式消除掉。
+ 例如可以使用策略模式等方式  循环语句 函数作为一等公民以及得到广泛的支持，因此我们可以使用以管道取代循环来让这些老古董退休。
+管道操作（如 filter和map）可以帮助我们更快地看清被处理的元素以及他们的动作.</description>
+    </item>
+    
     <item>
       <title>迟到的2021总结</title>
       <link>https://lllovol.com/p/2022/1/2021-summary/</link>
@@ -83,7 +117,7 @@ func main() { var wg sync.WaitGroup var x int32 = 0 for i := 0; i &amp;lt; 100; 
       
       <guid>https://lllovol.com/p/2021/12/awk-tool-analysis/</guid>
       <description>背景 使用awk快速统计查看自己的常用命令
-指令 history --i | awk &#39;{print $4}&#39; | sort | uniq -c | sort -k1,1nr | head -20 解析  history -i 查看所有的历史记录 awk &#39;{print $4}&#39; 使用awk分词整理，取到每一行的第四个参数，也就是我们常用的命令 sort 排序 uniq -c 去重计数 sort -k1,1nr 排序 head -20 取前20  效果  ~ &amp;gt; history --i | awk &#39;{print $4}&#39; | sort | uniq -c | sort -k1,1nr | head -20 4570 git 578 rake 174 ****test 132 ls 122 cd 118 go 80 testcover 61 ssh*** 52 vim 35 source 28 kinit 27 goimports 22 gofumpt 20 sudo 17 brew 17 open 16 echo 15 ssh </description>
+指令 history --i | awk &#39;{print $4}&#39; | sort | uniq -c | sort -k1,1nr | head -20解析  history -i 查看所有的历史记录 awk &#39;{print $4}&#39; 使用awk分词整理，取到每一行的第四个参数，也就是我们常用的命令 sort 排序 uniq -c 去重计数 sort -k1,1nr 排序 head -20 取前20  效果  ~ &amp;gt; history --i | awk &#39;{print $4}&#39; | sort | uniq -c | sort -k1,1nr | head -204570 git578 rake174 ****test132 ls122 cd118 go80 testcover61 ssh***52 vim35 source28 kinit27 goimports22 gofumpt20 sudo17 brew17 open16 echo15 ssh</description>
     </item>
     
     <item>
@@ -99,10 +133,10 @@ func main() { var wg sync.WaitGroup var x int32 = 0 for i := 0; i &amp;lt; 100; 
     
     <item>
       <title>《重构》-重构的原则</title>
-      <link>https://lllovol.com/p/2021/12/refactoring-principles/</link>
+      <link>https://lllovol.com/p/2021/12/refactoring-chapter2/</link>
       <pubDate>Tue, 07 Dec 2021 21:05:58 +0000</pubDate>
       
-      <guid>https://lllovol.com/p/2021/12/refactoring-principles/</guid>
+      <guid>https://lllovol.com/p/2021/12/refactoring-chapter2/</guid>
       <description>前言 本文是一篇关于Martin Fowler《重构：改善既有代码的设计》的第二章读书笔记与总结。
 何谓重构 很多一线的实践者会非常随意的使用重构这个词，但是作者会非常严谨地使用重构。
  重构（名词）：对软件内部的结构的一种调整，目的是在不改变可观察行为的前提下，提高其可理解性，降低其修改成本 重构（动词）：使用一系列重构手法，在不改变可观察行为的前提下，调整其结构。  重构的关键在于运用大量微且保持软件行为的步骤，一步步达成大规模的修改。 每个单独的重构呀么很小，要么由若干个小步骤组合而成。这样的好处是，即使重构没有完成，也可以在任何时刻停下来，代码很少进入到不可工作的状态。
@@ -303,10 +337,11 @@ func Test(t *testing.T) { PatchConvey(&amp;#34;test&amp;#34;, t, func () { //you
       <guid>https://lllovol.com/p/2021/8/strategy/</guid>
       <description>前言 为什么我们需要设计模式呢？我们日常的设计应该对手头的问题有针对性，同时对将来的问题也要有足够的通用性，同时我们也需要避免重复设计或者尽可能的减少重复设计。但是想以一下子就得到复用性和灵活性好的设计，其实是相当困难的。 而设计模式，就是将对面向对象软件的设计经验作为设计模式记录下来。
 设计模式的四个基本要素  模式名称 一个助记的名称 问题 描述了应该在什么时候使用设计模式 解决方案 描述了设计的组成成分，它们之间的相互关系和各自的职责和协作方式 效果 描述了模式应用的效果以及使用模式应该权衡的问题  设计模式的三大分类 我们主要通过两个准则对各种设计模式进行分类：
- 目的准则 这个模式是用来完成什么工作的 范围准则 这个模式用于类还是用于对象的   面向对象的六大原则  单一功能原则 一个类只做一件事情 开闭原则 一个软件实体类，模块和函数应该对扩展开放，对修改关闭 里氏替换原则 子类可以扩展父类的功能，但不能改变父类原有的功能 依赖倒置原则 抽象不应该依赖细节，细节应该依赖于抽象，换一句话说，就是要针对接口编程，不要对实现编程 接口分离原则 系统解开耦合，从而容易重构，更改和重新部署 迪米特原则 一个类应该对自己需要耦合或者调用的类知道得最少，这有点类似于接口隔离原则中的最小接口的概念  Strategy 策略模式 意图 定义一系列的算法，把他们一个个封装起来，并且使他们可以互相替换。同时本模式可以使得算法可以独立于使用它的客户变化而变化
+ 目的准则 这个模式是用来完成什么工作的 范围准则 这个模式用于类还是用于对象的 设计模式分类  面向对象的六大原则  单一功能原则 一个类只做一件事情 开闭原则 一个软件实体类，模块和函数应该对扩展开放，对修改关闭 里氏替换原则 子类可以扩展父类的功能，但不能改变父类原有的功能 依赖倒置原则 抽象不应该依赖细节，细节应该依赖于抽象，换一句话说，就是要针对接口编程，不要对实现编程 接口分离原则 系统解开耦合，从而容易重构，更改和重新部署 迪米特原则 一个类应该对自己需要耦合或者调用的类知道得最少，这有点类似于接口隔离原则中的最小接口的概念  Strategy 策略模式 意图 定义一系列的算法，把他们一个个封装起来，并且使他们可以互相替换。同时本模式可以使得算法可以独立于使用它的客户变化而变化
 别名 Policy 政策模式
 动机 当我们需要对一个正文流进行处理，需要使用许多不同的算法。这个时候，将这些算法那硬编码进使用它们的类当中是不可取的，原因如下：
- 客户程序异常庞大同时难以维护 不同的时候需要不同的算法，我们不想支持我们并不使用的算法 当其中某些算法是客户程序难以分割的算法的时候，增加新的算法或者改变现有的算法将十分困难  适用性  许多相关的类只是行为有不同 可以使用多个行为中的一个行为来配置一个类 需要使用一个算法的不同变体 可能会定义一些反映了不同时间、空间等因素权衡的算法，将这些变体实现为类层次 算法使用了客户不应该知道的数据 避免暴露负责的、与算法相关的数据结构 一个类定义了多种行为，并且这些行为在这个类的操作中以多个条件语句的形式出现。将相关的条件分支移入它们各自的Strategy类当中来代替这些条件语句  结构 参与者  Strategy  定义所有支持的算法的公共接口。Context使用这个接口来调用某个ConcreteStrategy定义的算法   ConcreteStrategy  以Strategy为策略是实现某具体的算法   Context  用一个ConcreteStrategy对象来配置 维护一个对Strategy对象的引用 可定义一个接口来让Strategy访问它的数据    协作  Strategy和Context相互作用以实现选定的算法  Context将算法所需要的数据传递给Strategy Context也可以将自身作为一个参数传递给Strategy，Strategy就可以在需要的时候回调Context   Context将客户的请求转发给它的Strategy。通常创建并传递一个ConcreteStrategy对象给Context。客户只需要和Context交互。  效果 优点  相关算法系列 Strategy类层次为Context定义了一系列可供重用的算法或者行为。有助于析取出这些算法的公共功能 一个替代继承的方法 可以使用继承生成Context的子类，给予它们不同的行为，但是这就会将行为硬编码到Context当中，将算法的实现和Context的实现混淆，使得Context难以理解、难以维护、难以扩展，还不能动态改变算法。将算法封装在独立的Strategy类中，使得我们可以独立于Context改变它，易于切换、易于理解、易于扩展 消除了一些条件语句 将不同行为堆砌在一个类当中的时候，很难避免使用条件语句来选择合适的行为。将行为封装成一个个独立的Strategy类中可以消除这些条件语句（含有许多条件语句的代码通常意味着需要使用策略模式） 实现的选择 可以为相同行为提供不同的实现，可以根据不同的时间、空间权衡取舍要求从不同的策略中进行选择  缺点  客户必须要了解不同的Strategy 本模式一个潜在的缺点，客户选择一个Strategy必须要知道这些Strategy有何不同，此时可能不得不向客户暴露实现。因此只有不同行为变体与客户相关的行为时，才需要使用Strategy Strategy和Context的通信开销 无论具体的ConcreteStrategy是简单还是负责，都共享Strategy定义的接口。因此很可能某一些简单的ConcreteStrategy可能不会使用所有通过这个接口传递给他们的信息。 增加了对象的数目 Strategy增加了一个应用中对象的数目。有时候可以将Strategy实现为可供各个Context共享的无状态对象来减少这一个开销。其余任何状态都由Context来维护  实现  定义Strategy接口和Context接口 必须传递所有实现需要的数据，也可以将Context自身作为参数进行传递 将Strategy作为模板参数 （Go里没有，这就不展开了） 让Strategy对象成为可选的 访问前先判断是否存在，如果存在，就使用它；如果没有，就执行缺省的行为  代码示例  回调事件处理  相关模式 Flyweight（享元模式）： Strategy对象通常是很好的轻量级对象</description>
+ 客户程序异常庞大同时难以维护 不同的时候需要不同的算法，我们不想支持我们并不使用的算法 当其中某些算法是客户程序难以分割的算法的时候，增加新的算法或者改变现有的算法将十分困难  适用性  许多相关的类只是行为有不同 可以使用多个行为中的一个行为来配置一个类 需要使用一个算法的不同变体 可能会定义一些反映了不同时间、空间等因素权衡的算法，将这些变体实现为类层次 算法使用了客户不应该知道的数据 避免暴露负责的、与算法相关的数据结构 一个类定义了多种行为，并且这些行为在这个类的操作中以多个条件语句的形式出现。将相关的条件分支移入它们各自的Strategy类当中来代替这些条件语句  结构 图
+参与者  Strategy  定义所有支持的算法的公共接口。Context使用这个接口来调用某个ConcreteStrategy定义的算法   ConcreteStrategy  以Strategy为策略是实现某具体的算法   Context  用一个ConcreteStrategy对象来配置 维护一个对Strategy对象的引用 可定义一个接口来让Strategy访问它的数据    协作  Strategy和Context相互作用以实现选定的算法  Context将算法所需要的数据传递给Strategy Context也可以将自身作为一个参数传递给Strategy，Strategy就可以在需要的时候回调Context   Context将客户的请求转发给它的Strategy。通常创建并传递一个ConcreteStrategy对象给Context。客户只需要和Context交互。  效果 优点  相关算法系列 Strategy类层次为Context定义了一系列可供重用的算法或者行为。有助于析取出这些算法的公共功能 一个替代继承的方法 可以使用继承生成Context的子类，给予它们不同的行为，但是这就会将行为硬编码到Context当中，将算法的实现和Context的实现混淆，使得Context难以理解、难以维护、难以扩展，还不能动态改变算法。将算法封装在独立的Strategy类中，使得我们可以独立于Context改变它，易于切换、易于理解、易于扩展 消除了一些条件语句 将不同行为堆砌在一个类当中的时候，很难避免使用条件语句来选择合适的行为。将行为封装成一个个独立的Strategy类中可以消除这些条件语句（含有许多条件语句的代码通常意味着需要使用策略模式） 实现的选择 可以为相同行为提供不同的实现，可以根据不同的时间、空间权衡取舍要求从不同的策略中进行选择  缺点  客户必须要了解不同的Strategy 本模式一个潜在的缺点，客户选择一个Strategy必须要知道这些Strategy有何不同，此时可能不得不向客户暴露实现。因此只有不同行为变体与客户相关的行为时，才需要使用Strategy Strategy和Context的通信开销 无论具体的ConcreteStrategy是简单还是负责，都共享Strategy定义的接口。因此很可能某一些简单的ConcreteStrategy可能不会使用所有通过这个接口传递给他们的信息。 增加了对象的数目 Strategy增加了一个应用中对象的数目。有时候可以将Strategy实现为可供各个Context共享的无状态对象来减少这一个开销。其余任何状态都由Context来维护  实现  定义Strategy接口和Context接口 必须传递所有实现需要的数据，也可以将Context自身作为参数进行传递 将Strategy作为模板参数 （Go里没有，这就不展开了） 让Strategy对象成为可选的 访问前先判断是否存在，如果存在，就使用它；如果没有，就执行缺省的行为  代码示例  回调事件处理  相关模式 Flyweight（享元模式）： Strategy对象通常是很好的轻量级对象</description>
     </item>
     
     <item>
@@ -320,7 +355,7 @@ func Test(t *testing.T) { PatchConvey(&amp;#34;test&amp;#34;, t, func () { //you
 这里想主要讲一下主题的适配，hugo的主题样式主要是由layouts这个文件夹下的样式作为模板，themes下所使用的模板中的layouts也会生效，因此我们可以利用这个特性，在站点项目下面的layouts重写同名的布局文件。 （本博客的gitalk就是利用了这一特性对主题进行了个性化配置）。
 撰写文章 不同的hugo主题可能会有不同的文章存放策略，但是一定都是放在contents目录下，本文是放在contents/post目录下
 markdown文件的头格式如下
---- title: 从Jekyll迁移至Hugo author: ymkNK categories: [Tech] tags: [Ruby,Tech,Hugo] date: 2021-05-27 19:52:17 +0800 img: https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/26.jpeg slug: 2021/5/rake-file-usage ---  用---和+++包围都可以，只是内容的格式要求有所区别，前者使用yaml的格式，后者使用toml的格式
+---title: 从Jekyll迁移至Hugoauthor: ymkNKcategories: [Tech]tags: [Ruby,Tech,Hugo]date: 2021-05-27 19:52:17 +0800img: https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/26.jpegslug: 2021/5/rake-file-usage--- 用---和+++包围都可以，只是内容的格式要求有所区别，前者使用yaml的格式，后者使用toml的格式
 Rakefile 可以使用hugo new 快速创建文章，但是如果像我这样有定制化需求的创建（比如本博客的文章图片，以及目录格式等等），就需要手动进行处理，因此我使用了rakefile来通过简单的命令快速创建生成文章以及Tag
 rake new 快速创建文章，并且可以随机生成oss图片库中的随机一个图片链接作为封面，按照创建的时间，自动放在content/post/#{@year}/#{@month}的目录下，方便归档（后期有考虑同时快速创建tags与categories）
 rake git 快速执行git，一键提交本次更改的内容
@@ -336,7 +371,8 @@ rake hugo 快速构建生成hugo的静态网页，public文件夹下就是站点
       <guid>https://lllovol.com/p/how-a-sql-executes/</guid>
       <description> 本文是学习笔记，来自极客时间
  mysql&amp;gt; select * from T where ID=10； 这么一条查询语句是如何执行的呢？
-MySQL基础架构 Server层：
+MySQL基础架构 
+Server层：
  连接器：管理连接，权限认证 分析器：词法语法分析 查询缓存：命中则直接返回结果 优化器：执行计划生成，索引选择 执行器：操作引擎，返回结果 Server层涵盖了MySQL的大多数的核心服务功能，以及所有的内置函数  </description>
     </item>
     
@@ -348,11 +384,11 @@ MySQL基础架构 Server层：
       <guid>https://lllovol.com/p/query-test/</guid>
       <description>背景 需要查询到一批部门以及子部门，最终拿到这些部门下的人员信息，我们能够进行的操作如下
  通过部门的目录前缀（前缀树）的方式，能够查询到所有子部门 能够通过部门查询到这个部门（不包含子部门）的所有人员 已经添加索引  方法一 思路 找到每一个需要排除的部门，以及每一个排除的部门的子部门，然后分别查出来需要排除的人,最后通过stream的flatMap进行聚合
-return allDepartment.stream().flatMap(department -&amp;gt; { List&amp;lt;EmployeeDetail&amp;gt; allByDepartmentId = employeeRepo.findAllByDepartmentId(department.getDepartmentId()); return allByDepartmentId.stream(); }).collect(Collectors.toList());  耗费时间 30616ms
+return allDepartment.stream().flatMap(department -&amp;gt; {List&amp;lt;EmployeeDetail&amp;gt; allByDepartmentId = employeeRepo.findAllByDepartmentId(department.getDepartmentId());return allByDepartmentId.stream();}).collect(Collectors.toList()); 耗费时间 30616ms
 方法二 思路 找到每一个需要排除的部门，将部门聚合，分别查询
- List&amp;lt;Department&amp;gt; allDepartment = findAllChildDepartments(byId.get()); return employeeRepo.findAllByDepartmentIdIsIn(allDepartment.stream().map(Department::getDepartmentId).collect(Collectors.toList())); List&amp;lt;EmployeeDetail&amp;gt; excludeEmployees = excludeDepartments.stream().flatMap(department -&amp;gt; serviceV2.findAllEmployeesByDepartmentId(department.getDepartmentId(), 1).stream()).collect(Collectors.toList()); 耗费时间 20057ms
+ List&amp;lt;Department&amp;gt; allDepartment = findAllChildDepartments(byId.get());return employeeRepo.findAllByDepartmentIdIsIn(allDepartment.stream().map(Department::getDepartmentId).collect(Collectors.toList()));List&amp;lt;EmployeeDetail&amp;gt; excludeEmployees = excludeDepartments.stream().flatMap(department -&amp;gt; serviceV2.findAllEmployeesByDepartmentId(department.getDepartmentId(), 1).stream()).collect(Collectors.toList());耗费时间 20057ms
 方法三 思路 将所有需要排除的部门聚合，统一查询
- @Override public List&amp;lt;EmployeeDetail&amp;gt; findAllEmployeesByDepartmentsId(Iterable&amp;lt;String&amp;gt; departmentIds) { return employeeRepo.findAllByDepartmentIdIsIn(departmentIds); }  List&amp;lt;Department&amp;gt; allExcludedDepartments = excludeDepartments.stream().flatMap(department -&amp;gt; serviceV2.findAllChildDepartments(department).stream()).collect(Collectors.toList()); List&amp;lt;EmployeeDetail&amp;gt; excludeEmployees = serviceV2.findAllEmployeesByDepartmentsId(allExcludedDepartments.stream().map(Department::getDepartmentId).collect(Collectors.toList())); 耗费时间 26058ms 时间耗费反而多了，因为对数据库的查询次数变多了</description>
+ @Overridepublic List&amp;lt;EmployeeDetail&amp;gt; findAllEmployeesByDepartmentsId(Iterable&amp;lt;String&amp;gt; departmentIds) {return employeeRepo.findAllByDepartmentIdIsIn(departmentIds);} List&amp;lt;Department&amp;gt; allExcludedDepartments = excludeDepartments.stream().flatMap(department -&amp;gt; serviceV2.findAllChildDepartments(department).stream()).collect(Collectors.toList());List&amp;lt;EmployeeDetail&amp;gt; excludeEmployees = serviceV2.findAllEmployeesByDepartmentsId(allExcludedDepartments.stream().map(Department::getDepartmentId).collect(Collectors.toList()));耗费时间 26058ms 时间耗费反而多了，因为对数据库的查询次数变多了</description>
     </item>
     
     <item>
@@ -379,6 +415,7 @@ Model public class Example { @Id String exampleId; String name; } 看起来没�
       <description>Java内存管理  Java的内存管理机制
  1. JMM java的内存模型
 1.1 主内存和工作内存 Java 内存模型规定了所有的变量都存储在主内存（Main Memory）中，每条线程有自己的工作内存（Working Memory），线程的工作内存中保存了该线程所使用到的变量的内存副本。 不同线程之间无法直接访问其他线程工作内存中的变量，线程间变量的传递都要通过主内存来完成（如下图 2-1所有）。
+java内存模型
 1.2 执行引擎 执行引擎，就是一个运算器，能够识别输入的指令，并根据输入的指令执行一套特定的逻辑。
 1.3 主内存和工作内存的交互模型 Java 内存模型中定义了 8 种操作完成主内存与工作内存之间具体的交互协议，虚拟机实现时必须保证 每一种操作都是原子级、不可再分的。 这 8 种操作又可分为作用于主内存和作用于工作内存的操作。
 1.3.1 作用于主内存的操作  lock 作用于主内存的变量，它把一个变量标识为一条线程独占的状态。 unlock 作用于主内存的变量，它把一个处于锁定状态的变量释放出来，释放后的变量才能被其他线程锁定。 read 作用于主内存的变量，它把一个变量的值从主内存传输到工作内存中，以便 laod 时使用。 write 作用于主内存的变量，它把 store 操作从工作内存中得到的变量值存入到主内存变量中。  1.3.2 作用于工作内存的操作  load 作用于工作内存的变量，它把 read 操作从主内存中得到的变量值放入工作内存的变量副本中。 use 作用于工作内存的变量，它把一个工作内存中的一个变量的值传递给执行引擎，每当虚拟机遇到一个需要使用的变量的值的字节码执行时会执行这个操作。 assign 作用于工作内存的变量，它把一个执行引擎接收到的值赋给工作内存的变量，每当虚拟机遇到一个变量赋值的字节码执行时执行这个操作。 store 作用于工作内存的变量，它把工作内存中的一个变量的值传送到主内存中，以便随后的 write 操作。  2. JVM是如何划分内存的 垃圾回收机制 对象类型 对象擦除 基本运行原理 </description>
@@ -415,8 +452,8 @@ Model public class Example { @Id String exampleId; String name; } 看起来没�
       <guid>https://lllovol.com/p/spring14/</guid>
       <description>背景 最近在做同步先关的工作，为了提升同步任务的处理效率，减少频繁的mongo数据库查询，因此需要将一些数据统一查询出来，在内存中进行处理。
 解决方式 在任务执行的之前，就需要将相关的数据查询出来，如何实现呢？使用一个@EventListener进行ApplicationReadyEvent时间的监听，就能在应用启动之后，进行相应的操作
-@EventListener(classes = {ApplicationReadyEvent.class}) public void initialMap() { if (CollectionUtils.isEmpty(ridMobileMap)) { List&amp;lt;UserRecord&amp;gt; all = entranceUserRecordRepo.findAll(); ridMobileMap = all.stream().filter(userRecord -&amp;gt; StringUtils.isNotEmpty(userRecord.getMobileNo())).collect(Collectors.toMap(UserRecord::getRid, UserRecord::getMobileNo)); } } More Application spring application，一般就是spring boot项目中的 Application这个类
-@SpringBootApplication @EnableConfigurationProperties @EnableAutoConfiguration(exclude = {DruidDataSourceAutoConfigure.class, DataSourceAutoConfiguration.class, RedisAutoConfiguration.class}) @EnableScheduling @EnableFeignClients(basePackages = {&amp;quot;&amp;quot;}) @EnableAspectJAutoProxy(proxyTargetClass = true) @EnableCircuitBreaker @EnableLdapRepositories public class Application { public static void main(String[] args) { SpringApplication.run(Application.class, args); } @Bean LdapTemplate getLdapTemplate(ContextSource contextSource) { LdapTemplate ldapTemplate = new LdapTemplate(contextSource); ldapTemplate.</description>
+@EventListener(classes = {ApplicationReadyEvent.class})public void initialMap() {if (CollectionUtils.isEmpty(ridMobileMap)) {List&amp;lt;UserRecord&amp;gt; all = entranceUserRecordRepo.findAll();ridMobileMap = all.stream().filter(userRecord -&amp;gt; StringUtils.isNotEmpty(userRecord.getMobileNo())).collect(Collectors.toMap(UserRecord::getRid, UserRecord::getMobileNo));}}More Application spring application，一般就是spring boot项目中的 Application这个类
+@SpringBootApplication@EnableConfigurationProperties@EnableAutoConfiguration(exclude = {DruidDataSourceAutoConfigure.class, DataSourceAutoConfiguration.class, RedisAutoConfiguration.class})@EnableScheduling@EnableFeignClients(basePackages = {&amp;quot;&amp;quot;})@EnableAspectJAutoProxy(proxyTargetClass = true)@EnableCircuitBreaker@EnableLdapRepositoriespublic class Application {public static void main(String[] args) {SpringApplication.run(Application.class, args);}@BeanLdapTemplate getLdapTemplate(ContextSource contextSource) {LdapTemplate ldapTemplate = new LdapTemplate(contextSource);ldapTemplate.</description>
     </item>
     
     <item>
@@ -428,6 +465,7 @@ Model public class Example { @Id String exampleId; String name; } 看起来没�
       <description>1. volatile volatile是轻量级的同步机制
  保证可见性 不保证原子性 禁止指令重排  1.1 JMM内存模型之可见性 JMM（Java Memory Model） Java内存模型
  Java内存模型
+java内存模型
  </description>
     </item>
     
@@ -440,11 +478,11 @@ Model public class Example { @Id String exampleId; String name; } 看起来没�
       <description>什么是单例模式？ 在整个程序运行过程中只会实现一次的对象，例如Runtime类。
 需要满足的条件有以下几点：
  构造器私有化 自行创建，并且用静态变量保存 向外提供这种实例 为了强调这是单例模式，我们可以使用final修饰  常见形式 饿汉式 懒汉式就是直接就实例化了，在程序运行的时候，直接创建，不管是否需要这个对象.不存在线程安全问题
-饿汉式-直接实例化饿汉式 public class Singleton(){ public static final INSTANCE=new Singleton(); private Singleton(){ // 构造器私有化 } } 饿汉式-枚举式 和上面的效果一模一样
-public enum Singleton(){ INSTANCE, ; } 静态代码块饿汉式 这种情况和第一种效果也是一样的，但是如果需要配置的话，就需要使用这种方式了
-public class Singleton(){ public static final INSTANCE; private String info; static { Properties pro=new Properties(); pro.load( Singleton.class.getClassLoader().getResourceAsStream(&amp;quot;src/下面的资源文件&amp;quot;)) INSTANCE=new Singleton(pro.getProperty(&amp;quot;info&amp;quot;)); } private Singleton(String info){ this.info=info; // 构造器私有化 } } 懒汉式 延迟创建，在需要的时候才创建对象
+饿汉式-直接实例化饿汉式 public class Singleton(){public static final INSTANCE=new Singleton();private Singleton(){// 构造器私有化}}饿汉式-枚举式 和上面的效果一模一样
+public enum Singleton(){INSTANCE,;} 静态代码块饿汉式 这种情况和第一种效果也是一样的，但是如果需要配置的话，就需要使用这种方式了
+public class Singleton(){public static final INSTANCE;private String info;static {Properties pro=new Properties();pro.load( Singleton.class.getClassLoader().getResourceAsStream(&amp;quot;src/下面的资源文件&amp;quot;))INSTANCE=new Singleton(pro.getProperty(&amp;quot;info&amp;quot;));}private Singleton(String info){this.info=info;// 构造器私有化}}懒汉式 延迟创建，在需要的时候才创建对象
 线程不安全的懒汉式 这种情况就是会有线程安全的问题
-public class Singleton(){ private static final INSTANCE; private Singleton(){ // 构造器私有化 } public Singleton getInstance(){ if(null==INSTANCE){ INSTANCE=new Singleton(); } return INSTANCE; } } 线程安全的懒汉式 加上锁，保证多线程的时候，不会有问题</description>
+public class Singleton(){private static final INSTANCE;private Singleton(){// 构造器私有化}public Singleton getInstance(){if(null==INSTANCE){INSTANCE=new Singleton();}return INSTANCE;}}线程安全的懒汉式 加上锁，保证多线程的时候，不会有问题</description>
     </item>
     
     <item>
@@ -457,11 +495,12 @@ public class Singleton(){ private static final INSTANCE; private Singleton(){ //
 想法 我大概实现的思路和设计
  构建实体类，实现相应的数据存储化，用户可以设置相应的权限策略。权限设置，换一个说法就是主谓宾&amp;ndash;&amp;ldquo;谁&amp;rdquo; &amp;ldquo;能看/不能看&amp;rdquo; &amp;ldquo;什么东西&amp;rdquo;。将这个权限设置抽象为对象，并进行存储。 根据实体类解析用户保存的策略，使之生效。  说起来简单，做起来难。第一点设置权限，其实就是非常简单的单表查询维护。难点在于第二点，如何能让这个策略生效。按照我目前接触和掌握到的技术手段，主要的解决方式有下面几种：
  写一个intercepor，拦截器。但是这个方式，只能处理请求的控制器和方法，控制不了具体的参数。这一点比较适合用来做整体的系统权限拦截，拦截接口。拦截控制的粒度比较粗糙。 在每一个业务逻辑中，分别添加拦截的逻辑，即每一个返回对象的接口，都需要查询和判断权限表。优点：思路简单。缺点：可维护性差，写完第一次之后，再维护就是噩梦。 使用Aspect，可以自定义切入的点，甚至能细化到拦截什么包什么类的什么方法等等。Perfectly，就是他了。  除了上面的Interceptor和Aspect，还有filter。这三者实际上都是对Aop的具体实现，都可以实现权限检查，日志记录等等的功能。都是对业务逻辑的提取，不同的是，使用的范围 规范、和深度不同。
+执行顺序
  Filter、Interceptor、Aop实现与区别
  实现 由于包含工作的涉密内容，真实实现的代码就不在此展示。而网上的Demo已经相当丰富。
  SpringBooot AOP的使用
  其中实现权限控制的最简单的demo就是如下的代码
-@Aspect @Component @RequiredArgsConstructor @Slf4j public class AuthAspect { @Pointcut(&amp;quot;execution(public * com.company.group.auth.service.AuthService.list(..))&amp;quot;) public void pointCutForListObjective() { } /** * 对list的方法返回值进行拦截处理 */ @AfterReturning(pointcut = &amp;quot;pointCutForListObjective()&amp;quot;, returning = &amp;quot;okrResponses&amp;quot;) public void afterReturningListObjective(JoinPoint joinPoint, Object okrResponses) { // 这个地方就能够对返回值直接进行处理 } }  定义切点pointCut(),这个地方，就是定义一个我们需要切入的点，我们要进行拦截处理的地方。 对这个切点有很多处理的方式，实现真正的权限拦截控制逻辑  其他的点  对于用户的组织权限的控制，我们可以使用路径的方式来进行判断，类似于一个树，我们每一次，存储的时候，需要将用户所在的组织架构的路径进行存储。这样我们在进行权限判断的时候，就不想要每一次都从库中获取用户的组织架构信息了。 对于model的校验可以写注解来进行实现。这一点，以后会专门写一篇文章来进行分享 Npe问题可谓是开发过程中的一生之敌。在循环迭代过程中，不可以一遍迭代，一边删除list中的值。 使用JPA的时候可以使用 pageable 来直接进行分页，不用再写mongoTemplate这种CustomRepo   @Override public List&amp;lt;Department&amp;gt; listAuthDepartment(String departmentName) { if (Strings.</description>
+@Aspect@Component@RequiredArgsConstructor@Slf4jpublic class AuthAspect {@Pointcut(&amp;quot;execution(public * com.company.group.auth.service.AuthService.list(..))&amp;quot;)public void pointCutForListObjective() {}/*** 对list的方法返回值进行拦截处理*/@AfterReturning(pointcut = &amp;quot;pointCutForListObjective()&amp;quot;, returning = &amp;quot;okrResponses&amp;quot;)public void afterReturningListObjective(JoinPoint joinPoint, Object okrResponses) {// 这个地方就能够对返回值直接进行处理}} 定义切点pointCut(),这个地方，就是定义一个我们需要切入的点，我们要进行拦截处理的地方。 对这个切点有很多处理的方式，实现真正的权限拦截控制逻辑  其他的点  对于用户的组织权限的控制，我们可以使用路径的方式来进行判断，类似于一个树，我们每一次，存储的时候，需要将用户所在的组织架构的路径进行存储。这样我们在进行权限判断的时候，就不想要每一次都从库中获取用户的组织架构信息了。 对于model的校验可以写注解来进行实现。这一点，以后会专门写一篇文章来进行分享 Npe问题可谓是开发过程中的一生之敌。在循环迭代过程中，不可以一遍迭代，一边删除list中的值。 使用JPA的时候可以使用 pageable 来直接进行分页，不用再写mongoTemplate这种CustomRepo   @Overridepublic List&amp;lt;Department&amp;gt; listAuthDepartment(String departmentName) {if (Strings.</description>
     </item>
     
     <item>
@@ -499,13 +538,14 @@ public class Singleton(){ private static final INSTANCE; private Singleton(){ //
       <guid>https://lllovol.com/p/spring12/</guid>
       <description>前言 2020将近，已经很久没有更新blog，但是每天的工作笔记都还是有在记录，趁着马上就要过年，没有那么忙碌了，把自己19年Q4的工作中遇到的问题以及一些有用的方法整理一下~
 测试的必要性 在程序员的日常工作中，实际上真正在编写代码的时间，在整个工作时间中所占的比例其实很小的一部分。在写代码之前我们需要撰写需求文档，以及充足的思考，画出uml图（虽然很多经验丰富的大佬都没有画，但是那是建立在经验相当丰富的基础之上的）；在写完代码之后，这个项目需要发布与部署到测试环境，这就是CI/CD所负责的部分了；再之后，我们就需要测试我们的项目，是否能够完成需求文档中的需求，实现了相应的功能。 如果没有进行充分完整的测试，直接上线，这个项目差不多就是穿着皇帝的新衣在大街上到处晃荡了。同样，在互联网高速发展的今天，测试也不再仅仅是人工进行测试，自动化测试的演进又再一次的提升了团队的生产效率。这和敏捷开发、持续集成、持续部署、DevOps是一脉相承的。
-测试金字塔Test Pyramid  图来源于ThoughtWorks
+测试金字塔Test Pyramid 测试金字塔
+ 图来源于ThoughtWorks
  在上方的金字塔当中，越往金字塔尖尖方向的，集成的程度越高，测试所耗费的时间就越长，但是需要的测试数目并没有那么多；与之相反，越往金字塔底层方向的，集成的程度就越低，测试所消耗的时间也更快，但是所需要测试的数量就会更加的庞大。
  UI Tests 项目的ui界面测试，这一层面的测试比较适合在上线之后进行冒烟测试，能够知道项目的整个流程到底是不是有问题。但是通常由于集成的程度太高，不能很快的定位问题。 Service Tests 这一层，用来测试服务是否可用，比如API测试。 Unit Tests 在代码层面进行测试，通常可以针对某一个类，某一个方法进行测试，能够快速定位问题。这个层级的层级能够保证一个系统的每一个基石都能够按照预期的那样进行工作。单元测试的数量应该在测试组合中远远多于其他类型的测试。  Junit 三段式结构 我们通常采用三段式的结构来撰写单元测试
  构造部分。进行对象的构建、赋值等。 逻辑部分。运行方法逻辑对第一部分的数据对象进行运算。 断言部分。判断本次单元测试能否通过。  实例代码 要使用is（）方法首先需要导入hamcrest-library-1.3.jar和hamcrest-core-1.3.jar两个jar包
 依赖配置：
-&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.hamcrest&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;hamcrest-library&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.3&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;junit&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;junit&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4.12&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; 简单的UT代码实现
-import static org.hamcrest.core.Is.is; import static org.junit.Assert.assertThat; @RunWith(SpringRunner.class) @SpringBootTest @Slf4j public class ApplicationTests { @Test @Ignore public void contextLoads() { } public Boolean compare(String A, String B) { return A.</description>
+&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;org.hamcrest&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;hamcrest-library&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;1.3&amp;lt;/version&amp;gt;&amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt;&amp;lt;/dependency&amp;gt;&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;junit&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;junit&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;4.12&amp;lt;/version&amp;gt;&amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt;&amp;lt;/dependency&amp;gt;简单的UT代码实现
+import static org.hamcrest.core.Is.is;import static org.junit.Assert.assertThat;@RunWith(SpringRunner.class)@SpringBootTest@Slf4jpublic class ApplicationTests {@Test@Ignorepublic void contextLoads() {}public Boolean compare(String A, String B) {return A.</description>
     </item>
     
     <item>
@@ -517,15 +557,15 @@ import static org.hamcrest.core.Is.is; import static org.junit.Assert.assertThat
       <description>一、前言 kubernetes作为一个容器的编排引擎，如今已经相当的火热，日常的工作中也有使用常用的kubernetes的相关的功能，例如滚动发布、扩容等等，但是这都是在公司现成的已经搭建好的kubernetes集群上实践的，因此，本篇文章就是自主探索在本地运行一个kubernetes集群，同时写一个自己的demo，运行到本地的kubernetes集群当中。
 本文主要包含如下几个方面：
  国内条件下如何安装kubernetes（no vpn） 写一个Spring boot 的demo 使用Docker将demo打包成镜像 将demo部署到本地kubernetes集群当中  二、本地安装kubernetes 选择使用minikube 我们想要学习使用kubernetes，首先就是选择一个平台进行操作，比如阿里云、Azure、Google Kubernetes等等
-这里我们选择的就是学习用的minikube
+ 这里我们选择的就是学习用的minikube
  kubernetes官方文档 minikube操作文档 minikube安装文档
- 安装minikube 1.检查能否虚拟化 sysctl -a | grep -E --color &#39;machdep.cpu.features|VMX&#39; vmx被标注出来有颜色，说明就是ok的，这台电脑是支持virtualization的（一般都是支持的,但是我花了88白菜价在腾讯云上买的1年1核1g服务器是不支持的）
-2.安装kubectl brew install kubernetes-cli 使用kubectl version能够查看到对应的kubectl版本
+ 安装minikube 1.检查能否虚拟化 sysctl -a | grep -E --color &#39;machdep.cpu.features|VMX&#39;  vmx被标注出来有颜色，说明就是ok的，这台电脑是支持virtualization的（一般都是支持的,但是我花了88白菜价在腾讯云上买的1年1核1g服务器是不支持的）
+2.安装kubectl brew install kubernetes-cli使用kubectl version能够查看到对应的kubectl版本
 3.安装Hypervisor（virtual machine monitor） 这个主要就是安装虚拟机了，kvm或者virtualBox二选一
 4.安装minikube 有两种方式,第一种方式就是如下的方式
-curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \ &amp;amp;&amp;amp; chmod +x minikube 将minikube安装包下载下来，手动进行安装
-sudo mkdir -p /usr/local/bin/ sudo install minikube /usr/local/bin/ 如果是mac用户，直接使用如下的命令就可以了
-brew install minikube brew link minikube 5.启动minikube minikube start 就会开始根据本地的virtualBox来下载对应的驱动,中间应该会要求输入一次本机电脑的一次密码,然后会出现这样的错误： Error creating machine: Error in driver during machine creation: hyperkit crashed!</description>
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \&amp;amp;&amp;amp; chmod +x minikube将minikube安装包下载下来，手动进行安装
+sudo mkdir -p /usr/local/bin/sudo install minikube /usr/local/bin/ 如果是mac用户，直接使用如下的命令就可以了
+brew install minikubebrew link minikube5.</description>
     </item>
     
     <item>
@@ -536,9 +576,10 @@ brew install minikube brew link minikube 5.启动minikube minikube start 就会�
       <guid>https://lllovol.com/p/java11/</guid>
       <description>前言 最近将java升级到了11，因此学习了一些java11的一些新特性
 一.局部变量类型判断 代码：
- @Test public void testVar() { // 测试局部变量类型判断特性 var java11 = &amp;quot;test java11&amp;quot;; var test = 1; System.out.println(java11); System.out.println(test); } 输出：
+ @Testpublic void testVar() {// 测试局部变量类型判断特性var java11 = &amp;quot;test java11&amp;quot;;var test = 1;System.out.println(java11);System.out.println(test);}输出：
+
 二.String类的新方法 代码：
- @Test public void testString() { String blank = &amp;quot;&amp;quot;; String strip = &amp;quot; strip &amp;quot;; String lines = &amp;quot;\n\n&amp;quot; + &amp;quot;\n&amp;quot; + &amp;quot;\n&amp;quot;; // 判断字符串是否为空白 System.out.println(blank.isBlank()); // 去除首尾空格 System.out.println(strip.strip()); // 去除开头空格 System.out.println(strip.stripLeading()); // 去除结尾空格 System.out.println(strip.stripTrailing()); // 重复 System.out.println(strip.repeat(0)); System.out.println(strip.repeat(1)); System.out.println(strip.repeat(2)); System.out.println(strip.repeat(3)); // 统计行数 System.</description>
+ @Testpublic void testString() {String blank = &amp;quot;&amp;quot;;String strip = &amp;quot; strip &amp;quot;;String lines = &amp;quot;\n\n&amp;quot; +&amp;quot;\n&amp;quot; +&amp;quot;\n&amp;quot;;// 判断字符串是否为空白System.out.println(blank.isBlank());// 去除首尾空格System.out.println(strip.strip());// 去除开头空格System.out.println(strip.stripLeading());// 去除结尾空格System.out.println(strip.stripTrailing());// 重复System.out.println(strip.repeat(0));System.out.println(strip.repeat(1));System.out.println(strip.repeat(2));System.</description>
     </item>
     
     <item>
@@ -550,11 +591,11 @@ brew install minikube brew link minikube 5.启动minikube minikube start 就会�
       <description>一 前言 最近独自完成了一个同步信息的项目，主要工作内容是从第三方的服务端将信息同步到公司的二方AD域当中。本文主要记录本项目的主要实现过程。
 二 项目设计 这是一个并不复杂的项目，因此项目主要涉及到两大部分：
  从第三方服务器端获取到信息数据 将信息数据进行处理，能够存入到公司的二方AD域当中  三 第三方数据获取 1.主要技术 本项目主要获取信息的方式，是通过FeignClient来获取的
-2.主要实现 a.最单纯的feign方式实现 添加pom依赖 	&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;feign-okhttp&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;10.1.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;feign-jackson&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;10.1.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 定义接收返回值所用到的model对象 这个地方的model定义，需要仔细阅读第三方服务端的api文档，然后根据上面的具体信息来进行定义
+2.主要实现 a.最单纯的feign方式实现 添加pom依赖 	&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;feign-okhttp&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;10.1.0&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;feign-jackson&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;10.1.0&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;定义接收返回值所用到的model对象 这个地方的model定义，需要仔细阅读第三方服务端的api文档，然后根据上面的具体信息来进行定义
 eg:
-@Data public class XxxApiResponse { private String code; private String message; private String timestamp; private String errcode; private String errmsg; private String detailMsg; } 这里的变量名没有按照驼峰的方式进行定义，是因为官方文档返回值当中的字段key值就是这样非驼峰的方式，我们需要保证名字的一致性。
-定义Feign public interface XxxClient { @RequestLine(&amp;quot;GET /v3/xxx/details?param1={param1}&amp;quot;) XxxDetailsResponse getXxxDetails(@Param(&amp;quot;param1&amp;quot;) String param1); } 注意这种RequestLine的方式和GetMapping和PostMapping的方式有所区别
-定义Feign的Factory public class XxxClientFactory { private final static String URL = &amp;quot;https://api.</description>
+@Datapublic class XxxApiResponse {private String code;private String message;private String timestamp;private String errcode;private String errmsg;private String detailMsg;}这里的变量名没有按照驼峰的方式进行定义，是因为官方文档返回值当中的字段key值就是这样非驼峰的方式，我们需要保证名字的一致性。
+定义Feign public interface XxxClient {@RequestLine(&amp;quot;GET /v3/xxx/details?param1={param1}&amp;quot;)XxxDetailsResponse getXxxDetails(@Param(&amp;quot;param1&amp;quot;) String param1);}注意这种RequestLine的方式和GetMapping和PostMapping的方式有所区别
+定义Feign的Factory public class XxxClientFactory {private final static String URL = &amp;quot;https://api.</description>
     </item>
     
     <item>
@@ -585,10 +626,11 @@ eg:
       <guid>https://lllovol.com/p/improve-our-vision/</guid>
       <description>前言 最近听了一场蔡黎博士关于如何提高我们技术视野的分享，收益良多，其实不仅仅是在技术方面，其实很多道理，在生活中都是有共通点的。分享的主要内容既然是关于如何提高我们的技术视野的，那么他是如何进行分享的呢？他主要将这次分享按照内容分为了三个方面：
  视野 技术 效益  第一部分 视野 用英文来讲，就是Vision，这决定了格局和潜力，也是指的一种远见。
-那么怎样才能看的更远呢？  看得到多远的过去，就能看得到多远的未来。&amp;ndash;丘吉尔  例子一：如今阿里云计算排名第一 中国云计算市场现状：top1阿里云 超过了第2到第8名的总和。 但是如果看看10年前，国内的各个公司都在同一起跑线上，那时候的大佬们对于云计算，看法又都是怎样的呢？
+那么怎样才能看的更远呢？  看得到多远的过去，就能看得到多远的未来。&amp;ndash;丘吉尔 
+ 例子一：如今阿里云计算排名第一 中国云计算市场现状：top1阿里云 超过了第2到第8名的总和。 但是如果看看10年前，国内的各个公司都在同一起跑线上，那时候的大佬们对于云计算，看法又都是怎样的呢？
  李彦宏，说云计算是新瓶装旧酒，没有什么新东西。 马化腾，云计算的理念，还为时过早，就算能够实现也是过一百年和一千年之后才能实现的事情了。 马云，可以生产更好的商品，卖给消费者。  可以看到，BAT作为那时候中国的互联网三大巨头，只有阿里的马云是看好云计算的，而从如今的结果来看，阿里巴巴当初选择将精力投入到云计算是绝对正确的选择。那么，为什么阿里巴巴当初为什么要投云计算？ 因为云计算其实是数据时代的公共基础设施，那么那时候的阿里，是通过什么样的方式发现这样的一个原因呢？10年前，能看到如今的未来嘛？答案是肯定的。
 我们回顾一下第二次工业革命，电的出现之后，是如何发展的呢？
- 最开始-分散发电模式到现在-集中发电模式我们可以看到，在电出现了之后，最开始，都是分散发电的模式，工厂都用着自己的发电机来进行发电，实现电量的自给自足。再看看现在，都是国家电网，集中发电的集中发电形式。
+ 最开始-分散发电模式分散发电模式 到现在-集中发电模式集中发电模式 我们可以看到，在电出现了之后，最开始，都是分散发电的模式，工厂都用着自己的发电机来进行发电，实现电量的自给自足。再看看现在，都是国家电网，集中发电的集中发电形式。
  通过类比的方式可以发现，其实和发电的形式是相当相似的
 工业时代看用电量
 信息时代看用云量
@@ -596,12 +638,13 @@ eg:
 例子二：小米卖手机 雷军在做小米手机的初期，那时候他的演讲，就讲到过Android还有操作系统芯片等等部分模块，都将实现标准化。
  产品经理是怎样炼成的？新媒体电商
 在那个时候的手机利润，是3倍来卖的，真的是个暴利行业，但是雷军觉得，手机不应该是3倍的毛利来卖，因此，小米手机一直都是每台手机只赚5%，一直卖到了现在世界五百强。 （看看pc，毛利才14%，那时候手机毛利3倍是多么的夸张，但是其实最开始的pc也没有几个人能买得起）第一个标准化，第二个是薄利多销，雷军他所看见的手机未来的发展趋势，其实就是pc行业发展的规律。
-  第一波浪潮-pc第二波浪潮-手机 这就是个历史规律，科技的趋势是普惠的。
+  第一波浪潮-pc 第二波浪潮-手机
+ 这就是个历史规律，科技的趋势是普惠的。
  一体化的用户体验，是远超组合的用户体验 标准化，差距会逐渐缩小 产业最终肯定分工化、规模化， 产业的演进是技术和商业模式的结合  例子三：为什么芯片要单独为手机再开发一次？ 为什么要在手机上芯片重新开发一遍？因为功耗更小
 差了几倍呢？10倍
 价格呢？便宜了10倍
-10倍因素的新技术，某个指标产生这种变化的时候，那么可能就是革命要出现了  你必须保持敏感，否则当新技术作为10倍数因素席卷而来的时候，猝不及防只能轰然倒塌。同时，对新技术的追逐可能不在盈利，而在于可以使得企业在必要的时候迅速转向。毕竟，只有早早行动，才有希望争取未来的胜利，改变不利的命运&amp;ndash;英特尔公司前CEO安迪·葛洛夫  水滴公司CEO沈鹏，是美团的第十号员工，他在带领团队做美团外卖的时候，也是在13年的时候，看见了一个10倍因素的场景，外卖出现了一个爆发的机会。 是什么呢？最开始的外卖机制，都需要店家在店里装一台二手电脑，用于接收订单的信息，相当的不方便。但是那时候，安卓手机的人人普及，提升了沟通的效率，也提高了配送的稳定性。外卖就是这么做出来的，稳定性就此提升，从而改变了这个产业。（饿了嘛 那时候已经做了5年左右，那时候都是用二手电脑来做的外卖生意， 美团当时第一年的目标，就是从饿了么的5w一天，美团的目标是要做到20w一天，而那时候真正的结果，美团达成了120w一天，这个因素已经远远超过了10倍）
- 很有可能在5年之后，这个10倍因素将会出现在电动车行业当中。看看如今电动车的体验，特斯拉差不多是一般电动车3倍的价格，但是它的体验，远远高于普通电动车所带来的3倍 分散发点模式，分久必合，合久必分。美国的solarcity公司，让每家每户，使用太阳能电池，各自发电，多余的电还可以输送到集中电网当中。 华为发布的鸿蒙系统其实，平头哥+鸿蒙，IoT（Internet of Things）是为了物联网而做出来的系统。  第二部分 技术 推荐一部书《技术的本质》W.</description>
+ 
+10倍因素的新技术，某个指标产生这种变化的时候，那么可能就是革命要出现了  你必须保持敏感，否则当新技术作为10倍数因素席卷而来的时候，猝不及防只能轰然倒塌。同时，对新技术的追逐可能不在盈利，而在于可以使得企业在必要的时候迅速转向。毕竟，只有早早行动，才有希望争取未来的胜利，改变不利的命运&amp;ndash;英特尔公司前CEO安迪·葛洛夫</description>
     </item>
     
     <item>
@@ -610,11 +653,11 @@ eg:
       <pubDate>Wed, 07 Aug 2019 10:08:30 +0000</pubDate>
       
       <guid>https://lllovol.com/p/ide-code-error-solution/</guid>
-      <description>前言 在安装使用Idea Intelli的时候，导入新项目的时候，总会出现代码权限飘红的问题。本篇文章，就是介绍出现这种问题的几种情况和分别的解决方式。 情况一：maven二方库settings没有设置 一般公司内部都会有自己的二方库建设，新人在git下项目之后，总是会出现代码偏红的问题，各种库都没有导入下来，这时候首先应该排查的就是maven的配置是否正确，是否正确连接到了公司内部的二方库。
+      <description>前言 在安装使用Idea Intelli的时候，导入新项目的时候，总会出现代码权限飘红的问题。本篇文章，就是介绍出现这种问题的几种情况和分别的解决方式。 导入项目代码全线飘红
+情况一：maven二方库settings没有设置 一般公司内部都会有自己的二方库建设，新人在git下项目之后，总是会出现代码偏红的问题，各种库都没有导入下来，这时候首先应该排查的就是maven的配置是否正确，是否正确连接到了公司内部的二方库。
 解决方式 以Idea Intelli为例: preference -&amp;gt; build,execution,deployment -&amp;gt; build tools -&amp;gt; maven -&amp;gt; User settings file: 勾选上override，改写为二方库settings.xml文件的路径
-情况二：Lombok插件没有安装  Project Lombok is a java library that automatically plugs into your editor and build tools, spicing up your java. Never write another getter or equals method again, with one annotation your class has a fully featured builder, Automate your logging variables, and much more.lombok官网
- Lombok可以让我们的Java代码更加简洁，不用再去写那些Getter和Setter。然而这个强大的功能，在初次安装idea的时候，并不会内置的给我们安装Lombok插件，因此这个时候，同样也会出现大片代码报错的问题。
-解决方式 安装Lombok的插件： ** preference -&amp;gt; Plugins -&amp;gt; Install lombok -&amp;gt; restart ** 问题三：注解未开启 在安装好了 Lombok之后，发现运行还是报错 解决方式  关闭项目。 Preference &amp;gt; Build, Execution, Deployment &amp;gt; Compiler &amp;gt; Annotation Processors.</description>
+设置maven settings
+情况二：Lombok插件没有安装  Project Lombok is a java library that automatically plugs into your editor and build tools, spicing up your java. Never write another getter or equals method again, with one annotation your class has a fully featured builder, Automate your logging variables, and much more.</description>
     </item>
     
     <item>
@@ -624,9 +667,9 @@ eg:
       
       <guid>https://lllovol.com/p/scala1/</guid>
       <description>前言 最近工作中需要参与一下scala的项目，借此机会学习一下这个心的语言。
-环境搭建  Java环境 JDK1.5以上  ymk@localhost ~ $ java -version java version &amp;quot;1.8.0_181&amp;quot; Java(TM) SE Runtime Environment (build 1.8.0_181-b13) Java HotSpot(TM) 64-Bit Server VM (build 25.181-b13, mixed mode) 下载安装Scala
+环境搭建  Java环境 JDK1.5以上  ymk@localhost ~ $ java -versionjava version &amp;quot;1.8.0_181&amp;quot;Java(TM) SE Runtime Environment (build 1.8.0_181-b13)Java HotSpot(TM) 64-Bit Server VM (build 25.181-b13, mixed mode)下载安装Scala
 Scala官方下载地址
-安装好了之后,可以通过scala查看是否安装成功  ymk@localhost ~ $ scala Welcome to Scala 2.12.7 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_181). Type in expressions for evaluation. Or try :help. 下载安装sbt
+安装好了之后,可以通过scala查看是否安装成功  ymk@localhost ~ $ scalaWelcome to Scala 2.12.7 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_181).Type in expressions for evaluation. Or try :help.下载安装sbt
 Mac: brew install sbt@1  使用命令行搭建第一个Scala项目 本节内容主要来自于官方文档
 创建项目  cd 进入一个新的空的文件夹。 执行命令 sbt new scala/hello-world.</description>
     </item>
@@ -639,11 +682,13 @@ Mac: brew install sbt@1  使用命令行搭建第一个Scala项目 本节内容�
       <guid>https://lllovol.com/p/jenkins-callback/</guid>
       <description>前言 最近的工作需要使用Jenkins执行一个特定脚本，但是使用FeignClient调用Jenkins的执行接口后，并不能获取到脚本执行之后的结果（成功和失败），本文就将介绍这种问题的其中一种解决方式。
  Jenkins是开源CI&amp;amp;CD软件领导者，提供超过1000个插件来支持构建、部署、自动化，满足任何项目的需要。Jenkins官网
- 关键点 通过调研后，Jenkins在完成构建后，可以添加一个构建后操作。这就可以通过这个构建后操作，将本次构建脚本执行的结果，通过这个构建后操作，传给另外一个job，然后通过这个job将执行的结果通过回调的方式，传给应用服务器。
+ 关键点  通过调研后，Jenkins在完成构建后，可以添加一个构建后操作。这就可以通过这个构建后操作，将本次构建脚本执行的结果，通过这个构建后操作，传给另外一个job，然后通过这个job将执行的结果通过回调的方式，传给应用服务器。
 整个流程  服务器端创建一条记录，获取到记录的id，与需要执行的job所需要的参数还有回调所需要用到的apiHost一同存入到map当中，转换为JSON格式，通过FeignClient调用Jenkins对应的脚本。   服务器端应用可能会部署在不同的环境下，连接不同的数据库，因此可以在application.yml中配置当前apiHost的值，通过ConfigServer可以更改为当前环境所对应的值。
   在Jenkins端进行对应的job执行。
-  通过构建后操作的trigger parameterized build on other projects功能。   根据本次构建的成功与否，分别执行不同的构建后操作，传递给回调job对应的参数。   回调job将获取到的信息，通过一个shell脚本，通过curl传递给服务器端。
-  echo &amp;quot;${ID}&amp;quot; echo &amp;quot;${API_HOST}&amp;quot; echo &amp;quot;${BUILD_NO}&amp;quot; echo &amp;quot;${RESULT}&amp;quot; curl &amp;quot;$API_HOST/api/xxx/xxx/xxx/hook&amp;quot; -X POST -d &amp;quot;Id=$ID&amp;amp;buildNo=$BUILD_NO&amp;amp;result=$RESULT&amp;quot; 服务器端拿到数据进行更新和处理。  结语 有时候只是想要一条小小的消息，却不知道要辗转多少次，才能到达该去的地方</description>
+  通过构建后操作的trigger parameterized build on other projects功能。 
+  根据本次构建的成功与否，分别执行不同的构建后操作，传递给回调job对应的参数。  
+  回调job将获取到的信息，通过一个shell脚本，通过curl传递给服务器端。
+  echo &amp;quot;${ID}&amp;quot;echo &amp;quot;${API_HOST}&amp;quot;echo &amp;quot;${BUILD_NO}&amp;quot;echo &amp;quot;${RESULT}&amp;quot;curl &amp;quot;$API_HOST/api/xxx/xxx/xxx/hook&amp;quot; -X POST -d &amp;quot;Id=$ID&amp;amp;buildNo=$BUILD_NO&amp;amp;result=$RESULT&amp;quot; 服务器端拿到数据进行更新和处理。  结语 有时候只是想要一条小小的消息，却不知道要辗转多少次，才能到达该去的地方</description>
     </item>
     
     <item>
@@ -654,11 +699,12 @@ Mac: brew install sbt@1  使用命令行搭建第一个Scala项目 本节内容�
       <guid>https://lllovol.com/p/container-is-a-special-process/</guid>
       <description>前言 程序的静态表现就是程序，平常的安安静静的躺在硬盘上；但是一旦运行起来，他就变成了计算机里的数据和状态的总和，这就是它的动态表现。 而容器的核心功能，就是通过约束和修改进程的动态表现，从而为其创造出了一个边界。
  Cgroups是用来约束的主要手段。 Namespace是用来修改视图的主要方法。  docker run实验 安装好docker，输入以下命令
-docker run -it busybox /bin/sh 这个命令就是告诉docker：帮我启动一个容器
-接下来我们可以使用ps指令，来看一看容器和宿主机中的进程信息。 宿主机里的内容： 容器里的内容 Namespace机制 上面的小实验，这就是Linux里的namespace机制实现的， 我们可以看到，我们容器里pid为1的/bin/sh进程，在宿主机中的pid为13193，这就是容器使用了namespace使用了障眼法，让容器里的视角，以为自己就是这个机器的1号员工（pid=1），可是实际上，他还是原来的100号进程。
+docker run -it busybox /bin/sh这个命令就是告诉docker：帮我启动一个容器
+接下来我们可以使用ps指令，来看一看容器和宿主机中的进程信息。 宿主机里的内容：  容器里的内容 
+Namespace机制 上面的小实验，这就是Linux里的namespace机制实现的， 我们可以看到，我们容器里pid为1的/bin/sh进程，在宿主机中的pid为13193，这就是容器使用了namespace使用了障眼法，让容器里的视角，以为自己就是这个机器的1号员工（pid=1），可是实际上，他还是原来的100号进程。
 namespace其实只是Linux在创建新的进程的时候的一个参数，在Linux系统中创建线程的系统调用是clone()
-int pid=clone(main_function,stack_size,SIGCHLD,NULL); 这个系统调用，创建了一个新进程，并且返回一个pid。而我们在创建一个新进程的时候，可以指定CLONE_NEWPID 参数。
-int pid=clone(main_function,stack_size,CLONE_NEWPID | SIGCHLD,NULL); 这个新创建的进程就将“看见”一个全新的进程空间，看见它自己在这个进程空间中，他自己的pid为1。这其实只是一个障眼法，在宿主机上，它的pid该是多少，还是多少。
+int pid=clone(main_function,stack_size,SIGCHLD,NULL);这个系统调用，创建了一个新进程，并且返回一个pid。而我们在创建一个新进程的时候，可以指定CLONE_NEWPID 参数。
+int pid=clone(main_function,stack_size,CLONE_NEWPID | SIGCHLD,NULL);这个新创建的进程就将“看见”一个全新的进程空间，看见它自己在这个进程空间中，他自己的pid为1。这其实只是一个障眼法，在宿主机上，它的pid该是多少，还是多少。
 Namespace种类 Namespace的种类很多，上文中提到的只是PID Namespace，除此之外，还有如下的Namespaces,这些namespaces用来实现对进程上下文的“障眼法操作”
  MOUNT Namespace， 用来隔离文件系统的挂载点，使得子进程拥有自己独立的挂载点信息。 UTS（UNIX Time-sharing System ）Namespace提供了主机名和域名的隔离,能够使得子进程有独立的主机名和域名(hostname),而不仅仅只是宿主机上的一个进程. IPC Namespace,使划分到不同ipc namespace的进程组通信上隔离，无法通过消息队列、共享内存、信号量方式通信，但没有对所述所有IPC通信方式隔离。 Network Namespace，是实现网络虚拟化的重要功能，它能创建多个隔离的网络空间，它们有独自的网络栈信息。不管是虚拟机还是容器，运行的时候仿佛自己就在独立的网络中。 User Namespace,是Linux3.8新增的一种namespace，用于隔离安全相关的资源，包括user IDs and group IDs，keys,和capabilities。同样一个用户的userID和groupID在不同的user namespace中可以不一样(与PID namespace类似)。换句话说，一个用户可以在一个user namespace中是普通用户，但在另一个user namespace中是超级用户。  通过Namespace这样的方式，容器就只能看见当前Namespace所限定的资源、文件、设备、状态、配置。而对于宿主机和其他不想关的程序，对这个容器（一个进程）来说，就“雨我无瓜了”
 结语 这个原理，就是为什么容器要比虚拟机效能更高的原因，本文是读了张磊前辈的文章后的学习笔记。</description>
@@ -691,9 +737,9 @@ Dot Cloud公司 在随着PaaS的历史长河的流动过程中，dot Cloud这个
       
       <guid>https://lllovol.com/p/fallback/</guid>
       <description>前言 在使用FeignClient的时候，我们很难保证第三方的调用不会出问题，这个时候，可以写一个FallBack类，来对出错的时候进行处理，可以异常上报，也可以进行打点处理，可以不再单独地去做这些事情。
-FeignClient的编写  添加maven依赖。  	&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-cloud-starter-openfeign&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.0.2.RELEASE&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;feign-core&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;9.7.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;feign-slf4j&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;9.7.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 新建一个接口，在上方添加FeignClient注解，在value中使用占位符的方式，对参数进行调用。  	@FeignClient(name = &amp;quot;gitApi&amp;quot;, url = &amp;quot;${api.server.gitlab.url}&amp;quot;,fallback = GitApiFeignFallBack.class) public interface GitApiFeign { @GetMapping(value = &amp;quot;/{namespace}/-/jobs/{jobId}/trace&amp;quot;) JSONObject getTrace( @PathVariable(&amp;quot;namespace&amp;quot;) String namespace, @PathVariable(&amp;quot;jobId&amp;quot;) Integer jobId, @RequestParam(&amp;quot;private_token&amp;quot;) String accessToken); } @Autowired 注解就能对FeignClient进行使用。  @Autowired GitApiFeign gitApiFeign; FeignClient的Fallback实现 在上方的代码中，可以看见注解中有fallback的选项，这个就是新建这个Client对应的fallback类来实现FeignClient。
+FeignClient的编写  添加maven依赖。  	&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;spring-cloud-starter-openfeign&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;2.0.2.RELEASE&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;feign-core&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;9.7.0&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;feign-slf4j&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;9.7.0&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;新建一个接口，在上方添加FeignClient注解，在value中使用占位符的方式，对参数进行调用。  	@FeignClient(name = &amp;quot;gitApi&amp;quot;, url = &amp;quot;${api.server.gitlab.url}&amp;quot;,fallback = GitApiFeignFallBack.class)public interface GitApiFeign {@GetMapping(value = &amp;quot;/{namespace}/-/jobs/{jobId}/trace&amp;quot;) JSONObject getTrace(@PathVariable(&amp;quot;namespace&amp;quot;) String namespace,@PathVariable(&amp;quot;jobId&amp;quot;) Integer jobId,@RequestParam(&amp;quot;private_token&amp;quot;) String accessToken);}@Autowired 注解就能对FeignClient进行使用。  @AutowiredGitApiFeign gitApiFeign;FeignClient的Fallback实现 在上方的代码中，可以看见注解中有fallback的选项，这个就是新建这个Client对应的fallback类来实现FeignClient。
 在fallback类的实现代码大致如下，最简单的实现就是在fallBack类中重写一遍Client中的所有方法。
-@Component @Slf4j public class GitApiFeignFallBack implements GitApiFeign { @Override public JSONObject getTrace(String namespace, Integer jobId, String accessToken) { log.</description>
+@Component@Slf4jpublic class GitApiFeignFallBack implements GitApiFeign {@Overridepublic JSONObject getTrace(String namespace, Integer jobId, String accessToken) {log.</description>
     </item>
     
     <item>
@@ -704,7 +750,7 @@ FeignClient的编写  添加maven依赖。  	&amp;lt;dependency&amp;gt; &amp;lt;
       <guid>https://lllovol.com/p/spring11/</guid>
       <description>前言 最近正式入职，第一周的事情主要就是进行代码的Code Review,将自己曾经的实习时候写的代码看一看，清掉一部分过时的代码。同时也从前辈们的分享中学习到了不少的小细节。 以及看了阿里巴巴的开发规范规约，将一些比较重要的地方、原来没有注意到的地方记录一下。
 测试用例   在写Junit的时候，可以写一个BaseTest,以后test直接继承这个类即可，就不用每次都新建一个类然后在上面重新写上好多注解了。
- @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) @RunWith(SpringJUnit4ClassRunner.class) @Slf4j public class BaseTests { }    在写CRUD的测试用例的时候，一定要写成一个闭环，新加了测试用例，最后测试结束的时候一定要删除，防止在数据库中产生脏数据。
+ @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) @RunWith(SpringJUnit4ClassRunner.class) @Slf4j public class BaseTests {}   在写CRUD的测试用例的时候，一定要写成一个闭环，新加了测试用例，最后测试结束的时候一定要删除，防止在数据库中产生脏数据。
   阿里巴巴的规约阅读笔记  外部正在调用或者二方库依赖的接口（二方库就是公司内部各个服务之间相互依赖的库）不允许修改方法的签名，避免对接口调用方造成影响。 接口过时的时候必须加上**@Deprecated**注解。 Object的equals方法容易报NPE，应该使用常量或者确定有值的对象来使用equals方法。   正例:&amp;ldquo;test&amp;rdquo;.equals(object);
 反例:object.equals(&amp;ldquo;test&amp;rdquo;);
  所有整型包装类对象之间值的比较，全部使用equals方法比较。   说明:对于 Integer var = ? 在-128 至 127 范围内的赋值，Integer 对象是在 IntegerCache.cache 产 生，会复用已有对象，这个区间内的 Integer 值可以直接使用==进行判断，但是这个区间之外的所有数 据，都会在堆上产生，并不会复用已有对象，这是一个大坑，推荐使用 equals 方法进行判断。
@@ -720,7 +766,7 @@ FeignClient的编写  添加maven依赖。  	&amp;lt;dependency&amp;gt; &amp;lt;
       <guid>https://lllovol.com/p/snippet/</guid>
       <description>前言 在书写markdown文章的时候，往往需要向其中添加图片的链接，从截图到文件的处理，到链接的获取都会很麻烦。在寻找各种图床工具之后，发现其效果都不是很好（比如要收费开通多个云图床的上传权限），因此本文将介绍另外一种较为简便的处理方式。
 设置Snippet snippet是短文的意思，在ide中常常是指可以通过一小串的命令生成一大段代码或者文字的方式。例如，在sublime中输入lorem+tab。就会生成一大段样例文字
-lorem+tab ==&amp;gt; Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+lorem+tab==&amp;gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmodtempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodoconsequat. Duis aute irure dolor in reprehenderit in voluptate velit essecillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
     </item>
     
     <item>
@@ -731,7 +777,7 @@ lorem+tab ==&amp;gt; Lorem ipsum dolor sit amet, consectetur adipisicing elit, s
       <guid>https://lllovol.com/p/android-idea/</guid>
       <description>前言 最近在帮朋友优化一个安卓的应用，使用Android来实现的一个华容道的小游戏。 项目链接
 Android Studio的开发项目文件结构图 主要显示的是src文件夹下的结构
- . ├── AndroidManifest.xml ├── java │ └── com │ └── example │ └── huarongdao │ ├── AboutActivity.java │ ├── Block.java │ ├── Dimension.java │ ├── Klotski.java │ ├── KlotskiMapParser.java │ ├── L.java │ ├── Level1Activity.java │ ├── Level2Activity.java │ ├── Level3Activity.java │ ├── Level4Activity.java │ ├── LevelActivity.java │ ├── MainActivity.java │ └── Screen.java └── res ├── drawable ├── drawable-v24 ├── layout ├── mipmap-anydpi-v26 ├── mipmap-hdpi ├── mipmap-mdpi ├── mipmap-xhdpi ├── mipmap-xxhdpi ├── mipmap-xxxhdpi ├── temp-mipmap └── values  AndroidManifest.</description>
+ .├── AndroidManifest.xml ├── java│ └── com│ └── example│ └── huarongdao│ ├── AboutActivity.java│ ├── Block.java│ ├── Dimension.java│ ├── Klotski.java│ ├── KlotskiMapParser.java│ ├── L.java│ ├── Level1Activity.java│ ├── Level2Activity.java│ ├── Level3Activity.java│ ├── Level4Activity.java│ ├── LevelActivity.java│ ├── MainActivity.java│ └── Screen.java└── res├── drawable├── drawable-v24├── layout├── mipmap-anydpi-v26├── mipmap-hdpi├── mipmap-mdpi├── mipmap-xhdpi├── mipmap-xxhdpi├── mipmap-xxxhdpi├── temp-mipmap└── values AndroidManifest.</description>
     </item>
     
     <item>
@@ -768,7 +814,7 @@ Android Studio的开发项目文件结构图 主要显示的是src文件夹下�
 小细节 权重转换百分比的问题 在工作中需要将各个对象所对应的权重转换成百分比，并且要求最后转换出来的百分比，同一类型的相加必须为百分之百，解决思路主要如下
  将各个类型的对象都分别分类 算出各个类型的总权重 算出每个对象在自己类型下的所占百分比 判断每个类型下的对象百分比相加是否等于100 在List处理的时候，可以将List分割成当前类型，和非当前类型 其中需要注意的是，在算百分比的时候，*100应该写在分子  eg: //这样会一直为0，是错误的 //原因是运算符是从左往右计算 //前面除法算出来之后会直接去尾，不足1就是0，所以最后乘以100结果还是0 percent / totalWeight * 100 //这样是正确的 percent * 100 / totalWeight
 code:
- private List&amp;lt;GreyDestination&amp;gt; getDestinationsPercent(List&amp;lt;GreyDestination&amp;gt; tempDestinations) { HashMap&amp;lt;String, Integer&amp;gt; serviceAndTotalWeight = new HashMap&amp;lt;&amp;gt;(); HashMap&amp;lt;String, Integer&amp;gt; serviceAndCount = new HashMap&amp;lt;&amp;gt;(); getServiceWeightAndCount(tempDestinations, serviceAndTotalWeight, serviceAndCount); List&amp;lt;GreyDestination&amp;gt; finalDestinations = tempDestinations.stream().map( destination -&amp;gt; { String service = destination.getService(); Integer count = serviceAndCount.get(service); if (count == 1) { destination.</description>
+ private List&amp;lt;GreyDestination&amp;gt; getDestinationsPercent(List&amp;lt;GreyDestination&amp;gt; tempDestinations) {HashMap&amp;lt;String, Integer&amp;gt; serviceAndTotalWeight = new HashMap&amp;lt;&amp;gt;();HashMap&amp;lt;String, Integer&amp;gt; serviceAndCount = new HashMap&amp;lt;&amp;gt;();getServiceWeightAndCount(tempDestinations, serviceAndTotalWeight, serviceAndCount);List&amp;lt;GreyDestination&amp;gt; finalDestinations = tempDestinations.stream().map(destination -&amp;gt; {String service = destination.getService();Integer count = serviceAndCount.get(service);if (count == 1) {destination.</description>
     </item>
     
     <item>
@@ -780,8 +826,8 @@ code:
       <description>前言 排序问题实现过很多次了，但是如何保证随机的乱序呢？这就是洗牌问题了（Shuffle）
  洗牌算法FisherYates原理
  洗牌问题 Fisher-Yates shuffle算法 首先来看看Collection里面的方法 code：
- /** * Created by ymk on 2019/3/28. * 这个算法主要是用来实现洗牌算法的 */ public class FisherYates { public static void main(String[] args) { Integer[] raw = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13}; List&amp;lt;Integer&amp;gt; pokers = Arrays.asList(raw); Joiner joiner= Joiner.on(&amp;quot;,&amp;quot;); System.out.println(joiner.join(pokers)); Collections.shuffle(pokers); System.out.println(joiner.join(pokers)); } }  输出：
- 1,2,3,4,5,6,7,8,9,10,11,12,13 5,9,1,12,7,8,2,10,11,6,3,4,13  源码实现  public static void shuffle(List&amp;lt;?</description>
+ /*** Created by ymk on 2019/3/28.* 这个算法主要是用来实现洗牌算法的*/public class FisherYates {public static void main(String[] args) {Integer[] raw = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};List&amp;lt;Integer&amp;gt; pokers = Arrays.asList(raw);Joiner joiner= Joiner.on(&amp;quot;,&amp;quot;);System.out.println(joiner.join(pokers));Collections.shuffle(pokers);System.out.println(joiner.join(pokers));}} 输出：
+ 1,2,3,4,5,6,7,8,9,10,11,12,135,9,1,12,7,8,2,10,11,6,3,4,13 源码实现  public static void shuffle(List&amp;lt;?</description>
     </item>
     
     <item>
@@ -798,10 +844,10 @@ code:
 这样，我们就能通过组合两个相关子问题的最优解，并在所有可能的两端切割方案中选取组合收益的最大者，构成原问题的最优解。 这样，我们称钢条切割问题满足最优子结构（optimal substructure）的性质：问题的最优解由相关问题的最优解组合而成，而这些子问题可以独立求解。
 除此之外，我们可以将钢条从左边切割下长度为i的一段，然后只对右边剩下的长度为n-i的一段继续进行切割（递归求解），对左边的一段则不再进行切割，
 而不做任何切割的方案，可以描述为：第一段的长度为n，收益为pn，剩余部分的长度为0，对应的收益为r0=0。
-伪代码实现（自顶向下的方法）  CUT-ROD（p,n) 1	if n == 0 2	return 0; 3 q = min_num 4 for i = 1 to n 5 q=max(q,p[i]+CUT-ROD(p,n-i)) 6 return q  CUT-ROD优化 上方的方法，在n变大的时候，程序运行时间会变得特别特别慢，原因是，它会反复的使用相同的参数值，对自身进行递归调用，等价于他在反复求解相同的子问题。如果将上面函数的递归调用树画出来，将会有2^(n-1)个叶节点。全部展开，必将成为一个指数级增长的趋势。上面的朴素递归算法，效率低，就是这个问题，反复求解了相同的子问题。
+伪代码实现（自顶向下的方法）  CUT-ROD（p,n)1	if n == 02	return 0;3 q = min_num4 for i = 1 to n5 q=max(q,p[i]+CUT-ROD(p,n-i))6 return q CUT-ROD优化 上方的方法，在n变大的时候，程序运行时间会变得特别特别慢，原因是，它会反复的使用相同的参数值，对自身进行递归调用，等价于他在反复求解相同的子问题。如果将上面函数的递归调用树画出来，将会有2^(n-1)个叶节点。全部展开，必将成为一个指数级增长的趋势。上面的朴素递归算法，效率低，就是这个问题，反复求解了相同的子问题。
 因此，动态规划要求仔细安排求解的顺序，对每个子问题，之求解一次，并将结果保存下来。因此，对于每个子问题的解，咱们只求一次，并且将结果保存下来，之后再遇到相同的子问题，就可以直接求出解，因此，动态规划方法，就是付出了额外的内存空间，来节省计算时间，这就是典型的时空权衡的例子。下面是两个优化算法的伪代码
 带备忘的自顶向下法（top-down with memoization） 过程会保存每个子问题的解，通常保存在一个数组或者散列表当中。当需要一个子问题的解的时候，首先检查一下是否已经保存过此解。
- MEMOIZED-CUT-ROD(p,n) 1 let r[0..n]be a new array 2 for i = 0 to n 3 r[i] = min_num 4 return MEMOIZED-CUT-ROD-AUX(p,n,r); MEMOIZED-CUT-ROD-AUX(p,n,r) 1 if r[n]&amp;gt;=0 2 return r[n] 3 if n == 0 4 q = 0 5 else q = min_num 6	for i = 1 to n 7 q=max(q,p[i]+MEMOIZED-CUT-ROD-AUX(p,n-i,r)) 8 r[n]=q 9 return q  自底向上的方法  BOTTOM-UP-CUT-ROD(p,n) 1 let r[0.</description>
+ MEMOIZED-CUT-ROD(p,n)1 let r[0..n]be a new array2 for i = 0 to n3 r[i] = min_num4 return MEMOIZED-CUT-ROD-AUX(p,n,r);MEMOIZED-CUT-ROD-AUX(p,n,r)1 if r[n]&amp;gt;=02 return r[n]3 if n == 04 q = 05 else q = min_num6	for i = 1 to n 7 q=max(q,p[i]+MEMOIZED-CUT-ROD-AUX(p,n-i,r))8 r[n]=q9 return q 自底向上的方法  BOTTOM-UP-CUT-ROD(p,n)1 let r[0.</description>
     </item>
     
     <item>
@@ -813,10 +859,10 @@ code:
       <description>前言 本文主要记录最近工作中关于开发中的一些小技巧以及感悟
 小细节 String转Long 使用Long.parseLong,而不是Long.getLong
 Guava库 Joiner 超好用的Guava库，主要用于字符串的拼接，可以自动在中间加上分隔符
- String yamlStart = &amp;quot;---\n&amp;quot;; String yamlEnd = &amp;quot;...\n&amp;quot;; Joiner joinerContent = Joiner.on(&amp;quot;...\n---\n&amp;quot;).skipNulls(); return Joiner.on(&amp;quot;&amp;quot;).join(yamlStart, joinerContent.join(yamlList), yamlEnd);  Splitter 可以很方便的将字符串分割成对应的数据结构
- //将source进行处理 List&amp;lt;String&amp;gt; tempSource = Splitter.on(&amp;quot;,&amp;quot;).splitToList(param.getSource());  String占位符的用法 原来：
- String title = &amp;quot;[&amp;quot; + characterName + &amp;quot;][&amp;quot; + task.getEnv() + &amp;quot;][&amp;quot; + pipelineStage.getService() + &amp;quot;]&amp;quot;;  改进：
- String title = String.format(&amp;quot;[%s][%s][%s]&amp;quot;,  线程中的问题 不能直接使用Autowired，需要定义了成员变量之后，使用外界已经加载好的service作为入参传入初始化这个线程，如果每一个线程都启一个service的话，资源消耗会很大。 （仅仅是我暂时这么理解，TODO 搞清楚原因）
+ String yamlStart = &amp;quot;---\n&amp;quot;;String yamlEnd = &amp;quot;...\n&amp;quot;;Joiner joinerContent = Joiner.on(&amp;quot;...\n---\n&amp;quot;).skipNulls();return Joiner.on(&amp;quot;&amp;quot;).join(yamlStart, joinerContent.join(yamlList), yamlEnd); Splitter 可以很方便的将字符串分割成对应的数据结构
+ //将source进行处理List&amp;lt;String&amp;gt; tempSource = Splitter.on(&amp;quot;,&amp;quot;).splitToList(param.getSource()); String占位符的用法 原来：
+ String title = &amp;quot;[&amp;quot; + characterName + &amp;quot;][&amp;quot; + task.getEnv() + &amp;quot;][&amp;quot; + pipelineStage.getService() + &amp;quot;]&amp;quot;; 改进：
+ String title = String.format(&amp;quot;[%s][%s][%s]&amp;quot;, 线程中的问题 不能直接使用Autowired，需要定义了成员变量之后，使用外界已经加载好的service作为入参传入初始化这个线程，如果每一个线程都启一个service的话，资源消耗会很大。 （仅仅是我暂时这么理解，TODO 搞清楚原因）
 数据入库的操作 建议先入队列，然后再入库
 Configuration的问题 定义了两个configuration，一个masterClient，一个jobClient 然后有个地方使用了@Autowired来进行配置（一个在外层service，一个是另外一个service），这时候就出现了冲突，开始报错。配置一定要清晰</description>
     </item>
@@ -847,6 +893,7 @@ Intermediate 操作 非最终操作，也就是中间操作
 主要功能  负载均衡 消费模式 消费拉取 消费进度反馈 消费过滤 延迟队列  分享主要内容笔记 打字速度有限，只能记录下简单的一些片段供参考
  有一个架构，轮询，可用性高，一致性要求没那么高 消息的一个流程：生产者发了一个消息，到了breaker之后，到了commitlog。有一个G的大小，实际发送的大小，顺序写的，io性能会很好，会被放到消费者的queue里面 ，小了之后，总要发到某一个topic里面 发一个消息的话，需要新建一个主题，需要制定一个queue的数量，每一个queue就是一个负载均衡，表示当前这个queue，消费到什么位置了。集群消息，一人拿一个。被负载的queue，同一个topic下的消息都是不同的 消费者可以对同一个topic下面的某几个队列进行消费，多个不同的consumer 设置min是核心线程数，是固定的，但是她的队列是无限的，所以这个地方没有什么用 缓存超过10000个，会改变线程池的大小，会做对应的限制 msgListener就是传的一个回调 会有一个offsetStore会存，存到本地和远程 还有消息的消费逻辑，注册到客户端的，生成clientId 封装了一些拉取消息的api，通过路由信息 worker发出请求，然后又一个线程池，来进行序列化和相应，消费的话会再七环到对应consumer的线程池 有各种组件，然后讲讲启动之后，都做了哪些事情 基本上都是通过定时消息去驱动的，很少是通过事件去驱动的， 找nameserver,然后去找server的信息 更新consumer消费的一个队列offset 都不是实时的更新的，是每一个五秒钟才刷新一次的 广播消费的，消费的queue是全部，订阅，不是分发，每一个rebalance里面，都处理了一个queue，实现了一个拍照 如果没有存，就是首次消费，如果是last，就会从，rocket是经常清消息的，发消息，然后消费 消费，就是拉取消息，就是放一条消息，就可以进行拉取，会先做一些验证，然后做一些限流，只不过限流是做一些delay，顺序消息，需要设置一下是不是第一次，然后获取订阅信息，然后调用对应的pullapi，然后去发一条消息，拉倒请求之后，就会有callback，去封装一下，找到了消息了，然后有一个真正的消息处理类 处理的流程 如果全部消费成功了之后，就会找到maxOffset，如果没有的话，就会去更新最小的那一个，这就是整个的一个消费流程  自行延展 MQ是高并发系统的核心组件之一，能够提高业务效率和系统的稳定性，主流的MQ有Rocketmq、kafka、Rabbitmq
  Rocketmq原理&amp;amp;最佳实践 主要对比如下
+对比
  </description>
     </item>
     
@@ -858,7 +905,8 @@ Intermediate 操作 非最终操作，也就是中间操作
       <guid>https://lllovol.com/p/spring8/</guid>
       <description>前言 主要用来记录整理最近一周工作学习中遇到，学到的一些小知识，积少成多，聚沙成塔
 小细节 Swagger-ui显示枚举类型的时候 定义的枚举类型的头上不需要加一些莫名其妙的注解，就可以在Swagger-ui界面自动生成
- public enum GreyTaskType { SCALE, PERSON, DEMAND, HOST ; }  Swagger-ui的参数显示的问题 这个是在帮忙解决朋友的问题的时候发现的，其实就是Getter的问题，他定义了俩Getter，这样就会有俩参数跑出来了。
+ public enum GreyTaskType {SCALE,PERSON,DEMAND,HOST;} 例子
+Swagger-ui的参数显示的问题 这个是在帮忙解决朋友的问题的时候发现的，其实就是Getter的问题，他定义了俩Getter，这样就会有俩参数跑出来了。
 双向的验证 在两个模块相互依赖的时候，一方在进行某些操作的时候，需要判断另一方的状态，同样，另一方在进行某些操作的时候，也需要对这边的状态进行判断。 （主要是在删除和发布操作的时候）
 Burp Suite和Kali系统 能够用于web应用攻击的，主要使用这个工具来进行网络安全方面的测试。而Kali系统主要就是黑客使用的系统了，用于网络渗透
 Spring cloud配置中心 能够使用这个工具，实现项目发布在不同环境的情况下， 自行加载对应环境下的配置，而不再用手动修改
@@ -885,8 +933,8 @@ Hibernate  Hibernate是一个开放源代码的对象关系映射框架，它对
 我们都知道，在使用持久化工具的时候，一般都有一个对象来操作数据库，在原生的Hibernate中叫做Session，在JPA中叫做EntityManager，在MyBatis中叫做SqlSession，通过这个对象来操作数据库。我们一般按照三层结构来看的话，Service层做业务逻辑处理，Dao层和数据库打交道，在Dao中，就存在着上面的对象。那么ORM框架本身提供的功能有什么呢？答案是基本的CRUD，所有的基础CRUD框架都提供，我们使用起来感觉很方便，很给力，业务逻辑层面的处理ORM是没有提供的，如果使用原生的框架，业务逻辑代码我们一般会自定义，会自己去写SQL语句，然后执行。在这个时候，Spring-data-jpa的威力就体现出来了，ORM提供的能力他都提供，ORM框架没有提供的业务逻辑功能Spring-data-jpa也提供，全方位的解决用户的需求。使用Spring-data-jpa进行开发的过程中，常用的功能，我们几乎不需要写一条sql语句。
   博文地址 JPA官方文档  应用实例 在大家的日常开发中都用到了很多，再次就不细致列举了，详情可以查看另外一篇博文
  Spring开发的小细节（六）
- 源码解析 Repository  @Indexed public interface Repository&amp;lt;T, ID&amp;gt; { }  CrudRepository 主要接口 CurdRepository
- public interface CrudRepository&amp;lt;T, ID&amp;gt; extends Repository&amp;lt;T, ID&amp;gt; { &amp;lt;S extends T&amp;gt; S save(S var1); &amp;lt;S extends T&amp;gt; Iterable&amp;lt;S&amp;gt; saveAll(Iterable&amp;lt;S&amp;gt; var1); Optional&amp;lt;T&amp;gt; findById(ID var1); boolean existsById(ID var1); Iterable&amp;lt;T&amp;gt; findAll(); Iterable&amp;lt;T&amp;gt; findAllById(Iterable&amp;lt;ID&amp;gt; var1); long count(); void deleteById(ID var1); void delete(T var1); void deleteAll(Iterable&amp;lt;?</description>
+ 源码解析 Repository  @Indexedpublic interface Repository&amp;lt;T, ID&amp;gt; {} CrudRepository 主要接口 CurdRepository
+ public interface CrudRepository&amp;lt;T, ID&amp;gt; extends Repository&amp;lt;T, ID&amp;gt; {&amp;lt;S extends T&amp;gt; S save(S var1);&amp;lt;S extends T&amp;gt; Iterable&amp;lt;S&amp;gt; saveAll(Iterable&amp;lt;S&amp;gt; var1);Optional&amp;lt;T&amp;gt; findById(ID var1);boolean existsById(ID var1);Iterable&amp;lt;T&amp;gt; findAll();Iterable&amp;lt;T&amp;gt; findAllById(Iterable&amp;lt;ID&amp;gt; var1);long count();void deleteById(ID var1);void delete(T var1);void deleteAll(Iterable&amp;lt;?</description>
     </item>
     
     <item>
@@ -912,12 +960,12 @@ Hibernate  Hibernate是一个开放源代码的对象关系映射框架，它对
  yamlBeans官网
 yaml文档的学习
  添加依赖 将下列代码添加到pom文件当中
-&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.esotericsoftware.yamlbeans&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;yamlbeans&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.12&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt;  Yaml反序列化为常见数据结构 所谓的反序列化，就是将yaml格式的文件，转换为java的常见数据结构 主要使用的类是YamlReader，然后可以将yaml文档转换为HashMap，ArrayList,还有Strings类型。
+&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;com.esotericsoftware.yamlbeans&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;yamlbeans&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;1.12&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt; Yaml反序列化为常见数据结构 所谓的反序列化，就是将yaml格式的文件，转换为java的常见数据结构 主要使用的类是YamlReader，然后可以将yaml文档转换为HashMap，ArrayList,还有Strings类型。
 yaml：
-name: Nathan Sweet age: 28 address: 4011 16th Ave S phone numbers: - name: Home number: 206-555-5138 - name: Work number: 425-555-2306  code:
-YamlReader reader = new YamlReader(new FileReader(&amp;quot;contact.yml&amp;quot;)); Object object = reader.read(); System.out.println(object); Map map = (Map)object; System.out.println(map.get(&amp;quot;address&amp;quot;));  Yaml反序列化为POJO 将yaml文档反序列化为pojo(plain ordinary java object)
+name: Nathan Sweetage: 28address: 4011 16th Ave Sphone numbers:- name: Homenumber: 206-555-5138- name: Worknumber: 425-555-2306 code:
+YamlReader reader = new YamlReader(new FileReader(&amp;quot;contact.yml&amp;quot;));Object object = reader.read();System.out.println(object);Map map = (Map)object;System.out.println(map.get(&amp;quot;address&amp;quot;)); Yaml反序列化为POJO 将yaml文档反序列化为pojo(plain ordinary java object)
 Yaml and java class:
-name: Nathan Sweet age: 28 public class Contact { public String name; public int age; }  Code:</description>
+name: Nathan Sweetage: 28public class Contact {public String name;public int age;} Code:</description>
     </item>
     
     <item>
@@ -928,10 +976,10 @@ name: Nathan Sweet age: 28 public class Contact { public String name; public int
       <guid>https://lllovol.com/p/spring7/</guid>
       <description>前言 过年后第一次开始更新啦，这一篇主要就用来总结年后以来有意思，有用的一些信息
 在Controller中的一些注解 Controller的类型 主要有两种，一种是普通的,通常是被使用服务于web页面的。默认，你的controller方法返回的是一个string串，是表示要展示哪个模板页面或者是要跳转到哪里去。
-@Controller  另外一种是专门用在编写API的时候，返回一个JSON，或者是XML等等。然后方法返回的是可以是一个对象，或者是一个可以被序列化的对象。
-@RestController  路由的类型 这里的路由就是指http method。（GET,POST,PUT,PATCH,DELETE）。
-@GetMapping @PostMapping @PutMapping @PatchMapping @DeleteMapping  同时，在Controller上面可以加上一个@RequestMapping，可以将所有类型路由的前缀都放在上面
-@RestController @Slf4j @Api(tags = &amp;quot;11. xxxxx&amp;quot;) @RequestMapping(&amp;quot;/api/v1&amp;quot;) @RequiredArgsConstructor public class DataController { private final DataService dataService; @ApiOperation(&amp;quot;11.1 xxxx&amp;quot;) @GetMapping(&amp;quot;/statistics&amp;quot;) public Response&amp;lt;DataDeployDto&amp;gt; deployTask(@Validated DataParam query){ log.info(&amp;quot;data Query {}&amp;quot;, JSONObject.toJSON(query)); return ResponseUtil.makeSuccess(dataService.deployData(query)); } }  在Controller内的传参的注解 @ApiOperation(&amp;quot;1.1 创建业务线&amp;quot;) @PostMapping(&amp;quot;/save&amp;quot;) public Response save(@RequestBody @Validated CustomProductAddParam customProductAddDto) { log.info(&amp;quot;save() {}&amp;quot;, JSONObject.toJSON(customProductAddDto)); customProductService.save(customProductAddDto, true); return ResponseUtil.</description>
+@Controller 另外一种是专门用在编写API的时候，返回一个JSON，或者是XML等等。然后方法返回的是可以是一个对象，或者是一个可以被序列化的对象。
+@RestController 路由的类型 这里的路由就是指http method。（GET,POST,PUT,PATCH,DELETE）。
+@GetMapping@PostMapping@PutMapping@PatchMapping@DeleteMapping 同时，在Controller上面可以加上一个@RequestMapping，可以将所有类型路由的前缀都放在上面
+@RestController@Slf4j@Api(tags = &amp;quot;11. xxxxx&amp;quot;)@RequestMapping(&amp;quot;/api/v1&amp;quot;)@RequiredArgsConstructorpublic class DataController {private final DataService dataService;@ApiOperation(&amp;quot;11.1 xxxx&amp;quot;)@GetMapping(&amp;quot;/statistics&amp;quot;)public Response&amp;lt;DataDeployDto&amp;gt; deployTask(@Validated DataParam query){log.info(&amp;quot;data Query {}&amp;quot;, JSONObject.toJSON(query));return ResponseUtil.makeSuccess(dataService.deployData(query));}} 在Controller内的传参的注解 @ApiOperation(&amp;quot;1.1 创建业务线&amp;quot;)@PostMapping(&amp;quot;/save&amp;quot;)public Response save(@RequestBody @Validated CustomProductAddParam customProductAddDto) {log.info(&amp;quot;save() {}&amp;quot;, JSONObject.toJSON(customProductAddDto));customProductService.save(customProductAddDto, true);return ResponseUtil.</description>
     </item>
     
     <item>
@@ -943,7 +991,7 @@ name: Nathan Sweet age: 28 public class Contact { public String name; public int
       <description>两种标签 Spring中的标签的包括默认的标签和自定义的标签两种，而这两种标签的用法和解析方式存在着很大的不同。
 默认标签的解析 默认标签的解析是在parseDefaultElement函数中进行的，函数中的功能逻辑一目了然，分别对4种不同的标签做了不同的处理：
  import alias bean beans  bean标签的解析以及注册 在4种标签的解析中，对bean的解析最为复杂也最为重要。因此由此深入，如果将此标签的解析过程理解了，其他标签的解析自然也会迎刃而解。
-processBeanDefinition（ele,delegate） /** * Process the given bean element, parsing the bean definition * and registering it with the registry. */ protected void processBeanDefinition(Element ele, BeanDefinitionParserDelegate delegate) { BeanDefinitionHolder bdHolder = delegate.parseBeanDefinitionElement(ele); if (bdHolder != null) { bdHolder = delegate.decorateBeanDefinitionIfRequired(ele, bdHolder); try { // Register the final decorated instance. BeanDefinitionReaderUtils.registerBeanDefinition(bdHolder, getReaderContext().getRegistry()); } catch (BeanDefinitionStoreException ex) { getReaderContext().error(&amp;quot;Failed to register bean definition with name &#39;&amp;quot; + bdHolder.</description>
+processBeanDefinition（ele,delegate） /*** Process the given bean element, parsing the bean definition* and registering it with the registry.*/protected void processBeanDefinition(Element ele, BeanDefinitionParserDelegate delegate) {BeanDefinitionHolder bdHolder = delegate.parseBeanDefinitionElement(ele);if (bdHolder != null) {bdHolder = delegate.decorateBeanDefinitionIfRequired(ele, bdHolder);try {// Register the final decorated instance.BeanDefinitionReaderUtils.registerBeanDefinition(bdHolder, getReaderContext().getRegistry());}catch (BeanDefinitionStoreException ex) {getReaderContext().error(&amp;quot;Failed to register bean definition with name &#39;&amp;quot; +bdHolder.</description>
     </item>
     
     <item>
@@ -958,11 +1006,11 @@ processBeanDefinition（ele,delegate） /** * Process the given bean element, pa
   一个成员属性
   这个属性的getter
   这个属性的setter 然后在配置文件xml当中添加相关的bean
- &amp;lt;bean id=&amp;quot;myTestBean&amp;quot; class=&amp;quot;bean.MyTestBean&amp;quot;/&amp;gt;    然后就可以在测试代码中使用我们所测试的bean了
+ &amp;lt;bean id=&amp;quot;myTestBean&amp;quot; class=&amp;quot;bean.MyTestBean&amp;quot;/&amp;gt;   然后就可以在测试代码中使用我们所测试的bean了
 容器的基础XmlBeanFactory 代码如下
- BeanFactory bf= new XmlBeanFactory(new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;));  实现流程 首先调用了ClassPathResource的构造函数 来构造了Resource资源文件的实例对象，然后后续的资源处理就可以使用Resource提供的各种服务来操作了。然后当我们有了Resource之后，就可以进行XmlBeanFactory的初始化了。
+ BeanFactory bf= new XmlBeanFactory(new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;)); 实现流程 首先调用了ClassPathResource的构造函数 来构造了Resource资源文件的实例对象，然后后续的资源处理就可以使用Resource提供的各种服务来操作了。然后当我们有了Resource之后，就可以进行XmlBeanFactory的初始化了。
 与之同理，对于不同来源的资源文件都有相应的Resource实现。有了Resource接口之后便可以对所有资源文件进行统一的处理。例如
- Resource resource=new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;); InputStream inputStream=resource.getInputStream();  XmlBeanDefinition 然后，当Resource的相关类完成了对配置文件进行封住后配置文件的读取工作就全权交给XmlBeanDefinition来处理了。
+ Resource resource=new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;);InputStream inputStream=resource.getInputStream(); XmlBeanDefinition 然后，当Resource的相关类完成了对配置文件进行封住后配置文件的读取工作就全权交给XmlBeanDefinition来处理了。
 （ignoreDependencyInterface（）函数的主要功能是忽略给定接口的自动装配功能） (时序图书 p20)
  封装资源文件。 获取输入流 通过构造的InputSource实例和Resource实例继续调用函数doLoadbeanDefinitions  支撑着整个Spring容器部分的实现基础 然后就是3个步骤，支撑着整个Spring容器部分的实现基础
  获取对XML文件的验证模式 加载XML文件，并得到对应的Document 根据返回的Document注册Bean信息  doRegisterBeanDefinitions(root) 然后，又通过一系列的处理之后，终于可以到了核心逻辑的底部doRegisterBeanDefinitions(root)
@@ -982,7 +1030,7 @@ Spring MongoDB官方文档
 JPA JAVA Persistence API，java持久化的api
  JPA的主要目标之一就是提供更加简单的编程模型：在JPA框架下创建实体和创建Java 类一样简单，没有任何的约束和限制，只需要使用 javax.persistence.Entity进行注释，JPA的框架和接口也都非常简单，没有太多特别的规则和设计模式的要求，开发者可以很容易地掌握。JPA基于非侵入式原则设计，因此可以很容易地和其它框架或者容器集成。
  MongoDB与JDBC mongoDB和JDBC（JAVA DATABASE CONNECTIVITY）最顶级的抽象类CrudRepository有很多相似的地方，下面就来看看CrudRepository和MongoRepository的对比，根据源码来看看两者之间的关系
-MongoRepository @NoRepositoryBean public interface MongoRepository&amp;lt;T, ID&amp;gt; extends PagingAndSortingRepository&amp;lt;T, ID&amp;gt;, QueryByExampleExecutor&amp;lt;T&amp;gt; { @Override &amp;lt;S extends T&amp;gt; List&amp;lt;S&amp;gt; saveAll(Iterable&amp;lt;S&amp;gt; entites); @Override List&amp;lt;T&amp;gt; findAll(); @Override List&amp;lt;T&amp;gt; findAll(Sort sort); &amp;lt;S extends T&amp;gt; S insert(S entity); &amp;lt;S extends T&amp;gt; List&amp;lt;S&amp;gt; insert(Iterable&amp;lt;S&amp;gt; entities); @Override &amp;lt;S extends T&amp;gt; List&amp;lt;S&amp;gt; findAll(Example&amp;lt;S&amp;gt; example); @Override &amp;lt;S extends T&amp;gt; List&amp;lt;S&amp;gt; findAll(Example&amp;lt;S&amp;gt; example, Sort sort); }  CrudRepository public interface CrudRepository&amp;lt;T, ID extends Serializable&amp;gt; extends Repository&amp;lt;T, ID&amp;gt; { &amp;lt;S extends T&amp;gt; S save(S entity); Optional&amp;lt;T&amp;gt; findById(ID primaryKey); Iterable&amp;lt;T&amp;gt; findAll(); long count(); void delete(T entity); boolean existsById(ID primaryKey); // … more functionality omitted.</description>
+MongoRepository @NoRepositoryBeanpublic interface MongoRepository&amp;lt;T, ID&amp;gt; extends PagingAndSortingRepository&amp;lt;T, ID&amp;gt;, QueryByExampleExecutor&amp;lt;T&amp;gt; {@Override&amp;lt;S extends T&amp;gt; List&amp;lt;S&amp;gt; saveAll(Iterable&amp;lt;S&amp;gt; entites);@OverrideList&amp;lt;T&amp;gt; findAll();@OverrideList&amp;lt;T&amp;gt; findAll(Sort sort);&amp;lt;S extends T&amp;gt; S insert(S entity);&amp;lt;S extends T&amp;gt; List&amp;lt;S&amp;gt; insert(Iterable&amp;lt;S&amp;gt; entities);@Override&amp;lt;S extends T&amp;gt; List&amp;lt;S&amp;gt; findAll(Example&amp;lt;S&amp;gt; example);@Override&amp;lt;S extends T&amp;gt; List&amp;lt;S&amp;gt; findAll(Example&amp;lt;S&amp;gt; example, Sort sort);} CrudRepository public interface CrudRepository&amp;lt;T, ID extends Serializable&amp;gt;extends Repository&amp;lt;T, ID&amp;gt; {&amp;lt;S extends T&amp;gt; S save(S entity); Optional&amp;lt;T&amp;gt; findById(ID primaryKey);Iterable&amp;lt;T&amp;gt; findAll(); long count(); void delete(T entity); boolean existsById(ID primaryKey); // … more functionality omitted.</description>
     </item>
     
     <item>
@@ -1011,7 +1059,7 @@ QPS 每秒查询数量 Query Per Second
       <description>Code Review 这一周主要是一个前辈的code Review，在此期间能学到很多新的东西，也能看到自己的不足
 变量名的命名 禁止使用拼音，真的显得很没有水平，而且可读性会非常差，除非这个对象真的只有拼音名字
 关于异常的抛出  异常不要怕抛出的多，有异常一定要打出来，不然出了错都不知道是什么地方出的错 禁止一个Exception就把一大段代码的所有异常给吞了 异常一定要用log.error()将栈给打出来  StringBuffer、StringBuilder和String 运行速度：执行速度，在这方面运行速度快慢为：StringBuilder &amp;gt; StringBuffer &amp;gt; String String为字符串常量，而StringBuilder和StringBuffer均为字符串变量，即String对象一旦创建之后该对象是不可更改的，但后两者的对象是变量，是可以更改的。Java中对String对象进行的操作实际上是一个不断创建新的对象并且将旧的对象回收的一个过程，所以执行速度很慢。而StringBuilder和StringBuffer的对象是变量，对变量进行操作就是直接对该对象进行更改，而不进行创建和回收的操作，所以速度要比String快很多。
-String str=&amp;quot;abc&amp;quot;+&amp;quot;de&amp;quot;; StringBuilder stringBuilder=new StringBuilder().append(&amp;quot;abc&amp;quot;).append(&amp;quot;de&amp;quot;); System.out.println(str); System.out.println(stringBuilder.toString());  这种情况下除外，String的速度会比StringBuilder要快，因为第一行等价于String str=&amp;ldquo;abcde&amp;rdquo;。
+String str=&amp;quot;abc&amp;quot;+&amp;quot;de&amp;quot;;StringBuilder stringBuilder=new StringBuilder().append(&amp;quot;abc&amp;quot;).append(&amp;quot;de&amp;quot;);System.out.println(str);System.out.println(stringBuilder.toString()); 这种情况下除外，String的速度会比StringBuilder要快，因为第一行等价于String str=&amp;ldquo;abcde&amp;rdquo;。
 在线程安全上，StringBuilder是线程不安全的，而StringBuffer是线程安全的 如果一个StringBuffer对象在字符串缓冲区被多个线程使用时，StringBuffer中很多方法可以带有synchronized关键字，所以可以保证线程是安全的，但StringBuilder的方法则没有该关键字，所以不能保证线程安全，有可能会出现一些错误的操作。所以如果要进行的操作是多线程的，那么就要使用StringBuffer，但是在单线程的情况下，还是建议使用速度比较快的StringBuilder。
 使用的情况 String：适用于少量的字符串操作的情况
 StringBuilder：适用于单线程下在字符缓冲区进行大量操作的情况
@@ -1022,8 +1070,8 @@ Stream流的方式 主要用在将一个list转成另外一个list或者map转ma
 数据库的CRUD 查询的时候注意 不建议使用findAll，最好做一个分页，看一下表有多大，除非是表小，而且不会有爆炸性的数据增长的时候可以用。其他时候最好都有分页
 删除的时候 最好是确认了可以保存了，然后再去删，这个，不应该一来就删了
 profile 想了解应用运行的状态，在什么环境下的，应该去看activity的profile
-spring: profiles: active: debug  上面是在bootstrap.yml中的，下面是如何使用
-@Value(&amp;quot;${spring.profiles.active}&amp;quot;) String active; log.info(&amp;quot;start kubernetes watch,active:{}&amp;quot;,active);  将mongoTemplate改为repo的形式  官方文档
+spring:profiles:active: debug 上面是在bootstrap.yml中的，下面是如何使用
+@Value(&amp;quot;${spring.profiles.active}&amp;quot;)String active;log.info(&amp;quot;start kubernetes watch,active:{}&amp;quot;,active); 将mongoTemplate改为repo的形式  官方文档
  相当的方便，好处就是出问题的时候，可以找到对应的表的对应的repo类，快速排查问题。
 如果想要自定义函数的话，需要自定义一个接口，再实现之后，用repo来继承自定义的接口。</description>
     </item>
@@ -1055,8 +1103,8 @@ spring: profiles: active: debug  上面是在bootstrap.yml中的，下面是如�
       <description>Code Review 这周被点名来做code view了来着，然后昨天晚上做了一个小时的code review，还是相当紧张，然后今天改了一天代码 特此总结
 ApplicationListener 这个地方原来主要实现的功能是spring3中的功能，在启动了整个项目之后，让watch pods和watch service启动并且只启动一次。
 （启动一个单线程，回调函数，生命周期） 原来的做法是使用spring task在应用启动之后，就启动一次然后一直运行
-// @Scheduled(cron = &amp;quot;${schedule.kubeService}&amp;quot;) @Scheduled(fixedDelay = 999999999) protected void gitlabProjectTask() { kubernetesService.collectServices(); customServiceService.bindServiceAndProject(); kubernetesService.watchServices(); } // @Scheduled(cron = &amp;quot;${schedule.kubePod}&amp;quot;) // @Scheduled(cron = &amp;quot;0 0,14 6,18 * * ? &amp;quot;) //taskexecutor // ScheduledExecutorTask // new 一个单线程一直跑就可以了 @Scheduled(fixedDelay = 999999999) public void collectPod() { kubernetesService.collectPods(); kubernetesService.watchPods(); }  现在使用的是ApplicationListener
-public class KubernetesServiceImpl implements KubernetesService, ApplicationListener&amp;lt;ApplicationReadyEvent&amp;gt; { //生命周期 @Override public void onApplicationEvent(ApplicationReadyEvent event) { collectServices(); customServiceService.</description>
+// @Scheduled(cron = &amp;quot;${schedule.kubeService}&amp;quot;)@Scheduled(fixedDelay = 999999999)protected void gitlabProjectTask() {kubernetesService.collectServices();customServiceService.bindServiceAndProject();kubernetesService.watchServices();}// @Scheduled(cron = &amp;quot;${schedule.kubePod}&amp;quot;)// @Scheduled(cron = &amp;quot;0 0,14 6,18 * * ? &amp;quot;)//taskexecutor// ScheduledExecutorTask// new 一个单线程一直跑就可以了@Scheduled(fixedDelay = 999999999)public void collectPod() {kubernetesService.collectPods();kubernetesService.watchPods();} 现在使用的是ApplicationListener
+public class KubernetesServiceImpl implements KubernetesService, ApplicationListener&amp;lt;ApplicationReadyEvent&amp;gt; {//生命周期@Overridepublic void onApplicationEvent(ApplicationReadyEvent event) {collectServices();customServiceService.</description>
     </item>
     
     <item>
@@ -1067,13 +1115,13 @@ public class KubernetesServiceImpl implements KubernetesService, ApplicationList
       <guid>https://lllovol.com/p/spring3/</guid>
       <description>前言 最近主要在获取到的k8s中的相关service和pod的信息的变化，将原来全量获取数据的方式改进为增量的方式，此篇主要记录使用过程中遇到的坑和相信的解决方式
 KubernetesClient的包的依赖的引用 使用的是fabric8的kubernetes-client，添加如下依赖即可
-&amp;lt;!--在pom.xml文件--&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.fabric8&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;kubernetes-client&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4.0.5&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt;  配置文件配置相关的属性 application.yml文件 添加k8s集群的主机url,token
-api: server: k8s: key: &amp;quot;kubernetes.auth.token&amp;quot; token: &amp;quot;***********************************&amp;quot; url: &amp;quot;https://10.0.0.0:6443&amp;quot;  这里就有一个坑，就是这个token,由于kubernetes的安全机制，原来获取到的token都只有一天的时效，第二天都需要重新更新一个新的token
+&amp;lt;!--在pom.xml文件--&amp;gt;&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;io.fabric8&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;kubernetes-client&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;4.0.5&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt; 配置文件配置相关的属性 application.yml文件 添加k8s集群的主机url,token
+api:server:k8s:key: &amp;quot;kubernetes.auth.token&amp;quot;token: &amp;quot;***********************************&amp;quot;url: &amp;quot;https://10.0.0.0:6443&amp;quot; 这里就有一个坑，就是这个token,由于kubernetes的安全机制，原来获取到的token都只有一天的时效，第二天都需要重新更新一个新的token
 这样是肯定不行的，解决的方式有大概下面几种：
  使用证书的方式，需要三个文件，CaCertFile,ClientCertFile,ClientKeyFile 获取一种长效的永久的token，这个需要的权限比较高，需要找到kubernetes的负责人，拥有的权限比较高的人
 （查看本地的token,cd ~/.kube,然后cat config,就能看到自己本地的token） 使用账号密码进行登录  configuration的实现 在configuration文件夹下面新建一个class，取名为KubernetesConfig
 主要文件内容如下
-@Setter @Configuration @ConfigurationProperties(prefix = &amp;quot;api.server&amp;quot;) public class KubernetesConfig { private K8s k8s; private static final int REQUEST_TIMEOUT = 3 * 1000; private static final int CONNECTION_TIMEOUT = 3 * 1000; @Bean(&amp;quot;kubernetesClient&amp;quot;) public KubernetesClient kubernetesClient() { Config config = new ConfigBuilder() .</description>
+@Setter@Configuration@ConfigurationProperties(prefix = &amp;quot;api.server&amp;quot;)public class KubernetesConfig {private K8s k8s;private static final int REQUEST_TIMEOUT = 3 * 1000;private static final int CONNECTION_TIMEOUT = 3 * 1000;@Bean(&amp;quot;kubernetesClient&amp;quot;)public KubernetesClient kubernetesClient() {Config config = new ConfigBuilder().</description>
     </item>
     
     <item>
@@ -1126,11 +1174,11 @@ p6 游戏是积极的！ 玩游戏超过12小时的举手！但是玩游戏是�
       <guid>https://lllovol.com/p/spring2/</guid>
       <description>Code Review 让大家对代码质量的标准是在一个线上， 是一个相互学习的过程。 blog主要是用来记录当时的笔记与自己的一些感想
 用户中心的接口，需要查用户之前捐过的一些订单 ContextUtil.getUserId(()不建议使用 限制了使用线程的场景，可能每一段代码执行的线程可能不在一起了 讲究的是 变量来源应该是外部的,参数是传入的 swing local ？本地的东西 context 在子线程中是无法工作的，Util这个工具类，不应该涉及到线程这种复杂的东西
-interceptor， implements HandlerMethodargumentResolver，//可以直接解析参数（将token解析的过程，就放到这个里面了） (@LoginUidAttribute String uid)  拿到userId的，isDelete()可以不用判断 解决泛型，warning 加 PageHelper是用的swing local mapper上面的select 一定要体现一个sql,查询条件一定要解耦，不要太复杂了 不要写太多的if OrderBizMapper.xml 这样可以更好的去维护索引
+interceptor， implements HandlerMethodargumentResolver，//可以直接解析参数（将token解析的过程，就放到这个里面了）(@LoginUidAttribute String uid) 拿到userId的，isDelete()可以不用判断 解决泛型，warning 加 PageHelper是用的swing local mapper上面的select 一定要体现一个sql,查询条件一定要解耦，不要太复杂了 不要写太多的if OrderBizMapper.xml 这样可以更好的去维护索引
 不建议使用copyProperties，只要一个属性对不上可能就会 使用long不建议使用int，java中一直诟病的，就是java中的对象看不出来到底是不是long null 新的语言都解决了 null会不会有问题的东西。 创建一个 optional约定就是，可能为null int 是不能为null的 interger是可以为null的 这样可以增加代码的意义的传递，这个就是一种约定 ，使用原生的类型比较好
-链式的一个使用的方式，每一个点放一个行,因为一个点就表示一个操作了 order.stream() .map(OrderBizVo::new) .collect(Collection.toList())这样会更加java 8一点 .map() .distinct() .collect(Collections.toList()) //就可以  返回给前端最好返回是一个空的集合而不是一个null，这样前端会更好处理一点 每一个表建表的时候都需要加一个 isDelete update 不涉及索引的，不能一味使用 查sql，一般不应该根据sql来加，先是业务来看怎么查的？（冲突与建议）查询的时候只能将sql交给dba，沟通的简洁 连点增加锁的操作，token不用放在数据库中，这种没必要持久化的东西，就放到redis中 为什么是double check? 是处理单例的时候才会使用double check，早起的java处理指令重排的时候，会导致一个check会被跳过去的，所以才处理了double check （在说什么？我怎么开始听不懂了），两次的话，就总有一次会成功
+链式的一个使用的方式，每一个点放一个行,因为一个点就表示一个操作了 order.stream().map(OrderBizVo::new).collect(Collection.toList())这样会更加java 8一点.map().distinct().collect(Collections.toList()) //就可以 返回给前端最好返回是一个空的集合而不是一个null，这样前端会更好处理一点 每一个表建表的时候都需要加一个 isDelete update 不涉及索引的，不能一味使用 查sql，一般不应该根据sql来加，先是业务来看怎么查的？（冲突与建议）查询的时候只能将sql交给dba，沟通的简洁 连点增加锁的操作，token不用放在数据库中，这种没必要持久化的东西，就放到redis中 为什么是double check? 是处理单例的时候才会使用double check，早起的java处理指令重排的时候，会导致一个check会被跳过去的，所以才处理了double check （在说什么？我怎么开始听不懂了），两次的话，就总有一次会成功
 e.printStackTrace()是禁止的 使用
-log.error(&amp;quot;&amp;quot;,{},e);  token的延长时间 一个是长效token,一个是短效的token,这样子的话会更加安全一点</description>
+log.error(&amp;quot;&amp;quot;,{},e); token的延长时间 一个是长效token,一个是短效的token,这样子的话会更加安全一点</description>
     </item>
     
     <item>
@@ -1156,7 +1204,7 @@ Java的容器类 Java中的容器类按照大的来分，主要可以分为：
       <description>原来写的代码被CTO抓出来吐槽，发现确实都是一些当初自己没有注意到的地方，打算将这样的小细节一点一点的收集起来，养成更好的编码习惯。
 Slf4j  The Simple Logging Facade for Java (SLF4J) serves as a simple facade or abstraction for various logging frameworks (e.g. java.util.logging, logback, log4j) allowing the end user to plug in the desired logging framework at deployment time. 摘自https://www.slf4j.org/
  在编写Spring的代码的时候，只需要在Class上方添加一个@Slf4j的注解即可。slf4j是facade pattern的典型例子（隐藏系统的复杂性，并向客户端提供了一个客户端可以访问系统的接口，又被成为门面模式或者外观模式） 使用的时候，可以使用占位符的方式进行日志的记录，省去了原来自己拼接日志的麻烦。
- log.debug(&amp;quot;wxpushGet() returned: {}&amp;quot; ,result);  但是有一些需要注意的地方。
+ log.debug(&amp;quot;wxpushGet() returned: {}&amp;quot; ,result); 但是有一些需要注意的地方。
  在日常开发调试的时候应该少用log.info()，而应该使用log.debug，不然在上线之后，就会产生很多冗余的信息。 只有在线上部署的时候，关键代码的信息，才使用log.info(),来显示日志的信息。千万不能滥用！ 在catch的抛出错误的时候，使用log.error()。会打印错误以及异常的信息 log.warn(),用于打印潜在的用户的错误可能的信息。  Dto等model的@Data注解 @Data注解，可以实现类的Getter和Setter的同时还有toString方法，没有必要自己再转一次Json(如果只是打印个日志的话)，lombok生成的toString的可读性是很高的
  Lombok 是一种 Java™ 实用工具，可用来帮助开发人员消除 Java 的冗长，尤其是对于简单的 Java 对象（POJO Plain Ordinary Java Object）。它通过注解实现这一目的。</description>
     </item>
@@ -1180,7 +1228,8 @@ Slf4j  The Simple Logging Facade for Java (SLF4J) serves as a simple facade or a
       <guid>https://lllovol.com/p/%E5%AE%89%E8%A3%85atom%E7%9A%84atom-beautify/</guid>
       <description>前言 想给atom安装beautify的插件 使用apm install atom-beautify 和是用preference中的插件安装都失败了
 Start 使用github 克隆到本地，然后安装
- cd ~/.atom/packages git clone https://github.com/Glavin001/atom-beautify.git cd atom-beautify npm install  Success 使用control + alt + b 组合键 即可</description>
+ cd ~/.atom/packagesgit clone https://github.com/Glavin001/atom-beautify.gitcd atom-beautifynpm install 59469635.png
+Success 使用control + alt + b 组合键 即可</description>
     </item>
     
     <item>
@@ -1207,8 +1256,9 @@ Start 使用github 克隆到本地，然后安装
  Gitalk：一个基于 Github Issue 和 Preact 开发的评论插件 摘自v2ex
  再一次感受到了开源的强大之处，造就了现如今信息技术的高速发展
 设置OAuth github&amp;gt;右上角settings&amp;gt;Developer Settings&amp;gt;new OAuth App 然后依次输入
- Application name : 一个超厉害的名字 Homepage URL : github page的地址（http://yourname.github.io/） Application description : app的描述（随意） Authorization callback URL : Github api回调的地址，与Homepage URL相同  有一些坑需要注意，如果解析到了自己的域名，就在githubpage中的Repository，找到settings，找到github给你的url 即可获取到对应的clientId和clientSecret 修改post.html 然后在修改项目文件中的_layouts的post.html 找到合适的位置添加如下代码
-&amp;lt;!--Gitalk评论start --&amp;gt; {% if site.gitalk.enable %} &amp;lt;!-- 引入Gitalk评论插件 --&amp;gt; &amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;https://unpkg.com/gitalk/dist/gitalk.css&amp;quot;&amp;gt; &amp;lt;script src=&amp;quot;https://unpkg.com/gitalk@latest/dist/gitalk.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;div id=&amp;quot;gitalk-container&amp;quot;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt; var gitalk = new Gitalk({ clientID: &#39;{{site.gitalk.clientID}}&#39;, clientSecret: &#39;{{site.</description>
+ Application name : 一个超厉害的名字 Homepage URL : github page的地址（http://yourname.github.io/） Application description : app的描述（随意） Authorization callback URL : Github api回调的地址，与Homepage URL相同  有一些坑需要注意，如果解析到了自己的域名，就在githubpage中的Repository，找到settings，找到github给你的url   即可获取到对应的clientId和clientSecret 
+修改post.html 然后在修改项目文件中的_layouts的post.html 找到合适的位置添加如下代码
+&amp;lt;!--Gitalk评论start --&amp;gt;{% if site.gitalk.enable %}&amp;lt;!-- 引入Gitalk评论插件 --&amp;gt;&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;https://unpkg.com/gitalk/dist/gitalk.css&amp;quot;&amp;gt;&amp;lt;script src=&amp;quot;https://unpkg.com/gitalk@latest/dist/gitalk.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&amp;lt;div id=&amp;quot;gitalk-container&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;var gitalk = new Gitalk({clientID: &#39;{{site.</description>
     </item>
     
     <item>
@@ -1220,10 +1270,10 @@ Start 使用github 克隆到本地，然后安装
       <description>使用github.io来写blog 本就是件很棒的事情，但是每次在想写新的文章的时候，都需要重新复制title和开头的标签，如果能够自动化地完成这件事就好了（重复性的东西工作）
 About Rakefile  Rake is a Make-like program implemented in Ruby. Tasks and dependencies are specified in standard Ruby syntax.
  摘自http://docs.seattlerb.org/rake/
-安装Rake sudo gem install rake  即可
+安装Rake sudo gem install rake 即可
 创建Rakefile 在项目的根目录下
-touch Rakefile vim Rakefile  然后添加如下代码
-task :default =&amp;gt; :new require &#39;fileutils&#39; desc &amp;quot;创建新 post&amp;quot; task :new do puts &amp;quot;请输入要创建的文章文件文件名字：&amp;quot; @url = STDIN.gets.chomp puts &amp;quot;请输入文章的标题：&amp;quot; @name = STDIN.gets.chomp puts &amp;quot;请输入文章的子标题：&amp;quot; @slug = STDIN.gets.chomp puts &amp;quot;请输入文章的分类，以空格分隔：&amp;quot; @categories = STDIN.</description>
+touch Rakefilevim Rakefile 然后添加如下代码
+task :default =&amp;gt; :newrequire &#39;fileutils&#39;desc &amp;quot;创建新 post&amp;quot;task :new doputs &amp;quot;请输入要创建的文章文件文件名字：&amp;quot;@url = STDIN.gets.chompputs &amp;quot;请输入文章的标题：&amp;quot;@name = STDIN.gets.chompputs &amp;quot;请输入文章的子标题：&amp;quot;@slug = STDIN.gets.chompputs &amp;quot;请输入文章的分类，以空格分隔：&amp;quot;@categories = STDIN.</description>
     </item>
     
     <item>

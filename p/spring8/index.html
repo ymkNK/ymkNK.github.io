@@ -3,7 +3,8 @@
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='前言 主要用来记录整理最近一周工作学习中遇到，学到的一些小知识，积少成多，聚沙成塔
 小细节 Swagger-ui显示枚举类型的时候 定义的枚举类型的头上不需要加一些莫名其妙的注解，就可以在Swagger-ui界面自动生成
- public enum GreyTaskType { SCALE, PERSON, DEMAND, HOST ; }  Swagger-ui的参数显示的问题 这个是在帮忙解决朋友的问题的时候发现的，其实就是Getter的问题，他定义了俩Getter，这样就会有俩参数跑出来了。
+ public enum GreyTaskType {SCALE,PERSON,DEMAND,HOST;} 例子
+Swagger-ui的参数显示的问题 这个是在帮忙解决朋友的问题的时候发现的，其实就是Getter的问题，他定义了俩Getter，这样就会有俩参数跑出来了。
 双向的验证 在两个模块相互依赖的时候，一方在进行某些操作的时候，需要判断另一方的状态，同样，另一方在进行某些操作的时候，也需要对这边的状态进行判断。 （主要是在删除和发布操作的时候）
 Burp Suite和Kali系统 能够用于web应用攻击的，主要使用这个工具来进行网络安全方面的测试。而Kali系统主要就是黑客使用的系统了，用于网络渗透
 Spring cloud配置中心 能够使用这个工具，实现项目发布在不同环境的情况下， 自行加载对应环境下的配置，而不再用手动修改
@@ -22,7 +23,8 @@ spring 相关书籍推荐 spring boot 编程思想 原生类型，装箱和拆�
 <link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='SpringBoot开发中的一些小细节(八)装箱与拆箱，基本数据类型与包装类'>
 <meta property='og:description' content='前言 主要用来记录整理最近一周工作学习中遇到，学到的一些小知识，积少成多，聚沙成塔
 小细节 Swagger-ui显示枚举类型的时候 定义的枚举类型的头上不需要加一些莫名其妙的注解，就可以在Swagger-ui界面自动生成
- public enum GreyTaskType { SCALE, PERSON, DEMAND, HOST ; }  Swagger-ui的参数显示的问题 这个是在帮忙解决朋友的问题的时候发现的，其实就是Getter的问题，他定义了俩Getter，这样就会有俩参数跑出来了。
+ public enum GreyTaskType {SCALE,PERSON,DEMAND,HOST;} 例子
+Swagger-ui的参数显示的问题 这个是在帮忙解决朋友的问题的时候发现的，其实就是Getter的问题，他定义了俩Getter，这样就会有俩参数跑出来了。
 双向的验证 在两个模块相互依赖的时候，一方在进行某些操作的时候，需要判断另一方的状态，同样，另一方在进行某些操作的时候，也需要对这边的状态进行判断。 （主要是在删除和发布操作的时候）
 Burp Suite和Kali系统 能够用于web应用攻击的，主要使用这个工具来进行网络安全方面的测试。而Kali系统主要就是黑客使用的系统了，用于网络渗透
 Spring cloud配置中心 能够使用这个工具，实现项目发布在不同环境的情况下， 自行加载对应环境下的配置，而不再用手动修改
@@ -41,7 +43,8 @@ spring 相关书籍推荐 spring boot 编程思想 原生类型，装箱和拆�
 <meta name="twitter:title" content="SpringBoot开发中的一些小细节(八)装箱与拆箱，基本数据类型与包装类">
 <meta name="twitter:description" content="前言 主要用来记录整理最近一周工作学习中遇到，学到的一些小知识，积少成多，聚沙成塔
 小细节 Swagger-ui显示枚举类型的时候 定义的枚举类型的头上不需要加一些莫名其妙的注解，就可以在Swagger-ui界面自动生成
- public enum GreyTaskType { SCALE, PERSON, DEMAND, HOST ; }  Swagger-ui的参数显示的问题 这个是在帮忙解决朋友的问题的时候发现的，其实就是Getter的问题，他定义了俩Getter，这样就会有俩参数跑出来了。
+ public enum GreyTaskType {SCALE,PERSON,DEMAND,HOST;} 例子
+Swagger-ui的参数显示的问题 这个是在帮忙解决朋友的问题的时候发现的，其实就是Getter的问题，他定义了俩Getter，这样就会有俩参数跑出来了。
 双向的验证 在两个模块相互依赖的时候，一方在进行某些操作的时候，需要判断另一方的状态，同样，另一方在进行某些操作的时候，也需要对这边的状态进行判断。 （主要是在删除和发布操作的时候）
 Burp Suite和Kali系统 能够用于web应用攻击的，主要使用这个工具来进行网络安全方面的测试。而Kali系统主要就是黑客使用的系统了，用于网络渗透
 Spring cloud配置中心 能够使用这个工具，实现项目发布在不同环境的情况下， 自行加载对应环境下的配置，而不再用手动修改
@@ -70,7 +73,7 @@ if (!doNotTrack) {
 
     </head>
     <body class="
-    article-page 
+    article-page has-toc
 ">
     <script>
         (function() {
@@ -96,155 +99,22 @@ if (!doNotTrack) {
 </script>
 <div class="container main-container flex 
     
-        on-phone--column extended
+        extended
     
 ">
     
-        <aside class="sidebar left-sidebar sticky">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
-        <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-        </span>
-    </button>
-
-    <header class="site-info">
-        
-            
-            <figure class="site-avatar">
-                
-                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
-                
-
-                
-                    <span class="emoji">⚖️</span>
-                
-            </figure>
-            
-        
-        <h1 class="site-name"><a href="https://lllovol.com">lllovol</a></h1>
-        <h2 class="site-description">Stay hungry, stay foolish.</h2>
-    </header>
-
-    <ol class="menu" id="main-menu">
-        
-        
-        
-
-        <li >
-            <a href='/' >
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <div id="article-toolbar">
+            <a href="/" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="5 12 3 12 12 3 21 12 19 12" />
-  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+  <polyline points="15 6 9 12 15 18" />
 </svg>
 
 
 
-                
-                <span>主页</span>
+                <span>返回</span>
             </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/about/' >
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="7" r="4" />
-  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-</svg>
-
-
-
-                
-                <span>关于</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/archives/' >
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <rect x="3" y="4" width="18" height="4" rx="2" />
-  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
-  <line x1="10" y1="12" x2="14" y2="12" />
-</svg>
-
-
-
-                
-                <span>归档</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/links/' >
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
-  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
-</svg>
-
-
-
-                
-                <span>链接</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/search/' >
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-                
-                <span>搜索</span>
-            </a>
-        </li>
-        
-
-        
-            <li id="dark-mode-toggle">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="8" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="16" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                <span>暗色模式</span>
-            </li>
-        
-    </ol>
-</aside>
-
+        </div>
     
 <main class="main full-width">
     <article class="main-article">
@@ -293,6 +163,20 @@ if (!doNotTrack) {
         
 
         
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 1 分钟
+                </time>
+            </div>
+        
     </footer>
     
 </div>
@@ -312,7 +196,20 @@ if (!doNotTrack) {
         ;
 	}
 </code></pre>
-<p><img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/spring8/1.png" alt="例子"  /></p>
+<p><figure 
+	>
+	<a href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/spring8/1.png" >
+		<img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/spring8/1.png"
+			
+			
+			
+			loading="lazy"
+			alt="例子">
+	</a>
+	
+	<figcaption>例子</figcaption>
+	
+</figure></p>
 <h4 id="swagger-ui的参数显示的问题">Swagger-ui的参数显示的问题</h4>
 <p>这个是在帮忙解决朋友的问题的时候发现的，其实就是Getter的问题，他定义了俩Getter，这样就会有俩参数跑出来了。</p>
 <h4 id="双向的验证">双向的验证</h4>
@@ -572,7 +469,7 @@ if (!doNotTrack) {
 </aside>
 
      
-     
+    
         
     
 
@@ -697,6 +594,44 @@ if (!doNotTrack) {
             >
 
             </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">目录</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </div>
+            </section>
+        </aside>
     
 
         </div>
