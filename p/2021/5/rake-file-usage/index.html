@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='最近将博客背后的静态引擎，从Jekyll框架切换为了Hugo。也折腾了不少时间，现在总结一下其中的过程吧
 准备  Go语言的环境 Go官网 Hugo的安装 Hugo官网 选择一个喜欢的hugo主题进行搭建, Hugo官网主题（本博客使用的主题是hugo-theme-stack）  主题个性化配置 hugo创建的基本流程网络上很多，这里就不过多赘述，一般选择了相应主题后，相关的主题介绍页，都会介绍如何使用，按照主题页指引即可。
 这里想主要讲一下主题的适配，hugo的主题样式主要是由layouts这个文件夹下的样式作为模板，themes下所使用的模板中的layouts也会生效，因此我们可以利用这个特性，在站点项目下面的layouts重写同名的布局文件。 （本博客的gitalk就是利用了这一特性对主题进行了个性化配置）。
 撰写文章 不同的hugo主题可能会有不同的文章存放策略，但是一定都是放在contents目录下，本文是放在contents/post目录下
 markdown文件的头格式如下
----title: 从Jekyll迁移至Hugoauthor: ymkNKcategories: [Tech]tags: [Ruby,Tech,Hugo]date: 2021-05-27 19:52:17 &#43;0800img: https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/26.jpegslug: 2021/5/rake-file-usage--- 用---和&#43;&#43;&#43;包围都可以，只是内容的格式要求有所区别，前者使用yaml的格式，后者使用toml的格式
+--- title: 从Jekyll迁移至Hugo author: ymkNK categories: [Tech] tags: [Ruby,Tech,Hugo] date: 2021-05-27 19:52:17 &#43;0800 img: https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/26.jpeg slug: 2021/5/rake-file-usage ---  用---和&#43;&#43;&#43;包围都可以，只是内容的格式要求有所区别，前者使用yaml的格式，后者使用toml的格式
 Rakefile 可以使用hugo new 快速创建文章，但是如果像我这样有定制化需求的创建（比如本博客的文章图片，以及目录格式等等），就需要手动进行处理，因此我使用了rakefile来通过简单的命令快速创建生成文章以及Tag
 rake new 快速创建文章，并且可以随机生成oss图片库中的随机一个图片链接作为封面，按照创建的时间，自动放在content/post/#{@year}/#{@month}的目录下，方便归档（后期有考虑同时快速创建tags与categories）
 rake git 快速执行git，一键提交本次更改的内容
@@ -15,13 +15,13 @@ rake hugo 快速构建生成hugo的静态网页，public文件夹下就是站点
 
 <link rel='canonical' href='https://lllovol.com/p/2021/5/rake-file-usage/'>
 
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='从Jekyll迁移至Hugo'>
+<link rel="stylesheet" href="/scss/style.min.b80bf249ce4a22cf55e8d7340a0b37a2f2c10f54f3a9a49cb94b694a2eb0bbea.css"><meta property='og:title' content='从Jekyll迁移至Hugo'>
 <meta property='og:description' content='最近将博客背后的静态引擎，从Jekyll框架切换为了Hugo。也折腾了不少时间，现在总结一下其中的过程吧
 准备  Go语言的环境 Go官网 Hugo的安装 Hugo官网 选择一个喜欢的hugo主题进行搭建, Hugo官网主题（本博客使用的主题是hugo-theme-stack）  主题个性化配置 hugo创建的基本流程网络上很多，这里就不过多赘述，一般选择了相应主题后，相关的主题介绍页，都会介绍如何使用，按照主题页指引即可。
 这里想主要讲一下主题的适配，hugo的主题样式主要是由layouts这个文件夹下的样式作为模板，themes下所使用的模板中的layouts也会生效，因此我们可以利用这个特性，在站点项目下面的layouts重写同名的布局文件。 （本博客的gitalk就是利用了这一特性对主题进行了个性化配置）。
 撰写文章 不同的hugo主题可能会有不同的文章存放策略，但是一定都是放在contents目录下，本文是放在contents/post目录下
 markdown文件的头格式如下
----title: 从Jekyll迁移至Hugoauthor: ymkNKcategories: [Tech]tags: [Ruby,Tech,Hugo]date: 2021-05-27 19:52:17 &#43;0800img: https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/26.jpegslug: 2021/5/rake-file-usage--- 用---和&#43;&#43;&#43;包围都可以，只是内容的格式要求有所区别，前者使用yaml的格式，后者使用toml的格式
+--- title: 从Jekyll迁移至Hugo author: ymkNK categories: [Tech] tags: [Ruby,Tech,Hugo] date: 2021-05-27 19:52:17 &#43;0800 img: https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/26.jpeg slug: 2021/5/rake-file-usage ---  用---和&#43;&#43;&#43;包围都可以，只是内容的格式要求有所区别，前者使用yaml的格式，后者使用toml的格式
 Rakefile 可以使用hugo new 快速创建文章，但是如果像我这样有定制化需求的创建（比如本博客的文章图片，以及目录格式等等），就需要手动进行处理，因此我使用了rakefile来通过简单的命令快速创建生成文章以及Tag
 rake new 快速创建文章，并且可以随机生成oss图片库中的随机一个图片链接作为封面，按照创建的时间，自动放在content/post/#{@year}/#{@month}的目录下，方便归档（后期有考虑同时快速创建tags与categories）
 rake git 快速执行git，一键提交本次更改的内容
@@ -29,14 +29,14 @@ rake hugo 快速构建生成hugo的静态网页，public文件夹下就是站点
 源代码 task :default =&amp;gt; :new require &amp;#39;fileutils&amp;#39; desc &amp;#34;创建新 post&amp;#34; task :new do time = Time.new puts &amp;#34;请输入要创建的 文件名字：&amp;#34; @name = STDIN.'>
 <meta property='og:url' content='https://lllovol.com/p/2021/5/rake-file-usage/'>
 <meta property='og:site_name' content='lllovol'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Ruby' /><meta property='article:tag' content='Tech' /><meta property='article:tag' content='Hugo' /><meta property='article:published_time' content='2021-05-27T19:52:17&#43;00:00'/><meta property='article:modified_time' content='2021-05-27T19:52:17&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/26.jpeg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Ruby' /><meta property='article:tag' content='Tech' /><meta property='article:tag' content='Hugo' /><meta property='article:published_time' content='2021-05-27T19:52:17&#43;08:00'/><meta property='article:modified_time' content='2021-05-27T19:52:17&#43;08:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/26.jpeg' />
 <meta name="twitter:title" content="从Jekyll迁移至Hugo">
 <meta name="twitter:description" content="最近将博客背后的静态引擎，从Jekyll框架切换为了Hugo。也折腾了不少时间，现在总结一下其中的过程吧
 准备  Go语言的环境 Go官网 Hugo的安装 Hugo官网 选择一个喜欢的hugo主题进行搭建, Hugo官网主题（本博客使用的主题是hugo-theme-stack）  主题个性化配置 hugo创建的基本流程网络上很多，这里就不过多赘述，一般选择了相应主题后，相关的主题介绍页，都会介绍如何使用，按照主题页指引即可。
 这里想主要讲一下主题的适配，hugo的主题样式主要是由layouts这个文件夹下的样式作为模板，themes下所使用的模板中的layouts也会生效，因此我们可以利用这个特性，在站点项目下面的layouts重写同名的布局文件。 （本博客的gitalk就是利用了这一特性对主题进行了个性化配置）。
 撰写文章 不同的hugo主题可能会有不同的文章存放策略，但是一定都是放在contents目录下，本文是放在contents/post目录下
 markdown文件的头格式如下
----title: 从Jekyll迁移至Hugoauthor: ymkNKcategories: [Tech]tags: [Ruby,Tech,Hugo]date: 2021-05-27 19:52:17 &#43;0800img: https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/26.jpegslug: 2021/5/rake-file-usage--- 用---和&#43;&#43;&#43;包围都可以，只是内容的格式要求有所区别，前者使用yaml的格式，后者使用toml的格式
+--- title: 从Jekyll迁移至Hugo author: ymkNK categories: [Tech] tags: [Ruby,Tech,Hugo] date: 2021-05-27 19:52:17 &#43;0800 img: https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/26.jpeg slug: 2021/5/rake-file-usage ---  用---和&#43;&#43;&#43;包围都可以，只是内容的格式要求有所区别，前者使用yaml的格式，后者使用toml的格式
 Rakefile 可以使用hugo new 快速创建文章，但是如果像我这样有定制化需求的创建（比如本博客的文章图片，以及目录格式等等），就需要手动进行处理，因此我使用了rakefile来通过简单的命令快速创建生成文章以及Tag
 rake new 快速创建文章，并且可以随机生成oss图片库中的随机一个图片链接作为封面，按照创建的时间，自动放在content/post/#{@year}/#{@month}的目录下，方便归档（后期有考虑同时快速创建tags与categories）
 rake git 快速执行git，一键提交本次更改的内容
@@ -58,8 +58,8 @@ if (!doNotTrack) {
 
     </head>
     <body class="
-    article-page has-toc
-">
+    article-page
+    ">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -82,25 +82,175 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex 
-    
-        extended
-    
-">
-    
-        <div id="article-toolbar">
-            <a href="/" class="back-home">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">⚖️</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">lllovol</a></h1>
+            <h2 class="site-description">Stay hungry, stay foolish.</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="15 6 9 12 15 18" />
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
 </svg>
 
 
 
-                <span>返回</span>
+                
+                <span>主页</span>
             </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/links/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
         </div>
-    
+    </ol>
+</aside>
 <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
@@ -124,11 +274,13 @@ if (!doNotTrack) {
     </header>
     
 
-    <h2 class="article-title">
-        <a href="/p/2021/5/rake-file-usage/">从Jekyll迁移至Hugo</a>
-    </h2>
-
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/2021/5/rake-file-usage/">从Jekyll迁移至Hugo</a>
+        </h2>
     
+        
+    </div>
 
     
     <footer class="article-time">
@@ -164,10 +316,14 @@ if (!doNotTrack) {
         
     </footer>
     
+
+    
 </div>
 </header>
 
     <section class="article-content">
+    
+    
     <p>最近将博客背后的静态引擎，从Jekyll框架切换为了Hugo。也折腾了不少时间，现在总结一下其中的过程吧</p>
 <h3 id="准备">准备</h3>
 <ol>
@@ -206,166 +362,165 @@ slug: 2021/5/rake-file-usage
 <h4 id="rake-hugo">rake hugo</h4>
 <p>快速构建生成hugo的静态网页，public文件夹下就是站点项目，本博客托管在github，因此可以直接push到仓库，进行直接发布</p>
 <h4 id="源代码">源代码</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Ruby" data-lang="Ruby"><span class="n">task</span> <span class="ss">:default</span> <span class="o">=&gt;</span> <span class="ss">:new</span>
-
-<span class="nb">require</span> <span class="s1">&#39;fileutils&#39;</span>
-
-
-<span class="n">desc</span> <span class="s2">&#34;创建新 post&#34;</span>
-<span class="n">task</span> <span class="ss">:new</span> <span class="k">do</span>
-    <span class="n">time</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">new</span>
-
-    <span class="nb">puts</span> <span class="s2">&#34;请输入要创建的 文件名字：&#34;</span>
-    <span class="vi">@name</span> <span class="o">=</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">gets</span><span class="o">.</span><span class="n">chomp</span>
-    <span class="vi">@name</span> <span class="o">=</span> <span class="vi">@name</span><span class="o">.</span><span class="n">downcase</span><span class="o">.</span><span class="n">strip</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span>
-
-    <span class="nb">puts</span> <span class="s2">&#34;请输入文章的 标题：&#34;</span>
-    <span class="vi">@title</span> <span class="o">=</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">gets</span><span class="o">.</span><span class="n">chomp</span>
-
-    <span class="nb">puts</span> <span class="s2">&#34;请输入文章的 categories, 以逗号分隔：&#34;</span>
-    <span class="vi">@categories</span> <span class="o">=</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">gets</span><span class="o">.</span><span class="n">chomp</span>
-    <span class="vi">@categories</span> <span class="o">=</span> <span class="n">format_tags_or_categories</span> <span class="vi">@origin</span> <span class="o">=</span> <span class="vi">@categories</span>
-
-    <span class="nb">puts</span> <span class="s2">&#34;请输入文章的 tags, 以逗号分隔：&#34;</span>
-    <span class="vi">@tags</span> <span class="o">=</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">gets</span><span class="o">.</span><span class="n">chomp</span>
-    <span class="vi">@tags</span> <span class="o">=</span> <span class="n">format_tags_or_categories</span> <span class="vi">@origin</span> <span class="o">=</span> <span class="vi">@tags</span>
-
-    <span class="c1"># 需要检查一下文章目录是否存在</span>
-    <span class="vi">@root_path</span> <span class="o">=</span> <span class="s2">&#34;content/post&#34;</span>
-
-    <span class="n">check_or_create_dir</span><span class="p">(</span><span class="vi">@dir</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="vi">@root_path</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">time</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
-    <span class="n">check_or_create_dir</span><span class="p">(</span><span class="vi">@dir</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="vi">@root_path</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">time</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">time</span><span class="o">.</span><span class="n">month</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
-
-    <span class="vi">@date</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&#34;%F&#34;</span><span class="p">)</span>
-    <span class="vi">@base_path</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="n">time</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">time</span><span class="o">.</span><span class="n">month</span><span class="si">}</span><span class="s2">&#34;</span>
-    <span class="vi">@file_name</span> <span class="o">=</span> <span class="vi">@date</span> <span class="o">+</span> <span class="s2">&#34;-&#34;</span> <span class="o">+</span> <span class="vi">@name</span>
-
-    <span class="vi">@slug</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="vi">@base_path</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="vi">@name</span><span class="si">}</span><span class="s2">&#34;</span>
-    <span class="vi">@slug</span> <span class="o">=</span> <span class="vi">@slug</span><span class="o">.</span><span class="n">downcase</span><span class="o">.</span><span class="n">strip</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span>
-
-    <span class="c1"># 生成随机封面</span>
-    <span class="vi">@img_num</span> <span class="o">=</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">1</span><span class="o">...</span><span class="mi">31</span><span class="p">)</span>
-    <span class="vi">@directory_url</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="vi">@root_path</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="vi">@base_path</span><span class="si">}</span><span class="s2">&#34;</span>
-
-    <span class="c1"># 对应分类的文件放进对应的文件夹当中</span>
-    <span class="vi">@post_name</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="vi">@directory_url</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="vi">@file_name</span><span class="si">}</span><span class="s2">.md&#34;</span>
-
-    <span class="vi">@content</span> <span class="o">=</span> <span class="s2">&#34;---&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
-               <span class="s2">&#34;title: </span><span class="si">#{</span><span class="vi">@title</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
-               <span class="s2">&#34;author: ymkNK&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
-               <span class="s2">&#34;categories: [</span><span class="si">#{</span><span class="vi">@categories</span><span class="si">}</span><span class="s2">]&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
-               <span class="s2">&#34;tags: [</span><span class="si">#{</span><span class="vi">@tags</span><span class="si">}</span><span class="s2">]&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
-               <span class="s2">&#34;date: </span><span class="si">#{</span><span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
-               <span class="s2">&#34;img: https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/</span><span class="si">#{</span><span class="vi">@img_num</span><span class="si">}</span><span class="s2">.jpeg&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
-               <span class="s2">&#34;slug: </span><span class="si">#{</span><span class="vi">@slug</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
-               <span class="s2">&#34;---&#34;</span>
-    <span class="n">create_file</span> <span class="vi">@file_dir</span> <span class="o">=</span> <span class="vi">@post_name</span><span class="p">,</span> <span class="vi">@content</span>
-
-<span class="k">end</span>
-
-<span class="n">task</span> <span class="ss">:git</span> <span class="k">do</span>
-  <span class="nb">puts</span> <span class="s2">&#34;请输入git内容 m&#34;</span>
-    <span class="vi">@msg</span> <span class="o">=</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">gets</span><span class="o">.</span><span class="n">chomp</span>
-
-    <span class="vi">@slug</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="vi">@msg</span><span class="si">}</span><span class="s2">&#34;</span>
-    <span class="vi">@slug</span> <span class="o">=</span> <span class="vi">@slug</span><span class="o">.</span><span class="n">downcase</span><span class="o">.</span><span class="n">strip</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span>
-    <span class="vi">@date</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&#34;%F&#34;</span><span class="p">)</span>
-    <span class="vi">@finalmsg</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="vi">@date</span><span class="si">}</span><span class="s2">-</span><span class="si">#{</span><span class="vi">@slug</span><span class="si">}</span><span class="s2">&#34;</span>
-    <span class="nb">system</span> <span class="s2">&#34;git add .&#34;</span>
-    <span class="nb">system</span> <span class="s2">&#34;git commit -m </span><span class="se">\&#34;</span><span class="si">#{</span><span class="vi">@finalmsg</span><span class="si">}</span><span class="se">\&#34;</span><span class="s2">&#34;</span>
-    <span class="nb">system</span> <span class="s2">&#34;git status&#34;</span>
-    <span class="nb">system</span> <span class="s2">&#34;git push&#34;</span>
-    <span class="c1"># system &#34;git push github&#34;</span>
-    <span class="c1"># system &#34;git push gitee&#34;</span>
-    <span class="nb">puts</span> <span class="s2">&#34;git push </span><span class="se">\&#34;</span><span class="si">#{</span><span class="vi">@finalmsg</span><span class="si">}</span><span class="se">\&#34;</span><span class="s2">&#34;</span>
-<span class="k">end</span>
-
-<span class="n">task</span> <span class="ss">:hugo</span> <span class="k">do</span>
-    <span class="vi">@slug</span> <span class="o">=</span> <span class="s1">&#39;build hugo&#39;</span>
-    <span class="vi">@date</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&#34;%F&#34;</span><span class="p">)</span>
-    <span class="vi">@finalmsg</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="vi">@date</span><span class="si">}</span><span class="s2">-</span><span class="si">#{</span><span class="vi">@slug</span><span class="si">}</span><span class="s2">&#34;</span>
-    <span class="nb">system</span> <span class="s2">&#34;hugo&#34;</span>
-    <span class="nb">system</span> <span class="s2">&#34;cd public &amp;&amp; git add . &amp;&amp; git commit -m </span><span class="se">\&#34;</span><span class="si">#{</span><span class="vi">@finalmsg</span><span class="si">}</span><span class="se">\&#34;</span><span class="s2"> &amp;&amp; git status &amp;&amp; git push&#34;</span>
-    <span class="nb">puts</span> <span class="s2">&#34;git push </span><span class="se">\&#34;</span><span class="si">#{</span><span class="vi">@finalmsg</span><span class="si">}</span><span class="se">\&#34;</span><span class="s2">&#34;</span>
-<span class="k">end</span>
-
-<span class="n">task</span> <span class="ss">:tag</span> <span class="k">do</span>
-    <span class="nb">puts</span> <span class="s2">&#34;请输入要创建的tag名字：&#34;</span>
-    <span class="vi">@tag</span> <span class="o">=</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">gets</span><span class="o">.</span><span class="n">chomp</span>
-    <span class="vi">@type</span> <span class="o">=</span> <span class="s2">&#34;tags&#34;</span>
-    <span class="n">build_tag_or_category</span> <span class="vi">@type</span><span class="p">,</span> <span class="vi">@tag</span>
-<span class="k">end</span>
-
-<span class="n">task</span> <span class="ss">:category</span> <span class="k">do</span>
-    <span class="nb">puts</span> <span class="s2">&#34;请输入要创建的category名字：&#34;</span>
-    <span class="vi">@tag</span> <span class="o">=</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">gets</span><span class="o">.</span><span class="n">chomp</span>
-    <span class="vi">@type</span> <span class="o">=</span> <span class="s2">&#34;categories&#34;</span>
-    <span class="n">build_tag_or_category</span> <span class="vi">@type</span><span class="p">,</span> <span class="vi">@tag</span>
-<span class="k">end</span>
-
-<span class="c1">####################### 方法区 #######################</span>
-
-<span class="k">def</span> <span class="nf">format_tags_or_categories</span><span class="p">(</span><span class="n">origin</span><span class="p">)</span>
-    <span class="n">split_array</span> <span class="o">=</span> <span class="vi">@origin</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;,&#34;</span><span class="p">)</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="nb">Array</span><span class="o">.</span><span class="n">new</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="n">split_array</span><span class="o">.</span><span class="n">collect</span><span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span><span class="n">x</span><span class="o">.</span><span class="n">capitalize</span> <span class="p">}</span>
-    <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&#34;,&#34;</span><span class="p">)</span>
-<span class="k">end</span>
-
-<span class="k">def</span> <span class="nf">check_or_create_dir</span><span class="p">(</span><span class="n">dir</span><span class="p">)</span>
-    <span class="nb">puts</span> <span class="s2">&#34;Check or create the dir : </span><span class="si">#{</span><span class="vi">@dir</span><span class="si">}</span><span class="s2">&#34;</span>
-    <span class="k">if</span> <span class="no">File</span><span class="o">.</span><span class="n">directory?</span><span class="p">(</span><span class="vi">@dir</span><span class="p">)</span>
-        <span class="nb">puts</span> <span class="s2">&#34;The directory: </span><span class="si">#{</span><span class="vi">@dir</span><span class="si">}</span><span class="s2"> has existed.&#34;</span>
-    <span class="k">else</span>
-        <span class="no">FileUtils</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="vi">@dir</span><span class="p">)</span>
-        <span class="nb">puts</span> <span class="s2">&#34;The directory: </span><span class="si">#{</span><span class="vi">@dir</span><span class="si">}</span><span class="s2"> has created.&#34;</span>
-    <span class="k">end</span>
-<span class="k">end</span>
-
-<span class="k">def</span> <span class="nf">build_tag_or_category</span> <span class="p">(</span><span class="n">type</span><span class="p">,</span> <span class="n">tag</span><span class="p">)</span>
-    <span class="vi">@tag</span> <span class="o">=</span> <span class="n">tag</span><span class="o">.</span><span class="n">capitalize</span>
-    <span class="vi">@directory_name</span> <span class="o">=</span> <span class="vi">@tag</span><span class="o">.</span><span class="n">downcase</span>
-    <span class="vi">@slug</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="vi">@directory_name</span><span class="si">}</span><span class="s2">&#34;</span>
-    <span class="vi">@img</span> <span class="o">=</span> <span class="s2">&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/tags/</span><span class="si">#{</span><span class="vi">@directory_name</span><span class="si">}</span><span class="s2">.jpg&#34;</span>
-
-    <span class="vi">@directory_url</span> <span class="o">=</span> <span class="s2">&#34;content/</span><span class="si">#{</span><span class="vi">@type</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="vi">@directory_name</span><span class="si">}</span><span class="s2">&#34;</span>
-    <span class="n">create_tag_or_category_file</span> <span class="vi">@directory_url</span><span class="p">,</span> <span class="vi">@tag</span><span class="p">,</span> <span class="vi">@slug</span><span class="p">,</span> <span class="vi">@img</span>
-    <span class="nb">puts</span> <span class="s2">&#34;rake new </span><span class="si">#{</span><span class="vi">@type</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="vi">@tag</span><span class="si">}</span><span class="s2"> end.&#34;</span>
-<span class="k">end</span>
-
-<span class="k">def</span> <span class="nf">create_tag_or_category_file</span> <span class="p">(</span><span class="n">directory_url</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">slug</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>
-    <span class="n">check_or_create_dir</span> <span class="vi">@dir</span><span class="o">=</span><span class="vi">@directory_url</span>
-
-    <span class="c1"># 对应分类的文件放进对应的categories或者tags文件夹当中</span>
-    <span class="vi">@file_dir</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="vi">@directory_url</span><span class="si">}</span><span class="s2">/_index.md&#34;</span>
-
-    <span class="vi">@content</span> <span class="o">=</span> <span class="s2">&#34;---&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
-               <span class="s2">&#34;title: </span><span class="si">#{</span><span class="vi">@tag</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
-               <span class="s2">&#34;description: </span><span class="si">#{</span><span class="vi">@tag</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
-               <span class="s2">&#34;slug: </span><span class="si">#{</span><span class="vi">@slug</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
-               <span class="s2">&#34;img: </span><span class="si">#{</span><span class="vi">@img</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
-               <span class="s2">&#34;style:&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
-               <span class="s2">&#34;    background: #2a9d8f&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
-               <span class="s2">&#34;    color: #fff&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
-               <span class="s2">&#34;---&#34;</span>
-    <span class="n">create_file</span> <span class="vi">@file_dir</span><span class="p">,</span> <span class="vi">@content</span>
-<span class="k">end</span>
-
-<span class="k">def</span> <span class="nf">create_file</span> <span class="p">(</span><span class="n">file_dir</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
-    <span class="k">if</span> <span class="no">File</span><span class="o">.</span><span class="n">exist?</span><span class="p">(</span><span class="vi">@file_dir</span><span class="p">)</span>
-        <span class="nb">puts</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="vi">@file_dir</span><span class="si">}</span><span class="s2"> 文件已经存在！创建失败&#34;</span>
-        <span class="k">return</span>
-    <span class="k">end</span>
-
-    <span class="no">FileUtils</span><span class="o">.</span><span class="n">touch</span><span class="p">(</span><span class="vi">@file_dir</span><span class="p">)</span>
-    <span class="nb">open</span><span class="p">(</span><span class="vi">@file_dir</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">file</span><span class="o">|</span>
-        <span class="n">file</span><span class="o">.</span><span class="n">puts</span> <span class="vi">@content</span>
-    <span class="k">end</span>
-    <span class="nb">puts</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="vi">@file_dir</span><span class="si">}</span><span class="s2"> 文件创建成功 内容如下:&#34;</span>
-    <span class="nb">puts</span> <span class="vi">@content</span>
-<span class="k">end</span>
-
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Ruby" data-lang="Ruby"><span class="line"><span class="cl"><span class="n">task</span> <span class="ss">:default</span> <span class="o">=&gt;</span> <span class="ss">:new</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">require</span> <span class="s1">&#39;fileutils&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">desc</span> <span class="s2">&#34;创建新 post&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">task</span> <span class="ss">:new</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">    <span class="n">time</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">new</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">puts</span> <span class="s2">&#34;请输入要创建的 文件名字：&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@name</span> <span class="o">=</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">gets</span><span class="o">.</span><span class="n">chomp</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@name</span> <span class="o">=</span> <span class="vi">@name</span><span class="o">.</span><span class="n">downcase</span><span class="o">.</span><span class="n">strip</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">puts</span> <span class="s2">&#34;请输入文章的 标题：&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@title</span> <span class="o">=</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">gets</span><span class="o">.</span><span class="n">chomp</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">puts</span> <span class="s2">&#34;请输入文章的 categories, 以逗号分隔：&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@categories</span> <span class="o">=</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">gets</span><span class="o">.</span><span class="n">chomp</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@categories</span> <span class="o">=</span> <span class="n">format_tags_or_categories</span> <span class="vi">@origin</span> <span class="o">=</span> <span class="vi">@categories</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">puts</span> <span class="s2">&#34;请输入文章的 tags, 以逗号分隔：&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@tags</span> <span class="o">=</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">gets</span><span class="o">.</span><span class="n">chomp</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@tags</span> <span class="o">=</span> <span class="n">format_tags_or_categories</span> <span class="vi">@origin</span> <span class="o">=</span> <span class="vi">@tags</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 需要检查一下文章目录是否存在</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@root_path</span> <span class="o">=</span> <span class="s2">&#34;content/post&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">check_or_create_dir</span><span class="p">(</span><span class="vi">@dir</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="vi">@root_path</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">time</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">check_or_create_dir</span><span class="p">(</span><span class="vi">@dir</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="vi">@root_path</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">time</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">time</span><span class="o">.</span><span class="n">month</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="vi">@date</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&#34;%F&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@base_path</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="n">time</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">time</span><span class="o">.</span><span class="n">month</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@file_name</span> <span class="o">=</span> <span class="vi">@date</span> <span class="o">+</span> <span class="s2">&#34;-&#34;</span> <span class="o">+</span> <span class="vi">@name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="vi">@slug</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="vi">@base_path</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="vi">@name</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@slug</span> <span class="o">=</span> <span class="vi">@slug</span><span class="o">.</span><span class="n">downcase</span><span class="o">.</span><span class="n">strip</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 生成随机封面</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@img_num</span> <span class="o">=</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">1</span><span class="o">...</span><span class="mi">31</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@directory_url</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="vi">@root_path</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="vi">@base_path</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 对应分类的文件放进对应的文件夹当中</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@post_name</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="vi">@directory_url</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="vi">@file_name</span><span class="si">}</span><span class="s2">.md&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="vi">@content</span> <span class="o">=</span> <span class="s2">&#34;---&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">               <span class="s2">&#34;title: </span><span class="si">#{</span><span class="vi">@title</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">               <span class="s2">&#34;author: ymkNK&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">               <span class="s2">&#34;categories: [</span><span class="si">#{</span><span class="vi">@categories</span><span class="si">}</span><span class="s2">]&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">               <span class="s2">&#34;tags: [</span><span class="si">#{</span><span class="vi">@tags</span><span class="si">}</span><span class="s2">]&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">               <span class="s2">&#34;date: </span><span class="si">#{</span><span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">               <span class="s2">&#34;img: https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/</span><span class="si">#{</span><span class="vi">@img_num</span><span class="si">}</span><span class="s2">.jpeg&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">               <span class="s2">&#34;slug: </span><span class="si">#{</span><span class="vi">@slug</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">               <span class="s2">&#34;---&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">create_file</span> <span class="vi">@file_dir</span> <span class="o">=</span> <span class="vi">@post_name</span><span class="p">,</span> <span class="vi">@content</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">task</span> <span class="ss">:git</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">puts</span> <span class="s2">&#34;请输入git内容 m&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@msg</span> <span class="o">=</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">gets</span><span class="o">.</span><span class="n">chomp</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="vi">@slug</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="vi">@msg</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@slug</span> <span class="o">=</span> <span class="vi">@slug</span><span class="o">.</span><span class="n">downcase</span><span class="o">.</span><span class="n">strip</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@date</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&#34;%F&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@finalmsg</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="vi">@date</span><span class="si">}</span><span class="s2">-</span><span class="si">#{</span><span class="vi">@slug</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">system</span> <span class="s2">&#34;git add .&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">system</span> <span class="s2">&#34;git commit -m </span><span class="se">\&#34;</span><span class="si">#{</span><span class="vi">@finalmsg</span><span class="si">}</span><span class="se">\&#34;</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">system</span> <span class="s2">&#34;git status&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">system</span> <span class="s2">&#34;git push&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># system &#34;git push github&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># system &#34;git push gitee&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">puts</span> <span class="s2">&#34;git push </span><span class="se">\&#34;</span><span class="si">#{</span><span class="vi">@finalmsg</span><span class="si">}</span><span class="se">\&#34;</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">task</span> <span class="ss">:hugo</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@slug</span> <span class="o">=</span> <span class="s1">&#39;build hugo&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@date</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&#34;%F&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@finalmsg</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="vi">@date</span><span class="si">}</span><span class="s2">-</span><span class="si">#{</span><span class="vi">@slug</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">system</span> <span class="s2">&#34;hugo&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">system</span> <span class="s2">&#34;cd public &amp;&amp; git add . &amp;&amp; git commit -m </span><span class="se">\&#34;</span><span class="si">#{</span><span class="vi">@finalmsg</span><span class="si">}</span><span class="se">\&#34;</span><span class="s2"> &amp;&amp; git status &amp;&amp; git push&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">puts</span> <span class="s2">&#34;git push </span><span class="se">\&#34;</span><span class="si">#{</span><span class="vi">@finalmsg</span><span class="si">}</span><span class="se">\&#34;</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">task</span> <span class="ss">:tag</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">puts</span> <span class="s2">&#34;请输入要创建的tag名字：&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@tag</span> <span class="o">=</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">gets</span><span class="o">.</span><span class="n">chomp</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@type</span> <span class="o">=</span> <span class="s2">&#34;tags&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">build_tag_or_category</span> <span class="vi">@type</span><span class="p">,</span> <span class="vi">@tag</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">task</span> <span class="ss">:category</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">puts</span> <span class="s2">&#34;请输入要创建的category名字：&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@tag</span> <span class="o">=</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">gets</span><span class="o">.</span><span class="n">chomp</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@type</span> <span class="o">=</span> <span class="s2">&#34;categories&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">build_tag_or_category</span> <span class="vi">@type</span><span class="p">,</span> <span class="vi">@tag</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">####################### 方法区 #######################</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">format_tags_or_categories</span><span class="p">(</span><span class="n">origin</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">split_array</span> <span class="o">=</span> <span class="vi">@origin</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;,&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">res</span> <span class="o">=</span> <span class="nb">Array</span><span class="o">.</span><span class="n">new</span>
+</span></span><span class="line"><span class="cl">    <span class="n">res</span> <span class="o">=</span> <span class="n">split_array</span><span class="o">.</span><span class="n">collect</span><span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span><span class="n">x</span><span class="o">.</span><span class="n">capitalize</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&#34;,&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">check_or_create_dir</span><span class="p">(</span><span class="n">dir</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">puts</span> <span class="s2">&#34;Check or create the dir : </span><span class="si">#{</span><span class="vi">@dir</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="no">File</span><span class="o">.</span><span class="n">directory?</span><span class="p">(</span><span class="vi">@dir</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">puts</span> <span class="s2">&#34;The directory: </span><span class="si">#{</span><span class="vi">@dir</span><span class="si">}</span><span class="s2"> has existed.&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span>
+</span></span><span class="line"><span class="cl">        <span class="no">FileUtils</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="vi">@dir</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">puts</span> <span class="s2">&#34;The directory: </span><span class="si">#{</span><span class="vi">@dir</span><span class="si">}</span><span class="s2"> has created.&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">end</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">build_tag_or_category</span> <span class="p">(</span><span class="n">type</span><span class="p">,</span> <span class="n">tag</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@tag</span> <span class="o">=</span> <span class="n">tag</span><span class="o">.</span><span class="n">capitalize</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@directory_name</span> <span class="o">=</span> <span class="vi">@tag</span><span class="o">.</span><span class="n">downcase</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@slug</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="vi">@directory_name</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@img</span> <span class="o">=</span> <span class="s2">&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/tags/</span><span class="si">#{</span><span class="vi">@directory_name</span><span class="si">}</span><span class="s2">.jpg&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="vi">@directory_url</span> <span class="o">=</span> <span class="s2">&#34;content/</span><span class="si">#{</span><span class="vi">@type</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="vi">@directory_name</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">create_tag_or_category_file</span> <span class="vi">@directory_url</span><span class="p">,</span> <span class="vi">@tag</span><span class="p">,</span> <span class="vi">@slug</span><span class="p">,</span> <span class="vi">@img</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">puts</span> <span class="s2">&#34;rake new </span><span class="si">#{</span><span class="vi">@type</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="vi">@tag</span><span class="si">}</span><span class="s2"> end.&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">create_tag_or_category_file</span> <span class="p">(</span><span class="n">directory_url</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">slug</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">check_or_create_dir</span> <span class="vi">@dir</span><span class="o">=</span><span class="vi">@directory_url</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 对应分类的文件放进对应的categories或者tags文件夹当中</span>
+</span></span><span class="line"><span class="cl">    <span class="vi">@file_dir</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="vi">@directory_url</span><span class="si">}</span><span class="s2">/_index.md&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="vi">@content</span> <span class="o">=</span> <span class="s2">&#34;---&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">               <span class="s2">&#34;title: </span><span class="si">#{</span><span class="vi">@tag</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">               <span class="s2">&#34;description: </span><span class="si">#{</span><span class="vi">@tag</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">               <span class="s2">&#34;slug: </span><span class="si">#{</span><span class="vi">@slug</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">               <span class="s2">&#34;img: </span><span class="si">#{</span><span class="vi">@img</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">               <span class="s2">&#34;style:&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">               <span class="s2">&#34;    background: #2a9d8f&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">               <span class="s2">&#34;    color: #fff&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">               <span class="s2">&#34;---&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">create_file</span> <span class="vi">@file_dir</span><span class="p">,</span> <span class="vi">@content</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">create_file</span> <span class="p">(</span><span class="n">file_dir</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="no">File</span><span class="o">.</span><span class="n">exist?</span><span class="p">(</span><span class="vi">@file_dir</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">puts</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="vi">@file_dir</span><span class="si">}</span><span class="s2"> 文件已经存在！创建失败&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>
+</span></span><span class="line"><span class="cl">    <span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="no">FileUtils</span><span class="o">.</span><span class="n">touch</span><span class="p">(</span><span class="vi">@file_dir</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">open</span><span class="p">(</span><span class="vi">@file_dir</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">file</span><span class="o">|</span>
+</span></span><span class="line"><span class="cl">        <span class="n">file</span><span class="o">.</span><span class="n">puts</span> <span class="vi">@content</span>
+</span></span><span class="line"><span class="cl">    <span class="k">end</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">puts</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="vi">@file_dir</span><span class="si">}</span><span class="s2"> 文件创建成功 内容如下:&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">puts</span> <span class="vi">@content</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span></code></pre></div>
 </section>
 
 
@@ -403,11 +558,11 @@ slug: 2021/5/rake-file-usage
                 href="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css"integrity="sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn"crossorigin="anonymous"
             ><script 
                 src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.js"integrity="sha384-pK1WpvzWVBQiP0/GjnvRxV4mOb0oxFuyRxJlk6vVw146n3egcN5C925NCP7a7BY8"crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><script 
                 src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/contrib/auto-render.min.js"integrity="sha384-vZTG03m&#43;2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
@@ -423,14 +578,16 @@ slug: 2021/5/rake-file-usage
     
 </article>
 
-    <aside class="related-contents--wrapper">
     
+
     
-        <h2 class="section-title">相关文章</h2>
-        <div class="related-contents">
-            <div class="flex article-list--tile">
+
+<aside class="related-contents--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-contents">
+        <div class="flex article-list--tile">
+            
                 
-                    
 <article class="has-image">
     <a href="/p/rake/">
         
@@ -447,8 +604,8 @@ slug: 2021/5/rake-file-usage
         </div>
     </a>
 </article>
+            
                 
-                    
 <article class="has-image">
     <a href="/p/2021/12/awk-tool-analysis/">
         
@@ -465,8 +622,8 @@ slug: 2021/5/rake-file-usage
         </div>
     </a>
 </article>
+            
                 
-                    
 <article class="has-image">
     <a href="/p/2021/9/prototype/">
         
@@ -483,8 +640,8 @@ slug: 2021/5/rake-file-usage
         </div>
     </a>
 </article>
+            
                 
-                    
 <article class="has-image">
     <a href="/p/2021/9/design-pattern-factory/">
         
@@ -501,8 +658,8 @@ slug: 2021/5/rake-file-usage
         </div>
     </a>
 </article>
+            
                 
-                    
 <article class="has-image">
     <a href="/p/2021/9/design-pattern-singleton/">
         
@@ -519,10 +676,9 @@ slug: 2021/5/rake-file-usage
         </div>
     </a>
 </article>
-                
-            </div>
+            
         </div>
-    
+    </div>
 </aside>
 
      
@@ -568,7 +724,7 @@ slug: 2021/5/rake-file-usage
         
             <b><a href="https://github.com/ymkNK" target="_blank" rel="noopener" data-version="%s">Owner Rainbowly </a></b> <br/>
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -636,11 +792,11 @@ slug: 2021/5/rake-file-usage
 
 </div><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><link 
                 rel="stylesheet" 
@@ -652,44 +808,11 @@ slug: 2021/5/rake-file-usage
 
             </main>
     
-        <aside class="sidebar right-sidebar sticky">
-            <section class="widget archives">
-                <div class="widget-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-                </div>
-                <h2 class="widget-title section-title">目录</h2>
-                
-                <div class="widget--toc">
-                    <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#准备">准备</a></li>
-        <li><a href="#主题个性化配置">主题个性化配置</a></li>
-        <li><a href="#撰写文章">撰写文章</a></li>
-        <li><a href="#rakefile">Rakefile</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-                </div>
-            </section>
-        </aside>
-    
 
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
-                defer="false"
+                
                 >
             </script><script type="text/javascript" src="/ts/main.js" defer></script>
 <script>

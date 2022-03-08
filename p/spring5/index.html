@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Code Review 这一周主要是一个前辈的code Review，在此期间能学到很多新的东西，也能看到自己的不足
 变量名的命名 禁止使用拼音，真的显得很没有水平，而且可读性会非常差，除非这个对象真的只有拼音名字
 关于异常的抛出  异常不要怕抛出的多，有异常一定要打出来，不然出了错都不知道是什么地方出的错 禁止一个Exception就把一大段代码的所有异常给吞了 异常一定要用log.error()将栈给打出来  StringBuffer、StringBuilder和String 运行速度：执行速度，在这方面运行速度快慢为：StringBuilder &amp;gt; StringBuffer &amp;gt; String String为字符串常量，而StringBuilder和StringBuffer均为字符串变量，即String对象一旦创建之后该对象是不可更改的，但后两者的对象是变量，是可以更改的。Java中对String对象进行的操作实际上是一个不断创建新的对象并且将旧的对象回收的一个过程，所以执行速度很慢。而StringBuilder和StringBuffer的对象是变量，对变量进行操作就是直接对该对象进行更改，而不进行创建和回收的操作，所以速度要比String快很多。
-String str=&amp;quot;abc&amp;quot;&#43;&amp;quot;de&amp;quot;;StringBuilder stringBuilder=new StringBuilder().append(&amp;quot;abc&amp;quot;).append(&amp;quot;de&amp;quot;);System.out.println(str);System.out.println(stringBuilder.toString()); 这种情况下除外，String的速度会比StringBuilder要快，因为第一行等价于String str=&amp;ldquo;abcde&amp;rdquo;。
+String str=&amp;quot;abc&amp;quot;&#43;&amp;quot;de&amp;quot;; StringBuilder stringBuilder=new StringBuilder().append(&amp;quot;abc&amp;quot;).append(&amp;quot;de&amp;quot;); System.out.println(str); System.out.println(stringBuilder.toString());  这种情况下除外，String的速度会比StringBuilder要快，因为第一行等价于String str=&amp;ldquo;abcde&amp;rdquo;。
 在线程安全上，StringBuilder是线程不安全的，而StringBuffer是线程安全的 如果一个StringBuffer对象在字符串缓冲区被多个线程使用时，StringBuffer中很多方法可以带有synchronized关键字，所以可以保证线程是安全的，但StringBuilder的方法则没有该关键字，所以不能保证线程安全，有可能会出现一些错误的操作。所以如果要进行的操作是多线程的，那么就要使用StringBuffer，但是在单线程的情况下，还是建议使用速度比较快的StringBuilder。
 使用的情况 String：适用于少量的字符串操作的情况
 StringBuilder：适用于单线程下在字符缓冲区进行大量操作的情况
@@ -15,18 +15,18 @@ Stream流的方式 主要用在将一个list转成另外一个list或者map转ma
 数据库的CRUD 查询的时候注意 不建议使用findAll，最好做一个分页，看一下表有多大，除非是表小，而且不会有爆炸性的数据增长的时候可以用。其他时候最好都有分页
 删除的时候 最好是确认了可以保存了，然后再去删，这个，不应该一来就删了
 profile 想了解应用运行的状态，在什么环境下的，应该去看activity的profile
-spring:profiles:active: debug 上面是在bootstrap.yml中的，下面是如何使用
-@Value(&amp;quot;${spring.profiles.active}&amp;quot;)String active;log.info(&amp;quot;start kubernetes watch,active:{}&amp;quot;,active); 将mongoTemplate改为repo的形式  官方文档
+spring: profiles: active: debug  上面是在bootstrap.yml中的，下面是如何使用
+@Value(&amp;quot;${spring.profiles.active}&amp;quot;) String active; log.info(&amp;quot;start kubernetes watch,active:{}&amp;quot;,active);  将mongoTemplate改为repo的形式  官方文档
  相当的方便，好处就是出问题的时候，可以找到对应的表的对应的repo类，快速排查问题。
 如果想要自定义函数的话，需要自定义一个接口，再实现之后，用repo来继承自定义的接口。'><title>SpringBoot开发中的一些小细节(五)String、StringBuffer和StringBuilder、</title>
 
 <link rel='canonical' href='https://lllovol.com/p/spring5/'>
 
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='SpringBoot开发中的一些小细节(五)String、StringBuffer和StringBuilder、'>
+<link rel="stylesheet" href="/scss/style.min.b80bf249ce4a22cf55e8d7340a0b37a2f2c10f54f3a9a49cb94b694a2eb0bbea.css"><meta property='og:title' content='SpringBoot开发中的一些小细节(五)String、StringBuffer和StringBuilder、'>
 <meta property='og:description' content='Code Review 这一周主要是一个前辈的code Review，在此期间能学到很多新的东西，也能看到自己的不足
 变量名的命名 禁止使用拼音，真的显得很没有水平，而且可读性会非常差，除非这个对象真的只有拼音名字
 关于异常的抛出  异常不要怕抛出的多，有异常一定要打出来，不然出了错都不知道是什么地方出的错 禁止一个Exception就把一大段代码的所有异常给吞了 异常一定要用log.error()将栈给打出来  StringBuffer、StringBuilder和String 运行速度：执行速度，在这方面运行速度快慢为：StringBuilder &amp;gt; StringBuffer &amp;gt; String String为字符串常量，而StringBuilder和StringBuffer均为字符串变量，即String对象一旦创建之后该对象是不可更改的，但后两者的对象是变量，是可以更改的。Java中对String对象进行的操作实际上是一个不断创建新的对象并且将旧的对象回收的一个过程，所以执行速度很慢。而StringBuilder和StringBuffer的对象是变量，对变量进行操作就是直接对该对象进行更改，而不进行创建和回收的操作，所以速度要比String快很多。
-String str=&amp;quot;abc&amp;quot;&#43;&amp;quot;de&amp;quot;;StringBuilder stringBuilder=new StringBuilder().append(&amp;quot;abc&amp;quot;).append(&amp;quot;de&amp;quot;);System.out.println(str);System.out.println(stringBuilder.toString()); 这种情况下除外，String的速度会比StringBuilder要快，因为第一行等价于String str=&amp;ldquo;abcde&amp;rdquo;。
+String str=&amp;quot;abc&amp;quot;&#43;&amp;quot;de&amp;quot;; StringBuilder stringBuilder=new StringBuilder().append(&amp;quot;abc&amp;quot;).append(&amp;quot;de&amp;quot;); System.out.println(str); System.out.println(stringBuilder.toString());  这种情况下除外，String的速度会比StringBuilder要快，因为第一行等价于String str=&amp;ldquo;abcde&amp;rdquo;。
 在线程安全上，StringBuilder是线程不安全的，而StringBuffer是线程安全的 如果一个StringBuffer对象在字符串缓冲区被多个线程使用时，StringBuffer中很多方法可以带有synchronized关键字，所以可以保证线程是安全的，但StringBuilder的方法则没有该关键字，所以不能保证线程安全，有可能会出现一些错误的操作。所以如果要进行的操作是多线程的，那么就要使用StringBuffer，但是在单线程的情况下，还是建议使用速度比较快的StringBuilder。
 使用的情况 String：适用于少量的字符串操作的情况
 StringBuilder：适用于单线程下在字符缓冲区进行大量操作的情况
@@ -37,8 +37,8 @@ Stream流的方式 主要用在将一个list转成另外一个list或者map转ma
 数据库的CRUD 查询的时候注意 不建议使用findAll，最好做一个分页，看一下表有多大，除非是表小，而且不会有爆炸性的数据增长的时候可以用。其他时候最好都有分页
 删除的时候 最好是确认了可以保存了，然后再去删，这个，不应该一来就删了
 profile 想了解应用运行的状态，在什么环境下的，应该去看activity的profile
-spring:profiles:active: debug 上面是在bootstrap.yml中的，下面是如何使用
-@Value(&amp;quot;${spring.profiles.active}&amp;quot;)String active;log.info(&amp;quot;start kubernetes watch,active:{}&amp;quot;,active); 将mongoTemplate改为repo的形式  官方文档
+spring: profiles: active: debug  上面是在bootstrap.yml中的，下面是如何使用
+@Value(&amp;quot;${spring.profiles.active}&amp;quot;) String active; log.info(&amp;quot;start kubernetes watch,active:{}&amp;quot;,active);  将mongoTemplate改为repo的形式  官方文档
  相当的方便，好处就是出问题的时候，可以找到对应的表的对应的repo类，快速排查问题。
 如果想要自定义函数的话，需要自定义一个接口，再实现之后，用repo来继承自定义的接口。'>
 <meta property='og:url' content='https://lllovol.com/p/spring5/'>
@@ -48,7 +48,7 @@ spring:profiles:active: debug 上面是在bootstrap.yml中的，下面是如�
 <meta name="twitter:description" content="Code Review 这一周主要是一个前辈的code Review，在此期间能学到很多新的东西，也能看到自己的不足
 变量名的命名 禁止使用拼音，真的显得很没有水平，而且可读性会非常差，除非这个对象真的只有拼音名字
 关于异常的抛出  异常不要怕抛出的多，有异常一定要打出来，不然出了错都不知道是什么地方出的错 禁止一个Exception就把一大段代码的所有异常给吞了 异常一定要用log.error()将栈给打出来  StringBuffer、StringBuilder和String 运行速度：执行速度，在这方面运行速度快慢为：StringBuilder &amp;gt; StringBuffer &amp;gt; String String为字符串常量，而StringBuilder和StringBuffer均为字符串变量，即String对象一旦创建之后该对象是不可更改的，但后两者的对象是变量，是可以更改的。Java中对String对象进行的操作实际上是一个不断创建新的对象并且将旧的对象回收的一个过程，所以执行速度很慢。而StringBuilder和StringBuffer的对象是变量，对变量进行操作就是直接对该对象进行更改，而不进行创建和回收的操作，所以速度要比String快很多。
-String str=&amp;quot;abc&amp;quot;&#43;&amp;quot;de&amp;quot;;StringBuilder stringBuilder=new StringBuilder().append(&amp;quot;abc&amp;quot;).append(&amp;quot;de&amp;quot;);System.out.println(str);System.out.println(stringBuilder.toString()); 这种情况下除外，String的速度会比StringBuilder要快，因为第一行等价于String str=&amp;ldquo;abcde&amp;rdquo;。
+String str=&amp;quot;abc&amp;quot;&#43;&amp;quot;de&amp;quot;; StringBuilder stringBuilder=new StringBuilder().append(&amp;quot;abc&amp;quot;).append(&amp;quot;de&amp;quot;); System.out.println(str); System.out.println(stringBuilder.toString());  这种情况下除外，String的速度会比StringBuilder要快，因为第一行等价于String str=&amp;ldquo;abcde&amp;rdquo;。
 在线程安全上，StringBuilder是线程不安全的，而StringBuffer是线程安全的 如果一个StringBuffer对象在字符串缓冲区被多个线程使用时，StringBuffer中很多方法可以带有synchronized关键字，所以可以保证线程是安全的，但StringBuilder的方法则没有该关键字，所以不能保证线程安全，有可能会出现一些错误的操作。所以如果要进行的操作是多线程的，那么就要使用StringBuffer，但是在单线程的情况下，还是建议使用速度比较快的StringBuilder。
 使用的情况 String：适用于少量的字符串操作的情况
 StringBuilder：适用于单线程下在字符缓冲区进行大量操作的情况
@@ -59,8 +59,8 @@ Stream流的方式 主要用在将一个list转成另外一个list或者map转ma
 数据库的CRUD 查询的时候注意 不建议使用findAll，最好做一个分页，看一下表有多大，除非是表小，而且不会有爆炸性的数据增长的时候可以用。其他时候最好都有分页
 删除的时候 最好是确认了可以保存了，然后再去删，这个，不应该一来就删了
 profile 想了解应用运行的状态，在什么环境下的，应该去看activity的profile
-spring:profiles:active: debug 上面是在bootstrap.yml中的，下面是如何使用
-@Value(&amp;quot;${spring.profiles.active}&amp;quot;)String active;log.info(&amp;quot;start kubernetes watch,active:{}&amp;quot;,active); 将mongoTemplate改为repo的形式  官方文档
+spring: profiles: active: debug  上面是在bootstrap.yml中的，下面是如何使用
+@Value(&amp;quot;${spring.profiles.active}&amp;quot;) String active; log.info(&amp;quot;start kubernetes watch,active:{}&amp;quot;,active);  将mongoTemplate改为repo的形式  官方文档
  相当的方便，好处就是出问题的时候，可以找到对应的表的对应的repo类，快速排查问题。
 如果想要自定义函数的话，需要自定义一个接口，再实现之后，用repo来继承自定义的接口。"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg' />
@@ -79,8 +79,8 @@ if (!doNotTrack) {
 
     </head>
     <body class="
-    article-page has-toc
-">
+    article-page
+    ">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -103,25 +103,175 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex 
-    
-        extended
-    
-">
-    
-        <div id="article-toolbar">
-            <a href="/" class="back-home">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">⚖️</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">lllovol</a></h1>
+            <h2 class="site-description">Stay hungry, stay foolish.</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="15 6 9 12 15 18" />
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
 </svg>
 
 
 
-                <span>返回</span>
+                
+                <span>主页</span>
             </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/links/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
         </div>
-    
+    </ol>
+</aside>
 <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
@@ -145,11 +295,13 @@ if (!doNotTrack) {
     </header>
     
 
-    <h2 class="article-title">
-        <a href="/p/spring5/">SpringBoot开发中的一些小细节(五)String、StringBuffer和StringBuilder、</a>
-    </h2>
-
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/spring5/">SpringBoot开发中的一些小细节(五)String、StringBuffer和StringBuilder、</a>
+        </h2>
     
+        
+    </div>
 
     
     <footer class="article-time">
@@ -185,10 +337,14 @@ if (!doNotTrack) {
         
     </footer>
     
+
+    
 </div>
 </header>
 
     <section class="article-content">
+    
+    
     <h1 id="code-review">Code Review</h1>
 <p>这一周主要是一个前辈的code Review，在此期间能学到很多新的东西，也能看到自己的不足</p>
 <h1 id="变量名的命名">变量名的命名</h1>
@@ -294,11 +450,11 @@ public class CustomizeProjectRepoImpl implements CustomizeProjectRepo {
                 href="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css"integrity="sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn"crossorigin="anonymous"
             ><script 
                 src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.js"integrity="sha384-pK1WpvzWVBQiP0/GjnvRxV4mOb0oxFuyRxJlk6vVw146n3egcN5C925NCP7a7BY8"crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><script 
                 src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/contrib/auto-render.min.js"integrity="sha384-vZTG03m&#43;2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
@@ -314,14 +470,16 @@ public class CustomizeProjectRepoImpl implements CustomizeProjectRepo {
     
 </article>
 
-    <aside class="related-contents--wrapper">
     
+
     
-        <h2 class="section-title">相关文章</h2>
-        <div class="related-contents">
-            <div class="flex article-list--tile">
+
+<aside class="related-contents--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-contents">
+        <div class="flex article-list--tile">
+            
                 
-                    
 <article class="has-image">
     <a href="/p/spring14/">
         
@@ -338,8 +496,8 @@ public class CustomizeProjectRepoImpl implements CustomizeProjectRepo {
         </div>
     </a>
 </article>
+            
                 
-                    
 <article class="has-image">
     <a href="/p/singleton-realization/">
         
@@ -356,8 +514,8 @@ public class CustomizeProjectRepoImpl implements CustomizeProjectRepo {
         </div>
     </a>
 </article>
+            
                 
-                    
 <article class="has-image">
     <a href="/p/spring13/">
         
@@ -374,8 +532,8 @@ public class CustomizeProjectRepoImpl implements CustomizeProjectRepo {
         </div>
     </a>
 </article>
+            
                 
-                    
 <article class="has-image">
     <a href="/p/spring12/">
         
@@ -392,8 +550,8 @@ public class CustomizeProjectRepoImpl implements CustomizeProjectRepo {
         </div>
     </a>
 </article>
+            
                 
-                    
 <article class="has-image">
     <a href="/p/synchronize-job/">
         
@@ -410,10 +568,9 @@ public class CustomizeProjectRepoImpl implements CustomizeProjectRepo {
         </div>
     </a>
 </article>
-                
-            </div>
+            
         </div>
-    
+    </div>
 </aside>
 
      
@@ -459,7 +616,7 @@ public class CustomizeProjectRepoImpl implements CustomizeProjectRepo {
         
             <b><a href="https://github.com/ymkNK" target="_blank" rel="noopener" data-version="%s">Owner Rainbowly </a></b> <br/>
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -527,11 +684,11 @@ public class CustomizeProjectRepoImpl implements CustomizeProjectRepo {
 
 </div><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><link 
                 rel="stylesheet" 
@@ -543,52 +700,11 @@ public class CustomizeProjectRepoImpl implements CustomizeProjectRepo {
 
             </main>
     
-        <aside class="sidebar right-sidebar sticky">
-            <section class="widget archives">
-                <div class="widget-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-                </div>
-                <h2 class="widget-title section-title">目录</h2>
-                
-                <div class="widget--toc">
-                    <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#运行速度执行速度在这方面运行速度快慢为stringbuilder--stringbuffer--string">运行速度：执行速度，在这方面运行速度快慢为：StringBuilder &gt; StringBuffer &gt; String</a></li>
-        <li><a href="#在线程安全上stringbuilder是线程不安全的而stringbuffer是线程安全的">在线程安全上，StringBuilder是线程不安全的，而StringBuffer是线程安全的</a></li>
-        <li><a href="#使用的情况">使用的情况</a></li>
-      </ul>
-    </li>
-  </ul>
-
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#查询的时候注意">查询的时候注意</a></li>
-        <li><a href="#删除的时候">删除的时候</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-                </div>
-            </section>
-        </aside>
-    
 
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
-                defer="false"
+                
                 >
             </script><script type="text/javascript" src="/ts/main.js" defer></script>
 <script>

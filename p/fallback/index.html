@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='前言 在使用FeignClient的时候，我们很难保证第三方的调用不会出问题，这个时候，可以写一个FallBack类，来对出错的时候进行处理，可以异常上报，也可以进行打点处理，可以不再单独地去做这些事情。
-FeignClient的编写  添加maven依赖。  	&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;spring-cloud-starter-openfeign&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;2.0.2.RELEASE&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;feign-core&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;9.7.0&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;feign-slf4j&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;9.7.0&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;新建一个接口，在上方添加FeignClient注解，在value中使用占位符的方式，对参数进行调用。  	@FeignClient(name = &amp;quot;gitApi&amp;quot;, url = &amp;quot;${api.server.gitlab.url}&amp;quot;,fallback = GitApiFeignFallBack.class)public interface GitApiFeign {@GetMapping(value = &amp;quot;/{namespace}/-/jobs/{jobId}/trace&amp;quot;) JSONObject getTrace(@PathVariable(&amp;quot;namespace&amp;quot;) String namespace,@PathVariable(&amp;quot;jobId&amp;quot;) Integer jobId,@RequestParam(&amp;quot;private_token&amp;quot;) String accessToken);}@Autowired 注解就能对FeignClient进行使用。  @AutowiredGitApiFeign gitApiFeign;FeignClient的Fallback实现 在上方的代码中，可以看见注解中有fallback的选项，这个就是新建这个Client对应的fallback类来实现FeignClient。
+FeignClient的编写  添加maven依赖。  	&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-cloud-starter-openfeign&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.0.2.RELEASE&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;feign-core&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;9.7.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;feign-slf4j&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;9.7.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 新建一个接口，在上方添加FeignClient注解，在value中使用占位符的方式，对参数进行调用。  	@FeignClient(name = &amp;#34;gitApi&amp;#34;, url = &amp;#34;${api.server.gitlab.url}&amp;#34;,fallback = GitApiFeignFallBack.class) public interface GitApiFeign { @GetMapping(value = &amp;#34;/{namespace}/-/jobs/{jobId}/trace&amp;#34;) JSONObject getTrace( @PathVariable(&amp;#34;namespace&amp;#34;) String namespace, @PathVariable(&amp;#34;jobId&amp;#34;) Integer jobId, @RequestParam(&amp;#34;private_token&amp;#34;) String accessToken); } @Autowired 注解就能对FeignClient进行使用。  @Autowired GitApiFeign gitApiFeign; FeignClient的Fallback实现 在上方的代码中，可以看见注解中有fallback的选项，这个就是新建这个Client对应的fallback类来实现FeignClient。
 在fallback类的实现代码大致如下，最简单的实现就是在fallBack类中重写一遍Client中的所有方法。
-@Component@Slf4jpublic class GitApiFeignFallBack implements GitApiFeign {@Overridepublic JSONObject getTrace(String namespace, Integer jobId, String accessToken) {log.'><title>FeignClient的FallBack处理</title>
+@Component @Slf4j public class GitApiFeignFallBack implements GitApiFeign { @Override public JSONObject getTrace(String namespace, Integer jobId, String accessToken) { log.'><title>FeignClient的FallBack处理</title>
 
 <link rel='canonical' href='https://lllovol.com/p/fallback/'>
 
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='FeignClient的FallBack处理'>
+<link rel="stylesheet" href="/scss/style.min.b80bf249ce4a22cf55e8d7340a0b37a2f2c10f54f3a9a49cb94b694a2eb0bbea.css"><meta property='og:title' content='FeignClient的FallBack处理'>
 <meta property='og:description' content='前言 在使用FeignClient的时候，我们很难保证第三方的调用不会出问题，这个时候，可以写一个FallBack类，来对出错的时候进行处理，可以异常上报，也可以进行打点处理，可以不再单独地去做这些事情。
-FeignClient的编写  添加maven依赖。  	&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;spring-cloud-starter-openfeign&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;2.0.2.RELEASE&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;feign-core&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;9.7.0&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;feign-slf4j&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;9.7.0&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;新建一个接口，在上方添加FeignClient注解，在value中使用占位符的方式，对参数进行调用。  	@FeignClient(name = &amp;quot;gitApi&amp;quot;, url = &amp;quot;${api.server.gitlab.url}&amp;quot;,fallback = GitApiFeignFallBack.class)public interface GitApiFeign {@GetMapping(value = &amp;quot;/{namespace}/-/jobs/{jobId}/trace&amp;quot;) JSONObject getTrace(@PathVariable(&amp;quot;namespace&amp;quot;) String namespace,@PathVariable(&amp;quot;jobId&amp;quot;) Integer jobId,@RequestParam(&amp;quot;private_token&amp;quot;) String accessToken);}@Autowired 注解就能对FeignClient进行使用。  @AutowiredGitApiFeign gitApiFeign;FeignClient的Fallback实现 在上方的代码中，可以看见注解中有fallback的选项，这个就是新建这个Client对应的fallback类来实现FeignClient。
+FeignClient的编写  添加maven依赖。  	&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-cloud-starter-openfeign&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.0.2.RELEASE&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;feign-core&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;9.7.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;feign-slf4j&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;9.7.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 新建一个接口，在上方添加FeignClient注解，在value中使用占位符的方式，对参数进行调用。  	@FeignClient(name = &amp;#34;gitApi&amp;#34;, url = &amp;#34;${api.server.gitlab.url}&amp;#34;,fallback = GitApiFeignFallBack.class) public interface GitApiFeign { @GetMapping(value = &amp;#34;/{namespace}/-/jobs/{jobId}/trace&amp;#34;) JSONObject getTrace( @PathVariable(&amp;#34;namespace&amp;#34;) String namespace, @PathVariable(&amp;#34;jobId&amp;#34;) Integer jobId, @RequestParam(&amp;#34;private_token&amp;#34;) String accessToken); } @Autowired 注解就能对FeignClient进行使用。  @Autowired GitApiFeign gitApiFeign; FeignClient的Fallback实现 在上方的代码中，可以看见注解中有fallback的选项，这个就是新建这个Client对应的fallback类来实现FeignClient。
 在fallback类的实现代码大致如下，最简单的实现就是在fallBack类中重写一遍Client中的所有方法。
-@Component@Slf4jpublic class GitApiFeignFallBack implements GitApiFeign {@Overridepublic JSONObject getTrace(String namespace, Integer jobId, String accessToken) {log.'>
+@Component @Slf4j public class GitApiFeignFallBack implements GitApiFeign { @Override public JSONObject getTrace(String namespace, Integer jobId, String accessToken) { log.'>
 <meta property='og:url' content='https://lllovol.com/p/fallback/'>
 <meta property='og:site_name' content='lllovol'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Spring' /><meta property='article:published_time' content='2019-07-11T16:31:53&#43;00:00'/><meta property='article:modified_time' content='2019-07-11T16:31:53&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/8.jpg' />
 <meta name="twitter:title" content="FeignClient的FallBack处理">
 <meta name="twitter:description" content="前言 在使用FeignClient的时候，我们很难保证第三方的调用不会出问题，这个时候，可以写一个FallBack类，来对出错的时候进行处理，可以异常上报，也可以进行打点处理，可以不再单独地去做这些事情。
-FeignClient的编写  添加maven依赖。  	&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;spring-cloud-starter-openfeign&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;2.0.2.RELEASE&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;feign-core&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;9.7.0&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;feign-slf4j&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;9.7.0&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;新建一个接口，在上方添加FeignClient注解，在value中使用占位符的方式，对参数进行调用。  	@FeignClient(name = &amp;quot;gitApi&amp;quot;, url = &amp;quot;${api.server.gitlab.url}&amp;quot;,fallback = GitApiFeignFallBack.class)public interface GitApiFeign {@GetMapping(value = &amp;quot;/{namespace}/-/jobs/{jobId}/trace&amp;quot;) JSONObject getTrace(@PathVariable(&amp;quot;namespace&amp;quot;) String namespace,@PathVariable(&amp;quot;jobId&amp;quot;) Integer jobId,@RequestParam(&amp;quot;private_token&amp;quot;) String accessToken);}@Autowired 注解就能对FeignClient进行使用。  @AutowiredGitApiFeign gitApiFeign;FeignClient的Fallback实现 在上方的代码中，可以看见注解中有fallback的选项，这个就是新建这个Client对应的fallback类来实现FeignClient。
+FeignClient的编写  添加maven依赖。  	&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-cloud-starter-openfeign&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.0.2.RELEASE&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;feign-core&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;9.7.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;feign-slf4j&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;9.7.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 新建一个接口，在上方添加FeignClient注解，在value中使用占位符的方式，对参数进行调用。  	@FeignClient(name = &amp;#34;gitApi&amp;#34;, url = &amp;#34;${api.server.gitlab.url}&amp;#34;,fallback = GitApiFeignFallBack.class) public interface GitApiFeign { @GetMapping(value = &amp;#34;/{namespace}/-/jobs/{jobId}/trace&amp;#34;) JSONObject getTrace( @PathVariable(&amp;#34;namespace&amp;#34;) String namespace, @PathVariable(&amp;#34;jobId&amp;#34;) Integer jobId, @RequestParam(&amp;#34;private_token&amp;#34;) String accessToken); } @Autowired 注解就能对FeignClient进行使用。  @Autowired GitApiFeign gitApiFeign; FeignClient的Fallback实现 在上方的代码中，可以看见注解中有fallback的选项，这个就是新建这个Client对应的fallback类来实现FeignClient。
 在fallback类的实现代码大致如下，最简单的实现就是在fallBack类中重写一遍Client中的所有方法。
-@Component@Slf4jpublic class GitApiFeignFallBack implements GitApiFeign {@Overridepublic JSONObject getTrace(String namespace, Integer jobId, String accessToken) {log."><meta name="twitter:card" content="summary_large_image">
+@Component @Slf4j public class GitApiFeignFallBack implements GitApiFeign { @Override public JSONObject getTrace(String namespace, Integer jobId, String accessToken) { log."><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/8.jpg' />
     <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
 
@@ -37,8 +37,8 @@ if (!doNotTrack) {
 
     </head>
     <body class="
-    article-page 
-">
+    article-page
+    ">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -61,27 +61,22 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex 
-    
-        on-phone--column extended
-    
-">
-    
-        <aside class="sidebar left-sidebar sticky">
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
     <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
         </span>
     </button>
 
-    <header class="site-info">
+    <header>
         
             
             <figure class="site-avatar">
+                <a href="/">
                 
                     <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
                 
-
+                </a>
                 
                     <span class="emoji">⚖️</span>
                 
@@ -89,10 +84,11 @@ if (!doNotTrack) {
             
         
         
-        <h1 class="site-name"><a href="/">lllovol</a></h1>
-        <h2 class="site-description">Stay hungry, stay foolish.</h2></header>
-
-    <ol class="menu" id="main-menu">
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">lllovol</a></h1>
+            <h2 class="site-description">Stay hungry, stay foolish.</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
         
         
         
@@ -208,9 +204,11 @@ if (!doNotTrack) {
         </li>
         
 
-        
-            <li id="dark-mode-toggle">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="8" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -218,7 +216,7 @@ if (!doNotTrack) {
 
 
 
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="16" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -226,13 +224,12 @@ if (!doNotTrack) {
 
 
 
-                <span>暗色模式</span>
-            </li>
-        
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
     </ol>
 </aside>
-
-    
 <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
@@ -256,11 +253,13 @@ if (!doNotTrack) {
     </header>
     
 
-    <h2 class="article-title">
-        <a href="/p/fallback/">FeignClient的FallBack处理</a>
-    </h2>
-
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/fallback/">FeignClient的FallBack处理</a>
+        </h2>
     
+        
+    </div>
 
     
     <footer class="article-time">
@@ -296,17 +295,21 @@ if (!doNotTrack) {
         
     </footer>
     
+
+    
 </div>
 </header>
 
     <section class="article-content">
+    
+    
     <h1 id="前言">前言</h1>
 <p>在使用FeignClient的时候，我们很难保证第三方的调用不会出问题，这个时候，可以写一个FallBack类，来对出错的时候进行处理，可以异常上报，也可以进行打点处理，可以不再单独地去做这些事情。</p>
 <h1 id="feignclient的编写">FeignClient的编写</h1>
 <ol>
 <li>添加maven依赖。</li>
 </ol>
-<pre><code>		&lt;dependency&gt;
+<pre tabindex="0"><code>		&lt;dependency&gt;
 		    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
 		    &lt;artifactId&gt;spring-cloud-starter-openfeign&lt;/artifactId&gt;
 		    &lt;version&gt;2.0.2.RELEASE&lt;/version&gt;
@@ -324,35 +327,34 @@ if (!doNotTrack) {
 </code></pre><ol start="2">
 <li>新建一个接口，在上方添加FeignClient注解，在value中使用占位符的方式，对参数进行调用。</li>
 </ol>
-<pre><code>		@FeignClient(name = &quot;gitApi&quot;, url = &quot;${api.server.gitlab.url}&quot;,fallback = GitApiFeignFallBack.class)
+<pre tabindex="0"><code>		@FeignClient(name = &#34;gitApi&#34;, url = &#34;${api.server.gitlab.url}&#34;,fallback = GitApiFeignFallBack.class)
 		public interface GitApiFeign {
 
-			@GetMapping(value = &quot;/{namespace}/-/jobs/{jobId}/trace&quot;)    
+			@GetMapping(value = &#34;/{namespace}/-/jobs/{jobId}/trace&#34;)    
 		    JSONObject getTrace(
-		            @PathVariable(&quot;namespace&quot;) String namespace,
-		            @PathVariable(&quot;jobId&quot;) Integer jobId,
-		            @RequestParam(&quot;private_token&quot;) String accessToken);
+		            @PathVariable(&#34;namespace&#34;) String namespace,
+		            @PathVariable(&#34;jobId&#34;) Integer jobId,
+		            @RequestParam(&#34;private_token&#34;) String accessToken);
 		}
 </code></pre><ol start="3">
 <li>@Autowired 注解就能对FeignClient进行使用。</li>
 </ol>
-<pre><code>@Autowired
+<pre tabindex="0"><code>@Autowired
 GitApiFeign gitApiFeign;
 </code></pre><h1 id="feignclient的fallback实现">FeignClient的Fallback实现</h1>
 <p>在上方的代码中，可以看见注解中有fallback的选项，这个就是新建这个Client对应的fallback类来实现FeignClient。<br>
 在fallback类的实现代码大致如下，最简单的实现就是在fallBack类中重写一遍Client中的所有方法。</p>
-<pre><code>@Component
+<pre tabindex="0"><code>@Component
 @Slf4j
 public class GitApiFeignFallBack implements GitApiFeign {
 
     @Override
     public JSONObject getTrace(String namespace, Integer jobId, String accessToken) {
-        log.error(&quot;调用gitlab api 失败&quot;);
+        log.error(&#34;调用gitlab api 失败&#34;);
         return null;
     }
 
 }
-
 </code></pre>
 </section>
 
@@ -387,11 +389,11 @@ public class GitApiFeignFallBack implements GitApiFeign {
                 href="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css"integrity="sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn"crossorigin="anonymous"
             ><script 
                 src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.js"integrity="sha384-pK1WpvzWVBQiP0/GjnvRxV4mOb0oxFuyRxJlk6vVw146n3egcN5C925NCP7a7BY8"crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><script 
                 src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/contrib/auto-render.min.js"integrity="sha384-vZTG03m&#43;2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
@@ -407,14 +409,16 @@ public class GitApiFeignFallBack implements GitApiFeign {
     
 </article>
 
-    <aside class="related-contents--wrapper">
     
+
     
-        <h2 class="section-title">相关文章</h2>
-        <div class="related-contents">
-            <div class="flex article-list--tile">
+
+<aside class="related-contents--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-contents">
+        <div class="flex article-list--tile">
+            
                 
-                    
 <article class="has-image">
     <a href="/p/spring14/">
         
@@ -431,8 +435,8 @@ public class GitApiFeignFallBack implements GitApiFeign {
         </div>
     </a>
 </article>
+            
                 
-                    
 <article class="has-image">
     <a href="/p/singleton-realization/">
         
@@ -449,8 +453,8 @@ public class GitApiFeignFallBack implements GitApiFeign {
         </div>
     </a>
 </article>
+            
                 
-                    
 <article class="has-image">
     <a href="/p/spring13/">
         
@@ -467,8 +471,8 @@ public class GitApiFeignFallBack implements GitApiFeign {
         </div>
     </a>
 </article>
+            
                 
-                    
 <article class="has-image">
     <a href="/p/spring12/">
         
@@ -485,8 +489,8 @@ public class GitApiFeignFallBack implements GitApiFeign {
         </div>
     </a>
 </article>
+            
                 
-                    
 <article class="has-image">
     <a href="/p/synchronize-job/">
         
@@ -503,10 +507,9 @@ public class GitApiFeignFallBack implements GitApiFeign {
         </div>
     </a>
 </article>
-                
-            </div>
+            
         </div>
-    
+    </div>
 </aside>
 
      
@@ -552,7 +555,7 @@ public class GitApiFeignFallBack implements GitApiFeign {
         
             <b><a href="https://github.com/ymkNK" target="_blank" rel="noopener" data-version="%s">Owner Rainbowly </a></b> <br/>
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -620,11 +623,11 @@ public class GitApiFeignFallBack implements GitApiFeign {
 
 </div><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><link 
                 rel="stylesheet" 
@@ -640,7 +643,7 @@ public class GitApiFeignFallBack implements GitApiFeign {
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
-                defer="false"
+                
                 >
             </script><script type="text/javascript" src="/ts/main.js" defer></script>
 <script>

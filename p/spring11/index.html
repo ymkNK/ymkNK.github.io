@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='前言 最近正式入职，第一周的事情主要就是进行代码的Code Review,将自己曾经的实习时候写的代码看一看，清掉一部分过时的代码。同时也从前辈们的分享中学习到了不少的小细节。 以及看了阿里巴巴的开发规范规约，将一些比较重要的地方、原来没有注意到的地方记录一下。
 测试用例   在写Junit的时候，可以写一个BaseTest,以后test直接继承这个类即可，就不用每次都新建一个类然后在上面重新写上好多注解了。
- @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) @RunWith(SpringJUnit4ClassRunner.class) @Slf4j public class BaseTests {}   在写CRUD的测试用例的时候，一定要写成一个闭环，新加了测试用例，最后测试结束的时候一定要删除，防止在数据库中产生脏数据。
+ @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) @RunWith(SpringJUnit4ClassRunner.class) @Slf4j public class BaseTests { }    在写CRUD的测试用例的时候，一定要写成一个闭环，新加了测试用例，最后测试结束的时候一定要删除，防止在数据库中产生脏数据。
   阿里巴巴的规约阅读笔记  外部正在调用或者二方库依赖的接口（二方库就是公司内部各个服务之间相互依赖的库）不允许修改方法的签名，避免对接口调用方造成影响。 接口过时的时候必须加上**@Deprecated**注解。 Object的equals方法容易报NPE，应该使用常量或者确定有值的对象来使用equals方法。   正例:&amp;ldquo;test&amp;rdquo;.equals(object);
 反例:object.equals(&amp;ldquo;test&amp;rdquo;);
  所有整型包装类对象之间值的比较，全部使用equals方法比较。   说明:对于 Integer var = ? 在-128 至 127 范围内的赋值，Integer 对象是在 IntegerCache.cache 产 生，会复用已有对象，这个区间内的 Integer 值可以直接使用==进行判断，但是这个区间之外的所有数 据，都会在堆上产生，并不会复用已有对象，这是一个大坑，推荐使用 equals 方法进行判断。
@@ -12,10 +12,10 @@
 
 <link rel='canonical' href='https://lllovol.com/p/spring11/'>
 
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='SpringBoot开发中的一些小细节(十一)CR笔记、阿里巴巴代码规约'>
+<link rel="stylesheet" href="/scss/style.min.b80bf249ce4a22cf55e8d7340a0b37a2f2c10f54f3a9a49cb94b694a2eb0bbea.css"><meta property='og:title' content='SpringBoot开发中的一些小细节(十一)CR笔记、阿里巴巴代码规约'>
 <meta property='og:description' content='前言 最近正式入职，第一周的事情主要就是进行代码的Code Review,将自己曾经的实习时候写的代码看一看，清掉一部分过时的代码。同时也从前辈们的分享中学习到了不少的小细节。 以及看了阿里巴巴的开发规范规约，将一些比较重要的地方、原来没有注意到的地方记录一下。
 测试用例   在写Junit的时候，可以写一个BaseTest,以后test直接继承这个类即可，就不用每次都新建一个类然后在上面重新写上好多注解了。
- @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) @RunWith(SpringJUnit4ClassRunner.class) @Slf4j public class BaseTests {}   在写CRUD的测试用例的时候，一定要写成一个闭环，新加了测试用例，最后测试结束的时候一定要删除，防止在数据库中产生脏数据。
+ @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) @RunWith(SpringJUnit4ClassRunner.class) @Slf4j public class BaseTests { }    在写CRUD的测试用例的时候，一定要写成一个闭环，新加了测试用例，最后测试结束的时候一定要删除，防止在数据库中产生脏数据。
   阿里巴巴的规约阅读笔记  外部正在调用或者二方库依赖的接口（二方库就是公司内部各个服务之间相互依赖的库）不允许修改方法的签名，避免对接口调用方造成影响。 接口过时的时候必须加上**@Deprecated**注解。 Object的equals方法容易报NPE，应该使用常量或者确定有值的对象来使用equals方法。   正例:&amp;ldquo;test&amp;rdquo;.equals(object);
 反例:object.equals(&amp;ldquo;test&amp;rdquo;);
  所有整型包装类对象之间值的比较，全部使用equals方法比较。   说明:对于 Integer var = ? 在-128 至 127 范围内的赋值，Integer 对象是在 IntegerCache.cache 产 生，会复用已有对象，这个区间内的 Integer 值可以直接使用==进行判断，但是这个区间之外的所有数 据，都会在堆上产生，并不会复用已有对象，这是一个大坑，推荐使用 equals 方法进行判断。
@@ -27,7 +27,7 @@
 <meta name="twitter:title" content="SpringBoot开发中的一些小细节(十一)CR笔记、阿里巴巴代码规约">
 <meta name="twitter:description" content="前言 最近正式入职，第一周的事情主要就是进行代码的Code Review,将自己曾经的实习时候写的代码看一看，清掉一部分过时的代码。同时也从前辈们的分享中学习到了不少的小细节。 以及看了阿里巴巴的开发规范规约，将一些比较重要的地方、原来没有注意到的地方记录一下。
 测试用例   在写Junit的时候，可以写一个BaseTest,以后test直接继承这个类即可，就不用每次都新建一个类然后在上面重新写上好多注解了。
- @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) @RunWith(SpringJUnit4ClassRunner.class) @Slf4j public class BaseTests {}   在写CRUD的测试用例的时候，一定要写成一个闭环，新加了测试用例，最后测试结束的时候一定要删除，防止在数据库中产生脏数据。
+ @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) @RunWith(SpringJUnit4ClassRunner.class) @Slf4j public class BaseTests { }    在写CRUD的测试用例的时候，一定要写成一个闭环，新加了测试用例，最后测试结束的时候一定要删除，防止在数据库中产生脏数据。
   阿里巴巴的规约阅读笔记  外部正在调用或者二方库依赖的接口（二方库就是公司内部各个服务之间相互依赖的库）不允许修改方法的签名，避免对接口调用方造成影响。 接口过时的时候必须加上**@Deprecated**注解。 Object的equals方法容易报NPE，应该使用常量或者确定有值的对象来使用equals方法。   正例:&amp;ldquo;test&amp;rdquo;.equals(object);
 反例:object.equals(&amp;ldquo;test&amp;rdquo;);
  所有整型包装类对象之间值的比较，全部使用equals方法比较。   说明:对于 Integer var = ? 在-128 至 127 范围内的赋值，Integer 对象是在 IntegerCache.cache 产 生，会复用已有对象，这个区间内的 Integer 值可以直接使用==进行判断，但是这个区间之外的所有数 据，都会在堆上产生，并不会复用已有对象，这是一个大坑，推荐使用 equals 方法进行判断。
@@ -49,8 +49,8 @@ if (!doNotTrack) {
 
     </head>
     <body class="
-    article-page 
-">
+    article-page
+    ">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -73,27 +73,22 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex 
-    
-        on-phone--column extended
-    
-">
-    
-        <aside class="sidebar left-sidebar sticky">
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
     <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
         </span>
     </button>
 
-    <header class="site-info">
+    <header>
         
             
             <figure class="site-avatar">
+                <a href="/">
                 
                     <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
                 
-
+                </a>
                 
                     <span class="emoji">⚖️</span>
                 
@@ -101,10 +96,11 @@ if (!doNotTrack) {
             
         
         
-        <h1 class="site-name"><a href="/">lllovol</a></h1>
-        <h2 class="site-description">Stay hungry, stay foolish.</h2></header>
-
-    <ol class="menu" id="main-menu">
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">lllovol</a></h1>
+            <h2 class="site-description">Stay hungry, stay foolish.</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
         
         
         
@@ -220,9 +216,11 @@ if (!doNotTrack) {
         </li>
         
 
-        
-            <li id="dark-mode-toggle">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="8" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -230,7 +228,7 @@ if (!doNotTrack) {
 
 
 
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="16" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -238,13 +236,12 @@ if (!doNotTrack) {
 
 
 
-                <span>暗色模式</span>
-            </li>
-        
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
     </ol>
 </aside>
-
-    
 <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
@@ -268,11 +265,13 @@ if (!doNotTrack) {
     </header>
     
 
-    <h2 class="article-title">
-        <a href="/p/spring11/">SpringBoot开发中的一些小细节(十一)CR笔记、阿里巴巴代码规约</a>
-    </h2>
-
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/spring11/">SpringBoot开发中的一些小细节(十一)CR笔记、阿里巴巴代码规约</a>
+        </h2>
     
+        
+    </div>
 
     
     <footer class="article-time">
@@ -308,10 +307,14 @@ if (!doNotTrack) {
         
     </footer>
     
+
+    
 </div>
 </header>
 
     <section class="article-content">
+    
+    
     <h1 id="前言">前言</h1>
 <p>最近正式入职，第一周的事情主要就是进行代码的Code Review,将自己曾经的实习时候写的代码看一看，清掉一部分过时的代码。同时也从前辈们的分享中学习到了不少的小细节。
 以及看了阿里巴巴的开发规范规约，将一些比较重要的地方、原来没有注意到的地方记录一下。</p>
@@ -362,7 +365,7 @@ if (!doNotTrack) {
 如:BigDecimal g = new BigDecimal(0.1f); 实际的存储值为:0.10000000149<br>
 正例:优先推荐入参为 String 的构造方法，或使用 BigDecimal 的 valueOf 方法，此方法内部其实执行了 Double 的 toString，而 Double 的 toString 按 double 的实际能表达的精度对尾数进行了截断。</p>
 </blockquote>
-<pre><code>BigDecimal recommend1 = new BigDecimal(&quot;0.1&quot;);
+<pre tabindex="0"><code>BigDecimal recommend1 = new BigDecimal(&#34;0.1&#34;);
 BigDecimal recommend2 = BigDecimal.valueOf(0.1);
 </code></pre><ol start="8">
 <li>所有POJO类属性必须使用包装数据类型。</li>
@@ -386,8 +389,8 @@ BigDecimal recommend2 = BigDecimal.valueOf(0.1);
 </ol>
 <blockquote>
 </blockquote>
-<pre><code>String str = &quot;a,b,c,,&quot;;
-String[] ary = str.split(&quot;,&quot;);
+<pre tabindex="0"><code>String str = &#34;a,b,c,,&#34;;
+String[] ary = str.split(&#34;,&#34;);
 // 预期大于 3，结果是 3 System.out.println(ary.length);
 </code></pre><ol start="15">
 <li>循环体类，字符串的连接方式，使用StringBuilder的append方法进行拓展，或者使用Guava的Joiner来进行拓展。如果使用str=str+“new str”的方式来进行字符串连接的话，每一次循环都会产生一个新的StringBuilder对象然后进行append操作，最后通过toString方法返回String对象，造成内存资源的浪费。</li>
@@ -395,26 +398,26 @@ String[] ary = str.split(&quot;,&quot;);
 <blockquote>
 <p>反例</p>
 </blockquote>
-<pre><code>String str = &quot;start&quot;;
+<pre tabindex="0"><code>String str = &#34;start&#34;;
 for (int i = 0; i &lt; 100; i++) {
-str = str + &quot;hello&quot;; }
+str = str + &#34;hello&#34;; }
 </code></pre><ol start="16">
 <li>表达异常的分支时，少用if-else方式，这种方式可以改写成:</li>
 </ol>
 <blockquote>
 </blockquote>
-<pre><code>if (condition) { ...
+<pre tabindex="0"><code>if (condition) { ...
 return obj; }
 // 接着写 else 的业务逻辑代码;
 </code></pre><p>说明:如果非使用 if()&hellip;else if()&hellip;else&hellip;方式表达逻辑，避免后续代码维护困难，请勿超过3层。 正例:超过3层的if-else的逻辑判断代码可以使用卫语句、策略模式、状态模式等来实现，其中卫语句,即代码逻辑先考虑失败、异常、中断、退出等直接返回的情况，以方法多个出口的方式，解决代码中判断分支嵌套的问题，这是逆向思维的体现。</p>
-<pre><code>public void findBoyfriend(Man man) {
-if (man.isUgly()) { System.out.println(&quot;本姑娘是外貌协会的资深会员&quot;);
+<pre tabindex="0"><code>public void findBoyfriend(Man man) {
+if (man.isUgly()) { System.out.println(&#34;本姑娘是外貌协会的资深会员&#34;);
 return; }
-if (man.isPoor()) { System.out.println(&quot;贫贱夫妻百事哀&quot;);
+if (man.isPoor()) { System.out.println(&#34;贫贱夫妻百事哀&#34;);
 return; }
-if (man.isBadTemper()) { System.out.println(&quot;银河有多远，你就给我滚多远&quot;);
+if (man.isBadTemper()) { System.out.println(&#34;银河有多远，你就给我滚多远&#34;);
 return; }
-System.out.println(&quot;可以先交往一段时间看看&quot;); }
+System.out.println(&#34;可以先交往一段时间看看&#34;); }
 //he,woman
 </code></pre><ol start="17">
 <li>除常用方法(如getXxx/isXxx)等外，不要在条件判断中执行其它复杂的语句，将复杂逻辑判断的结果赋值给一个有意义的布尔变量名，以提高可读性。</li>
@@ -423,8 +426,8 @@ System.out.println(&quot;可以先交往一段时间看看&quot;); }
 <p>说明:很多if语句内的逻辑表达式相当复杂，与、或、取反混合运算，甚至各种方法纵深调用，理解成本非常高。如果赋值一个非常好理解的布尔变量名字，则是件令人爽心悦目的事情。<br>
 正例:</p>
 </blockquote>
-<pre><code>// 伪代码如下
-final boolean existed = (file.open(fileName, &quot;w&quot;) != null) &amp;&amp; (...) || (...);
+<pre tabindex="0"><code>// 伪代码如下
+final boolean existed = (file.open(fileName, &#34;w&#34;) != null) &amp;&amp; (...) || (...);
 </code></pre><ol start="18">
 <li>在高并发场景中，避免使用”等于”判断作为中断或退出的条件。</li>
 </ol>
@@ -436,7 +439,7 @@ final boolean existed = (file.open(fileName, &quot;w&quot;) != null) &amp;&amp; 
 <li>类、类属性、类方法的注释必须使用Javadoc规范，使用/**内容*/格式，不得使用 // xxx 方式。</li>
 <li>所有的抽象方法(包括接口中的方法)必须要用Javadoc注释、除了返回值、参数、 异常说明外，还必须指出该方法做什么事情，实现什么功能。 说明:对子类的实现要求，或者调用注意事项，请一并说明。</li>
 <li>所有的类都必须添加创建者和创建日期。</li>
-<li>方法内部单行注释，在被注释语句上方另起一行，使用//注释。方法内部多行注释 
+<li>方法内部单行注释，在被注释语句上方另起一行，使用//注释。方法内部多行注释
 使用/* */注释，注意与代码对齐。</li>
 <li>所有的枚举类型字段必须要有注释，说明每个数据项的用途。</li>
 <li>避免出现重复的代码(<strong>Don&rsquo;t Repeat Yourself</strong>)，即DRY原则。说明:随意复制和粘贴代码，必然会导致代码的重复，在以后需要修改时，需要修改所有的副本，容易遗漏。必要时抽取共性方法，或者抽象公共类，甚至是组件化。</li>
@@ -484,11 +487,11 @@ final boolean existed = (file.open(fileName, &quot;w&quot;) != null) &amp;&amp; 
                 href="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css"integrity="sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn"crossorigin="anonymous"
             ><script 
                 src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.js"integrity="sha384-pK1WpvzWVBQiP0/GjnvRxV4mOb0oxFuyRxJlk6vVw146n3egcN5C925NCP7a7BY8"crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><script 
                 src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/contrib/auto-render.min.js"integrity="sha384-vZTG03m&#43;2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
@@ -504,14 +507,16 @@ final boolean existed = (file.open(fileName, &quot;w&quot;) != null) &amp;&amp; 
     
 </article>
 
-    <aside class="related-contents--wrapper">
     
+
     
-        <h2 class="section-title">相关文章</h2>
-        <div class="related-contents">
-            <div class="flex article-list--tile">
+
+<aside class="related-contents--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-contents">
+        <div class="flex article-list--tile">
+            
                 
-                    
 <article class="has-image">
     <a href="/p/spring14/">
         
@@ -528,8 +533,8 @@ final boolean existed = (file.open(fileName, &quot;w&quot;) != null) &amp;&amp; 
         </div>
     </a>
 </article>
+            
                 
-                    
 <article class="has-image">
     <a href="/p/singleton-realization/">
         
@@ -546,8 +551,8 @@ final boolean existed = (file.open(fileName, &quot;w&quot;) != null) &amp;&amp; 
         </div>
     </a>
 </article>
+            
                 
-                    
 <article class="has-image">
     <a href="/p/spring13/">
         
@@ -564,8 +569,8 @@ final boolean existed = (file.open(fileName, &quot;w&quot;) != null) &amp;&amp; 
         </div>
     </a>
 </article>
+            
                 
-                    
 <article class="has-image">
     <a href="/p/spring12/">
         
@@ -582,8 +587,8 @@ final boolean existed = (file.open(fileName, &quot;w&quot;) != null) &amp;&amp; 
         </div>
     </a>
 </article>
+            
                 
-                    
 <article class="has-image">
     <a href="/p/synchronize-job/">
         
@@ -600,10 +605,9 @@ final boolean existed = (file.open(fileName, &quot;w&quot;) != null) &amp;&amp; 
         </div>
     </a>
 </article>
-                
-            </div>
+            
         </div>
-    
+    </div>
 </aside>
 
      
@@ -649,7 +653,7 @@ final boolean existed = (file.open(fileName, &quot;w&quot;) != null) &amp;&amp; 
         
             <b><a href="https://github.com/ymkNK" target="_blank" rel="noopener" data-version="%s">Owner Rainbowly </a></b> <br/>
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -717,11 +721,11 @@ final boolean existed = (file.open(fileName, &quot;w&quot;) != null) &amp;&amp; 
 
 </div><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><link 
                 rel="stylesheet" 
@@ -737,7 +741,7 @@ final boolean existed = (file.open(fileName, &quot;w&quot;) != null) &amp;&amp; 
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
-                defer="false"
+                
                 >
             </script><script type="text/javascript" src="/ts/main.js" defer></script>
 <script>

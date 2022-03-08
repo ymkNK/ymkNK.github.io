@@ -1,28 +1,90 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Jenkins on lllovol</title>
-    <link>https://lllovol.com/tags/jenkins/</link>
-    <description>Recent content in Jenkins on lllovol</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Fri, 26 Jul 2019 11:01:52 +0000</lastBuildDate><atom:link href="https://lllovol.com/tags/jenkins/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>使用Jenkins回调获取状态</title>
-      <link>https://lllovol.com/p/jenkins-callback/</link>
-      <pubDate>Fri, 26 Jul 2019 11:01:52 +0000</pubDate>
-      
-      <guid>https://lllovol.com/p/jenkins-callback/</guid>
-      <description>前言 最近的工作需要使用Jenkins执行一个特定脚本，但是使用FeignClient调用Jenkins的执行接口后，并不能获取到脚本执行之后的结果（成功和失败），本文就将介绍这种问题的其中一种解决方式。
- Jenkins是开源CI&amp;amp;CD软件领导者，提供超过1000个插件来支持构建、部署、自动化，满足任何项目的需要。Jenkins官网
- 关键点  通过调研后，Jenkins在完成构建后，可以添加一个构建后操作。这就可以通过这个构建后操作，将本次构建脚本执行的结果，通过这个构建后操作，传给另外一个job，然后通过这个job将执行的结果通过回调的方式，传给应用服务器。
-整个流程  服务器端创建一条记录，获取到记录的id，与需要执行的job所需要的参数还有回调所需要用到的apiHost一同存入到map当中，转换为JSON格式，通过FeignClient调用Jenkins对应的脚本。   服务器端应用可能会部署在不同的环境下，连接不同的数据库，因此可以在application.yml中配置当前apiHost的值，通过ConfigServer可以更改为当前环境所对应的值。
-  在Jenkins端进行对应的job执行。
-  通过构建后操作的trigger parameterized build on other projects功能。 
-  根据本次构建的成功与否，分别执行不同的构建后操作，传递给回调job对应的参数。  
-  回调job将获取到的信息，通过一个shell脚本，通过curl传递给服务器端。
-  echo &amp;quot;${ID}&amp;quot;echo &amp;quot;${API_HOST}&amp;quot;echo &amp;quot;${BUILD_NO}&amp;quot;echo &amp;quot;${RESULT}&amp;quot;curl &amp;quot;$API_HOST/api/xxx/xxx/xxx/hook&amp;quot; -X POST -d &amp;quot;Id=$ID&amp;amp;buildNo=$BUILD_NO&amp;amp;result=$RESULT&amp;quot; 服务器端拿到数据进行更新和处理。  结语 有时候只是想要一条小小的消息，却不知道要辗转多少次，才能到达该去的地方</description>
-    </item>
-    
-  </channel>
+    <channel>
+        <title>Jenkins on lllovol</title>
+        <link>https://lllovol.com/tags/jenkins/</link>
+        <description>Recent content in Jenkins on lllovol</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Fri, 26 Jul 2019 11:01:52 +0000</lastBuildDate><atom:link href="https://lllovol.com/tags/jenkins/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>使用Jenkins回调获取状态</title>
+        <link>https://lllovol.com/p/jenkins-callback/</link>
+        <pubDate>Fri, 26 Jul 2019 11:01:52 +0000</pubDate>
+        
+        <guid>https://lllovol.com/p/jenkins-callback/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg" alt="Featured image of post 使用Jenkins回调获取状态" /&gt;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+&lt;p&gt;最近的工作需要使用Jenkins执行一个特定脚本，但是使用FeignClient调用Jenkins的执行接口后，并不能获取到脚本执行之后的结果（成功和失败），本文就将介绍这种问题的其中一种解决方式。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Jenkins是开源CI&amp;amp;CD软件领导者，提供超过1000个插件来支持构建、部署、自动化，满足任何项目的需要。&lt;a class=&#34;link&#34; href=&#34;https://jenkins.io/zh/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Jenkins官网&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;关键点&#34;&gt;关键点&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190726-115622@2x.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;
+通过调研后，Jenkins在完成构建后，可以添加一个构建后操作。这就可以通过这个构建后操作，将本次构建脚本执行的结果，通过这个构建后操作，传给另外一个job，然后通过这个job将执行的结果通过回调的方式，传给应用服务器。&lt;/p&gt;
+&lt;h2 id=&#34;整个流程&#34;&gt;整个流程&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;服务器端创建一条记录，获取到记录的id，与需要执行的job所需要的参数还有回调所需要用到的apiHost一同存入到map当中，转换为JSON格式，通过FeignClient调用Jenkins对应的脚本。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;服务器端应用可能会部署在不同的环境下，连接不同的数据库，因此可以在application.yml中配置当前apiHost的值，通过ConfigServer可以更改为当前环境所对应的值。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;在Jenkins端进行对应的job执行。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;通过构建后操作的trigger parameterized build on other projects功能。
+&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190726-150927@2x.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;根据本次构建的成功与否，分别执行不同的构建后操作，传递给回调job对应的参数。
+&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190726-145102@2x.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;
+&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190726-145131@2x.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;回调job将获取到的信息，通过一个shell脚本，通过curl传递给服务器端。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;echo &amp;#34;${ID}&amp;#34;
+echo &amp;#34;${API_HOST}&amp;#34;
+echo &amp;#34;${BUILD_NO}&amp;#34;
+echo &amp;#34;${RESULT}&amp;#34;
+curl &amp;#34;$API_HOST/api/xxx/xxx/xxx/hook&amp;#34; -X POST -d &amp;#34;Id=$ID&amp;amp;buildNo=$BUILD_NO&amp;amp;result=$RESULT&amp;#34; 
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;服务器端拿到数据进行更新和处理。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;结语&#34;&gt;结语&lt;/h2&gt;
+&lt;p&gt;有时候只是想要一条小小的消息，却不知道要辗转多少次，才能到达该去的地方&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
 </rss>

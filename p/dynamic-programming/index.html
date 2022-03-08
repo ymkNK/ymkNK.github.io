@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='前言 动态规划是算法中的一大类，是一个求解最优解的值的问题
  本文内容主要来自于 《算法导论第三版第四部分第15章 动态规划》
@@ -9,14 +9,14 @@
 这样，我们就能通过组合两个相关子问题的最优解，并在所有可能的两端切割方案中选取组合收益的最大者，构成原问题的最优解。 这样，我们称钢条切割问题满足最优子结构（optimal substructure）的性质：问题的最优解由相关问题的最优解组合而成，而这些子问题可以独立求解。
 除此之外，我们可以将钢条从左边切割下长度为i的一段，然后只对右边剩下的长度为n-i的一段继续进行切割（递归求解），对左边的一段则不再进行切割，
 而不做任何切割的方案，可以描述为：第一段的长度为n，收益为pn，剩余部分的长度为0，对应的收益为r0=0。
-伪代码实现（自顶向下的方法）  CUT-ROD（p,n)1	if n == 02	return 0;3 q = min_num4 for i = 1 to n5 q=max(q,p[i]&#43;CUT-ROD(p,n-i))6 return q CUT-ROD优化 上方的方法，在n变大的时候，程序运行时间会变得特别特别慢，原因是，它会反复的使用相同的参数值，对自身进行递归调用，等价于他在反复求解相同的子问题。如果将上面函数的递归调用树画出来，将会有2^(n-1)个叶节点。全部展开，必将成为一个指数级增长的趋势。上面的朴素递归算法，效率低，就是这个问题，反复求解了相同的子问题。
+伪代码实现（自顶向下的方法） 	CUT-ROD（p,n) 1	if n == 0 2	return 0; 3 q = min_num 4 for i = 1 to n 5 q=max(q,p[i]&#43;CUT-ROD(p,n-i)) 6 return q  CUT-ROD优化 上方的方法，在n变大的时候，程序运行时间会变得特别特别慢，原因是，它会反复的使用相同的参数值，对自身进行递归调用，等价于他在反复求解相同的子问题。如果将上面函数的递归调用树画出来，将会有2^(n-1)个叶节点。全部展开，必将成为一个指数级增长的趋势。上面的朴素递归算法，效率低，就是这个问题，反复求解了相同的子问题。
 因此，动态规划要求仔细安排求解的顺序，对每个子问题，之求解一次，并将结果保存下来。因此，对于每个子问题的解，咱们只求一次，并且将结果保存下来，之后再遇到相同的子问题，就可以直接求出解，因此，动态规划方法，就是付出了额外的内存空间，来节省计算时间，这就是典型的时空权衡的例子。下面是两个优化算法的伪代码
 带备忘的自顶向下法（top-down with memoization） 过程会保存每个子问题的解，通常保存在一个数组或者散列表当中。当需要一个子问题的解的时候，首先检查一下是否已经保存过此解。
- MEMOIZED-CUT-ROD(p,n)1 let r[0..n]be a new array2 for i = 0 to n3 r[i] = min_num4 return MEMOIZED-CUT-ROD-AUX(p,n,r);MEMOIZED-CUT-ROD-AUX(p,n,r)1 if r[n]&amp;gt;=02 return r[n]3 if n == 04 q = 05 else q = min_num6	for i = 1 to n 7 q=max(q,p[i]&#43;MEMOIZED-CUT-ROD-AUX(p,n-i,r))8 r[n]=q9 return q 自底向上的方法  BOTTOM-UP-CUT-ROD(p,n)1 let r[0.'><title>Dynamic Programming-钢条切割问题</title>
+	MEMOIZED-CUT-ROD(p,n) 1 let r[0..n]be a new array 2 for i = 0 to n 3 r[i] = min_num 4 return MEMOIZED-CUT-ROD-AUX(p,n,r); MEMOIZED-CUT-ROD-AUX(p,n,r) 1 if r[n]&amp;gt;=0 2 return r[n] 3 if n == 0 4 q = 0 5 else q = min_num 6	for i = 1 to n 7 q=max(q,p[i]&#43;MEMOIZED-CUT-ROD-AUX(p,n-i,r)) 8 r[n]=q 9 return q  自底向上的方法 	BOTTOM-UP-CUT-ROD(p,n) 1 let r[0.'><title>Dynamic Programming-钢条切割问题</title>
 
 <link rel='canonical' href='https://lllovol.com/p/dynamic-programming/'>
 
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Dynamic Programming-钢条切割问题'>
+<link rel="stylesheet" href="/scss/style.min.b80bf249ce4a22cf55e8d7340a0b37a2f2c10f54f3a9a49cb94b694a2eb0bbea.css"><meta property='og:title' content='Dynamic Programming-钢条切割问题'>
 <meta property='og:description' content='前言 动态规划是算法中的一大类，是一个求解最优解的值的问题
  本文内容主要来自于 《算法导论第三版第四部分第15章 动态规划》
  四个基本步骤 我们通常需要四个步骤来设计一个动态规划算法：
@@ -25,10 +25,10 @@
 这样，我们就能通过组合两个相关子问题的最优解，并在所有可能的两端切割方案中选取组合收益的最大者，构成原问题的最优解。 这样，我们称钢条切割问题满足最优子结构（optimal substructure）的性质：问题的最优解由相关问题的最优解组合而成，而这些子问题可以独立求解。
 除此之外，我们可以将钢条从左边切割下长度为i的一段，然后只对右边剩下的长度为n-i的一段继续进行切割（递归求解），对左边的一段则不再进行切割，
 而不做任何切割的方案，可以描述为：第一段的长度为n，收益为pn，剩余部分的长度为0，对应的收益为r0=0。
-伪代码实现（自顶向下的方法）  CUT-ROD（p,n)1	if n == 02	return 0;3 q = min_num4 for i = 1 to n5 q=max(q,p[i]&#43;CUT-ROD(p,n-i))6 return q CUT-ROD优化 上方的方法，在n变大的时候，程序运行时间会变得特别特别慢，原因是，它会反复的使用相同的参数值，对自身进行递归调用，等价于他在反复求解相同的子问题。如果将上面函数的递归调用树画出来，将会有2^(n-1)个叶节点。全部展开，必将成为一个指数级增长的趋势。上面的朴素递归算法，效率低，就是这个问题，反复求解了相同的子问题。
+伪代码实现（自顶向下的方法） 	CUT-ROD（p,n) 1	if n == 0 2	return 0; 3 q = min_num 4 for i = 1 to n 5 q=max(q,p[i]&#43;CUT-ROD(p,n-i)) 6 return q  CUT-ROD优化 上方的方法，在n变大的时候，程序运行时间会变得特别特别慢，原因是，它会反复的使用相同的参数值，对自身进行递归调用，等价于他在反复求解相同的子问题。如果将上面函数的递归调用树画出来，将会有2^(n-1)个叶节点。全部展开，必将成为一个指数级增长的趋势。上面的朴素递归算法，效率低，就是这个问题，反复求解了相同的子问题。
 因此，动态规划要求仔细安排求解的顺序，对每个子问题，之求解一次，并将结果保存下来。因此，对于每个子问题的解，咱们只求一次，并且将结果保存下来，之后再遇到相同的子问题，就可以直接求出解，因此，动态规划方法，就是付出了额外的内存空间，来节省计算时间，这就是典型的时空权衡的例子。下面是两个优化算法的伪代码
 带备忘的自顶向下法（top-down with memoization） 过程会保存每个子问题的解，通常保存在一个数组或者散列表当中。当需要一个子问题的解的时候，首先检查一下是否已经保存过此解。
- MEMOIZED-CUT-ROD(p,n)1 let r[0..n]be a new array2 for i = 0 to n3 r[i] = min_num4 return MEMOIZED-CUT-ROD-AUX(p,n,r);MEMOIZED-CUT-ROD-AUX(p,n,r)1 if r[n]&amp;gt;=02 return r[n]3 if n == 04 q = 05 else q = min_num6	for i = 1 to n 7 q=max(q,p[i]&#43;MEMOIZED-CUT-ROD-AUX(p,n-i,r))8 r[n]=q9 return q 自底向上的方法  BOTTOM-UP-CUT-ROD(p,n)1 let r[0.'>
+	MEMOIZED-CUT-ROD(p,n) 1 let r[0..n]be a new array 2 for i = 0 to n 3 r[i] = min_num 4 return MEMOIZED-CUT-ROD-AUX(p,n,r); MEMOIZED-CUT-ROD-AUX(p,n,r) 1 if r[n]&amp;gt;=0 2 return r[n] 3 if n == 0 4 q = 0 5 else q = min_num 6	for i = 1 to n 7 q=max(q,p[i]&#43;MEMOIZED-CUT-ROD-AUX(p,n-i,r)) 8 r[n]=q 9 return q  自底向上的方法 	BOTTOM-UP-CUT-ROD(p,n) 1 let r[0.'>
 <meta property='og:url' content='https://lllovol.com/p/dynamic-programming/'>
 <meta property='og:site_name' content='lllovol'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Algorithm' /><meta property='article:published_time' content='2019-03-27T20:38:15&#43;00:00'/><meta property='article:modified_time' content='2019-03-27T20:38:15&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/1.jpg' />
@@ -41,10 +41,10 @@
 这样，我们就能通过组合两个相关子问题的最优解，并在所有可能的两端切割方案中选取组合收益的最大者，构成原问题的最优解。 这样，我们称钢条切割问题满足最优子结构（optimal substructure）的性质：问题的最优解由相关问题的最优解组合而成，而这些子问题可以独立求解。
 除此之外，我们可以将钢条从左边切割下长度为i的一段，然后只对右边剩下的长度为n-i的一段继续进行切割（递归求解），对左边的一段则不再进行切割，
 而不做任何切割的方案，可以描述为：第一段的长度为n，收益为pn，剩余部分的长度为0，对应的收益为r0=0。
-伪代码实现（自顶向下的方法）  CUT-ROD（p,n)1	if n == 02	return 0;3 q = min_num4 for i = 1 to n5 q=max(q,p[i]&#43;CUT-ROD(p,n-i))6 return q CUT-ROD优化 上方的方法，在n变大的时候，程序运行时间会变得特别特别慢，原因是，它会反复的使用相同的参数值，对自身进行递归调用，等价于他在反复求解相同的子问题。如果将上面函数的递归调用树画出来，将会有2^(n-1)个叶节点。全部展开，必将成为一个指数级增长的趋势。上面的朴素递归算法，效率低，就是这个问题，反复求解了相同的子问题。
+伪代码实现（自顶向下的方法） 	CUT-ROD（p,n) 1	if n == 0 2	return 0; 3 q = min_num 4 for i = 1 to n 5 q=max(q,p[i]&#43;CUT-ROD(p,n-i)) 6 return q  CUT-ROD优化 上方的方法，在n变大的时候，程序运行时间会变得特别特别慢，原因是，它会反复的使用相同的参数值，对自身进行递归调用，等价于他在反复求解相同的子问题。如果将上面函数的递归调用树画出来，将会有2^(n-1)个叶节点。全部展开，必将成为一个指数级增长的趋势。上面的朴素递归算法，效率低，就是这个问题，反复求解了相同的子问题。
 因此，动态规划要求仔细安排求解的顺序，对每个子问题，之求解一次，并将结果保存下来。因此，对于每个子问题的解，咱们只求一次，并且将结果保存下来，之后再遇到相同的子问题，就可以直接求出解，因此，动态规划方法，就是付出了额外的内存空间，来节省计算时间，这就是典型的时空权衡的例子。下面是两个优化算法的伪代码
 带备忘的自顶向下法（top-down with memoization） 过程会保存每个子问题的解，通常保存在一个数组或者散列表当中。当需要一个子问题的解的时候，首先检查一下是否已经保存过此解。
- MEMOIZED-CUT-ROD(p,n)1 let r[0..n]be a new array2 for i = 0 to n3 r[i] = min_num4 return MEMOIZED-CUT-ROD-AUX(p,n,r);MEMOIZED-CUT-ROD-AUX(p,n,r)1 if r[n]&amp;gt;=02 return r[n]3 if n == 04 q = 05 else q = min_num6	for i = 1 to n 7 q=max(q,p[i]&#43;MEMOIZED-CUT-ROD-AUX(p,n-i,r))8 r[n]=q9 return q 自底向上的方法  BOTTOM-UP-CUT-ROD(p,n)1 let r[0."><meta name="twitter:card" content="summary_large_image">
+	MEMOIZED-CUT-ROD(p,n) 1 let r[0..n]be a new array 2 for i = 0 to n 3 r[i] = min_num 4 return MEMOIZED-CUT-ROD-AUX(p,n,r); MEMOIZED-CUT-ROD-AUX(p,n,r) 1 if r[n]&amp;gt;=0 2 return r[n] 3 if n == 0 4 q = 0 5 else q = min_num 6	for i = 1 to n 7 q=max(q,p[i]&#43;MEMOIZED-CUT-ROD-AUX(p,n-i,r)) 8 r[n]=q 9 return q  自底向上的方法 	BOTTOM-UP-CUT-ROD(p,n) 1 let r[0."><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/1.jpg' />
     <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
 
@@ -61,8 +61,8 @@ if (!doNotTrack) {
 
     </head>
     <body class="
-    article-page has-toc
-">
+    article-page
+    ">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -85,25 +85,175 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex 
-    
-        extended
-    
-">
-    
-        <div id="article-toolbar">
-            <a href="/" class="back-home">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">⚖️</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">lllovol</a></h1>
+            <h2 class="site-description">Stay hungry, stay foolish.</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="15 6 9 12 15 18" />
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
 </svg>
 
 
 
-                <span>返回</span>
+                
+                <span>主页</span>
             </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/links/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
         </div>
-    
+    </ol>
+</aside>
 <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
@@ -127,11 +277,13 @@ if (!doNotTrack) {
     </header>
     
 
-    <h2 class="article-title">
-        <a href="/p/dynamic-programming/">Dynamic Programming-钢条切割问题</a>
-    </h2>
-
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/dynamic-programming/">Dynamic Programming-钢条切割问题</a>
+        </h2>
     
+        
+    </div>
 
     
     <footer class="article-time">
@@ -167,10 +319,14 @@ if (!doNotTrack) {
         
     </footer>
     
+
+    
 </div>
 </header>
 
     <section class="article-content">
+    
+    
     <h1 id="前言">前言</h1>
 <p>动态规划是算法中的一大类，是一个求解最优解的值的问题</p>
 <blockquote>
@@ -195,7 +351,7 @@ if (!doNotTrack) {
 <p>除此之外，我们可以将钢条从左边切割下长度为i的一段，然后只对右边剩下的长度为n-i的一段继续进行切割（递归求解），对左边的一段则不再进行切割，</p>
 <p>而不做任何切割的方案，可以描述为：第一段的长度为n，收益为pn，剩余部分的长度为0，对应的收益为r0=0。</p>
 <h4 id="伪代码实现自顶向下的方法">伪代码实现（自顶向下的方法）</h4>
-<pre><code>    CUT-ROD（p,n)
+<pre><code>	CUT-ROD（p,n)
 	1	if n == 0
 	2		return 0;
 	3 	q = min_num
@@ -208,7 +364,7 @@ if (!doNotTrack) {
 <p>因此，动态规划要求仔细安排求解的顺序，对每个子问题，之求解一次，并将结果保存下来。因此，对于每个子问题的解，咱们只求一次，并且将结果保存下来，之后再遇到相同的子问题，就可以直接求出解，因此，动态规划方法，就是付出了额外的内存空间，来节省计算时间，这就是典型的时空权衡的例子。下面是两个优化算法的伪代码</p>
 <h5 id="带备忘的自顶向下法top-down-with-memoization">带备忘的自顶向下法（top-down with memoization）</h5>
 <p>过程会保存每个子问题的解，通常保存在一个数组或者散列表当中。当需要一个子问题的解的时候，首先检查一下是否已经保存过此解。</p>
-<pre><code>    MEMOIZED-CUT-ROD(p,n)
+<pre><code>	MEMOIZED-CUT-ROD(p,n)
 	1 let r[0..n]be a new array
 	2 for i = 0 to n
 	3 	r[i] = min_num
@@ -226,7 +382,7 @@ if (!doNotTrack) {
 	9 return q
 </code></pre>
 <h5 id="自底向上的方法">自底向上的方法</h5>
-<pre><code>    BOTTOM-UP-CUT-ROD(p,n)
+<pre><code>	BOTTOM-UP-CUT-ROD(p,n)
 	1 let r[0..n] be a new array
 	2 r[0] = 0
 	3 for j = 1 to n 
@@ -273,11 +429,11 @@ if (!doNotTrack) {
                 href="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css"integrity="sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn"crossorigin="anonymous"
             ><script 
                 src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.js"integrity="sha384-pK1WpvzWVBQiP0/GjnvRxV4mOb0oxFuyRxJlk6vVw146n3egcN5C925NCP7a7BY8"crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><script 
                 src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/contrib/auto-render.min.js"integrity="sha384-vZTG03m&#43;2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><script>
     window.addEventListener("DOMContentLoaded", () => {
@@ -293,14 +449,16 @@ if (!doNotTrack) {
     
 </article>
 
-    <aside class="related-contents--wrapper">
     
+
     
-        <h2 class="section-title">相关文章</h2>
-        <div class="related-contents">
-            <div class="flex article-list--tile">
+
+<aside class="related-contents--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-contents">
+        <div class="flex article-list--tile">
+            
                 
-                    
 <article class="has-image">
     <a href="/p/shuffle/">
         
@@ -317,10 +475,9 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
-                
-            </div>
+            
         </div>
-    
+    </div>
 </aside>
 
      
@@ -366,7 +523,7 @@ if (!doNotTrack) {
         
             <b><a href="https://github.com/ymkNK" target="_blank" rel="noopener" data-version="%s">Owner Rainbowly </a></b> <br/>
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -434,11 +591,11 @@ if (!doNotTrack) {
 
 </div><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><link 
                 rel="stylesheet" 
@@ -450,41 +607,11 @@ if (!doNotTrack) {
 
             </main>
     
-        <aside class="sidebar right-sidebar sticky">
-            <section class="widget archives">
-                <div class="widget-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-                </div>
-                <h2 class="widget-title section-title">目录</h2>
-                
-                <div class="widget--toc">
-                    <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-                </div>
-            </section>
-        </aside>
-    
 
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
-                defer="false"
+                
                 >
             </script><script type="text/javascript" src="/ts/main.js" defer></script>
 <script>

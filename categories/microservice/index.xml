@@ -1,70 +1,480 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>MicroService on lllovol</title>
-    <link>https://lllovol.com/categories/microservice/</link>
-    <description>Recent content in MicroService on lllovol</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Mon, 02 Dec 2019 14:23:17 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/microservice/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>从零开始将项目部署到Kubernetes</title>
-      <link>https://lllovol.com/p/minikube/</link>
-      <pubDate>Mon, 02 Dec 2019 14:23:17 +0000</pubDate>
-      
-      <guid>https://lllovol.com/p/minikube/</guid>
-      <description>一、前言 kubernetes作为一个容器的编排引擎，如今已经相当的火热，日常的工作中也有使用常用的kubernetes的相关的功能，例如滚动发布、扩容等等，但是这都是在公司现成的已经搭建好的kubernetes集群上实践的，因此，本篇文章就是自主探索在本地运行一个kubernetes集群，同时写一个自己的demo，运行到本地的kubernetes集群当中。
-本文主要包含如下几个方面：
- 国内条件下如何安装kubernetes（no vpn） 写一个Spring boot 的demo 使用Docker将demo打包成镜像 将demo部署到本地kubernetes集群当中  二、本地安装kubernetes 选择使用minikube 我们想要学习使用kubernetes，首先就是选择一个平台进行操作，比如阿里云、Azure、Google Kubernetes等等
- 这里我们选择的就是学习用的minikube
- kubernetes官方文档 minikube操作文档 minikube安装文档
- 安装minikube 1.检查能否虚拟化 sysctl -a | grep -E --color &#39;machdep.cpu.features|VMX&#39;  vmx被标注出来有颜色，说明就是ok的，这台电脑是支持virtualization的（一般都是支持的,但是我花了88白菜价在腾讯云上买的1年1核1g服务器是不支持的）
-2.安装kubectl brew install kubernetes-cli使用kubectl version能够查看到对应的kubectl版本
-3.安装Hypervisor（virtual machine monitor） 这个主要就是安装虚拟机了，kvm或者virtualBox二选一
-4.安装minikube 有两种方式,第一种方式就是如下的方式
-curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \&amp;amp;&amp;amp; chmod +x minikube将minikube安装包下载下来，手动进行安装
-sudo mkdir -p /usr/local/bin/sudo install minikube /usr/local/bin/ 如果是mac用户，直接使用如下的命令就可以了
-brew install minikubebrew link minikube5.</description>
-    </item>
-    
-    <item>
-      <title>容器就是一个特殊的进程</title>
-      <link>https://lllovol.com/p/container-is-a-special-process/</link>
-      <pubDate>Fri, 19 Jul 2019 11:56:44 +0000</pubDate>
-      
-      <guid>https://lllovol.com/p/container-is-a-special-process/</guid>
-      <description>前言 程序的静态表现就是程序，平常的安安静静的躺在硬盘上；但是一旦运行起来，他就变成了计算机里的数据和状态的总和，这就是它的动态表现。 而容器的核心功能，就是通过约束和修改进程的动态表现，从而为其创造出了一个边界。
- Cgroups是用来约束的主要手段。 Namespace是用来修改视图的主要方法。  docker run实验 安装好docker，输入以下命令
-docker run -it busybox /bin/sh这个命令就是告诉docker：帮我启动一个容器
-接下来我们可以使用ps指令，来看一看容器和宿主机中的进程信息。 宿主机里的内容：  容器里的内容 
-Namespace机制 上面的小实验，这就是Linux里的namespace机制实现的， 我们可以看到，我们容器里pid为1的/bin/sh进程，在宿主机中的pid为13193，这就是容器使用了namespace使用了障眼法，让容器里的视角，以为自己就是这个机器的1号员工（pid=1），可是实际上，他还是原来的100号进程。
-namespace其实只是Linux在创建新的进程的时候的一个参数，在Linux系统中创建线程的系统调用是clone()
-int pid=clone(main_function,stack_size,SIGCHLD,NULL);这个系统调用，创建了一个新进程，并且返回一个pid。而我们在创建一个新进程的时候，可以指定CLONE_NEWPID 参数。
-int pid=clone(main_function,stack_size,CLONE_NEWPID | SIGCHLD,NULL);这个新创建的进程就将“看见”一个全新的进程空间，看见它自己在这个进程空间中，他自己的pid为1。这其实只是一个障眼法，在宿主机上，它的pid该是多少，还是多少。
-Namespace种类 Namespace的种类很多，上文中提到的只是PID Namespace，除此之外，还有如下的Namespaces,这些namespaces用来实现对进程上下文的“障眼法操作”
- MOUNT Namespace， 用来隔离文件系统的挂载点，使得子进程拥有自己独立的挂载点信息。 UTS（UNIX Time-sharing System ）Namespace提供了主机名和域名的隔离,能够使得子进程有独立的主机名和域名(hostname),而不仅仅只是宿主机上的一个进程. IPC Namespace,使划分到不同ipc namespace的进程组通信上隔离，无法通过消息队列、共享内存、信号量方式通信，但没有对所述所有IPC通信方式隔离。 Network Namespace，是实现网络虚拟化的重要功能，它能创建多个隔离的网络空间，它们有独自的网络栈信息。不管是虚拟机还是容器，运行的时候仿佛自己就在独立的网络中。 User Namespace,是Linux3.8新增的一种namespace，用于隔离安全相关的资源，包括user IDs and group IDs，keys,和capabilities。同样一个用户的userID和groupID在不同的user namespace中可以不一样(与PID namespace类似)。换句话说，一个用户可以在一个user namespace中是普通用户，但在另一个user namespace中是超级用户。  通过Namespace这样的方式，容器就只能看见当前Namespace所限定的资源、文件、设备、状态、配置。而对于宿主机和其他不想关的程序，对这个容器（一个进程）来说，就“雨我无瓜了”
-结语 这个原理，就是为什么容器要比虚拟机效能更高的原因，本文是读了张磊前辈的文章后的学习笔记。</description>
-    </item>
-    
-    <item>
-      <title>小鲸鱼的成长史</title>
-      <link>https://lllovol.com/p/docker-history/</link>
-      <pubDate>Tue, 16 Jul 2019 20:58:05 +0000</pubDate>
-      
-      <guid>https://lllovol.com/p/docker-history/</guid>
-      <description>前言 了解一个未知的事物，最好的方式就是去了解这个事物的历史。现在容器化，微服务很火热，有必要去了解一下docker这个小鲸鱼背后的东西。
-最热的服务器端技术 在如今，肯定可以不假思索的说，是容器，因为现在是2019年，如果是2013年，我们可不敢这么说.那时候最火热的是PaaS化。“应用托管”，那时候租了虚拟机之后，用脚本或者手动的在上面部署应用。这样部署应用就会有本地环境和云端环境不一致的问题，因此，那时候的公司，拼的就是，谁能更好的模拟云端的环境。而PaaS项目的出现，就是实现当时这个问题的最佳方案。
-Cloud Foundry 当时最大的开源的PaaS项目。只需要一个命令
-cf push &amp;quot;我的应用&amp;quot;
-就可以将本地应用部署到云上。这就是实现了应用托管的功能。
-“应用托管”如何是实现？  每一种主流的语言特定方式各自打包，上传（cf push的作用就等同于用户将应用的可执行文件和启动脚本打进了脚本当中，上传到了Cloud Foundry的云存储当中。） 在虚拟机创造各种沙盒隔离环境 Cloud Foundry调度合适的虚拟机下载压缩包 机器上的Agent下载压缩包启动运行  而这个沙盒隔离环境，其实就是现如今所说的“容器”。
-Dot Cloud公司 在随着PaaS的历史长河的流动过程中，dot Cloud这个公司，弱小，可怜又无助，无人问津，差一点就在PaaS的潮流中被抛弃。这个时候，这个公司决定开源一个项目，就是Docker项目。 这个Docker呢，其实同样也是使用了Cgroups和Namespace的方式来创造了容器，和Cloud Foundry等其他的PaaS项目基本没有什么区别，没有什么黑科技，因此那些PaaS平台的大佬也就没有将Docker放在眼里。
-风云变幻 然而，世事无常，短短几个月，Cloud Foundry等其他的PaaS社区，还没有来得及成为Docker的对手，就被Docker直接宣告“出局”。
-原因 先看看Cloud Foundry的一件上传
- 需要为每种语言、每种框架、甚至应用的每种版本单独维护一个打好的包。 打包过程没有章法 本地跑的好好的应用，需要修改和更改不少配置才能好好的在云端运行 表面一件发布，实际上一波三折、费劲心力  Docker成功，就是靠着Docker镜像，这个看起来无足轻重的一部分，但是却提供了一种非常方便的打包机制
- 完整操作系统的文件和目录 完全不需要任何配置和修改  这样做了之后，就是docker能够成功的精髓，那就是实现了本地环境和云端环境的高度一致！
-结语 生产力解放之后。PaaS自然就被淘汰，CaaS（Container as a Service）变成了一种新兴的趋势。DotCloud公司也改名为Docker公司。成为了基础设施领域近十年难得一见的技术明星。</description>
-    </item>
-    
-  </channel>
+    <channel>
+        <title>MicroService on lllovol</title>
+        <link>https://lllovol.com/categories/microservice/</link>
+        <description>Recent content in MicroService on lllovol</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Mon, 02 Dec 2019 14:23:17 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/microservice/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>从零开始将项目部署到Kubernetes</title>
+        <link>https://lllovol.com/p/minikube/</link>
+        <pubDate>Mon, 02 Dec 2019 14:23:17 +0000</pubDate>
+        
+        <guid>https://lllovol.com/p/minikube/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/4.jpg" alt="Featured image of post 从零开始将项目部署到Kubernetes" /&gt;&lt;h2 id=&#34;一前言&#34;&gt;一、前言&lt;/h2&gt;
+&lt;p&gt;kubernetes作为一个容器的编排引擎，如今已经相当的火热，日常的工作中也有使用常用的kubernetes的相关的功能，例如滚动发布、扩容等等，但是这都是在公司现成的已经搭建好的kubernetes集群上实践的，因此，本篇文章就是自主探索在本地运行一个kubernetes集群，同时写一个自己的demo，运行到本地的kubernetes集群当中。&lt;br&gt;
+本文主要包含如下几个方面：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;国内条件下如何安装kubernetes（no vpn）&lt;/li&gt;
+&lt;li&gt;写一个Spring boot 的demo&lt;/li&gt;
+&lt;li&gt;使用Docker将demo打包成镜像&lt;/li&gt;
+&lt;li&gt;将demo部署到本地kubernetes集群当中&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;二本地安装kubernetes&#34;&gt;二、本地安装kubernetes&lt;/h2&gt;
+&lt;h3 id=&#34;选择使用minikube&#34;&gt;选择使用minikube&lt;/h3&gt;
+&lt;p&gt;我们想要学习使用kubernetes，首先就是选择一个平台进行操作，比如阿里云、Azure、Google Kubernetes等等&lt;br&gt;
+&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-151024.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;
+这里我们选择的就是学习用的minikube&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://kubernetes.io/docs/home/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;kubernetes官方文档&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://kubernetes.io/docs/setup/learning-environment/minikube/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;minikube操作文档&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://kubernetes.io/docs/tasks/tools/install-minikube/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;minikube安装文档&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;安装minikube&#34;&gt;安装minikube&lt;/h3&gt;
+&lt;h4 id=&#34;1检查能否虚拟化&#34;&gt;1.检查能否虚拟化&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sysctl -a | grep -E --color &amp;#39;machdep.cpu.features|VMX&amp;#39; 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-152029.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;
+vmx被标注出来有颜色，说明就是ok的，这台电脑是支持virtualization的（一般都是支持的,但是我花了88白菜价在腾讯云上买的1年1核1g服务器是不支持的）&lt;/p&gt;
+&lt;h4 id=&#34;2安装kubectl&#34;&gt;2.安装kubectl&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;brew install kubernetes-cli
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;使用&lt;code&gt;kubectl version&lt;/code&gt;能够查看到对应的kubectl版本&lt;/p&gt;
+&lt;h4 id=&#34;3安装hypervisorvirtual-machine-monitor&#34;&gt;3.安装Hypervisor（virtual machine monitor）&lt;/h4&gt;
+&lt;p&gt;这个主要就是安装虚拟机了，&lt;a class=&#34;link&#34; href=&#34;https://www.linux-kvm.org/page/Main_Page&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;kvm&lt;/a&gt;或者&lt;a class=&#34;link&#34; href=&#34;https://www.virtualbox.org/wiki/Downloads&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;virtualBox&lt;/a&gt;二选一&lt;/p&gt;
+&lt;h4 id=&#34;4安装minikube&#34;&gt;4.安装minikube&lt;/h4&gt;
+&lt;p&gt;有两种方式,第一种方式就是如下的方式&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
+	&amp;amp;&amp;amp; chmod +x minikube
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;将minikube安装包下载下来，手动进行安装&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo mkdir -p /usr/local/bin/
+sudo install minikube /usr/local/bin/
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-153329.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;
+如果是mac用户，直接使用如下的命令就可以了&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;brew install minikube
+brew link minikube
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;5启动minikube&#34;&gt;5.启动minikube&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;minikube start
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-153624.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;
+就会开始根据本地的virtualBox来下载对应的驱动,中间应该会要求输入一次本机电脑的一次密码,然后会出现这样的错误：
+&lt;code&gt;Error creating machine: Error in driver during machine creation: hyperkit crashed!&lt;/code&gt;  我们可以使用&lt;code&gt;minikube start -help&lt;/code&gt;查看到这个命令的一些参数:
+例如&lt;code&gt;--cpus=2&lt;/code&gt;我们可以设置为4,&lt;code&gt;--disk-size&lt;/code&gt;等等都可以进行测试。由于按照官网的操作一步一步来做，发现依然会出错？然后我发现本地已经有了hyperkit，装的virtualBox没有什么用，因此我&lt;code&gt;brew reinstall hyperkit&lt;/code&gt;重新安装了一下，这时候再来一次&lt;code&gt;minikube start&lt;/code&gt;,这一次似乎终于是成功了。&lt;br&gt;
+&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-154002.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;
+&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-154155.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;
+然后就开始下载kubernetes的相关的各种组件dns、kube-proxy\kube-addon-manager等等，但是可能是由于被墙的原因下载不下来，这个时候我进行了以下的几种处理方式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;科学上网,ok科学上网之后，再来看看，但是发现依然还是不行&lt;/li&gt;
+&lt;li&gt;设置国内的代理&amp;ndash;image-repository……ok还是一样的错&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;minikube start --registry-mirror=https://registry.docker-cn.com
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;换一个虚拟机来进行安装，改用vmware来进行安装,当然也是没有什么作用的&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;brew install docker-machine-driver-vmware
+minikube start --vm-driver=vmware
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;关键的问题就在于&lt;code&gt;VM is unable to access k8s.gcr.io, you may need to configure a proxy or set --image-repository&lt;/code&gt;,因此我找到了kubernetes minikube的github仓库，找到了其issue区，看看有没有仁兄有我一样的情况。功夫不负有心人，找到了&lt;a class=&#34;link&#34; href=&#34;https://github.com/kubernetes/minikube/issues/3860&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;issue 3860&lt;/a&gt;，我们可以使用国内的阿里云镜像&lt;code&gt;egistry.cn-hangzhou.aliyuncs.com/google_containers&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;rm -rf ~/.minikube
+minikube start --image-repository=registry.cn-hangzhou.aliyuncs.com/google_containers --vm-driver=vmware
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-154759.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;
+看一看minikube都有些什么namespace
+&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-154823.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;
+成功了！&lt;/p&gt;
+&lt;h2 id=&#34;三编写demo&#34;&gt;三、编写Demo&lt;/h2&gt;
+&lt;p&gt;接下来我们新建一个demo，使用Spring框架写一个简单的controller&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/ymkNK/IstioTestDemo&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;TestDemo&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;1使用官方的initializer脚手架初始化一个demo&#34;&gt;1.使用官方的Initializer脚手架初始化一个demo&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://start.spring.io/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://start.spring.io/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;2在项目中添加需要的restcontroller和swagger的依赖&#34;&gt;2.在项目中添加需要的RestController和swagger的依赖&lt;/h3&gt;
+&lt;p&gt;RestController有关的依赖&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;dependency&amp;gt;
+    &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;
+    &amp;lt;artifactId&amp;gt;spring-boot-starter-web&amp;lt;/artifactId&amp;gt;
+    &amp;lt;version&amp;gt;2.1.8.RELEASE&amp;lt;/version&amp;gt;
+&amp;lt;/dependency&amp;gt;
+
+&amp;lt;dependency&amp;gt;
+    &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;
+    &amp;lt;artifactId&amp;gt;spring-boot-starter-thymeleaf&amp;lt;/artifactId&amp;gt;
+    &amp;lt;version&amp;gt;2.0.5.RELEASE&amp;lt;/version&amp;gt;
+&amp;lt;/dependency&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;与swagger有关的依赖&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;dependency&amp;gt;
+            &amp;lt;groupId&amp;gt;io.springfox&amp;lt;/groupId&amp;gt;
+            &amp;lt;artifactId&amp;gt;springfox-swagger2&amp;lt;/artifactId&amp;gt;
+            &amp;lt;version&amp;gt;${io.springfox.version}&amp;lt;/version&amp;gt;
+        &amp;lt;/dependency&amp;gt;
+
+        &amp;lt;dependency&amp;gt;
+            &amp;lt;groupId&amp;gt;io.springfox&amp;lt;/groupId&amp;gt;
+            &amp;lt;artifactId&amp;gt;springfox-swagger-ui&amp;lt;/artifactId&amp;gt;
+            &amp;lt;version&amp;gt;${io.springfox.version}&amp;lt;/version&amp;gt;
+        &amp;lt;/dependency&amp;gt;
+
+        &amp;lt;dependency&amp;gt;
+            &amp;lt;groupId&amp;gt;io.springfox&amp;lt;/groupId&amp;gt;
+            &amp;lt;artifactId&amp;gt;springfox-swagger-common&amp;lt;/artifactId&amp;gt;
+            &amp;lt;version&amp;gt;${io.springfox.version}&amp;lt;/version&amp;gt;
+        &amp;lt;/dependency&amp;gt;
+
+
+        &amp;lt;dependency&amp;gt;
+            &amp;lt;groupId&amp;gt;io.springfox&amp;lt;/groupId&amp;gt;
+            &amp;lt;artifactId&amp;gt;springfox-spring-web&amp;lt;/artifactId&amp;gt;
+            &amp;lt;version&amp;gt;${io.springfox.version}&amp;lt;/version&amp;gt;
+        &amp;lt;/dependency&amp;gt;
+
+        &amp;lt;dependency&amp;gt;
+            &amp;lt;groupId&amp;gt;io.springfox&amp;lt;/groupId&amp;gt;
+            &amp;lt;artifactId&amp;gt;springfox-spi&amp;lt;/artifactId&amp;gt;
+            &amp;lt;version&amp;gt;${io.springfox.version}&amp;lt;/version&amp;gt;
+        &amp;lt;/dependency&amp;gt;
+
+        &amp;lt;dependency&amp;gt;
+            &amp;lt;groupId&amp;gt;io.springfox&amp;lt;/groupId&amp;gt;
+            &amp;lt;artifactId&amp;gt;springfox-schema&amp;lt;/artifactId&amp;gt;
+            &amp;lt;version&amp;gt;${io.springfox.version}&amp;lt;/version&amp;gt;
+        &amp;lt;/dependency&amp;gt;
+
+        &amp;lt;dependency&amp;gt;
+            &amp;lt;groupId&amp;gt;io.springfox&amp;lt;/groupId&amp;gt;
+            &amp;lt;artifactId&amp;gt;springfox-core&amp;lt;/artifactId&amp;gt;
+            &amp;lt;version&amp;gt;${io.springfox.version}&amp;lt;/version&amp;gt;
+        &amp;lt;/dependency&amp;gt;
+
+        &amp;lt;dependency&amp;gt;
+            &amp;lt;groupId&amp;gt;io.springfox&amp;lt;/groupId&amp;gt;
+            &amp;lt;artifactId&amp;gt;springfox-bean-validators&amp;lt;/artifactId&amp;gt;
+            &amp;lt;version&amp;gt;${io.springfox.version}&amp;lt;/version&amp;gt;
+        &amp;lt;/dependency&amp;gt;
+
+        &amp;lt;dependency&amp;gt;
+            &amp;lt;groupId&amp;gt;io.swagger&amp;lt;/groupId&amp;gt;
+            &amp;lt;artifactId&amp;gt;swagger-annotations&amp;lt;/artifactId&amp;gt;
+            &amp;lt;version&amp;gt;1.5.21&amp;lt;/version&amp;gt;
+        &amp;lt;/dependency&amp;gt;
+
+        &amp;lt;dependency&amp;gt;
+            &amp;lt;groupId&amp;gt;io.swagger&amp;lt;/groupId&amp;gt;
+            &amp;lt;artifactId&amp;gt;swagger-models&amp;lt;/artifactId&amp;gt;
+            &amp;lt;version&amp;gt;1.5.21&amp;lt;/version&amp;gt;
+        &amp;lt;/dependency&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;同时我们还需要在Application类中@EnableSwagger2&lt;/p&gt;
+&lt;h3 id=&#34;3创建controller&#34;&gt;3.创建controller&lt;/h3&gt;
+&lt;p&gt;首先在application.properties文件中添加一条配置&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;version=@project.version@
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后添加controller&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;package com.example.demo.controller;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * Created by Yangmingkai on 2019-11-11.
+ */
+@RestController
+@Api(&amp;#34;用于istio测试&amp;#34;)
+@RequestMapping(&amp;#34;/demo&amp;#34;)
+public class IstioController {
+
+    @Value(&amp;#34;${version}&amp;#34;)
+    private String version;
+
+    @GetMapping(&amp;#34;/version&amp;#34;)
+    @ApiOperation(&amp;#34;获取当前版本&amp;#34;)
+    public String getVersion() {
+
+        return String.format(&amp;#34;This is version %s&amp;#34;, version);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;4运行&#34;&gt;4.运行&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-155916.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-155943.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;四将demo打包成镜像&#34;&gt;四、将Demo打包成镜像&lt;/h2&gt;
+&lt;h3 id=&#34;1打包成jar包&#34;&gt;1.打包成jar包&lt;/h3&gt;
+&lt;p&gt;进入pom.xml文件目录，运行命令&lt;code&gt;mvn clean install -Dmaven.test.skip=true&lt;/code&gt;执行打包
+&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-161743.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;2利用dockerfile打包成镜像&#34;&gt;2.利用dockerFile打包成镜像&lt;/h3&gt;
+&lt;p&gt;编写docker file&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# 拉取JDK11的系统镜像
+From openjdk:11
+# 设置时区
+ENV TZ=Asia/Shanghai
+# 时区写入系统文件
+RUN ln -snf /usr/share/zoneinfo/$TZ  /etc/localtime &amp;amp;&amp;amp; echo $TZ &amp;gt; /etc/timezone
+
+VOLUME /tmp
+# 加入打包好的jar文件(xxxxx改为自己文件名)
+ADD ./target/demo-0.0.1-SNAPSHOT.jar /
+
+ENTRYPOINT [&amp;#34;java&amp;#34;,&amp;#34;-Djava.security.egd=file:/dev/./urandom&amp;#34;,&amp;#34;-jar&amp;#34;,&amp;#34;/demo-0.0.1-SNAPSHOT.jar&amp;#34;]
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;运行命令&lt;code&gt;docker build -t 自定义镜像名称 .&lt;/code&gt;（注意后面有个 . 不要漏掉）,如果需要将该镜像加入我本地的harbor仓库（需要自己搭建），则镜像名称需要为：
+仓库地址/名称:v版本号&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如：192.168.123.45:8000/library/data_lake:v1.0&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这里我们docker builde一下&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;docker build -t my-demo .
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;3在本地docker运行打包好的镜像&#34;&gt;3.在本地docker运行打包好的镜像&lt;/h3&gt;
+&lt;p&gt;使用命令docker run 运行镜像&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;docker run -d --name test -p 8080:8080 my-demo
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后可以使用&lt;code&gt;docker ps&lt;/code&gt;查看运行中的docker镜像
+&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-162318.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;
+使用&lt;code&gt;docker stop&lt;/code&gt;加上对应的容器的id就能够停止对应的镜像的运行&lt;/p&gt;
+&lt;h3 id=&#34;4将docker推向镜像仓库&#34;&gt;4.将docker推向镜像仓库&lt;/h3&gt;
+&lt;p&gt;首先我们需要创建一个docker的账号，就能拥有一个docker远端的镜像仓库。我们给我们的镜像打一个tag,使用docker tag将本地原来的镜像推&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; docker tag my-demo yangdocker1118/my-demo
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后使用docker push将本地的镜像推向远端&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;docker push yangdocker1118/my-demo
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-163228.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;五将demo镜像部署到kubernetes集群当中&#34;&gt;五、将demo镜像部署到kubernetes集群当中&lt;/h2&gt;
+&lt;h3 id=&#34;1创建一个namespace&#34;&gt;1.创建一个namespace&lt;/h3&gt;
+&lt;p&gt;创建namespace也有两种方式&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;使用yaml文件编写配置来进行创建&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    istio-injection: enabled
+  name: zelda
+status:
+  phase: Active
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后使用&lt;code&gt;kc apply -f namespace.yaml&lt;/code&gt;就能创建一个名为zelda的namespace
+2. kubectl create namespace命令直接创建&lt;/p&gt;
+&lt;h3 id=&#34;2创建deployment&#34;&gt;2.创建deployment&lt;/h3&gt;
+&lt;p&gt;这里我们同样也可以使用yaml配置的方式来创建deployment，也可以直接使用下面命令行的方式直接创建deployment拉取镜像进行部署（推荐还是本地自己重新搭建一个镜像仓库harbor，使用docker官方的镜像仓库拉镜像的速度太慢了）&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kubectl create deployment my-demo --image=yangdocker1118/my-demo -n zelda
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-163713.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191202-163742@2x.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;成功！Done!&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>容器就是一个特殊的进程</title>
+        <link>https://lllovol.com/p/container-is-a-special-process/</link>
+        <pubDate>Fri, 19 Jul 2019 11:56:44 +0000</pubDate>
+        
+        <guid>https://lllovol.com/p/container-is-a-special-process/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/1.jpg" alt="Featured image of post 容器就是一个特殊的进程" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
+&lt;p&gt;程序的静态表现就是程序，平常的安安静静的躺在硬盘上；但是一旦运行起来，他就变成了计算机里的数据和状态的总和，这就是它的动态表现。
+而容器的核心功能，就是通过约束和修改进程的动态表现，从而为其创造出了一个边界。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Cgroups是用来约束的主要手段。&lt;/li&gt;
+&lt;li&gt;Namespace是用来修改视图的主要方法。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;docker-run实验&#34;&gt;docker run实验&lt;/h1&gt;
+&lt;p&gt;安装好docker，输入以下命令&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;docker run -it busybox /bin/sh
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这个命令就是告诉docker：帮我启动一个容器&lt;br&gt;
+接下来我们可以使用ps指令，来看一看容器和宿主机中的进程信息。
+宿主机里的内容：
+&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190719-120700@2x.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;
+容器里的内容
+&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190719-120743@2x.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h1 id=&#34;namespace机制&#34;&gt;Namespace机制&lt;/h1&gt;
+&lt;p&gt;上面的小实验，这就是Linux里的namespace机制实现的，
+我们可以看到，我们容器里pid为1的/bin/sh进程，在宿主机中的pid为13193，这就是容器使用了namespace使用了障眼法，让容器里的视角，以为自己就是这个机器的1号员工（pid=1），可是实际上，他还是原来的100号进程。&lt;/p&gt;
+&lt;p&gt;namespace其实只是Linux在创建新的进程的时候的一个参数，在Linux系统中创建线程的系统调用是clone()&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;int pid=clone(main_function,stack_size,SIGCHLD,NULL);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这个系统调用，创建了一个新进程，并且返回一个pid。而我们在创建一个新进程的时候，可以指定CLONE_NEWPID 参数。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;int pid=clone(main_function,stack_size,CLONE_NEWPID | SIGCHLD,NULL);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这个新创建的进程就将“看见”一个全新的进程空间，看见它自己在这个进程空间中，他自己的pid为1。这其实只是一个障眼法，在宿主机上，它的pid该是多少，还是多少。&lt;/p&gt;
+&lt;h1 id=&#34;namespace种类&#34;&gt;Namespace种类&lt;/h1&gt;
+&lt;p&gt;Namespace的种类很多，上文中提到的只是PID Namespace，除此之外，还有如下的Namespaces,这些namespaces用来实现对进程上下文的“障眼法操作”&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;MOUNT Namespace， 用来隔离文件系统的挂载点，使得子进程拥有自己独立的挂载点信息。&lt;/li&gt;
+&lt;li&gt;UTS（UNIX Time-sharing System ）Namespace提供了主机名和域名的隔离,能够使得子进程有独立的主机名和域名(hostname),而不仅仅只是宿主机上的一个进程.&lt;/li&gt;
+&lt;li&gt;IPC Namespace,使划分到不同ipc namespace的进程组通信上隔离，无法通过消息队列、共享内存、信号量方式通信，但没有对所述所有IPC通信方式隔离。&lt;/li&gt;
+&lt;li&gt;Network Namespace，是实现网络虚拟化的重要功能，它能创建多个隔离的网络空间，它们有独自的网络栈信息。不管是虚拟机还是容器，运行的时候仿佛自己就在独立的网络中。&lt;/li&gt;
+&lt;li&gt;User Namespace,是Linux3.8新增的一种namespace，用于隔离安全相关的资源，包括user IDs and group IDs，keys,和capabilities。同样一个用户的userID和groupID在不同的user namespace中可以不一样(与PID namespace类似)。换句话说，一个用户可以在一个user namespace中是普通用户，但在另一个user namespace中是超级用户。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;通过Namespace这样的方式，容器就只能看见当前Namespace所限定的资源、文件、设备、状态、配置。而对于宿主机和其他不想关的程序，对这个容器（一个进程）来说，就“雨我无瓜了”&lt;/p&gt;
+&lt;h1 id=&#34;结语&#34;&gt;结语&lt;/h1&gt;
+&lt;p&gt;这个原理，就是为什么容器要比虚拟机效能更高的原因，本文是读了张磊前辈的文章后的学习笔记。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>小鲸鱼的成长史</title>
+        <link>https://lllovol.com/p/docker-history/</link>
+        <pubDate>Tue, 16 Jul 2019 20:58:05 +0000</pubDate>
+        
+        <guid>https://lllovol.com/p/docker-history/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/9.jpg" alt="Featured image of post 小鲸鱼的成长史" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
+&lt;p&gt;了解一个未知的事物，最好的方式就是去了解这个事物的历史。现在容器化，微服务很火热，有必要去了解一下docker这个小鲸鱼背后的东西。&lt;/p&gt;
+&lt;h1 id=&#34;最热的服务器端技术&#34;&gt;最热的服务器端技术&lt;/h1&gt;
+&lt;p&gt;在如今，肯定可以不假思索的说，是容器，因为现在是2019年，如果是2013年，我们可不敢这么说.那时候最火热的是PaaS化。“应用托管”，那时候租了虚拟机之后，用脚本或者手动的在上面部署应用。这样部署应用就会有本地环境和云端环境不一致的问题，因此，那时候的公司，拼的就是，谁能更好的模拟云端的环境。而PaaS项目的出现，就是实现当时这个问题的最佳方案。&lt;/p&gt;
+&lt;h1 id=&#34;cloud-foundry&#34;&gt;Cloud Foundry&lt;/h1&gt;
+&lt;p&gt;当时最大的开源的PaaS项目。只需要一个命令&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;cf push &amp;quot;我的应用&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;就可以将本地应用部署到云上。这就是实现了应用托管的功能。&lt;/p&gt;
+&lt;h1 id=&#34;应用托管如何是实现&#34;&gt;“应用托管”如何是实现？&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;每一种主流的语言特定方式各自打包，上传（cf push的作用就等同于用户将应用的可执行文件和启动脚本打进了脚本当中，上传到了Cloud Foundry的云存储当中。）&lt;/li&gt;
+&lt;li&gt;在虚拟机创造各种沙盒隔离环境&lt;/li&gt;
+&lt;li&gt;Cloud Foundry调度合适的虚拟机下载压缩包&lt;/li&gt;
+&lt;li&gt;机器上的Agent下载压缩包启动运行&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;而这个沙盒隔离环境，其实就是现如今所说的“容器”。&lt;/p&gt;
+&lt;h1 id=&#34;dot-cloud公司&#34;&gt;Dot Cloud公司&lt;/h1&gt;
+&lt;p&gt;在随着PaaS的历史长河的流动过程中，dot Cloud这个公司，弱小，可怜又无助，无人问津，差一点就在PaaS的潮流中被抛弃。这个时候，这个公司决定开源一个项目，就是Docker项目。
+这个Docker呢，其实同样也是使用了Cgroups和Namespace的方式来创造了容器，和Cloud Foundry等其他的PaaS项目基本没有什么区别，没有什么黑科技，因此那些PaaS平台的大佬也就没有将Docker放在眼里。&lt;/p&gt;
+&lt;h1 id=&#34;风云变幻&#34;&gt;风云变幻&lt;/h1&gt;
+&lt;p&gt;然而，世事无常，短短几个月，Cloud Foundry等其他的PaaS社区，还没有来得及成为Docker的对手，就被Docker直接宣告“出局”。&lt;/p&gt;
+&lt;h1 id=&#34;原因&#34;&gt;原因&lt;/h1&gt;
+&lt;p&gt;先看看Cloud Foundry的一件上传&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;需要为每种语言、每种框架、甚至应用的每种版本单独维护一个打好的包。&lt;/li&gt;
+&lt;li&gt;打包过程没有章法&lt;/li&gt;
+&lt;li&gt;本地跑的好好的应用，需要修改和更改不少配置才能好好的在云端运行&lt;/li&gt;
+&lt;li&gt;表面一件发布，实际上一波三折、费劲心力&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Docker成功，就是靠着Docker镜像，这个看起来无足轻重的一部分，但是却提供了一种非常方便的打包机制&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;完整操作系统的文件和目录&lt;/li&gt;
+&lt;li&gt;完全不需要任何配置和修改&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这样做了之后，就是docker能够成功的精髓，那就是实现了&lt;strong&gt;本地环境和云端环境的高度一致！&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&#34;结语&#34;&gt;结语&lt;/h1&gt;
+&lt;p&gt;生产力解放之后。PaaS自然就被淘汰，CaaS（Container as a Service）变成了一种新兴的趋势。DotCloud公司也改名为Docker公司。成为了基础设施领域近十年难得一见的技术明星。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
 </rss>

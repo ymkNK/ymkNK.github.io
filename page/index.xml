@@ -1,47 +1,67 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Pages on lllovol</title>
-    <link>https://lllovol.com/page/</link>
-    <description>Recent content in Pages on lllovol</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Tue, 25 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lllovol.com/page/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>归档</title>
-      <link>https://lllovol.com/archives/</link>
-      <pubDate>Tue, 25 May 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://lllovol.com/archives/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>链接</title>
-      <link>https://lllovol.com/links/</link>
-      <pubDate>Tue, 25 May 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://lllovol.com/links/</guid>
-      <description>友人  Leto @Leto Bsyze @bsyze  感谢  The theme is designed by @Jimmy  </description>
-    </item>
-    
-    <item>
-      <title>关于</title>
-      <link>https://lllovol.com/about/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://lllovol.com/about/</guid>
-      <description>Info  软件工程师 四川人 现居北京 2019年 毕业于南开大学 本博客使用Hugo构建 Stack主题搭建, 托管于Github  More 养了两只暹罗可可乐乐，详情请关注Bilibili频道Rainbowly彩虹</description>
-    </item>
-    
-    <item>
-      <title>搜索</title>
-      <link>https://lllovol.com/search/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://lllovol.com/search/</guid>
-      <description></description>
-    </item>
-    
-  </channel>
+    <channel>
+        <title>Pages on lllovol</title>
+        <link>https://lllovol.com/page/</link>
+        <description>Recent content in Pages on lllovol</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Tue, 25 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lllovol.com/page/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>归档</title>
+        <link>https://lllovol.com/archives/</link>
+        <pubDate>Tue, 25 May 2021 00:00:00 +0000</pubDate>
+        
+        <guid>https://lllovol.com/archives/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>链接</title>
+        <link>https://lllovol.com/links/</link>
+        <pubDate>Tue, 25 May 2021 00:00:00 +0000</pubDate>
+        
+        <guid>https://lllovol.com/links/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/5.jpeg" alt="Featured image of post 链接" /&gt;&lt;h2 id=&#34;友人&#34;&gt;友人&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Leto &lt;a class=&#34;link&#34; href=&#34;http://blog.letow.top/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;@Leto&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Bsyze &lt;a class=&#34;link&#34; href=&#34;http://www.bsyze.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;@bsyze&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;感谢&#34;&gt;感谢&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;The theme is designed by  &lt;a class=&#34;link&#34; href=&#34;https://jimmycai.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;@Jimmy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>关于</title>
+        <link>https://lllovol.com/about/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://lllovol.com/about/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/6.jpeg" alt="Featured image of post 关于" /&gt;&lt;h2 id=&#34;info&#34;&gt;Info&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;软件工程师&lt;/li&gt;
+&lt;li&gt;四川人 现居北京&lt;/li&gt;
+&lt;li&gt;2019年 毕业于南开大学&lt;/li&gt;
+&lt;li&gt;本博客使用Hugo构建 &lt;a class=&#34;link&#34; href=&#34;https://github.com/CaiJimmy/hugo-theme-stack&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Stack主题&lt;/a&gt;搭建, 托管于&lt;a class=&#34;link&#34; href=&#34;https://github.com/ymkNK/hugo&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Github&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;more&#34;&gt;More&lt;/h2&gt;
+&lt;p&gt;养了两只暹罗可可乐乐，详情请关注Bilibili频道&lt;a class=&#34;link&#34; href=&#34;https://space.bilibili.com/7857769&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Rainbowly彩虹&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>搜索</title>
+        <link>https://lllovol.com/search/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://lllovol.com/search/</guid>
+        <description></description>
+        </item>
+        
+    </channel>
 </rss>

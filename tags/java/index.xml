@@ -1,83 +1,554 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Java on lllovol</title>
-    <link>https://lllovol.com/tags/java/</link>
-    <description>Recent content in Java on lllovol</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sun, 20 Sep 2020 18:44:18 +0000</lastBuildDate><atom:link href="https://lllovol.com/tags/java/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Java的部分基础机制</title>
-      <link>https://lllovol.com/p/java-basic/</link>
-      <pubDate>Sun, 20 Sep 2020 18:44:18 +0000</pubDate>
-      
-      <guid>https://lllovol.com/p/java-basic/</guid>
-      <description>Java内存管理  Java的内存管理机制
- 1. JMM java的内存模型
-1.1 主内存和工作内存 Java 内存模型规定了所有的变量都存储在主内存（Main Memory）中，每条线程有自己的工作内存（Working Memory），线程的工作内存中保存了该线程所使用到的变量的内存副本。 不同线程之间无法直接访问其他线程工作内存中的变量，线程间变量的传递都要通过主内存来完成（如下图 2-1所有）。
-java内存模型
-1.2 执行引擎 执行引擎，就是一个运算器，能够识别输入的指令，并根据输入的指令执行一套特定的逻辑。
-1.3 主内存和工作内存的交互模型 Java 内存模型中定义了 8 种操作完成主内存与工作内存之间具体的交互协议，虚拟机实现时必须保证 每一种操作都是原子级、不可再分的。 这 8 种操作又可分为作用于主内存和作用于工作内存的操作。
-1.3.1 作用于主内存的操作  lock 作用于主内存的变量，它把一个变量标识为一条线程独占的状态。 unlock 作用于主内存的变量，它把一个处于锁定状态的变量释放出来，释放后的变量才能被其他线程锁定。 read 作用于主内存的变量，它把一个变量的值从主内存传输到工作内存中，以便 laod 时使用。 write 作用于主内存的变量，它把 store 操作从工作内存中得到的变量值存入到主内存变量中。  1.3.2 作用于工作内存的操作  load 作用于工作内存的变量，它把 read 操作从主内存中得到的变量值放入工作内存的变量副本中。 use 作用于工作内存的变量，它把一个工作内存中的一个变量的值传递给执行引擎，每当虚拟机遇到一个需要使用的变量的值的字节码执行时会执行这个操作。 assign 作用于工作内存的变量，它把一个执行引擎接收到的值赋给工作内存的变量，每当虚拟机遇到一个变量赋值的字节码执行时执行这个操作。 store 作用于工作内存的变量，它把工作内存中的一个变量的值传送到主内存中，以便随后的 write 操作。  2. JVM是如何划分内存的 垃圾回收机制 对象类型 对象擦除 基本运行原理 </description>
-    </item>
-    
-    <item>
-      <title>Java学习笔记（一）</title>
-      <link>https://lllovol.com/p/java-note/</link>
-      <pubDate>Sat, 04 Jul 2020 14:07:38 +0000</pubDate>
-      
-      <guid>https://lllovol.com/p/java-note/</guid>
-      <description>1. volatile volatile是轻量级的同步机制
- 保证可见性 不保证原子性 禁止指令重排  1.1 JMM内存模型之可见性 JMM（Java Memory Model） Java内存模型
- Java内存模型
-java内存模型
- </description>
-    </item>
-    
-    <item>
-      <title>Java11新特性的六个实验</title>
-      <link>https://lllovol.com/p/java11/</link>
-      <pubDate>Wed, 16 Oct 2019 18:41:31 +0000</pubDate>
-      
-      <guid>https://lllovol.com/p/java11/</guid>
-      <description>前言 最近将java升级到了11，因此学习了一些java11的一些新特性
-一.局部变量类型判断 代码：
- @Testpublic void testVar() {// 测试局部变量类型判断特性var java11 = &amp;quot;test java11&amp;quot;;var test = 1;System.out.println(java11);System.out.println(test);}输出：
+    <channel>
+        <title>Java on lllovol</title>
+        <link>https://lllovol.com/tags/java/</link>
+        <description>Recent content in Java on lllovol</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Sun, 20 Sep 2020 18:44:18 +0000</lastBuildDate><atom:link href="https://lllovol.com/tags/java/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Java的部分基础机制</title>
+        <link>https://lllovol.com/p/java-basic/</link>
+        <pubDate>Sun, 20 Sep 2020 18:44:18 +0000</pubDate>
+        
+        <guid>https://lllovol.com/p/java-basic/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg" alt="Featured image of post Java的部分基础机制" /&gt;&lt;h2 id=&#34;java内存管理&#34;&gt;Java内存管理&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/steffen/p/11368018.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Java的内存管理机制&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;1-jmm&#34;&gt;1. JMM&lt;/h3&gt;
+&lt;p&gt;java的内存模型&lt;/p&gt;
+&lt;h4 id=&#34;11-主内存和工作内存&#34;&gt;1.1 主内存和工作内存&lt;/h4&gt;
+&lt;p&gt;Java 内存模型规定了所有的变量都存储在主内存（Main Memory）中，每条线程有自己的工作内存（Working Memory），线程的工作内存中保存了该线程所使用到的变量的内存副本。
+不同线程之间无法直接访问其他线程工作内存中的变量，线程间变量的传递都要通过主内存来完成（如下图 2-1所有）。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/Java%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/648037-20190817202020256-687819291.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;java内存模型&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;12-执行引擎&#34;&gt;1.2 执行引擎&lt;/h4&gt;
+&lt;p&gt;执行引擎，就是一个运算器，能够识别输入的指令，并根据输入的指令执行一套特定的逻辑。&lt;/p&gt;
+&lt;h4 id=&#34;13-主内存和工作内存的交互模型&#34;&gt;1.3 主内存和工作内存的交互模型&lt;/h4&gt;
+&lt;p&gt;Java 内存模型中定义了 8 种操作完成主内存与工作内存之间具体的交互协议，虚拟机实现时必须保证 每一种操作都是原子级、不可再分的。
+这 8 种操作又可分为作用于主内存和作用于工作内存的操作。&lt;/p&gt;
+&lt;h5 id=&#34;131-作用于主内存的操作&#34;&gt;1.3.1 作用于主内存的操作&lt;/h5&gt;
+&lt;ol&gt;
+&lt;li&gt;lock 作用于主内存的变量，它把一个变量标识为一条线程独占的状态。&lt;/li&gt;
+&lt;li&gt;unlock 作用于主内存的变量，它把一个处于锁定状态的变量释放出来，释放后的变量才能被其他线程锁定。&lt;/li&gt;
+&lt;li&gt;read 作用于主内存的变量，它把一个变量的值从主内存传输到工作内存中，以便 laod 时使用。&lt;/li&gt;
+&lt;li&gt;write 作用于主内存的变量，它把 store 操作从工作内存中得到的变量值存入到主内存变量中。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5 id=&#34;132-作用于工作内存的操作&#34;&gt;1.3.2 作用于工作内存的操作&lt;/h5&gt;
+&lt;ol&gt;
+&lt;li&gt;load 作用于工作内存的变量，它把 read 操作从主内存中得到的变量值放入工作内存的变量副本中。&lt;/li&gt;
+&lt;li&gt;use 作用于工作内存的变量，它把一个工作内存中的一个变量的值传递给执行引擎，每当虚拟机遇到一个需要使用的变量的值的字节码执行时会执行这个操作。&lt;/li&gt;
+&lt;li&gt;assign 作用于工作内存的变量，它把一个执行引擎接收到的值赋给工作内存的变量，每当虚拟机遇到一个变量赋值的字节码执行时执行这个操作。&lt;/li&gt;
+&lt;li&gt;store 作用于工作内存的变量，它把工作内存中的一个变量的值传送到主内存中，以便随后的 write 操作。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;2-jvm是如何划分内存的&#34;&gt;2. JVM是如何划分内存的&lt;/h3&gt;
+&lt;h3 id=&#34;垃圾回收机制&#34;&gt;垃圾回收机制&lt;/h3&gt;
+&lt;h3 id=&#34;对象类型&#34;&gt;对象类型&lt;/h3&gt;
+&lt;h3 id=&#34;对象擦除&#34;&gt;对象擦除&lt;/h3&gt;
+&lt;h2 id=&#34;基本运行原理&#34;&gt;基本运行原理&lt;/h2&gt;
+</description>
+        </item>
+        <item>
+        <title>Java学习笔记（一）</title>
+        <link>https://lllovol.com/p/java-note/</link>
+        <pubDate>Sat, 04 Jul 2020 14:07:38 +0000</pubDate>
+        
+        <guid>https://lllovol.com/p/java-note/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/9.jpg" alt="Featured image of post Java学习笔记（一）" /&gt;&lt;h2 id=&#34;1-volatile&#34;&gt;1. volatile&lt;/h2&gt;
+&lt;p&gt;volatile是轻量级的同步机制&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;保证可见性&lt;/li&gt;
+&lt;li&gt;不保证原子性&lt;/li&gt;
+&lt;li&gt;禁止指令重排&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;11-jmm内存模型之可见性&#34;&gt;1.1 JMM内存模型之可见性&lt;/h3&gt;
+&lt;p&gt;JMM（Java Memory Model） Java内存模型&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.jianshu.com/p/15106e9c4bf3&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Java内存模型&lt;/a&gt;&lt;br&gt;
+&lt;img src=&#34;https://upload-images.jianshu.io/upload_images/4899162-66736384361f6b8b.png?imageMogr2/auto-orient/strip%7cimageView2/2/w/812/format/webp&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;java内存模型&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>Java11新特性的六个实验</title>
+        <link>https://lllovol.com/p/java11/</link>
+        <pubDate>Wed, 16 Oct 2019 18:41:31 +0000</pubDate>
+        
+        <guid>https://lllovol.com/p/java11/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg" alt="Featured image of post Java11新特性的六个实验" /&gt;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+&lt;p&gt;最近将java升级到了11，因此学习了一些java11的一些新特性&lt;/p&gt;
+&lt;h2 id=&#34;一局部变量类型判断&#34;&gt;一.局部变量类型判断&lt;/h2&gt;
+&lt;p&gt;代码：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;    @Test
+    public void testVar() {
+        // 测试局部变量类型判断特性
+        var java11 = &amp;#34;test java11&amp;#34;;
+        var test = 1;
+        System.out.println(java11);
+        System.out.println(test);
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;输出：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191016-190331.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;二string类的新方法&#34;&gt;二.String类的新方法&lt;/h2&gt;
+&lt;p&gt;代码：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; @Test
+    public void testString() {
+        String blank = &amp;#34;&amp;#34;;
+        String strip = &amp;#34; strip &amp;#34;;
+        String lines = &amp;#34;\n\n&amp;#34; +
+                &amp;#34;\n&amp;#34; +
+                &amp;#34;\n&amp;#34;;
+        // 判断字符串是否为空白
+        System.out.println(blank.isBlank());
 
-二.String类的新方法 代码：
- @Testpublic void testString() {String blank = &amp;quot;&amp;quot;;String strip = &amp;quot; strip &amp;quot;;String lines = &amp;quot;\n\n&amp;quot; +&amp;quot;\n&amp;quot; +&amp;quot;\n&amp;quot;;// 判断字符串是否为空白System.out.println(blank.isBlank());// 去除首尾空格System.out.println(strip.strip());// 去除开头空格System.out.println(strip.stripLeading());// 去除结尾空格System.out.println(strip.stripTrailing());// 重复System.out.println(strip.repeat(0));System.out.println(strip.repeat(1));System.out.println(strip.repeat(2));System.</description>
-    </item>
-    
-    <item>
-      <title>Java8流式编程</title>
-      <link>https://lllovol.com/p/stream/</link>
-      <pubDate>Thu, 21 Mar 2019 11:08:24 +0000</pubDate>
-      
-      <guid>https://lllovol.com/p/stream/</guid>
-      <description>前言 在前天的时候，java12都出了，但是我还在用java6的陈旧的编码方式，需要改进到java8的流式编程，此文主要是用来记录流式编程的积累
- java8 新特性
- 个人的主要理解 java真正的支持了函数式的编程，同时加入了streamApi来进行支持
- Java 8 API添加了一个新的抽象称为流Stream，可以让你以一种声明的方式处理数据。 Stream 使用一种类似用 SQL 语句从数据库查询数据的直观方式来提供一种对 Java 集合运算和表达的高阶抽象。 Stream API可以极大提高Java程序员的生产力，让程序员写出高效率、干净、简洁的代码。 这种风格将要处理的元素集合看作一种流， 流在管道中传输， 并且可以在管道的节点上进行处理， 比如筛选， 排序，聚合等。 元素流在管道中经过中间操作（intermediate operation）的处理，最后由最终操作(terminal operation)得到前面处理的结果。 Stream编程
- 总而言之，流式操作主要分为了中间操作和最终操作
-Intermediate 操作 非最终操作，也就是中间操作
- map (mapToInt, flatMap 等) filter distinct sorted peek limit skip parallel sequential unordered  Terminal 操作 最终操作
- forEach forEachOrdered toArray reduce collect min max count anyMatch allMatch noneMatch findFirst findAny iterator  Short-circuiting 操作 短程巡回操作</description>
-    </item>
-    
-    <item>
-      <title>Java中的容器类</title>
-      <link>https://lllovol.com/p/java/</link>
-      <pubDate>Sun, 16 Dec 2018 22:23:46 +0000</pubDate>
-      
-      <guid>https://lllovol.com/p/java/</guid>
-      <description>概览 平时学习工作中，总会使用到各种各样的数据结构，map、set、LinkedHashMap等等，虽然在使用的过程中对此有了一定的了解，但是感觉还是不是很通透。故此写一篇blog用于总结java中的数据结构。
-Java的容器类 Java中的容器类按照大的来分，主要可以分为：
- collection：存储着对象的集合 map：存储着key，value的键值对 接下来的主要就分别以上面两个类别展开进行整理  Collection List    List类别 特点     ArrayList 基于动态数组实现，支持随机访问，允许所有元素包括null   Vector 与ArrayList相似，但是Vector是线程安全的（同步的）   LinkedList 基于双向链表，只能顺序访问，可以快速的再链表中插入和删除元素（栈[Stack]、队列[Queue]、双向队列[Deque]）。没有同步方法   Stack 继承自Vector，实现一个后进先出的堆栈。额外提供了5个方法使得Vector可以被当做堆栈使用：push,pop,peek,empty,search。刚刚创建的时候是空栈     和LinkedList一样，ArrayList也是非同步的（unsynchronized）。一般情况下使用这两个就可以了，因为非同步，所以效率比较高。 如果涉及到堆栈，队列等操作，应该考虑用List，对于需要快速插入，删除元素，应该使用LinkedList，如果需要快速随机访问元素，应该使用ArrayList。 几种java容器
- 有几个问题
- ArrayList的扩容操作？  每一次扩容都会扩容到原来的1.5倍，使用grow()方法，第一次添加元素的时候分配10个对象空间，当添加到第11个元素的时候，就会扩容到原来的1.5倍，当添加到16个元素的时候，就会扩容到原来的15*1.5的大小，等等。每一次扩容都是通过Array.copyof(elementData,newCapacity)来实现的，会消耗大量的资源，代价比较大，因此在知道大致对象大小的时候，提前设置好ArrayList的大小是非常明智的选择。（old+old&amp;raquo;1)
- 为什么Vector是线程安全的？  Set    Set类别 特点     SortSet(TreeSet) 基于红黑树有序，TreeSet是set的一种变体，是可以实现排序等功能的集合 O(logN)   HashSet 基于hash表实现，可以看成一个只有key的HashMap O(1) ，不允许重复，无序，允许存在null(最多一个)   LinkedHashSet 具有HashSet的查找效率，且内部使用了双向链表维护了元素的插入顺序,保证了集合的有序性     写了 HashMap 和 HashSet，然后我们可以看到 HashSet 的方法基本上都是基于 HashMap 来实现的，说白了，HashSet内部的数据结构就是一个 HashMap，其方法的内部几乎就是在调用 HashMap 的方法。 LinkedHashSet 首先我们需要知道的是它是一个 Set 的实现，所以它其中存的肯定不是键值对，而是值。此实现与 HashSet 的不同之处在于，LinkedHashSet 维护着一个运行于所有条目的双重链接列表。此链接列表定义了迭代顺序，该迭代顺序可为插入顺序或是访问顺序。 看到上面的介绍，是不是感觉其与 HashMap 和 LinkedHashMap 的关系很像？LinkedHashSet就是使用LinkedHashMap来实现的。 注意，此实现不是同步的。如果多个线程同时访问链接的哈希Set，而其中至少一个线程修改了该 Set，则它必须保持外部同步。</description>
-    </item>
-    
-  </channel>
+        // 去除首尾空格
+        System.out.println(strip.strip());
+        // 去除开头空格
+        System.out.println(strip.stripLeading());
+        // 去除结尾空格
+        System.out.println(strip.stripTrailing());
+        // 重复
+        System.out.println(strip.repeat(0));
+        System.out.println(strip.repeat(1));
+        System.out.println(strip.repeat(2));
+        System.out.println(strip.repeat(3));
+        // 统计行数
+        System.out.println(lines.lines().count());
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;输出：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191016-190659.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;三使用ofcopyof方法创建不可变更的集合&#34;&gt;三.使用of、copyOf方法创建不可变更的集合&lt;/h2&gt;
+&lt;p&gt;代码：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;@Test
+    public void testList() {
+        // 使用 of copyOf 创建不可变的集合 AbstractImmutableList ImmutableCollections.ListN&amp;lt;&amp;gt;(e1, e2, e3);
+        // 通过这些方式创建出来的集合，是不能进行添加删除操作的，如果使用了就会报java.lang.UnsupportedOperationException异常
+        var list = List.of(&amp;#34;1&amp;#34;, &amp;#34;2&amp;#34;, &amp;#34;3&amp;#34;, &amp;#34;4&amp;#34;);
+        var copy = List.copyOf(list);
+        System.out.println(list == copy);
+        var list1 = new ArrayList&amp;lt;&amp;gt;();
+        var copy1 = List.copyOf(list1);
+        System.out.println(list1 == copy1);
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;输出：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191016-190844.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;四stream的新方法&#34;&gt;四.Stream的新方法&lt;/h2&gt;
+&lt;p&gt;代码：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;@Test
+    public void testStream() {
+        // 为stream增加了4个新方法
+        // 1.增加了单个参数的构造方法
+        long count = Stream.ofNullable(null).count();
+        System.out.println(count);
+        // 2.takeWhile 一旦不满足了条件就停止 下面样例输出是123
+        Stream.of(1, 2, 3, 4, 3, 2, 1).takeWhile(n -&amp;gt; n &amp;lt; 4).forEach(System.out::print);
+        System.out.println();
+        // 3.dropWhile 满足条件的时候都扔掉 下面样例输出是4321
+        Stream.of(1, 2, 3, 4, 3, 2, 1).dropWhile(n -&amp;gt; n &amp;lt; 4).forEach(System.out::print);
+        System.out.println();
+        // 4. iterate重载，可以提供一个predicate判断条件来指定什么时候结束迭代。
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;输出：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191016-190924.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;五更加强大的optional方法&#34;&gt;五.更加强大的Optional方法&lt;/h2&gt;
+&lt;p&gt;代码：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;@Test
+    public void testOptional() {
+        // 可以很方便的将一个Optional转成一个stream，这个repo需要自己实现或者换个东西进行替代
+        Optional&amp;lt;GreyPolicy&amp;gt; byId = greyPolicyRepo.findById(&amp;#34;&amp;#34;);
+        System.out.println(byId.stream().count());
+        // 或者当optional为空的时候给他一个替代
+        System.out.println(&amp;#34;label:&amp;#34;);
+        byId.ifPresent(greyPolicy -&amp;gt; System.out.println(greyPolicy.getLabel()));
+        Optional&amp;lt;GreyPolicy&amp;gt; replace = byId.or(() -&amp;gt; {
+            GreyPolicy greyPolicy = new GreyPolicy();
+            greyPolicy.setLabel(&amp;#34;replace&amp;#34;);
+            return Optional.of(greyPolicy);
+        });
+        System.out.println(&amp;#34;label:&amp;#34;);
+        replace.ifPresent(greyPolicy -&amp;gt; System.out.println(greyPolicy.getLabel()));
+
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;输出：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191016-191042.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;六jdk中自带的httpclient&#34;&gt;六.JDK中自带的httpClient&lt;/h2&gt;
+&lt;p&gt;代码：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;   @Test
+    public void testHttpClient() throws IOException, InterruptedException {
+        // 可以在java.net中找到这个api，jdk自带的 http ClientAPI
+        var request = HttpRequest.newBuilder().uri(URI.create(&amp;#34;https://www.baidu.com&amp;#34;)).GET().build();
+        var httpClient = HttpClient.newHttpClient();
+        HttpResponse&amp;lt;String&amp;gt; response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+		System.out.println(response.body());
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;输出：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20191016-191153.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Java8流式编程</title>
+        <link>https://lllovol.com/p/stream/</link>
+        <pubDate>Thu, 21 Mar 2019 11:08:24 +0000</pubDate>
+        
+        <guid>https://lllovol.com/p/stream/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/8.jpg" alt="Featured image of post Java8流式编程" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
+&lt;p&gt;在前天的时候，java12都出了，但是我还在用java6的陈旧的编码方式，需要改进到java8的流式编程，此文主要是用来记录流式编程的积累&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.runoob.com/java/java8-new-features.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;java8 新特性&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;个人的主要理解&#34;&gt;个人的主要理解&lt;/h1&gt;
+&lt;p&gt;java真正的支持了函数式的编程，同时加入了streamApi来进行支持&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Java 8 API添加了一个新的抽象称为流Stream，可以让你以一种声明的方式处理数据。
+Stream 使用一种类似用 SQL 语句从数据库查询数据的直观方式来提供一种对 Java 集合运算和表达的高阶抽象。
+Stream API可以极大提高Java程序员的生产力，让程序员写出高效率、干净、简洁的代码。
+这种风格将要处理的元素集合看作一种流， 流在管道中传输， 并且可以在管道的节点上进行处理， 比如筛选， 排序，聚合等。
+元素流在管道中经过中间操作（intermediate operation）的处理，最后由最终操作(terminal operation)得到前面处理的结果。
+&lt;a class=&#34;link&#34; href=&#34;http://www.runoob.com/java/java8-streams.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Stream编程&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;总而言之，流式操作主要分为了中间操作和最终操作&lt;/p&gt;
+&lt;h2 id=&#34;intermediate-操作&#34;&gt;Intermediate 操作&lt;/h2&gt;
+&lt;p&gt;非最终操作，也就是中间操作&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;map (mapToInt, flatMap 等)&lt;/li&gt;
+&lt;li&gt;filter&lt;/li&gt;
+&lt;li&gt;distinct&lt;/li&gt;
+&lt;li&gt;sorted&lt;/li&gt;
+&lt;li&gt;peek&lt;/li&gt;
+&lt;li&gt;limit&lt;/li&gt;
+&lt;li&gt;skip&lt;/li&gt;
+&lt;li&gt;parallel&lt;/li&gt;
+&lt;li&gt;sequential&lt;/li&gt;
+&lt;li&gt;unordered&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;terminal-操作&#34;&gt;Terminal 操作&lt;/h2&gt;
+&lt;p&gt;最终操作&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;forEach&lt;/li&gt;
+&lt;li&gt;forEachOrdered&lt;/li&gt;
+&lt;li&gt;toArray&lt;/li&gt;
+&lt;li&gt;reduce&lt;/li&gt;
+&lt;li&gt;collect&lt;/li&gt;
+&lt;li&gt;min&lt;/li&gt;
+&lt;li&gt;max&lt;/li&gt;
+&lt;li&gt;count&lt;/li&gt;
+&lt;li&gt;anyMatch&lt;/li&gt;
+&lt;li&gt;allMatch&lt;/li&gt;
+&lt;li&gt;noneMatch&lt;/li&gt;
+&lt;li&gt;findFirst&lt;/li&gt;
+&lt;li&gt;findAny&lt;/li&gt;
+&lt;li&gt;iterator&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;short-circuiting-操作&#34;&gt;Short-circuiting 操作&lt;/h2&gt;
+&lt;p&gt;短程巡回操作&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;anyMatch&lt;/li&gt;
+&lt;li&gt;allMatch&lt;/li&gt;
+&lt;li&gt;noneMatch&lt;/li&gt;
+&lt;li&gt;findFirst&lt;/li&gt;
+&lt;li&gt;findAny&lt;/li&gt;
+&lt;li&gt;limit&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;实操例子&#34;&gt;实操例子&lt;/h1&gt;
+&lt;h2 id=&#34;将一个列表数组进行处理进行转换&#34;&gt;将一个列表/数组进行处理进行转换&lt;/h2&gt;
+&lt;p&gt;例子如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;	Set&amp;lt;Integer&amp;gt; collect = projects
+		.stream()
+		.map(CustomProject::getId)
+		.collect(Collectors.toSet());
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;代码翻译：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;projects是CustomProject的一个List&lt;/li&gt;
+&lt;li&gt;然后map()进行一个映射&lt;/li&gt;
+&lt;li&gt;将其中的id属性去除，&lt;/li&gt;
+&lt;li&gt;collect()可以转换成另外的数据结构集合&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;filter过滤和foreach&#34;&gt;filter过滤和forEach&lt;/h2&gt;
+&lt;p&gt;例子如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    all.stream().filter(greyTask -&amp;gt;
+            greyTask.getType() == GreyTaskType.PERSON
+    ).forEach(greyTask1 -&amp;gt; {
+        List&amp;lt;String&amp;gt; source = greyTask1.getSource();
+        source.stream().filter(username -&amp;gt; username.startsWith(&amp;quot;B-&amp;quot;)).forEach(bUser -&amp;gt; {
+            bUser = &amp;quot;B-&amp;quot; + 处理bUser的代码;
+        });
+        source.stream().filter(userId -&amp;gt; userId.startsWith(&amp;quot;C-&amp;quot;)).forEach(cUser -&amp;gt; {
+            cUser = &amp;quot;C-&amp;quot; + 处理cUser的代码;
+        });
+        greyTask1.setSource(source);
+    });
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;转换成map&#34;&gt;转换成map&lt;/h2&gt;
+&lt;p&gt;例子如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;	 List&amp;lt;Person&amp;gt; list = new ArrayList();  
+	        list.add(new Person(&amp;quot;1001&amp;quot;, &amp;quot;小A&amp;quot;));  
+	        list.add(new Person(&amp;quot;1002&amp;quot;, &amp;quot;小B&amp;quot;));  
+	        list.add(new Person(&amp;quot;1003&amp;quot;, &amp;quot;小C&amp;quot;));
+	//将list转换map
+	Map&amp;lt;String, String&amp;gt; map = list.stream().collect(Collectors.toMap(Person::getId, Person::getName));
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;但是有一点需要注意，就是Collectors中的tomap 方法，value值也是不允许重复的，如果想要转成HashMap的话，还是使用forEach比较方便&lt;/p&gt;
+&lt;h2 id=&#34;处理string类型的string&#34;&gt;处理String类型的String&lt;/h2&gt;
+&lt;p&gt;对List&lt;!-- raw HTML omitted --&gt;类型进行处理的时候，需要重新返回一个List，因为String都是final的&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;	 List&amp;lt;String&amp;gt; collectUserB = source.stream().filter(username -&amp;gt; username.startsWith(&amp;quot;B-&amp;quot;)).map(bUser -&amp;gt; {
+            bUser = &amp;quot;B-&amp;quot; + userService.getPerson(bUser.replace(&amp;quot;B-&amp;quot;, &amp;quot;&amp;quot;)).getDisplayName();
+            return bUser;
+        }).collect(Collectors.toList());
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+        </item>
+        <item>
+        <title>Java中的容器类</title>
+        <link>https://lllovol.com/p/java/</link>
+        <pubDate>Sun, 16 Dec 2018 22:23:46 +0000</pubDate>
+        
+        <guid>https://lllovol.com/p/java/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/1.jpg" alt="Featured image of post Java中的容器类" /&gt;&lt;h1 id=&#34;概览&#34;&gt;概览&lt;/h1&gt;
+&lt;p&gt;平时学习工作中，总会使用到各种各样的数据结构，map、set、LinkedHashMap等等，虽然在使用的过程中对此有了一定的了解，但是感觉还是不是很通透。故此写一篇blog用于总结java中的数据结构。&lt;/p&gt;
+&lt;h1 id=&#34;java的容器类&#34;&gt;Java的容器类&lt;/h1&gt;
+&lt;p&gt;Java中的容器类按照大的来分，主要可以分为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;collection：存储着对象的集合&lt;/li&gt;
+&lt;li&gt;map：存储着key，value的键值对
+接下来的主要就分别以上面两个类别展开进行整理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;collection&#34;&gt;Collection&lt;/h1&gt;
+&lt;h3 id=&#34;list&#34;&gt;List&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;List类别&lt;/th&gt;
+&lt;th&gt;特点&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;ArrayList&lt;/td&gt;
+&lt;td&gt;基于动态数组实现，支持随机访问，允许所有元素包括null&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Vector&lt;/td&gt;
+&lt;td&gt;与ArrayList相似，但是Vector是线程安全的（同步的）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;LinkedList&lt;/td&gt;
+&lt;td&gt;基于双向链表，只能顺序访问，可以快速的再链表中插入和删除元素（栈[Stack]、队列[Queue]、双向队列[Deque]）。没有同步方法&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Stack&lt;/td&gt;
+&lt;td&gt;继承自Vector，实现一个后进先出的堆栈。额外提供了5个方法使得Vector可以被当做堆栈使用：push,pop,peek,empty,search。刚刚创建的时候是空栈&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;和LinkedList一样，ArrayList也是非同步的（unsynchronized）。一般情况下使用这两个就可以了，因为非同步，所以效率比较高。
+如果涉及到堆栈，队列等操作，应该考虑用List，对于需要快速插入，删除元素，应该使用LinkedList，如果需要快速随机访问元素，应该使用ArrayList。
+&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/dengpeng0419/article/details/47983033&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;几种java容器&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;有几个问题&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ArrayList的扩容操作？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;每一次扩容都会扩容到原来的1.5倍，使用grow()方法，第一次添加元素的时候分配10个对象空间，当添加到第11个元素的时候，就会扩容到原来的1.5倍，当添加到16个元素的时候，就会扩容到原来的15*1.5的大小，等等。每一次扩容都是通过Array.copyof(elementData,newCapacity)来实现的，会消耗大量的资源，代价比较大，因此在知道大致对象大小的时候，提前设置好ArrayList的大小是非常明智的选择。（old+old&amp;raquo;1)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;为什么Vector是线程安全的？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;set&#34;&gt;Set&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Set类别&lt;/th&gt;
+&lt;th&gt;特点&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;SortSet(TreeSet)&lt;/td&gt;
+&lt;td&gt;基于红黑树有序，TreeSet是set的一种变体，是可以实现排序等功能的集合 O(logN)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;HashSet&lt;/td&gt;
+&lt;td&gt;基于hash表实现，可以看成一个只有key的HashMap O(1) ，不允许重复，无序，允许存在null(最多一个)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;LinkedHashSet&lt;/td&gt;
+&lt;td&gt;具有HashSet的查找效率，且内部使用了双向链表维护了元素的插入顺序,保证了集合的有序性&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;写了 HashMap 和 HashSet，然后我们可以看到 HashSet 的方法基本上都是基于 HashMap 来实现的，说白了，HashSet内部的数据结构就是一个 HashMap，其方法的内部几乎就是在调用 HashMap 的方法。
+LinkedHashSet 首先我们需要知道的是它是一个 Set 的实现，所以它其中存的肯定不是键值对，而是值。此实现与 HashSet 的不同之处在于，LinkedHashSet 维护着一个运行于所有条目的双重链接列表。此链接列表定义了迭代顺序，该迭代顺序可为插入顺序或是访问顺序。
+看到上面的介绍，是不是感觉其与 HashMap 和 LinkedHashMap 的关系很像？LinkedHashSet就是使用LinkedHashMap来实现的。
+注意，此实现不是同步的。如果多个线程同时访问链接的哈希Set，而其中至少一个线程修改了该 Set，则它必须保持外部同步。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;queue&#34;&gt;Queue&lt;/h3&gt;
+&lt;p&gt;队列与Stack的区别在于，Stack的删除与添加都在队尾进行，而Queue删除在队头，添加在队尾&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Queue类别&lt;/th&gt;
+&lt;th&gt;特点&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;LinkedList&lt;/td&gt;
+&lt;td&gt;基于双向链表，只能顺序访问，可以快速的再链表中插入和删除元素&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PriorityQueue&lt;/td&gt;
+&lt;td&gt;基于堆结构实现，可以用来实现优先队列&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;map&#34;&gt;Map&lt;/h1&gt;
+&lt;h3 id=&#34;hashmap&#34;&gt;HashMap&lt;/h3&gt;
+&lt;p&gt;HashMap实际上就是java中最基本的两个结构所实现的：数组和指针。通俗的说，就是数组和链表的结合体。（HashMap如何实现）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;每一个Entry的结构中包含了 key,value, int hash,和下一个Entry的指针next&lt;/li&gt;
+&lt;li&gt;然后构造HashMap的时候，会初始化一个数组 table=new Entry[capacity]&lt;/li&gt;
+&lt;li&gt;由此看来，entry就是键值对，另外还包含了写一个next的Entry指针，由此构成了链表&lt;/li&gt;
+&lt;li&gt;在我们想要查找某一个元素的时候，只需要key和hash值，就能知道这个元素在什么位置，而不用去遍历链表，优化了查询的效率&lt;/li&gt;
+&lt;li&gt;HashMap的底层数组总是2的n次幂，这样的好处是可以让不同的key算出来的index相同的几率较小，那么数据在数组上的分布就会比较均匀&lt;/li&gt;
+&lt;li&gt;从HashMap中get元素的时候，先计算出key的hashcode，然后找到数组中对应位置的某一元素，然后通过key的equals方法在对应的位置链表中找到需要的元素&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;当 HashMap 中的元素越来越多的时候，hash 冲突的几率也就越来越高，因为数组的长度是固定的。所以为了提高查询的效率，就要对 HashMap 的数组进行扩容，数组扩容这个操作也会出现在 ArrayList 中，这是一个常用的操作，而在 HashMap 数组扩容之后，最消耗性能的点就出现了：原数组中的数据必须重新计算其在新数组中的位置，并放进去，这就是 resize。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;那么 HashMap 什么时候进行扩容呢？当 HashMap 中的元素个数超过数组大小 *loadFactor时，就会进行数组扩容，loadFactor的默认值为 0.75，这是一个折中的取值。也就是说，默认情况下，数组大小为 16，那么当 HashMap 中元素个数超过 16&lt;em&gt;0.75=12 的时候，就把数组的大小扩展为 2&lt;/em&gt;16=32，即扩大一倍，然后重新计算每个元素在数组中的位置，而这是一个非常消耗性能的操作，所以如果我们已经预知 HashMap 中元素的个数，那么预设元素的个数能够有效的提高 HashMap 的性能。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;初始容量为16，负载因此为0.75，只要超过了16*0.75=12的时候，就会进行扩容到原来的两倍&lt;br&gt;
+遍历的时候最好使用map.entrySet().iterator()的方式，效率比较高
+HashMap是非同步的。&lt;/p&gt;
+&lt;p&gt;解决hash冲突的方法：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;方法&lt;/th&gt;
+&lt;th&gt;内容&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;开放地址法&lt;/td&gt;
+&lt;td&gt;按照一定的次序，从哈希表中找到一个空闲的单元。然后把发生冲突的元素存入到该单元的一种方法。开放定址法需要的表长度要大于等于所需要存放的元素（线性探查法、平方探查法、双散列函数探查法）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;链地址法（拉链法）&lt;/td&gt;
+&lt;td&gt;jdk1.7 全都是单链表来存储同义词，jdk1.8之后，如果链表的长度大于8，会转换为红黑树来存储&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;再哈希法&lt;/td&gt;
+&lt;td&gt;同时构造多个不同的哈希函数，直到冲突不再产生，但是增加了计算时间&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;建立公共溢出区&lt;/td&gt;
+&lt;td&gt;将哈希表分为公共表和溢出表，当溢出发生的时候，将所有的溢出输出统一放到溢出区&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;hashtable&#34;&gt;HashTable&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;与HashMap特别的相似，但是HashTable是线程安全的（如果想使用一个线程安全的HashMap,可以使用Collections类中的synchronizedMap()方法）&lt;/li&gt;
+&lt;li&gt;HashTable不允许null（key value 都不行），HashMap允许一个null的key,若干的value的null&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;linkedhashmap&#34;&gt;LinkedHashMap&lt;/h3&gt;
+&lt;p&gt;LinkedHashMap是HashMap的一个子类，它保留了插入时候的顺序，如果需要在输出的时候保持和输入的顺序时相同，就使用本结构（一言：有序的HashMap）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;维护着一个云星宇所有条目的双重链接列表。这个链接定义了迭代顺序，可以是插入顺序或者是访问顺序&lt;/li&gt;
+&lt;li&gt;和HashMap一样，都是不同步的&lt;/li&gt;
+&lt;li&gt;可以实现LRU缓存（Least Recently Used),把最近最少使用的数据溢出，让给最新读取的数据。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;concurrenthashmap&#34;&gt;ConcurrentHashMap&lt;/h3&gt;
+&lt;p&gt;ConcurrentHashMap 是一个并发散列映射表的实现，它允许完全并发的读取，并且支持给定数量的并发更新。相比于 HashTable 和用同步包装器包装的 HashMap（Collections.synchronizedMap(new HashMap())），ConcurrentHashMap 拥有更高的并发性。在 HashTable 和由同步包装器包装的 HashMap 中，使用一个全局的锁来同步不同线程间的并发访问。（基于java的内存机制（mark））(没有ConcurrentHashTable这个类)&lt;/p&gt;
+&lt;h3 id=&#34;sortedmaptreemap&#34;&gt;SortedMap(TreeMap)&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;SortedMap mapA = new TreeMap();
+
+Comparator comparator = new MyComparator();
+SortedMap mapB = new TreeMap(comparator);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;能够自然排序的一个map，用的并不是那么多&lt;/p&gt;
+&lt;h1 id=&#34;参考网站&#34;&gt;参考网站&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://mp.weixin.qq.com/s?__biz=MzU0OTE4MzYzMw==&amp;amp;mid=2247485577&amp;amp;idx=1&amp;amp;sn=60809425511e9354fbcf3d2d42f43898&amp;amp;chksm=fbb28177ccc508611c86951b617c6f7125212915ff125c144bc778142399666b6ff791e980db&amp;amp;mpshare=1&amp;amp;scene=1&amp;amp;srcid=1207LEbl5tAzCy4pKL8QMzBu&amp;amp;rd2werd=1#wechat_redirect&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;动画演绎Java常用数据结构&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;http://wiki.jikexueyuan.com/project/java-collection/hashmap.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;java集合学习指南&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.jianshu.com/p/4d3cb99d7580&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;解决哈希冲突的常用方法&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
 </rss>
