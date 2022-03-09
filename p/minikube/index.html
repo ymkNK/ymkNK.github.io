@@ -698,6 +698,18 @@ status:
     </section>
 
 
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
     </footer>
 
 
@@ -879,7 +891,66 @@ status:
             >
 
             </main>
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#一前言">一、前言</a></li>
+    <li><a href="#二本地安装kubernetes">二、本地安装kubernetes</a>
+      <ul>
+        <li><a href="#选择使用minikube">选择使用minikube</a></li>
+        <li><a href="#安装minikube">安装minikube</a></li>
+      </ul>
+    </li>
+    <li><a href="#三编写demo">三、编写Demo</a>
+      <ul>
+        <li><a href="#1使用官方的initializer脚手架初始化一个demo">1.使用官方的Initializer脚手架初始化一个demo</a></li>
+        <li><a href="#2在项目中添加需要的restcontroller和swagger的依赖">2.在项目中添加需要的RestController和swagger的依赖</a></li>
+        <li><a href="#3创建controller">3.创建controller</a></li>
+        <li><a href="#4运行">4.运行</a></li>
+      </ul>
+    </li>
+    <li><a href="#四将demo打包成镜像">四、将Demo打包成镜像</a>
+      <ul>
+        <li><a href="#1打包成jar包">1.打包成jar包</a></li>
+        <li><a href="#2利用dockerfile打包成镜像">2.利用dockerFile打包成镜像</a></li>
+        <li><a href="#3在本地docker运行打包好的镜像">3.在本地docker运行打包好的镜像</a></li>
+        <li><a href="#4将docker推向镜像仓库">4.将docker推向镜像仓库</a></li>
+      </ul>
+    </li>
+    <li><a href="#五将demo镜像部署到kubernetes集群当中">五、将demo镜像部署到kubernetes集群当中</a>
+      <ul>
+        <li><a href="#1创建一个namespace">1.创建一个namespace</a></li>
+        <li><a href="#2创建deployment">2.创建deployment</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
         </div>
         <script 
