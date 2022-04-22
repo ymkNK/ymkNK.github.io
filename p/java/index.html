@@ -10,7 +10,7 @@ Java的容器类 Java中的容器类按照大的来分，主要可以分为：
 
 <link rel='canonical' href='https://lllovol.com/p/java/'>
 
-<link rel="stylesheet" href="/scss/style.min.b80bf249ce4a22cf55e8d7340a0b37a2f2c10f54f3a9a49cb94b694a2eb0bbea.css"><meta property='og:title' content='Java中的容器类'>
+<link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='Java中的容器类'>
 <meta property='og:description' content='概览 平时学习工作中，总会使用到各种各样的数据结构，map、set、LinkedHashMap等等，虽然在使用的过程中对此有了一定的了解，但是感觉还是不是很通透。故此写一篇blog用于总结java中的数据结构。
 Java的容器类 Java中的容器类按照大的来分，主要可以分为：
  collection：存储着对象的集合 map：存储着key，value的键值对 接下来的主要就分别以上面两个类别展开进行整理  Collection List    List类别 特点     ArrayList 基于动态数组实现，支持随机访问，允许所有元素包括null   Vector 与ArrayList相似，但是Vector是线程安全的（同步的）   LinkedList 基于双向链表，只能顺序访问，可以快速的再链表中插入和删除元素（栈[Stack]、队列[Queue]、双向队列[Deque]）。没有同步方法   Stack 继承自Vector，实现一个后进先出的堆栈。额外提供了5个方法使得Vector可以被当做堆栈使用：push,pop,peek,empty,search。刚刚创建的时候是空栈     和LinkedList一样，ArrayList也是非同步的（unsynchronized）。一般情况下使用这两个就可以了，因为非同步，所以效率比较高。 如果涉及到堆栈，队列等操作，应该考虑用List，对于需要快速插入，删除元素，应该使用LinkedList，如果需要快速随机访问元素，应该使用ArrayList。 几种java容器

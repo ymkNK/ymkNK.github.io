@@ -9,7 +9,7 @@ code:
 
 <link rel='canonical' href='https://lllovol.com/p/spring10/'>
 
-<link rel="stylesheet" href="/scss/style.min.b80bf249ce4a22cf55e8d7340a0b37a2f2c10f54f3a9a49cb94b694a2eb0bbea.css"><meta property='og:title' content='SpringBoot开发中的一些小细节(十）泛型、分布式锁'>
+<link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='SpringBoot开发中的一些小细节(十）泛型、分布式锁'>
 <meta property='og:description' content='前言 本文主要记录最近工作中关于开发中的一些小技巧以及感悟
 小细节 权重转换百分比的问题 在工作中需要将各个对象所对应的权重转换成百分比，并且要求最后转换出来的百分比，同一类型的相加必须为百分之百，解决思路主要如下
  将各个类型的对象都分别分类 算出各个类型的总权重 算出每个对象在自己类型下的所占百分比 判断每个类型下的对象百分比相加是否等于100 在List处理的时候，可以将List分割成当前类型，和非当前类型 其中需要注意的是，在算百分比的时候，*100应该写在分子  eg: //这样会一直为0，是错误的 //原因是运算符是从左往右计算 //前面除法算出来之后会直接去尾，不足1就是0，所以最后乘以100结果还是0 percent / totalWeight * 100 //这样是正确的 percent * 100 / totalWeight

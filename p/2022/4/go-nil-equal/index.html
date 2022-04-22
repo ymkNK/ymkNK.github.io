@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='前言 在书写markdown文章的时候，往往需要向其中添加图片的链接，从截图到文件的处理，到链接的获取都会很麻烦。在寻找各种图床工具之后，发现其效果都不是很好（比如要收费开通多个云图床的上传权限），因此本文将介绍另外一种较为简便的处理方式。
-设置Snippet snippet是短文的意思，在ide中常常是指可以通过一小串的命令生成一大段代码或者文字的方式。例如，在sublime中输入lorem&#43;tab。就会生成一大段样例文字
-lorem&#43;tab ==&amp;gt; Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'><title>自定义Snippet提高效率</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='背景 最近在开发过程中遇到了一个奇怪的现象，对传入参数interface{}的做nil判断的时候，发现有些情况不符合预期
+示例代码 可以猜测一下下方代码执行后的打印结果
+func TestIsNilEqual(t *testing.T) { PatchConvey(&amp;#34;test&amp;#34;, t, func() { var isNil = func(v interface{}) bool { return v == nil } PatchConvey(&amp;#34;test map&amp;#34;, func() { var testMap map[string]interface{} test1 := isNil(map[string]interface{}{}) test2 := isNil(testMap) test3 := testMap == nil test4 := isNil(nil) t.Logf(&amp;#34;result 1: %v&amp;#34;, test1) t.Logf(&amp;#34;result 2: %v&amp;#34;, test2) t.Logf(&amp;#34;result 3: %v&amp;#34;, test3) t.Logf(&amp;#34;result 4: %v&amp;#34;, test4) }) }) } 原因解析  nil 在 Go语言中只能被赋值给指针和接口。 但是接口在底层的实现有两个部分：  type data   在源码中，显式地将 nil 赋值给接口时，接口的 type 和 data 都将为 nil。此时，接口与 nil 值判断是相等的 但如果将一个带有类型的 nil 赋值给接口时，只有 data 为 nil，而 type 为 nil，此时，接口与 nil 判断将不相等。  参考文档  https://learnku.'><title>Go中经典nil!=nil</title>
 
-<link rel='canonical' href='https://lllovol.com/p/snippet/'>
+<link rel='canonical' href='https://lllovol.com/p/2022/4/go-nil-equal/'>
 
-<link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='自定义Snippet提高效率'>
-<meta property='og:description' content='前言 在书写markdown文章的时候，往往需要向其中添加图片的链接，从截图到文件的处理，到链接的获取都会很麻烦。在寻找各种图床工具之后，发现其效果都不是很好（比如要收费开通多个云图床的上传权限），因此本文将介绍另外一种较为简便的处理方式。
-设置Snippet snippet是短文的意思，在ide中常常是指可以通过一小串的命令生成一大段代码或者文字的方式。例如，在sublime中输入lorem&#43;tab。就会生成一大段样例文字
-lorem&#43;tab ==&amp;gt; Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'>
-<meta property='og:url' content='https://lllovol.com/p/snippet/'>
+<link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='Go中经典nil!=nil'>
+<meta property='og:description' content='背景 最近在开发过程中遇到了一个奇怪的现象，对传入参数interface{}的做nil判断的时候，发现有些情况不符合预期
+示例代码 可以猜测一下下方代码执行后的打印结果
+func TestIsNilEqual(t *testing.T) { PatchConvey(&amp;#34;test&amp;#34;, t, func() { var isNil = func(v interface{}) bool { return v == nil } PatchConvey(&amp;#34;test map&amp;#34;, func() { var testMap map[string]interface{} test1 := isNil(map[string]interface{}{}) test2 := isNil(testMap) test3 := testMap == nil test4 := isNil(nil) t.Logf(&amp;#34;result 1: %v&amp;#34;, test1) t.Logf(&amp;#34;result 2: %v&amp;#34;, test2) t.Logf(&amp;#34;result 3: %v&amp;#34;, test3) t.Logf(&amp;#34;result 4: %v&amp;#34;, test4) }) }) } 原因解析  nil 在 Go语言中只能被赋值给指针和接口。 但是接口在底层的实现有两个部分：  type data   在源码中，显式地将 nil 赋值给接口时，接口的 type 和 data 都将为 nil。此时，接口与 nil 值判断是相等的 但如果将一个带有类型的 nil 赋值给接口时，只有 data 为 nil，而 type 为 nil，此时，接口与 nil 判断将不相等。  参考文档  https://learnku.'>
+<meta property='og:url' content='https://lllovol.com/p/2022/4/go-nil-equal/'>
 <meta property='og:site_name' content='lllovol'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Tech' /><meta property='article:published_time' content='2019-06-16T22:16:35&#43;00:00'/><meta property='article:modified_time' content='2019-06-16T22:16:35&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg' />
-<meta name="twitter:title" content="自定义Snippet提高效率">
-<meta name="twitter:description" content="前言 在书写markdown文章的时候，往往需要向其中添加图片的链接，从截图到文件的处理，到链接的获取都会很麻烦。在寻找各种图床工具之后，发现其效果都不是很好（比如要收费开通多个云图床的上传权限），因此本文将介绍另外一种较为简便的处理方式。
-设置Snippet snippet是短文的意思，在ide中常常是指可以通过一小串的命令生成一大段代码或者文字的方式。例如，在sublime中输入lorem&#43;tab。就会生成一大段样例文字
-lorem&#43;tab ==&amp;gt; Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Go' /><meta property='article:published_time' content='2022-04-21T22:02:27&#43;08:00'/><meta property='article:modified_time' content='2022-04-21T22:02:27&#43;08:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/17.jpeg' />
+<meta name="twitter:title" content="Go中经典nil!=nil">
+<meta name="twitter:description" content="背景 最近在开发过程中遇到了一个奇怪的现象，对传入参数interface{}的做nil判断的时候，发现有些情况不符合预期
+示例代码 可以猜测一下下方代码执行后的打印结果
+func TestIsNilEqual(t *testing.T) { PatchConvey(&amp;#34;test&amp;#34;, t, func() { var isNil = func(v interface{}) bool { return v == nil } PatchConvey(&amp;#34;test map&amp;#34;, func() { var testMap map[string]interface{} test1 := isNil(map[string]interface{}{}) test2 := isNil(testMap) test3 := testMap == nil test4 := isNil(nil) t.Logf(&amp;#34;result 1: %v&amp;#34;, test1) t.Logf(&amp;#34;result 2: %v&amp;#34;, test2) t.Logf(&amp;#34;result 3: %v&amp;#34;, test3) t.Logf(&amp;#34;result 4: %v&amp;#34;, test4) }) }) } 原因解析  nil 在 Go语言中只能被赋值给指针和接口。 但是接口在底层的实现有两个部分：  type data   在源码中，显式地将 nil 赋值给接口时，接口的 type 和 data 都将为 nil。此时，接口与 nil 值判断是相等的 但如果将一个带有类型的 nil 赋值给接口时，只有 data 为 nil，而 type 为 nil，此时，接口与 nil 判断将不相等。  参考文档  https://learnku."><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/17.jpeg' />
     <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-MK7GTCNC34"></script>
@@ -231,9 +231,9 @@ if (!doNotTrack) {
     <article class="main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/snippet/">
+            <a href="/p/2022/4/go-nil-equal/">
                 
-                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg" loading="lazy" alt="Featured image of post 自定义Snippet提高效率" />
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/17.jpeg" loading="lazy" alt="Featured image of post Go中经典nil!=nil" />
                 
             </a>
         </div>
@@ -243,8 +243,8 @@ if (!doNotTrack) {
     
     <header class="article-category">
         
-            <a href="/categories/tech/" style="background-color: ; color: ;">
-                Tech
+            <a href="/categories/go/" style="background-color: ; color: ;">
+                Go
             </a>
         
     </header>
@@ -252,7 +252,7 @@ if (!doNotTrack) {
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/snippet/">自定义Snippet提高效率</a>
+            <a href="/p/2022/4/go-nil-equal/">Go中经典nil!=nil</a>
         </h2>
     
         
@@ -271,7 +271,7 @@ if (!doNotTrack) {
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Jun 16, 2019</time>
+                <time class="article-time--published">Apr 21, 2022</time>
             </div>
         
 
@@ -300,73 +300,50 @@ if (!doNotTrack) {
     <section class="article-content">
     
     
-    <h1 id="前言">前言</h1>
-<p>在书写markdown文章的时候，往往需要向其中添加图片的链接，从截图到文件的处理，到链接的获取都会很麻烦。在寻找各种图床工具之后，发现其效果都不是很好（比如要收费开通多个云图床的上传权限），因此本文将介绍另外一种较为简便的处理方式。</p>
-<h1 id="设置snippet">设置Snippet</h1>
-<p>snippet是短文的意思，在ide中常常是指可以通过一小串的命令生成一大段代码或者文字的方式。例如，在sublime中输入<!-- raw HTML omitted -->lorem<!-- raw HTML omitted -->+<!-- raw HTML omitted -->tab<!-- raw HTML omitted -->。就会生成一大段样例文字</p>
-<pre><code>lorem+tab
-==&gt;
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</code></pre>
-<p>而接下来要做的就是要自定义一个snippet：在sublime中，Tools&ndash;&gt;Developer&ndash;&gt;New Snippet
-<img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190616-235826@2x.png"
-	
-	
-	
-	loading="lazy"
-	
-	
->
-然后就能得到如下的新建snippet
-<img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190617-000803@2x.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
-<p>写入自己自定义的代码</p>
-<pre><code>&lt;snippet&gt;
-	&lt;content&gt;&lt;![CDATA[
-![](https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/$1.png)
-]]&gt;&lt;/content&gt;
-	&lt;!-- Optional: Set a tabTrigger to define how to trigger the snippet --&gt;
-	&lt;tabTrigger&gt;ap&lt;/tabTrigger&gt;
-	&lt;!-- Optional: Set a scope to limit where the snippet will trigger --&gt;
-	&lt;scope&gt;text.html.markdown&lt;/scope&gt;
-&lt;/snippet&gt;
-</code></pre>
-<p>其中：</p>
+    <h1 id="背景">背景</h1>
+<p>最近在开发过程中遇到了一个奇怪的现象，对传入参数interface{}的做nil判断的时候，发现有些情况不符合预期</p>
+<h1 id="示例代码">示例代码</h1>
+<p>可以猜测一下下方代码执行后的打印结果</p>
+<pre tabindex="0"><code>func TestIsNilEqual(t *testing.T) {
+	PatchConvey(&#34;test&#34;, t, func() {
+		var isNil = func(v interface{}) bool {
+			return v == nil
+		}
+
+		PatchConvey(&#34;test map&#34;, func() {
+			var testMap map[string]interface{}
+			test1 := isNil(map[string]interface{}{})
+			test2 := isNil(testMap)
+			test3 := testMap == nil
+			test4 := isNil(nil)
+
+			t.Logf(&#34;result 1: %v&#34;, test1)
+			t.Logf(&#34;result 2: %v&#34;, test2)
+			t.Logf(&#34;result 3: %v&#34;, test3)
+			t.Logf(&#34;result 4: %v&#34;, test4)
+		})
+	})
+}
+</code></pre><h1 id="原因解析">原因解析</h1>
 <ul>
-<li>CDATA框住的地方表示自己自定义的代码</li>
-<li>$1表示占位符，这就是在生成的代码最后光标所在的位置</li>
-<li>tabTrigger表示触发的条件</li>
-<li>scope表示的时候这个snippet的作用域（获取方式Tools&ndash;&gt;Developer&ndash;&gt;Show Scope Name）
-<img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190617-001852@2x.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></li>
+<li>nil 在 Go语言中只能被赋值给指针和接口。</li>
+<li>但是接口在底层的实现有两个部分：
+<ul>
+<li>type</li>
+<li>data</li>
 </ul>
-<p>然后保存在sublime的默认目录下，即可生效了</p>
-<pre><code>macOS的目录如下
-/Users/user_name/Library/Application Support/Sublime Text 3/Packages/User
-</code></pre>
-<h1 id="如何使用">如何使用</h1>
+</li>
+<li>在源码中，显式地将 nil 赋值给接口时，接口的 type 和 data 都将为 nil。此时，接口与 nil 值判断是相等的</li>
+<li>但如果将一个带有类型的 nil 赋值给接口时，只有 data 为 nil，而 type 为 nil，此时，接口与 nil 判断将不相等。</li>
+</ul>
+<h1 id="参考文档">参考文档</h1>
 <ul>
-<li>截图，将图片保存到自定义的路径下，复制出其文件名即可</li>
-<li>输入ap，tab</li>
-<li>粘贴文件名，完成！
-这种方式对于只是日常写blog的我来说，已经方便了太多了</li>
+<li><a class="link" href="https://learnku.com/go/t/46496"  target="_blank" rel="noopener"
+    >https://learnku.com/go/t/46496</a></li>
+<li><a class="link" href="https://www.cnblogs.com/chenqionghe/p/11357013.html"  target="_blank" rel="noopener"
+    >https://www.cnblogs.com/chenqionghe/p/11357013.html</a></li>
+<li><a class="link" href="https://gfw.go101.org/article/nil.html"  target="_blank" rel="noopener"
+    >https://gfw.go101.org/article/nil.html</a></li>
 </ul>
 
 </section>
@@ -376,7 +353,7 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     
     <section class="article-tags">
         
-            <a href="/tags/tech/">Tech</a>
+            <a href="/tags/go/">Go</a>
         
     </section>
 
@@ -410,72 +387,18 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
             
                 
 <article class="has-image">
-    <a href="/p/2021/12/awk-tool-analysis/">
+    <a href="/p/2022/1/go-concurrency/">
         
         
             <div class="article-image">
                 
-                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/20.jpeg" loading="lazy" data-key="2021/12/awk-tool-analysis" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/20.jpeg"/>
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/4.jpeg" loading="lazy" data-key="2022/1/go-concurrency" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/4.jpeg"/>
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">常用命令行统计指令</h2>
-        </div>
-    </a>
-</article>
-            
-                
-<article class="has-image">
-    <a href="/p/2021/9/prototype/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/5.jpeg" loading="lazy" data-key="2021/9/prototype" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/5.jpeg"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">设计模式-Prototype原型模式</h2>
-        </div>
-    </a>
-</article>
-            
-                
-<article class="has-image">
-    <a href="/p/2021/9/design-pattern-factory/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/30.jpeg" loading="lazy" data-key="2021/9/design-pattern-factory" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/30.jpeg"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">设计模式-Factory工厂模式学习笔记</h2>
-        </div>
-    </a>
-</article>
-            
-                
-<article class="has-image">
-    <a href="/p/2021/9/design-pattern-singleton/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/27.jpeg" loading="lazy" data-key="2021/9/design-pattern-singleton" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/27.jpeg"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">设计模式-Singleton单例模式学习笔记</h2>
+            <h2 class="article-title">Go并发编程学习笔记-WaitGroup和Mutex</h2>
         </div>
     </a>
 </article>

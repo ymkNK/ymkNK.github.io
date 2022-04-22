@@ -11,7 +11,7 @@ log.error(&amp;quot;&amp;quot;,{},e);  token的延长时间 一个是长效token
 
 <link rel='canonical' href='https://lllovol.com/p/spring2/'>
 
-<link rel="stylesheet" href="/scss/style.min.b80bf249ce4a22cf55e8d7340a0b37a2f2c10f54f3a9a49cb94b694a2eb0bbea.css"><meta property='og:title' content='SpringBoot开发中的一些小细节(二)CR笔记'>
+<link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='SpringBoot开发中的一些小细节(二)CR笔记'>
 <meta property='og:description' content='Code Review 让大家对代码质量的标准是在一个线上， 是一个相互学习的过程。 blog主要是用来记录当时的笔记与自己的一些感想
 用户中心的接口，需要查用户之前捐过的一些订单 ContextUtil.getUserId(()不建议使用 限制了使用线程的场景，可能每一段代码执行的线程可能不在一起了 讲究的是 变量来源应该是外部的,参数是传入的 swing local ？本地的东西 context 在子线程中是无法工作的，Util这个工具类，不应该涉及到线程这种复杂的东西
 interceptor， implements HandlerMethodargumentResolver，//可以直接解析参数（将token解析的过程，就放到这个里面了） (@LoginUidAttribute String uid)  拿到userId的，isDelete()可以不用判断 解决泛型，warning 加 PageHelper是用的swing local mapper上面的select 一定要体现一个sql,查询条件一定要解耦，不要太复杂了 不要写太多的if OrderBizMapper.xml 这样可以更好的去维护索引

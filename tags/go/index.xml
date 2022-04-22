@@ -6,7 +6,60 @@
         <description>Recent content in Go on lllovol</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Thu, 20 Jan 2022 20:07:33 +0800</lastBuildDate><atom:link href="https://lllovol.com/tags/go/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 21 Apr 2022 22:02:27 +0800</lastBuildDate><atom:link href="https://lllovol.com/tags/go/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Go中经典nil!=nil</title>
+        <link>https://lllovol.com/p/2022/4/go-nil-equal/</link>
+        <pubDate>Thu, 21 Apr 2022 22:02:27 +0800</pubDate>
+        
+        <guid>https://lllovol.com/p/2022/4/go-nil-equal/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/17.jpeg" alt="Featured image of post Go中经典nil!=nil" /&gt;&lt;h1 id=&#34;背景&#34;&gt;背景&lt;/h1&gt;
+&lt;p&gt;最近在开发过程中遇到了一个奇怪的现象，对传入参数interface{}的做nil判断的时候，发现有些情况不符合预期&lt;/p&gt;
+&lt;h1 id=&#34;示例代码&#34;&gt;示例代码&lt;/h1&gt;
+&lt;p&gt;可以猜测一下下方代码执行后的打印结果&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;func TestIsNilEqual(t *testing.T) {
+	PatchConvey(&amp;#34;test&amp;#34;, t, func() {
+		var isNil = func(v interface{}) bool {
+			return v == nil
+		}
+
+		PatchConvey(&amp;#34;test map&amp;#34;, func() {
+			var testMap map[string]interface{}
+			test1 := isNil(map[string]interface{}{})
+			test2 := isNil(testMap)
+			test3 := testMap == nil
+			test4 := isNil(nil)
+
+			t.Logf(&amp;#34;result 1: %v&amp;#34;, test1)
+			t.Logf(&amp;#34;result 2: %v&amp;#34;, test2)
+			t.Logf(&amp;#34;result 3: %v&amp;#34;, test3)
+			t.Logf(&amp;#34;result 4: %v&amp;#34;, test4)
+		})
+	})
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;原因解析&#34;&gt;原因解析&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;nil 在 Go语言中只能被赋值给指针和接口。&lt;/li&gt;
+&lt;li&gt;但是接口在底层的实现有两个部分：
+&lt;ul&gt;
+&lt;li&gt;type&lt;/li&gt;
+&lt;li&gt;data&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;在源码中，显式地将 nil 赋值给接口时，接口的 type 和 data 都将为 nil。此时，接口与 nil 值判断是相等的&lt;/li&gt;
+&lt;li&gt;但如果将一个带有类型的 nil 赋值给接口时，只有 data 为 nil，而 type 为 nil，此时，接口与 nil 判断将不相等。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;参考文档&#34;&gt;参考文档&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://learnku.com/go/t/46496&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://learnku.com/go/t/46496&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/chenqionghe/p/11357013.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.cnblogs.com/chenqionghe/p/11357013.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://gfw.go101.org/article/nil.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://gfw.go101.org/article/nil.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>Go并发编程学习笔记-WaitGroup和Mutex</title>
         <link>https://lllovol.com/p/2022/1/go-concurrency/</link>
         <pubDate>Thu, 20 Jan 2022 20:07:33 +0800</pubDate>

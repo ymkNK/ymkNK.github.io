@@ -23,6 +23,15 @@
     <loc>https://lllovol.com/tags/</loc>
     <lastmod>2022-12-31T23:59:59+08:00</lastmod>
   </url><url>
+    <loc>https://lllovol.com/categories/go/</loc>
+    <lastmod>2022-04-21T22:02:27+08:00</lastmod>
+  </url><url>
+    <loc>https://lllovol.com/tags/go/</loc>
+    <lastmod>2022-04-21T22:02:27+08:00</lastmod>
+  </url><url>
+    <loc>https://lllovol.com/p/2022/4/go-nil-equal/</loc>
+    <lastmod>2022-04-21T22:02:27+08:00</lastmod>
+  </url><url>
     <loc>https://lllovol.com/categories/note/</loc>
     <lastmod>2022-02-07T20:17:32+08:00</lastmod>
   </url><url>
@@ -46,12 +55,6 @@
   </url><url>
     <loc>https://lllovol.com/p/2022/1/2021-summary/</loc>
     <lastmod>2022-01-21T21:58:39+08:00</lastmod>
-  </url><url>
-    <loc>https://lllovol.com/categories/go/</loc>
-    <lastmod>2022-01-20T20:07:33+08:00</lastmod>
-  </url><url>
-    <loc>https://lllovol.com/tags/go/</loc>
-    <lastmod>2022-01-20T20:07:33+08:00</lastmod>
   </url><url>
     <loc>https://lllovol.com/p/2022/1/go-concurrency/</loc>
     <lastmod>2022-01-20T20:07:33+08:00</lastmod>

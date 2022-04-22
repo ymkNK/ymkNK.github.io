@@ -16,7 +16,7 @@
 
 <link rel='canonical' href='https://lllovol.com/p/redis/'>
 
-<link rel="stylesheet" href="/scss/style.min.b80bf249ce4a22cf55e8d7340a0b37a2f2c10f54f3a9a49cb94b694a2eb0bbea.css"><meta property='og:title' content='Redis中的常用数据结构'>
+<link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='Redis中的常用数据结构'>
 <meta property='og:description' content='前言 Redis在曾经实现用户登录token的时候使用过，但是对其的了解程度，就只是在使用的这个层次。本篇文章主要用于学习记录Redis的常见的一些数据结构。
 第一部分 什么是redis？  是NoSql数据库，非关系型数据库。 是个非关系型数据库。 Key-Value数据库 使用C语言实现的单线程应用，基于内存，读取的速度都超快！ 基于内存存放,使用了rdb （就是redis内存的SNAPSHOT，存到了磁盘当中）和Aof(Append only file 也就是平时操作的命令集合)的机制来保障数据的持久化，宕机的时候可以通过这两种方式来进行数据恢复。 拥有丰富的Value对象，String\Hash\List\Set\ZSet\Stream 拥有多种底层数据结构：SDS，list，dict，zskiplist，intset，ziplist，quicklist，zipmap，stream 支持丰富功能，过期，事物  第二部分 常用Value对象 1 String对象 最常见的类型
 1.1 编码 int，可以自增 embstr，就是单纯的字符串 raw

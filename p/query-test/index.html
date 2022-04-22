@@ -11,7 +11,7 @@ return allDepartment.stream().flatMap(department -&amp;gt; { List&amp;lt;Employe
 
 <link rel='canonical' href='https://lllovol.com/p/query-test/'>
 
-<link rel="stylesheet" href="/scss/style.min.b80bf249ce4a22cf55e8d7340a0b37a2f2c10f54f3a9a49cb94b694a2eb0bbea.css"><meta property='og:title' content='从零开始的查询优化'>
+<link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='从零开始的查询优化'>
 <meta property='og:description' content='背景 需要查询到一批部门以及子部门，最终拿到这些部门下的人员信息，我们能够进行的操作如下
  通过部门的目录前缀（前缀树）的方式，能够查询到所有子部门 能够通过部门查询到这个部门（不包含子部门）的所有人员 已经添加索引  方法一 思路 找到每一个需要排除的部门，以及每一个排除的部门的子部门，然后分别查出来需要排除的人,最后通过stream的flatMap进行聚合
 return allDepartment.stream().flatMap(department -&amp;gt; { List&amp;lt;EmployeeDetail&amp;gt; allByDepartmentId = employeeRepo.findAllByDepartmentId(department.getDepartmentId()); return allByDepartmentId.stream(); }).collect(Collectors.toList());  耗费时间 30616ms

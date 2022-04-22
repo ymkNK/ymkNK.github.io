@@ -12,7 +12,7 @@
 
 <link rel='canonical' href='https://lllovol.com/p/spring11/'>
 
-<link rel="stylesheet" href="/scss/style.min.b80bf249ce4a22cf55e8d7340a0b37a2f2c10f54f3a9a49cb94b694a2eb0bbea.css"><meta property='og:title' content='SpringBoot开发中的一些小细节(十一)CR笔记、阿里巴巴代码规约'>
+<link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='SpringBoot开发中的一些小细节(十一)CR笔记、阿里巴巴代码规约'>
 <meta property='og:description' content='前言 最近正式入职，第一周的事情主要就是进行代码的Code Review,将自己曾经的实习时候写的代码看一看，清掉一部分过时的代码。同时也从前辈们的分享中学习到了不少的小细节。 以及看了阿里巴巴的开发规范规约，将一些比较重要的地方、原来没有注意到的地方记录一下。
 测试用例   在写Junit的时候，可以写一个BaseTest,以后test直接继承这个类即可，就不用每次都新建一个类然后在上面重新写上好多注解了。
  @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) @RunWith(SpringJUnit4ClassRunner.class) @Slf4j public class BaseTests { }    在写CRUD的测试用例的时候，一定要写成一个闭环，新加了测试用例，最后测试结束的时候一定要删除，防止在数据库中产生脏数据。

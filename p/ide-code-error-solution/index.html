@@ -9,7 +9,7 @@
 
 <link rel='canonical' href='https://lllovol.com/p/ide-code-error-solution/'>
 
-<link rel="stylesheet" href="/scss/style.min.b80bf249ce4a22cf55e8d7340a0b37a2f2c10f54f3a9a49cb94b694a2eb0bbea.css"><meta property='og:title' content='Idea代码飘红的问题解决方式'>
+<link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='Idea代码飘红的问题解决方式'>
 <meta property='og:description' content='前言 在安装使用Idea Intelli的时候，导入新项目的时候，总会出现代码权限飘红的问题。本篇文章，就是介绍出现这种问题的几种情况和分别的解决方式。 情况一：maven二方库settings没有设置 一般公司内部都会有自己的二方库建设，新人在git下项目之后，总是会出现代码偏红的问题，各种库都没有导入下来，这时候首先应该排查的就是maven的配置是否正确，是否正确连接到了公司内部的二方库。
 解决方式 以Idea Intelli为例: preference -&amp;gt; build,execution,deployment -&amp;gt; build tools -&amp;gt; maven -&amp;gt; User settings file: 勾选上override，改写为二方库settings.xml文件的路径
 情况二：Lombok插件没有安装  Project Lombok is a java library that automatically plugs into your editor and build tools, spicing up your java. Never write another getter or equals method again, with one annotation your class has a fully featured builder, Automate your logging variables, and much more.lombok官网

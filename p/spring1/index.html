@@ -10,7 +10,7 @@ Slf4j  The Simple Logging Facade for Java (SLF4J) serves as a simple facade or a
 
 <link rel='canonical' href='https://lllovol.com/p/spring1/'>
 
-<link rel="stylesheet" href="/scss/style.min.b80bf249ce4a22cf55e8d7340a0b37a2f2c10f54f3a9a49cb94b694a2eb0bbea.css"><meta property='og:title' content='SpringBoot开发中的一些小细节(一)Slf4J、Post和Get的小技巧'>
+<link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='SpringBoot开发中的一些小细节(一)Slf4J、Post和Get的小技巧'>
 <meta property='og:description' content='原来写的代码被CTO抓出来吐槽，发现确实都是一些当初自己没有注意到的地方，打算将这样的小细节一点一点的收集起来，养成更好的编码习惯。
 Slf4j  The Simple Logging Facade for Java (SLF4J) serves as a simple facade or abstraction for various logging frameworks (e.g. java.util.logging, logback, log4j) allowing the end user to plug in the desired logging framework at deployment time. 摘自https://www.slf4j.org/
  在编写Spring的代码的时候，只需要在Class上方添加一个@Slf4j的注解即可。slf4j是facade pattern的典型例子（隐藏系统的复杂性，并向客户端提供了一个客户端可以访问系统的接口，又被成为门面模式或者外观模式） 使用的时候，可以使用占位符的方式进行日志的记录，省去了原来自己拼接日志的麻烦。

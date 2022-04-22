@@ -8,7 +8,7 @@
 
 <link rel='canonical' href='https://lllovol.com/p/spring14/'>
 
-<link rel="stylesheet" href="/scss/style.min.b80bf249ce4a22cf55e8d7340a0b37a2f2c10f54f3a9a49cb94b694a2eb0bbea.css"><meta property='og:title' content='SpringBoot开发中的一些小细节(十四）事件监听的使用'>
+<link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='SpringBoot开发中的一些小细节(十四）事件监听的使用'>
 <meta property='og:description' content='背景 最近在做同步先关的工作，为了提升同步任务的处理效率，减少频繁的mongo数据库查询，因此需要将一些数据统一查询出来，在内存中进行处理。
 解决方式 在任务执行的之前，就需要将相关的数据查询出来，如何实现呢？使用一个@EventListener进行ApplicationReadyEvent时间的监听，就能在应用启动之后，进行相应的操作
 @EventListener(classes = {ApplicationReadyEvent.class}) public void initialMap() { if (CollectionUtils.isEmpty(ridMobileMap)) { List&amp;lt;UserRecord&amp;gt; all = entranceUserRecordRepo.findAll(); ridMobileMap = all.stream().filter(userRecord -&amp;gt; StringUtils.isNotEmpty(userRecord.getMobileNo())).collect(Collectors.toMap(UserRecord::getRid, UserRecord::getMobileNo)); } } More Application spring application，一般就是spring boot项目中的 Application这个类

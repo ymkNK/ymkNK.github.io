@@ -8,7 +8,7 @@
 
 <link rel='canonical' href='https://lllovol.com/p/2021/9/prototype/'>
 
-<link rel="stylesheet" href="/scss/style.min.b80bf249ce4a22cf55e8d7340a0b37a2f2c10f54f3a9a49cb94b694a2eb0bbea.css"><meta property='og:title' content='设计模式-Prototype原型模式'>
+<link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='设计模式-Prototype原型模式'>
 <meta property='og:description' content='场景 有一个object，想要生成与之完全相同的复制品，该如何是实现？ 问题：
  私有数据 不想包含具体的包 如果原始的对象只是一个接口，具体类都不知道，怎么处理呢？  方案 将克隆过程，委派给被克隆的实际对象，由实际对象负责clone 因此，只要实现了clone()方法的，就是原型模式
 实现  原型（Prototype）接口对clone方法做一个申明，绝大部分情况下，里面只有一个名为clone的方法 具体原型（ConcretePrototype）类实现接口 客户端（Client）可以复制实现了原型接口的任何对象  应用  将自身作为构造函数的参数传入 复制数组

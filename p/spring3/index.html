@@ -13,7 +13,7 @@ api: server: k8s: key: &amp;quot;kubernetes.auth.token&amp;quot; token: &amp;quo
 
 <link rel='canonical' href='https://lllovol.com/p/spring3/'>
 
-<link rel="stylesheet" href="/scss/style.min.b80bf249ce4a22cf55e8d7340a0b37a2f2c10f54f3a9a49cb94b694a2eb0bbea.css"><meta property='og:title' content='SpringBoot开发中的一些小细节(三)KubernetesClient的使用与配置'>
+<link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='SpringBoot开发中的一些小细节(三)KubernetesClient的使用与配置'>
 <meta property='og:description' content='前言 最近主要在获取到的k8s中的相关service和pod的信息的变化，将原来全量获取数据的方式改进为增量的方式，此篇主要记录使用过程中遇到的坑和相信的解决方式
 KubernetesClient的包的依赖的引用 使用的是fabric8的kubernetes-client，添加如下依赖即可
 &amp;lt;!--在pom.xml文件--&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.fabric8&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;kubernetes-client&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4.0.5&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt;  配置文件配置相关的属性 application.yml文件 添加k8s集群的主机url,token

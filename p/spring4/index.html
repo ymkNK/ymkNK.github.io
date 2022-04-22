@@ -9,7 +9,7 @@ public class KubernetesServiceImpl implements KubernetesService, ApplicationList
 
 <link rel='canonical' href='https://lllovol.com/p/spring4/'>
 
-<link rel="stylesheet" href="/scss/style.min.b80bf249ce4a22cf55e8d7340a0b37a2f2c10f54f3a9a49cb94b694a2eb0bbea.css"><meta property='og:title' content='SpringBoot开发中的一些小细节(四)CR笔记ApplicationListener等等'>
+<link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='SpringBoot开发中的一些小细节(四)CR笔记ApplicationListener等等'>
 <meta property='og:description' content='Code Review 这周被点名来做code view了来着，然后昨天晚上做了一个小时的code review，还是相当紧张，然后今天改了一天代码 特此总结
 ApplicationListener 这个地方原来主要实现的功能是spring3中的功能，在启动了整个项目之后，让watch pods和watch service启动并且只启动一次。
 （启动一个单线程，回调函数，生命周期） 原来的做法是使用spring task在应用启动之后，就启动一次然后一直运行

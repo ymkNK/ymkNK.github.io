@@ -9,7 +9,7 @@ func main() { var wg sync.WaitGroup var x int32 = 0 for i := 0; i &amp;lt; 100; 
 
 <link rel='canonical' href='https://lllovol.com/p/2022/1/go-concurrency/'>
 
-<link rel="stylesheet" href="/scss/style.min.b80bf249ce4a22cf55e8d7340a0b37a2f2c10f54f3a9a49cb94b694a2eb0bbea.css"><meta property='og:title' content='Go并发编程学习笔记-WaitGroup和Mutex'>
+<link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='Go并发编程学习笔记-WaitGroup和Mutex'>
 <meta property='og:description' content='原则 不要用共享内存来通信，而是使用通信来共享内存
 注意  内存重排，机器码执行的顺序可能并不是代码的顺序 Go的锁，不要使用值传递，不然每次都是复制新的值，这样的锁是失效的。这类bug可以被go vet检测出来（Go的所有的传递，都是值传递）  sync.WaitGroup debug.SetMaxThread(1)
 func main() { var wg sync.WaitGroup var x int32 = 0 for i := 0; i &amp;lt; 100; i&#43;&#43; { go func() { // wg.Add不应该放在这里，应该放在循坏外面  wg.Add(1) atomic.AddInt32(&amp;amp;x, 1) wg.Done() }() } fmt.Println(&amp;#34;等待片刻...&amp;#34;) wg.Wait() fmt.Println(atomic.LoadInt32(&amp;amp;x)) } 这样写代码是不行，add放在主线程，done放在子协程中
@@ -437,6 +437,24 @@ if (!doNotTrack) {
     <h2 class="section-title">相关文章</h2>
     <div class="related-contents">
         <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/2022/4/go-nil-equal/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/17.jpeg" loading="lazy" data-key="2022/4/go-nil-equal" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/17.jpeg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Go中经典nil!=nil</h2>
+        </div>
+    </a>
+</article>
             
                 
 <article class="has-image">
