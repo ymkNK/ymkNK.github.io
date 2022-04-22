@@ -388,7 +388,7 @@ if (!doNotTrack) {
 </table></div>
 <h3 id="non-nillable-structs-非空结构体">Non-nillable structs 非空结构体</h3>
 <p>组合的 <code>struct</code> 类型也是不可空的，并且 struct 的默认值将包含其所有字段的默认值</p>
-<h2 id="nillable-可为空类型">Nillable 可为空类型</h2>
+<h3 id="nillable-可为空类型">Nillable 可为空类型</h3>
 <p>还有一种更高级到 <code>nillable</code> 类型，如果对应的类型未初始化，将会报错，触发 panic</p>
 <p>这些可以为 nillabe 类型:</p>
 <ul>
@@ -738,10 +738,7 @@ if (!doNotTrack) {
         <li><a href="#非空和空类型">非空和空类型</a></li>
         <li><a href="#非空基本类型">非空基本类型</a></li>
         <li><a href="#non-nillable-structs-非空结构体">Non-nillable structs 非空结构体</a></li>
-      </ul>
-    </li>
-    <li><a href="#nillable-可为空类型">Nillable 可为空类型</a>
-      <ul>
+        <li><a href="#nillable-可为空类型">Nillable 可为空类型</a></li>
         <li><a href="#可为空的指针函数和接口类型会引起-panic">可为空的指针、函数和接口类型会引起 panic</a></li>
         <li><a href="#nil-channel-永远阻塞">nil-channel 永远阻塞</a></li>
         <li><a href="#nil预声明标识符nil没有默认类型">nil预声明标识符nil没有默认类型</a></li>

@@ -97,7 +97,7 @@
 &lt;/table&gt;
 &lt;h3 id=&#34;non-nillable-structs-非空结构体&#34;&gt;Non-nillable structs 非空结构体&lt;/h3&gt;
 &lt;p&gt;组合的 &lt;code&gt;struct&lt;/code&gt; 类型也是不可空的，并且 struct 的默认值将包含其所有字段的默认值&lt;/p&gt;
-&lt;h2 id=&#34;nillable-可为空类型&#34;&gt;Nillable 可为空类型&lt;/h2&gt;
+&lt;h3 id=&#34;nillable-可为空类型&#34;&gt;Nillable 可为空类型&lt;/h3&gt;
 &lt;p&gt;还有一种更高级到 &lt;code&gt;nillable&lt;/code&gt; 类型，如果对应的类型未初始化，将会报错，触发 panic&lt;/p&gt;
 &lt;p&gt;这些可以为 nillabe 类型:&lt;/p&gt;
 &lt;ul&gt;
