@@ -289,7 +289,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    阅读时长: 1 分钟
+                    阅读时长: 2 分钟
                 </time>
             </div>
         
@@ -408,7 +408,62 @@ if (!doNotTrack) {
 <p>每当处理这些类型时，我们都必须考虑它们是否为零</p>
 <h3 id="nil-channel-永远阻塞">nil-channel 永远阻塞</h3>
 <p>尝试从 nil 通道读取或写入 nil 通道将永远受阻。关闭 nil 通道会引起 Panic</p>
-<h3 id="nilnil">nil!=nil</h3>
+<h3 id="nil预声明标识符nil没有默认类型">nil预声明标识符nil没有默认类型</h3>
+<p>Go中其它的预声明标识符都有各自的默认类型，比如</p>
+<ul>
+<li>预声明标识符true和false的默认类型均为内置类型bool。</li>
+<li>预声明标识符iota的默认类型为内置类型int。
+但是，预声明标识符nil没有一个默认类型，尽管它有很多潜在的可能类型。 事实上，预声明标识符nil是Go中唯一一个没有默认类型的类型不确定值。 我们必须在代码中提供足够的信息以便让编译器能够推断出一个类型不确定的nil值的期望类型。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 代码中必须提供充足的信息来让编译器推断出某个nil的类型。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">_</span> <span class="p">=</span> <span class="p">(</span><span class="o">*</span><span class="kd">struct</span><span class="p">{})(</span><span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">_</span> <span class="p">=</span> <span class="p">[]</span><span class="nb">int</span><span class="p">(</span><span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">_</span> <span class="p">=</span> <span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="nb">bool</span><span class="p">(</span><span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">_</span> <span class="p">=</span> <span class="kd">chan</span> <span class="nb">string</span><span class="p">(</span><span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">_</span> <span class="p">=</span> <span class="p">(</span><span class="kd">func</span><span class="p">())(</span><span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">_</span> <span class="p">=</span> <span class="kd">interface</span><span class="p">{}(</span><span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 下面这一组和上面这一组等价。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kd">var</span> <span class="nx">_</span> <span class="o">*</span><span class="kd">struct</span><span class="p">{}</span> <span class="p">=</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">_</span> <span class="p">[]</span><span class="kt">int</span> <span class="p">=</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">_</span> <span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kt">bool</span> <span class="p">=</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">_</span> <span class="kd">chan</span> <span class="kt">string</span> <span class="p">=</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">_</span> <span class="kd">func</span><span class="p">()</span> <span class="p">=</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">_</span> <span class="kd">interface</span><span class="p">{}</span> <span class="p">=</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 下面这行编译不通过。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kd">var</span> <span class="nx">_</span> <span class="p">=</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="两个不同类型的nil值可能不能相互比较">两个不同类型的nil值可能不能相互比较</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// error: 类型不匹配
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">_</span> <span class="p">=</span> <span class="p">(</span><span class="o">*</span><span class="kt">int</span><span class="p">)(</span><span class="kc">nil</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="o">*</span><span class="kt">bool</span><span class="p">)(</span><span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// error: 类型不匹配
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">_</span> <span class="p">=</span> <span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">)(</span><span class="kc">nil</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="kd">chan</span> <span class="kt">bool</span><span class="p">)(</span><span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">IntPtr</span> <span class="o">*</span><span class="kt">int</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 类型IntPtr的底层类型为*int。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">_</span> <span class="p">=</span> <span class="nf">IntPtr</span><span class="p">(</span><span class="kc">nil</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="o">*</span><span class="kt">int</span><span class="p">)(</span><span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 任何类型都实现了interface{}类型。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">_</span> <span class="p">=</span> <span class="p">(</span><span class="kd">interface</span><span class="p">{})(</span><span class="kc">nil</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="o">*</span><span class="kt">int</span><span class="p">)(</span><span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 一个双向通道可以隐式转换为和它的
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 元素类型一样的单项通道类型。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">_</span> <span class="p">=</span> <span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">)(</span><span class="kc">nil</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="kd">chan</span><span class="o">&lt;-</span> <span class="kt">int</span><span class="p">)(</span><span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">_</span> <span class="p">=</span> <span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">)(</span><span class="kc">nil</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="o">&lt;-</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">)(</span><span class="kc">nil</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="同一个类型的两个nil值可能不能相互比较">同一个类型的两个nil值可能不能相互比较</h3>
+<p>在Go中，map、slice和func类型是不支持比较类型。比较同一个不支持比较的类型的两个值（包括nil值）是非法的。 比如，下面的几个比较都编译不通过。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">_</span> <span class="p">=</span> <span class="p">([]</span><span class="kt">int</span><span class="p">)(</span><span class="kc">nil</span><span class="p">)</span> <span class="o">==</span> <span class="p">([]</span><span class="kt">int</span><span class="p">)(</span><span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">_</span> <span class="p">=</span> <span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">)(</span><span class="kc">nil</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">)(</span><span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">_</span> <span class="p">=</span> <span class="p">(</span><span class="kd">func</span><span class="p">())(</span><span class="kc">nil</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="kd">func</span><span class="p">())(</span><span class="kc">nil</span><span class="p">)</span>
+</span></span></code></pre></div><p>但是，映射类型、切片类型和函数类型的任何值都可以和类型不确定的裸nil标识符比较。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">_</span> <span class="p">=</span> <span class="p">([]</span><span class="kt">int</span><span class="p">)(</span><span class="kc">nil</span><span class="p">)</span> <span class="o">==</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">_</span> <span class="p">=</span> <span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">)(</span><span class="kc">nil</span><span class="p">)</span> <span class="o">==</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">_</span> <span class="p">=</span> <span class="p">(</span><span class="kd">func</span><span class="p">())(</span><span class="kc">nil</span><span class="p">)</span> <span class="o">==</span> <span class="kc">nil</span>
+</span></span></code></pre></div><h3 id="nilnil">nil!=nil</h3>
 <ul>
 <li>nil 在 Go语言中只能被赋值给指针和接口。</li>
 <li>但是接口在底层的实现有两个部分：
@@ -420,7 +475,25 @@ if (!doNotTrack) {
 <li>在源码中，显式地将 nil 赋值给接口时，接口的 type 和 data 都将为 nil。此时，接口与 nil 值判断是相等的</li>
 <li>但如果将一个带有类型的 nil 赋值给接口时，只有 data 为 nil，而 type 为 nil，此时，接口与 nil 判断将不相等。</li>
 </ul>
-<h2 id="参考文档">参考文档</h2>
+<h3 id="解决方式">解决方式</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// IsNil 判断指针,Slice,Map类型的值是否为空
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">IsNil</span><span class="p">(</span><span class="nx">i</span> <span class="kd">interface</span><span class="p">{})</span> <span class="kt">bool</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 首先判断i是否为nil
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="nx">i</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 判断值是否为nil
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">vi</span> <span class="o">:=</span> <span class="nx">reflect</span><span class="p">.</span><span class="nf">ValueOf</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">vi</span><span class="p">.</span><span class="nf">Kind</span><span class="p">()</span> <span class="o">==</span> <span class="nx">reflect</span><span class="p">.</span><span class="nx">Ptr</span> <span class="o">||</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">vi</span><span class="p">.</span><span class="nf">Kind</span><span class="p">()</span> <span class="o">==</span> <span class="nx">reflect</span><span class="p">.</span><span class="nx">Slice</span> <span class="o">||</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">vi</span><span class="p">.</span><span class="nf">Kind</span><span class="p">()</span> <span class="o">==</span> <span class="nx">reflect</span><span class="p">.</span><span class="nx">Map</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">vi</span><span class="p">.</span><span class="nf">IsNil</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="参考文档">参考文档</h2>
 <ul>
 <li><a class="link" href="https://learnku.com/go/t/46496"  target="_blank" rel="noopener"
     >https://learnku.com/go/t/46496</a> 原文作者：Summer</li>
@@ -671,7 +744,11 @@ if (!doNotTrack) {
       <ul>
         <li><a href="#可为空的指针函数和接口类型会引起-panic">可为空的指针、函数和接口类型会引起 panic</a></li>
         <li><a href="#nil-channel-永远阻塞">nil-channel 永远阻塞</a></li>
+        <li><a href="#nil预声明标识符nil没有默认类型">nil预声明标识符nil没有默认类型</a></li>
+        <li><a href="#两个不同类型的nil值可能不能相互比较">两个不同类型的nil值可能不能相互比较</a></li>
+        <li><a href="#同一个类型的两个nil值可能不能相互比较">同一个类型的两个nil值可能不能相互比较</a></li>
         <li><a href="#nilnil">nil!=nil</a></li>
+        <li><a href="#解决方式">解决方式</a></li>
       </ul>
     </li>
     <li><a href="#参考文档">参考文档</a></li>
