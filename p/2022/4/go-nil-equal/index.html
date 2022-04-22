@@ -4,11 +4,11 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='背景 最近在开发过程中遇到了一个奇怪的现象，对传入参数interface{}的做nil判断的时候，发现有些情况不符合预期，
 示例代码 可以猜测一下下方代码执行后的打印结果
 func TestIsNilEqual(t *testing.T) { PatchConvey(&amp;#34;test&amp;#34;, t, func() { var isNil = func(v interface{}) bool { return v == nil } PatchConvey(&amp;#34;test map&amp;#34;, func() { var testMap map[string]interface{} test1 := isNil(map[string]interface{}{}) test2 := isNil(testMap) test3 := testMap == nil test4 := isNil(nil) t.Logf(&amp;#34;result 1: %v&amp;#34;, test1) t.Logf(&amp;#34;result 2: %v&amp;#34;, test2) t.Logf(&amp;#34;result 3: %v&amp;#34;, test3) t.Logf(&amp;#34;result 4: %v&amp;#34;, test4) }) }) } 原因解析 非空和空类型 在 go 中类型可以是空或非空
- 非空类型永远不能为 nil，并且永远不会导致nil-panic(等效于 Java 的 NullPointerException) 处理空类型时，我们仍须谨慎一点，可能会导致nil-panic  非空基本类型 在 go 中，基本类型不可为空。像这样的声明，都会有默认0值'><title>Go中经典nil!=nil</title>
+ 非空类型永远不能为 nil，并且永远不会导致nil-panic(等效于 Java 的 NullPointerException) 处理空类型时，我们仍须谨慎一点，可能会导致nil-panic  非空基本类型 在 go 中，基本类型不可为空。像这样的声明，都会有默认0值'><title>Go中经典nil!=nil问题</title>
 
 <link rel='canonical' href='https://lllovol.com/p/2022/4/go-nil-equal/'>
 
-<link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='Go中经典nil!=nil'>
+<link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='Go中经典nil!=nil问题'>
 <meta property='og:description' content='背景 最近在开发过程中遇到了一个奇怪的现象，对传入参数interface{}的做nil判断的时候，发现有些情况不符合预期，
 示例代码 可以猜测一下下方代码执行后的打印结果
 func TestIsNilEqual(t *testing.T) { PatchConvey(&amp;#34;test&amp;#34;, t, func() { var isNil = func(v interface{}) bool { return v == nil } PatchConvey(&amp;#34;test map&amp;#34;, func() { var testMap map[string]interface{} test1 := isNil(map[string]interface{}{}) test2 := isNil(testMap) test3 := testMap == nil test4 := isNil(nil) t.Logf(&amp;#34;result 1: %v&amp;#34;, test1) t.Logf(&amp;#34;result 2: %v&amp;#34;, test2) t.Logf(&amp;#34;result 3: %v&amp;#34;, test3) t.Logf(&amp;#34;result 4: %v&amp;#34;, test4) }) }) } 原因解析 非空和空类型 在 go 中类型可以是空或非空
@@ -16,7 +16,7 @@ func TestIsNilEqual(t *testing.T) { PatchConvey(&amp;#34;test&amp;#34;, t, func(
 <meta property='og:url' content='https://lllovol.com/p/2022/4/go-nil-equal/'>
 <meta property='og:site_name' content='lllovol'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Go' /><meta property='article:published_time' content='2022-04-21T22:02:27&#43;08:00'/><meta property='article:modified_time' content='2022-04-21T22:02:27&#43;08:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/17.jpeg' />
-<meta name="twitter:title" content="Go中经典nil!=nil">
+<meta name="twitter:title" content="Go中经典nil!=nil问题">
 <meta name="twitter:description" content="背景 最近在开发过程中遇到了一个奇怪的现象，对传入参数interface{}的做nil判断的时候，发现有些情况不符合预期，
 示例代码 可以猜测一下下方代码执行后的打印结果
 func TestIsNilEqual(t *testing.T) { PatchConvey(&amp;#34;test&amp;#34;, t, func() { var isNil = func(v interface{}) bool { return v == nil } PatchConvey(&amp;#34;test map&amp;#34;, func() { var testMap map[string]interface{} test1 := isNil(map[string]interface{}{}) test2 := isNil(testMap) test3 := testMap == nil test4 := isNil(nil) t.Logf(&amp;#34;result 1: %v&amp;#34;, test1) t.Logf(&amp;#34;result 2: %v&amp;#34;, test2) t.Logf(&amp;#34;result 3: %v&amp;#34;, test3) t.Logf(&amp;#34;result 4: %v&amp;#34;, test4) }) }) } 原因解析 非空和空类型 在 go 中类型可以是空或非空
@@ -236,7 +236,7 @@ if (!doNotTrack) {
         <div class="article-image">
             <a href="/p/2022/4/go-nil-equal/">
                 
-                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/17.jpeg" loading="lazy" alt="Featured image of post Go中经典nil!=nil" />
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/17.jpeg" loading="lazy" alt="Featured image of post Go中经典nil!=nil问题" />
                 
             </a>
         </div>
@@ -255,7 +255,7 @@ if (!doNotTrack) {
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/2022/4/go-nil-equal/">Go中经典nil!=nil</a>
+            <a href="/p/2022/4/go-nil-equal/">Go中经典nil!=nil问题</a>
         </h2>
     
         
@@ -303,9 +303,9 @@ if (!doNotTrack) {
     <section class="article-content">
     
     
-    <h1 id="背景">背景</h1>
+    <h2 id="背景">背景</h2>
 <p>最近在开发过程中遇到了一个奇怪的现象，对传入参数interface{}的做nil判断的时候，发现有些情况不符合预期，</p>
-<h1 id="示例代码">示例代码</h1>
+<h2 id="示例代码">示例代码</h2>
 <p>可以猜测一下下方代码执行后的打印结果</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">TestIsNilEqual</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="nf">PatchConvey</span><span class="p">(</span><span class="s">&#34;test&#34;</span><span class="p">,</span> <span class="nx">t</span><span class="p">,</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
@@ -327,14 +327,14 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">		<span class="p">})</span>
 </span></span><span class="line"><span class="cl">	<span class="p">})</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><h1 id="原因解析">原因解析</h1>
-<h2 id="非空和空类型">非空和空类型</h2>
+</span></span></code></pre></div><h2 id="原因解析">原因解析</h2>
+<h3 id="非空和空类型">非空和空类型</h3>
 <p>在 go 中类型可以是空或非空</p>
 <ul>
 <li>非空类型永远不能为 nil，并且永远不会导致nil-panic(等效于 Java 的 NullPointerException)</li>
 <li>处理空类型时，我们仍须谨慎一点，可能会导致nil-panic</li>
 </ul>
-<h2 id="非空基本类型">非空基本类型</h2>
+<h3 id="非空基本类型">非空基本类型</h3>
 <p>在 go 中，基本类型不可为空。像这样的声明，都会有默认0值</p>
 <div class="table-wrapper"><table>
 <thead>
@@ -386,9 +386,9 @@ if (!doNotTrack) {
 </tr>
 </tbody>
 </table></div>
-<h2 id="non-nillable-structs-非空结构体">Non-nillable structs 非空结构体</h2>
+<h3 id="non-nillable-structs-非空结构体">Non-nillable structs 非空结构体</h3>
 <p>组合的 <code>struct</code> 类型也是不可空的，并且 struct 的默认值将包含其所有字段的默认值</p>
-<h1 id="nillable-可为空类型">Nillable 可为空类型</h1>
+<h2 id="nillable-可为空类型">Nillable 可为空类型</h2>
 <p>还有一种更高级到 <code>nillable</code> 类型，如果对应的类型未初始化，将会报错，触发 panic</p>
 <p>这些可以为 nillabe 类型:</p>
 <ul>
@@ -402,9 +402,13 @@ if (!doNotTrack) {
 <p>但是，nil-slice 和 nil-maps 仍然可以使用，在我们开始使用它们之前不必进行初始化。</p>
 <ul>
 <li>nil-maps 可以取值，但是不能赋值</li>
-<li></li>
+<li>nil-slices 在外部引用切片将导致死机，但是<code>len()</code>和<code>cap()</code>的操作不会导致死机出现。他们只返回<code>0</code>, 因为对于未初始化的切片，其容量和长度都为零，所以可以在 nil-slice 上成功调用 append</li>
 </ul>
-<h2 id="nilnil">nil!=nil</h2>
+<h3 id="可为空的指针函数和接口类型会引起-panic">可为空的指针、函数和接口类型会引起 panic</h3>
+<p>每当处理这些类型时，我们都必须考虑它们是否为零</p>
+<h3 id="nil-channel-永远阻塞">nil-channel 永远阻塞</h3>
+<p>尝试从 nil 通道读取或写入 nil 通道将永远受阻。关闭 nil 通道会引起 Panic</p>
+<h3 id="nilnil">nil!=nil</h3>
 <ul>
 <li>nil 在 Go语言中只能被赋值给指针和接口。</li>
 <li>但是接口在底层的实现有两个部分：
@@ -416,7 +420,7 @@ if (!doNotTrack) {
 <li>在源码中，显式地将 nil 赋值给接口时，接口的 type 和 data 都将为 nil。此时，接口与 nil 值判断是相等的</li>
 <li>但如果将一个带有类型的 nil 赋值给接口时，只有 data 为 nil，而 type 为 nil，此时，接口与 nil 判断将不相等。</li>
 </ul>
-<h1 id="参考文档">参考文档</h1>
+<h2 id="参考文档">参考文档</h2>
 <ul>
 <li><a class="link" href="https://learnku.com/go/t/46496"  target="_blank" rel="noopener"
     >https://learnku.com/go/t/46496</a> 原文作者：Summer</li>
@@ -654,13 +658,23 @@ if (!doNotTrack) {
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ul>
-    <li><a href="#非空和空类型">非空和空类型</a></li>
-    <li><a href="#非空基本类型">非空基本类型</a></li>
-    <li><a href="#non-nillable-structs-非空结构体">Non-nillable structs 非空结构体</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#nilnil">nil!=nil</a></li>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#示例代码">示例代码</a></li>
+    <li><a href="#原因解析">原因解析</a>
+      <ul>
+        <li><a href="#非空和空类型">非空和空类型</a></li>
+        <li><a href="#非空基本类型">非空基本类型</a></li>
+        <li><a href="#non-nillable-structs-非空结构体">Non-nillable structs 非空结构体</a></li>
+      </ul>
+    </li>
+    <li><a href="#nillable-可为空类型">Nillable 可为空类型</a>
+      <ul>
+        <li><a href="#可为空的指针函数和接口类型会引起-panic">可为空的指针、函数和接口类型会引起 panic</a></li>
+        <li><a href="#nil-channel-永远阻塞">nil-channel 永远阻塞</a></li>
+        <li><a href="#nilnil">nil!=nil</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考文档">参考文档</a></li>
   </ul>
 </nav>
         </div>
