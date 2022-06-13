@@ -1,1229 +1,291 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-        <title>Note on lllovol</title>
-        <link>https://lllovol.com/tags/note/</link>
-        <description>Recent content in Note on lllovol</description>
-        <generator>Hugo -- gohugo.io</generator>
-        <language>en-us</language>
-        <lastBuildDate>Mon, 07 Feb 2022 20:17:32 +0800</lastBuildDate><atom:link href="https://lllovol.com/tags/note/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>《重构》-代码的坏味道</title>
-        <link>https://lllovol.com/p/2022/2/refactoring-chapter3/</link>
-        <pubDate>Mon, 07 Feb 2022 20:17:32 +0800</pubDate>
-        
-        <guid>https://lllovol.com/p/2022/2/refactoring-chapter3/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/2.jpeg" alt="Featured image of post 《重构》-代码的坏味道" /&gt;&lt;h1 id=&#34;神秘命名&#34;&gt;神秘命名&lt;/h1&gt;
-&lt;p&gt;整洁代码最重要的一环就是好的名字，所以我们会深思熟虑如何给函数、模块、变量和类命名，使他们能清晰表面自己的功能和用法。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;需要考虑取一个好的名字&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;重复代码&#34;&gt;重复代码&lt;/h1&gt;
-&lt;p&gt;如果你在一个以上的地点看到相同的代码结构，那么可以肯定：设法将它们合而为一，程序会变得更好。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;抽取重复代码，使之能够复用&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;过长函数&#34;&gt;过长函数&lt;/h1&gt;
-&lt;p&gt;据我们的经验，活得最长、最好的程序，其中的函数都比较短。&lt;/p&gt;
-&lt;p&gt;短的函数具有更好的阐释力、更易于分享、更多的选择。&lt;/p&gt;
-&lt;p&gt;函数越长，就越难理解。&lt;/p&gt;
-&lt;p&gt;每当感觉需要以注释来说明点什么的时候，我们就把需要说明的东西写进一个独立函数中，并以其用途（而非实现手法）命名。&lt;/p&gt;
-&lt;p&gt;条件表达式和循环常常也是提炼的信号。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;可以考虑使用横屏显示器进行开发，这样潜意识里就不会把一个函数写的过长&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;过长的参数列表&#34;&gt;过长的参数列表&lt;/h1&gt;
-&lt;p&gt;过长的参数列表本身也经常令人迷惑。&lt;/p&gt;
-&lt;p&gt;如果可以向某个参数发起查询而获得另一个参数的值，那么就可以使用以查询取代参数去掉第二个参数。&lt;/p&gt;
-&lt;p&gt;使用类可以有效地缩短参数列表。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Go中可以使用struct的方式，来传入较多的参数&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;全局数据&#34;&gt;全局数据&lt;/h1&gt;
-&lt;p&gt;全局数据是最刺鼻的坏味道之一。&lt;/p&gt;
-&lt;p&gt;一次又一次，全局数据造成了哪些诡异的bug，而问题的根源却在遥远的别处，想要找到出错的代码难于登天。&lt;/p&gt;
-&lt;p&gt;良药与毒药的却别在于剂量。有少量的全局数据或许无妨，但数量越多，处理的难度就会指数上升。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;尽量少使用全局变量&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;可变数据&#34;&gt;可变数据&lt;/h1&gt;
-&lt;p&gt;对数据的修改经常导致出乎意料的结果和难以发现的bug。&lt;/p&gt;
-&lt;p&gt;如果可变数据的值能在其他地方计算出来，这就是一个特别刺鼻的坏味道。&lt;/p&gt;
-&lt;h1 id=&#34;发散式变化&#34;&gt;发散式变化&lt;/h1&gt;
-&lt;p&gt;一旦需要修改，我们希望能够跳到系统的某一点进行修改，只在此处进行修改。如果不能做到这一点，你就能嗅出两种紧密相关的刺鼻味道中的一种了。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;一个类受多种变化的影响&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;散弹式修改&#34;&gt;散弹式修改&lt;/h1&gt;
-&lt;p&gt;如果遇到某种变化，你都必须在许多不同的类内做出许多小修改，你所面临的坏味道就是散弹式修改。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;一种变化引发多个类对应改动&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;依恋情结&#34;&gt;依恋情结&lt;/h1&gt;
-&lt;p&gt;所谓模块化，就是力求将代码分出区域，最大化区域内部的交互、最小化跨区域的交互。&lt;/p&gt;
-&lt;p&gt;如果一个函数跟另一个模块的函数或者数据交流格外频繁，远胜于在自己所处模块内的交流，这就是依恋情结的典型情况。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;函数对某个类的兴趣高过对自己所处类的兴趣&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;数据泥团&#34;&gt;数据泥团&lt;/h1&gt;
-&lt;p&gt;你常常可以在很多地方看到相同的三四项数据：两个类中相同的字段、许多函数签名中相同的参数。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;两个类中同样的字段、很多函数签名中同样的參数&lt;/li&gt;
-&lt;li&gt;这种情况汪汪和历史遗留问题相关&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;基本类型偏执&#34;&gt;基本类型偏执&lt;/h1&gt;
-&lt;p&gt;大多数编程环境都大量使用基本类型，即整数、浮点数和字符串等。&lt;/p&gt;
-&lt;p&gt;一个有趣的现象：很多程序员不愿意创建对自己的问题域有用的基本类型。&lt;/p&gt;
-&lt;p&gt;字符串是这种坏味道的最佳培养皿，比如，电话号码不只是一串字符。&lt;/p&gt;
-&lt;h1 id=&#34;重复的switch&#34;&gt;重复的switch&lt;/h1&gt;
-&lt;p&gt;我们现在更关注重复的switch：在不同的地方反复使用同样的switch逻辑（可能是以switch/case语句的形式，也可能是以连续的if/else语句的形式）。应该以多态取代条件表达式消除掉。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;例如可以使用策略模式等方式&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;循环语句&#34;&gt;循环语句&lt;/h1&gt;
-&lt;p&gt;函数作为一等公民以及得到广泛的支持，因此我们可以使用以管道取代循环来让这些老古董退休。&lt;/p&gt;
-&lt;p&gt;管道操作（如 filter和map）可以帮助我们更快地看清被处理的元素以及他们的动作.&lt;/p&gt;
-&lt;h1 id=&#34;冗赘的元素&#34;&gt;冗赘的元素&lt;/h1&gt;
-&lt;p&gt;程序元素（如类和函数）能给代码增加结构，从而支持变化、促进复用或者哪怕只提供更好的名字也好，但有时我们真的不需要这层额外的结构。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;可能有这样一个函数，他的名字就跟实现代码看起来一模一样。&lt;/li&gt;
-&lt;li&gt;可能有这样一个类，根本就是一个简单的函数。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;夸夸其谈通用性&#34;&gt;夸夸其谈通用性&lt;/h1&gt;
-&lt;p&gt;如果函数或类的唯一用户是测试用例，这就飘出了这个坏味道。
-如果发现这样的函数或类，可以先删掉测试用例，然后移除死代码。&lt;/p&gt;
-&lt;h1 id=&#34;临时字段&#34;&gt;临时字段&lt;/h1&gt;
-&lt;p&gt;某个字段仅为某种特定情况而设。这样的代码让人不易理解，因为你通常认为对象在所有时候都需要它的所有字段。在字段未使用的情况下猜测当初设置它的目的，会让你发疯。&lt;/p&gt;
-&lt;h1 id=&#34;过长的消息链&#34;&gt;过长的消息链&lt;/h1&gt;
-&lt;p&gt;如果你看到用户向一个对象请求另一个对象，然后再向后者请求另一个对象，然后再请求另一个对象——这就是消息链。&lt;/p&gt;
-&lt;p&gt;在实际代码中你看到的可能是一长串取值函数或者一长串临时变量。&lt;/p&gt;
-&lt;h1 id=&#34;中间人&#34;&gt;中间人&lt;/h1&gt;
-&lt;p&gt;对象的基本特征之一就是封装——对外部世界隐藏其内部细节。&lt;/p&gt;
-&lt;p&gt;封装往往伴随着委托。&lt;/p&gt;
-&lt;p&gt;但是人们可能过度运用委托。你也许会看到某个类的接口有一半的函数都委托给其他类，这样就是过度运用。&lt;/p&gt;
-&lt;h1 id=&#34;内幕交易&#34;&gt;内幕交易&lt;/h1&gt;
-&lt;p&gt;如果两个模块总是窃窃私语，就应该用搬移函数和搬移字段减少它们的私下交流，把这种交易都放到明面上来。&lt;/p&gt;
-&lt;p&gt;如果两个模块有共同的兴趣，可以尝试再新建一个模块，把这些公用的数据放在一个管理良好的地方。&lt;/p&gt;
-&lt;h1 id=&#34;过大的类&#34;&gt;过大的类&lt;/h1&gt;
-&lt;p&gt;如果想利用单个类做太多事情，其内往往就会出现太多字段。一旦如此，重复代码也就接踵而至了。&lt;/p&gt;
-&lt;h1 id=&#34;异曲同工的类&#34;&gt;异曲同工的类&lt;/h1&gt;
-&lt;p&gt;使用类的好处之一在于可以替换：今天用这个类，未来可以换成另一个类。&lt;/p&gt;
-&lt;h1 id=&#34;纯数据类&#34;&gt;纯数据类&lt;/h1&gt;
-&lt;p&gt;所谓纯数据类是指：他们拥有一些字段，以及用于访问（读写）这些字段的函数，除此之外一无长物。&lt;/p&gt;
-&lt;p&gt;如果发生这种情况，你应该在别人注意到之前，立刻运用封装记录将他们封装起来。&lt;/p&gt;
-&lt;h1 id=&#34;被拒绝的遗赠&#34;&gt;被拒绝的遗赠&lt;/h1&gt;
-&lt;p&gt;子类应该继承超类的函数和数据。但如果他们不想或不需要继承，又该怎么办呢？他们得到所有礼物，却只从中挑选几样来玩！&lt;/p&gt;
-&lt;p&gt;这种情况就不要虚情假意地糊弄继承体系，应该运用委托取代子类或者委托取代超类彻底划清界限。&lt;/p&gt;
-&lt;h1 id=&#34;注释&#34;&gt;注释&lt;/h1&gt;
-&lt;p&gt;别担心，不是说你不该写注释。&lt;/p&gt;
-&lt;p&gt;有写注释存在是因为代码很糟糕，这种情况的发生次数之多，实在令人吃惊。&lt;/p&gt;
-&lt;p&gt;注释可以带我们找到本章先前提到的各种坏味道。&lt;/p&gt;
-&lt;p&gt;当你感觉需要撰写注释时，请先尝试重构，试着让所有注释都变得多余。
-如果你需要注释来解释一块代码做了什么，试试提炼函数。如果函数已经提炼出来，试试用改变函数声明为它改名，再或者引入断言。如果你实在不知道该做什么，这才是注释的良好运用时机。&lt;/p&gt;
-&lt;p&gt;除了用来记述将来的打算之外，注释还可以用来标记你并无十足把握的区域，比如你可以在注释里写下自己“为什么做某某事”。这类信息可以帮助将来的修改者，尤其是那些健忘的家伙。&lt;/p&gt;
-&lt;h1 id=&#34;其他&#34;&gt;其他&lt;/h1&gt;
-&lt;p&gt;本文笔记原链接：https://blog.csdn.net/u014779536/article/details/107309260
-其内容也主要出自《重构-改善既有代码的设计》&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>《重构》-重构的原则</title>
-        <link>https://lllovol.com/p/2021/12/refactoring-chapter2/</link>
-        <pubDate>Tue, 07 Dec 2021 21:05:58 +0800</pubDate>
-        
-        <guid>https://lllovol.com/p/2021/12/refactoring-chapter2/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/6.jpeg" alt="Featured image of post 《重构》-重构的原则" /&gt;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
-&lt;p&gt;本文是一篇关于Martin Fowler《重构：改善既有代码的设计》的第二章读书笔记与总结。&lt;/p&gt;
-&lt;h2 id=&#34;何谓重构&#34;&gt;何谓重构&lt;/h2&gt;
-&lt;p&gt;很多一线的实践者会非常随意的使用重构这个词，但是作者会非常严谨地使用重构。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;重构（名词）：对软件内部的结构的一种调整，目的是在不改变可观察行为的前提下，提高其可理解性，降低其修改成本&lt;/li&gt;
-&lt;li&gt;重构（动词）：使用一系列重构手法，在不改变可观察行为的前提下，调整其结构。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;重构的关键在于&lt;strong&gt;运用大量微且保持软件行为的步骤，一步步达成大规模的修改。&lt;/strong&gt;
-每个单独的重构呀么很小，要么由若干个小步骤组合而成。这样的好处是，即使重构没有完成，也可以在任何时刻停下来，代码很少进入到不可工作的状态。&lt;/p&gt;
-&lt;h3 id=&#34;重构与性能优化&#34;&gt;重构与性能优化&lt;/h3&gt;
-&lt;p&gt;二者有很多相似之处&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;都需要修改代码&lt;/li&gt;
-&lt;li&gt;都不会改变程序的整体功能&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;区别&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;重构是为了让代码更容易理解，更易于修改。这可能会让程序运行的更快，也可能运行的更慢。&lt;/li&gt;
-&lt;li&gt;性能优化时，只关心如何让代码程序运行得更快，最终得到的代码有可能更难理解和维护，对此需要有心理准备。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;两顶帽子&#34;&gt;两顶帽子&lt;/h2&gt;
-&lt;p&gt;Kent Beck提出了两顶帽子的比喻。使用重构技术进行软件开发是，可以把自己的时间分配给两种截然不同的行为：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;添加新功能：不应该修改既有的代码，只管添加新功能。同时需要添加测试并且让测试正常运行。&lt;/li&gt;
-&lt;li&gt;重构：不再添加新的功能，只调整代码的结构。此时不应该添加任何测试，只有在绝对必要的时候才修改测试。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;但是在实际的开发过程当中，我实际会经常变换帽子：当我开始添加新功能时候，突然意识到如果把程序结构修改一下，功能添加会容易很多。于是就换上了一顶重构帽子，开始了一会的重构工作。当程序结构调整好了之后，又戴上了原来的帽子。&lt;/p&gt;
-&lt;p&gt;总之，整个过程中，无论何时何地，都要清楚当前的自己戴的帽子究竟是哪一个，并且了解不同的帽子对编程状态提出的&lt;strong&gt;不同的要求&lt;/strong&gt;&lt;/p&gt;
-&lt;h2 id=&#34;为何重构&#34;&gt;为何重构&lt;/h2&gt;
-&lt;p&gt;重构绝对不是包治百病的灵丹妙药，更不是所谓的“银弹”，但是绝对算是一把银钳子，可以帮你始终良好的控制自己的代码。
-重构是一个工具，它能够用于以下几个目的：&lt;/p&gt;
-&lt;h3 id=&#34;重构改进软件的设计&#34;&gt;重构改进软件的设计&lt;/h3&gt;
-&lt;p&gt;如果没有重构，程序的内部设计（架构）会逐渐的腐败变质。当人们只为了短期目的而修改代码时，经常没有完全理解架构的整体设计，于是代码就逐渐失去了自己的结构。（屎山代码就是这么来的，但是没有办法避免）
-越难看出代码的设计意图，就越难保护其设计，腐败的也就越快。经常的重构有助于代码为支持自己该有的形态。
-同时，消除重复代码，就可以确定所有事物和行为在代码中只表述一次，这才是优秀设计的根本。&lt;/p&gt;
-&lt;h3 id=&#34;重构使软件更容易理解&#34;&gt;重构使软件更容易理解&lt;/h3&gt;
-&lt;p&gt;虽然代码是在计算机上运行的，编程的核心就是“准确的说出我想要的”，但是除了计算机之外，源码还有其他读者，几个月之后可能会有另外以为程序员尝试读懂我的代码并且进行一些修改。我们很容易就忘记了这个读者，“又不是不能用”，然后这个代码就这么写出来了。而后人可能会花费很多时间来理解和阅读我的代码。&lt;/p&gt;
-&lt;p&gt;因此，我们需要改变一下开发的节奏，让代码变得更加易于理解。重构可以让代码更加易读。&lt;/p&gt;
-&lt;p&gt;做一个懒惰的程序员，表现形式之一就是，总是记不住自己写过的代码。对于任何能够立刻查阅的东西，都可以故意不去记它，别把自己的脑袋塞爆了。尽量把需要记住的东西写在代码里。&lt;/p&gt;
-&lt;h3 id=&#34;重构帮助找到bug&#34;&gt;重构帮助找到bug&lt;/h3&gt;
-&lt;p&gt;重构的时候，能够更加深入的理解代码的所做所谓，并立即把新的理解反映在代码当中。在弄清楚程序结构的同时，必须要做一些假设去验证，因此想不把bug找出来都难。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Kent Beck：我不是一个特别好的程序员，我只是一个有一些特别好的习惯的还不错的程序员&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;重构提高编程速度&#34;&gt;重构提高编程速度&lt;/h3&gt;
-&lt;p&gt;最后，前面的一切都归结到了这一点: 重构能够帮助我们更快的开发程序。&lt;/p&gt;
-&lt;p&gt;这虽然有点违反直觉，因为重构本来就是一件耗费精力的事情。但是如果一个代码全靠补丁来不断的修复，最后就是补丁补补丁，需要考古学家才能弄清楚这个代码到底是怎么个回事。以至于最后，这个系统的负担会不断拖慢新增功能的速度，到最后程序员恨不得重头开始写整个系统。&lt;/p&gt;
-&lt;p&gt;如果代码很清晰，引入bug的可能性就会很小，即使引入的bug，调试和排查也会容易很多。理想情况下，我的代码库会逐渐严骅成为一个平台，在其上可以容易的构造与其领域相关的新功能。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;设计耐久性假说：通过投入精力改善内部设计，我们增加了软件的耐久性，从而可以更长时间的保持开发的快速。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;何时重构&#34;&gt;何时重构&lt;/h2&gt;
-&lt;p&gt;编程的每个小时，都应该去做重构。有几种方式可以把重构融入工作过程中。&lt;/p&gt;
-&lt;h3 id=&#34;三次法则&#34;&gt;三次法则&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;第一次做某件事的时候尽管去做&lt;/li&gt;
-&lt;li&gt;第二次做类似的事情会产生方案，但是无论如何还是可以去去做&lt;/li&gt;
-&lt;li&gt;第三次再做类似的事情，就应该去重构&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;预备性重构让添加新功能更容易&#34;&gt;预备性重构：让添加新功能更容易&lt;/h3&gt;
-&lt;p&gt;重构的最佳时机就是在添加新功能之前&lt;/p&gt;
-&lt;h3 id=&#34;帮助理解的重构使代码更易懂&#34;&gt;帮助理解的重构：使代码更易懂&lt;/h3&gt;
-&lt;p&gt;需要理解代码做什么才能着手修改&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;比如看到一段迷惑的代码，自问，能不能重构它，让它看起来一目了然？&lt;/li&gt;
-&lt;li&gt;看到结果糟糕的条件判断，想修改，发现函数命名太糟糕了？
-等等，都是重构的机会。哪怕只是修改函数的命名这类重构，只要能够更加清楚的表达出一图，都会是非常有意义的。这些初步的重构，就像是扫去窗上的灰尘，能够让我们看到窗外的风景。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;捡垃圾式重构&#34;&gt;捡垃圾式重构&lt;/h3&gt;
-&lt;p&gt;可以把要重构的点记下来，把更紧急的事情处理之后，抽空来处理这些垃圾。积少成多&lt;/p&gt;
-&lt;h3 id=&#34;有计划的重构和见机行事的重构&#34;&gt;有计划的重构和见机行事的重构&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;肮脏的代码必须重构，但是漂亮的代码也需要很多重构（需求和情况是会不断改变的）&lt;/li&gt;
-&lt;li&gt;每一次修改的时候，首先要令修改很容易（这件事有时候会很难），然后再进行这次容易的修改&lt;/li&gt;
-&lt;li&gt;软件永远都不应该被视为“完成”&lt;/li&gt;
-&lt;li&gt;重构常常和新功能紧密交织，不值得花功夫将它们分开。并且这样做也使得重构脱离上下文（除非真的有必要，感觉到真有的有益时，才值得这样做）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;长期重构&#34;&gt;长期重构&lt;/h3&gt;
-&lt;p&gt;重构可能会花费几分钟、几个小时、几个周、几个月，但是哪怕是大型的重构项目，也不愿意让一个团队专门来做重构。可以让团队达成共识，可以逐步解决这个问题。
-小改动的好处是，不会破坏代码。例如想要换掉一个正在使用的库，可以引入一层新的抽象，兼容新旧两个库的接口，直到调用方已经完全改用了这层抽象。&lt;/p&gt;
-&lt;h3 id=&#34;复审代码时重构&#34;&gt;复审代码时重构&lt;/h3&gt;
-&lt;p&gt;重构可以帮助我复审别人的代码，同时还能帮助cr工作得到更加具体的结果。最好的情况，就是两个人肩并肩，一起cr，一起重构，这也就是所谓的结对编程了&lt;/p&gt;
-&lt;h3 id=&#34;怎么对经理说客户&#34;&gt;怎么对经理说？（客户）&lt;/h3&gt;
-&lt;p&gt;重构的时候不要告诉经理（客户），他们是进度驱动的，而我们发现重构就是完成工作最快的方式，那么就做。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;我认为最快的方式就是重构，所以我就重构&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;何时不应该重构&#34;&gt;何时不应该重构&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;如果丑陋的代码能够隐藏在一个api之下，不影响我使用，那就可以忍受它继续保持丑陋。只有需要了解其工作原理时，重构才有价值&lt;/li&gt;
-&lt;li&gt;重写比重构还容易的时候，就别重构了，直接重写。不过如何判断，就需要丰富的经验了&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;重构的挑战&#34;&gt;重构的挑战&lt;/h2&gt;
-&lt;h3 id=&#34;延缓新功能开发&#34;&gt;延缓新功能开发&lt;/h3&gt;
-&lt;p&gt;重构的唯一目的是我们开发的更快，用更少的工作量创造更大的价值。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;如果一个小功能，可以先上小功能，再做大规模的重构。这需要程序员专业的判断能力，无法量化决定的依据。&lt;/li&gt;
-&lt;li&gt;重构应该总是以收益来驱动。而不是掉进“整洁的代码”“良好的工程实践”这类道德理由的陷阱里。纯粹考虑经济利益。都是上班，为何不用一些工作效率更高的方式来完成工作呢？&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;代码所有权&#34;&gt;代码所有权&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;不建议搞细粒度的强代码所有制&lt;/li&gt;
-&lt;li&gt;鼓励开源的模型（比如一些开源协议）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;分支&#34;&gt;分支&lt;/h3&gt;
-&lt;p&gt;分支的合并是一个复杂的问题，随着特性分支的存在的时间加长，合并的难度会指数上升。减少特性分支的生命周期。
-使用的方法就是CI（Continuous Integration）,也叫作“基于主干开发”。在使用CI时，每个团队成员每天至少向主干分支集成一次。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;避免了任何分支之间差异太大&lt;/li&gt;
-&lt;li&gt;降低了合并的难度&lt;/li&gt;
-&lt;li&gt;必须保证主干的健康&lt;/li&gt;
-&lt;li&gt;学会将大功能拆小，将未完成又无法拆小的功能隐藏掉&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;测试&#34;&gt;测试&lt;/h3&gt;
-&lt;p&gt;想要重构，就必须要有可以自测试的代码（单元测试的重要性）自测试代码和继承测试紧密相关。我们依赖持续继承来及时捕获分支继承时的语义冲突。测试也是持续交付的关键环节&lt;/p&gt;
-&lt;h3 id=&#34;遗留代码&#34;&gt;遗留代码&lt;/h3&gt;
-&lt;p&gt;对于别人写的代码，留下来的遗产，没有测试我们就加测试，听起来简单，做起来可不容易。再有了充分的测试之后再进行重构。
-这很难，但是于是频繁使用的代码，改善其可理解性的努力就能获得更丰厚的回报。&lt;/p&gt;
-&lt;h3 id=&#34;数据库&#34;&gt;数据库&lt;/h3&gt;
-&lt;p&gt;将代码和数据库的变更，通过脚本代码的方式来进行同步。和常规的重构不同，数据库重构最好是分散到多次生产发布来完成，这样即使出现问题，也比较容易回滚。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;同时写入新旧两个字段，然后再把读的地方逐个换成新的字段，看有没有bug，确定没有问题之后，在进行修改，删除无人使用的旧字段。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;重构架构和yagni&#34;&gt;重构、架构和YAGNI&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;在任何时候，代码开始写之前就应该完成软件的设计和架构，一旦代码写了出来，代码就开始腐败了&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;重构改变了这种观点，重构可以改善现有代码的设计。这种观点最大的问题，就是大多数时候，软件的需求都很难被预先充分理解。只有在真正使用的时候，人们才会知道自己真正想要的是什么（就像人生很多事情，在经历的时候，才会知道自己真正想要的是什么）
-应对未来变化的办法之一，就是在软件植入灵活性机制。在编写一个函数的时候就要思考，如何将这个代码变得更有通用性。如果一个灵活性会增加软件复杂度，就必须证明它值得被引入。&lt;/p&gt;
-&lt;p&gt;这种设计方法叫做简单设计、增量式设计或者YAGNI：You aren&amp;rsquo;t going to need it。 YAGNI并不是不做架构性思考的意思，而是应该融为一体，将重构作为基础。&lt;/p&gt;
-&lt;h2 id=&#34;重构和软件开发过程&#34;&gt;重构和软件开发过程&lt;/h2&gt;
-&lt;p&gt;大部分的敏捷项目都只是徒有其名，真正的敏捷方式的运作，团队成员必须要在重构上有能力、有激情，采用的开发过程必须与常规的、持续的重构相匹配。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;自测试代码&lt;/li&gt;
-&lt;li&gt;持续继承&lt;/li&gt;
-&lt;li&gt;重构
-有了这些核心实践打下的基础，才能让项目始终处于可发布的状态，做到一天多次发布，同时还增加了软件的可靠性、减少耗费在bug上的时间&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;重构和性能&#34;&gt;重构和性能&lt;/h2&gt;
-&lt;p&gt;并不赞同为了提高设计的纯洁性而忽视性能。我们应该先写出可调优的软件，然后调优它以获得足够的速度。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;时间预算法：用于性能要求极高的实时系统，在设计师就做好预算，给每个组件做好预算，分配好资源&lt;/li&gt;
-&lt;li&gt;持续关注法：要求程序员在任何时间做任何事情，都要设法保持系统的高性能。但是通常不会有太大的作用。通常任何修改如果只是为了提高性能，通常会使得程序难以维护。&lt;/li&gt;
-&lt;li&gt;统计优化法：使用工具去监控程序，看看90%的资源和时间都被什么地方的代码消耗了，着重优化那些地方，找出性能热点。这样，较少的工作量也能有不错的成果。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;重构起源于何处&#34;&gt;重构起源于何处&lt;/h2&gt;
-&lt;p&gt;作者找了找，但是没找到。优秀的程序员肯定会花时间来清理自己的代码。整洁的代码肯定比杂乱无章的代码容易修改，而且他们知道，几乎是无法一开始就写出整洁的代码的。
-重构对于提高生产力非常重要。
-巴拉巴拉，是作者的一些经历和对重构这个概念和技术的推广，然后逐渐被行业广泛接收。（也有负面的效果，Java世界里，重构被滥用，其实只是不严谨的结构调整）&lt;/p&gt;
-&lt;h2 id=&#34;自动化重构&#34;&gt;自动化重构&lt;/h2&gt;
-&lt;p&gt;主要靠着IDE实现。比如JetBrains的Intelli IDEA。后面IBM还出了VisualAge，然后是Eclipse等等。现在，只要是正常主流的工具或者编译器，都支持重构。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;文本操作，查找替换&lt;/li&gt;
-&lt;li&gt;提取变量&lt;/li&gt;
-&lt;li&gt;代码导航&lt;/li&gt;
-&lt;li&gt;静态检查&lt;/li&gt;
-&lt;li&gt;理解、修改、处理语法树
-这背后的实现，应该是很有挑战的事情，修改和重构之后，还需将结果写回编辑器视图等等。尽管现在的工具已经很强大了，但是也不能掉以轻心，因为某些情况，比如反射等等，编译器并不能很好的处理，依然需要我们强大的测试来保证重构。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;延展阅读&#34;&gt;延展阅读&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Josh Kerievsky《重构与模式》&lt;/li&gt;
-&lt;li&gt;Ambler &amp;amp; Sadalage《数据库重构》&lt;/li&gt;
-&lt;li&gt;Harold《重构HTML》&lt;/li&gt;
-&lt;li&gt;Michael Feather 《修改代码的艺术》&lt;/li&gt;
-&lt;li&gt;Jay Fields &amp;amp; Shane Harvey 写了关于Ruby的《重构》&lt;/li&gt;
-&lt;li&gt;关于本书&lt;a class=&#34;link&#34; href=&#34;http://refactoring.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;refactoring.com&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        </item>
-        <item>
-        <title>正念</title>
-        <link>https://lllovol.com/p/2021/10/mindfulness/</link>
-        <pubDate>Tue, 12 Oct 2021 17:05:49 +0800</pubDate>
-        
-        <guid>https://lllovol.com/p/2021/10/mindfulness/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/10.jpeg" alt="Featured image of post 正念" /&gt;&lt;p&gt;北大心理学教授的课笔记&lt;/p&gt;
-&lt;h2 id=&#34;概念澄清&#34;&gt;概念澄清&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;并非正确的观念、积极的信念&lt;/li&gt;
-&lt;li&gt;没有宗教色彩&lt;/li&gt;
-&lt;li&gt;是为了自身的心理健康&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;作用&#34;&gt;作用&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;降低焦虑与抑郁&lt;/li&gt;
-&lt;li&gt;缓解压力&lt;/li&gt;
-&lt;li&gt;内心更加平静，改善睡眠&lt;/li&gt;
-&lt;li&gt;提升专注度&lt;/li&gt;
-&lt;li&gt;降低血压（正念主要是让我们的心理压力缓解了，紧张的时候血压就是会升高，正常现象）&lt;/li&gt;
-&lt;li&gt;压力大，免疫力就会降低。压力小，免疫力就会提高&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;应用&#34;&gt;应用&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;精英运动员&lt;/li&gt;
-&lt;li&gt;警察&lt;/li&gt;
-&lt;li&gt;美军&lt;/li&gt;
-&lt;li&gt;领导者&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;练习要点&#34;&gt;练习要点&lt;/h2&gt;
-&lt;p&gt;觉察&amp;lt;==&amp;gt;接纳&lt;/p&gt;
-&lt;p&gt;接纳-&amp;gt;不去在乎那些细节
-更多的体会当下&lt;/p&gt;
-&lt;p&gt;可以让那些杂念存在，并不需要排除它&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>Goland全局替换正则技巧</title>
-        <link>https://lllovol.com/p/2021/10/goland-tips/</link>
-        <pubDate>Mon, 11 Oct 2021 11:33:32 +0800</pubDate>
-        
-        <guid>https://lllovol.com/p/2021/10/goland-tips/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/20.jpeg" alt="Featured image of post Goland全局替换正则技巧" /&gt;&lt;h1 id=&#34;使用goland的全局替换&#34;&gt;使用Goland的全局替换&lt;/h1&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;单文件
-使用&lt;code&gt;Command+R&lt;/code&gt;进行替换&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;多文件
-使用&lt;code&gt;Shift+Command+R&lt;/code&gt;进行替换&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h1 id=&#34;正则替换&#34;&gt;正则替换&lt;/h1&gt;
-&lt;p&gt;可以使用正则表达式进行替换
-例如，我们想为DoFunction这个方法添加一个ctx作为第一个参数&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;打开Regex的开关&lt;/li&gt;
-&lt;li&gt;搜索：&lt;code&gt;DoFunction((.*?)\)&lt;/code&gt;，其中 &lt;code&gt;(.*?)&lt;/code&gt; 表示正则 group，会取到这个函数的参数&lt;/li&gt;
-&lt;li&gt;替换：&lt;code&gt;DoFunction(ctx, $1)&lt;/code&gt;，其中 $1 表示上一步匹配到的第一个参数&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        </item>
-        <item>
-        <title>设计模式-Prototype原型模式</title>
-        <link>https://lllovol.com/p/2021/9/prototype/</link>
-        <pubDate>Thu, 23 Sep 2021 15:21:54 +0800</pubDate>
-        
-        <guid>https://lllovol.com/p/2021/9/prototype/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/5.jpeg" alt="Featured image of post 设计模式-Prototype原型模式" /&gt;&lt;h2 id=&#34;场景&#34;&gt;场景&lt;/h2&gt;
-&lt;p&gt;有一个object，想要生成与之完全相同的复制品，该如何是实现？
-问题：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;私有数据&lt;/li&gt;
-&lt;li&gt;不想包含具体的包&lt;/li&gt;
-&lt;li&gt;如果原始的对象只是一个接口，具体类都不知道，怎么处理呢？&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;方案&#34;&gt;方案&lt;/h2&gt;
-&lt;p&gt;将克隆过程，委派给被克隆的实际对象，由实际对象负责clone
-因此，只要实现了clone()方法的，就是原型模式&lt;/p&gt;
-&lt;h2 id=&#34;实现&#34;&gt;实现&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;原型（Prototype）接口对clone方法做一个申明，绝大部分情况下，里面只有一个名为clone的方法&lt;/li&gt;
-&lt;li&gt;具体原型（ConcretePrototype）类实现接口&lt;/li&gt;
-&lt;li&gt;客户端（Client）可以复制实现了原型接口的任何对象&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;应用&#34;&gt;应用&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;将自身作为构造函数的参数传入
-复制数组&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;如果需要复制一些对象，同时又希望代码独立于这些对象所属的具体类&lt;/li&gt;
-&lt;li&gt;如果子类的区别仅在于对象的初始化方式，那么可以使用该模式减少子类的数量，别人创建这些子类的目的可能只是为了创建特定的对象。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;优点&#34;&gt;优点&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;克隆时 无需与所属的具体类耦合&lt;/li&gt;
-&lt;li&gt;克隆原型 防止反复运行初始化&lt;/li&gt;
-&lt;li&gt;更方便的生成复杂对象&lt;/li&gt;
-&lt;li&gt;可以用继承以外的方式来处理复杂对象的不同配置&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;缺点&#34;&gt;缺点&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;克隆博涵循环引用的复杂对象可能会非常麻烦&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        </item>
-        <item>
-        <title>设计模式-Factory工厂模式学习笔记</title>
-        <link>https://lllovol.com/p/2021/9/design-pattern-factory/</link>
-        <pubDate>Thu, 09 Sep 2021 15:31:14 +0800</pubDate>
-        
-        <guid>https://lllovol.com/p/2021/9/design-pattern-factory/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/30.jpeg" alt="Featured image of post 设计模式-Factory工厂模式学习笔记" /&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://refactoringguru.cn/design-patterns/factory-method&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;工厂模式&lt;/a&gt;
-有点忙，先看看吧&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>设计模式-Singleton单例模式学习笔记</title>
-        <link>https://lllovol.com/p/2021/9/design-pattern-singleton/</link>
-        <pubDate>Thu, 02 Sep 2021 15:50:47 +0800</pubDate>
-        
-        <guid>https://lllovol.com/p/2021/9/design-pattern-singleton/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/27.jpeg" alt="Featured image of post 设计模式-Singleton单例模式学习笔记" /&gt;&lt;h2 id=&#34;概要&#34;&gt;概要&lt;/h2&gt;
-&lt;p&gt;保证一个类只有一个实例，保证一个进程中，某个类有且仅有一个实例&lt;/p&gt;
-&lt;h2 id=&#34;方案&#34;&gt;方案：&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;构造函数私有化&lt;/li&gt;
-&lt;li&gt;新建静态构造方法作为构造函数&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;饿汉式&#34;&gt;饿汉式&lt;/h2&gt;
-&lt;p&gt;类加载的时候，就实例化。&lt;/p&gt;
-&lt;h2 id=&#34;懒汉式&#34;&gt;懒汉式&lt;/h2&gt;
-&lt;p&gt;第一次使用的时候，再实例化。节省资源，但是需要注意线程安全问题&lt;/p&gt;
-&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
-&lt;h3 id=&#34;优点&#34;&gt;优点&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;只有一个实例，避免了重复的内存开销&lt;/li&gt;
-&lt;li&gt;避免对资源的重复占用&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;缺点&#34;&gt;缺点&lt;/h3&gt;
-&lt;p&gt;可以理解为一个全局变量，没有接口，不能继承。违背了SRP职责&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>Google SRE解密笔记(一)</title>
-        <link>https://lllovol.com/p/2021/8/google-sre/</link>
-        <pubDate>Tue, 24 Aug 2021 21:55:29 +0800</pubDate>
-        
-        <guid>https://lllovol.com/p/2021/8/google-sre/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/8.jpeg" alt="Featured image of post Google SRE解密笔记(一)" /&gt;&lt;h1 id=&#34;拥抱风险&#34;&gt;拥抱风险&lt;/h1&gt;
-&lt;p&gt;百分百可靠的服务，是不现实也是没有必要的。
-可靠性到达一定值之后，会带来成本的大幅度提升：过分要求稳定性会限制新产品的开发速度和交付速度。&lt;/p&gt;
-&lt;p&gt;用于对于高可靠性和极端可靠性的感知几乎是没有的。&lt;/p&gt;
-&lt;p&gt;基于这一点，SRE追求快速创新和高效的服务运营业务之间的风险的平衡，而不是简单的将服务在线时间最大化。&lt;/p&gt;
-&lt;p&gt;平衡系统的&lt;strong&gt;功能、服务和性能&lt;/strong&gt;&lt;/p&gt;
-&lt;h2 id=&#34;管理风险&#34;&gt;管理风险&lt;/h2&gt;
-</description>
-        </item>
-        <item>
-        <title>设计模式-Strategy策略模式学习笔记</title>
-        <link>https://lllovol.com/p/2021/8/strategy/</link>
-        <pubDate>Sun, 15 Aug 2021 02:12:03 +0800</pubDate>
-        
-        <guid>https://lllovol.com/p/2021/8/strategy/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/5.jpeg" alt="Featured image of post 设计模式-Strategy策略模式学习笔记" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
-&lt;p&gt;为什么我们需要设计模式呢？我们日常的设计应该对手头的问题有针对性，同时对将来的问题也要有足够的通用性，同时我们也需要避免重复设计或者尽可能的减少重复设计。但是想以一下子就得到复用性和灵活性好的设计，其实是相当困难的。
-而设计模式，就是将对面向对象软件的设计经验作为设计模式记录下来。&lt;/p&gt;
-&lt;h2 id=&#34;设计模式的四个基本要素&#34;&gt;设计模式的四个基本要素&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;模式名称&lt;/strong&gt; 一个助记的名称&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;问题&lt;/strong&gt; 描述了应该在什么时候使用设计模式&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;解决方案&lt;/strong&gt; 描述了设计的组成成分，它们之间的相互关系和各自的职责和协作方式&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;效果&lt;/strong&gt; 描述了模式应用的效果以及使用模式应该权衡的问题&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;设计模式的三大分类&#34;&gt;设计模式的三大分类&lt;/h2&gt;
-&lt;p&gt;我们主要通过两个准则对各种设计模式进行分类：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;目的准则&lt;/strong&gt; 这个模式是用来完成什么工作的&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;范围准则&lt;/strong&gt; 这个模式用于类还是用于对象的
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/screenshot-20210816-013825.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;设计模式分类&#34;
-	
-	
-&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;面向对象的六大原则&#34;&gt;面向对象的六大原则&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;单一功能原则&lt;/strong&gt; 一个类只做一件事情&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;开闭原则&lt;/strong&gt; 一个软件实体类，模块和函数应该对扩展开放，对修改关闭&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;里氏替换原则&lt;/strong&gt; 子类可以扩展父类的功能，但不能改变父类原有的功能&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;依赖倒置原则&lt;/strong&gt; 抽象不应该依赖细节，细节应该依赖于抽象，换一句话说，就是要针对接口编程，不要对实现编程&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;接口分离原则&lt;/strong&gt; 系统解开耦合，从而容易重构，更改和重新部署&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;迪米特原则&lt;/strong&gt; 一个类应该对自己需要耦合或者调用的类知道得最少，这有点类似于接口隔离原则中的最小接口的概念&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h1 id=&#34;strategy-策略模式&#34;&gt;Strategy 策略模式&lt;/h1&gt;
-&lt;h2 id=&#34;意图&#34;&gt;意图&lt;/h2&gt;
-&lt;p&gt;定义一系列的算法，把他们一个个封装起来，并且使他们可以互相替换。同时本模式可以使得算法可以独立于使用它的客户变化而变化&lt;/p&gt;
-&lt;h2 id=&#34;别名&#34;&gt;别名&lt;/h2&gt;
-&lt;p&gt;Policy 政策模式&lt;/p&gt;
-&lt;h2 id=&#34;动机&#34;&gt;动机&lt;/h2&gt;
-&lt;p&gt;当我们需要对一个正文流进行处理，需要使用许多不同的算法。这个时候，将这些算法那硬编码进使用它们的类当中是不可取的，原因如下：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;客户程序异常庞大同时难以维护&lt;/li&gt;
-&lt;li&gt;不同的时候需要不同的算法，我们不想支持我们并不使用的算法&lt;/li&gt;
-&lt;li&gt;当其中某些算法是客户程序难以分割的算法的时候，增加新的算法或者改变现有的算法将十分困难&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;适用性&#34;&gt;适用性&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;许多相关的类只是行为有不同&lt;/strong&gt; 可以使用多个行为中的一个行为来配置一个类&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;需要使用一个算法的不同变体&lt;/strong&gt; 可能会定义一些反映了不同时间、空间等因素权衡的算法，将这些变体实现为类层次&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;算法使用了客户不应该知道的数据&lt;/strong&gt; 避免暴露负责的、与算法相关的数据结构&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;一个类定义了多种行为&lt;/strong&gt;，并且这些行为在这个类的操作中以多个条件语句的形式出现。将相关的条件分支移入它们各自的Strategy类当中来代替这些条件语句&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;结构&#34;&gt;结构&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/UML%20%E5%9B%BE.jpg&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;图&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;h2 id=&#34;参与者&#34;&gt;参与者&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;Strategy&lt;/strong&gt;
-&lt;ol&gt;
-&lt;li&gt;定义所有支持的算法的公共接口。Context使用这个接口来调用某个ConcreteStrategy定义的算法&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;ConcreteStrategy&lt;/strong&gt;
-&lt;ol&gt;
-&lt;li&gt;以Strategy为策略是实现某具体的算法&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Context&lt;/strong&gt;
-&lt;ol&gt;
-&lt;li&gt;用一个ConcreteStrategy对象来配置&lt;/li&gt;
-&lt;li&gt;维护一个对Strategy对象的引用&lt;/li&gt;
-&lt;li&gt;可定义一个接口来让Strategy访问它的数据&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;协作&#34;&gt;协作&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;Strategy和Context相互作用以实现选定的算法
-&lt;ol&gt;
-&lt;li&gt;Context将算法所需要的数据传递给Strategy&lt;/li&gt;
-&lt;li&gt;Context也可以将自身作为一个参数传递给Strategy，Strategy就可以在需要的时候回调Context&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;Context将客户的请求转发给它的Strategy。通常创建并传递一个ConcreteStrategy对象给Context。客户只需要和Context交互。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;效果&#34;&gt;效果&lt;/h2&gt;
-&lt;h3 id=&#34;优点&#34;&gt;优点&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;相关算法系列&lt;/strong&gt; Strategy类层次为Context定义了一系列可供重用的算法或者行为。有助于析取出这些算法的公共功能&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;一个替代继承的方法&lt;/strong&gt; 可以使用继承生成Context的子类，给予它们不同的行为，但是这就会将行为硬编码到Context当中，将算法的实现和Context的实现混淆，使得Context难以理解、难以维护、难以扩展，还不能动态改变算法。将算法封装在独立的Strategy类中，使得我们可以独立于Context改变它，易于切换、易于理解、易于扩展&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;消除了一些条件语句&lt;/strong&gt; 将不同行为堆砌在一个类当中的时候，很难避免使用条件语句来选择合适的行为。将行为封装成一个个独立的Strategy类中可以消除这些条件语句（含有许多条件语句的代码通常意味着需要使用策略模式）&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;实现的选择&lt;/strong&gt; 可以为相同行为提供不同的实现，可以根据不同的时间、空间权衡取舍要求从不同的策略中进行选择&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;缺点&#34;&gt;缺点&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;客户必须要了解不同的Strategy&lt;/strong&gt; 本模式一个潜在的缺点，客户选择一个Strategy必须要知道这些Strategy有何不同，此时可能不得不向客户暴露实现。因此只有不同行为变体与客户相关的行为时，才需要使用Strategy&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Strategy和Context的通信开销&lt;/strong&gt; 无论具体的ConcreteStrategy是简单还是负责，都共享Strategy定义的接口。因此很可能某一些简单的ConcreteStrategy可能不会使用所有通过这个接口传递给他们的信息。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;增加了对象的数目&lt;/strong&gt; Strategy增加了一个应用中对象的数目。有时候可以将Strategy实现为可供各个Context共享的无状态对象来减少这一个开销。其余任何状态都由Context来维护&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;实现&#34;&gt;实现&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;定义Strategy接口和Context接口&lt;/strong&gt; 必须传递所有实现需要的数据，也可以将Context自身作为参数进行传递&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;将Strategy作为模板参数&lt;/strong&gt; （Go里没有，这就不展开了）&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;让Strategy对象成为可选的&lt;/strong&gt; 访问前先判断是否存在，如果存在，就使用它；如果没有，就执行缺省的行为&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;代码示例&#34;&gt;代码示例&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;回调事件处理&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;相关模式&#34;&gt;相关模式&lt;/h2&gt;
-&lt;p&gt;Flyweight（享元模式）： Strategy对象通常是很好的轻量级对象&lt;/p&gt;
-&lt;h1 id=&#34;总结&#34;&gt;总结&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;代码基于接口而非基于实现编程&lt;/li&gt;
-&lt;li&gt;为系统提供新的扩展点，定义一类算法类，需要扩展的时候，只需要增加对应策略的算法实现即可&lt;/li&gt;
-&lt;li&gt;控制代码复杂度，添加新策略的时候，最小化、集中化代码改动，减少引入 bug 的风险&lt;/li&gt;
-&lt;li&gt;能够消除大量成片的if-else和switch代码&lt;/li&gt;
-&lt;li&gt;策略模式能够起到解耦的作用，主要是三个方面 解耦策略的定义、创建、和使用&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;设计的思想和原则比设计模式更加普适和重要&lt;/strong&gt;&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>Structure and Interpretation of Computer Programs 读书笔记 Chapter 1 构造过程抽象 1.1 程序设计的基本元素</title>
-        <link>https://lllovol.com/p/sicp-chapter1.1/</link>
-        <pubDate>Fri, 17 Jan 2020 11:13:47 +0000</pubDate>
-        
-        <guid>https://lllovol.com/p/sicp-chapter1.1/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg" alt="Featured image of post Structure and Interpretation of Computer Programs 读书笔记 Chapter 1 构造过程抽象 1.1 程序设计的基本元素" /&gt;&lt;h2 id=&#34;第1章-构造抽象过程&#34;&gt;第1章 构造抽象过程&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;这一张主要学习的是有关&lt;strong&gt;计算过程&lt;/strong&gt;的知识。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;定义：计算过程是存在于计算机的里的一类抽象事物，主要操作一些被称之为&amp;quot;数据&amp;quot;的抽象事物。（就像Java中的各种类中的方法）&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;我们指挥这种过程的程序就像是巫师的巫术一样，使用一些诡秘而深奥的程序设计语言，通过符号表达式的形式精心编排而成，他们描述了我们希望相应的计算过程去完成的工作。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;但是幸运的是，我们学习程序的危险性远远小于巫术。但是我们也必须像麻瓜一样，必须去学习、理解、预期我们所使用的咒语（程序）所带来的效果。程序里即使有一个小错误（bug or glitch）,也可能带来无法预料的后果。
-真实的程序设计则需要极度细心，需要经验和智慧。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;设计良好的计算系统就像设计良好的汽车或者核反应堆一样，具有某种模块化的设计，其中的各个部分都可以独立地构造、替换和排除错误。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;书中所使用的Lisp方言Scheme，并不是一门主流语言，但是有一个非常重要的特征：计算过程的Lisp描述（过程）本身可以作为Lisp的数据来表示和操作。而不是现在很多威力强大的程序设计技术，都依赖于填平在 &amp;ldquo;被动的&amp;quot;数据和&amp;quot;主动的&amp;quot;过程之间的传统划分。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;11-程序设计的基本元素&#34;&gt;1.1 程序设计的基本元素&lt;/h2&gt;
-&lt;p&gt;一个强有力的语言，不仅是一种指挥计算机执行任务的方式，它应该成为一种框架，是我们能够在其中组织自己有关计算过程的思想。
-每一种强有力的语言都提供了三种机制：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;基本表达式形式：用于表示语言所关心的最简单的个体。&lt;/li&gt;
-&lt;li&gt;组合的方法：通过它们可以从比较简单的东西出发构造出复合的元素。&lt;/li&gt;
-&lt;li&gt;抽象的方法：通过它们可以为复合对象命名，并将它们当做单元去操作。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;用白话来解释，数据就是我们希望去操作的东西，而过程就是有关操作这些数据的规则描述。这样，任何强有力的程序设计语言都必须能够表达表述基本的数据和基本过程，还需要提供对过程和数据进行组合和抽象的方法。&lt;/p&gt;
-&lt;h3 id=&#34;111-表达式&#34;&gt;1.1.1 表达式&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;开始程序设计，最简单的方式就是打开计算机的终端，用键盘输入一个表达式，解释器的响应就是将它对这一个表达式的求值结果显示出来。&lt;/li&gt;
-&lt;li&gt;运算对象+运算符 ==&amp;gt;组合式  （组合式本身也可以作为运算对象参与其他组合式的运算（套娃递归））&lt;/li&gt;
-&lt;li&gt;即使对于非常复杂的表达式 解释器也是按照同样的基本循环运作： 读入-&amp;gt;求值-&amp;gt;打印&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;112-命名和环境&#34;&gt;1.1.2 命名和环境&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;程序设计中一个必不可少的方面，就是它需要提供一种通过名字去使用计算对象的方式。我们将名字标识符成为变量，它的值也就是它所对应的那个对象。&lt;/li&gt;
-&lt;li&gt;实际上，构造一个复杂的程序，也就是为了去一步步地创建出越来越复杂的计算性对象。（一个Lisp程序通常是由一大批相对简单的过程组成的）&lt;/li&gt;
-&lt;li&gt;我们可以将值和符号相关联，而后又能提取出这些纸，这意味着解释器必须维护这某种存储能力，以便保持有关 名字-值 对偶的轨迹。这种存储被称之为环境 （更加准确的说是全局环境，以后会看到，在一个计算过程中完全可能涉及到若干不同的环境（全局域和局部域，全局变量和局部变量））&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;113-组合式的求值&#34;&gt;1.1.3 组合式的求值&lt;/h3&gt;
-&lt;p&gt;一个组合式的求值狐妖就是做两件事&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;求值该组合式的各个子表达式&lt;/li&gt;
-&lt;li&gt;将作为最左子表达式的（运算符）的值那个过程应用于相应的实际参数，所谓的实际参数就是其他子表达式（运算对象）的值。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;一般而言，我们将递归看做一种处理层次性结构的（像树这样的对象）极强有力的技术。&lt;/li&gt;
-&lt;li&gt;&amp;ldquo;值向上穿行&amp;quot;形式的求值形式是一类更一般的计算过程的例子，这种计算过程被称为树形积累。&lt;/li&gt;
-&lt;li&gt;(define x 3)这种定义的情况，这算是一种特殊形式，作用是将符号x关联一个3的值，这并不是一个组合式。每一种特殊形式都有自己的求值规则。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;114-复合过程&#34;&gt;1.1.4 复合过程&lt;/h3&gt;
-&lt;p&gt;三个元素：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;数和算数运算是基本的数据和过程&lt;/li&gt;
-&lt;li&gt;组合式的嵌套提供了一种组织起多个操作的方法&lt;/li&gt;
-&lt;li&gt;定义是一种受限的抽象手段，他为名字关联相应的值&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;这是一种威力更强大的抽象技术&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;(define (square x) (* x x))
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;上述代码就是是用复合过程的方式，定义了一个乘方，使用的时候只需要&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;(square x)
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;和组合式的嵌套类似，复合过程也可以使用在其他的复合过程的定义当中&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;(
-    define (sum_of_squares x y) (+ (square x) (square y))
-)
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;例如上面的代码，就是一个平方和的复合过程实现,我们同样也能够将其实用到更加复杂的复合过程中去（无限套娃）。但是由于复合过程的构造太深，如果我们只是看到sum_of_squares这一层，就会感到疑惑？这个square究竟是像 &amp;ldquo;+&amp;rdquo;,&amp;rdquo;-&amp;rdquo;,&amp;quot;*&amp;quot;,&amp;quot;/&amp;quot; 一样直接做在解释器中呢？还是被定义成了一个复合过程呢？&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;(
-    define (f a)
-        (sum_of_squares (+ a 1) (* a 2))
-)
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;115-过程应用的代换模型&#34;&gt;1.1.5 过程应用的代换模型&lt;/h3&gt;
-&lt;p&gt;在本章的例子当中，就比如上方的 平方和 例子 &lt;code&gt;(f 5)&lt;/code&gt; 结果是136，我们是怎么去理解这个过程的呢？&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;(f 5)&lt;/code&gt; 我们先取出f的体&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;(sum_of_squares (+ a 1) (* a 2))&lt;/code&gt; 然后将实际参数替换这个表达式中的形参&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;(sum_of_squares (+ 5 1) (* 5 2))&lt;/code&gt; 这样就转化为了两个简单表达式的运算&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;(sum_of_squares 6 10)&lt;/code&gt; 然后取出sum_of_square的体，同样进行计算&lt;/li&gt;
-&lt;li&gt;&amp;hellip;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;(+ 36 100)&lt;/code&gt; 得到结果&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;上面的这种模型，就是我们所说的代换模型。但是有两点需要注意：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;代换的作用只是方便我们理解，而不是解释器的实际工作方式的具体描述。&lt;/li&gt;
-&lt;li&gt;在模拟复杂的科学研究现象的时候，我们也都是从最简单的模型开始的。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;正则序和应用序&#34;&gt;正则序和应用序&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;正则序：完全展开再进行规约（处理到了最后一步，再进行求值）&lt;/li&gt;
-&lt;li&gt;应用序：先求值参数而后应用（一边带入，一边处理）（可能会重复求值，浪费效率&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;条件表达式和谓词&#34;&gt;条件表达式和谓词&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;条件表达式：根据不同的情况进行不同的处理（if-else、switch、cond等等）&lt;/li&gt;
-&lt;li&gt;谓词：返回 真 或者 假 的表达式。&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        </item>
-        <item>
-        <title>Structure and Interpretation of Computer Programs 读书笔记 前言</title>
-        <link>https://lllovol.com/p/sicp/</link>
-        <pubDate>Mon, 13 Jan 2020 15:22:58 +0000</pubDate>
-        
-        <guid>https://lllovol.com/p/sicp/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/10.jpg" alt="Featured image of post Structure and Interpretation of Computer Programs 读书笔记 前言" /&gt;&lt;h2 id=&#34;写在最前面&#34;&gt;写在最前面&lt;/h2&gt;
-&lt;p&gt;本文主要用来记录自己再工作之余阅读的这本书籍的读书笔记，在记录的同时，也会加入一些自己的一些思考与总结(括号中的内容)&lt;/p&gt;
-&lt;h2 id=&#34;书籍目录架构&#34;&gt;书籍目录架构&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;构造过程抽象&lt;/li&gt;
-&lt;li&gt;构造数据抽象&lt;/li&gt;
-&lt;li&gt;模块化、对象和状态&lt;/li&gt;
-&lt;li&gt;元语言抽象&lt;/li&gt;
-&lt;li&gt;寄存机器里的计算&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;序言部分笔记&#34;&gt;序言部分笔记&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;程序员必须同时追求具体部分的完美和继承的适宜性。&lt;/li&gt;
-&lt;li&gt;每一个计算机程序都是现实中或者精神中的某一个过程的模型，通过人的头脑孵化出来。&lt;/li&gt;
-&lt;li&gt;如果艺术解释了我们的梦想，那么计算机就是以程序的名义执行着他们。&lt;/li&gt;
-&lt;li&gt;计算机是一位一丝不苟的&amp;quot;工匠&amp;quot;：它的程序必须正确，我们希望的所有东西，都必须表述得准确到每一点细节。&lt;/li&gt;
-&lt;li&gt;掌握强有力的组织技术，将会提升我们构造大型重要程序的能力。&lt;/li&gt;
-&lt;li&gt;计算机必须遵守物理定律。如果它们要快速执行，几个纳秒做一次状态转换，那么就必须在很短的距离内传导电子。&lt;/li&gt;
-&lt;li&gt;计算机永远都不够大也不够快。硬件技术的每一次突破都带来了更大规模的程序设计事业（同时也会带来更大规模的机会，机会总是无处不在的，但是能发现并抓住机会的人却没有那么多）&lt;/li&gt;
-&lt;li&gt;Lisp语言有着非常简单的语法和语义，程序的语法分析可以看做一种很简单的工作。这样，语法分析技术对于Lisp程序几乎就没有价值，语言处理器的构造不会成为大型Lisp系统发展的变化和阻碍。最后，正是这种语法和语义的极端简单性，给所有的Lisp程序员都带来了负担和自由。任何规模的Lisp程序，除了那种寥寥几行的程序外，都包含考虑周到的各种功能。&lt;/li&gt;
-&lt;li&gt;发明并调整，调整恰当后再去发明！&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;前言部分笔记&#34;&gt;前言部分笔记&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;计算机语言并不仅仅是一种让计算机去执行操作的方式，更重要的是，它是一种表述有关方法学的思想的新颖的形式化媒介。因此，程序必须写的能够供人阅读，偶尔地去供计算机执行。&lt;/li&gt;
-&lt;li&gt;能够对程序设计的风格要素有一种很好的审美观。……知道在什么时候哪些地方不需要去读，哪些东西不需要去理解。应该很有把握地去修改一个程序，同时又能保持原来作者的精神和风格。&lt;/li&gt;
-&lt;li&gt;计算机革命是关于我们如何去思考，以及如何去表达自己所思考的&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        </item>
-        <item>
-        <title>大咖分享-如何提高自己的技术视野</title>
-        <link>https://lllovol.com/p/improve-our-vision/</link>
-        <pubDate>Thu, 08 Aug 2019 01:14:30 +0000</pubDate>
-        
-        <guid>https://lllovol.com/p/improve-our-vision/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/7.jpg" alt="Featured image of post 大咖分享-如何提高自己的技术视野" /&gt;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
-&lt;p&gt;最近听了一场蔡黎博士关于如何提高我们技术视野的分享，收益良多，其实不仅仅是在技术方面，其实很多道理，在生活中都是有共通点的。分享的主要内容既然是关于如何提高我们的技术视野的，那么他是如何进行分享的呢？他主要将这次分享按照内容分为了三个方面：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;视野&lt;/li&gt;
-&lt;li&gt;技术&lt;/li&gt;
-&lt;li&gt;效益&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;第一部分-视野&#34;&gt;第一部分 视野&lt;/h2&gt;
-&lt;p&gt;用英文来讲，就是Vision，这决定了格局和潜力，也是指的一种远见。&lt;/p&gt;
-&lt;h3 id=&#34;那么怎样才能看的更远呢&#34;&gt;那么怎样才能看的更远呢？&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;看得到多远的过去，就能看得到多远的未来。&amp;ndash;丘吉尔
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190811-185950@2x.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;例子一如今阿里云计算排名第一&#34;&gt;例子一：如今阿里云计算排名第一&lt;/h3&gt;
-&lt;p&gt;中国云计算市场现状：top1阿里云 超过了第2到第8名的总和。
-但是如果看看10年前，国内的各个公司都在同一起跑线上，那时候的大佬们对于云计算，看法又都是怎样的呢？&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;李彦宏，说云计算是新瓶装旧酒，没有什么新东西。&lt;/li&gt;
-&lt;li&gt;马化腾，云计算的理念，还为时过早，就算能够实现也是过一百年和一千年之后才能实现的事情了。&lt;/li&gt;
-&lt;li&gt;马云，可以生产更好的商品，卖给消费者。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;可以看到，BAT作为那时候中国的互联网三大巨头，只有阿里的马云是看好云计算的，而从如今的结果来看，阿里巴巴当初选择将精力投入到云计算是绝对正确的选择。那么，为什么阿里巴巴当初为什么要投云计算？
-因为云计算其实是数据时代的公共基础设施，那么那时候的阿里，是通过什么样的方式发现这样的一个原因呢？10年前，能看到如今的未来嘛？答案是肯定的。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;我们回顾一下第二次工业革命，电的出现之后，是如何发展的呢？&lt;/strong&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;最开始-分散发电模式&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-201125@2x.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;分散发电模式&#34;
-	
-	
-&gt;
-到现在-集中发电模式&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-200724@2x.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;集中发电模式&#34;
-	
-	
-&gt;
-我们可以看到，在电出现了之后，最开始，都是分散发电的模式，工厂都用着自己的发电机来进行发电，实现电量的自给自足。再看看现在，都是国家电网，集中发电的集中发电形式。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;通过类比的方式可以发现，其实和发电的形式是相当相似的&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;工业时代看用电量&lt;/em&gt;&lt;br&gt;
-&lt;em&gt;信息时代看用云量&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;科技永远向前，历史总在重演&lt;/strong&gt;&lt;/p&gt;
-&lt;h3 id=&#34;例子二小米卖手机&#34;&gt;例子二：小米卖手机&lt;/h3&gt;
-&lt;p&gt;雷军在做小米手机的初期，那时候他的演讲，就讲到过Android还有操作系统芯片等等部分模块，都将实现标准化。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://v.youku.com/v_show/id_XMTYyODA4NzA3Ng==.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;产品经理是怎样炼成的？新媒体电商&lt;/a&gt;&lt;br&gt;
-在那个时候的手机利润，是3倍来卖的，真的是个暴利行业，但是雷军觉得，手机不应该是3倍的毛利来卖，因此，小米手机一直都是每台手机只赚5%，一直卖到了现在世界五百强。
-（看看pc，毛利才14%，那时候手机毛利3倍是多么的夸张，但是其实最开始的pc也没有几个人能买得起）第一个标准化，第二个是薄利多销，雷军他所看见的手机未来的发展趋势，其实就是pc行业发展的规律。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;第一波浪潮-pc&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-202524@2x.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;
-第二波浪潮-手机&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-202638@2x.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;这就是个历史规律，科技的趋势是普惠的。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;一体化的用户体验，是远超组合的用户体验&lt;/li&gt;
-&lt;li&gt;标准化，差距会逐渐缩小&lt;/li&gt;
-&lt;li&gt;产业最终肯定分工化、规模化，&lt;/li&gt;
-&lt;li&gt;产业的演进是技术和商业模式的结合&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;例子三为什么芯片要单独为手机再开发一次&#34;&gt;例子三：为什么芯片要单独为手机再开发一次？&lt;/h3&gt;
-&lt;p&gt;为什么要在手机上芯片重新开发一遍？&lt;strong&gt;因为功耗更小&lt;/strong&gt;&lt;br&gt;
-差了几倍呢？&lt;strong&gt;10倍&lt;/strong&gt;&lt;br&gt;
-价格呢？&lt;strong&gt;便宜了10倍&lt;/strong&gt;&lt;br&gt;
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-203155@2x.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-203228@2x.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;h4 id=&#34;10倍因素的新技术某个指标产生这种变化的时候那么可能就是革命要出现了&#34;&gt;10倍因素的新技术，某个指标产生这种变化的时候，那么可能就是革命要出现了&lt;/h4&gt;
-&lt;blockquote&gt;
-&lt;p&gt;你必须保持敏感，否则当新技术作为10倍数因素席卷而来的时候，猝不及防只能轰然倒塌。同时，对新技术的追逐可能不在盈利，而在于可以使得企业在必要的时候迅速转向。毕竟，只有早早行动，才有希望争取未来的胜利，改变不利的命运&amp;ndash;英特尔公司前CEO安迪·葛洛夫 &lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-203413@2x.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;水滴公司CEO沈鹏，是美团的第十号员工，他在带领团队做美团外卖的时候，也是在13年的时候，看见了一个10倍因素的场景，外卖出现了一个爆发的机会。
-是什么呢？最开始的外卖机制，都需要店家在店里装一台二手电脑，用于接收订单的信息，相当的不方便。但是那时候，安卓手机的人人普及，提升了沟通的效率，也提高了配送的稳定性。外卖就是这么做出来的，稳定性就此提升，从而改变了这个产业。（饿了嘛 那时候已经做了5年左右，那时候都是用二手电脑来做的外卖生意，
-美团当时第一年的目标，就是从饿了么的5w一天，美团的目标是要做到20w一天，而那时候真正的结果，美团达成了120w一天，这个因素已经远远超过了10倍）&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;很有可能在5年之后，这个10倍因素将会出现在电动车行业当中。看看如今电动车的体验，特斯拉差不多是一般电动车3倍的价格，但是它的体验，远远高于普通电动车所带来的3倍&lt;/li&gt;
-&lt;li&gt;分散发点模式，分久必合，合久必分。美国的solarcity公司，让每家每户，使用太阳能电池，各自发电，多余的电还可以输送到集中电网当中。&lt;/li&gt;
-&lt;li&gt;华为发布的鸿蒙系统其实，平头哥+鸿蒙，IoT（Internet of Things）是为了物联网而做出来的系统。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;第二部分-技术&#34;&gt;第二部分 技术&lt;/h2&gt;
-&lt;p&gt;推荐一部书&lt;a class=&#34;link&#34; href=&#34;http://note.youdao.com/noteshare?id=5556416ea18ece9953bae4109c5d40d5&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;《技术的本质》W. Brain Arthur&lt;/a&gt;&lt;br&gt;
-技术的本质就是自然现象有目的的组合&lt;br&gt;
-&lt;strong&gt;技术=自然现象+目的+组合&lt;/strong&gt;&lt;/p&gt;
-&lt;h3 id=&#34;技术肯定是来自于自然现象的&#34;&gt;技术肯定是来自于自然现象的&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;数学是上帝描述自然的符号 &amp;ndash; 黑格尔 &lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-204925@2x.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;基础理论才是突破创新的最根本的基石&#34;&gt;基础理论才是突破创新的最根本的基石&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;技术来源于自然现象 技术的极限也受这些自然现象约束，除非发现新的自然现象&lt;/strong&gt;&lt;/p&gt;
-&lt;h3 id=&#34;华为5g&#34;&gt;华为5G&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;华为现在的水平尚停留在工程教学、物理算法等工程科学的创新层面，尚未真正进入基础理论研究。随着逐步逼近香农定理、摩尔定律的极限，而对大流量、低时延的理论还未创造出来，华为已感到前途茫茫、找不到方向。华为已前进在迷航中。重大创新是无人区的生存法则，没有理论突破，没有技术突破，没有大量的技术积累，是不可能产生爆发性创新的&amp;ndash;任正非&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;现在来看，5G真的是90后的机会，5G的出现，这个社会必将发生不小的变化，而绝非下载速度变快这么简单的一件事情&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-205108@2x.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;h4 id=&#34;5g的原理就是香农定理&#34;&gt;5G的原理就是香农定理:&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-205916@2x.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;C=Blog2(1+S/N)
-使用类比的方式来看这个公司&lt;/p&gt;
-&lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;C就是单位时间的载货量&lt;/li&gt;
-&lt;li&gt;B道路的宽度&lt;/li&gt;
-&lt;li&gt;S车的速度&lt;/li&gt;
-&lt;li&gt;N道路的平整状况&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4 id=&#34;如何解决这些问题才能实现5g&#34;&gt;如何解决这些问题才能实现5G？&lt;/h4&gt;
-&lt;ol&gt;
-&lt;li&gt;使用的技术是毫米波，小基站，提高车速（频率越高，能量也就越大，所以为了安全不能使用大的基站）&lt;/li&gt;
-&lt;li&gt;使用多输入多输出，全双工技术，变宽车道&lt;/li&gt;
-&lt;li&gt;波束赋形，使得道路更加平整&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-210436@2x.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;
-而华为，投入了数以万计的工程师，才能将这些基础的东西结合起来，带给了我们5G&lt;br&gt;
-ps:技术视野还可以赚钱，知道什么地方需求大。比如如果知道了5G发展的趋势，可以提前买小基站公司的股票，可以大赚一笔。&lt;/p&gt;
-&lt;h2 id=&#34;第三部分-效益&#34;&gt;第三部分 效益&lt;/h2&gt;
-&lt;p&gt;技术怎么带来效益，如何才能带来效益？再回答这个问题之前，我们需要想一想，一般老板最关心的是什么？&lt;br&gt;
-&lt;strong&gt;增长！&lt;/strong&gt; 可以亏损，但是一定要增长
-一般的工程师，最关注的是什么？&lt;br&gt;
-一般都是在做将成本的降低。&lt;/p&gt;
-&lt;h3 id=&#34;什么技术能使得全球运输成本下降90&#34;&gt;什么技术能使得全球运输成本下降90%?&lt;/h3&gt;
-&lt;p&gt;集装箱 &lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-211138@2x.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;麦克莱恩认识到，降低货运成本所要求的不仅仅是一只金属箱子，而是一整套货物处理的新方法。这个系统的每一个组成部分，港口、轮船、起重机、储存设施、卡车、火车以及发货人自身的操作等等，都必须做出改变。他的这种认识几乎要比当时运输业中的每一个人都超前很多年。这些见识所引发的变革如此富有戏剧性，以至于连几十年来一直在推动集装箱运输的国际集装箱局的专家们都为之震惊。 &amp;ndash;摘编自《集装箱改变世界》&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;集装箱的发展节点：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;效能发挥不出来，10年不盈利&lt;/li&gt;
-&lt;li&gt;1967年，越战，3C原则就是一个箱子、一种货物，一个客户&lt;/li&gt;
-&lt;li&gt;码头工人，阻止集装箱、塔吊，港口根据集装箱改造&lt;/li&gt;
-&lt;li&gt;陆地交通设施，根据集装箱改造&lt;/li&gt;
-&lt;li&gt;货轮越来越大，资本开始介入，给码头工人好处，相互协作&lt;/li&gt;
-&lt;li&gt;公司供应链，根据集装箱，进行改造&lt;/li&gt;
-&lt;li&gt;全球货运量越来越大，改变地域格局&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;可以说 &lt;strong&gt;没有集装箱，就没有全球化&lt;/strong&gt;（无独有偶，docker的标志，就是个小鲸鱼，拖着个集装箱，就是技术的集装箱）&lt;/p&gt;
-&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
-&lt;h3 id=&#34;关于视野的总结&#34;&gt;关于视野的总结&lt;/h3&gt;
-&lt;p&gt;如何拥有技术的视野？
-**那就是用历史的纵深，去深入抓规律。**这也就是为什么读史使人明智的原因。
-我们可以看看前、后端、QA等方向发展的过去，看看其规律，看看是不是也有例如10倍指标这样的现象，通过这些现象，反观现在，又能看见什么未来呢？&lt;/p&gt;
-&lt;h3 id=&#34;关于技术的总结&#34;&gt;关于技术的总结&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;常识就像氧气一样,越往高处走，越是稀薄&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;要用基础的原理，去感知这个方向。知道的越底层，基础越牢靠，方向感越强。&lt;/p&gt;
-&lt;h3 id=&#34;关于效益的总结&#34;&gt;关于效益的总结&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;技术落地需要多方系统协作，才能发挥更大的效能&lt;/strong&gt;&lt;/p&gt;
-&lt;h3 id=&#34;结语&#34;&gt;结语&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;视野：用历史的纵深，抓主线&lt;/li&gt;
-&lt;li&gt;技术：用基础的原理，知方向&lt;/li&gt;
-&lt;li&gt;效益：用系统的协作，去演化&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;推荐以及相关链接&#34;&gt;推荐以及相关链接&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;任何在我出生时已经有的科技都是稀松平常的世界本来秩序的一部分；
-任何在我15-35岁之间诞生的科技都是将会改变世界的革命性产物；
-任何在我35岁之后诞生的科技都是违反自然规律要遭天谴的。——英国科幻作家道格拉斯·亚当斯&lt;br&gt;
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190813-212047@2x.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;推荐书籍&#34;&gt;推荐书籍&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;《技术的本质》W.Brain Arthur&lt;/li&gt;
-&lt;li&gt;《集装箱改变世界》Marc Levinson&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;相关链接&#34;&gt;相关链接&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;http://note.youdao.com/noteshare?id=5556416ea18ece9953bae4109c5d40d5&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;技术的本质&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;http://note.youdao.com/noteshare?id=be7d6a7084ed443e631fa2f56db83899&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;集装箱改变世界&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://v.youku.com/v_show/id_XMTYyODA4NzA3Ng==.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;雷军：产品经理是怎样练成的&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/av15100925&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;5G是什么，5G如何改变我们的世界&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/av15830213&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;吴国盛 科学通史 （全39讲）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1Mg_txhnA_ogKDwMWx6oz3g&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;吴军  科技史纲60讲&lt;/a&gt;密码:54dy&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;公众号&#34;&gt;公众号&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;原理&lt;/li&gt;
-&lt;li&gt;返朴&lt;/li&gt;
-&lt;li&gt;sheldon&lt;/li&gt;
-&lt;li&gt;科学的历程&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        </item>
-        <item>
-        <title>《定位》</title>
-        <link>https://lllovol.com/p/positioning/</link>
-        <pubDate>Tue, 01 Jan 2019 01:29:23 +0000</pubDate>
-        
-        <guid>https://lllovol.com/p/positioning/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/1.jpg" alt="Featured image of post 《定位》" /&gt;&lt;h1 id=&#34;取法于上仅得为中取法为中故为其下&#34;&gt;“取法于上，仅得为中，取法为中，故为其下”。&lt;/h1&gt;
-&lt;p&gt;  在读AI Ries和Jack Trout的这一本《定位》之前，我对“定位”这个词，第一个感觉，就是唐太宗的这句话，当然这只是仅仅是站在个人的层面，对自己的一种定位。在追求探索一件事情的时候，需要将目标放的高与长远一点。在读完《定位》之后，我对定位这个词有了新的理解。&lt;br&gt;
-  回想近代社会的发展史，其实也就是人们的定位的一次次的更新和迭代：十八世纪六十年代，瓦特改良了蒸汽机，手工劳动的转变为了大机器生产，是第一次的工业革命，人类的生产力得到了极大的提高，这时候生产力的定位，是靠着有这熟练经验的技工总结而来的；十九世纪下半叶，蒸汽时代逐渐接受，人们逐渐开始进入电气时代，这时候生产力的定位，和第一次有着巨大的不同，是科学技术真正的开始带来生产力的巨大变革；而在第二次世界大战结束之后，人类进入了第三次的生产力革命，信息技术的革命，技术更迭日新月异，瞬息万变的时代，而现在的定位，正是书中所着重介绍的，可以植入人们心智的一种定位。&lt;br&gt;
-  因此书中举了很多关于企业的例子，美国的香烟品牌如何使用定位抢占市场份额，航空公司的成长，福特公司生产汽车优劣等等。虽然这本书的作者，Jack Trout最早是在上个世纪70年代的时候提出来的定位这个概念，书中有不少例子都不是那么的新，甚至还会存在打脸的情况，但是最后的结果都在印证书中的观点的正确性。例如《TIME》的名字，作者最开始并不那么看好，认为这名字不是很好，销量不如《每周周刊》，虽然随着时间的不断积累，展示出来的结果恰恰相反，但是也在一定程度上印证了书中的观点，有一个好名字的重要性。预测失误只是当时的作者并不认为这是一个好的名字。&lt;br&gt;
-  现在的中国，已经成长为世界上第二大的经济体，改革开放以来，中国的实体经济，主要都是靠着廉价的劳动力成本来进行的驱动，但是随着时代的发展，人们物质生活水平都在不断的提高，对精神需求方面以及环境保护方面，都有了非常大的变化。而在现如今的社会市场状况下，已经不是当初那个靠着产品来驱动的时代了。而应该就是书中所说的“定位的时代”。&lt;br&gt;
-通读全书，定位主要有以下几个方面。&lt;/p&gt;
-&lt;h1 id=&#34;确定领导者地位&#34;&gt;确定领导者地位&lt;/h1&gt;
-&lt;p&gt;  成为第一就是进入顾客心智的主要途径，成为第一个进入人们心智某个领域的产品，给自己确定一个定位。在给自己定位之前，还必须明确当前自己的定位，不要去尝试去挑战那些已经是第一领导者的人，那需要更多宣传和更高的质量，然后对于后来者来说，都是很难同时兼顾的事情。如果是成功成为了领导者，那么就要遵循领导者的准则，以潜在用户的标准来建立领导地位，然后对竞争对手进行全面的拦截，同时保证自己产品的实力，对竞争对手提出来新的概念的时候做出迅速的回应，以保持自己的领导者地位。书中说，成为第一很难，保持第一很简单。但我觉得，这两者都并非易事，但是成为领导者之后，确实可以通过占有更大的资源份额，做出更大发展。就这一点来看，我们公司现在已经做到了，但是需要努力工作，才能保持优势。在公益筹款平台方面，我询问我的朋友们，他们第一反应就是我们公司。&lt;/p&gt;
-&lt;h1 id=&#34;跟随者的方式&#34;&gt;跟随者的方式&lt;/h1&gt;
-&lt;p&gt;  如果不能成为领导者，那么就需要使用跟随者的方式，找到一个未被其他人占据的“空位”。例如同一个产品的高价定位，或者低价定位，或者性别定位，但是有一个陷阱，就是永远不要想着满足所有人的需求。这一点无论是做产品，还是做人做事，都是一样的道理，人的精力是有限的，将目标之事专注的完成了已经就不是一件易事。除此之外，还可以给竞争对手重新定位。个人理解，就是进行一种比较性的定位，找出自己具有优势而对手却薄弱的方面，进行定位，&lt;em&gt;虽然这么做不是那么厚道，但是却真实有效。但是现实就是如此，对竞争对手少许的“贬低”，比自己大量的“自吹自擂”更加有意义。诚实和公正的重新定位，才能让竞争对手不敢怠慢。&lt;/em&gt;&lt;/p&gt;
-&lt;h1 id=&#34;产品的定位品牌&#34;&gt;产品的定位品牌&lt;/h1&gt;
-&lt;p&gt;  然后就是书中很重要的一个方面，就是自己的产品的定位品牌。一是拥有一个优秀的好名字，一个优秀的名字本身，在这个传播过渡的社会中就具有巨大的威力，例如水滴，完美符合众筹的这个概念，无论是点滴汇成江河海洋，还是滴水石穿，从古诗意境上面分析，这就是一个非常好的意象。一个响亮，接近通用而又带有描述性的名字，本身就可以阻击对手进入我们的领域。取名字真的是一门学问，就像一个好的名字会伴随一个人的终生，一个名字也将是一个产品最重要的牌面。二就是书中所提到的无名陷阱，有些名字冗长的公司企图使用缩写来简化自己的名字，然而往往适得其反，最后使得用户完全不知道这个缩写词所代指的到底是什么，除非足够幸运，缩写词刚好也是公司主要业务的体现这样的尤为特殊的情况，例如漫威电影中的神盾局Strategic Homeland Intervention, Enforcement and Logistics Division缩写刚好是S.H.I.E.L.D，这么幸运的事情，还是很难强求的。三就是不要企图将第一个成功的品牌名字无限的重复使用，使用一个名字不断延伸自己的产品种类，这样的坏处是，用户在看见这个名字的时候，会疑惑这到底指的是什么产品。当把一个成功产品的名字使用到多个新产品中的时候，其实是在消耗成功产品的寿命。看完此书之后，我才明白，为什么竹子好课不叫水滴好课，国际化项目不叫水滴国际而叫Deeda。总结来讲，品牌名就像是橡皮筋，它可以拉伸，但是又临界点，它拉的越长，就越脆弱。&lt;/p&gt;
-&lt;h1 id=&#34;个人定位&#34;&gt;个人定位&lt;/h1&gt;
-&lt;p&gt;  上面都是关于企业产品的定位，而对个人而言，也可以拥有自己的定位。首先是定义自己，给自己一个唯一确定的定位，个人觉得这是一个很难的命题，需要随着时间阶段的推移和自身的成长做出长远和短期的定位目标（OKR），例如现在我对自己的定位，就是做一个认真踏实的后端实习生，将来的定位，就是成为一个后端研发专业的工程师。然后就是拥有一个好名字，这一点需要感谢我的母亲，给我取了一个好名字，而我自身也需要用自己的行动来将这个名字赋予新的意义，更加具有辨识度。然后就是找一匹优秀的马，换言之，就是寻找一个能够提升自己的事业的公司与愿意培养自己的领导。我很幸运，在实习的时候能够来到这个充满活力和无限未来可能性的公司，同时也有很多优秀的前辈给予我悉心的培养、耐心的指导，在过去半年里让我成长很大。&lt;/p&gt;
-&lt;h1 id=&#34;你好2019&#34;&gt;你好2019&lt;/h1&gt;
-&lt;p&gt;  18再见，19你好！新的一年里，从零开始，新生再战！&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>大咖分享-对游戏的看法</title>
-        <link>https://lllovol.com/p/share/</link>
-        <pubDate>Fri, 21 Dec 2018 19:24:46 +0000</pubDate>
-        
-        <guid>https://lllovol.com/p/share/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg" alt="Featured image of post 大咖分享-对游戏的看法" /&gt;&lt;h1 id=&#34;背景&#34;&gt;背景&lt;/h1&gt;
-&lt;p&gt;晚上 青果灵动的CEO刘睿（julao）来到了我们公司进行了一场演讲&lt;br&gt;
-（以下都是按照julao的“我”）&lt;/p&gt;
-&lt;h1 id=&#34;正题&#34;&gt;正题&lt;/h1&gt;
-&lt;p&gt;其实是周三&lt;br&gt;
-做了十五年了&lt;br&gt;
-青果这家公司已经做了10年了&lt;/p&gt;
-&lt;p&gt;每个人对游戏都有自己的价值观，所以这只是一次分享&lt;/p&gt;
-&lt;h2 id=&#34;p1-有人没有玩过游戏嘛请举手&#34;&gt;p1 有人没有玩过游戏嘛？请举手&lt;/h2&gt;
-&lt;p&gt;（有零星几个人举手）&lt;br&gt;
-玩过俄罗斯方块嘛？&lt;br&gt;
-玩过剪刀石头布吗？&lt;/p&gt;
-&lt;h3 id=&#34;拼多多使用游戏化的方法成功&#34;&gt;拼多多使用游戏化的方法，成功？&lt;/h3&gt;
-&lt;p&gt;其实并不是，拼多多并不是游戏化的方式成功了。&lt;/p&gt;
-&lt;p&gt;这一次的分享只是一次学习的回报&lt;/p&gt;
-&lt;h3 id=&#34;关于游戏化的建议&#34;&gt;关于游戏化的建议：&lt;/h3&gt;
-&lt;p&gt;不要做，我做了十五年，都没有搞清楚游戏化是什么，每一个游戏都有自己的逻辑&lt;/p&gt;
-&lt;h2 id=&#34;p2-游戏仅仅是娱乐&#34;&gt;p2 游戏仅仅是娱乐？&lt;/h2&gt;
-&lt;h3 id=&#34;毁三观&#34;&gt;毁三观：&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;英国【报销门】，做一些假报销，==》卫报的游戏（调查你处议员的开支）&lt;/li&gt;
-&lt;li&gt;大概是个什么样的游戏呢？
-&lt;ul&gt;
-&lt;li&gt;登录这个游戏，就可以看到可能和议会有关的图片都上传扫描上去，然后可以看见其他的玩家打上的留言和标签，&lt;/li&gt;
-&lt;li&gt;所有人可以根据这些图片找出线索，&lt;/li&gt;
-&lt;li&gt;这仅仅只是一个游戏，并没有什么物质上的奖励，调查的结果又28名议员和这个案子有关。&lt;br&gt;
-&lt;strong&gt;给我们一个非常重要的启示：20000名个玩家，为什么要去参加?&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;社会正义感？&lt;/li&gt;
-&lt;li&gt;为什么游戏的这种方式会有效？&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;p3-光晕3中的人类保卫战halo3&#34;&gt;p3 光晕3中的人类保卫战（HALO3）&lt;/h2&gt;
-&lt;p&gt;这是微软做的一个游戏，也是一个系列，是个在线联网的游戏 &lt;br&gt;
-1500w名玩家发动的活动，人类保卫战。&lt;br&gt;
-565天，消灭了一百e的外星人，平均每天1175个，每小时73万个。&lt;br&gt;
-然后他们的成就被记录在 MUSEUM OF HUMANITY，做了个纪录片&lt;br&gt;
-里面所有的故事和画面都是虚拟的，但是唤起的感情是真实的&lt;/p&gt;
-&lt;h2 id=&#34;p4-重新认识一下游戏&#34;&gt;p4 重新认识一下游戏&lt;/h2&gt;
-&lt;p&gt;俄罗斯方块：你知道你终究都会失败，这个游戏是没有胜利者的，这个游戏是为了输才玩的&lt;br&gt;
-内容并不新鲜，得分并没有奖励，so 为什么我们要玩俄罗斯方块？&lt;/p&gt;
-&lt;p&gt;人类的大脑进化到今天，大概过了四十万年&lt;/p&gt;
-&lt;p&gt;从经验&lt;br&gt;
-到规律&lt;br&gt;
-到指导行为&lt;br&gt;
-eg:为什么可以一边听演讲一边打字记下笔记？&lt;br&gt;
-为什么我们知道桌上的水是水？&lt;/p&gt;
-&lt;p&gt;游戏比现实更可预测！&lt;br&gt;
-这就是为什么游戏那么吸引人的一个重要的前提&lt;br&gt;
-游戏更加的不耐（进度反馈和不耐）&lt;br&gt;
-人脑只有体重的5%，但是消耗了25%的能量，所以这是为什么甜食这么受人们喜欢的原因&lt;/p&gt;
-&lt;h2 id=&#34;p5-追女孩是一件很难的事情&#34;&gt;p5 追女孩是一件很难的事情&lt;/h2&gt;
-&lt;p&gt;但是如果谈恋爱有进度条&lt;/p&gt;
-&lt;p&gt;我们的生物性，决定了我们的社会性&lt;br&gt;
-（游戏红）
-游戏好玩就和脂肪很香一样，都是植入了DNA的东西&lt;/p&gt;
-&lt;h2 id=&#34;p6-游戏是积极的&#34;&gt;p6 游戏是积极的！&lt;/h2&gt;
-&lt;p&gt;玩游戏超过12小时的举手！但是玩游戏是很累的！加微信&lt;br&gt;
-因为游戏是个很累的一种事情&lt;/p&gt;
-&lt;p&gt;再说自我决定论：&lt;br&gt;
-人类有三个需求：能力需求，自主需求，关系需求&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;能力需求，又叫做掌控力，是积极处理与外部环境关系的能力&amp;ndash;hold住&lt;br&gt;
-（偷懒和做能做的事情，是人的先天性的东西，就是做的顺手）&lt;/li&gt;
-&lt;li&gt;关系需求，涉及社会联系与家庭成员、朋友以及他人互动的愿望&amp;ndash;有人点赞&lt;br&gt;
-（人类存在的意义就是被看到）&lt;/li&gt;
-&lt;li&gt;自主需求，是人自我设定的使命，是于个人价值观统一的&amp;ndash;目标达成&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;游戏里面有四个大的特征&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;目标：玩家努力达成的具体结果&lt;/li&gt;
-&lt;li&gt;规则：玩家如何实现目标作出的限制&lt;/li&gt;
-&lt;li&gt;反馈：告诉玩家距离实现目标还有多远&lt;/li&gt;
-&lt;li&gt;自愿：玩家要了解并愿意接受目标和规则（相当重要）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;游戏，是自愿尝试克服种种不必要的障碍。
-&amp;ndash;哲学家（xxx）&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;我定义的游戏：&lt;br&gt;
-&lt;strong&gt;玩家在游戏中探索、学习和改进
-自愿从事不必要的艰苦工作&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;900个zelda，宝石，呀哈哈，我相当的肝！我真的很看重自己的成果&lt;/p&gt;
-&lt;p&gt;玩游戏是一种最积极的人生态度&lt;br&gt;
-玩的对立面不是艰苦工作&lt;/p&gt;
-&lt;p&gt;不是游戏带来了空虚&lt;br&gt;
-而是在游戏结束&lt;br&gt;
-进入现实时迷失了方向&lt;br&gt;
-（连续玩了36个小时，一睁眼就过去了，整个体验的过程中会无聊吗？不可能的，在过程中会获得到自己想要的东西）&lt;/p&gt;
-&lt;p&gt;我承认游戏是有害的，因为游戏和现实是有很大的落差的&lt;/p&gt;
-&lt;h2 id=&#34;p7-游戏化&#34;&gt;p7 游戏化&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;不是名词替换&lt;/li&gt;
-&lt;li&gt;不是营销包装&lt;/li&gt;
-&lt;li&gt;不是积分换奖励&lt;/li&gt;
-&lt;li&gt;不是比赛和排行榜&lt;/li&gt;
-&lt;li&gt;（趣头条？都不是什么新鲜的东西&lt;br&gt;
-以上都只是游戏化的一种手段&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;游戏化是一种新的目标管理&#34;&gt;游戏化，是一种新的目标管理&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;从外在目标向内在目标转变&lt;/li&gt;
-&lt;li&gt;游戏过程，本身就是奖励&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;（我知道在美国有一个学校，一个小学，整个学校的管理都是一种游戏化的管理，每天放学的时候，告诉同学：明天一早，学校会在博物馆中放5个信封，每个信封里面有一个任务。只要来到博物馆中前五的同学，才能完成这样的任务。没有奖励，但是有很多学生参加。这只是因为过程）
-（号召全员去跑步，打卡制，不太好。有个企业做的很好，跑向月球计划，超级远，“因为你今天跑了5公里，咱们公司离月球又近了一点”）
-（水滴筹，很羡慕，因为咱们先天性就能找到我们的价值，互助也是被，不建议把帮助别人，变成你怎么样就给你一块钱，你怎么样就罚你一块钱。市场关系（你给我钱我就干），社会关系（在宏大事情中的参与度））&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;p8-参与要自愿&#34;&gt;p8 参与要自愿&lt;/h2&gt;
-&lt;p&gt;提供选择性而不是强制性&lt;br&gt;
-（不能提供一个，你不怎么样就会怎么样）&lt;br&gt;
-游戏化有一定是长期的&lt;/p&gt;
-&lt;p&gt;游戏化就是设计游戏本身&lt;/p&gt;
-&lt;h2 id=&#34;qa&#34;&gt;Q&amp;amp;A&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Q:对外挂的态度和看法？&lt;br&gt;
-A:外挂就是系统的漏洞&lt;/li&gt;
-&lt;li&gt;Q:为什么游戏是648？&lt;br&gt;
-A:因为当初苹果规定的，那时候1刀汇率是6.48rmb&lt;/li&gt;
-&lt;li&gt;Q:给竹子好课的游戏化的建议？&lt;br&gt;
-A:做一个雷达，学习之后增加属性，增加反馈。不过不建议什么都做游戏化&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        </item>
-        <item>
-        <title>高效能人士的七个习惯</title>
-        <link>https://lllovol.com/p/msg/</link>
-        <pubDate>Thu, 06 Dec 2018 10:22:08 +0000</pubDate>
-        
-        <guid>https://lllovol.com/p/msg/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/software.jpg" alt="Featured image of post 高效能人士的七个习惯" /&gt;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
-&lt;p&gt;最近看的一本书的随笔，摘抄与记录&lt;/p&gt;
-&lt;h2 id=&#34;七个习惯的简要的概要&#34;&gt;七个习惯的简要的概要&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;习惯一，积极主动。由内而外的改变，积极面对一切&lt;/li&gt;
-&lt;li&gt;习惯二，以终为始。所有的事物都经过了两次创造，先在脑海中酝酿，其次才是实质的创造&lt;/li&gt;
-&lt;li&gt;习惯三，要事第一。次要的事情不必摆在第一，要事不能放在第二&lt;/li&gt;
-&lt;li&gt;习惯四，双赢思维。无论工作伙伴还是家庭成员，要从互赖式的角度思考&lt;/li&gt;
-&lt;li&gt;习惯五，知彼解己。舍弃回答心，改以了解心去聆听别人&lt;/li&gt;
-&lt;li&gt;习惯六，统合综效。创造第三种选择，是互相尊重的成果，创造式的合作，1+1&amp;gt;2的方式&lt;/li&gt;
-&lt;li&gt;习惯七，不断更新。身体、精神、智力、社会，不断更新自己&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;变化的世界不变的原则&#34;&gt;变化的世界不变的原则&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;恐惧感和不安全感：在现代社会有太多的人保守不安全感的折磨，担心自己失业，担心自己无力养家，也因此助长了一种现象就是：人们不论是在工作还是生活中，都倾向于选择一种零风险的生活，并且逃避和他人互相依赖和合作。（不能说这种想法就是错的，就像元素守恒的道理是一样的，风险和收益往往都是成正比例的，高回报的同时也伴随着高风险，而低风险往往伴随着平平淡淡；而合作的好处更是不言而喻，例如，在现代的敏捷软件开发过程中，出现了pair programming，可以增加纪律性，写出更加优秀的代码。就如同书中所说，我们生活在一个相互依赖的社会中，最辉煌的成就都是靠着互相依赖和合作才能成就的，远远不是个人能力了就能够企及的。）&lt;/li&gt;
-&lt;li&gt;我现在就想得到：我们必须训练头脑，大量投入，不断磨练，提升自己的竞争力，以免被社会所淘汰。绝对不能就满足于学校的教育。人生处处皆高考，这是我高中班主任最常给我们传授的一句话，而现实也正是如此。&lt;/li&gt;
-&lt;li&gt;缺乏人生平衡：懂得轻重缓急，抓住生活的重点，客观面对现实&lt;/li&gt;
-&lt;li&gt;我的定位在哪儿：真正的大事业，通常只会由思维开阔、内涵丰富的头脑，经由忘我的合作精神&amp;ndash;互敬和双赢取得的&lt;/li&gt;
-&lt;li&gt;渴望理解：想要获得其他人的理解，那么自己需要成为一个聆听着，学会去理解他人&lt;/li&gt;
-&lt;li&gt;冲突与分歧：采用创造性的合作，找到比双方最初想法都要好的解决方法。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;产能平衡的原则&#34;&gt;产能平衡的原则&lt;/h2&gt;
-&lt;p&gt;秉承自己内心的价值观，产生自己的自尊自重与自制力，以自己内在的价值标准，而不是以别人的好恶或者与别人的评价的结果，来衡量自己。事情的对错与别人是否发现无关。&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;不再让别人影响自己的情绪，反而会更加容易接受变化，因为可以有一些恒久不变的内在的本质，可以作为支柱&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;对自己要有耐心，因为自我成长是神圣的，同时也是脆弱的，是人生中最大规模的投资。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;“得之太易者必不受珍惜。唯有付出代价，万物始有价值。上苍深知如何为其产品制定合理的价格”&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;待续。有缘再更&lt;/p&gt;
-</description>
-        </item>
-        
-    </channel>
+  <channel>
+    <title>Note on lllovol</title>
+    <link>https://lllovol.com/tags/note/</link>
+    <description>Recent content in Note on lllovol</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 07 Feb 2022 20:17:32 +0000</lastBuildDate><atom:link href="https://lllovol.com/tags/note/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>《重构》-代码的坏味道</title>
+      <link>https://lllovol.com/p/2022/2/refactoring-chapter3/</link>
+      <pubDate>Mon, 07 Feb 2022 20:17:32 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2022/2/refactoring-chapter3/</guid>
+      <description>神秘命名 整洁代码最重要的一环就是好的名字，所以我们会深思熟虑如何给函数、模块、变量和类命名，使他们能清晰表面自己的功能和用法。
+ 需要考虑取一个好的名字  重复代码 如果你在一个以上的地点看到相同的代码结构，那么可以肯定：设法将它们合而为一，程序会变得更好。
+ 抽取重复代码，使之能够复用  过长函数 据我们的经验，活得最长、最好的程序，其中的函数都比较短。
+短的函数具有更好的阐释力、更易于分享、更多的选择。
+函数越长，就越难理解。
+每当感觉需要以注释来说明点什么的时候，我们就把需要说明的东西写进一个独立函数中，并以其用途（而非实现手法）命名。
+条件表达式和循环常常也是提炼的信号。
+ 可以考虑使用横屏显示器进行开发，这样潜意识里就不会把一个函数写的过长  过长的参数列表 过长的参数列表本身也经常令人迷惑。
+如果可以向某个参数发起查询而获得另一个参数的值，那么就可以使用以查询取代参数去掉第二个参数。
+使用类可以有效地缩短参数列表。
+ Go中可以使用struct的方式，来传入较多的参数  全局数据 全局数据是最刺鼻的坏味道之一。
+一次又一次，全局数据造成了哪些诡异的bug，而问题的根源却在遥远的别处，想要找到出错的代码难于登天。
+良药与毒药的却别在于剂量。有少量的全局数据或许无妨，但数量越多，处理的难度就会指数上升。
+ 尽量少使用全局变量  可变数据 对数据的修改经常导致出乎意料的结果和难以发现的bug。
+如果可变数据的值能在其他地方计算出来，这就是一个特别刺鼻的坏味道。
+发散式变化 一旦需要修改，我们希望能够跳到系统的某一点进行修改，只在此处进行修改。如果不能做到这一点，你就能嗅出两种紧密相关的刺鼻味道中的一种了。
+ 一个类受多种变化的影响  散弹式修改 如果遇到某种变化，你都必须在许多不同的类内做出许多小修改，你所面临的坏味道就是散弹式修改。
+ 一种变化引发多个类对应改动  依恋情结 所谓模块化，就是力求将代码分出区域，最大化区域内部的交互、最小化跨区域的交互。
+如果一个函数跟另一个模块的函数或者数据交流格外频繁，远胜于在自己所处模块内的交流，这就是依恋情结的典型情况。
+ 函数对某个类的兴趣高过对自己所处类的兴趣  数据泥团 你常常可以在很多地方看到相同的三四项数据：两个类中相同的字段、许多函数签名中相同的参数。
+ 两个类中同样的字段、很多函数签名中同样的參数 这种情况汪汪和历史遗留问题相关  基本类型偏执 大多数编程环境都大量使用基本类型，即整数、浮点数和字符串等。
+一个有趣的现象：很多程序员不愿意创建对自己的问题域有用的基本类型。
+字符串是这种坏味道的最佳培养皿，比如，电话号码不只是一串字符。
+重复的switch 我们现在更关注重复的switch：在不同的地方反复使用同样的switch逻辑（可能是以switch/case语句的形式，也可能是以连续的if/else语句的形式）。应该以多态取代条件表达式消除掉。
+ 例如可以使用策略模式等方式  循环语句 函数作为一等公民以及得到广泛的支持，因此我们可以使用以管道取代循环来让这些老古董退休。
+管道操作（如 filter和map）可以帮助我们更快地看清被处理的元素以及他们的动作.</description>
+    </item>
+    
+    <item>
+      <title>《重构》-重构的原则</title>
+      <link>https://lllovol.com/p/2021/12/refactoring-chapter2/</link>
+      <pubDate>Tue, 07 Dec 2021 21:05:58 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/12/refactoring-chapter2/</guid>
+      <description>前言 本文是一篇关于Martin Fowler《重构：改善既有代码的设计》的第二章读书笔记与总结。
+何谓重构 很多一线的实践者会非常随意的使用重构这个词，但是作者会非常严谨地使用重构。
+ 重构（名词）：对软件内部的结构的一种调整，目的是在不改变可观察行为的前提下，提高其可理解性，降低其修改成本 重构（动词）：使用一系列重构手法，在不改变可观察行为的前提下，调整其结构。  重构的关键在于运用大量微且保持软件行为的步骤，一步步达成大规模的修改。 每个单独的重构呀么很小，要么由若干个小步骤组合而成。这样的好处是，即使重构没有完成，也可以在任何时刻停下来，代码很少进入到不可工作的状态。
+重构与性能优化 二者有很多相似之处
+ 都需要修改代码 都不会改变程序的整体功能  区别
+ 重构是为了让代码更容易理解，更易于修改。这可能会让程序运行的更快，也可能运行的更慢。 性能优化时，只关心如何让代码程序运行得更快，最终得到的代码有可能更难理解和维护，对此需要有心理准备。  两顶帽子 Kent Beck提出了两顶帽子的比喻。使用重构技术进行软件开发是，可以把自己的时间分配给两种截然不同的行为：
+ 添加新功能：不应该修改既有的代码，只管添加新功能。同时需要添加测试并且让测试正常运行。 重构：不再添加新的功能，只调整代码的结构。此时不应该添加任何测试，只有在绝对必要的时候才修改测试。  但是在实际的开发过程当中，我实际会经常变换帽子：当我开始添加新功能时候，突然意识到如果把程序结构修改一下，功能添加会容易很多。于是就换上了一顶重构帽子，开始了一会的重构工作。当程序结构调整好了之后，又戴上了原来的帽子。
+总之，整个过程中，无论何时何地，都要清楚当前的自己戴的帽子究竟是哪一个，并且了解不同的帽子对编程状态提出的不同的要求
+为何重构 重构绝对不是包治百病的灵丹妙药，更不是所谓的“银弹”，但是绝对算是一把银钳子，可以帮你始终良好的控制自己的代码。 重构是一个工具，它能够用于以下几个目的：
+重构改进软件的设计 如果没有重构，程序的内部设计（架构）会逐渐的腐败变质。当人们只为了短期目的而修改代码时，经常没有完全理解架构的整体设计，于是代码就逐渐失去了自己的结构。（屎山代码就是这么来的，但是没有办法避免） 越难看出代码的设计意图，就越难保护其设计，腐败的也就越快。经常的重构有助于代码为支持自己该有的形态。 同时，消除重复代码，就可以确定所有事物和行为在代码中只表述一次，这才是优秀设计的根本。
+重构使软件更容易理解 虽然代码是在计算机上运行的，编程的核心就是“准确的说出我想要的”，但是除了计算机之外，源码还有其他读者，几个月之后可能会有另外以为程序员尝试读懂我的代码并且进行一些修改。我们很容易就忘记了这个读者，“又不是不能用”，然后这个代码就这么写出来了。而后人可能会花费很多时间来理解和阅读我的代码。
+因此，我们需要改变一下开发的节奏，让代码变得更加易于理解。重构可以让代码更加易读。
+做一个懒惰的程序员，表现形式之一就是，总是记不住自己写过的代码。对于任何能够立刻查阅的东西，都可以故意不去记它，别把自己的脑袋塞爆了。尽量把需要记住的东西写在代码里。
+重构帮助找到bug 重构的时候，能够更加深入的理解代码的所做所谓，并立即把新的理解反映在代码当中。在弄清楚程序结构的同时，必须要做一些假设去验证，因此想不把bug找出来都难。
+ Kent Beck：我不是一个特别好的程序员，我只是一个有一些特别好的习惯的还不错的程序员
+ 重构提高编程速度 最后，前面的一切都归结到了这一点: 重构能够帮助我们更快的开发程序。
+这虽然有点违反直觉，因为重构本来就是一件耗费精力的事情。但是如果一个代码全靠补丁来不断的修复，最后就是补丁补补丁，需要考古学家才能弄清楚这个代码到底是怎么个回事。以至于最后，这个系统的负担会不断拖慢新增功能的速度，到最后程序员恨不得重头开始写整个系统。
+如果代码很清晰，引入bug的可能性就会很小，即使引入的bug，调试和排查也会容易很多。理想情况下，我的代码库会逐渐严骅成为一个平台，在其上可以容易的构造与其领域相关的新功能。
+ 设计耐久性假说：通过投入精力改善内部设计，我们增加了软件的耐久性，从而可以更长时间的保持开发的快速。
+ 何时重构 编程的每个小时，都应该去做重构。有几种方式可以把重构融入工作过程中。
+三次法则  第一次做某件事的时候尽管去做 第二次做类似的事情会产生方案，但是无论如何还是可以去去做 第三次再做类似的事情，就应该去重构  预备性重构：让添加新功能更容易 重构的最佳时机就是在添加新功能之前
+帮助理解的重构：使代码更易懂 需要理解代码做什么才能着手修改
+ 比如看到一段迷惑的代码，自问，能不能重构它，让它看起来一目了然？ 看到结果糟糕的条件判断，想修改，发现函数命名太糟糕了？ 等等，都是重构的机会。哪怕只是修改函数的命名这类重构，只要能够更加清楚的表达出一图，都会是非常有意义的。这些初步的重构，就像是扫去窗上的灰尘，能够让我们看到窗外的风景。  捡垃圾式重构 可以把要重构的点记下来，把更紧急的事情处理之后，抽空来处理这些垃圾。积少成多</description>
+    </item>
+    
+    <item>
+      <title>正念</title>
+      <link>https://lllovol.com/p/2021/10/mindfulness/</link>
+      <pubDate>Tue, 12 Oct 2021 17:05:49 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/10/mindfulness/</guid>
+      <description>北大心理学教授的课笔记
+概念澄清  并非正确的观念、积极的信念 没有宗教色彩 是为了自身的心理健康  作用  降低焦虑与抑郁 缓解压力 内心更加平静，改善睡眠 提升专注度 降低血压（正念主要是让我们的心理压力缓解了，紧张的时候血压就是会升高，正常现象） 压力大，免疫力就会降低。压力小，免疫力就会提高  应用  精英运动员 警察 美军 领导者  练习要点 觉察&amp;lt;==&amp;gt;接纳
+接纳-&amp;gt;不去在乎那些细节 更多的体会当下
+可以让那些杂念存在，并不需要排除它</description>
+    </item>
+    
+    <item>
+      <title>Goland全局替换正则技巧</title>
+      <link>https://lllovol.com/p/2021/10/goland-tips/</link>
+      <pubDate>Mon, 11 Oct 2021 11:33:32 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/10/goland-tips/</guid>
+      <description>使用Goland的全局替换   单文件 使用Command+R进行替换
+  多文件 使用Shift+Command+R进行替换
+  正则替换 可以使用正则表达式进行替换 例如，我们想为DoFunction这个方法添加一个ctx作为第一个参数
+ 打开Regex的开关 搜索：DoFunction((.*?)\)，其中 (.*?) 表示正则 group，会取到这个函数的参数 替换：DoFunction(ctx, $1)，其中 $1 表示上一步匹配到的第一个参数  </description>
+    </item>
+    
+    <item>
+      <title>设计模式-Prototype原型模式</title>
+      <link>https://lllovol.com/p/2021/9/prototype/</link>
+      <pubDate>Thu, 23 Sep 2021 15:21:54 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/9/prototype/</guid>
+      <description>场景 有一个object，想要生成与之完全相同的复制品，该如何是实现？ 问题：
+ 私有数据 不想包含具体的包 如果原始的对象只是一个接口，具体类都不知道，怎么处理呢？  方案 将克隆过程，委派给被克隆的实际对象，由实际对象负责clone 因此，只要实现了clone()方法的，就是原型模式
+实现  原型（Prototype）接口对clone方法做一个申明，绝大部分情况下，里面只有一个名为clone的方法 具体原型（ConcretePrototype）类实现接口 客户端（Client）可以复制实现了原型接口的任何对象  应用  将自身作为构造函数的参数传入 复制数组
+  如果需要复制一些对象，同时又希望代码独立于这些对象所属的具体类 如果子类的区别仅在于对象的初始化方式，那么可以使用该模式减少子类的数量，别人创建这些子类的目的可能只是为了创建特定的对象。  优点  克隆时 无需与所属的具体类耦合 克隆原型 防止反复运行初始化 更方便的生成复杂对象 可以用继承以外的方式来处理复杂对象的不同配置  缺点  克隆博涵循环引用的复杂对象可能会非常麻烦  </description>
+    </item>
+    
+    <item>
+      <title>设计模式-Factory工厂模式学习笔记</title>
+      <link>https://lllovol.com/p/2021/9/design-pattern-factory/</link>
+      <pubDate>Thu, 09 Sep 2021 15:31:14 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/9/design-pattern-factory/</guid>
+      <description>工厂模式 有点忙，先看看吧</description>
+    </item>
+    
+    <item>
+      <title>设计模式-Singleton单例模式学习笔记</title>
+      <link>https://lllovol.com/p/2021/9/design-pattern-singleton/</link>
+      <pubDate>Thu, 02 Sep 2021 15:50:47 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/9/design-pattern-singleton/</guid>
+      <description>概要 保证一个类只有一个实例，保证一个进程中，某个类有且仅有一个实例
+方案：  构造函数私有化 新建静态构造方法作为构造函数  饿汉式 类加载的时候，就实例化。
+懒汉式 第一次使用的时候，再实例化。节省资源，但是需要注意线程安全问题
+总结 优点  只有一个实例，避免了重复的内存开销 避免对资源的重复占用  缺点 可以理解为一个全局变量，没有接口，不能继承。违背了SRP职责</description>
+    </item>
+    
+    <item>
+      <title>Google SRE解密笔记(一)</title>
+      <link>https://lllovol.com/p/2021/8/google-sre/</link>
+      <pubDate>Tue, 24 Aug 2021 21:55:29 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/8/google-sre/</guid>
+      <description>拥抱风险 百分百可靠的服务，是不现实也是没有必要的。 可靠性到达一定值之后，会带来成本的大幅度提升：过分要求稳定性会限制新产品的开发速度和交付速度。
+用于对于高可靠性和极端可靠性的感知几乎是没有的。
+基于这一点，SRE追求快速创新和高效的服务运营业务之间的风险的平衡，而不是简单的将服务在线时间最大化。
+平衡系统的功能、服务和性能
+管理风险 </description>
+    </item>
+    
+    <item>
+      <title>设计模式-Strategy策略模式学习笔记</title>
+      <link>https://lllovol.com/p/2021/8/strategy/</link>
+      <pubDate>Sun, 15 Aug 2021 02:12:03 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/8/strategy/</guid>
+      <description>前言 为什么我们需要设计模式呢？我们日常的设计应该对手头的问题有针对性，同时对将来的问题也要有足够的通用性，同时我们也需要避免重复设计或者尽可能的减少重复设计。但是想以一下子就得到复用性和灵活性好的设计，其实是相当困难的。 而设计模式，就是将对面向对象软件的设计经验作为设计模式记录下来。
+设计模式的四个基本要素  模式名称 一个助记的名称 问题 描述了应该在什么时候使用设计模式 解决方案 描述了设计的组成成分，它们之间的相互关系和各自的职责和协作方式 效果 描述了模式应用的效果以及使用模式应该权衡的问题  设计模式的三大分类 我们主要通过两个准则对各种设计模式进行分类：
+ 目的准则 这个模式是用来完成什么工作的 范围准则 这个模式用于类还是用于对象的 设计模式分类  面向对象的六大原则  单一功能原则 一个类只做一件事情 开闭原则 一个软件实体类，模块和函数应该对扩展开放，对修改关闭 里氏替换原则 子类可以扩展父类的功能，但不能改变父类原有的功能 依赖倒置原则 抽象不应该依赖细节，细节应该依赖于抽象，换一句话说，就是要针对接口编程，不要对实现编程 接口分离原则 系统解开耦合，从而容易重构，更改和重新部署 迪米特原则 一个类应该对自己需要耦合或者调用的类知道得最少，这有点类似于接口隔离原则中的最小接口的概念  Strategy 策略模式 意图 定义一系列的算法，把他们一个个封装起来，并且使他们可以互相替换。同时本模式可以使得算法可以独立于使用它的客户变化而变化
+别名 Policy 政策模式
+动机 当我们需要对一个正文流进行处理，需要使用许多不同的算法。这个时候，将这些算法那硬编码进使用它们的类当中是不可取的，原因如下：
+ 客户程序异常庞大同时难以维护 不同的时候需要不同的算法，我们不想支持我们并不使用的算法 当其中某些算法是客户程序难以分割的算法的时候，增加新的算法或者改变现有的算法将十分困难  适用性  许多相关的类只是行为有不同 可以使用多个行为中的一个行为来配置一个类 需要使用一个算法的不同变体 可能会定义一些反映了不同时间、空间等因素权衡的算法，将这些变体实现为类层次 算法使用了客户不应该知道的数据 避免暴露负责的、与算法相关的数据结构 一个类定义了多种行为，并且这些行为在这个类的操作中以多个条件语句的形式出现。将相关的条件分支移入它们各自的Strategy类当中来代替这些条件语句  结构 图
+参与者  Strategy  定义所有支持的算法的公共接口。Context使用这个接口来调用某个ConcreteStrategy定义的算法   ConcreteStrategy  以Strategy为策略是实现某具体的算法   Context  用一个ConcreteStrategy对象来配置 维护一个对Strategy对象的引用 可定义一个接口来让Strategy访问它的数据    协作  Strategy和Context相互作用以实现选定的算法  Context将算法所需要的数据传递给Strategy Context也可以将自身作为一个参数传递给Strategy，Strategy就可以在需要的时候回调Context   Context将客户的请求转发给它的Strategy。通常创建并传递一个ConcreteStrategy对象给Context。客户只需要和Context交互。  效果 优点  相关算法系列 Strategy类层次为Context定义了一系列可供重用的算法或者行为。有助于析取出这些算法的公共功能 一个替代继承的方法 可以使用继承生成Context的子类，给予它们不同的行为，但是这就会将行为硬编码到Context当中，将算法的实现和Context的实现混淆，使得Context难以理解、难以维护、难以扩展，还不能动态改变算法。将算法封装在独立的Strategy类中，使得我们可以独立于Context改变它，易于切换、易于理解、易于扩展 消除了一些条件语句 将不同行为堆砌在一个类当中的时候，很难避免使用条件语句来选择合适的行为。将行为封装成一个个独立的Strategy类中可以消除这些条件语句（含有许多条件语句的代码通常意味着需要使用策略模式） 实现的选择 可以为相同行为提供不同的实现，可以根据不同的时间、空间权衡取舍要求从不同的策略中进行选择  缺点  客户必须要了解不同的Strategy 本模式一个潜在的缺点，客户选择一个Strategy必须要知道这些Strategy有何不同，此时可能不得不向客户暴露实现。因此只有不同行为变体与客户相关的行为时，才需要使用Strategy Strategy和Context的通信开销 无论具体的ConcreteStrategy是简单还是负责，都共享Strategy定义的接口。因此很可能某一些简单的ConcreteStrategy可能不会使用所有通过这个接口传递给他们的信息。 增加了对象的数目 Strategy增加了一个应用中对象的数目。有时候可以将Strategy实现为可供各个Context共享的无状态对象来减少这一个开销。其余任何状态都由Context来维护  实现  定义Strategy接口和Context接口 必须传递所有实现需要的数据，也可以将Context自身作为参数进行传递 将Strategy作为模板参数 （Go里没有，这就不展开了） 让Strategy对象成为可选的 访问前先判断是否存在，如果存在，就使用它；如果没有，就执行缺省的行为  代码示例  回调事件处理  相关模式 Flyweight（享元模式）： Strategy对象通常是很好的轻量级对象</description>
+    </item>
+    
+    <item>
+      <title>Structure and Interpretation of Computer Programs 读书笔记 Chapter 1 构造过程抽象 1.1 程序设计的基本元素</title>
+      <link>https://lllovol.com/p/sicp-chapter1.1/</link>
+      <pubDate>Fri, 17 Jan 2020 11:13:47 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/sicp-chapter1.1/</guid>
+      <description>第1章 构造抽象过程  这一张主要学习的是有关计算过程的知识。   定义：计算过程是存在于计算机的里的一类抽象事物，主要操作一些被称之为&amp;quot;数据&amp;quot;的抽象事物。（就像Java中的各种类中的方法）
+   我们指挥这种过程的程序就像是巫师的巫术一样，使用一些诡秘而深奥的程序设计语言，通过符号表达式的形式精心编排而成，他们描述了我们希望相应的计算过程去完成的工作。
+  但是幸运的是，我们学习程序的危险性远远小于巫术。但是我们也必须像麻瓜一样，必须去学习、理解、预期我们所使用的咒语（程序）所带来的效果。程序里即使有一个小错误（bug or glitch）,也可能带来无法预料的后果。 真实的程序设计则需要极度细心，需要经验和智慧。
+  设计良好的计算系统就像设计良好的汽车或者核反应堆一样，具有某种模块化的设计，其中的各个部分都可以独立地构造、替换和排除错误。
+  书中所使用的Lisp方言Scheme，并不是一门主流语言，但是有一个非常重要的特征：计算过程的Lisp描述（过程）本身可以作为Lisp的数据来表示和操作。而不是现在很多威力强大的程序设计技术，都依赖于填平在 &amp;ldquo;被动的&amp;quot;数据和&amp;quot;主动的&amp;quot;过程之间的传统划分。
+  1.1 程序设计的基本元素 一个强有力的语言，不仅是一种指挥计算机执行任务的方式，它应该成为一种框架，是我们能够在其中组织自己有关计算过程的思想。 每一种强有力的语言都提供了三种机制：
+ 基本表达式形式：用于表示语言所关心的最简单的个体。 组合的方法：通过它们可以从比较简单的东西出发构造出复合的元素。 抽象的方法：通过它们可以为复合对象命名，并将它们当做单元去操作。  用白话来解释，数据就是我们希望去操作的东西，而过程就是有关操作这些数据的规则描述。这样，任何强有力的程序设计语言都必须能够表达表述基本的数据和基本过程，还需要提供对过程和数据进行组合和抽象的方法。
+1.1.1 表达式  开始程序设计，最简单的方式就是打开计算机的终端，用键盘输入一个表达式，解释器的响应就是将它对这一个表达式的求值结果显示出来。 运算对象+运算符 ==&amp;gt;组合式 （组合式本身也可以作为运算对象参与其他组合式的运算（套娃递归）） 即使对于非常复杂的表达式 解释器也是按照同样的基本循环运作： 读入-&amp;gt;求值-&amp;gt;打印  1.1.2 命名和环境  程序设计中一个必不可少的方面，就是它需要提供一种通过名字去使用计算对象的方式。我们将名字标识符成为变量，它的值也就是它所对应的那个对象。 实际上，构造一个复杂的程序，也就是为了去一步步地创建出越来越复杂的计算性对象。（一个Lisp程序通常是由一大批相对简单的过程组成的） 我们可以将值和符号相关联，而后又能提取出这些纸，这意味着解释器必须维护这某种存储能力，以便保持有关 名字-值 对偶的轨迹。这种存储被称之为环境 （更加准确的说是全局环境，以后会看到，在一个计算过程中完全可能涉及到若干不同的环境（全局域和局部域，全局变量和局部变量））  1.1.3 组合式的求值 一个组合式的求值狐妖就是做两件事
+ 求值该组合式的各个子表达式 将作为最左子表达式的（运算符）的值那个过程应用于相应的实际参数，所谓的实际参数就是其他子表达式（运算对象）的值。   一般而言，我们将递归看做一种处理层次性结构的（像树这样的对象）极强有力的技术。 &amp;ldquo;值向上穿行&amp;quot;形式的求值形式是一类更一般的计算过程的例子，这种计算过程被称为树形积累。 (define x 3)这种定义的情况，这算是一种特殊形式，作用是将符号x关联一个3的值，这并不是一个组合式。每一种特殊形式都有自己的求值规则。  1.</description>
+    </item>
+    
+    <item>
+      <title>Structure and Interpretation of Computer Programs 读书笔记 前言</title>
+      <link>https://lllovol.com/p/sicp/</link>
+      <pubDate>Mon, 13 Jan 2020 15:22:58 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/sicp/</guid>
+      <description>写在最前面 本文主要用来记录自己再工作之余阅读的这本书籍的读书笔记，在记录的同时，也会加入一些自己的一些思考与总结(括号中的内容)
+书籍目录架构  构造过程抽象 构造数据抽象 模块化、对象和状态 元语言抽象 寄存机器里的计算  序言部分笔记  程序员必须同时追求具体部分的完美和继承的适宜性。 每一个计算机程序都是现实中或者精神中的某一个过程的模型，通过人的头脑孵化出来。 如果艺术解释了我们的梦想，那么计算机就是以程序的名义执行着他们。 计算机是一位一丝不苟的&amp;quot;工匠&amp;quot;：它的程序必须正确，我们希望的所有东西，都必须表述得准确到每一点细节。 掌握强有力的组织技术，将会提升我们构造大型重要程序的能力。 计算机必须遵守物理定律。如果它们要快速执行，几个纳秒做一次状态转换，那么就必须在很短的距离内传导电子。 计算机永远都不够大也不够快。硬件技术的每一次突破都带来了更大规模的程序设计事业（同时也会带来更大规模的机会，机会总是无处不在的，但是能发现并抓住机会的人却没有那么多） Lisp语言有着非常简单的语法和语义，程序的语法分析可以看做一种很简单的工作。这样，语法分析技术对于Lisp程序几乎就没有价值，语言处理器的构造不会成为大型Lisp系统发展的变化和阻碍。最后，正是这种语法和语义的极端简单性，给所有的Lisp程序员都带来了负担和自由。任何规模的Lisp程序，除了那种寥寥几行的程序外，都包含考虑周到的各种功能。 发明并调整，调整恰当后再去发明！  前言部分笔记  计算机语言并不仅仅是一种让计算机去执行操作的方式，更重要的是，它是一种表述有关方法学的思想的新颖的形式化媒介。因此，程序必须写的能够供人阅读，偶尔地去供计算机执行。 能够对程序设计的风格要素有一种很好的审美观。……知道在什么时候哪些地方不需要去读，哪些东西不需要去理解。应该很有把握地去修改一个程序，同时又能保持原来作者的精神和风格。 计算机革命是关于我们如何去思考，以及如何去表达自己所思考的  </description>
+    </item>
+    
+    <item>
+      <title>大咖分享-如何提高自己的技术视野</title>
+      <link>https://lllovol.com/p/improve-our-vision/</link>
+      <pubDate>Thu, 08 Aug 2019 01:14:30 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/improve-our-vision/</guid>
+      <description>前言 最近听了一场蔡黎博士关于如何提高我们技术视野的分享，收益良多，其实不仅仅是在技术方面，其实很多道理，在生活中都是有共通点的。分享的主要内容既然是关于如何提高我们的技术视野的，那么他是如何进行分享的呢？他主要将这次分享按照内容分为了三个方面：
+ 视野 技术 效益  第一部分 视野 用英文来讲，就是Vision，这决定了格局和潜力，也是指的一种远见。
+那么怎样才能看的更远呢？  看得到多远的过去，就能看得到多远的未来。&amp;ndash;丘吉尔 
+ 例子一：如今阿里云计算排名第一 中国云计算市场现状：top1阿里云 超过了第2到第8名的总和。 但是如果看看10年前，国内的各个公司都在同一起跑线上，那时候的大佬们对于云计算，看法又都是怎样的呢？
+ 李彦宏，说云计算是新瓶装旧酒，没有什么新东西。 马化腾，云计算的理念，还为时过早，就算能够实现也是过一百年和一千年之后才能实现的事情了。 马云，可以生产更好的商品，卖给消费者。  可以看到，BAT作为那时候中国的互联网三大巨头，只有阿里的马云是看好云计算的，而从如今的结果来看，阿里巴巴当初选择将精力投入到云计算是绝对正确的选择。那么，为什么阿里巴巴当初为什么要投云计算？ 因为云计算其实是数据时代的公共基础设施，那么那时候的阿里，是通过什么样的方式发现这样的一个原因呢？10年前，能看到如今的未来嘛？答案是肯定的。
+我们回顾一下第二次工业革命，电的出现之后，是如何发展的呢？
+ 最开始-分散发电模式分散发电模式 到现在-集中发电模式集中发电模式 我们可以看到，在电出现了之后，最开始，都是分散发电的模式，工厂都用着自己的发电机来进行发电，实现电量的自给自足。再看看现在，都是国家电网，集中发电的集中发电形式。
+ 通过类比的方式可以发现，其实和发电的形式是相当相似的
+工业时代看用电量
+信息时代看用云量
+科技永远向前，历史总在重演
+例子二：小米卖手机 雷军在做小米手机的初期，那时候他的演讲，就讲到过Android还有操作系统芯片等等部分模块，都将实现标准化。
+ 产品经理是怎样炼成的？新媒体电商
+在那个时候的手机利润，是3倍来卖的，真的是个暴利行业，但是雷军觉得，手机不应该是3倍的毛利来卖，因此，小米手机一直都是每台手机只赚5%，一直卖到了现在世界五百强。 （看看pc，毛利才14%，那时候手机毛利3倍是多么的夸张，但是其实最开始的pc也没有几个人能买得起）第一个标准化，第二个是薄利多销，雷军他所看见的手机未来的发展趋势，其实就是pc行业发展的规律。
+  第一波浪潮-pc 第二波浪潮-手机
+ 这就是个历史规律，科技的趋势是普惠的。
+ 一体化的用户体验，是远超组合的用户体验 标准化，差距会逐渐缩小 产业最终肯定分工化、规模化， 产业的演进是技术和商业模式的结合  例子三：为什么芯片要单独为手机再开发一次？ 为什么要在手机上芯片重新开发一遍？因为功耗更小
+差了几倍呢？10倍
+价格呢？便宜了10倍
+ 
+10倍因素的新技术，某个指标产生这种变化的时候，那么可能就是革命要出现了  你必须保持敏感，否则当新技术作为10倍数因素席卷而来的时候，猝不及防只能轰然倒塌。同时，对新技术的追逐可能不在盈利，而在于可以使得企业在必要的时候迅速转向。毕竟，只有早早行动，才有希望争取未来的胜利，改变不利的命运&amp;ndash;英特尔公司前CEO安迪·葛洛夫</description>
+    </item>
+    
+    <item>
+      <title>《定位》</title>
+      <link>https://lllovol.com/p/positioning/</link>
+      <pubDate>Tue, 01 Jan 2019 01:29:23 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/positioning/</guid>
+      <description>“取法于上，仅得为中，取法为中，故为其下”。  在读AI Ries和Jack Trout的这一本《定位》之前，我对“定位”这个词，第一个感觉，就是唐太宗的这句话，当然这只是仅仅是站在个人的层面，对自己的一种定位。在追求探索一件事情的时候，需要将目标放的高与长远一点。在读完《定位》之后，我对定位这个词有了新的理解。
+回想近代社会的发展史，其实也就是人们的定位的一次次的更新和迭代：十八世纪六十年代，瓦特改良了蒸汽机，手工劳动的转变为了大机器生产，是第一次的工业革命，人类的生产力得到了极大的提高，这时候生产力的定位，是靠着有这熟练经验的技工总结而来的；十九世纪下半叶，蒸汽时代逐渐接受，人们逐渐开始进入电气时代，这时候生产力的定位，和第一次有着巨大的不同，是科学技术真正的开始带来生产力的巨大变革；而在第二次世界大战结束之后，人类进入了第三次的生产力革命，信息技术的革命，技术更迭日新月异，瞬息万变的时代，而现在的定位，正是书中所着重介绍的，可以植入人们心智的一种定位。
+因此书中举了很多关于企业的例子，美国的香烟品牌如何使用定位抢占市场份额，航空公司的成长，福特公司生产汽车优劣等等。虽然这本书的作者，Jack Trout最早是在上个世纪70年代的时候提出来的定位这个概念，书中有不少例子都不是那么的新，甚至还会存在打脸的情况，但是最后的结果都在印证书中的观点的正确性。例如《TIME》的名字，作者最开始并不那么看好，认为这名字不是很好，销量不如《每周周刊》，虽然随着时间的不断积累，展示出来的结果恰恰相反，但是也在一定程度上印证了书中的观点，有一个好名字的重要性。预测失误只是当时的作者并不认为这是一个好的名字。
+现在的中国，已经成长为世界上第二大的经济体，改革开放以来，中国的实体经济，主要都是靠着廉价的劳动力成本来进行的驱动，但是随着时代的发展，人们物质生活水平都在不断的提高，对精神需求方面以及环境保护方面，都有了非常大的变化。而在现如今的社会市场状况下，已经不是当初那个靠着产品来驱动的时代了。而应该就是书中所说的“定位的时代”。
+通读全书，定位主要有以下几个方面。
+确定领导者地位  成为第一就是进入顾客心智的主要途径，成为第一个进入人们心智某个领域的产品，给自己确定一个定位。在给自己定位之前，还必须明确当前自己的定位，不要去尝试去挑战那些已经是第一领导者的人，那需要更多宣传和更高的质量，然后对于后来者来说，都是很难同时兼顾的事情。如果是成功成为了领导者，那么就要遵循领导者的准则，以潜在用户的标准来建立领导地位，然后对竞争对手进行全面的拦截，同时保证自己产品的实力，对竞争对手提出来新的概念的时候做出迅速的回应，以保持自己的领导者地位。书中说，成为第一很难，保持第一很简单。但我觉得，这两者都并非易事，但是成为领导者之后，确实可以通过占有更大的资源份额，做出更大发展。就这一点来看，我们公司现在已经做到了，但是需要努力工作，才能保持优势。在公益筹款平台方面，我询问我的朋友们，他们第一反应就是我们公司。
+跟随者的方式  如果不能成为领导者，那么就需要使用跟随者的方式，找到一个未被其他人占据的“空位”。例如同一个产品的高价定位，或者低价定位，或者性别定位，但是有一个陷阱，就是永远不要想着满足所有人的需求。这一点无论是做产品，还是做人做事，都是一样的道理，人的精力是有限的，将目标之事专注的完成了已经就不是一件易事。除此之外，还可以给竞争对手重新定位。个人理解，就是进行一种比较性的定位，找出自己具有优势而对手却薄弱的方面，进行定位，虽然这么做不是那么厚道，但是却真实有效。但是现实就是如此，对竞争对手少许的“贬低”，比自己大量的“自吹自擂”更加有意义。诚实和公正的重新定位，才能让竞争对手不敢怠慢。
+产品的定位品牌  然后就是书中很重要的一个方面，就是自己的产品的定位品牌。一是拥有一个优秀的好名字，一个优秀的名字本身，在这个传播过渡的社会中就具有巨大的威力，例如水滴，完美符合众筹的这个概念，无论是点滴汇成江河海洋，还是滴水石穿，从古诗意境上面分析，这就是一个非常好的意象。一个响亮，接近通用而又带有描述性的名字，本身就可以阻击对手进入我们的领域。取名字真的是一门学问，就像一个好的名字会伴随一个人的终生，一个名字也将是一个产品最重要的牌面。二就是书中所提到的无名陷阱，有些名字冗长的公司企图使用缩写来简化自己的名字，然而往往适得其反，最后使得用户完全不知道这个缩写词所代指的到底是什么，除非足够幸运，缩写词刚好也是公司主要业务的体现这样的尤为特殊的情况，例如漫威电影中的神盾局Strategic Homeland Intervention, Enforcement and Logistics Division缩写刚好是S.H.I.E.L.D，这么幸运的事情，还是很难强求的。三就是不要企图将第一个成功的品牌名字无限的重复使用，使用一个名字不断延伸自己的产品种类，这样的坏处是，用户在看见这个名字的时候，会疑惑这到底指的是什么产品。当把一个成功产品的名字使用到多个新产品中的时候，其实是在消耗成功产品的寿命。看完此书之后，我才明白，为什么竹子好课不叫水滴好课，国际化项目不叫水滴国际而叫Deeda。总结来讲，品牌名就像是橡皮筋，它可以拉伸，但是又临界点，它拉的越长，就越脆弱。
+个人定位  上面都是关于企业产品的定位，而对个人而言，也可以拥有自己的定位。首先是定义自己，给自己一个唯一确定的定位，个人觉得这是一个很难的命题，需要随着时间阶段的推移和自身的成长做出长远和短期的定位目标（OKR），例如现在我对自己的定位，就是做一个认真踏实的后端实习生，将来的定位，就是成为一个后端研发专业的工程师。然后就是拥有一个好名字，这一点需要感谢我的母亲，给我取了一个好名字，而我自身也需要用自己的行动来将这个名字赋予新的意义，更加具有辨识度。然后就是找一匹优秀的马，换言之，就是寻找一个能够提升自己的事业的公司与愿意培养自己的领导。我很幸运，在实习的时候能够来到这个充满活力和无限未来可能性的公司，同时也有很多优秀的前辈给予我悉心的培养、耐心的指导，在过去半年里让我成长很大。
+你好2019  18再见，19你好！新的一年里，从零开始，新生再战！</description>
+    </item>
+    
+    <item>
+      <title>大咖分享-对游戏的看法</title>
+      <link>https://lllovol.com/p/share/</link>
+      <pubDate>Fri, 21 Dec 2018 19:24:46 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/share/</guid>
+      <description>背景 晚上 青果灵动的CEO刘睿（julao）来到了我们公司进行了一场演讲
+（以下都是按照julao的“我”）
+正题 其实是周三
+做了十五年了
+青果这家公司已经做了10年了
+每个人对游戏都有自己的价值观，所以这只是一次分享
+p1 有人没有玩过游戏嘛？请举手 （有零星几个人举手）
+玩过俄罗斯方块嘛？
+玩过剪刀石头布吗？
+拼多多使用游戏化的方法，成功？ 其实并不是，拼多多并不是游戏化的方式成功了。
+这一次的分享只是一次学习的回报
+关于游戏化的建议： 不要做，我做了十五年，都没有搞清楚游戏化是什么，每一个游戏都有自己的逻辑
+p2 游戏仅仅是娱乐？ 毁三观：  英国【报销门】，做一些假报销，==》卫报的游戏（调查你处议员的开支） 大概是个什么样的游戏呢？  登录这个游戏，就可以看到可能和议会有关的图片都上传扫描上去，然后可以看见其他的玩家打上的留言和标签， 所有人可以根据这些图片找出线索， 这仅仅只是一个游戏，并没有什么物质上的奖励，调查的结果又28名议员和这个案子有关。
+给我们一个非常重要的启示：20000名个玩家，为什么要去参加? 社会正义感？ 为什么游戏的这种方式会有效？    p3 光晕3中的人类保卫战（HALO3） 这是微软做的一个游戏，也是一个系列，是个在线联网的游戏 1500w名玩家发动的活动，人类保卫战。
+565天，消灭了一百e的外星人，平均每天1175个，每小时73万个。
+然后他们的成就被记录在 MUSEUM OF HUMANITY，做了个纪录片
+里面所有的故事和画面都是虚拟的，但是唤起的感情是真实的
+p4 重新认识一下游戏 俄罗斯方块：你知道你终究都会失败，这个游戏是没有胜利者的，这个游戏是为了输才玩的
+内容并不新鲜，得分并没有奖励，so 为什么我们要玩俄罗斯方块？
+人类的大脑进化到今天，大概过了四十万年
+从经验
+到规律
+到指导行为
+eg:为什么可以一边听演讲一边打字记下笔记？
+为什么我们知道桌上的水是水？
+游戏比现实更可预测！
+这就是为什么游戏那么吸引人的一个重要的前提
+游戏更加的不耐（进度反馈和不耐）
+人脑只有体重的5%，但是消耗了25%的能量，所以这是为什么甜食这么受人们喜欢的原因
+p5 追女孩是一件很难的事情 但是如果谈恋爱有进度条
+我们的生物性，决定了我们的社会性
+（游戏红） 游戏好玩就和脂肪很香一样，都是植入了DNA的东西
+p6 游戏是积极的！ 玩游戏超过12小时的举手！但是玩游戏是很累的！加微信
+因为游戏是个很累的一种事情</description>
+    </item>
+    
+    <item>
+      <title>高效能人士的七个习惯</title>
+      <link>https://lllovol.com/p/msg/</link>
+      <pubDate>Thu, 06 Dec 2018 10:22:08 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/msg/</guid>
+      <description>前言 最近看的一本书的随笔，摘抄与记录
+七个习惯的简要的概要  习惯一，积极主动。由内而外的改变，积极面对一切 习惯二，以终为始。所有的事物都经过了两次创造，先在脑海中酝酿，其次才是实质的创造 习惯三，要事第一。次要的事情不必摆在第一，要事不能放在第二 习惯四，双赢思维。无论工作伙伴还是家庭成员，要从互赖式的角度思考 习惯五，知彼解己。舍弃回答心，改以了解心去聆听别人 习惯六，统合综效。创造第三种选择，是互相尊重的成果，创造式的合作，1+1&amp;gt;2的方式 习惯七，不断更新。身体、精神、智力、社会，不断更新自己  变化的世界不变的原则  恐惧感和不安全感：在现代社会有太多的人保守不安全感的折磨，担心自己失业，担心自己无力养家，也因此助长了一种现象就是：人们不论是在工作还是生活中，都倾向于选择一种零风险的生活，并且逃避和他人互相依赖和合作。（不能说这种想法就是错的，就像元素守恒的道理是一样的，风险和收益往往都是成正比例的，高回报的同时也伴随着高风险，而低风险往往伴随着平平淡淡；而合作的好处更是不言而喻，例如，在现代的敏捷软件开发过程中，出现了pair programming，可以增加纪律性，写出更加优秀的代码。就如同书中所说，我们生活在一个相互依赖的社会中，最辉煌的成就都是靠着互相依赖和合作才能成就的，远远不是个人能力了就能够企及的。） 我现在就想得到：我们必须训练头脑，大量投入，不断磨练，提升自己的竞争力，以免被社会所淘汰。绝对不能就满足于学校的教育。人生处处皆高考，这是我高中班主任最常给我们传授的一句话，而现实也正是如此。 缺乏人生平衡：懂得轻重缓急，抓住生活的重点，客观面对现实 我的定位在哪儿：真正的大事业，通常只会由思维开阔、内涵丰富的头脑，经由忘我的合作精神&amp;ndash;互敬和双赢取得的 渴望理解：想要获得其他人的理解，那么自己需要成为一个聆听着，学会去理解他人 冲突与分歧：采用创造性的合作，找到比双方最初想法都要好的解决方法。  产能平衡的原则 秉承自己内心的价值观，产生自己的自尊自重与自制力，以自己内在的价值标准，而不是以别人的好恶或者与别人的评价的结果，来衡量自己。事情的对错与别人是否发现无关。
+不再让别人影响自己的情绪，反而会更加容易接受变化，因为可以有一些恒久不变的内在的本质，可以作为支柱
+对自己要有耐心，因为自我成长是神圣的，同时也是脆弱的，是人生中最大规模的投资。
+“得之太易者必不受珍惜。唯有付出代价，万物始有价值。上苍深知如何为其产品制定合理的价格”
+待续。有缘再更</description>
+    </item>
+    
+  </channel>
 </rss>

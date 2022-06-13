@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us" dir="ltr">
+<html lang="en-us">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='前言 Redis在曾经实现用户登录token的时候使用过，但是对其的了解程度，就只是在使用的这个层次。本篇文章主要用于学习记录Redis的常见的一些数据结构。
 第一部分 什么是redis？  是NoSql数据库，非关系型数据库。 是个非关系型数据库。 Key-Value数据库 使用C语言实现的单线程应用，基于内存，读取的速度都超快！ 基于内存存放,使用了rdb （就是redis内存的SNAPSHOT，存到了磁盘当中）和Aof(Append only file 也就是平时操作的命令集合)的机制来保障数据的持久化，宕机的时候可以通过这两种方式来进行数据恢复。 拥有丰富的Value对象，String\Hash\List\Set\ZSet\Stream 拥有多种底层数据结构：SDS，list，dict，zskiplist，intset，ziplist，quicklist，zipmap，stream 支持丰富功能，过期，事物  第二部分 常用Value对象 1 String对象 最常见的类型
@@ -16,7 +16,7 @@
 
 <link rel='canonical' href='https://lllovol.com/p/redis/'>
 
-<link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='Redis中的常用数据结构'>
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Redis中的常用数据结构'>
 <meta property='og:description' content='前言 Redis在曾经实现用户登录token的时候使用过，但是对其的了解程度，就只是在使用的这个层次。本篇文章主要用于学习记录Redis的常见的一些数据结构。
 第一部分 什么是redis？  是NoSql数据库，非关系型数据库。 是个非关系型数据库。 Key-Value数据库 使用C语言实现的单线程应用，基于内存，读取的速度都超快！ 基于内存存放,使用了rdb （就是redis内存的SNAPSHOT，存到了磁盘当中）和Aof(Append only file 也就是平时操作的命令集合)的机制来保障数据的持久化，宕机的时候可以通过这两种方式来进行数据恢复。 拥有丰富的Value对象，String\Hash\List\Set\ZSet\Stream 拥有多种底层数据结构：SDS，list，dict，zskiplist，intset，ziplist，quicklist，zipmap，stream 支持丰富功能，过期，事物  第二部分 常用Value对象 1 String对象 最常见的类型
 1.1 编码 int，可以自增 embstr，就是单纯的字符串 raw
@@ -61,8 +61,8 @@ if (!doNotTrack) {
 
     </head>
     <body class="
-    article-page
-    ">
+    article-page has-toc
+">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -85,175 +85,25 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
-        <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-        </span>
-    </button>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="/" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
 
-    <header>
-        
-            
-            <figure class="site-avatar">
-                <a href="/">
-                
-                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
-                
-                </a>
-                
-                    <span class="emoji">⚖️</span>
-                
-            </figure>
-            
-        
-        
-        <div class="site-meta">
-            <h1 class="site-name"><a href="/">lllovol</a></h1>
-            <h2 class="site-description">Stay hungry, stay foolish.</h2>
+
+
+                <span>返回</span>
+            </a>
         </div>
-    </header><ol class="menu" id="main-menu">
-        
-        
-        
-
-        <li >
-            <a href='/' >
-                
-                
-                    
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="5 12 3 12 12 3 21 12 19 12" />
-  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-</svg>
-
-
-
-                
-                <span>主页</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/about/' >
-                
-                
-                    
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="7" r="4" />
-  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-</svg>
-
-
-
-                
-                <span>关于</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/archives/' >
-                
-                
-                    
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <rect x="3" y="4" width="18" height="4" rx="2" />
-  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
-  <line x1="10" y1="12" x2="14" y2="12" />
-</svg>
-
-
-
-                
-                <span>归档</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/links/' >
-                
-                
-                    
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
-  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
-</svg>
-
-
-
-                
-                <span>链接</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/search/' >
-                
-                
-                    
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-                
-                <span>搜索</span>
-            </a>
-        </li>
-        
-
-        <div class="menu-bottom-section">
-            
-            
-                <li id="dark-mode-toggle">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="8" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="16" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                    <span>暗色模式</span>
-                </li>
-            
-        </div>
-    </ol>
-</aside>
+    
 <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
@@ -277,13 +127,11 @@ if (!doNotTrack) {
     </header>
     
 
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/redis/">Redis中的常用数据结构</a>
-        </h2>
+    <h2 class="article-title">
+        <a href="/p/redis/">Redis中的常用数据结构</a>
+    </h2>
+
     
-        
-    </div>
 
     
     <footer class="article-time">
@@ -319,14 +167,10 @@ if (!doNotTrack) {
         
     </footer>
     
-
-    
 </div>
 </header>
 
     <section class="article-content">
-    
-    
     <h2 id="前言">前言</h2>
 <p>Redis在曾经实现用户登录token的时候使用过，但是对其的了解程度，就只是在使用的这个层次。本篇文章主要用于学习记录Redis的常见的一些数据结构。</p>
 <h2 id="第一部分-什么是redis">第一部分 什么是redis？</h2>
@@ -460,16 +304,14 @@ ZSet 小64数量小128 用ziplist 否则用skiplist</p>
     
 </article>
 
+    <aside class="related-contents--wrapper">
     
-
     
-
-<aside class="related-contents--wrapper">
-    <h2 class="section-title">相关文章</h2>
-    <div class="related-contents">
-        <div class="flex article-list--tile">
-            
+        <h2 class="section-title">相关文章</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
                 
+                    
 <article class="has-image">
     <a href="/p/2021/12/awk-tool-analysis/">
         
@@ -486,8 +328,8 @@ ZSet 小64数量小128 用ziplist 否则用skiplist</p>
         </div>
     </a>
 </article>
-            
                 
+                    
 <article class="has-image">
     <a href="/p/2021/9/prototype/">
         
@@ -504,8 +346,8 @@ ZSet 小64数量小128 用ziplist 否则用skiplist</p>
         </div>
     </a>
 </article>
-            
                 
+                    
 <article class="has-image">
     <a href="/p/2021/9/design-pattern-factory/">
         
@@ -522,8 +364,8 @@ ZSet 小64数量小128 用ziplist 否则用skiplist</p>
         </div>
     </a>
 </article>
-            
                 
+                    
 <article class="has-image">
     <a href="/p/2021/9/design-pattern-singleton/">
         
@@ -540,8 +382,8 @@ ZSet 小64数量小128 用ziplist 否则用skiplist</p>
         </div>
     </a>
 </article>
-            
                 
+                    
 <article class="has-image">
     <a href="/p/2021/8/go-slice/">
         
@@ -558,9 +400,10 @@ ZSet 小64数量小128 用ziplist 否则用skiplist</p>
         </div>
     </a>
 </article>
-            
+                
+            </div>
         </div>
-    </div>
+    
 </aside>
 
      
@@ -606,7 +449,7 @@ ZSet 小64数量小128 用ziplist 否则用skiplist</p>
             Owner Rainbowly <br/>
         
         Total [<span id="busuanzi_value_site_uv"></span>] user views [<span id="busuanzi_value_site_pv"></span>] site views [<span id="busuanzi_value_page_pv"></span>] page views <br/>Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -675,11 +518,11 @@ ZSet 小64数量小128 用ziplist 否则用skiplist</p>
 
 </div><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer
+                defer="true"
                 >
             </script><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer
+                defer="true"
                 >
             </script><link 
                 rel="stylesheet" 
@@ -690,13 +533,11 @@ ZSet 小64数量小128 用ziplist 否则用skiplist</p>
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <line x1="5" y1="9" x2="19" y2="9" />
   <line x1="5" y1="15" x2="19" y2="15" />
@@ -706,11 +547,11 @@ ZSet 小64数量小128 用ziplist 否则用skiplist</p>
 
 
 
-        </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
+                </div>
+                <h2 class="widget-title section-title">目录</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
   <ul>
     <li><a href="#前言">前言</a></li>
     <li><a href="#第一部分-什么是redis">第一部分 什么是redis？</a></li>
@@ -732,18 +573,15 @@ ZSet 小64数量小128 用ziplist 否则用skiplist</p>
     <li><a href="#第四部分-其他事件">第四部分 其他事件</a></li>
   </ul>
 </nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
+                </div>
+            </section>
+        </aside>
+    
 
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
-                
+                defer="false"
                 >
             </script><script type="text/javascript" src="/ts/main.js" defer></script>
 <script>

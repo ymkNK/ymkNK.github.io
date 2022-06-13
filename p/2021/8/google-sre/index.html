@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us" dir="ltr">
+<html lang="en-us">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='拥抱风险 百分百可靠的服务，是不现实也是没有必要的。 可靠性到达一定值之后，会带来成本的大幅度提升：过分要求稳定性会限制新产品的开发速度和交付速度。
 用于对于高可靠性和极端可靠性的感知几乎是没有的。
@@ -9,7 +9,7 @@
 
 <link rel='canonical' href='https://lllovol.com/p/2021/8/google-sre/'>
 
-<link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='Google SRE解密笔记(一)'>
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Google SRE解密笔记(一)'>
 <meta property='og:description' content='拥抱风险 百分百可靠的服务，是不现实也是没有必要的。 可靠性到达一定值之后，会带来成本的大幅度提升：过分要求稳定性会限制新产品的开发速度和交付速度。
 用于对于高可靠性和极端可靠性的感知几乎是没有的。
 基于这一点，SRE追求快速创新和高效的服务运营业务之间的风险的平衡，而不是简单的将服务在线时间最大化。
@@ -17,7 +17,7 @@
 管理风险 '>
 <meta property='og:url' content='https://lllovol.com/p/2021/8/google-sre/'>
 <meta property='og:site_name' content='lllovol'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Note' /><meta property='article:tag' content='Tech' /><meta property='article:published_time' content='2021-08-24T21:55:29&#43;08:00'/><meta property='article:modified_time' content='2021-08-24T21:55:29&#43;08:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/8.jpeg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Note' /><meta property='article:tag' content='Tech' /><meta property='article:published_time' content='2021-08-24T21:55:29&#43;00:00'/><meta property='article:modified_time' content='2021-08-24T21:55:29&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/8.jpeg' />
 <meta name="twitter:title" content="Google SRE解密笔记(一)">
 <meta name="twitter:description" content="拥抱风险 百分百可靠的服务，是不现实也是没有必要的。 可靠性到达一定值之后，会带来成本的大幅度提升：过分要求稳定性会限制新产品的开发速度和交付速度。
 用于对于高可靠性和极端可靠性的感知几乎是没有的。
@@ -40,8 +40,8 @@ if (!doNotTrack) {
 
     </head>
     <body class="
-    article-page
-    ">
+    article-page has-toc
+">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -64,175 +64,25 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
-        <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-        </span>
-    </button>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="/" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
 
-    <header>
-        
-            
-            <figure class="site-avatar">
-                <a href="/">
-                
-                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
-                
-                </a>
-                
-                    <span class="emoji">⚖️</span>
-                
-            </figure>
-            
-        
-        
-        <div class="site-meta">
-            <h1 class="site-name"><a href="/">lllovol</a></h1>
-            <h2 class="site-description">Stay hungry, stay foolish.</h2>
+
+
+                <span>返回</span>
+            </a>
         </div>
-    </header><ol class="menu" id="main-menu">
-        
-        
-        
-
-        <li >
-            <a href='/' >
-                
-                
-                    
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="5 12 3 12 12 3 21 12 19 12" />
-  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-</svg>
-
-
-
-                
-                <span>主页</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/about/' >
-                
-                
-                    
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="7" r="4" />
-  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-</svg>
-
-
-
-                
-                <span>关于</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/archives/' >
-                
-                
-                    
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <rect x="3" y="4" width="18" height="4" rx="2" />
-  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
-  <line x1="10" y1="12" x2="14" y2="12" />
-</svg>
-
-
-
-                
-                <span>归档</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/links/' >
-                
-                
-                    
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
-  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
-</svg>
-
-
-
-                
-                <span>链接</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/search/' >
-                
-                
-                    
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-                
-                <span>搜索</span>
-            </a>
-        </li>
-        
-
-        <div class="menu-bottom-section">
-            
-            
-                <li id="dark-mode-toggle">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="8" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="16" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                    <span>暗色模式</span>
-                </li>
-            
-        </div>
-    </ol>
-</aside>
+    
 <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
@@ -260,13 +110,11 @@ if (!doNotTrack) {
     </header>
     
 
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/2021/8/google-sre/">Google SRE解密笔记(一)</a>
-        </h2>
+    <h2 class="article-title">
+        <a href="/p/2021/8/google-sre/">Google SRE解密笔记(一)</a>
+    </h2>
+
     
-        
-    </div>
 
     
     <footer class="article-time">
@@ -302,14 +150,10 @@ if (!doNotTrack) {
         
     </footer>
     
-
-    
 </div>
 </header>
 
     <section class="article-content">
-    
-    
     <h1 id="拥抱风险">拥抱风险</h1>
 <p>百分百可靠的服务，是不现实也是没有必要的。
 可靠性到达一定值之后，会带来成本的大幅度提升：过分要求稳定性会限制新产品的开发速度和交付速度。</p>
@@ -350,16 +194,14 @@ if (!doNotTrack) {
     
 </article>
 
+    <aside class="related-contents--wrapper">
     
-
     
-
-<aside class="related-contents--wrapper">
-    <h2 class="section-title">相关文章</h2>
-    <div class="related-contents">
-        <div class="flex article-list--tile">
-            
+        <h2 class="section-title">相关文章</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
                 
+                    
 <article class="has-image">
     <a href="/p/2021/9/prototype/">
         
@@ -376,8 +218,8 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
-            
                 
+                    
 <article class="has-image">
     <a href="/p/2021/9/design-pattern-factory/">
         
@@ -394,8 +236,8 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
-            
                 
+                    
 <article class="has-image">
     <a href="/p/2021/9/design-pattern-singleton/">
         
@@ -412,8 +254,8 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
-            
                 
+                    
 <article class="has-image">
     <a href="/p/2021/8/strategy/">
         
@@ -430,8 +272,8 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
-            
                 
+                    
 <article class="has-image">
     <a href="/p/2022/2/refactoring-chapter3/">
         
@@ -448,9 +290,10 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
-            
+                
+            </div>
         </div>
-    </div>
+    
 </aside>
 
      
@@ -496,7 +339,7 @@ if (!doNotTrack) {
             Owner Rainbowly <br/>
         
         Total [<span id="busuanzi_value_site_uv"></span>] user views [<span id="busuanzi_value_site_pv"></span>] site views [<span id="busuanzi_value_page_pv"></span>] page views <br/>Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -565,11 +408,11 @@ if (!doNotTrack) {
 
 </div><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer
+                defer="true"
                 >
             </script><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer
+                defer="true"
                 >
             </script><link 
                 rel="stylesheet" 
@@ -580,13 +423,11 @@ if (!doNotTrack) {
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <line x1="5" y1="9" x2="19" y2="9" />
   <line x1="5" y1="15" x2="19" y2="15" />
@@ -596,27 +437,24 @@ if (!doNotTrack) {
 
 
 
-        </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
+                </div>
+                <h2 class="widget-title section-title">目录</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
   <ul>
     <li><a href="#管理风险">管理风险</a></li>
   </ul>
 </nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
+                </div>
+            </section>
+        </aside>
+    
 
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
-                
+                defer="false"
                 >
             </script><script type="text/javascript" src="/ts/main.js" defer></script>
 <script>

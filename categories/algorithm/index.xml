@@ -1,212 +1,44 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-        <title>Algorithm on lllovol</title>
-        <link>https://lllovol.com/categories/algorithm/</link>
-        <description>Recent content in Algorithm on lllovol</description>
-        <generator>Hugo -- gohugo.io</generator>
-        <language>en-us</language>
-        <lastBuildDate>Thu, 28 Mar 2019 11:00:40 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/algorithm/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>Shuffle</title>
-        <link>https://lllovol.com/p/shuffle/</link>
-        <pubDate>Thu, 28 Mar 2019 11:00:40 +0000</pubDate>
-        
-        <guid>https://lllovol.com/p/shuffle/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg" alt="Featured image of post Shuffle" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
-&lt;p&gt;排序问题实现过很多次了，但是如何保证随机的乱序呢？这就是洗牌问题了（Shuffle）&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/dodng/p/4485713.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;洗牌算法FisherYates原理&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id=&#34;洗牌问题&#34;&gt;洗牌问题&lt;/h1&gt;
-&lt;h2 id=&#34;fisher-yates-shuffle算法&#34;&gt;Fisher-Yates shuffle算法&lt;/h2&gt;
-&lt;h4 id=&#34;首先来看看collection里面的方法&#34;&gt;首先来看看Collection里面的方法&lt;/h4&gt;
-&lt;p&gt;code：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;	/**
-	 * Created by ymk on 2019/3/28.
-	 * 这个算法主要是用来实现洗牌算法的
-	 */
-	public class FisherYates {
-
-	    public static void main(String[] args) {
-	        Integer[] raw = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
-	        List&amp;lt;Integer&amp;gt; pokers = Arrays.asList(raw);
-	        Joiner joiner= Joiner.on(&amp;quot;,&amp;quot;);
-	        System.out.println(joiner.join(pokers));
-	        Collections.shuffle(pokers);
-	        System.out.println(joiner.join(pokers));
-	    }
-	}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;输出：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;	1,2,3,4,5,6,7,8,9,10,11,12,13
-	5,9,1,12,7,8,2,10,11,6,3,4,13
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4 id=&#34;源码实现&#34;&gt;源码实现&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;    public static void shuffle(List&amp;lt;?&amp;gt; list) {
-        Random rnd = r;
-        if (rnd == null)
-            r = rnd = new Random(); // harmless race.
-        shuffle(list, rnd);
-    }
-
-    private static Random r;
-
-	 @SuppressWarnings({&amp;quot;rawtypes&amp;quot;, &amp;quot;unchecked&amp;quot;})
-	    public static void shuffle(List&amp;lt;?&amp;gt; list, Random rnd) {
-	        int size = list.size();
-	        if (size &amp;lt; SHUFFLE_THRESHOLD || list instanceof RandomAccess) {
-	            for (int i=size; i&amp;gt;1; i--)
-	                swap(list, i-1, rnd.nextInt(i));
-	        } else {
-	            Object arr[] = list.toArray();
-
-	            // Shuffle array
-	            for (int i=size; i&amp;gt;1; i--)
-	                swap(arr, i-1, rnd.nextInt(i));
-
-	            // Dump array back into list
-	            // instead of using a raw type here, it&#39;s possible to capture
-	            // the wildcard but it will require a call to a supplementary
-	            // private method
-	            ListIterator it = list.listIterator();
-	            for (int i=0; i&amp;lt;arr.length; i++) {
-	                it.next();
-	                it.set(arr[i]);
-	            }
-	        }
-	    }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4 id=&#34;为什么优秀&#34;&gt;为什么优秀？&lt;/h4&gt;
-&lt;p&gt;如果简单粗暴的随机抽取不够好呢？这就和昨天的钢条问题一样，在简单随机抽取的过程中就有可能出现重复的位置，就等于浪费了一次抽取。而使用了Fisher-Yates方法之所以优秀，就是在原理上保证了不会出现浪费次数，每一次抽卡的范围都在慢慢变小
-&lt;img src=&#34;https://images0.cnblogs.com/blog2015/734743/201505/071802188601847.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;h2 id=&#34;自己实现&#34;&gt;自己实现&lt;/h2&gt;
-&lt;pre&gt;&lt;code&gt;	package Shuffle;
-	import com.google.common.base.Joiner;
-	import java.util.*;
-
-	/**
-	 * Created by ymk on 2019/3/28.
-	 * 这个算法主要是用来实现洗牌算法的
-	 */
-	public class FisherYates {
-
-	    public static void byMyWayFisherYates(Integer[] raw) {
-	        Random rnd = new Random();
-	        //nextInt(n)生成的值范围是[0,n)的
-	        for (int i = raw.length; i&amp;gt;1; i--) {
-	            swap(raw,i-1,rnd.nextInt(i));
-	        }
-	    }
-
-
-	    public static void swap(Integer[] raw, int i, int j) {
-	        Integer temp = raw[i];
-	        raw[i] = raw[j];
-	        raw[j] = temp;
-	    }
-
-
-	    public static void main(String[] args) {
-	        Integer[] raw = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
-	        List&amp;lt;Integer&amp;gt; pokers = Arrays.asList(raw);
-	        Joiner joiner = Joiner.on(&amp;quot;,&amp;quot;);
-	        System.out.println(joiner.join(pokers));
-	        Collections.shuffle(pokers);
-	        System.out.println(joiner.join(pokers));
-
-	        Integer[] newRaw = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
-	        System.out.println(joiner.join(newRaw));
-	        byMyWayFisherYates(newRaw);
-	        System.out.println(joiner.join(newRaw));
-	    }
-	}
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-        </item>
-        <item>
-        <title>Dynamic Programming-钢条切割问题</title>
-        <link>https://lllovol.com/p/dynamic-programming/</link>
-        <pubDate>Wed, 27 Mar 2019 20:38:15 +0000</pubDate>
-        
-        <guid>https://lllovol.com/p/dynamic-programming/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/1.jpg" alt="Featured image of post Dynamic Programming-钢条切割问题" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
-&lt;p&gt;动态规划是算法中的一大类，是一个求解最优解的值的问题&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;本文内容主要来自于 《算法导论第三版第四部分第15章 动态规划》&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id=&#34;四个基本步骤&#34;&gt;四个基本步骤&lt;/h1&gt;
-&lt;p&gt;我们通常需要四个步骤来设计一个动态规划算法：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;1.刻画一个最优解的结构特征&lt;/li&gt;
-&lt;li&gt;2.递归地定义最优解的值。&lt;/li&gt;
-&lt;li&gt;3.计算最优解的值，通常采用自定向上的算法&lt;/li&gt;
-&lt;li&gt;4.利用计算出的信息构造一个最优解&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;钢条切割问题&#34;&gt;钢条切割问题&lt;/h1&gt;
-&lt;h4 id=&#34;问题描述&#34;&gt;问题描述&lt;/h4&gt;
-&lt;p&gt;给定一段长度为n的英寸的钢条，和一个价格表pi（i=1,2,&amp;hellip;,n）,求切割钢条的切割方案，是的销售收益rn最大。（如果长度为n英寸的钢条价格pn足够大，最优解可能就是完全不需要切割）&lt;/p&gt;
-&lt;h4 id=&#34;问题处理&#34;&gt;问题处理&lt;/h4&gt;
-&lt;p&gt;长度为n英寸的钢条共有2^(n-1)种不同的切割方案，因为在距离钢条左端i（i=1,2,&amp;hellip;,n-1）英寸的地方，我们总是可以选择切割或者不切割。
-这时候rn=max(pn,r1+r[n-1],r2+r[n-2],r[n-1]+r1)，相当于，我们将问题分割了，首先将钢条切割了，切割成了长度为i和n-i的两端，然后求解这两端的ri和r[n-i]&lt;/p&gt;
-&lt;p&gt;这样，我们就能通过组合两个相关子问题的最优解，并在所有可能的两端切割方案中选取组合收益的最大者，构成原问题的最优解。
-这样，我们称钢条切割问题满足最优子结构（optimal substructure）的性质：问题的最优解由相关问题的最优解组合而成，而这些子问题可以独立求解。&lt;/p&gt;
-&lt;p&gt;除此之外，我们可以将钢条从左边切割下长度为i的一段，然后只对右边剩下的长度为n-i的一段继续进行切割（递归求解），对左边的一段则不再进行切割，&lt;/p&gt;
-&lt;p&gt;而不做任何切割的方案，可以描述为：第一段的长度为n，收益为pn，剩余部分的长度为0，对应的收益为r0=0。&lt;/p&gt;
-&lt;h4 id=&#34;伪代码实现自顶向下的方法&#34;&gt;伪代码实现（自顶向下的方法）&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;	CUT-ROD（p,n)
-	1	if n == 0
-	2		return 0;
-	3 	q = min_num
-	4 	for i = 1 to n
-	5 		q=max(q,p[i]+CUT-ROD(p,n-i))
-	6 return q
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4 id=&#34;cut-rod优化&#34;&gt;CUT-ROD优化&lt;/h4&gt;
-&lt;p&gt;上方的方法，在n变大的时候，程序运行时间会变得特别特别慢，原因是，它会反复的使用相同的参数值，对自身进行递归调用，等价于他在反复求解相同的子问题。如果将上面函数的递归调用树画出来，将会有2^(n-1)个叶节点。全部展开，必将成为一个指数级增长的趋势。上面的朴素递归算法，效率低，就是这个问题，反复求解了相同的子问题。&lt;/p&gt;
-&lt;p&gt;因此，动态规划要求仔细安排求解的顺序，对每个子问题，之求解一次，并将结果保存下来。因此，对于每个子问题的解，咱们只求一次，并且将结果保存下来，之后再遇到相同的子问题，就可以直接求出解，因此，动态规划方法，就是付出了额外的内存空间，来节省计算时间，这就是典型的时空权衡的例子。下面是两个优化算法的伪代码&lt;/p&gt;
-&lt;h5 id=&#34;带备忘的自顶向下法top-down-with-memoization&#34;&gt;带备忘的自顶向下法（top-down with memoization）&lt;/h5&gt;
-&lt;p&gt;过程会保存每个子问题的解，通常保存在一个数组或者散列表当中。当需要一个子问题的解的时候，首先检查一下是否已经保存过此解。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;	MEMOIZED-CUT-ROD(p,n)
-	1 let r[0..n]be a new array
-	2 for i = 0 to n
-	3 	r[i] = min_num
-	4 return MEMOIZED-CUT-ROD-AUX(p,n,r);
-
-	MEMOIZED-CUT-ROD-AUX(p,n,r)
-	1 if r[n]&amp;gt;=0
-	2 	return r[n]
-	3 if n == 0
-	4 	q = 0
-	5 else q = min_num
-	6		for i = 1 to n 
-	7 			q=max(q,p[i]+MEMOIZED-CUT-ROD-AUX(p,n-i,r))
-	8 r[n]=q
-	9 return q
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h5 id=&#34;自底向上的方法&#34;&gt;自底向上的方法&lt;/h5&gt;
-&lt;pre&gt;&lt;code&gt;	BOTTOM-UP-CUT-ROD(p,n)
-	1 let r[0..n] be a new array
-	2 r[0] = 0
-	3 for j = 1 to n 
-	4 		q=min_num
-	5		for i = 1 to j
-	6  			q = max(q,p[i]+r[j-i])
-	7 		r[j]=q
-	8 return r[n]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h1 id=&#34;结语&#34;&gt;结语&lt;/h1&gt;
-&lt;p&gt;算法之大，博大精深，吾之所见，沧海一粟&lt;br&gt;
-路漫漫其修远兮，吾将上下而求索&lt;/p&gt;
-</description>
-        </item>
-        
-    </channel>
+  <channel>
+    <title>Algorithm on lllovol</title>
+    <link>https://lllovol.com/categories/algorithm/</link>
+    <description>Recent content in Algorithm on lllovol</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 28 Mar 2019 11:00:40 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Shuffle</title>
+      <link>https://lllovol.com/p/shuffle/</link>
+      <pubDate>Thu, 28 Mar 2019 11:00:40 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/shuffle/</guid>
+      <description>前言 排序问题实现过很多次了，但是如何保证随机的乱序呢？这就是洗牌问题了（Shuffle）
+ 洗牌算法FisherYates原理
+ 洗牌问题 Fisher-Yates shuffle算法 首先来看看Collection里面的方法 code：
+ /*** Created by ymk on 2019/3/28.* 这个算法主要是用来实现洗牌算法的*/public class FisherYates {public static void main(String[] args) {Integer[] raw = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};List&amp;lt;Integer&amp;gt; pokers = Arrays.asList(raw);Joiner joiner= Joiner.on(&amp;quot;,&amp;quot;);System.out.println(joiner.join(pokers));Collections.shuffle(pokers);System.out.println(joiner.join(pokers));}} 输出：
+ 1,2,3,4,5,6,7,8,9,10,11,12,135,9,1,12,7,8,2,10,11,6,3,4,13 源码实现  public static void shuffle(List&amp;lt;?</description>
+    </item>
+    
+    <item>
+      <title>Dynamic Programming-钢条切割问题</title>
+      <link>https://lllovol.com/p/dynamic-programming/</link>
+      <pubDate>Wed, 27 Mar 2019 20:38:15 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/dynamic-programming/</guid>
+      <description>前言 动态规划是算法中的一大类，是一个求解最优解的值的问题
+ 本文内容主要来自于 《算法导论第三版第四部分第15章 动态规划》
+ 四个基本步骤 我们通常需要四个步骤来设计一个动态规划算法：
+ 1.刻画一个最优解的结构特征 2.递归地定义最优解的值。 3.计算最优解的值，通常采用自定向上的算法 4.利用计算出的信息构造一个最优解  钢条切割问题 问题描述 给定一段长度为n的英寸的钢条，和一个价格表pi（i=1,2,&amp;hellip;,n）,求切割钢条的切割方案，是的销售收益rn最大。（如果长度为n英寸的钢条价格pn足够大，最优解可能就是完全不需要切割）
+问题处理 长度为n英寸的钢条共有2^(n-1)种不同的切割方案，因为在距离钢条左端i（i=1,2,&amp;hellip;,n-1）英寸的地方，我们总是可以选择切割或者不切割。 这时候rn=max(pn,r1+r[n-1],r2+r[n-2],r[n-1]+r1)，相当于，我们将问题分割了，首先将钢条切割了，切割成了长度为i和n-i的两端，然后求解这两端的ri和r[n-i]
+这样，我们就能通过组合两个相关子问题的最优解，并在所有可能的两端切割方案中选取组合收益的最大者，构成原问题的最优解。 这样，我们称钢条切割问题满足最优子结构（optimal substructure）的性质：问题的最优解由相关问题的最优解组合而成，而这些子问题可以独立求解。
+除此之外，我们可以将钢条从左边切割下长度为i的一段，然后只对右边剩下的长度为n-i的一段继续进行切割（递归求解），对左边的一段则不再进行切割，
+而不做任何切割的方案，可以描述为：第一段的长度为n，收益为pn，剩余部分的长度为0，对应的收益为r0=0。
+伪代码实现（自顶向下的方法）  CUT-ROD（p,n)1	if n == 02	return 0;3 q = min_num4 for i = 1 to n5 q=max(q,p[i]+CUT-ROD(p,n-i))6 return q CUT-ROD优化 上方的方法，在n变大的时候，程序运行时间会变得特别特别慢，原因是，它会反复的使用相同的参数值，对自身进行递归调用，等价于他在反复求解相同的子问题。如果将上面函数的递归调用树画出来，将会有2^(n-1)个叶节点。全部展开，必将成为一个指数级增长的趋势。上面的朴素递归算法，效率低，就是这个问题，反复求解了相同的子问题。
+因此，动态规划要求仔细安排求解的顺序，对每个子问题，之求解一次，并将结果保存下来。因此，对于每个子问题的解，咱们只求一次，并且将结果保存下来，之后再遇到相同的子问题，就可以直接求出解，因此，动态规划方法，就是付出了额外的内存空间，来节省计算时间，这就是典型的时空权衡的例子。下面是两个优化算法的伪代码
+带备忘的自顶向下法（top-down with memoization） 过程会保存每个子问题的解，通常保存在一个数组或者散列表当中。当需要一个子问题的解的时候，首先检查一下是否已经保存过此解。
+ MEMOIZED-CUT-ROD(p,n)1 let r[0..n]be a new array2 for i = 0 to n3 r[i] = min_num4 return MEMOIZED-CUT-ROD-AUX(p,n,r);MEMOIZED-CUT-ROD-AUX(p,n,r)1 if r[n]&amp;gt;=02 return r[n]3 if n == 04 q = 05 else q = min_num6	for i = 1 to n 7 q=max(q,p[i]+MEMOIZED-CUT-ROD-AUX(p,n-i,r))8 r[n]=q9 return q 自底向上的方法  BOTTOM-UP-CUT-ROD(p,n)1 let r[0.</description>
+    </item>
+    
+  </channel>
 </rss>

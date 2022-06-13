@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us" dir="ltr">
+<html lang="en-us">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='原则 不要用共享内存来通信，而是使用通信来共享内存
 注意  内存重排，机器码执行的顺序可能并不是代码的顺序 Go的锁，不要使用值传递，不然每次都是复制新的值，这样的锁是失效的。这类bug可以被go vet检测出来（Go的所有的传递，都是值传递）  sync.WaitGroup debug.SetMaxThread(1)
@@ -9,7 +9,7 @@ func main() { var wg sync.WaitGroup var x int32 = 0 for i := 0; i &amp;lt; 100; 
 
 <link rel='canonical' href='https://lllovol.com/p/2022/1/go-concurrency/'>
 
-<link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='Go并发编程学习笔记-WaitGroup和Mutex'>
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Go并发编程学习笔记-WaitGroup和Mutex'>
 <meta property='og:description' content='原则 不要用共享内存来通信，而是使用通信来共享内存
 注意  内存重排，机器码执行的顺序可能并不是代码的顺序 Go的锁，不要使用值传递，不然每次都是复制新的值，这样的锁是失效的。这类bug可以被go vet检测出来（Go的所有的传递，都是值传递）  sync.WaitGroup debug.SetMaxThread(1)
 func main() { var wg sync.WaitGroup var x int32 = 0 for i := 0; i &amp;lt; 100; i&#43;&#43; { go func() { // wg.Add不应该放在这里，应该放在循坏外面  wg.Add(1) atomic.AddInt32(&amp;amp;x, 1) wg.Done() }() } fmt.Println(&amp;#34;等待片刻...&amp;#34;) wg.Wait() fmt.Println(atomic.LoadInt32(&amp;amp;x)) } 这样写代码是不行，add放在主线程，done放在子协程中
@@ -17,7 +17,7 @@ func main() { var wg sync.WaitGroup var x int32 = 0 for i := 0; i &amp;lt; 100; 
  简单思路  Add() 内置count记录多少任务完成，通过加锁来保证安全 Done() 完成后count&amp;ndash;，加锁操作 Wait() 通过for循环加锁读取当前count，直到值为0  实际实现 type WaitGroup struct { // https://golang.org/issues/8005#issuecomment-190753527  // 使用时只能使用指针来传递，使用值传递会被go vet 检验出来  noCopy noCopy // count Add()时增加这个值  // wait Wait() 时增加这个值  // semap 信号量，与此相关的有两个操作，增加信号量，协程挂起；减少信号量，唤醒协程  state1 [3]uint32 }  WaitGroup使用CASatomic.'>
 <meta property='og:url' content='https://lllovol.com/p/2022/1/go-concurrency/'>
 <meta property='og:site_name' content='lllovol'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Go' /><meta property='article:published_time' content='2022-01-20T20:07:33&#43;08:00'/><meta property='article:modified_time' content='2022-01-20T20:07:33&#43;08:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/4.jpeg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Go' /><meta property='article:published_time' content='2022-01-20T20:07:33&#43;00:00'/><meta property='article:modified_time' content='2022-01-20T20:07:33&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/4.jpeg' />
 <meta name="twitter:title" content="Go并发编程学习笔记-WaitGroup和Mutex">
 <meta name="twitter:description" content="原则 不要用共享内存来通信，而是使用通信来共享内存
 注意  内存重排，机器码执行的顺序可能并不是代码的顺序 Go的锁，不要使用值传递，不然每次都是复制新的值，这样的锁是失效的。这类bug可以被go vet检测出来（Go的所有的传递，都是值传递）  sync.WaitGroup debug.SetMaxThread(1)
@@ -40,8 +40,8 @@ if (!doNotTrack) {
 
     </head>
     <body class="
-    article-page
-    ">
+    article-page has-toc
+">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -64,175 +64,25 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
-        <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-        </span>
-    </button>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="/" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
 
-    <header>
-        
-            
-            <figure class="site-avatar">
-                <a href="/">
-                
-                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
-                
-                </a>
-                
-                    <span class="emoji">⚖️</span>
-                
-            </figure>
-            
-        
-        
-        <div class="site-meta">
-            <h1 class="site-name"><a href="/">lllovol</a></h1>
-            <h2 class="site-description">Stay hungry, stay foolish.</h2>
+
+
+                <span>返回</span>
+            </a>
         </div>
-    </header><ol class="menu" id="main-menu">
-        
-        
-        
-
-        <li >
-            <a href='/' >
-                
-                
-                    
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="5 12 3 12 12 3 21 12 19 12" />
-  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-</svg>
-
-
-
-                
-                <span>主页</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/about/' >
-                
-                
-                    
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="7" r="4" />
-  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-</svg>
-
-
-
-                
-                <span>关于</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/archives/' >
-                
-                
-                    
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <rect x="3" y="4" width="18" height="4" rx="2" />
-  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
-  <line x1="10" y1="12" x2="14" y2="12" />
-</svg>
-
-
-
-                
-                <span>归档</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/links/' >
-                
-                
-                    
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
-  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
-</svg>
-
-
-
-                
-                <span>链接</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/search/' >
-                
-                
-                    
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-                
-                <span>搜索</span>
-            </a>
-        </li>
-        
-
-        <div class="menu-bottom-section">
-            
-            
-                <li id="dark-mode-toggle">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="8" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="16" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                    <span>暗色模式</span>
-                </li>
-            
-        </div>
-    </ol>
-</aside>
+    
 <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
@@ -256,13 +106,11 @@ if (!doNotTrack) {
     </header>
     
 
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/2022/1/go-concurrency/">Go并发编程学习笔记-WaitGroup和Mutex</a>
-        </h2>
+    <h2 class="article-title">
+        <a href="/p/2022/1/go-concurrency/">Go并发编程学习笔记-WaitGroup和Mutex</a>
+    </h2>
+
     
-        
-    </div>
 
     
     <footer class="article-time">
@@ -298,14 +146,10 @@ if (!doNotTrack) {
         
     </footer>
     
-
-    
 </div>
 </header>
 
     <section class="article-content">
-    
-    
     <h2 id="原则">原则</h2>
 <p><strong>不要用共享内存来通信，而是使用通信来共享内存</strong></p>
 <h2 id="注意">注意</h2>
@@ -315,23 +159,23 @@ if (!doNotTrack) {
 </ul>
 <h2 id="syncwaitgroup">sync.WaitGroup</h2>
 <p>debug.SetMaxThread(1)</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Go" data-lang="Go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">wg</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">x</span> <span class="kt">int32</span> <span class="p">=</span> <span class="mi">0</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">			<span class="c1">// wg.Add不应该放在这里，应该放在循坏外面
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">wg</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">atomic</span><span class="p">.</span><span class="nf">AddInt32</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">wg</span><span class="p">.</span><span class="nf">Done</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}()</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;等待片刻...&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">wg</span><span class="p">.</span><span class="nf">Wait</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">atomic</span><span class="p">.</span><span class="nf">LoadInt32</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">x</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>这样写代码是不行，add放在主线程，done放在子协程中</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Go" data-lang="Go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">wg</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
+    <span class="kd">var</span> <span class="nx">x</span> <span class="kt">int32</span> <span class="p">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+        <span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+			<span class="c1">// wg.Add不应该放在这里，应该放在循坏外面
+</span><span class="c1"></span>            <span class="nx">wg</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="nx">atomic</span><span class="p">.</span><span class="nf">AddInt32</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="nx">wg</span><span class="p">.</span><span class="nf">Done</span><span class="p">()</span>
+        <span class="p">}()</span>
+    <span class="p">}</span>
+
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;等待片刻...&#34;</span><span class="p">)</span>
+    <span class="nx">wg</span><span class="p">.</span><span class="nf">Wait</span><span class="p">()</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">atomic</span><span class="p">.</span><span class="nf">LoadInt32</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">x</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></div><p>这样写代码是不行，add放在主线程，done放在子协程中</p>
 <h3 id="如何实现">如何实现</h3>
 <blockquote>
 <p><a class="link" href="https://segmentfault.com/a/1190000040653924"  target="_blank" rel="noopener"
@@ -344,16 +188,16 @@ if (!doNotTrack) {
 <li>Wait() 通过for循环加锁读取当前count，直到值为0</li>
 </ol>
 <h4 id="实际实现">实际实现</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Go" data-lang="Go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">WaitGroup</span> <span class="kd">struct</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">   <span class="c1">// https://golang.org/issues/8005#issuecomment-190753527
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="c1">// 使用时只能使用指针来传递，使用值传递会被go vet 检验出来
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="nx">noCopy</span> <span class="nx">noCopy</span>
-</span></span><span class="line"><span class="cl">   <span class="c1">// count Add()时增加这个值
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="c1">// wait  Wait() 时增加这个值
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="c1">// semap  信号量，与此相关的有两个操作，增加信号量，协程挂起；减少信号量，唤醒协程
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="nx">state1</span> <span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="kt">uint32</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Go" data-lang="Go"><span class="kd">type</span> <span class="nx">WaitGroup</span> <span class="kd">struct</span> <span class="p">{</span>
+   <span class="c1">// https://golang.org/issues/8005#issuecomment-190753527
+</span><span class="c1"></span>   <span class="c1">// 使用时只能使用指针来传递，使用值传递会被go vet 检验出来
+</span><span class="c1"></span>   <span class="nx">noCopy</span> <span class="nx">noCopy</span>
+   <span class="c1">// count Add()时增加这个值
+</span><span class="c1"></span>   <span class="c1">// wait  Wait() 时增加这个值
+</span><span class="c1"></span>   <span class="c1">// semap  信号量，与此相关的有两个操作，增加信号量，协程挂起；减少信号量，唤醒协程
+</span><span class="c1"></span>   <span class="nx">state1</span> <span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="kt">uint32</span>
+<span class="p">}</span>
+</code></pre></div><ul>
 <li>WaitGroup使用CAS<code>atomic.CompareAndSwapUint64(statep, state, state+1)</code>代替锁，使用无锁的结构达到了线程安全的目的。将三个 count、wait、sema 定义成一个数组，来保证取count和wait的时候是原子性的</li>
 <li>32位和64位的机器，这个state1的内存布局是不同的</li>
 <li>使用int32(state &raquo; 32)位移操作拿到counter</li>
@@ -367,31 +211,31 @@ if (!doNotTrack) {
 </ul>
 <h2 id="timeafter不能和selectfor放在一起用">time.After不能和select、for放在一起用</h2>
 <p>如果一次性来5000次请求，会同时开5000个协程，然后执行一分钟，这样内存会直接爆炸。应该用taker</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Go" data-lang="Go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">longRunning</span><span class="p">(</span><span class="nx">messages</span> <span class="o">&lt;-</span><span class="kd">chan</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">select</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="o">&lt;-</span><span class="nx">time</span><span class="p">.</span><span class="nf">After</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Minute</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span>
-</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="nx">msg</span> <span class="o">:=</span> <span class="o">&lt;-</span><span class="nx">messages</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">msg</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><h2 id="mutex">Mutex</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Go" data-lang="Go"><span class="kd">func</span> <span class="nf">longRunning</span><span class="p">(</span><span class="nx">messages</span> <span class="o">&lt;-</span><span class="kd">chan</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">{</span>
+        <span class="k">select</span> <span class="p">{</span>
+            <span class="k">case</span> <span class="o">&lt;-</span><span class="nx">time</span><span class="p">.</span><span class="nf">After</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Minute</span><span class="p">):</span>
+        <span class="k">return</span>
+            <span class="k">case</span> <span class="nx">msg</span> <span class="o">:=</span> <span class="o">&lt;-</span><span class="nx">messages</span><span class="p">:</span>
+            <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">msg</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h2 id="mutex">Mutex</h2>
 <ol>
 <li>在defer中执行解锁，能够保证执行操作一定被执行</li>
 <li>throw的panic不能恢复</li>
 </ol>
 <h3 id="如何实现-1">如何实现</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Go" data-lang="Go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Mutex</span> <span class="kd">struct</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">   <span class="c1">// 等待协程数|饥饿状态|是否被唤醒|是否被锁
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="c1">// 00000000 00000000 00000000 00000|0|0|0
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="c1">// 提问：为什么要有饥饿态呢？
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="nx">state</span> <span class="kt">int32</span>
-</span></span><span class="line"><span class="cl">   <span class="c1">// 信号量
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="nx">sema</span>  <span class="kt">uint32</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><h4 id="简单实现思路">简单实现思路</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Go" data-lang="Go"><span class="kd">type</span> <span class="nx">Mutex</span> <span class="kd">struct</span> <span class="p">{</span>
+   <span class="c1">// 等待协程数|饥饿状态|是否被唤醒|是否被锁
+</span><span class="c1"></span>   <span class="c1">// 00000000 00000000 00000000 00000|0|0|0
+</span><span class="c1"></span>   <span class="c1">// 提问：为什么要有饥饿态呢？
+</span><span class="c1"></span>   <span class="nx">state</span> <span class="kt">int32</span>
+   <span class="c1">// 信号量
+</span><span class="c1"></span>   <span class="nx">sema</span>  <span class="kt">uint32</span>
+<span class="p">}</span>
+</code></pre></div><h4 id="简单实现思路">简单实现思路</h4>
 <ul>
 <li>Lock() for循环直到CAS成功为止</li>
 <li>Unlock() 进行CAS</li>
@@ -429,16 +273,14 @@ if (!doNotTrack) {
     
 </article>
 
+    <aside class="related-contents--wrapper">
     
-
     
-
-<aside class="related-contents--wrapper">
-    <h2 class="section-title">相关文章</h2>
-    <div class="related-contents">
-        <div class="flex article-list--tile">
-            
+        <h2 class="section-title">相关文章</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
                 
+                    
 <article class="has-image">
     <a href="/p/2022/4/go-nil-equal/">
         
@@ -455,8 +297,8 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
-            
                 
+                    
 <article class="has-image">
     <a href="/p/2021/8/go-slice/">
         
@@ -473,9 +315,10 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
-            
+                
+            </div>
         </div>
-    </div>
+    
 </aside>
 
      
@@ -521,7 +364,7 @@ if (!doNotTrack) {
             Owner Rainbowly <br/>
         
         Total [<span id="busuanzi_value_site_uv"></span>] user views [<span id="busuanzi_value_site_pv"></span>] site views [<span id="busuanzi_value_page_pv"></span>] page views <br/>Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -590,11 +433,11 @@ if (!doNotTrack) {
 
 </div><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer
+                defer="true"
                 >
             </script><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer
+                defer="true"
                 >
             </script><link 
                 rel="stylesheet" 
@@ -605,13 +448,11 @@ if (!doNotTrack) {
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <line x1="5" y1="9" x2="19" y2="9" />
   <line x1="5" y1="15" x2="19" y2="15" />
@@ -621,11 +462,11 @@ if (!doNotTrack) {
 
 
 
-        </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
+                </div>
+                <h2 class="widget-title section-title">目录</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
   <ul>
     <li><a href="#原则">原则</a></li>
     <li><a href="#注意">注意</a></li>
@@ -642,18 +483,15 @@ if (!doNotTrack) {
     </li>
   </ul>
 </nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
+                </div>
+            </section>
+        </aside>
+    
 
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
-                
+                defer="false"
                 >
             </script><script type="text/javascript" src="/ts/main.js" defer></script>
 <script>

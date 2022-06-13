@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="en-us" dir="ltr">
+<html lang="en-us">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='一 前言 最近独自完成了一个同步信息的项目，主要工作内容是从第三方的服务端将信息同步到公司的二方AD域当中。本文主要记录本项目的主要实现过程。
 二 项目设计 这是一个并不复杂的项目，因此项目主要涉及到两大部分：
  从第三方服务器端获取到信息数据 将信息数据进行处理，能够存入到公司的二方AD域当中  三 第三方数据获取 1.主要技术 本项目主要获取信息的方式，是通过FeignClient来获取的
-2.主要实现 a.最单纯的feign方式实现 添加pom依赖 	&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;feign-okhttp&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;10.1.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;feign-jackson&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;10.1.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 定义接收返回值所用到的model对象 这个地方的model定义，需要仔细阅读第三方服务端的api文档，然后根据上面的具体信息来进行定义
+2.主要实现 a.最单纯的feign方式实现 添加pom依赖 	&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;feign-okhttp&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;10.1.0&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;feign-jackson&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;10.1.0&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;定义接收返回值所用到的model对象 这个地方的model定义，需要仔细阅读第三方服务端的api文档，然后根据上面的具体信息来进行定义
 eg:
-@Data public class XxxApiResponse { private String code; private String message; private String timestamp; private String errcode; private String errmsg; private String detailMsg; } 这里的变量名没有按照驼峰的方式进行定义，是因为官方文档返回值当中的字段key值就是这样非驼峰的方式，我们需要保证名字的一致性。
-定义Feign public interface XxxClient { @RequestLine(&amp;#34;GET /v3/xxx/details?param1={param1}&amp;#34;) XxxDetailsResponse getXxxDetails(@Param(&amp;#34;param1&amp;#34;) String param1); } 注意这种RequestLine的方式和GetMapping和PostMapping的方式有所区别
-定义Feign的Factory public class XxxClientFactory { private final static String URL = &amp;#34;https://api.'><title>从零开始搭建AD信息同步的项目</title>
+@Datapublic class XxxApiResponse {private String code;private String message;private String timestamp;private String errcode;private String errmsg;private String detailMsg;}这里的变量名没有按照驼峰的方式进行定义，是因为官方文档返回值当中的字段key值就是这样非驼峰的方式，我们需要保证名字的一致性。
+定义Feign public interface XxxClient {@RequestLine(&amp;quot;GET /v3/xxx/details?param1={param1}&amp;quot;)XxxDetailsResponse getXxxDetails(@Param(&amp;quot;param1&amp;quot;) String param1);}注意这种RequestLine的方式和GetMapping和PostMapping的方式有所区别
+定义Feign的Factory public class XxxClientFactory {private final static String URL = &amp;quot;https://api.'><title>从零开始搭建AD信息同步的项目</title>
 
 <link rel='canonical' href='https://lllovol.com/p/synchronize-job/'>
 
-<link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='从零开始搭建AD信息同步的项目'>
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='从零开始搭建AD信息同步的项目'>
 <meta property='og:description' content='一 前言 最近独自完成了一个同步信息的项目，主要工作内容是从第三方的服务端将信息同步到公司的二方AD域当中。本文主要记录本项目的主要实现过程。
 二 项目设计 这是一个并不复杂的项目，因此项目主要涉及到两大部分：
  从第三方服务器端获取到信息数据 将信息数据进行处理，能够存入到公司的二方AD域当中  三 第三方数据获取 1.主要技术 本项目主要获取信息的方式，是通过FeignClient来获取的
-2.主要实现 a.最单纯的feign方式实现 添加pom依赖 	&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;feign-okhttp&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;10.1.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;feign-jackson&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;10.1.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 定义接收返回值所用到的model对象 这个地方的model定义，需要仔细阅读第三方服务端的api文档，然后根据上面的具体信息来进行定义
+2.主要实现 a.最单纯的feign方式实现 添加pom依赖 	&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;feign-okhttp&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;10.1.0&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;feign-jackson&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;10.1.0&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;定义接收返回值所用到的model对象 这个地方的model定义，需要仔细阅读第三方服务端的api文档，然后根据上面的具体信息来进行定义
 eg:
-@Data public class XxxApiResponse { private String code; private String message; private String timestamp; private String errcode; private String errmsg; private String detailMsg; } 这里的变量名没有按照驼峰的方式进行定义，是因为官方文档返回值当中的字段key值就是这样非驼峰的方式，我们需要保证名字的一致性。
-定义Feign public interface XxxClient { @RequestLine(&amp;#34;GET /v3/xxx/details?param1={param1}&amp;#34;) XxxDetailsResponse getXxxDetails(@Param(&amp;#34;param1&amp;#34;) String param1); } 注意这种RequestLine的方式和GetMapping和PostMapping的方式有所区别
-定义Feign的Factory public class XxxClientFactory { private final static String URL = &amp;#34;https://api.'>
+@Datapublic class XxxApiResponse {private String code;private String message;private String timestamp;private String errcode;private String errmsg;private String detailMsg;}这里的变量名没有按照驼峰的方式进行定义，是因为官方文档返回值当中的字段key值就是这样非驼峰的方式，我们需要保证名字的一致性。
+定义Feign public interface XxxClient {@RequestLine(&amp;quot;GET /v3/xxx/details?param1={param1}&amp;quot;)XxxDetailsResponse getXxxDetails(@Param(&amp;quot;param1&amp;quot;) String param1);}注意这种RequestLine的方式和GetMapping和PostMapping的方式有所区别
+定义Feign的Factory public class XxxClientFactory {private final static String URL = &amp;quot;https://api.'>
 <meta property='og:url' content='https://lllovol.com/p/synchronize-job/'>
 <meta property='og:site_name' content='lllovol'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Spring' /><meta property='article:published_time' content='2019-09-23T17:12:49&#43;00:00'/><meta property='article:modified_time' content='2019-09-23T17:12:49&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg' />
@@ -28,11 +28,11 @@ eg:
 <meta name="twitter:description" content="一 前言 最近独自完成了一个同步信息的项目，主要工作内容是从第三方的服务端将信息同步到公司的二方AD域当中。本文主要记录本项目的主要实现过程。
 二 项目设计 这是一个并不复杂的项目，因此项目主要涉及到两大部分：
  从第三方服务器端获取到信息数据 将信息数据进行处理，能够存入到公司的二方AD域当中  三 第三方数据获取 1.主要技术 本项目主要获取信息的方式，是通过FeignClient来获取的
-2.主要实现 a.最单纯的feign方式实现 添加pom依赖 	&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;feign-okhttp&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;10.1.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;feign-jackson&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;10.1.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 定义接收返回值所用到的model对象 这个地方的model定义，需要仔细阅读第三方服务端的api文档，然后根据上面的具体信息来进行定义
+2.主要实现 a.最单纯的feign方式实现 添加pom依赖 	&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;feign-okhttp&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;10.1.0&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;io.github.openfeign&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;feign-jackson&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;10.1.0&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;定义接收返回值所用到的model对象 这个地方的model定义，需要仔细阅读第三方服务端的api文档，然后根据上面的具体信息来进行定义
 eg:
-@Data public class XxxApiResponse { private String code; private String message; private String timestamp; private String errcode; private String errmsg; private String detailMsg; } 这里的变量名没有按照驼峰的方式进行定义，是因为官方文档返回值当中的字段key值就是这样非驼峰的方式，我们需要保证名字的一致性。
-定义Feign public interface XxxClient { @RequestLine(&amp;#34;GET /v3/xxx/details?param1={param1}&amp;#34;) XxxDetailsResponse getXxxDetails(@Param(&amp;#34;param1&amp;#34;) String param1); } 注意这种RequestLine的方式和GetMapping和PostMapping的方式有所区别
-定义Feign的Factory public class XxxClientFactory { private final static String URL = &amp;#34;https://api."><meta name="twitter:card" content="summary_large_image">
+@Datapublic class XxxApiResponse {private String code;private String message;private String timestamp;private String errcode;private String errmsg;private String detailMsg;}这里的变量名没有按照驼峰的方式进行定义，是因为官方文档返回值当中的字段key值就是这样非驼峰的方式，我们需要保证名字的一致性。
+定义Feign public interface XxxClient {@RequestLine(&amp;quot;GET /v3/xxx/details?param1={param1}&amp;quot;)XxxDetailsResponse getXxxDetails(@Param(&amp;quot;param1&amp;quot;) String param1);}注意这种RequestLine的方式和GetMapping和PostMapping的方式有所区别
+定义Feign的Factory public class XxxClientFactory {private final static String URL = &amp;quot;https://api."><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg' />
     <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
 
@@ -49,8 +49,8 @@ if (!doNotTrack) {
 
     </head>
     <body class="
-    article-page
-    ">
+    article-page has-toc
+">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -73,175 +73,25 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
-        <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-        </span>
-    </button>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="/" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
 
-    <header>
-        
-            
-            <figure class="site-avatar">
-                <a href="/">
-                
-                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
-                
-                </a>
-                
-                    <span class="emoji">⚖️</span>
-                
-            </figure>
-            
-        
-        
-        <div class="site-meta">
-            <h1 class="site-name"><a href="/">lllovol</a></h1>
-            <h2 class="site-description">Stay hungry, stay foolish.</h2>
+
+
+                <span>返回</span>
+            </a>
         </div>
-    </header><ol class="menu" id="main-menu">
-        
-        
-        
-
-        <li >
-            <a href='/' >
-                
-                
-                    
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="5 12 3 12 12 3 21 12 19 12" />
-  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-</svg>
-
-
-
-                
-                <span>主页</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/about/' >
-                
-                
-                    
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="7" r="4" />
-  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-</svg>
-
-
-
-                
-                <span>关于</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/archives/' >
-                
-                
-                    
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <rect x="3" y="4" width="18" height="4" rx="2" />
-  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
-  <line x1="10" y1="12" x2="14" y2="12" />
-</svg>
-
-
-
-                
-                <span>归档</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/links/' >
-                
-                
-                    
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
-  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
-</svg>
-
-
-
-                
-                <span>链接</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/search/' >
-                
-                
-                    
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-                
-                <span>搜索</span>
-            </a>
-        </li>
-        
-
-        <div class="menu-bottom-section">
-            
-            
-                <li id="dark-mode-toggle">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="8" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="16" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                    <span>暗色模式</span>
-                </li>
-            
-        </div>
-    </ol>
-</aside>
+    
 <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
@@ -265,13 +115,11 @@ if (!doNotTrack) {
     </header>
     
 
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/synchronize-job/">从零开始搭建AD信息同步的项目</a>
-        </h2>
+    <h2 class="article-title">
+        <a href="/p/synchronize-job/">从零开始搭建AD信息同步的项目</a>
+    </h2>
+
     
-        
-    </div>
 
     
     <footer class="article-time">
@@ -307,14 +155,10 @@ if (!doNotTrack) {
         
     </footer>
     
-
-    
 </div>
 </header>
 
     <section class="article-content">
-    
-    
     <h2 id="一-前言">一 前言</h2>
 <p>最近独自完成了一个同步信息的项目，主要工作内容是从第三方的服务端将信息同步到公司的二方AD域当中。本文主要记录本项目的主要实现过程。</p>
 <h2 id="二-项目设计">二 项目设计</h2>
@@ -329,7 +173,7 @@ if (!doNotTrack) {
 <h3 id="2主要实现">2.主要实现</h3>
 <h4 id="a最单纯的feign方式实现">a.最单纯的feign方式实现</h4>
 <h5 id="添加pom依赖">添加pom依赖</h5>
-<pre tabindex="0"><code>		&lt;dependency&gt;
+<pre><code>		&lt;dependency&gt;
 			&lt;groupId&gt;io.github.openfeign&lt;/groupId&gt;
 			&lt;artifactId&gt;feign-okhttp&lt;/artifactId&gt;
 			&lt;version&gt;10.1.0&lt;/version&gt;
@@ -342,7 +186,7 @@ if (!doNotTrack) {
 </code></pre><h5 id="定义接收返回值所用到的model对象">定义接收返回值所用到的model对象</h5>
 <p>这个地方的model定义，需要仔细阅读第三方服务端的api文档，然后根据上面的具体信息来进行定义<br>
 eg:</p>
-<pre tabindex="0"><code>@Data
+<pre><code>@Data
 public class XxxApiResponse {
     private String code;
     private String message;
@@ -351,18 +195,19 @@ public class XxxApiResponse {
     private String errmsg;
     private String detailMsg;
 }
+
 </code></pre><p>这里的变量名没有按照驼峰的方式进行定义，是因为官方文档返回值当中的字段key值就是这样非驼峰的方式，我们需要保证名字的一致性。</p>
 <h5 id="定义feign">定义Feign</h5>
-<pre tabindex="0"><code>public interface XxxClient {
+<pre><code>public interface XxxClient {
 
-    @RequestLine(&#34;GET /v3/xxx/details?param1={param1}&#34;)
-    XxxDetailsResponse getXxxDetails(@Param(&#34;param1&#34;) String param1);
+    @RequestLine(&quot;GET /v3/xxx/details?param1={param1}&quot;)
+    XxxDetailsResponse getXxxDetails(@Param(&quot;param1&quot;) String param1);
 
 }
 </code></pre><p>注意这种RequestLine的方式和GetMapping和PostMapping的方式有所区别</p>
 <h5 id="定义feign的factory">定义Feign的Factory</h5>
-<pre tabindex="0"><code>public class XxxClientFactory {
-    private final static String URL = &#34;https://api.xxx.com&#34;;
+<pre><code>public class XxxClientFactory {
+    private final static String URL = &quot;https://api.xxx.com&quot;;
 
     public XxxClient createXxxClient() {
         ObjectMapper mapper = new ObjectMapper()
@@ -387,10 +232,11 @@ public class XxxApiResponse {
         return new XxxClientFactory();
     }
 }
+
 </code></pre><h4 id="b常用feignclient实现">b.常用FeignClient实现</h4>
 <h5 id="添加依赖">添加依赖</h5>
 <h5 id="application中增加注解允许指定包的feignclient有效">Application中增加注解,允许指定包的feignClient有效</h5>
-<pre tabindex="0"><code>@EnableFeignClients(basePackages = {&#34;com.shuidihuzhu.devops.xrxs.client&#34;, &#34;com.shuidihuzhu.devops.xrxs.feign&#34;})
+<pre><code>@EnableFeignClients(basePackages = {&quot;com.shuidihuzhu.devops.xrxs.client&quot;, &quot;com.shuidihuzhu.devops.xrxs.feign&quot;})
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -401,24 +247,24 @@ public class Application {
 <h2 id="四-将数据同步到ad域">四 将数据同步到AD域</h2>
 <h3 id="1添加依赖和配置">1.添加依赖和配置</h3>
 <h4 id="a依赖">a.依赖</h4>
-<pre tabindex="0"><code>		&lt;dependency&gt;
+<pre><code>		&lt;dependency&gt;
 			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
 			&lt;artifactId&gt;spring-boot-starter-data-ldap&lt;/artifactId&gt;
 		&lt;/dependency&gt;
 </code></pre><h4 id="b配置">b.配置</h4>
 <p>LdapConfiguration.Java</p>
-<pre tabindex="0"><code>@Configuration
+<pre><code>@Configuration
 @EnableLdapRepositories
 public class LdapConfiguration {
     private LdapTemplate ldapTemplate;
 
-    @Value(&#34;${spring.ldap.urls}&#34;)
+    @Value(&quot;${spring.ldap.urls}&quot;)
     private String LDAP_URL;
-    @Value(&#34;${spring.ldap.username}&#34;)
+    @Value(&quot;${spring.ldap.username}&quot;)
     private String USERNAME;
-    @Value(&#34;${spring.ldap.password}&#34;)
+    @Value(&quot;${spring.ldap.password}&quot;)
     private String PASSWORD;
-    @Value(&#34;${spring.ldap.base}&#34;)
+    @Value(&quot;${spring.ldap.base}&quot;)
     private String BASE;
 
     @Bean
@@ -429,7 +275,7 @@ public class LdapConfiguration {
         contextSource.setBase(BASE);
         contextSource.setUserDn(USERNAME);
         contextSource.setPassword(PASSWORD);
-        config.put(&#34;java.naming.ldap.attributes.binary&#34;, &#34;objectGUID&#34;);
+        config.put(&quot;java.naming.ldap.attributes.binary&quot;, &quot;objectGUID&quot;);
         contextSource.setPooled(true);
         contextSource.setBaseEnvironmentProperties(config);
         return contextSource;
@@ -445,11 +291,12 @@ public class LdapConfiguration {
         return ldapTemplate;
     }
 }
+
 </code></pre><p>Application.Java</p>
-<pre tabindex="0"><code>@SpringBootApplication
+<pre><code>@SpringBootApplication
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
 @EnableScheduling
-@EnableFeignClients(basePackages = {&#34;com.shuidihuzhu.devops.xrxs.client&#34;, &#34;com.shuidihuzhu.devops.xrxs.feign&#34;})
+@EnableFeignClients(basePackages = {&quot;com.shuidihuzhu.devops.xrxs.client&quot;, &quot;com.shuidihuzhu.devops.xrxs.feign&quot;})
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 @EnableCircuitBreaker
 @EnableLdapRepositories
@@ -465,11 +312,12 @@ public class Application {
         return ldapTemplate;
     }
 }
+
 </code></pre><p>注意<code>setIgnorePartialResultException(true)</code>这个方法是必须要设置好的，不然对接AD的时候，会报出莫名其妙的错误</p>
 <h3 id="2定义model和dao层">2.定义model和DAO层</h3>
 <p>以人员为例,Ad中的user对应的objectClasses有四个类，base设置就是对应的AD域下的专门存放这些user的域</p>
-<pre tabindex="0"><code>@Data
-@Entry(objectClasses = {&#34;top&#34;, &#34;person&#34;, &#34;organizationalPerson&#34;, &#34;user&#34;}, base = &#34;ou=XxxUser&#34;)
+<pre><code>@Data
+@Entry(objectClasses = {&quot;top&quot;, &quot;person&quot;, &quot;organizationalPerson&quot;, &quot;user&quot;}, base = &quot;ou=XxxUser&quot;)
 public final class XxxUser {
 
     @Id
@@ -477,29 +325,29 @@ public final class XxxUser {
     private Name id;
 
 
-    @Attribute(name = &#34;mail&#34;)
+    @Attribute(name = &quot;mail&quot;)
     private String mail;
 
-    @Attribute(name = &#34;mobile&#34;)
+    @Attribute(name = &quot;mobile&quot;)
     private String mobile;
 
-    @Attribute(name = &#34;sn&#34;)
+    @Attribute(name = &quot;sn&quot;)
     private String sn;
 
-    @Attribute(name = &#34;cn&#34;)
-    @DnAttribute(value = &#34;cn&#34;, index = 1)
+    @Attribute(name = &quot;cn&quot;)
+    @DnAttribute(value = &quot;cn&quot;, index = 1)
     private String cn;
 
 
-    @Attribute(name = &#34;displayName&#34;)
+    @Attribute(name = &quot;displayName&quot;)
     private String displayName;
 
-    @Attribute(name = &#34;ou&#34;)
-    @DnAttribute(value = &#34;ou&#34;, index = 1)
+    @Attribute(name = &quot;ou&quot;)
+    @DnAttribute(value = &quot;ou&quot;, index = 1)
     private String ou;
 }
 </code></pre><p>定义对应的DAO,在这个DAO接口中，可以使用JPA的函数命名来进行条件查询，但是还是做不了一些复杂的查询，如果需要复杂的查询依然还是需要在自定义的接口XxxUserExtension中进行定义，然后进行实现。</p>
-<pre tabindex="0"><code>@Repository
+<pre><code>@Repository
 public interface XxxUserRepo extends LdapRepository&lt;XxxUser&gt;, XxxUserExtension {
  
     List&lt;XxxUser&gt; findByOu(String ou);
@@ -509,14 +357,14 @@ public interface XxxUserRepo extends LdapRepository&lt;XxxUser&gt;, XxxUserExten
 <p>根据业务的需求，将获取到的第三方的信息，经过处理之后，将Response的有效内容解析到对应的AD的model中，通过对应的DAO层类，存入到AD中</p>
 <h2 id="五-创建定时任务">五 创建定时任务</h2>
 <p>根据cron或者fixedRate(每隔一段时间执行)来设置定时任务</p>
-<pre tabindex="0"><code>@Slf4j
+<pre><code>@Slf4j
 @Component
 @EnableScheduling
 public class XxxToAdJob {
     /**
      * 每20分钟同步一次
      */
-//  @Scheduled(cron = &#34;0 */20 * * * ?&#34;) 
+//  @Scheduled(cron = &quot;0 */20 * * * ?&quot;) 
     @Scheduled(fixedRate = 1000 * 60 * 20)
     public void doExecuteJob() {
     	// 同步逻辑
@@ -564,16 +412,14 @@ public class XxxToAdJob {
     
 </article>
 
+    <aside class="related-contents--wrapper">
     
-
     
-
-<aside class="related-contents--wrapper">
-    <h2 class="section-title">相关文章</h2>
-    <div class="related-contents">
-        <div class="flex article-list--tile">
-            
+        <h2 class="section-title">相关文章</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
                 
+                    
 <article class="has-image">
     <a href="/p/spring14/">
         
@@ -590,8 +436,8 @@ public class XxxToAdJob {
         </div>
     </a>
 </article>
-            
                 
+                    
 <article class="has-image">
     <a href="/p/singleton-realization/">
         
@@ -608,8 +454,8 @@ public class XxxToAdJob {
         </div>
     </a>
 </article>
-            
                 
+                    
 <article class="has-image">
     <a href="/p/spring13/">
         
@@ -626,8 +472,8 @@ public class XxxToAdJob {
         </div>
     </a>
 </article>
-            
                 
+                    
 <article class="has-image">
     <a href="/p/spring12/">
         
@@ -644,8 +490,8 @@ public class XxxToAdJob {
         </div>
     </a>
 </article>
-            
                 
+                    
 <article class="has-image">
     <a href="/p/fallback/">
         
@@ -662,9 +508,10 @@ public class XxxToAdJob {
         </div>
     </a>
 </article>
-            
+                
+            </div>
         </div>
-    </div>
+    
 </aside>
 
      
@@ -710,7 +557,7 @@ public class XxxToAdJob {
             Owner Rainbowly <br/>
         
         Total [<span id="busuanzi_value_site_uv"></span>] user views [<span id="busuanzi_value_site_pv"></span>] site views [<span id="busuanzi_value_page_pv"></span>] page views <br/>Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -779,11 +626,11 @@ public class XxxToAdJob {
 
 </div><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer
+                defer="true"
                 >
             </script><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer
+                defer="true"
                 >
             </script><link 
                 rel="stylesheet" 
@@ -794,13 +641,11 @@ public class XxxToAdJob {
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <line x1="5" y1="9" x2="19" y2="9" />
   <line x1="5" y1="15" x2="19" y2="15" />
@@ -810,11 +655,11 @@ public class XxxToAdJob {
 
 
 
-        </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
+                </div>
+                <h2 class="widget-title section-title">目录</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
   <ul>
     <li><a href="#一-前言">一 前言</a></li>
     <li><a href="#二-项目设计">二 项目设计</a></li>
@@ -836,18 +681,15 @@ public class XxxToAdJob {
     <li><a href="#六-注意事项">六 注意事项</a></li>
   </ul>
 </nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
+                </div>
+            </section>
+        </aside>
+    
 
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
-                
+                defer="false"
                 >
             </script><script type="text/javascript" src="/ts/main.js" defer></script>
 <script>

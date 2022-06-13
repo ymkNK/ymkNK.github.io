@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Monitor on lllovol</title>
+    <link>https://lllovol.com/categories/monitor/</link>
+    <description>Recent content in Monitor on lllovol</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 14 Jun 2022 00:58:16 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/monitor/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>准确率、精确率、召回率</title>
+      <link>https://lllovol.com/p/2022/6/fai/</link>
+      <pubDate>Tue, 14 Jun 2022 00:58:16 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2022/6/fai/</guid>
+      <description>简介 参考文档： 准确率(accuracy)、精确率(precision)、召回率(recall)_小胖蹄儿的博客-CSDN博客_准召率 报警打标统计数据说明
+ True Positive(真正, TP)：将正类预测为正类数 True Negative(真负 , TN)：将负类预测为负类数 False Positive(假正, FP)：将负类预测为正类数 False Negative(假负 , FN)：将正类预测为负类数     表头 Positive Negative     True TP FP   False FN TN    计算公式 一般的计算范式如下
+ 准确率 $$Acc = \frac{TP+TN}{TP+FP+FN+TN}$$ 精准率 $$Pre = \frac{TP}{TP+FP}$$ 召回率 $$Recall = \frac{TP}{TP+FN}$$  </description>
+    </item>
+    
+  </channel>
+</rss>

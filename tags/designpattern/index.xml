@@ -1,624 +1,182 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-        <title>DesignPattern on lllovol</title>
-        <link>https://lllovol.com/tags/designpattern/</link>
-        <description>Recent content in DesignPattern on lllovol</description>
-        <generator>Hugo -- gohugo.io</generator>
-        <language>en-us</language>
-        <lastBuildDate>Thu, 06 Jan 2022 15:41:40 +0800</lastBuildDate><atom:link href="https://lllovol.com/tags/designpattern/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>设计模式-命令模式</title>
-        <link>https://lllovol.com/p/2022/1/design-pattern/</link>
-        <pubDate>Thu, 06 Jan 2022 15:41:40 +0800</pubDate>
-        
-        <guid>https://lllovol.com/p/2022/1/design-pattern/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/16.jpeg" alt="Featured image of post 设计模式-命令模式" /&gt;&lt;h1 id=&#34;举例&#34;&gt;举例&lt;/h1&gt;
-&lt;p&gt;各种命令行工具&lt;/p&gt;
-&lt;h1 id=&#34;延伸&#34;&gt;延伸&lt;/h1&gt;
-&lt;p&gt;设计模式，复杂度，只是转移了，而不是消失了
-冷热分离，把经常修改和不常修改的分离开来&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>设计模式-Chain of Responsibility享元模式</title>
-        <link>https://lllovol.com/p/2021/12/design-pattern-chain-of-responsibility/</link>
-        <pubDate>Thu, 30 Dec 2021 15:43:25 +0800</pubDate>
-        
-        <guid>https://lllovol.com/p/2021/12/design-pattern-chain-of-responsibility/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/15.jpeg" alt="Featured image of post 设计模式-Chain of Responsibility享元模式" /&gt;&lt;h2 id=&#34;核心思想&#34;&gt;核心思想&lt;/h2&gt;
-&lt;p&gt;一条链，有多个对象，都可以去处理一个请求&lt;/p&gt;
-&lt;h2 id=&#34;举例&#34;&gt;举例&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;去医院问诊&lt;/li&gt;
-&lt;li&gt;java中的interceptor拦截器&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;实现&#34;&gt;实现&lt;/h2&gt;
-&lt;p&gt;最标准的实现用链表来实现，也可以用数组等等&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;定义接口&lt;/li&gt;
-&lt;li&gt;base handler 共通的逻辑&lt;/li&gt;
-&lt;li&gt;具体的实现逻辑&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;但是具体如何配置链，放在数据库、配置中心都是ok的，&lt;/p&gt;
-&lt;h3 id=&#34;优点&#34;&gt;优点&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;符合单一职责原则&lt;/li&gt;
-&lt;li&gt;开闭原则&lt;/li&gt;
-&lt;li&gt;比较灵活，支持运行时变更&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;缺点&#34;&gt;缺点&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;链特别长的时候，可能会有很多链都走不动，造成资源浪费&lt;/li&gt;
-&lt;li&gt;可能有部分消息未处理&lt;/li&gt;
-&lt;li&gt;太灵活，也可能会有缺点，比如重复处理（可以放一个context，共享一个状态）&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        </item>
-        <item>
-        <title>设计模式-TemplateMethod模板方法模式</title>
-        <link>https://lllovol.com/p/2021/12/design-pattern-template/</link>
-        <pubDate>Thu, 23 Dec 2021 15:54:21 +0800</pubDate>
-        
-        <guid>https://lllovol.com/p/2021/12/design-pattern-template/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/26.jpeg" alt="Featured image of post 设计模式-TemplateMethod模板方法模式" /&gt;&lt;h2 id=&#34;定义&#34;&gt;定义&lt;/h2&gt;
-&lt;p&gt;模板方法是一种行为设计模式，它在超类中定义了一个算法的框架，允许子类在不修改结构的情况下重写算法的特定步骤&lt;/p&gt;
-&lt;h2 id=&#34;解决方案&#34;&gt;解决方案&lt;/h2&gt;
-&lt;p&gt;模板方法模式建议将算法分解为一系列步骤，然后将这些步骤改写为方法，最后在“模板方法”中依次调用这些方法。步骤可以是抽象的，也可以有一些默认的实现。为了能够使用算法，客户端需要自行提供子类并实现所有的抽象步骤。如有必要还需重写一些步骤(但这一步中不包括模板方法自身)。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;抽象步骤必须由各个子类来实现&lt;/li&gt;
-&lt;li&gt;可选步骤已有一些默认实现， 但仍可在需要时进行重写&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;真实世界类比&#34;&gt;真实世界类比&lt;/h2&gt;
-&lt;p&gt;模板方法可用于建造大量房屋。标准房屋建造方案中可提供几个扩展点，允许潜在房屋业主调整成品房屋的部分细节。
-比如每个建造步骤(例如打地基、建造框架、建造墙壁和安装水电管线等)都能进行微调，这使得成品房屋会略有不同。&lt;/p&gt;
-&lt;h2 id=&#34;结构&#34;&gt;结构&lt;/h2&gt;
-&lt;p&gt;1.抽象类(AbstractClass)会声明作为算法步骤的方法，以及依次调用它们的实际模板方法。算法步骤可以被声明为抽象类型，也可以提供一些默认实现。
-2.具体类(ConcreteClass)可以重写所有步骤，但不能重写模板方法自身。&lt;/p&gt;
-&lt;h2 id=&#34;优缺点&#34;&gt;优缺点&lt;/h2&gt;
-&lt;h3 id=&#34;优点&#34;&gt;优点&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;你可仅允许客户端重写一个大型算法中的特定部分，使得算法其他部分修改对其所造成的影响减小。&lt;/li&gt;
-&lt;li&gt;你可将重复代码提取到一个超类中。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;缺点&#34;&gt;缺点&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;部分客户端可能会受到算法框架的限制。&lt;/li&gt;
-&lt;li&gt;通过子类抑制默认步骤实现可能会导致违反_里氏替换原则_。&lt;/li&gt;
-&lt;li&gt;模板方法中的步骤越多，其维护工作就可能会越困难。&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        </item>
-        <item>
-        <title>设计模式-FlyWeight享元模式</title>
-        <link>https://lllovol.com/p/2021/12/design-pattern-flyweight/</link>
-        <pubDate>Thu, 16 Dec 2021 15:42:40 +0800</pubDate>
-        
-        <guid>https://lllovol.com/p/2021/12/design-pattern-flyweight/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/29.jpeg" alt="Featured image of post 设计模式-FlyWeight享元模式" /&gt;&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
-&lt;p&gt;大量创建对象的场景，会耗费大量的资源，使用享元模式能共享一些内部的状态。&lt;/p&gt;
-&lt;h2 id=&#34;定义&#34;&gt;定义&lt;/h2&gt;
-&lt;p&gt;运用共享技术有效地支持大量细粒度对象的复用。系统只使用少量的对象，而这些对象都很相似，状态变化很小，可以实现对象的多次复用。由于享元模式要求能够共享的对象必须是细粒度对象，因此它又称为轻量级模式，它是一种对象结构型模式。&lt;/p&gt;
-&lt;h2 id=&#34;实现&#34;&gt;实现&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;定义一个享元的interface&lt;/li&gt;
-&lt;li&gt;定义一个享元的工厂&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;适用场景&#34;&gt;适用场景&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;系统有大量相似对象&lt;/li&gt;
-&lt;li&gt;需要缓冲池的场景&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;优缺点&#34;&gt;优缺点&lt;/h2&gt;
-&lt;h3 id=&#34;优点&#34;&gt;优点&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;能够大大减少内存中对象的数量，内存中只保存一份相同或相似的对象，从而可以节约系统资源，提高系统性能。&lt;/li&gt;
-&lt;li&gt;享元模式的外部状态相对独立，而且不会影响其内部状态，从而使得享元对象可以在不同的环境中被共享。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;缺点&#34;&gt;缺点&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;享元模式使得系统更加复杂，需要分离出内部状态和外部状态，这使得程序的逻辑复杂化。&lt;/li&gt;
-&lt;li&gt;为了使对象可以共享，享元模式需要将享元对象的状态外部化，而读取外部状态使得运行时间变长。&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        </item>
-        <item>
-        <title>设计模式-Facade门面模式</title>
-        <link>https://lllovol.com/p/2021/12/design-pattern-facade/</link>
-        <pubDate>Thu, 02 Dec 2021 15:55:10 +0800</pubDate>
-        
-        <guid>https://lllovol.com/p/2021/12/design-pattern-facade/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/17.jpeg" alt="Featured image of post 设计模式-Facade门面模式" /&gt;&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
-&lt;p&gt;结构型设计模式&lt;/p&gt;
-&lt;h2 id=&#34;真实场景&#34;&gt;真实场景&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;银行柜员&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;组成部分&#34;&gt;组成部分&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;门面接口&lt;/li&gt;
-&lt;li&gt;复杂子系统&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;使用场景&#34;&gt;使用场景&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;底层是复杂的子系统，对外暴露提供的就只是一个简单的接口&lt;/li&gt;
-&lt;li&gt;构建多层系统结构，利用门面模式最为每一层的入口，简化层间调用&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;实现方式&#34;&gt;实现方式&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;新增&lt;/li&gt;
-&lt;li&gt;维护、变更&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;优缺点&#34;&gt;优缺点&lt;/h2&gt;
-&lt;p&gt;优点&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;简化调用逻辑&lt;/li&gt;
-&lt;li&gt;高内聚低耦合&lt;/li&gt;
-&lt;li&gt;更好的划分层次，提高了安全性&lt;/li&gt;
-&lt;li&gt;符合迪米特法则，最少知道原则&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;缺点&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;有可能成为所有类型都耦合的上帝对象&lt;/li&gt;
-&lt;li&gt;不符合开闭原则：增加子系统需要对原有系统进行修改&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        </item>
-        <item>
-        <title>设计模式-Observer观察者模式</title>
-        <link>https://lllovol.com/p/2021/11/observer/</link>
-        <pubDate>Thu, 25 Nov 2021 15:21:43 +0800</pubDate>
-        
-        <guid>https://lllovol.com/p/2021/11/observer/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/5.jpeg" alt="Featured image of post 设计模式-Observer观察者模式" /&gt;&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
-&lt;p&gt;行为型设计模式&lt;/p&gt;
-&lt;h2 id=&#34;组成部分&#34;&gt;组成部分&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;发布者 接口&lt;/li&gt;
-&lt;li&gt;订阅者 接口&lt;/li&gt;
-&lt;li&gt;具体订阅者 实现&lt;/li&gt;
-&lt;li&gt;客户端&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;使用场景&#34;&gt;使用场景&lt;/h2&gt;
-&lt;p&gt;需要监听某种事件的变化，然后通知会对这种变化感兴趣的对象&lt;/p&gt;
-&lt;h2 id=&#34;实现方式&#34;&gt;实现方式&lt;/h2&gt;
-&lt;p&gt;略&lt;/p&gt;
-&lt;h2 id=&#34;优缺点&#34;&gt;优缺点&lt;/h2&gt;
-&lt;p&gt;优点&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;减少发布者和订阅者的耦合&lt;/li&gt;
-&lt;li&gt;支持开闭原则&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;缺点&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;没有完全解耦，可能会存在循环依赖&lt;/li&gt;
-&lt;li&gt;性能损耗&lt;/li&gt;
-&lt;li&gt;通知顺序是随机的(可以改变具体的实现方式)&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        </item>
-        <item>
-        <title>设计模式-Composite组合模式</title>
-        <link>https://lllovol.com/p/2021/11/design-pattern-composite/</link>
-        <pubDate>Thu, 11 Nov 2021 15:32:55 +0800</pubDate>
-        
-        <guid>https://lllovol.com/p/2021/11/design-pattern-composite/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/1.jpeg" alt="Featured image of post 设计模式-Composite组合模式" /&gt;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
-&lt;p&gt;树状组合模式，结构型设计模式&lt;/p&gt;
-&lt;h2 id=&#34;例子&#34;&gt;例子&lt;/h2&gt;
-&lt;p&gt;纸盒箱
--&amp;gt;可以包含产品
--&amp;gt;可以包含更小的盒子&lt;/p&gt;
-&lt;h2 id=&#34;解决方案&#34;&gt;解决方案&lt;/h2&gt;
-&lt;p&gt;组合模式建议使用一个通用接口来和产品盒子进行交互&lt;/p&gt;
-&lt;h2 id=&#34;实现方式&#34;&gt;实现方式&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;模型能够以树状展示&lt;/li&gt;
-&lt;li&gt;申明组件接口&lt;/li&gt;
-&lt;li&gt;创建叶子节点（简单元素）&lt;/li&gt;
-&lt;li&gt;创建容器节点（复杂元素）&lt;/li&gt;
-&lt;li&gt;容器可以添加和删除元素&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;代码演示&#34;&gt;代码演示&lt;/h2&gt;
-&lt;h3 id=&#34;画图功能&#34;&gt;画图功能&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;通用接口定义：draw() move()&lt;/li&gt;
-&lt;li&gt;叶子节点实现接口&lt;/li&gt;
-&lt;li&gt;容器节点实现接口，并且支持add()、remove()&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;文件系统&#34;&gt;文件系统&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;文件（叶子节点，能够执行）&lt;/li&gt;
-&lt;li&gt;文件夹（容器节点，可以包含文件和文件夹）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;适用场景&#34;&gt;适用场景&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;树状场景&lt;/li&gt;
-&lt;li&gt;希望客户端代码以相同方式处理简单和复杂元素&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;优缺点&#34;&gt;优缺点&lt;/h2&gt;
-&lt;p&gt;优点：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;可以使用多态、递归&lt;/li&gt;
-&lt;li&gt;开闭原则 无需更改代码&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;缺点：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;对于功能差异较大的类，提供公共接口或许会有困难&lt;/li&gt;
-&lt;li&gt;在特定情况下，需要过度一般化组件接口，使其变得令人难以理解&lt;/li&gt;
-&lt;li&gt;不容易限制容器中的构件&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        </item>
-        <item>
-        <title>设计模式-Adapter适配器模式</title>
-        <link>https://lllovol.com/p/2021/11/design-pattern-adapter/</link>
-        <pubDate>Thu, 04 Nov 2021 15:25:25 +0800</pubDate>
-        
-        <guid>https://lllovol.com/p/2021/11/design-pattern-adapter/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/30.jpeg" alt="Featured image of post 设计模式-Adapter适配器模式" /&gt;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
-&lt;p&gt;本文内容来源于宽哥分享&lt;/p&gt;
-&lt;h2 id=&#34;问题场景化&#34;&gt;问题场景化&lt;/h2&gt;
-&lt;p&gt;问题场景化：适配器（电源转接头）就是把一个类的接口（不同国家的新电源插口）转换成使用方（笔记本电脑）所能接受的另一种接口（笔记本电脑当地的电源插口），从而使因为两个接口（电脑电源无法插入新的电源插口）本身不匹配而无法一起工作的两个类能够在一起工作&lt;/p&gt;
-&lt;h3 id=&#34;其他例子&#34;&gt;其他例子&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;浏览器&lt;/li&gt;
-&lt;li&gt;HTTP&lt;/li&gt;
-&lt;li&gt;数据库驱动&lt;/li&gt;
-&lt;li&gt;报警平台适配的多数据源&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;角色&#34;&gt;角色&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Target（目标接口）：所要转换的目的接口&lt;/li&gt;
-&lt;li&gt;Adaptee（源角色/源接口）：需要适配的接口&lt;/li&gt;
-&lt;li&gt;Adapter（适配器）：将源接口适配成目标接口，&amp;ldquo;实现目标接口&amp;rdquo;，实现的方式有两种形式，一种是适配器本身实现目标接口，另一种是使用时获取&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;实现逻辑&#34;&gt;实现逻辑&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;确保至少有两个类的接口不兼容：
-&lt;ul&gt;
-&lt;li&gt;一个无法修改 （通常是第三方、 遗留系统或者存在众多已有依赖的类） 的功能性服务类&lt;/li&gt;
-&lt;li&gt;一个或多个将受益于使用服务类的客户端类&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;声明客户端接口， 描述客户端如何与服务交互&lt;/li&gt;
-&lt;li&gt;创建遵循客户端接口的适配器类，所有方法暂时都为空&lt;/li&gt;
-&lt;li&gt;在适配器类中添加一个成员变量用于保存对于服务对象的引用。 通常情况下会通过构造函数对该成员变量进行初始化， 但有时在调用其方法时将该变量传递给适配器会更方便&lt;/li&gt;
-&lt;li&gt;依次实现适配器类客户端接口的所有方法：适配器会将实际工作委派给服务对象， 自身只负责接口或数据格式的转换&lt;/li&gt;
-&lt;li&gt;客户端必须通过客户端接口使用适配器：这样一来，就可以在不影响客户端代码的情况下修改或扩展适配器&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;优缺点&#34;&gt;优缺点&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;优点：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;单一职责原则：你可以将接口从程序主要业务逻辑中分离&lt;/li&gt;
-&lt;li&gt;开闭原则：只要客户端代码通过客户端接口与适配器进行交互，你就能在不修改现有客户端代码的情况下在程序中添加新类型的适配器&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;缺点：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;代码整体复杂度增加：因为你需要新增一系列接口和类，有时直接更改服务类使其与其他代码兼容会更简单&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;比较&#34;&gt;比较&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;适配器模式可以对已有对象的接口&lt;strong&gt;进行修改&lt;/strong&gt;， 装饰模式则能在不改变对象接口的前提下&lt;strong&gt;强化对象功能&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;适配器模式能为被封装对象提供不同的接口， 代理模式能为对象提供相同的接口， 装饰模式则能为对象提供加强的接口&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        </item>
-        <item>
-        <title>设计模式-Bridge桥接模式</title>
-        <link>https://lllovol.com/p/2021/10/bridge/</link>
-        <pubDate>Thu, 21 Oct 2021 15:45:04 +0800</pubDate>
-        
-        <guid>https://lllovol.com/p/2021/10/bridge/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/24.jpeg" alt="Featured image of post 设计模式-Bridge桥接模式" /&gt;&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
-&lt;p&gt;桥接是一种结构型设计模式，可将一个大类或一系列紧密，相关的类拆分为抽象和实现两个独立的层次结构，从而能在开发时分别使用。&lt;/p&gt;
-&lt;h2 id=&#34;问题&#34;&gt;问题&lt;/h2&gt;
-&lt;p&gt;同一套服务界面，想在不同的操作系统下实现&lt;/p&gt;
-&lt;h2 id=&#34;解决方案&#34;&gt;解决方案&lt;/h2&gt;
-&lt;p&gt;让我们试着用桥接模式来解决这个问题。该模式建议将类拆分为两个类层次结构:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;抽象部分:程序的GUI层&lt;/li&gt;
-&lt;li&gt;实现部分:操作系统的API&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;结构&#34;&gt;结构&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;抽象部分&lt;/strong&gt;(Abstraction)提供高层控制逻辑，依赖于完成底层实际工作的实现对象。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;实现部分&lt;/strong&gt;(Implementation)为所有具体实现声明通用接口。抽象部分仅能通过在这里声明的方法与实现对象交互。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;具体实现&lt;/strong&gt;(Concrete Implementations)中包括特定于平台的代码。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;精确抽象&lt;/strong&gt;(Refined Abstraction)提供控制逻辑的变体。与其父类一样，它们通过通用实现接口与不同的实现进行交互。&lt;/li&gt;
-&lt;li&gt;通常情况下，&lt;strong&gt;客户端&lt;/strong&gt;(Client)仅关心如何与抽象部分合作。但是，客户端需要将抽象对象与一个实现对象连接起来。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;适合应用场景&#34;&gt;适合应用场景&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;如果你想要拆分或重组一个具有多重功能的庞杂类(例如能与多个数据库服务器进行交互的类)，可以使用桥接模式。&lt;/li&gt;
-&lt;li&gt;如果你希望在几个独立维度上扩展一个类，可使用该模式。&lt;/li&gt;
-&lt;li&gt;如果你需要在运行时切换不同实现方法，可使用桥接模式。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;优缺点&#34;&gt;优缺点&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;你可以创建与平台无关的类和程序。&lt;/li&gt;
-&lt;li&gt;客户端代码仅与高层抽象部分进行互动，不会接触到平台的详细信息。&lt;/li&gt;
-&lt;li&gt;开闭原则。你可以新增抽象部分和实现部分，且它们之间不会相互影响。&lt;/li&gt;
-&lt;li&gt;单一职责原则。抽象部分专注于处理高层逻辑，实现部分处理平台细节。&lt;/li&gt;
-&lt;li&gt;对高内聚的类使用该模式可能会让代码更加复杂。&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        </item>
-        <item>
-        <title>设计模式-Proxy代理模式</title>
-        <link>https://lllovol.com/p/2021/10/proxy-pattern/</link>
-        <pubDate>Thu, 14 Oct 2021 15:40:55 +0800</pubDate>
-        
-        <guid>https://lllovol.com/p/2021/10/proxy-pattern/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/14.jpeg" alt="Featured image of post 设计模式-Proxy代理模式" /&gt;&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
-&lt;p&gt;代理是一种结构型设计模式，让你能够提供对象的替代品或其占位符。
-代理控制着对于原对象的访问，并允许在将请求提交给对象前后进行一些处理。&lt;/p&gt;
-&lt;h2 id=&#34;原理&#34;&gt;原理&lt;/h2&gt;
-&lt;p&gt;代理模式建议新建一个与原服务对象接口相同的代理类，
-然后更新应用以将代理对象传递给所有原始对象客户端。
-代理类接收到客户端请求后会创建实际的服务对象，
-并将所有工作委派给它。&lt;/p&gt;
-&lt;h2 id=&#34;类比&#34;&gt;类比&lt;/h2&gt;
-&lt;p&gt;信用卡是银行账户的代理，银行账户则是一大捆现金的代理。
-它们都实现了同样的接口，均可用于进行支付。&lt;/p&gt;
-&lt;h2 id=&#34;结构&#34;&gt;结构&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;服务接口(ServiceInterface)&lt;/strong&gt;：申明服务接口，代理必须实现这个接口才能伪装成Service&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;服务(Service)&lt;/strong&gt;：提供服务的真实业务逻辑&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;代理(Proxy)&lt;/strong&gt;：代理完成代理的任务后，然后将请求传递给服务对象&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;客户端(Client)&lt;/strong&gt;: 能通过同一接口与服务或代理进行交互，可在一切需要服务对象的代码中使用代理&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;应用场景&#34;&gt;应用场景&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;延迟初始化（虚拟代理）&lt;/li&gt;
-&lt;li&gt;访问控制（保护代理）&lt;/li&gt;
-&lt;li&gt;本地执行远程服务（远程代理）&lt;/li&gt;
-&lt;li&gt;记录日志请求（日志记录代理）&lt;/li&gt;
-&lt;li&gt;缓存请求结果（缓存代理）&lt;/li&gt;
-&lt;li&gt;只能引用：客户端不调用的时候直接销毁服务对象&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;优缺点&#34;&gt;优缺点&lt;/h2&gt;
-&lt;h3 id=&#34;优点&#34;&gt;优点&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;在客户端毫无察觉的情况下控制服务对象&lt;/li&gt;
-&lt;li&gt;如果客户端对服务对象的生命周期没有特殊要求， 你可以对
-生命周期进行管理&lt;/li&gt;
-&lt;li&gt;即使服务对象还未准备好或不存在， 代理也可以正常工作&lt;/li&gt;
-&lt;li&gt;开闭原则。 你可以在不对服务或客户端做出修改的情况下创建新代理&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;缺点&#34;&gt;缺点&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;代码变复杂&lt;/li&gt;
-&lt;li&gt;请求时间延迟增加&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        </item>
-        <item>
-        <title>设计模式-Prototype原型模式</title>
-        <link>https://lllovol.com/p/2021/9/prototype/</link>
-        <pubDate>Thu, 23 Sep 2021 15:21:54 +0800</pubDate>
-        
-        <guid>https://lllovol.com/p/2021/9/prototype/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/5.jpeg" alt="Featured image of post 设计模式-Prototype原型模式" /&gt;&lt;h2 id=&#34;场景&#34;&gt;场景&lt;/h2&gt;
-&lt;p&gt;有一个object，想要生成与之完全相同的复制品，该如何是实现？
-问题：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;私有数据&lt;/li&gt;
-&lt;li&gt;不想包含具体的包&lt;/li&gt;
-&lt;li&gt;如果原始的对象只是一个接口，具体类都不知道，怎么处理呢？&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;方案&#34;&gt;方案&lt;/h2&gt;
-&lt;p&gt;将克隆过程，委派给被克隆的实际对象，由实际对象负责clone
-因此，只要实现了clone()方法的，就是原型模式&lt;/p&gt;
-&lt;h2 id=&#34;实现&#34;&gt;实现&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;原型（Prototype）接口对clone方法做一个申明，绝大部分情况下，里面只有一个名为clone的方法&lt;/li&gt;
-&lt;li&gt;具体原型（ConcretePrototype）类实现接口&lt;/li&gt;
-&lt;li&gt;客户端（Client）可以复制实现了原型接口的任何对象&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;应用&#34;&gt;应用&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;将自身作为构造函数的参数传入
-复制数组&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;如果需要复制一些对象，同时又希望代码独立于这些对象所属的具体类&lt;/li&gt;
-&lt;li&gt;如果子类的区别仅在于对象的初始化方式，那么可以使用该模式减少子类的数量，别人创建这些子类的目的可能只是为了创建特定的对象。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;优点&#34;&gt;优点&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;克隆时 无需与所属的具体类耦合&lt;/li&gt;
-&lt;li&gt;克隆原型 防止反复运行初始化&lt;/li&gt;
-&lt;li&gt;更方便的生成复杂对象&lt;/li&gt;
-&lt;li&gt;可以用继承以外的方式来处理复杂对象的不同配置&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;缺点&#34;&gt;缺点&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;克隆博涵循环引用的复杂对象可能会非常麻烦&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        </item>
-        <item>
-        <title>设计模式-Factory工厂模式学习笔记</title>
-        <link>https://lllovol.com/p/2021/9/design-pattern-factory/</link>
-        <pubDate>Thu, 09 Sep 2021 15:31:14 +0800</pubDate>
-        
-        <guid>https://lllovol.com/p/2021/9/design-pattern-factory/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/30.jpeg" alt="Featured image of post 设计模式-Factory工厂模式学习笔记" /&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://refactoringguru.cn/design-patterns/factory-method&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;工厂模式&lt;/a&gt;
-有点忙，先看看吧&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>设计模式-Singleton单例模式学习笔记</title>
-        <link>https://lllovol.com/p/2021/9/design-pattern-singleton/</link>
-        <pubDate>Thu, 02 Sep 2021 15:50:47 +0800</pubDate>
-        
-        <guid>https://lllovol.com/p/2021/9/design-pattern-singleton/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/27.jpeg" alt="Featured image of post 设计模式-Singleton单例模式学习笔记" /&gt;&lt;h2 id=&#34;概要&#34;&gt;概要&lt;/h2&gt;
-&lt;p&gt;保证一个类只有一个实例，保证一个进程中，某个类有且仅有一个实例&lt;/p&gt;
-&lt;h2 id=&#34;方案&#34;&gt;方案：&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;构造函数私有化&lt;/li&gt;
-&lt;li&gt;新建静态构造方法作为构造函数&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;饿汉式&#34;&gt;饿汉式&lt;/h2&gt;
-&lt;p&gt;类加载的时候，就实例化。&lt;/p&gt;
-&lt;h2 id=&#34;懒汉式&#34;&gt;懒汉式&lt;/h2&gt;
-&lt;p&gt;第一次使用的时候，再实例化。节省资源，但是需要注意线程安全问题&lt;/p&gt;
-&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
-&lt;h3 id=&#34;优点&#34;&gt;优点&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;只有一个实例，避免了重复的内存开销&lt;/li&gt;
-&lt;li&gt;避免对资源的重复占用&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;缺点&#34;&gt;缺点&lt;/h3&gt;
-&lt;p&gt;可以理解为一个全局变量，没有接口，不能继承。违背了SRP职责&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>设计模式-Strategy策略模式学习笔记</title>
-        <link>https://lllovol.com/p/2021/8/strategy/</link>
-        <pubDate>Sun, 15 Aug 2021 02:12:03 +0800</pubDate>
-        
-        <guid>https://lllovol.com/p/2021/8/strategy/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/5.jpeg" alt="Featured image of post 设计模式-Strategy策略模式学习笔记" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
-&lt;p&gt;为什么我们需要设计模式呢？我们日常的设计应该对手头的问题有针对性，同时对将来的问题也要有足够的通用性，同时我们也需要避免重复设计或者尽可能的减少重复设计。但是想以一下子就得到复用性和灵活性好的设计，其实是相当困难的。
-而设计模式，就是将对面向对象软件的设计经验作为设计模式记录下来。&lt;/p&gt;
-&lt;h2 id=&#34;设计模式的四个基本要素&#34;&gt;设计模式的四个基本要素&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;模式名称&lt;/strong&gt; 一个助记的名称&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;问题&lt;/strong&gt; 描述了应该在什么时候使用设计模式&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;解决方案&lt;/strong&gt; 描述了设计的组成成分，它们之间的相互关系和各自的职责和协作方式&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;效果&lt;/strong&gt; 描述了模式应用的效果以及使用模式应该权衡的问题&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;设计模式的三大分类&#34;&gt;设计模式的三大分类&lt;/h2&gt;
-&lt;p&gt;我们主要通过两个准则对各种设计模式进行分类：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;目的准则&lt;/strong&gt; 这个模式是用来完成什么工作的&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;范围准则&lt;/strong&gt; 这个模式用于类还是用于对象的
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/screenshot-20210816-013825.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;设计模式分类&#34;
-	
-	
-&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;面向对象的六大原则&#34;&gt;面向对象的六大原则&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;单一功能原则&lt;/strong&gt; 一个类只做一件事情&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;开闭原则&lt;/strong&gt; 一个软件实体类，模块和函数应该对扩展开放，对修改关闭&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;里氏替换原则&lt;/strong&gt; 子类可以扩展父类的功能，但不能改变父类原有的功能&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;依赖倒置原则&lt;/strong&gt; 抽象不应该依赖细节，细节应该依赖于抽象，换一句话说，就是要针对接口编程，不要对实现编程&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;接口分离原则&lt;/strong&gt; 系统解开耦合，从而容易重构，更改和重新部署&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;迪米特原则&lt;/strong&gt; 一个类应该对自己需要耦合或者调用的类知道得最少，这有点类似于接口隔离原则中的最小接口的概念&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h1 id=&#34;strategy-策略模式&#34;&gt;Strategy 策略模式&lt;/h1&gt;
-&lt;h2 id=&#34;意图&#34;&gt;意图&lt;/h2&gt;
-&lt;p&gt;定义一系列的算法，把他们一个个封装起来，并且使他们可以互相替换。同时本模式可以使得算法可以独立于使用它的客户变化而变化&lt;/p&gt;
-&lt;h2 id=&#34;别名&#34;&gt;别名&lt;/h2&gt;
-&lt;p&gt;Policy 政策模式&lt;/p&gt;
-&lt;h2 id=&#34;动机&#34;&gt;动机&lt;/h2&gt;
-&lt;p&gt;当我们需要对一个正文流进行处理，需要使用许多不同的算法。这个时候，将这些算法那硬编码进使用它们的类当中是不可取的，原因如下：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;客户程序异常庞大同时难以维护&lt;/li&gt;
-&lt;li&gt;不同的时候需要不同的算法，我们不想支持我们并不使用的算法&lt;/li&gt;
-&lt;li&gt;当其中某些算法是客户程序难以分割的算法的时候，增加新的算法或者改变现有的算法将十分困难&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;适用性&#34;&gt;适用性&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;许多相关的类只是行为有不同&lt;/strong&gt; 可以使用多个行为中的一个行为来配置一个类&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;需要使用一个算法的不同变体&lt;/strong&gt; 可能会定义一些反映了不同时间、空间等因素权衡的算法，将这些变体实现为类层次&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;算法使用了客户不应该知道的数据&lt;/strong&gt; 避免暴露负责的、与算法相关的数据结构&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;一个类定义了多种行为&lt;/strong&gt;，并且这些行为在这个类的操作中以多个条件语句的形式出现。将相关的条件分支移入它们各自的Strategy类当中来代替这些条件语句&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;结构&#34;&gt;结构&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/UML%20%E5%9B%BE.jpg&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;图&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;h2 id=&#34;参与者&#34;&gt;参与者&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;Strategy&lt;/strong&gt;
-&lt;ol&gt;
-&lt;li&gt;定义所有支持的算法的公共接口。Context使用这个接口来调用某个ConcreteStrategy定义的算法&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;ConcreteStrategy&lt;/strong&gt;
-&lt;ol&gt;
-&lt;li&gt;以Strategy为策略是实现某具体的算法&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Context&lt;/strong&gt;
-&lt;ol&gt;
-&lt;li&gt;用一个ConcreteStrategy对象来配置&lt;/li&gt;
-&lt;li&gt;维护一个对Strategy对象的引用&lt;/li&gt;
-&lt;li&gt;可定义一个接口来让Strategy访问它的数据&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;协作&#34;&gt;协作&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;Strategy和Context相互作用以实现选定的算法
-&lt;ol&gt;
-&lt;li&gt;Context将算法所需要的数据传递给Strategy&lt;/li&gt;
-&lt;li&gt;Context也可以将自身作为一个参数传递给Strategy，Strategy就可以在需要的时候回调Context&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;Context将客户的请求转发给它的Strategy。通常创建并传递一个ConcreteStrategy对象给Context。客户只需要和Context交互。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;效果&#34;&gt;效果&lt;/h2&gt;
-&lt;h3 id=&#34;优点&#34;&gt;优点&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;相关算法系列&lt;/strong&gt; Strategy类层次为Context定义了一系列可供重用的算法或者行为。有助于析取出这些算法的公共功能&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;一个替代继承的方法&lt;/strong&gt; 可以使用继承生成Context的子类，给予它们不同的行为，但是这就会将行为硬编码到Context当中，将算法的实现和Context的实现混淆，使得Context难以理解、难以维护、难以扩展，还不能动态改变算法。将算法封装在独立的Strategy类中，使得我们可以独立于Context改变它，易于切换、易于理解、易于扩展&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;消除了一些条件语句&lt;/strong&gt; 将不同行为堆砌在一个类当中的时候，很难避免使用条件语句来选择合适的行为。将行为封装成一个个独立的Strategy类中可以消除这些条件语句（含有许多条件语句的代码通常意味着需要使用策略模式）&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;实现的选择&lt;/strong&gt; 可以为相同行为提供不同的实现，可以根据不同的时间、空间权衡取舍要求从不同的策略中进行选择&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;缺点&#34;&gt;缺点&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;客户必须要了解不同的Strategy&lt;/strong&gt; 本模式一个潜在的缺点，客户选择一个Strategy必须要知道这些Strategy有何不同，此时可能不得不向客户暴露实现。因此只有不同行为变体与客户相关的行为时，才需要使用Strategy&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Strategy和Context的通信开销&lt;/strong&gt; 无论具体的ConcreteStrategy是简单还是负责，都共享Strategy定义的接口。因此很可能某一些简单的ConcreteStrategy可能不会使用所有通过这个接口传递给他们的信息。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;增加了对象的数目&lt;/strong&gt; Strategy增加了一个应用中对象的数目。有时候可以将Strategy实现为可供各个Context共享的无状态对象来减少这一个开销。其余任何状态都由Context来维护&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;实现&#34;&gt;实现&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;定义Strategy接口和Context接口&lt;/strong&gt; 必须传递所有实现需要的数据，也可以将Context自身作为参数进行传递&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;将Strategy作为模板参数&lt;/strong&gt; （Go里没有，这就不展开了）&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;让Strategy对象成为可选的&lt;/strong&gt; 访问前先判断是否存在，如果存在，就使用它；如果没有，就执行缺省的行为&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;代码示例&#34;&gt;代码示例&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;回调事件处理&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;相关模式&#34;&gt;相关模式&lt;/h2&gt;
-&lt;p&gt;Flyweight（享元模式）： Strategy对象通常是很好的轻量级对象&lt;/p&gt;
-&lt;h1 id=&#34;总结&#34;&gt;总结&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;代码基于接口而非基于实现编程&lt;/li&gt;
-&lt;li&gt;为系统提供新的扩展点，定义一类算法类，需要扩展的时候，只需要增加对应策略的算法实现即可&lt;/li&gt;
-&lt;li&gt;控制代码复杂度，添加新策略的时候，最小化、集中化代码改动，减少引入 bug 的风险&lt;/li&gt;
-&lt;li&gt;能够消除大量成片的if-else和switch代码&lt;/li&gt;
-&lt;li&gt;策略模式能够起到解耦的作用，主要是三个方面 解耦策略的定义、创建、和使用&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;设计的思想和原则比设计模式更加普适和重要&lt;/strong&gt;&lt;/p&gt;
-</description>
-        </item>
-        
-    </channel>
+  <channel>
+    <title>DesignPattern on lllovol</title>
+    <link>https://lllovol.com/tags/designpattern/</link>
+    <description>Recent content in DesignPattern on lllovol</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 06 Jan 2022 15:41:40 +0000</lastBuildDate><atom:link href="https://lllovol.com/tags/designpattern/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>设计模式-命令模式</title>
+      <link>https://lllovol.com/p/2022/1/design-pattern/</link>
+      <pubDate>Thu, 06 Jan 2022 15:41:40 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2022/1/design-pattern/</guid>
+      <description>举例 各种命令行工具
+延伸 设计模式，复杂度，只是转移了，而不是消失了 冷热分离，把经常修改和不常修改的分离开来</description>
+    </item>
+    
+    <item>
+      <title>设计模式-Chain of Responsibility享元模式</title>
+      <link>https://lllovol.com/p/2021/12/design-pattern-chain-of-responsibility/</link>
+      <pubDate>Thu, 30 Dec 2021 15:43:25 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/12/design-pattern-chain-of-responsibility/</guid>
+      <description>核心思想 一条链，有多个对象，都可以去处理一个请求
+举例  去医院问诊 java中的interceptor拦截器  实现 最标准的实现用链表来实现，也可以用数组等等
+ 定义接口 base handler 共通的逻辑 具体的实现逻辑  但是具体如何配置链，放在数据库、配置中心都是ok的，
+优点  符合单一职责原则 开闭原则 比较灵活，支持运行时变更  缺点  链特别长的时候，可能会有很多链都走不动，造成资源浪费 可能有部分消息未处理 太灵活，也可能会有缺点，比如重复处理（可以放一个context，共享一个状态）  </description>
+    </item>
+    
+    <item>
+      <title>设计模式-TemplateMethod模板方法模式</title>
+      <link>https://lllovol.com/p/2021/12/design-pattern-template/</link>
+      <pubDate>Thu, 23 Dec 2021 15:54:21 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/12/design-pattern-template/</guid>
+      <description>定义 模板方法是一种行为设计模式，它在超类中定义了一个算法的框架，允许子类在不修改结构的情况下重写算法的特定步骤
+解决方案 模板方法模式建议将算法分解为一系列步骤，然后将这些步骤改写为方法，最后在“模板方法”中依次调用这些方法。步骤可以是抽象的，也可以有一些默认的实现。为了能够使用算法，客户端需要自行提供子类并实现所有的抽象步骤。如有必要还需重写一些步骤(但这一步中不包括模板方法自身)。
+ 抽象步骤必须由各个子类来实现 可选步骤已有一些默认实现， 但仍可在需要时进行重写  真实世界类比 模板方法可用于建造大量房屋。标准房屋建造方案中可提供几个扩展点，允许潜在房屋业主调整成品房屋的部分细节。 比如每个建造步骤(例如打地基、建造框架、建造墙壁和安装水电管线等)都能进行微调，这使得成品房屋会略有不同。
+结构 1.抽象类(AbstractClass)会声明作为算法步骤的方法，以及依次调用它们的实际模板方法。算法步骤可以被声明为抽象类型，也可以提供一些默认实现。 2.具体类(ConcreteClass)可以重写所有步骤，但不能重写模板方法自身。
+优缺点 优点  你可仅允许客户端重写一个大型算法中的特定部分，使得算法其他部分修改对其所造成的影响减小。 你可将重复代码提取到一个超类中。  缺点  部分客户端可能会受到算法框架的限制。 通过子类抑制默认步骤实现可能会导致违反_里氏替换原则_。 模板方法中的步骤越多，其维护工作就可能会越困难。  </description>
+    </item>
+    
+    <item>
+      <title>设计模式-FlyWeight享元模式</title>
+      <link>https://lllovol.com/p/2021/12/design-pattern-flyweight/</link>
+      <pubDate>Thu, 16 Dec 2021 15:42:40 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/12/design-pattern-flyweight/</guid>
+      <description>背景 大量创建对象的场景，会耗费大量的资源，使用享元模式能共享一些内部的状态。
+定义 运用共享技术有效地支持大量细粒度对象的复用。系统只使用少量的对象，而这些对象都很相似，状态变化很小，可以实现对象的多次复用。由于享元模式要求能够共享的对象必须是细粒度对象，因此它又称为轻量级模式，它是一种对象结构型模式。
+实现  定义一个享元的interface 定义一个享元的工厂  适用场景  系统有大量相似对象 需要缓冲池的场景  优缺点 优点  能够大大减少内存中对象的数量，内存中只保存一份相同或相似的对象，从而可以节约系统资源，提高系统性能。 享元模式的外部状态相对独立，而且不会影响其内部状态，从而使得享元对象可以在不同的环境中被共享。  缺点  享元模式使得系统更加复杂，需要分离出内部状态和外部状态，这使得程序的逻辑复杂化。 为了使对象可以共享，享元模式需要将享元对象的状态外部化，而读取外部状态使得运行时间变长。  </description>
+    </item>
+    
+    <item>
+      <title>设计模式-Facade门面模式</title>
+      <link>https://lllovol.com/p/2021/12/design-pattern-facade/</link>
+      <pubDate>Thu, 02 Dec 2021 15:55:10 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/12/design-pattern-facade/</guid>
+      <description>简介 结构型设计模式
+真实场景  银行柜员  组成部分  门面接口 复杂子系统  使用场景  底层是复杂的子系统，对外暴露提供的就只是一个简单的接口 构建多层系统结构，利用门面模式最为每一层的入口，简化层间调用  实现方式  新增 维护、变更  优缺点 优点
+ 简化调用逻辑 高内聚低耦合 更好的划分层次，提高了安全性 符合迪米特法则，最少知道原则  缺点
+ 有可能成为所有类型都耦合的上帝对象 不符合开闭原则：增加子系统需要对原有系统进行修改  </description>
+    </item>
+    
+    <item>
+      <title>设计模式-Observer观察者模式</title>
+      <link>https://lllovol.com/p/2021/11/observer/</link>
+      <pubDate>Thu, 25 Nov 2021 15:21:43 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/11/observer/</guid>
+      <description>简介 行为型设计模式
+组成部分  发布者 接口 订阅者 接口 具体订阅者 实现 客户端  使用场景 需要监听某种事件的变化，然后通知会对这种变化感兴趣的对象
+实现方式 略
+优缺点 优点
+ 减少发布者和订阅者的耦合 支持开闭原则  缺点
+ 没有完全解耦，可能会存在循环依赖 性能损耗 通知顺序是随机的(可以改变具体的实现方式)  </description>
+    </item>
+    
+    <item>
+      <title>设计模式-Composite组合模式</title>
+      <link>https://lllovol.com/p/2021/11/design-pattern-composite/</link>
+      <pubDate>Thu, 11 Nov 2021 15:32:55 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/11/design-pattern-composite/</guid>
+      <description>前言 树状组合模式，结构型设计模式
+例子 纸盒箱 -&amp;gt;可以包含产品 -&amp;gt;可以包含更小的盒子
+解决方案 组合模式建议使用一个通用接口来和产品盒子进行交互
+实现方式  模型能够以树状展示 申明组件接口 创建叶子节点（简单元素） 创建容器节点（复杂元素） 容器可以添加和删除元素  代码演示 画图功能  通用接口定义：draw() move() 叶子节点实现接口 容器节点实现接口，并且支持add()、remove()  文件系统  文件（叶子节点，能够执行） 文件夹（容器节点，可以包含文件和文件夹）  适用场景  树状场景 希望客户端代码以相同方式处理简单和复杂元素  优缺点 优点：
+ 可以使用多态、递归 开闭原则 无需更改代码  缺点：
+ 对于功能差异较大的类，提供公共接口或许会有困难 在特定情况下，需要过度一般化组件接口，使其变得令人难以理解 不容易限制容器中的构件  </description>
+    </item>
+    
+    <item>
+      <title>设计模式-Adapter适配器模式</title>
+      <link>https://lllovol.com/p/2021/11/design-pattern-adapter/</link>
+      <pubDate>Thu, 04 Nov 2021 15:25:25 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/11/design-pattern-adapter/</guid>
+      <description>前言 本文内容来源于宽哥分享
+问题场景化 问题场景化：适配器（电源转接头）就是把一个类的接口（不同国家的新电源插口）转换成使用方（笔记本电脑）所能接受的另一种接口（笔记本电脑当地的电源插口），从而使因为两个接口（电脑电源无法插入新的电源插口）本身不匹配而无法一起工作的两个类能够在一起工作
+其他例子  浏览器 HTTP 数据库驱动 报警平台适配的多数据源  角色  Target（目标接口）：所要转换的目的接口 Adaptee（源角色/源接口）：需要适配的接口 Adapter（适配器）：将源接口适配成目标接口，&amp;ldquo;实现目标接口&amp;rdquo;，实现的方式有两种形式，一种是适配器本身实现目标接口，另一种是使用时获取  实现逻辑  确保至少有两个类的接口不兼容：  一个无法修改 （通常是第三方、 遗留系统或者存在众多已有依赖的类） 的功能性服务类 一个或多个将受益于使用服务类的客户端类   声明客户端接口， 描述客户端如何与服务交互 创建遵循客户端接口的适配器类，所有方法暂时都为空 在适配器类中添加一个成员变量用于保存对于服务对象的引用。 通常情况下会通过构造函数对该成员变量进行初始化， 但有时在调用其方法时将该变量传递给适配器会更方便 依次实现适配器类客户端接口的所有方法：适配器会将实际工作委派给服务对象， 自身只负责接口或数据格式的转换 客户端必须通过客户端接口使用适配器：这样一来，就可以在不影响客户端代码的情况下修改或扩展适配器  优缺点   优点：
+ 单一职责原则：你可以将接口从程序主要业务逻辑中分离 开闭原则：只要客户端代码通过客户端接口与适配器进行交互，你就能在不修改现有客户端代码的情况下在程序中添加新类型的适配器    缺点：
+ 代码整体复杂度增加：因为你需要新增一系列接口和类，有时直接更改服务类使其与其他代码兼容会更简单    比较  适配器模式可以对已有对象的接口进行修改， 装饰模式则能在不改变对象接口的前提下强化对象功能 适配器模式能为被封装对象提供不同的接口， 代理模式能为对象提供相同的接口， 装饰模式则能为对象提供加强的接口  </description>
+    </item>
+    
+    <item>
+      <title>设计模式-Bridge桥接模式</title>
+      <link>https://lllovol.com/p/2021/10/bridge/</link>
+      <pubDate>Thu, 21 Oct 2021 15:45:04 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/10/bridge/</guid>
+      <description>简介 桥接是一种结构型设计模式，可将一个大类或一系列紧密，相关的类拆分为抽象和实现两个独立的层次结构，从而能在开发时分别使用。
+问题 同一套服务界面，想在不同的操作系统下实现
+解决方案 让我们试着用桥接模式来解决这个问题。该模式建议将类拆分为两个类层次结构:
+ 抽象部分:程序的GUI层 实现部分:操作系统的API  结构  抽象部分(Abstraction)提供高层控制逻辑，依赖于完成底层实际工作的实现对象。 实现部分(Implementation)为所有具体实现声明通用接口。抽象部分仅能通过在这里声明的方法与实现对象交互。 具体实现(Concrete Implementations)中包括特定于平台的代码。 精确抽象(Refined Abstraction)提供控制逻辑的变体。与其父类一样，它们通过通用实现接口与不同的实现进行交互。 通常情况下，客户端(Client)仅关心如何与抽象部分合作。但是，客户端需要将抽象对象与一个实现对象连接起来。  适合应用场景  如果你想要拆分或重组一个具有多重功能的庞杂类(例如能与多个数据库服务器进行交互的类)，可以使用桥接模式。 如果你希望在几个独立维度上扩展一个类，可使用该模式。 如果你需要在运行时切换不同实现方法，可使用桥接模式。  优缺点  你可以创建与平台无关的类和程序。 客户端代码仅与高层抽象部分进行互动，不会接触到平台的详细信息。 开闭原则。你可以新增抽象部分和实现部分，且它们之间不会相互影响。 单一职责原则。抽象部分专注于处理高层逻辑，实现部分处理平台细节。 对高内聚的类使用该模式可能会让代码更加复杂。  </description>
+    </item>
+    
+    <item>
+      <title>设计模式-Proxy代理模式</title>
+      <link>https://lllovol.com/p/2021/10/proxy-pattern/</link>
+      <pubDate>Thu, 14 Oct 2021 15:40:55 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/10/proxy-pattern/</guid>
+      <description>简介 代理是一种结构型设计模式，让你能够提供对象的替代品或其占位符。 代理控制着对于原对象的访问，并允许在将请求提交给对象前后进行一些处理。
+原理 代理模式建议新建一个与原服务对象接口相同的代理类， 然后更新应用以将代理对象传递给所有原始对象客户端。 代理类接收到客户端请求后会创建实际的服务对象， 并将所有工作委派给它。
+类比 信用卡是银行账户的代理，银行账户则是一大捆现金的代理。 它们都实现了同样的接口，均可用于进行支付。
+结构  服务接口(ServiceInterface)：申明服务接口，代理必须实现这个接口才能伪装成Service 服务(Service)：提供服务的真实业务逻辑 代理(Proxy)：代理完成代理的任务后，然后将请求传递给服务对象 客户端(Client): 能通过同一接口与服务或代理进行交互，可在一切需要服务对象的代码中使用代理  应用场景  延迟初始化（虚拟代理） 访问控制（保护代理） 本地执行远程服务（远程代理） 记录日志请求（日志记录代理） 缓存请求结果（缓存代理） 只能引用：客户端不调用的时候直接销毁服务对象  优缺点 优点  在客户端毫无察觉的情况下控制服务对象 如果客户端对服务对象的生命周期没有特殊要求， 你可以对 生命周期进行管理 即使服务对象还未准备好或不存在， 代理也可以正常工作 开闭原则。 你可以在不对服务或客户端做出修改的情况下创建新代理  缺点  代码变复杂 请求时间延迟增加  </description>
+    </item>
+    
+    <item>
+      <title>设计模式-Prototype原型模式</title>
+      <link>https://lllovol.com/p/2021/9/prototype/</link>
+      <pubDate>Thu, 23 Sep 2021 15:21:54 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/9/prototype/</guid>
+      <description>场景 有一个object，想要生成与之完全相同的复制品，该如何是实现？ 问题：
+ 私有数据 不想包含具体的包 如果原始的对象只是一个接口，具体类都不知道，怎么处理呢？  方案 将克隆过程，委派给被克隆的实际对象，由实际对象负责clone 因此，只要实现了clone()方法的，就是原型模式
+实现  原型（Prototype）接口对clone方法做一个申明，绝大部分情况下，里面只有一个名为clone的方法 具体原型（ConcretePrototype）类实现接口 客户端（Client）可以复制实现了原型接口的任何对象  应用  将自身作为构造函数的参数传入 复制数组
+  如果需要复制一些对象，同时又希望代码独立于这些对象所属的具体类 如果子类的区别仅在于对象的初始化方式，那么可以使用该模式减少子类的数量，别人创建这些子类的目的可能只是为了创建特定的对象。  优点  克隆时 无需与所属的具体类耦合 克隆原型 防止反复运行初始化 更方便的生成复杂对象 可以用继承以外的方式来处理复杂对象的不同配置  缺点  克隆博涵循环引用的复杂对象可能会非常麻烦  </description>
+    </item>
+    
+    <item>
+      <title>设计模式-Factory工厂模式学习笔记</title>
+      <link>https://lllovol.com/p/2021/9/design-pattern-factory/</link>
+      <pubDate>Thu, 09 Sep 2021 15:31:14 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/9/design-pattern-factory/</guid>
+      <description>工厂模式 有点忙，先看看吧</description>
+    </item>
+    
+    <item>
+      <title>设计模式-Singleton单例模式学习笔记</title>
+      <link>https://lllovol.com/p/2021/9/design-pattern-singleton/</link>
+      <pubDate>Thu, 02 Sep 2021 15:50:47 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/9/design-pattern-singleton/</guid>
+      <description>概要 保证一个类只有一个实例，保证一个进程中，某个类有且仅有一个实例
+方案：  构造函数私有化 新建静态构造方法作为构造函数  饿汉式 类加载的时候，就实例化。
+懒汉式 第一次使用的时候，再实例化。节省资源，但是需要注意线程安全问题
+总结 优点  只有一个实例，避免了重复的内存开销 避免对资源的重复占用  缺点 可以理解为一个全局变量，没有接口，不能继承。违背了SRP职责</description>
+    </item>
+    
+    <item>
+      <title>设计模式-Strategy策略模式学习笔记</title>
+      <link>https://lllovol.com/p/2021/8/strategy/</link>
+      <pubDate>Sun, 15 Aug 2021 02:12:03 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2021/8/strategy/</guid>
+      <description>前言 为什么我们需要设计模式呢？我们日常的设计应该对手头的问题有针对性，同时对将来的问题也要有足够的通用性，同时我们也需要避免重复设计或者尽可能的减少重复设计。但是想以一下子就得到复用性和灵活性好的设计，其实是相当困难的。 而设计模式，就是将对面向对象软件的设计经验作为设计模式记录下来。
+设计模式的四个基本要素  模式名称 一个助记的名称 问题 描述了应该在什么时候使用设计模式 解决方案 描述了设计的组成成分，它们之间的相互关系和各自的职责和协作方式 效果 描述了模式应用的效果以及使用模式应该权衡的问题  设计模式的三大分类 我们主要通过两个准则对各种设计模式进行分类：
+ 目的准则 这个模式是用来完成什么工作的 范围准则 这个模式用于类还是用于对象的 设计模式分类  面向对象的六大原则  单一功能原则 一个类只做一件事情 开闭原则 一个软件实体类，模块和函数应该对扩展开放，对修改关闭 里氏替换原则 子类可以扩展父类的功能，但不能改变父类原有的功能 依赖倒置原则 抽象不应该依赖细节，细节应该依赖于抽象，换一句话说，就是要针对接口编程，不要对实现编程 接口分离原则 系统解开耦合，从而容易重构，更改和重新部署 迪米特原则 一个类应该对自己需要耦合或者调用的类知道得最少，这有点类似于接口隔离原则中的最小接口的概念  Strategy 策略模式 意图 定义一系列的算法，把他们一个个封装起来，并且使他们可以互相替换。同时本模式可以使得算法可以独立于使用它的客户变化而变化
+别名 Policy 政策模式
+动机 当我们需要对一个正文流进行处理，需要使用许多不同的算法。这个时候，将这些算法那硬编码进使用它们的类当中是不可取的，原因如下：
+ 客户程序异常庞大同时难以维护 不同的时候需要不同的算法，我们不想支持我们并不使用的算法 当其中某些算法是客户程序难以分割的算法的时候，增加新的算法或者改变现有的算法将十分困难  适用性  许多相关的类只是行为有不同 可以使用多个行为中的一个行为来配置一个类 需要使用一个算法的不同变体 可能会定义一些反映了不同时间、空间等因素权衡的算法，将这些变体实现为类层次 算法使用了客户不应该知道的数据 避免暴露负责的、与算法相关的数据结构 一个类定义了多种行为，并且这些行为在这个类的操作中以多个条件语句的形式出现。将相关的条件分支移入它们各自的Strategy类当中来代替这些条件语句  结构 图
+参与者  Strategy  定义所有支持的算法的公共接口。Context使用这个接口来调用某个ConcreteStrategy定义的算法   ConcreteStrategy  以Strategy为策略是实现某具体的算法   Context  用一个ConcreteStrategy对象来配置 维护一个对Strategy对象的引用 可定义一个接口来让Strategy访问它的数据    协作  Strategy和Context相互作用以实现选定的算法  Context将算法所需要的数据传递给Strategy Context也可以将自身作为一个参数传递给Strategy，Strategy就可以在需要的时候回调Context   Context将客户的请求转发给它的Strategy。通常创建并传递一个ConcreteStrategy对象给Context。客户只需要和Context交互。  效果 优点  相关算法系列 Strategy类层次为Context定义了一系列可供重用的算法或者行为。有助于析取出这些算法的公共功能 一个替代继承的方法 可以使用继承生成Context的子类，给予它们不同的行为，但是这就会将行为硬编码到Context当中，将算法的实现和Context的实现混淆，使得Context难以理解、难以维护、难以扩展，还不能动态改变算法。将算法封装在独立的Strategy类中，使得我们可以独立于Context改变它，易于切换、易于理解、易于扩展 消除了一些条件语句 将不同行为堆砌在一个类当中的时候，很难避免使用条件语句来选择合适的行为。将行为封装成一个个独立的Strategy类中可以消除这些条件语句（含有许多条件语句的代码通常意味着需要使用策略模式） 实现的选择 可以为相同行为提供不同的实现，可以根据不同的时间、空间权衡取舍要求从不同的策略中进行选择  缺点  客户必须要了解不同的Strategy 本模式一个潜在的缺点，客户选择一个Strategy必须要知道这些Strategy有何不同，此时可能不得不向客户暴露实现。因此只有不同行为变体与客户相关的行为时，才需要使用Strategy Strategy和Context的通信开销 无论具体的ConcreteStrategy是简单还是负责，都共享Strategy定义的接口。因此很可能某一些简单的ConcreteStrategy可能不会使用所有通过这个接口传递给他们的信息。 增加了对象的数目 Strategy增加了一个应用中对象的数目。有时候可以将Strategy实现为可供各个Context共享的无状态对象来减少这一个开销。其余任何状态都由Context来维护  实现  定义Strategy接口和Context接口 必须传递所有实现需要的数据，也可以将Context自身作为参数进行传递 将Strategy作为模板参数 （Go里没有，这就不展开了） 让Strategy对象成为可选的 访问前先判断是否存在，如果存在，就使用它；如果没有，就执行缺省的行为  代码示例  回调事件处理  相关模式 Flyweight（享元模式）： Strategy对象通常是很好的轻量级对象</description>
+    </item>
+    
+  </channel>
 </rss>

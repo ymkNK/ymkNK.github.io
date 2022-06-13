@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en-us" dir="ltr">
+<html lang="en-us">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='两种标签 Spring中的标签的包括默认的标签和自定义的标签两种，而这两种标签的用法和解析方式存在着很大的不同。
 默认标签的解析 默认标签的解析是在parseDefaultElement函数中进行的，函数中的功能逻辑一目了然，分别对4种不同的标签做了不同的处理：
  import alias bean beans  bean标签的解析以及注册 在4种标签的解析中，对bean的解析最为复杂也最为重要。因此由此深入，如果将此标签的解析过程理解了，其他标签的解析自然也会迎刃而解。
-processBeanDefinition（ele,delegate） /** * Process the given bean element, parsing the bean definition * and registering it with the registry. */ protected void processBeanDefinition(Element ele, BeanDefinitionParserDelegate delegate) { BeanDefinitionHolder bdHolder = delegate.parseBeanDefinitionElement(ele); if (bdHolder != null) { bdHolder = delegate.decorateBeanDefinitionIfRequired(ele, bdHolder); try { // Register the final decorated instance. BeanDefinitionReaderUtils.registerBeanDefinition(bdHolder, getReaderContext().getRegistry()); } catch (BeanDefinitionStoreException ex) { getReaderContext().error(&amp;quot;Failed to register bean definition with name &#39;&amp;quot; &#43; bdHolder.'><title>《Spring源码深度解析》读后感(二)Bean的标签解析</title>
+processBeanDefinition（ele,delegate） /*** Process the given bean element, parsing the bean definition* and registering it with the registry.*/protected void processBeanDefinition(Element ele, BeanDefinitionParserDelegate delegate) {BeanDefinitionHolder bdHolder = delegate.parseBeanDefinitionElement(ele);if (bdHolder != null) {bdHolder = delegate.decorateBeanDefinitionIfRequired(ele, bdHolder);try {// Register the final decorated instance.BeanDefinitionReaderUtils.registerBeanDefinition(bdHolder, getReaderContext().getRegistry());}catch (BeanDefinitionStoreException ex) {getReaderContext().error(&amp;quot;Failed to register bean definition with name &#39;&amp;quot; &#43;bdHolder.'><title>《Spring源码深度解析》读后感(二)Bean的标签解析</title>
 
 <link rel='canonical' href='https://lllovol.com/p/spring-source-code-2/'>
 
-<link rel="stylesheet" href="/scss/style.min.450926226e724574a6b936335ea06111f8aeb253d932c86cb2cc807341cd2889.css"><meta property='og:title' content='《Spring源码深度解析》读后感(二)Bean的标签解析'>
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='《Spring源码深度解析》读后感(二)Bean的标签解析'>
 <meta property='og:description' content='两种标签 Spring中的标签的包括默认的标签和自定义的标签两种，而这两种标签的用法和解析方式存在着很大的不同。
 默认标签的解析 默认标签的解析是在parseDefaultElement函数中进行的，函数中的功能逻辑一目了然，分别对4种不同的标签做了不同的处理：
  import alias bean beans  bean标签的解析以及注册 在4种标签的解析中，对bean的解析最为复杂也最为重要。因此由此深入，如果将此标签的解析过程理解了，其他标签的解析自然也会迎刃而解。
-processBeanDefinition（ele,delegate） /** * Process the given bean element, parsing the bean definition * and registering it with the registry. */ protected void processBeanDefinition(Element ele, BeanDefinitionParserDelegate delegate) { BeanDefinitionHolder bdHolder = delegate.parseBeanDefinitionElement(ele); if (bdHolder != null) { bdHolder = delegate.decorateBeanDefinitionIfRequired(ele, bdHolder); try { // Register the final decorated instance. BeanDefinitionReaderUtils.registerBeanDefinition(bdHolder, getReaderContext().getRegistry()); } catch (BeanDefinitionStoreException ex) { getReaderContext().error(&amp;quot;Failed to register bean definition with name &#39;&amp;quot; &#43; bdHolder.'>
+processBeanDefinition（ele,delegate） /*** Process the given bean element, parsing the bean definition* and registering it with the registry.*/protected void processBeanDefinition(Element ele, BeanDefinitionParserDelegate delegate) {BeanDefinitionHolder bdHolder = delegate.parseBeanDefinitionElement(ele);if (bdHolder != null) {bdHolder = delegate.decorateBeanDefinitionIfRequired(ele, bdHolder);try {// Register the final decorated instance.BeanDefinitionReaderUtils.registerBeanDefinition(bdHolder, getReaderContext().getRegistry());}catch (BeanDefinitionStoreException ex) {getReaderContext().error(&amp;quot;Failed to register bean definition with name &#39;&amp;quot; &#43;bdHolder.'>
 <meta property='og:url' content='https://lllovol.com/p/spring-source-code-2/'>
 <meta property='og:site_name' content='lllovol'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Spring' /><meta property='article:published_time' content='2019-01-17T11:56:50&#43;00:00'/><meta property='article:modified_time' content='2019-01-17T11:56:50&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/1.jpg' />
@@ -20,7 +20,7 @@ processBeanDefinition（ele,delegate） /** * Process the given bean element, pa
 <meta name="twitter:description" content="两种标签 Spring中的标签的包括默认的标签和自定义的标签两种，而这两种标签的用法和解析方式存在着很大的不同。
 默认标签的解析 默认标签的解析是在parseDefaultElement函数中进行的，函数中的功能逻辑一目了然，分别对4种不同的标签做了不同的处理：
  import alias bean beans  bean标签的解析以及注册 在4种标签的解析中，对bean的解析最为复杂也最为重要。因此由此深入，如果将此标签的解析过程理解了，其他标签的解析自然也会迎刃而解。
-processBeanDefinition（ele,delegate） /** * Process the given bean element, parsing the bean definition * and registering it with the registry. */ protected void processBeanDefinition(Element ele, BeanDefinitionParserDelegate delegate) { BeanDefinitionHolder bdHolder = delegate.parseBeanDefinitionElement(ele); if (bdHolder != null) { bdHolder = delegate.decorateBeanDefinitionIfRequired(ele, bdHolder); try { // Register the final decorated instance. BeanDefinitionReaderUtils.registerBeanDefinition(bdHolder, getReaderContext().getRegistry()); } catch (BeanDefinitionStoreException ex) { getReaderContext().error(&amp;quot;Failed to register bean definition with name &#39;&amp;quot; &#43; bdHolder."><meta name="twitter:card" content="summary_large_image">
+processBeanDefinition（ele,delegate） /*** Process the given bean element, parsing the bean definition* and registering it with the registry.*/protected void processBeanDefinition(Element ele, BeanDefinitionParserDelegate delegate) {BeanDefinitionHolder bdHolder = delegate.parseBeanDefinitionElement(ele);if (bdHolder != null) {bdHolder = delegate.decorateBeanDefinitionIfRequired(ele, bdHolder);try {// Register the final decorated instance.BeanDefinitionReaderUtils.registerBeanDefinition(bdHolder, getReaderContext().getRegistry());}catch (BeanDefinitionStoreException ex) {getReaderContext().error(&amp;quot;Failed to register bean definition with name &#39;&amp;quot; &#43;bdHolder."><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/1.jpg' />
     <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
 
@@ -37,8 +37,8 @@ if (!doNotTrack) {
 
     </head>
     <body class="
-    article-page
-    ">
+    article-page has-toc
+">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -61,175 +61,25 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
-        <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-        </span>
-    </button>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="/" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
 
-    <header>
-        
-            
-            <figure class="site-avatar">
-                <a href="/">
-                
-                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
-                
-                </a>
-                
-                    <span class="emoji">⚖️</span>
-                
-            </figure>
-            
-        
-        
-        <div class="site-meta">
-            <h1 class="site-name"><a href="/">lllovol</a></h1>
-            <h2 class="site-description">Stay hungry, stay foolish.</h2>
+
+
+                <span>返回</span>
+            </a>
         </div>
-    </header><ol class="menu" id="main-menu">
-        
-        
-        
-
-        <li >
-            <a href='/' >
-                
-                
-                    
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="5 12 3 12 12 3 21 12 19 12" />
-  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-</svg>
-
-
-
-                
-                <span>主页</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/about/' >
-                
-                
-                    
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="7" r="4" />
-  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-</svg>
-
-
-
-                
-                <span>关于</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/archives/' >
-                
-                
-                    
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <rect x="3" y="4" width="18" height="4" rx="2" />
-  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
-  <line x1="10" y1="12" x2="14" y2="12" />
-</svg>
-
-
-
-                
-                <span>归档</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/links/' >
-                
-                
-                    
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
-  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
-</svg>
-
-
-
-                
-                <span>链接</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/search/' >
-                
-                
-                    
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-                
-                <span>搜索</span>
-            </a>
-        </li>
-        
-
-        <div class="menu-bottom-section">
-            
-            
-                <li id="dark-mode-toggle">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="8" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="16" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                    <span>暗色模式</span>
-                </li>
-            
-        </div>
-    </ol>
-</aside>
+    
 <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
@@ -253,13 +103,11 @@ if (!doNotTrack) {
     </header>
     
 
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/spring-source-code-2/">《Spring源码深度解析》读后感(二)Bean的标签解析</a>
-        </h2>
+    <h2 class="article-title">
+        <a href="/p/spring-source-code-2/">《Spring源码深度解析》读后感(二)Bean的标签解析</a>
+    </h2>
+
     
-        
-    </div>
 
     
     <footer class="article-time">
@@ -295,14 +143,10 @@ if (!doNotTrack) {
         
     </footer>
     
-
-    
 </div>
 </header>
 
     <section class="article-content">
-    
-    
     <h1 id="两种标签">两种标签</h1>
 <p>Spring中的标签的包括默认的标签和自定义的标签两种，而这两种标签的用法和解析方式存在着很大的不同。</p>
 <h1 id="默认标签的解析">默认标签的解析</h1>
@@ -500,16 +344,20 @@ public BeanDefinitionHolder parseBeanDefinitionElement(Element ele) {
 <p>BeanDefinition是一个接口，在Spring中存在三种实现：RootBeanDefinition，ChildBeanDefinition,GenericBeanDefinition。三种实现方式均集成了AbstractBeanDefinition，其中BeanDefinition是配置文件<!-- raw HTML omitted -->元素标签的内部表示形式。（<!-- raw HTML omitted -->元素标签拥有class、scope、lazy-init等配置属性，而BeanDefinition咋提供了相应的beanClass、scope、LazyInit属性，BeanDefinition和<!-- raw HTML omitted -->中的属性是一一对应的。其中RootBeanDefinition是最常用的实现类）。<br>
 在配置文件中可以定义父<!-- raw HTML omitted -->和子<!-- raw HTML omitted -->，父<!-- raw HTML omitted -->使用RootBeanDefinition来表示，子<!-- raw HTML omitted -->使用ChildBeanDefinition来表示，而没有父<!-- raw HTML omitted -->的<!-- raw HTML omitted -->就用RootBeanDefinition来表示。AbstractBeanDefinition对两者共同的类信息进行抽象。
 Spring通过BeanDefinition将配置文件中的<!-- raw HTML omitted -->配置信息转化为容器的内部表示，然后将这些BeanDefinition注册到BeanDefinitionRegistry当中。</p>
-<p><img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/%e3%80%8aSpring%e6%ba%90%e7%a0%81%e6%b7%b1%e5%ba%a6%e8%a7%a3%e6%9e%90%e3%80%8b%e8%af%bb%e5%90%8e%e6%84%9f%28%e4%ba%8c%29_files/64484741.png"
+<p><figure 
+	>
+	<a href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/%e3%80%8aSpring%e6%ba%90%e7%a0%81%e6%b7%b1%e5%ba%a6%e8%a7%a3%e6%9e%90%e3%80%8b%e8%af%bb%e5%90%8e%e6%84%9f%28%e4%ba%8c%29_files/64484741.png" >
+		<img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/%e3%80%8aSpring%e6%ba%90%e7%a0%81%e6%b7%b1%e5%ba%a6%e8%a7%a3%e6%9e%90%e3%80%8b%e8%af%bb%e5%90%8e%e6%84%9f%28%e4%ba%8c%29_files/64484741.png"
+			
+			
+			
+			loading="lazy"
+			alt="64484741.png">
+	</a>
 	
+	<figcaption>64484741.png</figcaption>
 	
-	
-	loading="lazy"
-	
-		alt="64484741.png"
-	
-	
-></p>
+</figure></p>
 <p>要解析属性，首先要创建用于承载属性的实例，也就是创建GenericBeanDefinition类型的实例，而  AbstractBeanDefinition bd = createBeanDefinition(className, parent);就是实现这个功能</p>
 <pre><code>/**
   * Create a new GenericBeanDefinition for the given parent name and class name,
@@ -1849,16 +1697,14 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
     
 </article>
 
+    <aside class="related-contents--wrapper">
     
-
     
-
-<aside class="related-contents--wrapper">
-    <h2 class="section-title">相关文章</h2>
-    <div class="related-contents">
-        <div class="flex article-list--tile">
-            
+        <h2 class="section-title">相关文章</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
                 
+                    
 <article class="has-image">
     <a href="/p/spring14/">
         
@@ -1875,8 +1721,8 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
         </div>
     </a>
 </article>
-            
                 
+                    
 <article class="has-image">
     <a href="/p/singleton-realization/">
         
@@ -1893,8 +1739,8 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
         </div>
     </a>
 </article>
-            
                 
+                    
 <article class="has-image">
     <a href="/p/spring13/">
         
@@ -1911,8 +1757,8 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
         </div>
     </a>
 </article>
-            
                 
+                    
 <article class="has-image">
     <a href="/p/spring12/">
         
@@ -1929,8 +1775,8 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
         </div>
     </a>
 </article>
-            
                 
+                    
 <article class="has-image">
     <a href="/p/synchronize-job/">
         
@@ -1947,9 +1793,10 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
         </div>
     </a>
 </article>
-            
+                
+            </div>
         </div>
-    </div>
+    
 </aside>
 
      
@@ -1995,7 +1842,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
             Owner Rainbowly <br/>
         
         Total [<span id="busuanzi_value_site_uv"></span>] user views [<span id="busuanzi_value_site_pv"></span>] site views [<span id="busuanzi_value_page_pv"></span>] page views <br/>Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
 
@@ -2064,11 +1911,11 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 
 </div><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer
+                defer="true"
                 >
             </script><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer
+                defer="true"
                 >
             </script><link 
                 rel="stylesheet" 
@@ -2079,13 +1926,11 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <line x1="5" y1="9" x2="19" y2="9" />
   <line x1="5" y1="15" x2="19" y2="15" />
@@ -2095,11 +1940,11 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 
 
 
-        </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
+                </div>
+                <h2 class="widget-title section-title">目录</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
   <ul>
     <li><a href="#processbeandefinitioneledelegate">processBeanDefinition（ele,delegate）</a>
       <ul>
@@ -2117,18 +1962,15 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
     <li><a href="#abstractbeandefinition属性">AbstractBeanDefinition属性</a></li>
   </ul>
 </nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
+                </div>
+            </section>
+        </aside>
+    
 
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
-                
+                defer="false"
                 >
             </script><script type="text/javascript" src="/ts/main.js" defer></script>
 <script>

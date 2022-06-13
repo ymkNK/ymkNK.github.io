@@ -1,42 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-        <title>MySQL on lllovol</title>
-        <link>https://lllovol.com/tags/mysql/</link>
-        <description>Recent content in MySQL on lllovol</description>
-        <generator>Hugo -- gohugo.io</generator>
-        <language>en-us</language>
-        <lastBuildDate>Wed, 27 Jan 2021 14:46:13 +0000</lastBuildDate><atom:link href="https://lllovol.com/tags/mysql/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>基础架构：一条SQL更新语句是如何执行的？</title>
-        <link>https://lllovol.com/p/how-a-sql-executes/</link>
-        <pubDate>Wed, 27 Jan 2021 14:46:13 +0000</pubDate>
-        
-        <guid>https://lllovol.com/p/how-a-sql-executes/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg" alt="Featured image of post 基础架构：一条SQL更新语句是如何执行的？" /&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://time.geekbang.org/column/article/68319&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;本文是学习笔记，来自极客时间&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;code&gt;mysql&amp;gt; select * from T where ID=10；&lt;/code&gt; 这么一条查询语句是如何执行的呢？&lt;/p&gt;
-&lt;p&gt;MySQL基础架构
-&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/oss/mysql%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;Server层：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;连接器：管理连接，权限认证&lt;/li&gt;
-&lt;li&gt;分析器：词法语法分析&lt;/li&gt;
-&lt;li&gt;查询缓存：命中则直接返回结果&lt;/li&gt;
-&lt;li&gt;优化器：执行计划生成，索引选择&lt;/li&gt;
-&lt;li&gt;执行器：操作引擎，返回结果
-Server层涵盖了MySQL的大多数的核心服务功能，以及所有的内置函数&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        </item>
-        
-    </channel>
+  <channel>
+    <title>MySQL on lllovol</title>
+    <link>https://lllovol.com/tags/mysql/</link>
+    <description>Recent content in MySQL on lllovol</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 27 Jan 2021 14:46:13 +0000</lastBuildDate><atom:link href="https://lllovol.com/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>基础架构：一条SQL更新语句是如何执行的？</title>
+      <link>https://lllovol.com/p/how-a-sql-executes/</link>
+      <pubDate>Wed, 27 Jan 2021 14:46:13 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/how-a-sql-executes/</guid>
+      <description> 本文是学习笔记，来自极客时间
+ mysql&amp;gt; select * from T where ID=10； 这么一条查询语句是如何执行的呢？
+MySQL基础架构 
+Server层：
+ 连接器：管理连接，权限认证 分析器：词法语法分析 查询缓存：命中则直接返回结果 优化器：执行计划生成，索引选择 执行器：操作引擎，返回结果 Server层涵盖了MySQL的大多数的核心服务功能，以及所有的内置函数  </description>
+    </item>
+    
+  </channel>
 </rss>
