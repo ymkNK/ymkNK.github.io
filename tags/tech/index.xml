@@ -1,245 +1,1141 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Tech on lllovol</title>
-    <link>https://lllovol.com/tags/tech/</link>
-    <description>Recent content in Tech on lllovol</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Tue, 21 Dec 2021 14:12:16 +0000</lastBuildDate><atom:link href="https://lllovol.com/tags/tech/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>常用命令行统计指令</title>
-      <link>https://lllovol.com/p/2021/12/awk-tool-analysis/</link>
-      <pubDate>Tue, 21 Dec 2021 14:12:16 +0000</pubDate>
-      
-      <guid>https://lllovol.com/p/2021/12/awk-tool-analysis/</guid>
-      <description>背景 使用awk快速统计查看自己的常用命令
-指令 history --i | awk &#39;{print $4}&#39; | sort | uniq -c | sort -k1,1nr | head -20解析  history -i 查看所有的历史记录 awk &#39;{print $4}&#39; 使用awk分词整理，取到每一行的第四个参数，也就是我们常用的命令 sort 排序 uniq -c 去重计数 sort -k1,1nr 排序 head -20 取前20  效果  ~ &amp;gt; history --i | awk &#39;{print $4}&#39; | sort | uniq -c | sort -k1,1nr | head -204570 git578 rake174 ****test132 ls122 cd118 go80 testcover61 ssh***52 vim35 source28 kinit27 goimports22 gofumpt20 sudo17 brew17 open16 echo15 ssh</description>
-    </item>
-    
-    <item>
-      <title>设计模式-Prototype原型模式</title>
-      <link>https://lllovol.com/p/2021/9/prototype/</link>
-      <pubDate>Thu, 23 Sep 2021 15:21:54 +0000</pubDate>
-      
-      <guid>https://lllovol.com/p/2021/9/prototype/</guid>
-      <description>场景 有一个object，想要生成与之完全相同的复制品，该如何是实现？ 问题：
- 私有数据 不想包含具体的包 如果原始的对象只是一个接口，具体类都不知道，怎么处理呢？  方案 将克隆过程，委派给被克隆的实际对象，由实际对象负责clone 因此，只要实现了clone()方法的，就是原型模式
-实现  原型（Prototype）接口对clone方法做一个申明，绝大部分情况下，里面只有一个名为clone的方法 具体原型（ConcretePrototype）类实现接口 客户端（Client）可以复制实现了原型接口的任何对象  应用  将自身作为构造函数的参数传入 复制数组
-  如果需要复制一些对象，同时又希望代码独立于这些对象所属的具体类 如果子类的区别仅在于对象的初始化方式，那么可以使用该模式减少子类的数量，别人创建这些子类的目的可能只是为了创建特定的对象。  优点  克隆时 无需与所属的具体类耦合 克隆原型 防止反复运行初始化 更方便的生成复杂对象 可以用继承以外的方式来处理复杂对象的不同配置  缺点  克隆博涵循环引用的复杂对象可能会非常麻烦  </description>
-    </item>
-    
-    <item>
-      <title>设计模式-Factory工厂模式学习笔记</title>
-      <link>https://lllovol.com/p/2021/9/design-pattern-factory/</link>
-      <pubDate>Thu, 09 Sep 2021 15:31:14 +0000</pubDate>
-      
-      <guid>https://lllovol.com/p/2021/9/design-pattern-factory/</guid>
-      <description>工厂模式 有点忙，先看看吧</description>
-    </item>
-    
-    <item>
-      <title>设计模式-Singleton单例模式学习笔记</title>
-      <link>https://lllovol.com/p/2021/9/design-pattern-singleton/</link>
-      <pubDate>Thu, 02 Sep 2021 15:50:47 +0000</pubDate>
-      
-      <guid>https://lllovol.com/p/2021/9/design-pattern-singleton/</guid>
-      <description>概要 保证一个类只有一个实例，保证一个进程中，某个类有且仅有一个实例
-方案：  构造函数私有化 新建静态构造方法作为构造函数  饿汉式 类加载的时候，就实例化。
-懒汉式 第一次使用的时候，再实例化。节省资源，但是需要注意线程安全问题
-总结 优点  只有一个实例，避免了重复的内存开销 避免对资源的重复占用  缺点 可以理解为一个全局变量，没有接口，不能继承。违背了SRP职责</description>
-    </item>
-    
-    <item>
-      <title>Go Slice切割边界问题</title>
-      <link>https://lllovol.com/p/2021/8/go-slice/</link>
-      <pubDate>Tue, 31 Aug 2021 21:41:05 +0000</pubDate>
-      
-      <guid>https://lllovol.com/p/2021/8/go-slice/</guid>
-      <description>问题 如下代码
-func Test(t *testing.T) { PatchConvey(&amp;#34;test&amp;#34;, t, func () { //your mock code... PatchConvey(&amp;#34;test case1&amp;#34;, func () { var s []int s = append(s, 1, 2, 3) a := s[len(s):] b := s[len(s)] c := s[len(s)+1:] println(a) println(b) println(c) }) }) } 有几个问题：
- a不会报错 b会panic c会panic  原因  b的[len(s)]肯定越界 [:]切割Slice的方式是左闭右开的，  冒号左边如果为空, 默认是0 冒号右边如果为空, 默认是字符串len(s)   a中冒号左边的是len(s), 没有超过右边默认的len(s), 所以不会panic, 这样切出来的就是一个空的slice c中的冒号左边len(s)+1, 超过了右边默认的len(s), 所以会panic  其他知识  如果slice有扩容操作, 那么就会使用新的内存; 如果没有扩容操作, 使用旧的内存 append扩容的时候, slice的cap值会随着go的版本不同而略有不同（1.</description>
-    </item>
-    
-    <item>
-      <title>Google SRE解密笔记(一)</title>
-      <link>https://lllovol.com/p/2021/8/google-sre/</link>
-      <pubDate>Tue, 24 Aug 2021 21:55:29 +0000</pubDate>
-      
-      <guid>https://lllovol.com/p/2021/8/google-sre/</guid>
-      <description>拥抱风险 百分百可靠的服务，是不现实也是没有必要的。 可靠性到达一定值之后，会带来成本的大幅度提升：过分要求稳定性会限制新产品的开发速度和交付速度。
-用于对于高可靠性和极端可靠性的感知几乎是没有的。
-基于这一点，SRE追求快速创新和高效的服务运营业务之间的风险的平衡，而不是简单的将服务在线时间最大化。
-平衡系统的功能、服务和性能
-管理风险 </description>
-    </item>
-    
-    <item>
-      <title>设计模式-Strategy策略模式学习笔记</title>
-      <link>https://lllovol.com/p/2021/8/strategy/</link>
-      <pubDate>Sun, 15 Aug 2021 02:12:03 +0000</pubDate>
-      
-      <guid>https://lllovol.com/p/2021/8/strategy/</guid>
-      <description>前言 为什么我们需要设计模式呢？我们日常的设计应该对手头的问题有针对性，同时对将来的问题也要有足够的通用性，同时我们也需要避免重复设计或者尽可能的减少重复设计。但是想以一下子就得到复用性和灵活性好的设计，其实是相当困难的。 而设计模式，就是将对面向对象软件的设计经验作为设计模式记录下来。
-设计模式的四个基本要素  模式名称 一个助记的名称 问题 描述了应该在什么时候使用设计模式 解决方案 描述了设计的组成成分，它们之间的相互关系和各自的职责和协作方式 效果 描述了模式应用的效果以及使用模式应该权衡的问题  设计模式的三大分类 我们主要通过两个准则对各种设计模式进行分类：
- 目的准则 这个模式是用来完成什么工作的 范围准则 这个模式用于类还是用于对象的 设计模式分类  面向对象的六大原则  单一功能原则 一个类只做一件事情 开闭原则 一个软件实体类，模块和函数应该对扩展开放，对修改关闭 里氏替换原则 子类可以扩展父类的功能，但不能改变父类原有的功能 依赖倒置原则 抽象不应该依赖细节，细节应该依赖于抽象，换一句话说，就是要针对接口编程，不要对实现编程 接口分离原则 系统解开耦合，从而容易重构，更改和重新部署 迪米特原则 一个类应该对自己需要耦合或者调用的类知道得最少，这有点类似于接口隔离原则中的最小接口的概念  Strategy 策略模式 意图 定义一系列的算法，把他们一个个封装起来，并且使他们可以互相替换。同时本模式可以使得算法可以独立于使用它的客户变化而变化
-别名 Policy 政策模式
-动机 当我们需要对一个正文流进行处理，需要使用许多不同的算法。这个时候，将这些算法那硬编码进使用它们的类当中是不可取的，原因如下：
- 客户程序异常庞大同时难以维护 不同的时候需要不同的算法，我们不想支持我们并不使用的算法 当其中某些算法是客户程序难以分割的算法的时候，增加新的算法或者改变现有的算法将十分困难  适用性  许多相关的类只是行为有不同 可以使用多个行为中的一个行为来配置一个类 需要使用一个算法的不同变体 可能会定义一些反映了不同时间、空间等因素权衡的算法，将这些变体实现为类层次 算法使用了客户不应该知道的数据 避免暴露负责的、与算法相关的数据结构 一个类定义了多种行为，并且这些行为在这个类的操作中以多个条件语句的形式出现。将相关的条件分支移入它们各自的Strategy类当中来代替这些条件语句  结构 图
-参与者  Strategy  定义所有支持的算法的公共接口。Context使用这个接口来调用某个ConcreteStrategy定义的算法   ConcreteStrategy  以Strategy为策略是实现某具体的算法   Context  用一个ConcreteStrategy对象来配置 维护一个对Strategy对象的引用 可定义一个接口来让Strategy访问它的数据    协作  Strategy和Context相互作用以实现选定的算法  Context将算法所需要的数据传递给Strategy Context也可以将自身作为一个参数传递给Strategy，Strategy就可以在需要的时候回调Context   Context将客户的请求转发给它的Strategy。通常创建并传递一个ConcreteStrategy对象给Context。客户只需要和Context交互。  效果 优点  相关算法系列 Strategy类层次为Context定义了一系列可供重用的算法或者行为。有助于析取出这些算法的公共功能 一个替代继承的方法 可以使用继承生成Context的子类，给予它们不同的行为，但是这就会将行为硬编码到Context当中，将算法的实现和Context的实现混淆，使得Context难以理解、难以维护、难以扩展，还不能动态改变算法。将算法封装在独立的Strategy类中，使得我们可以独立于Context改变它，易于切换、易于理解、易于扩展 消除了一些条件语句 将不同行为堆砌在一个类当中的时候，很难避免使用条件语句来选择合适的行为。将行为封装成一个个独立的Strategy类中可以消除这些条件语句（含有许多条件语句的代码通常意味着需要使用策略模式） 实现的选择 可以为相同行为提供不同的实现，可以根据不同的时间、空间权衡取舍要求从不同的策略中进行选择  缺点  客户必须要了解不同的Strategy 本模式一个潜在的缺点，客户选择一个Strategy必须要知道这些Strategy有何不同，此时可能不得不向客户暴露实现。因此只有不同行为变体与客户相关的行为时，才需要使用Strategy Strategy和Context的通信开销 无论具体的ConcreteStrategy是简单还是负责，都共享Strategy定义的接口。因此很可能某一些简单的ConcreteStrategy可能不会使用所有通过这个接口传递给他们的信息。 增加了对象的数目 Strategy增加了一个应用中对象的数目。有时候可以将Strategy实现为可供各个Context共享的无状态对象来减少这一个开销。其余任何状态都由Context来维护  实现  定义Strategy接口和Context接口 必须传递所有实现需要的数据，也可以将Context自身作为参数进行传递 将Strategy作为模板参数 （Go里没有，这就不展开了） 让Strategy对象成为可选的 访问前先判断是否存在，如果存在，就使用它；如果没有，就执行缺省的行为  代码示例  回调事件处理  相关模式 Flyweight（享元模式）： Strategy对象通常是很好的轻量级对象</description>
-    </item>
-    
-    <item>
-      <title>从Jekyll迁移至Hugo</title>
-      <link>https://lllovol.com/p/2021/5/rake-file-usage/</link>
-      <pubDate>Thu, 27 May 2021 19:52:17 +0000</pubDate>
-      
-      <guid>https://lllovol.com/p/2021/5/rake-file-usage/</guid>
-      <description>最近将博客背后的静态引擎，从Jekyll框架切换为了Hugo。也折腾了不少时间，现在总结一下其中的过程吧
-准备  Go语言的环境 Go官网 Hugo的安装 Hugo官网 选择一个喜欢的hugo主题进行搭建, Hugo官网主题（本博客使用的主题是hugo-theme-stack）  主题个性化配置 hugo创建的基本流程网络上很多，这里就不过多赘述，一般选择了相应主题后，相关的主题介绍页，都会介绍如何使用，按照主题页指引即可。
-这里想主要讲一下主题的适配，hugo的主题样式主要是由layouts这个文件夹下的样式作为模板，themes下所使用的模板中的layouts也会生效，因此我们可以利用这个特性，在站点项目下面的layouts重写同名的布局文件。 （本博客的gitalk就是利用了这一特性对主题进行了个性化配置）。
-撰写文章 不同的hugo主题可能会有不同的文章存放策略，但是一定都是放在contents目录下，本文是放在contents/post目录下
-markdown文件的头格式如下
----title: 从Jekyll迁移至Hugoauthor: ymkNKcategories: [Tech]tags: [Ruby,Tech,Hugo]date: 2021-05-27 19:52:17 +0800img: https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/26.jpegslug: 2021/5/rake-file-usage--- 用---和+++包围都可以，只是内容的格式要求有所区别，前者使用yaml的格式，后者使用toml的格式
-Rakefile 可以使用hugo new 快速创建文章，但是如果像我这样有定制化需求的创建（比如本博客的文章图片，以及目录格式等等），就需要手动进行处理，因此我使用了rakefile来通过简单的命令快速创建生成文章以及Tag
-rake new 快速创建文章，并且可以随机生成oss图片库中的随机一个图片链接作为封面，按照创建的时间，自动放在content/post/#{@year}/#{@month}的目录下，方便归档（后期有考虑同时快速创建tags与categories）
-rake git 快速执行git，一键提交本次更改的内容
-rake hugo 快速构建生成hugo的静态网页，public文件夹下就是站点项目，本博客托管在github，因此可以直接push到仓库，进行直接发布
-源代码 task :default =&amp;gt; :new require &amp;#39;fileutils&amp;#39; desc &amp;#34;创建新 post&amp;#34; task :new do time = Time.new puts &amp;#34;请输入要创建的 文件名字：&amp;#34; @name = STDIN.</description>
-    </item>
-    
-    <item>
-      <title>Redis中的常用数据结构</title>
-      <link>https://lllovol.com/p/redis/</link>
-      <pubDate>Mon, 19 Aug 2019 19:15:50 +0000</pubDate>
-      
-      <guid>https://lllovol.com/p/redis/</guid>
-      <description>前言 Redis在曾经实现用户登录token的时候使用过，但是对其的了解程度，就只是在使用的这个层次。本篇文章主要用于学习记录Redis的常见的一些数据结构。
-第一部分 什么是redis？  是NoSql数据库，非关系型数据库。 是个非关系型数据库。 Key-Value数据库 使用C语言实现的单线程应用，基于内存，读取的速度都超快！ 基于内存存放,使用了rdb （就是redis内存的SNAPSHOT，存到了磁盘当中）和Aof(Append only file 也就是平时操作的命令集合)的机制来保障数据的持久化，宕机的时候可以通过这两种方式来进行数据恢复。 拥有丰富的Value对象，String\Hash\List\Set\ZSet\Stream 拥有多种底层数据结构：SDS，list，dict，zskiplist，intset，ziplist，quicklist，zipmap，stream 支持丰富功能，过期，事物  第二部分 常用Value对象 1 String对象 最常见的类型
-1.1 编码 int，可以自增 embstr，就是单纯的字符串 raw
-1.2 扩容长度 字符串在小于1M的时候，是加倍扩张的策略 在超过1M的时候，每次扩容会增加1M的空间，每个key最大512M
-2 List 相当于java中的linkedList 插入和删除非常快，时间复杂度是O(1)
-2.1 编码 redis3.2之后列表的内部实现变成了quickList而非传统的ziplist或者双向链表实现。使用的是quicklist和ziplist组成的双向链表。 ziplist的分配过长和过小都不好，过小了会太多碎片化，过大了之后空间复杂度就会更大。
- list-max-ziplist-size-2可以用来设置size. list-compress-depth 0：表示数据都不被压缩，为n的话，就是两端的n个数据不被压缩,双向链表
- 2.2 常用场景 消息队列
-3 Hash 3.1 编码 zipList 默认，所有的key value，长度都小于64，保存的键值对数量都小于512 ht（hashTable），超过了就用ht
-4 Set和ZSet Set无序和唯一的 ZSet是可排序的，是对每一个元素添加了一个分数一样的东西
-4.1 编码 Set 小512用intset，大于用hashtable ZSet 小64数量小128 用ziplist 否则用skiplist
-4.2 场景 跟踪唯一性数据，比如说排行榜</description>
-    </item>
-    
-    <item>
-      <title>Idea代码飘红的问题解决方式</title>
-      <link>https://lllovol.com/p/ide-code-error-solution/</link>
-      <pubDate>Wed, 07 Aug 2019 10:08:30 +0000</pubDate>
-      
-      <guid>https://lllovol.com/p/ide-code-error-solution/</guid>
-      <description>前言 在安装使用Idea Intelli的时候，导入新项目的时候，总会出现代码权限飘红的问题。本篇文章，就是介绍出现这种问题的几种情况和分别的解决方式。 导入项目代码全线飘红
-情况一：maven二方库settings没有设置 一般公司内部都会有自己的二方库建设，新人在git下项目之后，总是会出现代码偏红的问题，各种库都没有导入下来，这时候首先应该排查的就是maven的配置是否正确，是否正确连接到了公司内部的二方库。
-解决方式 以Idea Intelli为例: preference -&amp;gt; build,execution,deployment -&amp;gt; build tools -&amp;gt; maven -&amp;gt; User settings file: 勾选上override，改写为二方库settings.xml文件的路径
-设置maven settings
-情况二：Lombok插件没有安装  Project Lombok is a java library that automatically plugs into your editor and build tools, spicing up your java. Never write another getter or equals method again, with one annotation your class has a fully featured builder, Automate your logging variables, and much more.</description>
-    </item>
-    
-    <item>
-      <title>自定义Snippet提高效率</title>
-      <link>https://lllovol.com/p/snippet/</link>
-      <pubDate>Sun, 16 Jun 2019 22:16:35 +0000</pubDate>
-      
-      <guid>https://lllovol.com/p/snippet/</guid>
-      <description>前言 在书写markdown文章的时候，往往需要向其中添加图片的链接，从截图到文件的处理，到链接的获取都会很麻烦。在寻找各种图床工具之后，发现其效果都不是很好（比如要收费开通多个云图床的上传权限），因此本文将介绍另外一种较为简便的处理方式。
-设置Snippet snippet是短文的意思，在ide中常常是指可以通过一小串的命令生成一大段代码或者文字的方式。例如，在sublime中输入lorem+tab。就会生成一大段样例文字
-lorem+tab==&amp;gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmodtempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodoconsequat. Duis aute irure dolor in reprehenderit in voluptate velit essecillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
-    </item>
-    
-    <item>
-      <title>RocketMQ源码分享笔记</title>
-      <link>https://lllovol.com/p/rocketmq/</link>
-      <pubDate>Tue, 19 Mar 2019 10:54:01 +0000</pubDate>
-      
-      <guid>https://lllovol.com/p/rocketmq/</guid>
-      <description>前言 RocketMQ，是一种延时队列，主要的应用场景，就是消费者可以延时消费消息，比如在双11的时候,一瞬间有太多请求全部打在服务器上，服务器就会瞬间瘫痪，本文主要就是记录前辈分享的Rocket源码的时候笔记和一些感悟
-主要功能  负载均衡 消费模式 消费拉取 消费进度反馈 消费过滤 延迟队列  分享主要内容笔记 打字速度有限，只能记录下简单的一些片段供参考
- 有一个架构，轮询，可用性高，一致性要求没那么高 消息的一个流程：生产者发了一个消息，到了breaker之后，到了commitlog。有一个G的大小，实际发送的大小，顺序写的，io性能会很好，会被放到消费者的queue里面 ，小了之后，总要发到某一个topic里面 发一个消息的话，需要新建一个主题，需要制定一个queue的数量，每一个queue就是一个负载均衡，表示当前这个queue，消费到什么位置了。集群消息，一人拿一个。被负载的queue，同一个topic下的消息都是不同的 消费者可以对同一个topic下面的某几个队列进行消费，多个不同的consumer 设置min是核心线程数，是固定的，但是她的队列是无限的，所以这个地方没有什么用 缓存超过10000个，会改变线程池的大小，会做对应的限制 msgListener就是传的一个回调 会有一个offsetStore会存，存到本地和远程 还有消息的消费逻辑，注册到客户端的，生成clientId 封装了一些拉取消息的api，通过路由信息 worker发出请求，然后又一个线程池，来进行序列化和相应，消费的话会再七环到对应consumer的线程池 有各种组件，然后讲讲启动之后，都做了哪些事情 基本上都是通过定时消息去驱动的，很少是通过事件去驱动的， 找nameserver,然后去找server的信息 更新consumer消费的一个队列offset 都不是实时的更新的，是每一个五秒钟才刷新一次的 广播消费的，消费的queue是全部，订阅，不是分发，每一个rebalance里面，都处理了一个queue，实现了一个拍照 如果没有存，就是首次消费，如果是last，就会从，rocket是经常清消息的，发消息，然后消费 消费，就是拉取消息，就是放一条消息，就可以进行拉取，会先做一些验证，然后做一些限流，只不过限流是做一些delay，顺序消息，需要设置一下是不是第一次，然后获取订阅信息，然后调用对应的pullapi，然后去发一条消息，拉倒请求之后，就会有callback，去封装一下，找到了消息了，然后有一个真正的消息处理类 处理的流程 如果全部消费成功了之后，就会找到maxOffset，如果没有的话，就会去更新最小的那一个，这就是整个的一个消费流程  自行延展 MQ是高并发系统的核心组件之一，能够提高业务效率和系统的稳定性，主流的MQ有Rocketmq、kafka、Rabbitmq
- Rocketmq原理&amp;amp;最佳实践 主要对比如下
-对比
- </description>
-    </item>
-    
-    <item>
-      <title>进程间通信的方式</title>
-      <link>https://lllovol.com/p/inter-process/</link>
-      <pubDate>Tue, 05 Mar 2019 16:22:56 +0000</pubDate>
-      
-      <guid>https://lllovol.com/p/inter-process/</guid>
-      <description>前言 IPC（Inter-Process Communication，进程间通信）
-有时候我们需要在不同的程序之间，也就是不同的进程之间进行通讯，那么都有些什么方式呢？通过查阅相关资料，主要有信号、管道、消息队列、共享内存等等
- 进程间通信的方式
- 常见的通讯方式  套接字Socket：套接字是一种进程间通信机制，与其他通信机制不同的是，它可用于不同及其间的进程通信。 信号量：信号量是一种计数器，主要是用来控制多个进程对共享资源的访问，在锁机制中应用比较多，保证在一个进程对一个资源进行访问的时候，其他进程不能对其进行资源访问 信号：信号是一种比较复杂的通信方式，用于通知接收进程某个事件已经发生。 共享内存：内存共享是最快的IPC方式（SharedMemory）。就是映射一段其他进程也能够进行访问的内存。这一段内存虽然是由一个进程进行创建，但是多个进程都能进行访问。通常和信号量配合使用，来实现进程之间的同步和通信。 管道pipe：管道是一种半双工的通信方式，数据只能单向流动，而且只能在具有亲缘关系的进程间使用。进程的亲缘关系通常是指父子进程关系。 命名管道FIFO：有名管道也是半双工的通信方式，但是它允许无亲缘关系进程间的通信。 消息队列MessageQueue：消息队列是由消息的链表，存放在内核中并由消息队列标识符标识。消息队列克服了信号传递信息少、管道只能承载无格式字节流以及缓冲区大小受限等缺点。
-以上的任何一点都可以单独拿出来做一篇文章，路漫漫其修远兮  文章中已经写得很好了：）站在了巨人的肩膀上</description>
-    </item>
-    
-    <item>
-      <title>Yaml和Java对象之间的相互转换</title>
-      <link>https://lllovol.com/p/yamlbeans/</link>
-      <pubDate>Fri, 22 Feb 2019 21:46:09 +0000</pubDate>
-      
-      <guid>https://lllovol.com/p/yamlbeans/</guid>
-      <description>前言 最近需要做一个将java对象转换成yaml文件格式的工作，由于手动进行操作的话效率会很低下，因此再找有没有合适的包可以使用。最后找到的工具就是yamlBeans,本文主要是翻译整理yamlBeans中的一部分信息
- yamlBeans官网
-yaml文档的学习
- 添加依赖 将下列代码添加到pom文件当中
-&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;com.esotericsoftware.yamlbeans&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;yamlbeans&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;1.12&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt; Yaml反序列化为常见数据结构 所谓的反序列化，就是将yaml格式的文件，转换为java的常见数据结构 主要使用的类是YamlReader，然后可以将yaml文档转换为HashMap，ArrayList,还有Strings类型。
-yaml：
-name: Nathan Sweetage: 28address: 4011 16th Ave Sphone numbers:- name: Homenumber: 206-555-5138- name: Worknumber: 425-555-2306 code:
-YamlReader reader = new YamlReader(new FileReader(&amp;quot;contact.yml&amp;quot;));Object object = reader.read();System.out.println(object);Map map = (Map)object;System.out.println(map.get(&amp;quot;address&amp;quot;)); Yaml反序列化为POJO 将yaml文档反序列化为pojo(plain ordinary java object)
-Yaml and java class:
-name: Nathan Sweetage: 28public class Contact {public String name;public int age;} Code:</description>
-    </item>
-    
-    <item>
-      <title>关于吞吐量的一些小知识</title>
-      <link>https://lllovol.com/p/qps/</link>
-      <pubDate>Mon, 07 Jan 2019 15:23:02 +0000</pubDate>
-      
-      <guid>https://lllovol.com/p/qps/</guid>
-      <description>RT 响应时间 response time相应时间
-响应时间是提交请求和返回该请求的响应之间使用的时间。
-主要包括：
- 数据库查询的时间 将字符传到终端上面所花的时间 访问web页面所花的时间  对于没有并发的系统而言，响应时间是一个合理并且准确的性能指标。但是响应时间的绝对值并不能反应性能的高低，软件的性能高低实际取决于用户对于该响应时间的接受度。 这就像是恋爱中的感情一样，你回复消息的快慢并不能反应你有多么爱她，而是取决于她对于你的这些行为的接受程度。TPS 每秒事物处理量 Transaction Per Second 吞吐量的（Throughput），吞吐量是指系统在单位时间内处理请求的数量。
-对于单应用系统而言，吞吐量和响应时间严格成反比。单应用使用响应时间来作为衡量的指标，但是对于并发系统而言，通常需要吞吐量作为性能指标。因为在一个并发系统下，当一个用户一个请求的时间为t,但是n个用户一同请求往往不是n*t（可能大，可能小，需要看具体的情况）。一个并发系统如果配置合理，相应时间应该不会随着用户的增多而线性增加。因此才将吞吐量作为并发系统的性能衡量指标。一般而言，对于不同用户规模和不同的用户模式的系统，如果系统的最大吞吐量大致相同的话，可以判断两个系统的数据处理能力基本相同。
-并发用户数 并发用户数指的是系统最大可以承受的正常使用系统功能的用户数。这个指标比TPS更加笼统，但是也更加的直观。但是这是一个非常不准确的指标，比如一个直播的弹幕网站，用户可以登录，正常发送弹幕，但是如果都挤在了一个直播间，同一时间发送一大堆弹幕，这时候的服务器可能就会崩了。而且用户在线的时候，大部分时间都在阅读信息，只有小部分的再发送请求，这样的情况是很多的。这项指标很大情况下取决于用户的行为模式。
-QPS 每秒查询数量 Query Per Second
- 每秒查询率QPS是对一个特定的查询服务器在规定时间内所处理流量多少的衡量标准，在因特网上，作为域名系统服务器的机器的性能经常用每秒查询率来衡量。对应fetches/sec，即每秒的响应请求数，也即是最大吞吐能力。 （看来是类似于TPS，只是应用于特定场景的吞吐量）摘自cnblog
- </description>
-    </item>
-    
-    <item>
-      <title>安装atom的atom-beautify</title>
-      <link>https://lllovol.com/p/%E5%AE%89%E8%A3%85atom%E7%9A%84atom-beautify/</link>
-      <pubDate>Fri, 07 Dec 2018 17:03:25 +0000</pubDate>
-      
-      <guid>https://lllovol.com/p/%E5%AE%89%E8%A3%85atom%E7%9A%84atom-beautify/</guid>
-      <description>前言 想给atom安装beautify的插件 使用apm install atom-beautify 和是用preference中的插件安装都失败了
-Start 使用github 克隆到本地，然后安装
- cd ~/.atom/packagesgit clone https://github.com/Glavin001/atom-beautify.gitcd atom-beautifynpm install 59469635.png
-Success 使用control + alt + b 组合键 即可</description>
-    </item>
-    
-    <item>
-      <title>使用Rakefile实现文章生成器</title>
-      <link>https://lllovol.com/p/rake/</link>
-      <pubDate>Wed, 05 Dec 2018 01:23:16 +0000</pubDate>
-      
-      <guid>https://lllovol.com/p/rake/</guid>
-      <description>使用github.io来写blog 本就是件很棒的事情，但是每次在想写新的文章的时候，都需要重新复制title和开头的标签，如果能够自动化地完成这件事就好了（重复性的东西工作）
-About Rakefile  Rake is a Make-like program implemented in Ruby. Tasks and dependencies are specified in standard Ruby syntax.
- 摘自http://docs.seattlerb.org/rake/
-安装Rake sudo gem install rake 即可
-创建Rakefile 在项目的根目录下
-touch Rakefilevim Rakefile 然后添加如下代码
-task :default =&amp;gt; :newrequire &#39;fileutils&#39;desc &amp;quot;创建新 post&amp;quot;task :new doputs &amp;quot;请输入要创建的文章文件文件名字：&amp;quot;@url = STDIN.gets.chompputs &amp;quot;请输入文章的标题：&amp;quot;@name = STDIN.gets.chompputs &amp;quot;请输入文章的子标题：&amp;quot;@slug = STDIN.gets.chompputs &amp;quot;请输入文章的分类，以空格分隔：&amp;quot;@categories = STDIN.</description>
-    </item>
-    
-  </channel>
+    <channel>
+        <title>Tech on lllovol</title>
+        <link>https://lllovol.com/tags/tech/</link>
+        <description>Recent content in Tech on lllovol</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Tue, 21 Dec 2021 14:12:16 +0800</lastBuildDate><atom:link href="https://lllovol.com/tags/tech/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>常用命令行统计指令</title>
+        <link>https://lllovol.com/p/2021/12/awk-tool-analysis/</link>
+        <pubDate>Tue, 21 Dec 2021 14:12:16 +0800</pubDate>
+        
+        <guid>https://lllovol.com/p/2021/12/awk-tool-analysis/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/20.jpeg" alt="Featured image of post 常用命令行统计指令" /&gt;&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
+&lt;p&gt;使用awk快速统计查看自己的常用命令&lt;/p&gt;
+&lt;h2 id=&#34;指令&#34;&gt;指令&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;history --i | awk &amp;#39;{print $4}&amp;#39; | sort | uniq -c | sort -k1,1nr | head -20
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;解析&#34;&gt;解析&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;history -i&lt;/code&gt; 查看所有的历史记录&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;awk &#39;{print $4}&#39;&lt;/code&gt; 使用awk分词整理，取到每一行的第四个参数，也就是我们常用的命令&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sort&lt;/code&gt; 排序&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;uniq -c&lt;/code&gt; 去重计数&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sort -k1,1nr&lt;/code&gt; 排序&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;head -20&lt;/code&gt; 取前20&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;效果&#34;&gt;效果&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; ~ &amp;gt; history --i | awk &amp;#39;{print $4}&amp;#39; | sort | uniq -c | sort -k1,1nr | head -20
+4570 git
+ 578 rake
+ 174 ****test
+ 132 ls
+ 122 cd
+ 118 go
+  80 testcover
+  61 ssh***
+  52 vim
+  35 source
+  28 kinit
+  27 goimports
+  22 gofumpt
+  20 sudo
+  17 brew
+  17 open
+  16 echo
+  15 ssh
+&lt;/code&gt;&lt;/pre&gt;</description>
+        </item>
+        <item>
+        <title>设计模式-Prototype原型模式</title>
+        <link>https://lllovol.com/p/2021/9/prototype/</link>
+        <pubDate>Thu, 23 Sep 2021 15:21:54 +0800</pubDate>
+        
+        <guid>https://lllovol.com/p/2021/9/prototype/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/5.jpeg" alt="Featured image of post 设计模式-Prototype原型模式" /&gt;&lt;h2 id=&#34;场景&#34;&gt;场景&lt;/h2&gt;
+&lt;p&gt;有一个object，想要生成与之完全相同的复制品，该如何是实现？
+问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;私有数据&lt;/li&gt;
+&lt;li&gt;不想包含具体的包&lt;/li&gt;
+&lt;li&gt;如果原始的对象只是一个接口，具体类都不知道，怎么处理呢？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;方案&#34;&gt;方案&lt;/h2&gt;
+&lt;p&gt;将克隆过程，委派给被克隆的实际对象，由实际对象负责clone
+因此，只要实现了clone()方法的，就是原型模式&lt;/p&gt;
+&lt;h2 id=&#34;实现&#34;&gt;实现&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;原型（Prototype）接口对clone方法做一个申明，绝大部分情况下，里面只有一个名为clone的方法&lt;/li&gt;
+&lt;li&gt;具体原型（ConcretePrototype）类实现接口&lt;/li&gt;
+&lt;li&gt;客户端（Client）可以复制实现了原型接口的任何对象&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;应用&#34;&gt;应用&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;将自身作为构造函数的参数传入
+复制数组&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;如果需要复制一些对象，同时又希望代码独立于这些对象所属的具体类&lt;/li&gt;
+&lt;li&gt;如果子类的区别仅在于对象的初始化方式，那么可以使用该模式减少子类的数量，别人创建这些子类的目的可能只是为了创建特定的对象。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;优点&#34;&gt;优点&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;克隆时 无需与所属的具体类耦合&lt;/li&gt;
+&lt;li&gt;克隆原型 防止反复运行初始化&lt;/li&gt;
+&lt;li&gt;更方便的生成复杂对象&lt;/li&gt;
+&lt;li&gt;可以用继承以外的方式来处理复杂对象的不同配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;缺点&#34;&gt;缺点&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;克隆博涵循环引用的复杂对象可能会非常麻烦&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>设计模式-Factory工厂模式学习笔记</title>
+        <link>https://lllovol.com/p/2021/9/design-pattern-factory/</link>
+        <pubDate>Thu, 09 Sep 2021 15:31:14 +0800</pubDate>
+        
+        <guid>https://lllovol.com/p/2021/9/design-pattern-factory/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/30.jpeg" alt="Featured image of post 设计模式-Factory工厂模式学习笔记" /&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://refactoringguru.cn/design-patterns/factory-method&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;工厂模式&lt;/a&gt;
+有点忙，先看看吧&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>设计模式-Singleton单例模式学习笔记</title>
+        <link>https://lllovol.com/p/2021/9/design-pattern-singleton/</link>
+        <pubDate>Thu, 02 Sep 2021 15:50:47 +0800</pubDate>
+        
+        <guid>https://lllovol.com/p/2021/9/design-pattern-singleton/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/27.jpeg" alt="Featured image of post 设计模式-Singleton单例模式学习笔记" /&gt;&lt;h2 id=&#34;概要&#34;&gt;概要&lt;/h2&gt;
+&lt;p&gt;保证一个类只有一个实例，保证一个进程中，某个类有且仅有一个实例&lt;/p&gt;
+&lt;h2 id=&#34;方案&#34;&gt;方案：&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;构造函数私有化&lt;/li&gt;
+&lt;li&gt;新建静态构造方法作为构造函数&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;饿汉式&#34;&gt;饿汉式&lt;/h2&gt;
+&lt;p&gt;类加载的时候，就实例化。&lt;/p&gt;
+&lt;h2 id=&#34;懒汉式&#34;&gt;懒汉式&lt;/h2&gt;
+&lt;p&gt;第一次使用的时候，再实例化。节省资源，但是需要注意线程安全问题&lt;/p&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
+&lt;h3 id=&#34;优点&#34;&gt;优点&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;只有一个实例，避免了重复的内存开销&lt;/li&gt;
+&lt;li&gt;避免对资源的重复占用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;缺点&#34;&gt;缺点&lt;/h3&gt;
+&lt;p&gt;可以理解为一个全局变量，没有接口，不能继承。违背了SRP职责&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Go Slice切割边界问题</title>
+        <link>https://lllovol.com/p/2021/8/go-slice/</link>
+        <pubDate>Tue, 31 Aug 2021 21:41:05 +0800</pubDate>
+        
+        <guid>https://lllovol.com/p/2021/8/go-slice/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/9.jpeg" alt="Featured image of post Go Slice切割边界问题" /&gt;&lt;h2 id=&#34;问题&#34;&gt;问题&lt;/h2&gt;
+&lt;p&gt;如下代码&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Test&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;t&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;testing&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;PatchConvey&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;test&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;t&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//your mock code...
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;PatchConvey&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;test case1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;s&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[]&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nx&#34;&gt;s&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;append&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nx&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nx&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nx&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nb&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nb&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nb&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;有几个问题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;a不会报错&lt;/li&gt;
+&lt;li&gt;b会panic&lt;/li&gt;
+&lt;li&gt;c会panic&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;原因&#34;&gt;原因&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;b的[len(s)]肯定越界&lt;/li&gt;
+&lt;li&gt;[:]切割Slice的方式是左闭右开的，
+&lt;ul&gt;
+&lt;li&gt;冒号左边如果为空, 默认是0&lt;/li&gt;
+&lt;li&gt;冒号右边如果为空, 默认是字符串len(s)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;a中冒号左边的是len(s), 没有超过右边默认的len(s), 所以不会panic, 这样切出来的就是一个空的slice&lt;/li&gt;
+&lt;li&gt;c中的冒号左边len(s)+1, 超过了右边默认的len(s), 所以会panic&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;其他知识&#34;&gt;其他知识&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;如果slice有扩容操作, 那么就会使用新的内存; 如果没有扩容操作, 使用旧的内存&lt;/li&gt;
+&lt;li&gt;append扩容的时候, slice的cap值会随着go的版本不同而略有不同（1.5版本下, s的cap为4; 1.6的版本下, s的cap为3）&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Google SRE解密笔记(一)</title>
+        <link>https://lllovol.com/p/2021/8/google-sre/</link>
+        <pubDate>Tue, 24 Aug 2021 21:55:29 +0800</pubDate>
+        
+        <guid>https://lllovol.com/p/2021/8/google-sre/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/8.jpeg" alt="Featured image of post Google SRE解密笔记(一)" /&gt;&lt;h1 id=&#34;拥抱风险&#34;&gt;拥抱风险&lt;/h1&gt;
+&lt;p&gt;百分百可靠的服务，是不现实也是没有必要的。
+可靠性到达一定值之后，会带来成本的大幅度提升：过分要求稳定性会限制新产品的开发速度和交付速度。&lt;/p&gt;
+&lt;p&gt;用于对于高可靠性和极端可靠性的感知几乎是没有的。&lt;/p&gt;
+&lt;p&gt;基于这一点，SRE追求快速创新和高效的服务运营业务之间的风险的平衡，而不是简单的将服务在线时间最大化。&lt;/p&gt;
+&lt;p&gt;平衡系统的&lt;strong&gt;功能、服务和性能&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;管理风险&#34;&gt;管理风险&lt;/h2&gt;
+</description>
+        </item>
+        <item>
+        <title>设计模式-Strategy策略模式学习笔记</title>
+        <link>https://lllovol.com/p/2021/8/strategy/</link>
+        <pubDate>Sun, 15 Aug 2021 02:12:03 +0800</pubDate>
+        
+        <guid>https://lllovol.com/p/2021/8/strategy/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/5.jpeg" alt="Featured image of post 设计模式-Strategy策略模式学习笔记" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
+&lt;p&gt;为什么我们需要设计模式呢？我们日常的设计应该对手头的问题有针对性，同时对将来的问题也要有足够的通用性，同时我们也需要避免重复设计或者尽可能的减少重复设计。但是想以一下子就得到复用性和灵活性好的设计，其实是相当困难的。
+而设计模式，就是将对面向对象软件的设计经验作为设计模式记录下来。&lt;/p&gt;
+&lt;h2 id=&#34;设计模式的四个基本要素&#34;&gt;设计模式的四个基本要素&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;模式名称&lt;/strong&gt; 一个助记的名称&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;问题&lt;/strong&gt; 描述了应该在什么时候使用设计模式&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;解决方案&lt;/strong&gt; 描述了设计的组成成分，它们之间的相互关系和各自的职责和协作方式&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;效果&lt;/strong&gt; 描述了模式应用的效果以及使用模式应该权衡的问题&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;设计模式的三大分类&#34;&gt;设计模式的三大分类&lt;/h2&gt;
+&lt;p&gt;我们主要通过两个准则对各种设计模式进行分类：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;目的准则&lt;/strong&gt; 这个模式是用来完成什么工作的&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;范围准则&lt;/strong&gt; 这个模式用于类还是用于对象的
+&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/screenshot-20210816-013825.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;设计模式分类&#34;
+	
+	
+&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;面向对象的六大原则&#34;&gt;面向对象的六大原则&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;单一功能原则&lt;/strong&gt; 一个类只做一件事情&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;开闭原则&lt;/strong&gt; 一个软件实体类，模块和函数应该对扩展开放，对修改关闭&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;里氏替换原则&lt;/strong&gt; 子类可以扩展父类的功能，但不能改变父类原有的功能&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;依赖倒置原则&lt;/strong&gt; 抽象不应该依赖细节，细节应该依赖于抽象，换一句话说，就是要针对接口编程，不要对实现编程&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;接口分离原则&lt;/strong&gt; 系统解开耦合，从而容易重构，更改和重新部署&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;迪米特原则&lt;/strong&gt; 一个类应该对自己需要耦合或者调用的类知道得最少，这有点类似于接口隔离原则中的最小接口的概念&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;strategy-策略模式&#34;&gt;Strategy 策略模式&lt;/h1&gt;
+&lt;h2 id=&#34;意图&#34;&gt;意图&lt;/h2&gt;
+&lt;p&gt;定义一系列的算法，把他们一个个封装起来，并且使他们可以互相替换。同时本模式可以使得算法可以独立于使用它的客户变化而变化&lt;/p&gt;
+&lt;h2 id=&#34;别名&#34;&gt;别名&lt;/h2&gt;
+&lt;p&gt;Policy 政策模式&lt;/p&gt;
+&lt;h2 id=&#34;动机&#34;&gt;动机&lt;/h2&gt;
+&lt;p&gt;当我们需要对一个正文流进行处理，需要使用许多不同的算法。这个时候，将这些算法那硬编码进使用它们的类当中是不可取的，原因如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;客户程序异常庞大同时难以维护&lt;/li&gt;
+&lt;li&gt;不同的时候需要不同的算法，我们不想支持我们并不使用的算法&lt;/li&gt;
+&lt;li&gt;当其中某些算法是客户程序难以分割的算法的时候，增加新的算法或者改变现有的算法将十分困难&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;适用性&#34;&gt;适用性&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;许多相关的类只是行为有不同&lt;/strong&gt; 可以使用多个行为中的一个行为来配置一个类&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;需要使用一个算法的不同变体&lt;/strong&gt; 可能会定义一些反映了不同时间、空间等因素权衡的算法，将这些变体实现为类层次&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;算法使用了客户不应该知道的数据&lt;/strong&gt; 避免暴露负责的、与算法相关的数据结构&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;一个类定义了多种行为&lt;/strong&gt;，并且这些行为在这个类的操作中以多个条件语句的形式出现。将相关的条件分支移入它们各自的Strategy类当中来代替这些条件语句&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;结构&#34;&gt;结构&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/UML%20%E5%9B%BE.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;图&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;参与者&#34;&gt;参与者&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Strategy&lt;/strong&gt;
+&lt;ol&gt;
+&lt;li&gt;定义所有支持的算法的公共接口。Context使用这个接口来调用某个ConcreteStrategy定义的算法&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ConcreteStrategy&lt;/strong&gt;
+&lt;ol&gt;
+&lt;li&gt;以Strategy为策略是实现某具体的算法&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Context&lt;/strong&gt;
+&lt;ol&gt;
+&lt;li&gt;用一个ConcreteStrategy对象来配置&lt;/li&gt;
+&lt;li&gt;维护一个对Strategy对象的引用&lt;/li&gt;
+&lt;li&gt;可定义一个接口来让Strategy访问它的数据&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;协作&#34;&gt;协作&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Strategy和Context相互作用以实现选定的算法
+&lt;ol&gt;
+&lt;li&gt;Context将算法所需要的数据传递给Strategy&lt;/li&gt;
+&lt;li&gt;Context也可以将自身作为一个参数传递给Strategy，Strategy就可以在需要的时候回调Context&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Context将客户的请求转发给它的Strategy。通常创建并传递一个ConcreteStrategy对象给Context。客户只需要和Context交互。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;效果&#34;&gt;效果&lt;/h2&gt;
+&lt;h3 id=&#34;优点&#34;&gt;优点&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;相关算法系列&lt;/strong&gt; Strategy类层次为Context定义了一系列可供重用的算法或者行为。有助于析取出这些算法的公共功能&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;一个替代继承的方法&lt;/strong&gt; 可以使用继承生成Context的子类，给予它们不同的行为，但是这就会将行为硬编码到Context当中，将算法的实现和Context的实现混淆，使得Context难以理解、难以维护、难以扩展，还不能动态改变算法。将算法封装在独立的Strategy类中，使得我们可以独立于Context改变它，易于切换、易于理解、易于扩展&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;消除了一些条件语句&lt;/strong&gt; 将不同行为堆砌在一个类当中的时候，很难避免使用条件语句来选择合适的行为。将行为封装成一个个独立的Strategy类中可以消除这些条件语句（含有许多条件语句的代码通常意味着需要使用策略模式）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实现的选择&lt;/strong&gt; 可以为相同行为提供不同的实现，可以根据不同的时间、空间权衡取舍要求从不同的策略中进行选择&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;缺点&#34;&gt;缺点&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;客户必须要了解不同的Strategy&lt;/strong&gt; 本模式一个潜在的缺点，客户选择一个Strategy必须要知道这些Strategy有何不同，此时可能不得不向客户暴露实现。因此只有不同行为变体与客户相关的行为时，才需要使用Strategy&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Strategy和Context的通信开销&lt;/strong&gt; 无论具体的ConcreteStrategy是简单还是负责，都共享Strategy定义的接口。因此很可能某一些简单的ConcreteStrategy可能不会使用所有通过这个接口传递给他们的信息。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;增加了对象的数目&lt;/strong&gt; Strategy增加了一个应用中对象的数目。有时候可以将Strategy实现为可供各个Context共享的无状态对象来减少这一个开销。其余任何状态都由Context来维护&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;实现&#34;&gt;实现&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;定义Strategy接口和Context接口&lt;/strong&gt; 必须传递所有实现需要的数据，也可以将Context自身作为参数进行传递&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;将Strategy作为模板参数&lt;/strong&gt; （Go里没有，这就不展开了）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;让Strategy对象成为可选的&lt;/strong&gt; 访问前先判断是否存在，如果存在，就使用它；如果没有，就执行缺省的行为&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;代码示例&#34;&gt;代码示例&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;回调事件处理&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;相关模式&#34;&gt;相关模式&lt;/h2&gt;
+&lt;p&gt;Flyweight（享元模式）： Strategy对象通常是很好的轻量级对象&lt;/p&gt;
+&lt;h1 id=&#34;总结&#34;&gt;总结&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;代码基于接口而非基于实现编程&lt;/li&gt;
+&lt;li&gt;为系统提供新的扩展点，定义一类算法类，需要扩展的时候，只需要增加对应策略的算法实现即可&lt;/li&gt;
+&lt;li&gt;控制代码复杂度，添加新策略的时候，最小化、集中化代码改动，减少引入 bug 的风险&lt;/li&gt;
+&lt;li&gt;能够消除大量成片的if-else和switch代码&lt;/li&gt;
+&lt;li&gt;策略模式能够起到解耦的作用，主要是三个方面 解耦策略的定义、创建、和使用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;设计的思想和原则比设计模式更加普适和重要&lt;/strong&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>从Jekyll迁移至Hugo</title>
+        <link>https://lllovol.com/p/2021/5/rake-file-usage/</link>
+        <pubDate>Thu, 27 May 2021 19:52:17 +0800</pubDate>
+        
+        <guid>https://lllovol.com/p/2021/5/rake-file-usage/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/26.jpeg" alt="Featured image of post 从Jekyll迁移至Hugo" /&gt;&lt;p&gt;最近将博客背后的静态引擎，从Jekyll框架切换为了Hugo。也折腾了不少时间，现在总结一下其中的过程吧&lt;/p&gt;
+&lt;h3 id=&#34;准备&#34;&gt;准备&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Go语言的环境 &lt;a class=&#34;link&#34; href=&#34;https://golang.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Go官网&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Hugo的安装 &lt;a class=&#34;link&#34; href=&#34;https://gohugo.io/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo官网&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;选择一个喜欢的hugo主题进行搭建, &lt;a class=&#34;link&#34; href=&#34;https://themes.gohugo.io/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo官网主题&lt;/a&gt;（本博客使用的主题是&lt;a class=&#34;link&#34; href=&#34;https://github.com/CaiJimmy/hugo-theme-stack&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;hugo-theme-stack&lt;/a&gt;）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;主题个性化配置&#34;&gt;主题个性化配置&lt;/h3&gt;
+&lt;p&gt;hugo创建的基本流程网络上很多，这里就不过多赘述，一般选择了相应主题后，相关的主题介绍页，都会介绍如何使用，按照主题页指引即可。&lt;/p&gt;
+&lt;p&gt;这里想主要讲一下主题的适配，hugo的主题样式主要是由layouts这个文件夹下的样式作为模板，themes下所使用的模板中的layouts也会生效，因此我们可以利用这个特性，在站点项目下面的layouts重写同名的布局文件。
+（本博客的gitalk就是利用了这一特性对主题进行了个性化配置）。&lt;/p&gt;
+&lt;h3 id=&#34;撰写文章&#34;&gt;撰写文章&lt;/h3&gt;
+&lt;p&gt;不同的hugo主题可能会有不同的文章存放策略，但是一定都是放在contents目录下，本文是放在contents/post目录下&lt;/p&gt;
+&lt;p&gt;markdown文件的头格式如下&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;---
+title: 从Jekyll迁移至Hugo
+author: ymkNK
+categories: [Tech]
+tags: [Ruby,Tech,Hugo]
+date: 2021-05-27 19:52:17 +0800
+img: https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/26.jpeg
+slug: 2021/5/rake-file-usage
+---
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;用&lt;code&gt;---&lt;/code&gt;和&lt;code&gt;+++&lt;/code&gt;包围都可以，只是内容的格式要求有所区别，前者使用yaml的格式，后者使用toml的格式&lt;/p&gt;
+&lt;h3 id=&#34;rakefile&#34;&gt;Rakefile&lt;/h3&gt;
+&lt;p&gt;可以使用hugo new 快速创建文章，但是如果像我这样有定制化需求的创建（比如本博客的文章图片，以及目录格式等等），就需要手动进行处理，因此我使用了rakefile来通过简单的命令快速创建生成文章以及Tag&lt;/p&gt;
+&lt;h4 id=&#34;rake-new&#34;&gt;rake new&lt;/h4&gt;
+&lt;p&gt;快速创建文章，并且可以随机生成oss图片库中的随机一个图片链接作为封面，按照创建的时间，自动放在content/post/#{@year}/#{@month}的目录下，方便归档（后期有考虑同时快速创建tags与categories）&lt;/p&gt;
+&lt;h4 id=&#34;rake-git&#34;&gt;rake git&lt;/h4&gt;
+&lt;p&gt;快速执行git，一键提交本次更改的内容&lt;/p&gt;
+&lt;h4 id=&#34;rake-hugo&#34;&gt;rake hugo&lt;/h4&gt;
+&lt;p&gt;快速构建生成hugo的静态网页，public文件夹下就是站点项目，本博客托管在github，因此可以直接push到仓库，进行直接发布&lt;/p&gt;
+&lt;h4 id=&#34;源代码&#34;&gt;源代码&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Ruby&#34; data-lang=&#34;Ruby&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;task&lt;/span&gt; &lt;span class=&#34;ss&#34;&gt;:default&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;ss&#34;&gt;:new&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;require&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;fileutils&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;desc&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;创建新 post&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;task&lt;/span&gt; &lt;span class=&#34;ss&#34;&gt;:new&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;time&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;Time&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;new&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;puts&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;请输入要创建的 文件名字：&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@name&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;STDIN&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gets&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;chomp&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@name&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;vi&#34;&gt;@name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;downcase&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;strip&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gsub&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;-&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;puts&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;请输入文章的 标题：&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@title&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;STDIN&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gets&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;chomp&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;puts&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;请输入文章的 categories, 以逗号分隔：&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@categories&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;STDIN&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gets&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;chomp&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@categories&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;format_tags_or_categories&lt;/span&gt; &lt;span class=&#34;vi&#34;&gt;@origin&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;vi&#34;&gt;@categories&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;puts&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;请输入文章的 tags, 以逗号分隔：&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@tags&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;STDIN&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gets&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;chomp&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@tags&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;format_tags_or_categories&lt;/span&gt; &lt;span class=&#34;vi&#34;&gt;@origin&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;vi&#34;&gt;@tags&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# 需要检查一下文章目录是否存在&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@root_path&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;content/post&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;check_or_create_dir&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@dir&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@root_path&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;time&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;year&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;check_or_create_dir&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@dir&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@root_path&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;time&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;year&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;time&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;month&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@date&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;Time&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;now&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;strftime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;%F&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@base_path&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;time&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;year&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;time&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;month&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@file_name&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;vi&#34;&gt;@date&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;-&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;vi&#34;&gt;@name&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@slug&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@base_path&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@name&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@slug&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;vi&#34;&gt;@slug&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;downcase&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;strip&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gsub&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;-&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# 生成随机封面&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@img_num&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;rand&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;...&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;31&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@directory_url&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@root_path&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@base_path&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# 对应分类的文件放进对应的文件夹当中&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@post_name&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@directory_url&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@file_name&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;.md&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@content&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;---&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;               &lt;span class=&#34;s2&#34;&gt;&amp;#34;title: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@title&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;               &lt;span class=&#34;s2&#34;&gt;&amp;#34;author: ymkNK&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;               &lt;span class=&#34;s2&#34;&gt;&amp;#34;categories: [&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@categories&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;]&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;               &lt;span class=&#34;s2&#34;&gt;&amp;#34;tags: [&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@tags&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;]&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;               &lt;span class=&#34;s2&#34;&gt;&amp;#34;date: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;no&#34;&gt;Time&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;now&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;               &lt;span class=&#34;s2&#34;&gt;&amp;#34;img: https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@img_num&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;.jpeg&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;               &lt;span class=&#34;s2&#34;&gt;&amp;#34;slug: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@slug&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;               &lt;span class=&#34;s2&#34;&gt;&amp;#34;---&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;create_file&lt;/span&gt; &lt;span class=&#34;vi&#34;&gt;@file_dir&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;vi&#34;&gt;@post_name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;vi&#34;&gt;@content&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;task&lt;/span&gt; &lt;span class=&#34;ss&#34;&gt;:git&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nb&#34;&gt;puts&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;请输入git内容 m&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@msg&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;STDIN&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gets&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;chomp&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@slug&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@msg&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@slug&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;vi&#34;&gt;@slug&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;downcase&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;strip&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gsub&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;-&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@date&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;Time&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;now&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;strftime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;%F&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@finalmsg&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@date&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@slug&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;system&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;git add .&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;system&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;git commit -m &lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@finalmsg&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;system&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;git status&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;system&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;git push&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# system &amp;#34;git push github&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# system &amp;#34;git push gitee&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;puts&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;git push &lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@finalmsg&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;task&lt;/span&gt; &lt;span class=&#34;ss&#34;&gt;:hugo&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@slug&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;build hugo&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@date&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;Time&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;now&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;strftime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;%F&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@finalmsg&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@date&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@slug&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;system&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;hugo&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;system&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;cd public &amp;amp;&amp;amp; git add . &amp;amp;&amp;amp; git commit -m &lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@finalmsg&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt; &amp;amp;&amp;amp; git status &amp;amp;&amp;amp; git push&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;puts&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;git push &lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@finalmsg&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;task&lt;/span&gt; &lt;span class=&#34;ss&#34;&gt;:tag&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;puts&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;请输入要创建的tag名字：&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@tag&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;STDIN&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gets&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;chomp&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@type&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;tags&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;build_tag_or_category&lt;/span&gt; &lt;span class=&#34;vi&#34;&gt;@type&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;vi&#34;&gt;@tag&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;task&lt;/span&gt; &lt;span class=&#34;ss&#34;&gt;:category&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;puts&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;请输入要创建的category名字：&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@tag&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;STDIN&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gets&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;chomp&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@type&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;categories&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;build_tag_or_category&lt;/span&gt; &lt;span class=&#34;vi&#34;&gt;@type&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;vi&#34;&gt;@tag&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;####################### 方法区 #######################&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;format_tags_or_categories&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;origin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;split_array&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;vi&#34;&gt;@origin&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;split&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;,&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;res&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Array&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;new&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;res&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;split_array&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;collect&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;capitalize&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;res&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;join&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;,&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;check_or_create_dir&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dir&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;puts&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Check or create the dir : &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@dir&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;File&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;directory?&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@dir&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nb&#34;&gt;puts&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;The directory: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@dir&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt; has existed.&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;no&#34;&gt;FileUtils&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mkdir&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@dir&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nb&#34;&gt;puts&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;The directory: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@dir&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt; has created.&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;build_tag_or_category&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tag&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@tag&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tag&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;capitalize&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@directory_name&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;vi&#34;&gt;@tag&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;downcase&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@slug&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@directory_name&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@img&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/tags/&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@directory_name&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;.jpg&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@directory_url&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;content/&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@type&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@directory_name&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;create_tag_or_category_file&lt;/span&gt; &lt;span class=&#34;vi&#34;&gt;@directory_url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;vi&#34;&gt;@tag&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;vi&#34;&gt;@slug&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;vi&#34;&gt;@img&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;puts&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;rake new &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@type&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt; &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@tag&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt; end.&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;create_tag_or_category_file&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;directory_url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tag&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;slug&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;img&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;check_or_create_dir&lt;/span&gt; &lt;span class=&#34;vi&#34;&gt;@dir&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@directory_url&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# 对应分类的文件放进对应的categories或者tags文件夹当中&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@file_dir&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@directory_url&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;/_index.md&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@content&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;---&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;               &lt;span class=&#34;s2&#34;&gt;&amp;#34;title: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@tag&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;               &lt;span class=&#34;s2&#34;&gt;&amp;#34;description: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@tag&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;               &lt;span class=&#34;s2&#34;&gt;&amp;#34;slug: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@slug&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;               &lt;span class=&#34;s2&#34;&gt;&amp;#34;img: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@img&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;               &lt;span class=&#34;s2&#34;&gt;&amp;#34;style:&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;               &lt;span class=&#34;s2&#34;&gt;&amp;#34;    background: #2a9d8f&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;               &lt;span class=&#34;s2&#34;&gt;&amp;#34;    color: #fff&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;               &lt;span class=&#34;s2&#34;&gt;&amp;#34;---&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;create_file&lt;/span&gt; &lt;span class=&#34;vi&#34;&gt;@file_dir&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;vi&#34;&gt;@content&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;create_file&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;file_dir&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;content&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;File&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;exist?&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@file_dir&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nb&#34;&gt;puts&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@file_dir&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt; 文件已经存在！创建失败&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;no&#34;&gt;FileUtils&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;touch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@file_dir&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@file_dir&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;puts&lt;/span&gt; &lt;span class=&#34;vi&#34;&gt;@content&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;puts&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@file_dir&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt; 文件创建成功 内容如下:&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;puts&lt;/span&gt; &lt;span class=&#34;vi&#34;&gt;@content&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+        </item>
+        <item>
+        <title>Redis中的常用数据结构</title>
+        <link>https://lllovol.com/p/redis/</link>
+        <pubDate>Mon, 19 Aug 2019 19:15:50 +0000</pubDate>
+        
+        <guid>https://lllovol.com/p/redis/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg" alt="Featured image of post Redis中的常用数据结构" /&gt;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+&lt;p&gt;Redis在曾经实现用户登录token的时候使用过，但是对其的了解程度，就只是在使用的这个层次。本篇文章主要用于学习记录Redis的常见的一些数据结构。&lt;/p&gt;
+&lt;h2 id=&#34;第一部分-什么是redis&#34;&gt;第一部分 什么是redis？&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;是NoSql数据库，非关系型数据库。&lt;/li&gt;
+&lt;li&gt;是个非关系型数据库。&lt;/li&gt;
+&lt;li&gt;Key-Value数据库&lt;/li&gt;
+&lt;li&gt;使用C语言实现的单线程应用，基于内存，读取的速度都超快！&lt;/li&gt;
+&lt;li&gt;基于内存存放,使用了rdb （就是redis内存的SNAPSHOT，存到了磁盘当中）和Aof(Append only file 也就是平时操作的命令集合)的机制来保障数据的持久化，宕机的时候可以通过这两种方式来进行数据恢复。&lt;/li&gt;
+&lt;li&gt;拥有丰富的Value对象，String\Hash\List\Set\ZSet\Stream&lt;/li&gt;
+&lt;li&gt;拥有多种底层数据结构：SDS，list，dict，zskiplist，intset，ziplist，quicklist，zipmap，stream&lt;/li&gt;
+&lt;li&gt;支持丰富功能，过期，事物&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;第二部分-常用value对象&#34;&gt;第二部分 常用Value对象&lt;/h2&gt;
+&lt;h3 id=&#34;1-string对象&#34;&gt;1 String对象&lt;/h3&gt;
+&lt;p&gt;最常见的类型&lt;/p&gt;
+&lt;h4 id=&#34;11-编码&#34;&gt;1.1 编码&lt;/h4&gt;
+&lt;p&gt;int，可以自增
+embstr，就是单纯的字符串
+raw&lt;/p&gt;
+&lt;h4 id=&#34;12-扩容长度&#34;&gt;1.2 扩容长度&lt;/h4&gt;
+&lt;p&gt;字符串在小于1M的时候，是加倍扩张的策略
+在超过1M的时候，每次扩容会增加1M的空间，每个key最大512M&lt;/p&gt;
+&lt;h3 id=&#34;2-list&#34;&gt;2 List&lt;/h3&gt;
+&lt;p&gt;相当于java中的linkedList
+插入和删除非常快，时间复杂度是O(1)&lt;/p&gt;
+&lt;h4 id=&#34;21-编码&#34;&gt;2.1 编码&lt;/h4&gt;
+&lt;p&gt;redis3.2之后列表的内部实现变成了quickList而非传统的ziplist或者双向链表实现。使用的是quicklist和ziplist组成的双向链表。
+ziplist的分配过长和过小都不好，过小了会太多碎片化，过大了之后空间复杂度就会更大。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;list-max-ziplist-size-2可以用来设置size.
+list-compress-depth 0：表示数据都不被压缩，为n的话，就是两端的n个数据不被压缩,双向链表&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;22-常用场景&#34;&gt;2.2 常用场景&lt;/h4&gt;
+&lt;p&gt;消息队列&lt;/p&gt;
+&lt;h3 id=&#34;3-hash&#34;&gt;3 Hash&lt;/h3&gt;
+&lt;h4 id=&#34;31-编码&#34;&gt;3.1 编码&lt;/h4&gt;
+&lt;p&gt;zipList 默认，所有的key value，长度都小于64，保存的键值对数量都小于512
+ht（hashTable），超过了就用ht&lt;/p&gt;
+&lt;h3 id=&#34;4-set和zset&#34;&gt;4 Set和ZSet&lt;/h3&gt;
+&lt;p&gt;Set无序和唯一的
+ZSet是可排序的，是对每一个元素添加了一个分数一样的东西&lt;/p&gt;
+&lt;h4 id=&#34;41-编码&#34;&gt;4.1 编码&lt;/h4&gt;
+&lt;p&gt;Set 小512用intset，大于用hashtable
+ZSet 小64数量小128 用ziplist 否则用skiplist&lt;/p&gt;
+&lt;h4 id=&#34;42-场景&#34;&gt;4.2 场景&lt;/h4&gt;
+&lt;p&gt;跟踪唯一性数据，比如说排行榜&lt;/p&gt;
+&lt;h3 id=&#34;5-stream&#34;&gt;5 stream&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;是redis5.0 后引入的一种新数据类型。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Stream的多个客户端是竞争关系，可以拿到以前的数据，是通过id来获取的，stream会永久的存储数据
+和KafKa的机制很类似。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;提供了消费者组，不同组接受到的数据一致，组内是竞争关系。
+可以设置为阻塞和非阻塞的&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;类型和编码的对应关系，是在redisObject这个类中进行存储的&lt;/p&gt;
+&lt;h2 id=&#34;第三部分-底层数据结构&#34;&gt;第三部分 底层数据结构&lt;/h2&gt;
+&lt;h3 id=&#34;1-dict字典&#34;&gt;1 dict字典&lt;/h3&gt;
+&lt;p&gt;底层实现&lt;/p&gt;
+&lt;p&gt;扩容和缩容是根据负载因子的值来做的&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;used/size&lt;/li&gt;
+&lt;li&gt;如果大于1 且没有备份&lt;/li&gt;
+&lt;li&gt;如果大于5 且在备份
+那么就扩容，如果小于0.1那么来进行缩容&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;h1设置为扩容缩容所需要设置的大小&lt;/li&gt;
+&lt;li&gt;h0rehash放入h1当中，释放h0，给h1改名&lt;/li&gt;
+&lt;li&gt;不会锁主线程，会在每次的操作的过程中，做一次渐进的hash的过程&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;2-ziplist&#34;&gt;2 ziplist&lt;/h3&gt;
+&lt;p&gt;是redis为了节约内存而进行开发的
+是由一系列的特殊编码的连续内存块所组成的顺序形数据结构&lt;/p&gt;
+&lt;h2 id=&#34;第四部分-其他事件&#34;&gt;第四部分 其他事件&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;过期操作&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;定时删除策略&lt;/li&gt;
+&lt;li&gt;惰性删除策略&lt;/li&gt;
+&lt;li&gt;定期删除策略，每段时间删除一批，但是不会全量的删除&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;内存淘汰机制&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;noeviction&lt;/li&gt;
+&lt;li&gt;allkeys-lru&lt;/li&gt;
+&lt;li&gt;allkeys-random&lt;/li&gt;
+&lt;li&gt;volatile-lru&lt;/li&gt;
+&lt;li&gt;volatile-random&lt;/li&gt;
+&lt;li&gt;volatile-ttl&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>Idea代码飘红的问题解决方式</title>
+        <link>https://lllovol.com/p/ide-code-error-solution/</link>
+        <pubDate>Wed, 07 Aug 2019 10:08:30 +0000</pubDate>
+        
+        <guid>https://lllovol.com/p/ide-code-error-solution/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/9.jpg" alt="Featured image of post Idea代码飘红的问题解决方式" /&gt;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+&lt;p&gt;在安装使用Idea Intelli的时候，导入新项目的时候，总会出现代码权限飘红的问题。本篇文章，就是介绍出现这种问题的几种情况和分别的解决方式。
+&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190807-102252@2x.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;导入项目代码全线飘红&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;情况一maven二方库settings没有设置&#34;&gt;情况一：maven二方库settings没有设置&lt;/h2&gt;
+&lt;p&gt;一般公司内部都会有自己的二方库建设，新人在git下项目之后，总是会出现代码偏红的问题，各种库都没有导入下来，这时候首先应该排查的就是maven的配置是否正确，是否正确连接到了公司内部的二方库。&lt;/p&gt;
+&lt;h3 id=&#34;解决方式&#34;&gt;解决方式&lt;/h3&gt;
+&lt;p&gt;以Idea Intelli为例:
+&lt;strong&gt;preference -&amp;gt; build,execution,deployment -&amp;gt; build tools -&amp;gt; maven -&amp;gt; User settings file: 勾选上override，改写为二方库settings.xml文件的路径&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190807-105505.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;设置maven settings&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;情况二lombok插件没有安装&#34;&gt;情况二：Lombok插件没有安装&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Project Lombok is a java library that automatically plugs into your editor and build tools, spicing up your java.
+Never write another getter or equals method again, with one annotation your class has a fully featured builder, Automate your logging variables, and much more.&lt;a class=&#34;link&#34; href=&#34;https://www.projectlombok.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;lombok官网&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Lombok可以让我们的Java代码更加简洁，不用再去写那些Getter和Setter。然而这个强大的功能，在初次安装idea的时候，并不会内置的给我们安装Lombok插件，因此这个时候，同样也会出现大片代码报错的问题。&lt;/p&gt;
+&lt;h3 id=&#34;解决方式-1&#34;&gt;解决方式&lt;/h3&gt;
+&lt;p&gt;安装Lombok的插件：
+** preference -&amp;gt; Plugins -&amp;gt; Install lombok -&amp;gt; restart **
+&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190807-111529.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;问题三注解未开启&#34;&gt;问题三：注解未开启&lt;/h2&gt;
+&lt;p&gt;在安装好了 Lombok之后，发现运行还是报错
+&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190807-112144@2x.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;解决方式-2&#34;&gt;解决方式&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;关闭项目。&lt;/li&gt;
+&lt;li&gt;Preference &amp;gt; Build, Execution, Deployment &amp;gt; Compiler &amp;gt; Annotation Processors. Check &amp;lsquo;Enable annotation processing&amp;rsquo;.
+&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190807-112533.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/li&gt;
+&lt;li&gt;Open your project. File &amp;gt; Invalidate Caches / Restart&amp;hellip; &amp;gt; Invalidate and Restart 然后等待这个过程完成结束,将会发现一切都将回归平淡，云淡风轻.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>自定义Snippet提高效率</title>
+        <link>https://lllovol.com/p/snippet/</link>
+        <pubDate>Sun, 16 Jun 2019 22:16:35 +0000</pubDate>
+        
+        <guid>https://lllovol.com/p/snippet/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg" alt="Featured image of post 自定义Snippet提高效率" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
+&lt;p&gt;在书写markdown文章的时候，往往需要向其中添加图片的链接，从截图到文件的处理，到链接的获取都会很麻烦。在寻找各种图床工具之后，发现其效果都不是很好（比如要收费开通多个云图床的上传权限），因此本文将介绍另外一种较为简便的处理方式。&lt;/p&gt;
+&lt;h1 id=&#34;设置snippet&#34;&gt;设置Snippet&lt;/h1&gt;
+&lt;p&gt;snippet是短文的意思，在ide中常常是指可以通过一小串的命令生成一大段代码或者文字的方式。例如，在sublime中输入&lt;!-- raw HTML omitted --&gt;lorem&lt;!-- raw HTML omitted --&gt;+&lt;!-- raw HTML omitted --&gt;tab&lt;!-- raw HTML omitted --&gt;。就会生成一大段样例文字&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;lorem+tab
+==&amp;gt;
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;而接下来要做的就是要自定义一个snippet：在sublime中，Tools&amp;ndash;&amp;gt;Developer&amp;ndash;&amp;gt;New Snippet
+&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190616-235826@2x.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;
+然后就能得到如下的新建snippet
+&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190617-000803@2x.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;写入自己自定义的代码&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;snippet&amp;gt;
+	&amp;lt;content&amp;gt;&amp;lt;![CDATA[
+![](https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/$1.png)
+]]&amp;gt;&amp;lt;/content&amp;gt;
+	&amp;lt;!-- Optional: Set a tabTrigger to define how to trigger the snippet --&amp;gt;
+	&amp;lt;tabTrigger&amp;gt;ap&amp;lt;/tabTrigger&amp;gt;
+	&amp;lt;!-- Optional: Set a scope to limit where the snippet will trigger --&amp;gt;
+	&amp;lt;scope&amp;gt;text.html.markdown&amp;lt;/scope&amp;gt;
+&amp;lt;/snippet&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;其中：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CDATA框住的地方表示自己自定义的代码&lt;/li&gt;
+&lt;li&gt;$1表示占位符，这就是在生成的代码最后光标所在的位置&lt;/li&gt;
+&lt;li&gt;tabTrigger表示触发的条件&lt;/li&gt;
+&lt;li&gt;scope表示的时候这个snippet的作用域（获取方式Tools&amp;ndash;&amp;gt;Developer&amp;ndash;&amp;gt;Show Scope Name）
+&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190617-001852@2x.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;然后保存在sublime的默认目录下，即可生效了&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;macOS的目录如下
+/Users/user_name/Library/Application Support/Sublime Text 3/Packages/User
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;如何使用&#34;&gt;如何使用&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;截图，将图片保存到自定义的路径下，复制出其文件名即可&lt;/li&gt;
+&lt;li&gt;输入ap，tab&lt;/li&gt;
+&lt;li&gt;粘贴文件名，完成！
+这种方式对于只是日常写blog的我来说，已经方便了太多了&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>RocketMQ源码分享笔记</title>
+        <link>https://lllovol.com/p/rocketmq/</link>
+        <pubDate>Tue, 19 Mar 2019 10:54:01 +0000</pubDate>
+        
+        <guid>https://lllovol.com/p/rocketmq/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/7.jpg" alt="Featured image of post RocketMQ源码分享笔记" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
+&lt;p&gt;RocketMQ，是一种延时队列，主要的应用场景，就是消费者可以延时消费消息，比如在双11的时候,一瞬间有太多请求全部打在服务器上，服务器就会瞬间瘫痪，本文主要就是记录前辈分享的Rocket源码的时候笔记和一些感悟&lt;/p&gt;
+&lt;h1 id=&#34;主要功能&#34;&gt;主要功能&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;负载均衡&lt;/li&gt;
+&lt;li&gt;消费模式&lt;/li&gt;
+&lt;li&gt;消费拉取&lt;/li&gt;
+&lt;li&gt;消费进度反馈&lt;/li&gt;
+&lt;li&gt;消费过滤&lt;/li&gt;
+&lt;li&gt;延迟队列&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;分享主要内容笔记&#34;&gt;分享主要内容笔记&lt;/h1&gt;
+&lt;p&gt;打字速度有限，只能记录下简单的一些片段供参考&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;有一个架构，轮询，可用性高，一致性要求没那么高&lt;/li&gt;
+&lt;li&gt;消息的一个流程：生产者发了一个消息，到了breaker之后，到了commitlog。有一个G的大小，实际发送的大小，顺序写的，io性能会很好，会被放到消费者的queue里面
+，小了之后，总要发到某一个topic里面&lt;/li&gt;
+&lt;li&gt;发一个消息的话，需要新建一个主题，需要制定一个queue的数量，每一个queue就是一个负载均衡，表示当前这个queue，消费到什么位置了。集群消息，一人拿一个。被负载的queue，同一个topic下的消息都是不同的&lt;/li&gt;
+&lt;li&gt;消费者可以对同一个topic下面的某几个队列进行消费，多个不同的consumer&lt;/li&gt;
+&lt;li&gt;设置min是核心线程数，是固定的，但是她的队列是无限的，所以这个地方没有什么用&lt;/li&gt;
+&lt;li&gt;缓存超过10000个，会改变线程池的大小，会做对应的限制&lt;/li&gt;
+&lt;li&gt;msgListener就是传的一个回调&lt;/li&gt;
+&lt;li&gt;会有一个offsetStore会存，存到本地和远程&lt;/li&gt;
+&lt;li&gt;还有消息的消费逻辑，注册到客户端的，生成clientId&lt;/li&gt;
+&lt;li&gt;封装了一些拉取消息的api，通过路由信息&lt;/li&gt;
+&lt;li&gt;worker发出请求，然后又一个线程池，来进行序列化和相应，消费的话会再七环到对应consumer的线程池&lt;/li&gt;
+&lt;li&gt;有各种组件，然后讲讲启动之后，都做了哪些事情&lt;/li&gt;
+&lt;li&gt;基本上都是通过定时消息去驱动的，很少是通过事件去驱动的，&lt;/li&gt;
+&lt;li&gt;找nameserver,然后去找server的信息&lt;/li&gt;
+&lt;li&gt;更新consumer消费的一个队列offset&lt;/li&gt;
+&lt;li&gt;都不是实时的更新的，是每一个五秒钟才刷新一次的&lt;/li&gt;
+&lt;li&gt;广播消费的，消费的queue是全部，订阅，不是分发，每一个rebalance里面，都处理了一个queue，实现了一个拍照&lt;/li&gt;
+&lt;li&gt;如果没有存，就是首次消费，如果是last，就会从，rocket是经常清消息的，发消息，然后消费&lt;/li&gt;
+&lt;li&gt;消费，就是拉取消息，就是放一条消息，就可以进行拉取，会先做一些验证，然后做一些限流，只不过限流是做一些delay，顺序消息，需要设置一下是不是第一次，然后获取订阅信息，然后调用对应的pullapi，然后去发一条消息，拉倒请求之后，就会有callback，去封装一下，找到了消息了，然后有一个真正的消息处理类&lt;/li&gt;
+&lt;li&gt;处理的流程 如果全部消费成功了之后，就会找到maxOffset，如果没有的话，就会去更新最小的那一个，这就是整个的一个消费流程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;自行延展&#34;&gt;自行延展&lt;/h1&gt;
+&lt;p&gt;MQ是高并发系统的核心组件之一，能够提高业务效率和系统的稳定性，主流的MQ有Rocketmq、kafka、Rabbitmq&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.jianshu.com/p/2838890f3284&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Rocketmq原理&amp;amp;最佳实践&lt;/a&gt;
+主要对比如下&lt;br&gt;
+&lt;img src=&#34;https://upload-images.jianshu.io/upload_images/12619159-ebd12b24d5ae33d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/974/format/webp&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;对比&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>进程间通信的方式</title>
+        <link>https://lllovol.com/p/inter-process/</link>
+        <pubDate>Tue, 05 Mar 2019 16:22:56 +0000</pubDate>
+        
+        <guid>https://lllovol.com/p/inter-process/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/4.jpg" alt="Featured image of post 进程间通信的方式" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
+&lt;p&gt;IPC（Inter-Process Communication，进程间通信）&lt;br&gt;
+有时候我们需要在不同的程序之间，也就是不同的进程之间进行通讯，那么都有些什么方式呢？通过查阅相关资料，主要有信号、管道、消息队列、共享内存等等&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/LUO77/p/5816326.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;进程间通信的方式&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;常见的通讯方式&#34;&gt;常见的通讯方式&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;套接字Socket：套接字是一种进程间通信机制，与其他通信机制不同的是，它可用于不同及其间的进程通信。&lt;/li&gt;
+&lt;li&gt;信号量：信号量是一种计数器，主要是用来控制多个进程对共享资源的访问，在锁机制中应用比较多，保证在一个进程对一个资源进行访问的时候，其他进程不能对其进行资源访问&lt;/li&gt;
+&lt;li&gt;信号：信号是一种比较复杂的通信方式，用于通知接收进程某个事件已经发生。&lt;/li&gt;
+&lt;li&gt;共享内存：内存共享是最快的IPC方式（SharedMemory）。就是映射一段其他进程也能够进行访问的内存。这一段内存虽然是由一个进程进行创建，但是多个进程都能进行访问。通常和信号量配合使用，来实现进程之间的同步和通信。&lt;/li&gt;
+&lt;li&gt;管道pipe：管道是一种半双工的通信方式，数据只能单向流动，而且只能在具有亲缘关系的进程间使用。进程的亲缘关系通常是指父子进程关系。&lt;/li&gt;
+&lt;li&gt;命名管道FIFO：有名管道也是半双工的通信方式，但是它允许无亲缘关系进程间的通信。&lt;/li&gt;
+&lt;li&gt;消息队列MessageQueue：消息队列是由消息的链表，存放在内核中并由消息队列标识符标识。消息队列克服了信号传递信息少、管道只能承载无格式字节流以及缓冲区大小受限等缺点。&lt;br&gt;
+以上的任何一点都可以单独拿出来做一篇文章，路漫漫其修远兮&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;文章中已经写得很好了：）站在了巨人的肩膀上&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Yaml和Java对象之间的相互转换</title>
+        <link>https://lllovol.com/p/yamlbeans/</link>
+        <pubDate>Fri, 22 Feb 2019 21:46:09 +0000</pubDate>
+        
+        <guid>https://lllovol.com/p/yamlbeans/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg" alt="Featured image of post Yaml和Java对象之间的相互转换" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
+&lt;p&gt;最近需要做一个将java对象转换成yaml文件格式的工作，由于手动进行操作的话效率会很低下，因此再找有没有合适的包可以使用。最后找到的工具就是yamlBeans,本文主要是翻译整理yamlBeans中的一部分信息&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;http://yamlbeans.sourceforge.net/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;yamlBeans官网&lt;/a&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.jianshu.com/p/97222440cd08&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;yaml文档的学习&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;添加依赖&#34;&gt;添加依赖&lt;/h1&gt;
+&lt;p&gt;将下列代码添加到pom文件当中&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;dependency&amp;gt;
+   &amp;lt;groupId&amp;gt;com.esotericsoftware.yamlbeans&amp;lt;/groupId&amp;gt;
+   &amp;lt;artifactId&amp;gt;yamlbeans&amp;lt;/artifactId&amp;gt;
+   &amp;lt;version&amp;gt;1.12&amp;lt;/version&amp;gt;
+&amp;lt;/dependency&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;yaml反序列化为常见数据结构&#34;&gt;Yaml反序列化为常见数据结构&lt;/h1&gt;
+&lt;p&gt;所谓的反序列化，就是将yaml格式的文件，转换为java的常见数据结构
+主要使用的类是YamlReader，然后可以将yaml文档转换为HashMap，ArrayList,还有Strings类型。&lt;br&gt;
+yaml：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;name: Nathan Sweet
+age: 28
+address: 4011 16th Ave S
+phone numbers:
+ - name: Home
+   number: 206-555-5138
+ - name: Work
+   number: 425-555-2306
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;code:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;YamlReader reader = new YamlReader(new FileReader(&amp;quot;contact.yml&amp;quot;));
+Object object = reader.read();
+System.out.println(object);
+Map map = (Map)object;
+System.out.println(map.get(&amp;quot;address&amp;quot;));
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;yaml反序列化为pojo&#34;&gt;Yaml反序列化为POJO&lt;/h1&gt;
+&lt;p&gt;将yaml文档反序列化为pojo(plain ordinary java object)&lt;/p&gt;
+&lt;p&gt;Yaml and java class:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;name: Nathan Sweet
+age: 28
+
+public class Contact {
+	public String name;
+	public int age;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Code:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;YamlReader reader = new YamlReader(new FileReader(&amp;quot;contact.yml&amp;quot;));
+Contact contact = reader.read(Contact.class);
+System.out.println(contact.age);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;序列化为yaml文档&#34;&gt;序列化为Yaml文档&lt;/h1&gt;
+&lt;p&gt;这个地方就是与上方的反着来的，就是将java的常见的数据结构（HashMap,Sring,ArrayList都是可以的）或者pojo转换为yaml的文档，这里主要使用到的类是YamlWriter()&lt;/p&gt;
+&lt;p&gt;example:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;String yaml=&amp;quot;&amp;quot;;
+StringWriter stringWriter = new StringWriter();
+YamlWriter writer = new YamlWriter(stringWriter);
+try {
+    writer.write(greyTask);
+    writer.close();
+} catch (YamlException e) {
+    log.error(&amp;quot;Grey Yaml Error&amp;quot;,e);
+}
+yaml = stringWriter.toString();
+
+return yaml;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上方的是我自己写的例子，YamlWriter的构造函数所需要的参数，是一个writer（可以是fileWriter也可以是StringWriter，当然其他类型的writer也是可以的）&lt;/p&gt;
+&lt;p&gt;输出的图像如下(fileWriter的)：
+&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/yamlBeans/yamlWriter.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;YamlWriter&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;设置tag&#34;&gt;设置tag&lt;/h4&gt;
+&lt;p&gt;有的时候tag会特别长，这个时候，就可以将自定义设置tag&lt;/p&gt;
+&lt;p&gt;code:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;YamlWriter writer = new YamlWriter(new FileWriter(&amp;quot;output.yml&amp;quot;));
+writer.getConfig().setClassTag(&amp;quot;contact&amp;quot;, Contact.class);
+writer.write(contact);
+writer.close();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;result:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;!contact
+name: Nathan Sweet
+age: 28
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;锚点anchor&#34;&gt;锚点Anchor&lt;/h1&gt;
+&lt;p&gt;当出现指向同一个对象的时候，就会使用锚点&lt;/p&gt;
+&lt;p&gt;yaml:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;oldest friend:
+    &amp;amp;1 !contact
+    name: Bob
+    age: 29
+best friend: *1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上面的yaml文件中，&amp;amp;1 ！contact相当于定义了contact为1，然后使用*1来进行引用。默认来讲，yamlWriter在进行转换的时候，如果遇到了相同的对象会自动的输出锚点。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Contact contact = new Contact();
+contact.name = &amp;quot;Bob&amp;quot;;
+contact.age = 29;
+Map map = new HashMap();
+map.put(&amp;quot;oldest friend&amp;quot;, contact);
+map.put(&amp;quot;best friend&amp;quot;, contact);
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+        </item>
+        <item>
+        <title>关于吞吐量的一些小知识</title>
+        <link>https://lllovol.com/p/qps/</link>
+        <pubDate>Mon, 07 Jan 2019 15:23:02 +0000</pubDate>
+        
+        <guid>https://lllovol.com/p/qps/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg" alt="Featured image of post 关于吞吐量的一些小知识" /&gt;&lt;h1 id=&#34;rt-响应时间&#34;&gt;RT 响应时间&lt;/h1&gt;
+&lt;p&gt;response time相应时间&lt;br&gt;
+响应时间是提交请求和返回该请求的响应之间使用的时间。&lt;br&gt;
+主要包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;数据库查询的时间&lt;/li&gt;
+&lt;li&gt;将字符传到终端上面所花的时间&lt;/li&gt;
+&lt;li&gt;访问web页面所花的时间&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;对于没有并发的系统而言，响应时间是一个合理并且准确的性能指标。但是响应时间的绝对值并不能反应性能的高低，软件的性能高低实际取决于用户对于该响应时间的接受度。
+&lt;!-- raw HTML omitted --&gt;这就像是恋爱中的感情一样，你回复消息的快慢并不能反应你有多么爱她，而是取决于她对于你的这些行为的接受程度。&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;h1 id=&#34;tps-每秒事物处理量&#34;&gt;TPS 每秒事物处理量&lt;/h1&gt;
+&lt;p&gt;Transaction Per Second 吞吐量的（Throughput），吞吐量是指系统在单位时间内处理请求的数量。&lt;br&gt;
+对于单应用系统而言，吞吐量和响应时间严格成反比。单应用使用响应时间来作为衡量的指标，但是对于并发系统而言，通常需要吞吐量作为性能指标。因为在一个并发系统下，当一个用户一个请求的时间为t,但是n个用户一同请求往往不是n*t（可能大，可能小，需要看具体的情况）。一个并发系统如果配置合理，相应时间应该不会随着用户的增多而线性增加。因此才将吞吐量作为并发系统的性能衡量指标。一般而言，对于不同用户规模和不同的用户模式的系统，如果系统的最大吞吐量大致相同的话，可以判断两个系统的数据处理能力基本相同。&lt;/p&gt;
+&lt;h1 id=&#34;并发用户数&#34;&gt;并发用户数&lt;/h1&gt;
+&lt;p&gt;并发用户数指的是系统最大可以承受的正常使用系统功能的用户数。这个指标比TPS更加笼统，但是也更加的直观。但是这是一个非常不准确的指标，比如一个直播的弹幕网站，用户可以登录，正常发送弹幕，但是如果都挤在了一个直播间，同一时间发送一大堆弹幕，这时候的服务器可能就会崩了。而且用户在线的时候，大部分时间都在阅读信息，只有小部分的再发送请求，这样的情况是很多的。这项指标很大情况下取决于用户的行为模式。&lt;/p&gt;
+&lt;h1 id=&#34;qps-每秒查询数量&#34;&gt;QPS 每秒查询数量&lt;/h1&gt;
+&lt;p&gt;Query Per Second&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;每秒查询率QPS是对一个特定的查询服务器在规定时间内所处理流量多少的衡量标准，在因特网上，作为域名系统服务器的机器的性能经常用每秒查询率来衡量。对应fetches/sec，即每秒的响应请求数，也即是最大吞吐能力。 （看来是类似于TPS，只是应用于特定场景的吞吐量）&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/data2value/p/6220859.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;摘自cnblog&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>安装atom的atom-beautify</title>
+        <link>https://lllovol.com/p/%E5%AE%89%E8%A3%85atom%E7%9A%84atom-beautify/</link>
+        <pubDate>Fri, 07 Dec 2018 17:03:25 +0000</pubDate>
+        
+        <guid>https://lllovol.com/p/%E5%AE%89%E8%A3%85atom%E7%9A%84atom-beautify/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/3.jpg" alt="Featured image of post 安装atom的atom-beautify" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
+&lt;p&gt;想给atom安装beautify的插件
+使用&lt;em&gt;apm install atom-beautify&lt;/em&gt;
+和是用&lt;em&gt;preference中的插件&lt;/em&gt;安装都失败了&lt;/p&gt;
+&lt;h1 id=&#34;start&#34;&gt;Start&lt;/h1&gt;
+&lt;p&gt;使用github 克隆到本地，然后安装&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; cd ~/.atom/packages
+ git clone https://github.com/Glavin001/atom-beautify.git
+ cd atom-beautify
+ npm install
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/%e5%ae%89%e8%a3%85atom%e7%9a%84atom-beautify_files/59469635.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;59469635.png&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h1 id=&#34;success&#34;&gt;Success&lt;/h1&gt;
+&lt;p&gt;使用control + alt + b 组合键 即可&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>使用Rakefile实现文章生成器</title>
+        <link>https://lllovol.com/p/rake/</link>
+        <pubDate>Wed, 05 Dec 2018 01:23:16 +0000</pubDate>
+        
+        <guid>https://lllovol.com/p/rake/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/1.jpg" alt="Featured image of post 使用Rakefile实现文章生成器" /&gt;&lt;h2 id=&#34;使用githubio来写blog&#34;&gt;使用github.io来写blog&lt;/h2&gt;
+&lt;p&gt;本就是件很棒的事情，但是每次在想写新的文章的时候，都需要重新复制title和开头的标签，如果能够自动化地完成这件事就好了（重复性的东西工作）&lt;/p&gt;
+&lt;h2 id=&#34;about-rakefile&#34;&gt;About Rakefile&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Rake is a Make-like program implemented in Ruby. Tasks and dependencies are specified in standard Ruby syntax.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;摘自http://docs.seattlerb.org/rake/&lt;/p&gt;
+&lt;h2 id=&#34;安装rake&#34;&gt;安装Rake&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;sudo gem install rake
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;即可&lt;/p&gt;
+&lt;h2 id=&#34;创建rakefile&#34;&gt;创建Rakefile&lt;/h2&gt;
+&lt;p&gt;在项目的根目录下&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;touch Rakefile
+vim Rakefile
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;然后添加如下代码&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;task :default =&amp;gt; :new
+
+require &#39;fileutils&#39;
+
+desc &amp;quot;创建新 post&amp;quot;
+task :new do
+  puts &amp;quot;请输入要创建的文章文件文件名字：&amp;quot;
+    @url = STDIN.gets.chomp
+    puts &amp;quot;请输入文章的标题：&amp;quot;
+    @name = STDIN.gets.chomp
+    puts &amp;quot;请输入文章的子标题：&amp;quot;
+    @slug = STDIN.gets.chomp
+    puts &amp;quot;请输入文章的分类，以空格分隔：&amp;quot;
+    @categories = STDIN.gets.chomp
+    puts &amp;quot;请输入文章的标签：&amp;quot;
+    @tag = STDIN.gets.chomp
+    @slug = &amp;quot;#{@url}&amp;quot;
+    @slug = @slug.downcase.strip.gsub(&#39; &#39;, &#39;-&#39;)
+    @date = Time.now.strftime(&amp;quot;%F&amp;quot;)
+    @post_name = &amp;quot;_posts/#{@date}-#{@slug}.md&amp;quot;
+    if File.exist?(@post_name)
+            abort(&amp;quot;文件名已经存在！创建失败&amp;quot;)
+    end
+    FileUtils.touch(@post_name)
+    open(@post_name, &#39;a&#39;) do |file|
+            file.puts &amp;quot;---&amp;quot;
+            file.puts &amp;quot;layout: post&amp;quot;
+            file.puts &amp;quot;title: #{@name}&amp;quot;
+            file.puts &amp;quot;slug: #{@slug}&amp;quot;
+            file.puts &amp;quot;author: ymkNK&amp;quot;
+            file.puts &amp;quot;date: #{Time.now}&amp;quot;
+            file.puts &amp;quot;categories: #{@categories}&amp;quot;
+            file.puts &amp;quot;tags: #{@tag}&amp;quot;
+            file.puts &amp;quot;img: 1.jpg&amp;quot;
+            file.puts &amp;quot;---&amp;quot;
+    end
+    exec &amp;quot;vim #{@post_name}&amp;quot;
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;代码中的author等属性可以自行进行修改&lt;/p&gt;
+&lt;h2 id=&#34;使用rakefile生成文章&#34;&gt;使用Rakefile生成文章&lt;/h2&gt;
+&lt;p&gt;在项目的根目录下打开命令行&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rake new
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;依次输入相关的信息就可以在_post下看见新生成的文件啦&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
 </rss>

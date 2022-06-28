@@ -1,22 +1,59 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Monitor on lllovol</title>
-    <link>https://lllovol.com/tags/monitor/</link>
-    <description>Recent content in Monitor on lllovol</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Tue, 14 Jun 2022 00:58:16 +0000</lastBuildDate><atom:link href="https://lllovol.com/tags/monitor/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>准确率、精确率、召回率</title>
-      <link>https://lllovol.com/p/2022/6/measure-monitor/</link>
-      <pubDate>Tue, 14 Jun 2022 00:58:16 +0000</pubDate>
-      
-      <guid>https://lllovol.com/p/2022/6/measure-monitor/</guid>
-      <description>简介 参考文档： 准确率(accuracy)、精确率(precision)、召回率(recall)_小胖蹄儿的博客-CSDN博客_准召率
- True Positive(真正, TP)：将正类预测为正类数 True Negative(真负 , TN)：将负类预测为负类数 False Positive(假正, FP)：将负类预测为正类数 False Negative(假负 , FN)：将正类预测为负类数     表头 Positive Negative     True TP FP   False FN TN    计算公式 一般的计算范式如下
- 准确率 $$Acc = \frac{TP+TN}{TP+FP+FN+TN}$$ 精准率 $$Pre = \frac{TP}{TP+FP}$$ 召回率 $$Recall = \frac{TP}{TP+FN}$$  </description>
-    </item>
-    
-  </channel>
+    <channel>
+        <title>Monitor on lllovol</title>
+        <link>https://lllovol.com/tags/monitor/</link>
+        <description>Recent content in Monitor on lllovol</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Tue, 14 Jun 2022 00:58:16 +0800</lastBuildDate><atom:link href="https://lllovol.com/tags/monitor/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>准确率、精确率、召回率</title>
+        <link>https://lllovol.com/p/2022/6/measure-monitor/</link>
+        <pubDate>Tue, 14 Jun 2022 00:58:16 +0800</pubDate>
+        
+        <guid>https://lllovol.com/p/2022/6/measure-monitor/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/14.jpeg" alt="Featured image of post 准确率、精确率、召回率" /&gt;&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
+&lt;p&gt;参考文档： &lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/Cheese_pop/article/details/78228156&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;准确率(accuracy)、精确率(precision)、召回率(recall)_小胖蹄儿的博客-CSDN博客_准召率&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;True Positive(真正, TP)：将正类预测为正类数&lt;/li&gt;
+&lt;li&gt;True Negative(真负 , TN)：将负类预测为负类数&lt;/li&gt;
+&lt;li&gt;False Positive(假正, FP)：将负类预测为正类数&lt;/li&gt;
+&lt;li&gt;False Negative(假负 , FN)：将正类预测为负类数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;表头&lt;/th&gt;
+&lt;th&gt;Positive&lt;/th&gt;
+&lt;th&gt;Negative&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;True&lt;/td&gt;
+&lt;td&gt;TP&lt;/td&gt;
+&lt;td&gt;FP&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;False&lt;/td&gt;
+&lt;td&gt;FN&lt;/td&gt;
+&lt;td&gt;TN&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;计算公式&#34;&gt;计算公式&lt;/h2&gt;
+&lt;p&gt;一般的计算范式如下&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;准确率
+$$Acc = \frac{TP+TN}{TP+FP+FN+TN}$$&lt;/li&gt;
+&lt;li&gt;精准率
+$$Pre = \frac{TP}{TP+FP}$$&lt;/li&gt;
+&lt;li&gt;召回率
+$$Recall = \frac{TP}{TP+FN}$$&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
 </rss>

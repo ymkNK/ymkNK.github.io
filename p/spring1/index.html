@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='原来写的代码被CTO抓出来吐槽，发现确实都是一些当初自己没有注意到的地方，打算将这样的小细节一点一点的收集起来，养成更好的编码习惯。
 Slf4j  The Simple Logging Facade for Java (SLF4J) serves as a simple facade or abstraction for various logging frameworks (e.g. java.util.logging, logback, log4j) allowing the end user to plug in the desired logging framework at deployment time. 摘自https://www.slf4j.org/
  在编写Spring的代码的时候，只需要在Class上方添加一个@Slf4j的注解即可。slf4j是facade pattern的典型例子（隐藏系统的复杂性，并向客户端提供了一个客户端可以访问系统的接口，又被成为门面模式或者外观模式） 使用的时候，可以使用占位符的方式进行日志的记录，省去了原来自己拼接日志的麻烦。
- log.debug(&amp;quot;wxpushGet() returned: {}&amp;quot; ,result); 但是有一些需要注意的地方。
+ log.debug(&amp;quot;wxpushGet() returned: {}&amp;quot; ,result);  但是有一些需要注意的地方。
  在日常开发调试的时候应该少用log.info()，而应该使用log.debug，不然在上线之后，就会产生很多冗余的信息。 只有在线上部署的时候，关键代码的信息，才使用log.info(),来显示日志的信息。千万不能滥用！ 在catch的抛出错误的时候，使用log.error()。会打印错误以及异常的信息 log.warn(),用于打印潜在的用户的错误可能的信息。  Dto等model的@Data注解 @Data注解，可以实现类的Getter和Setter的同时还有toString方法，没有必要自己再转一次Json(如果只是打印个日志的话)，lombok生成的toString的可读性是很高的
  Lombok 是一种 Java™ 实用工具，可用来帮助开发人员消除 Java 的冗长，尤其是对于简单的 Java 对象（POJO Plain Ordinary Java Object）。它通过注解实现这一目的。'><title>SpringBoot开发中的一些小细节(一)Slf4J、Post和Get的小技巧</title>
 
 <link rel='canonical' href='https://lllovol.com/p/spring1/'>
 
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='SpringBoot开发中的一些小细节(一)Slf4J、Post和Get的小技巧'>
+<link rel="stylesheet" href="/scss/style.min.ac77dcf8b111b51da39a92990f431923f210f3876d85798a2125667f96dc33a4.css"><meta property='og:title' content='SpringBoot开发中的一些小细节(一)Slf4J、Post和Get的小技巧'>
 <meta property='og:description' content='原来写的代码被CTO抓出来吐槽，发现确实都是一些当初自己没有注意到的地方，打算将这样的小细节一点一点的收集起来，养成更好的编码习惯。
 Slf4j  The Simple Logging Facade for Java (SLF4J) serves as a simple facade or abstraction for various logging frameworks (e.g. java.util.logging, logback, log4j) allowing the end user to plug in the desired logging framework at deployment time. 摘自https://www.slf4j.org/
  在编写Spring的代码的时候，只需要在Class上方添加一个@Slf4j的注解即可。slf4j是facade pattern的典型例子（隐藏系统的复杂性，并向客户端提供了一个客户端可以访问系统的接口，又被成为门面模式或者外观模式） 使用的时候，可以使用占位符的方式进行日志的记录，省去了原来自己拼接日志的麻烦。
- log.debug(&amp;quot;wxpushGet() returned: {}&amp;quot; ,result); 但是有一些需要注意的地方。
+ log.debug(&amp;quot;wxpushGet() returned: {}&amp;quot; ,result);  但是有一些需要注意的地方。
  在日常开发调试的时候应该少用log.info()，而应该使用log.debug，不然在上线之后，就会产生很多冗余的信息。 只有在线上部署的时候，关键代码的信息，才使用log.info(),来显示日志的信息。千万不能滥用！ 在catch的抛出错误的时候，使用log.error()。会打印错误以及异常的信息 log.warn(),用于打印潜在的用户的错误可能的信息。  Dto等model的@Data注解 @Data注解，可以实现类的Getter和Setter的同时还有toString方法，没有必要自己再转一次Json(如果只是打印个日志的话)，lombok生成的toString的可读性是很高的
  Lombok 是一种 Java™ 实用工具，可用来帮助开发人员消除 Java 的冗长，尤其是对于简单的 Java 对象（POJO Plain Ordinary Java Object）。它通过注解实现这一目的。'>
 <meta property='og:url' content='https://lllovol.com/p/spring1/'>
@@ -24,7 +24,7 @@ Slf4j  The Simple Logging Facade for Java (SLF4J) serves as a simple facade or a
 <meta name="twitter:description" content="原来写的代码被CTO抓出来吐槽，发现确实都是一些当初自己没有注意到的地方，打算将这样的小细节一点一点的收集起来，养成更好的编码习惯。
 Slf4j  The Simple Logging Facade for Java (SLF4J) serves as a simple facade or abstraction for various logging frameworks (e.g. java.util.logging, logback, log4j) allowing the end user to plug in the desired logging framework at deployment time. 摘自https://www.slf4j.org/
  在编写Spring的代码的时候，只需要在Class上方添加一个@Slf4j的注解即可。slf4j是facade pattern的典型例子（隐藏系统的复杂性，并向客户端提供了一个客户端可以访问系统的接口，又被成为门面模式或者外观模式） 使用的时候，可以使用占位符的方式进行日志的记录，省去了原来自己拼接日志的麻烦。
- log.debug(&amp;quot;wxpushGet() returned: {}&amp;quot; ,result); 但是有一些需要注意的地方。
+ log.debug(&amp;quot;wxpushGet() returned: {}&amp;quot; ,result);  但是有一些需要注意的地方。
  在日常开发调试的时候应该少用log.info()，而应该使用log.debug，不然在上线之后，就会产生很多冗余的信息。 只有在线上部署的时候，关键代码的信息，才使用log.info(),来显示日志的信息。千万不能滥用！ 在catch的抛出错误的时候，使用log.error()。会打印错误以及异常的信息 log.warn(),用于打印潜在的用户的错误可能的信息。  Dto等model的@Data注解 @Data注解，可以实现类的Getter和Setter的同时还有toString方法，没有必要自己再转一次Json(如果只是打印个日志的话)，lombok生成的toString的可读性是很高的
  Lombok 是一种 Java™ 实用工具，可用来帮助开发人员消除 Java 的冗长，尤其是对于简单的 Java 对象（POJO Plain Ordinary Java Object）。它通过注解实现这一目的。"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg' />
@@ -43,8 +43,8 @@ if (!doNotTrack) {
 
     </head>
     <body class="
-    article-page 
-">
+    article-page
+    ">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -67,27 +67,22 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex 
-    
-        on-phone--column extended
-    
-">
-    
-        <aside class="sidebar left-sidebar sticky">
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
     <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
         </span>
     </button>
 
-    <header class="site-info">
+    <header>
         
             
             <figure class="site-avatar">
+                <a href="/">
                 
                     <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
                 
-
+                </a>
                 
                     <span class="emoji">⚖️</span>
                 
@@ -95,10 +90,11 @@ if (!doNotTrack) {
             
         
         
-        <h1 class="site-name"><a href="/">lllovol</a></h1>
-        <h2 class="site-description">Stay hungry, stay foolish.</h2></header>
-
-    <ol class="menu" id="main-menu">
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">lllovol</a></h1>
+            <h2 class="site-description">Stay hungry, stay foolish.</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
         
         
         
@@ -214,9 +210,11 @@ if (!doNotTrack) {
         </li>
         
 
-        
-            <li id="dark-mode-toggle">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="8" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -224,7 +222,7 @@ if (!doNotTrack) {
 
 
 
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="16" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -232,13 +230,12 @@ if (!doNotTrack) {
 
 
 
-                <span>暗色模式</span>
-            </li>
-        
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
     </ol>
 </aside>
-
-    
 <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
@@ -262,11 +259,13 @@ if (!doNotTrack) {
     </header>
     
 
-    <h2 class="article-title">
-        <a href="/p/spring1/">SpringBoot开发中的一些小细节(一)Slf4J、Post和Get的小技巧</a>
-    </h2>
-
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/spring1/">SpringBoot开发中的一些小细节(一)Slf4J、Post和Get的小技巧</a>
+        </h2>
     
+        
+    </div>
 
     
     <footer class="article-time">
@@ -302,10 +301,14 @@ if (!doNotTrack) {
         
     </footer>
     
+
+    
 </div>
 </header>
 
     <section class="article-content">
+    
+    
     <p>原来写的代码被CTO抓出来吐槽，发现确实都是一些当初自己没有注意到的地方，打算将这样的小细节一点一点的收集起来，养成更好的编码习惯。</p>
 <h1 id="slf4j">Slf4j</h1>
 <blockquote>
@@ -369,34 +372,26 @@ if (!doNotTrack) {
 <li>get的长度限制，主要是浏览器服务器等，为了防止一些黑客的攻击来进行的限制，和get、post的无关。</li>
 <li>可以在get的车里放data,也可以在post车外面放data,但是这样很蠢</li>
 </ul>
-<p><figure 
-	>
-	<a href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/SpringBoot%e5%bc%80%e5%8f%91%e4%b8%ad%e7%9a%84%e4%b8%80%e4%ba%9b%e5%b0%8f%e7%bb%86%e8%8a%82%ef%bc%88%e4%b8%80%ef%bc%89_files/64122226.png" >
-		<img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/SpringBoot%e5%bc%80%e5%8f%91%e4%b8%ad%e7%9a%84%e4%b8%80%e4%ba%9b%e5%b0%8f%e7%bb%86%e8%8a%82%ef%bc%88%e4%b8%80%ef%bc%89_files/64122226.png"
-			
-			
-			
-			loading="lazy"
-			alt="64122226.png">
-	</a>
+<p><img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/SpringBoot%e5%bc%80%e5%8f%91%e4%b8%ad%e7%9a%84%e4%b8%80%e4%ba%9b%e5%b0%8f%e7%bb%86%e8%8a%82%ef%bc%88%e4%b8%80%ef%bc%89_files/64122226.png"
 	
-	<figcaption>64122226.png</figcaption>
 	
-</figure>
-<figure 
-	>
-	<a href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/SpringBoot%e5%bc%80%e5%8f%91%e4%b8%ad%e7%9a%84%e4%b8%80%e4%ba%9b%e5%b0%8f%e7%bb%86%e8%8a%82%ef%bc%88%e4%b8%80%ef%bc%89_files/64276701.png" >
-		<img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/SpringBoot%e5%bc%80%e5%8f%91%e4%b8%ad%e7%9a%84%e4%b8%80%e4%ba%9b%e5%b0%8f%e7%bb%86%e8%8a%82%ef%bc%88%e4%b8%80%ef%bc%89_files/64276701.png"
-			
-			
-			
-			loading="lazy"
-			alt="64276701.png">
-	</a>
 	
-	<figcaption>64276701.png</figcaption>
+	loading="lazy"
 	
-</figure></p>
+		alt="64122226.png"
+	
+	
+>
+<img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/SpringBoot%e5%bc%80%e5%8f%91%e4%b8%ad%e7%9a%84%e4%b8%80%e4%ba%9b%e5%b0%8f%e7%bb%86%e8%8a%82%ef%bc%88%e4%b8%80%ef%bc%89_files/64276701.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="64276701.png"
+	
+	
+></p>
 
 </section>
 
@@ -428,14 +423,16 @@ if (!doNotTrack) {
     
 </article>
 
-    <aside class="related-contents--wrapper">
     
+
     
-        <h2 class="section-title">相关文章</h2>
-        <div class="related-contents">
-            <div class="flex article-list--tile">
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
                 
-                    
 <article class="has-image">
     <a href="/p/spring14/">
         
@@ -452,8 +449,9 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
+
+            
                 
-                    
 <article class="has-image">
     <a href="/p/singleton-realization/">
         
@@ -470,8 +468,9 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
+
+            
                 
-                    
 <article class="has-image">
     <a href="/p/spring13/">
         
@@ -488,8 +487,9 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
+
+            
                 
-                    
 <article class="has-image">
     <a href="/p/spring12/">
         
@@ -506,8 +506,9 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
+
+            
                 
-                    
 <article class="has-image">
     <a href="/p/synchronize-job/">
         
@@ -524,10 +525,10 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
-                
-            </div>
+
+            
         </div>
-    
+    </div>
 </aside>
 
      
@@ -573,7 +574,7 @@ if (!doNotTrack) {
             Owner Rainbowly <br/>
         
         Total [<span id="busuanzi_value_site_uv"></span>] user views [<span id="busuanzi_value_site_pv"></span>] site views [<span id="busuanzi_value_page_pv"></span>] page views <br/>Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -642,18 +643,18 @@ if (!doNotTrack) {
 
 </div><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
             ><link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
             >
 
             </main>
@@ -661,8 +662,8 @@ if (!doNotTrack) {
 
         </div>
         <script 
-                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
-                defer="false"
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
                 >
             </script><script type="text/javascript" src="/ts/main.js" defer></script>
 <script>

@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='背景 最近在做同步先关的工作，为了提升同步任务的处理效率，减少频繁的mongo数据库查询，因此需要将一些数据统一查询出来，在内存中进行处理。
 解决方式 在任务执行的之前，就需要将相关的数据查询出来，如何实现呢？使用一个@EventListener进行ApplicationReadyEvent时间的监听，就能在应用启动之后，进行相应的操作
-@EventListener(classes = {ApplicationReadyEvent.class})public void initialMap() {if (CollectionUtils.isEmpty(ridMobileMap)) {List&amp;lt;UserRecord&amp;gt; all = entranceUserRecordRepo.findAll();ridMobileMap = all.stream().filter(userRecord -&amp;gt; StringUtils.isNotEmpty(userRecord.getMobileNo())).collect(Collectors.toMap(UserRecord::getRid, UserRecord::getMobileNo));}}More Application spring application，一般就是spring boot项目中的 Application这个类
-@SpringBootApplication@EnableConfigurationProperties@EnableAutoConfiguration(exclude = {DruidDataSourceAutoConfigure.class, DataSourceAutoConfiguration.class, RedisAutoConfiguration.class})@EnableScheduling@EnableFeignClients(basePackages = {&amp;quot;&amp;quot;})@EnableAspectJAutoProxy(proxyTargetClass = true)@EnableCircuitBreaker@EnableLdapRepositoriespublic class Application {public static void main(String[] args) {SpringApplication.run(Application.class, args);}@BeanLdapTemplate getLdapTemplate(ContextSource contextSource) {LdapTemplate ldapTemplate = new LdapTemplate(contextSource);ldapTemplate.'><title>SpringBoot开发中的一些小细节(十四）事件监听的使用</title>
+@EventListener(classes = {ApplicationReadyEvent.class}) public void initialMap() { if (CollectionUtils.isEmpty(ridMobileMap)) { List&amp;lt;UserRecord&amp;gt; all = entranceUserRecordRepo.findAll(); ridMobileMap = all.stream().filter(userRecord -&amp;gt; StringUtils.isNotEmpty(userRecord.getMobileNo())).collect(Collectors.toMap(UserRecord::getRid, UserRecord::getMobileNo)); } } More Application spring application，一般就是spring boot项目中的 Application这个类
+@SpringBootApplication @EnableConfigurationProperties @EnableAutoConfiguration(exclude = {DruidDataSourceAutoConfigure.class, DataSourceAutoConfiguration.class, RedisAutoConfiguration.class}) @EnableScheduling @EnableFeignClients(basePackages = {&amp;#34;&amp;#34;}) @EnableAspectJAutoProxy(proxyTargetClass = true) @EnableCircuitBreaker @EnableLdapRepositories public class Application { public static void main(String[] args) { SpringApplication.run(Application.class, args); } @Bean LdapTemplate getLdapTemplate(ContextSource contextSource) { LdapTemplate ldapTemplate = new LdapTemplate(contextSource); ldapTemplate.'><title>SpringBoot开发中的一些小细节(十四）事件监听的使用</title>
 
 <link rel='canonical' href='https://lllovol.com/p/spring14/'>
 
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='SpringBoot开发中的一些小细节(十四）事件监听的使用'>
+<link rel="stylesheet" href="/scss/style.min.ac77dcf8b111b51da39a92990f431923f210f3876d85798a2125667f96dc33a4.css"><meta property='og:title' content='SpringBoot开发中的一些小细节(十四）事件监听的使用'>
 <meta property='og:description' content='背景 最近在做同步先关的工作，为了提升同步任务的处理效率，减少频繁的mongo数据库查询，因此需要将一些数据统一查询出来，在内存中进行处理。
 解决方式 在任务执行的之前，就需要将相关的数据查询出来，如何实现呢？使用一个@EventListener进行ApplicationReadyEvent时间的监听，就能在应用启动之后，进行相应的操作
-@EventListener(classes = {ApplicationReadyEvent.class})public void initialMap() {if (CollectionUtils.isEmpty(ridMobileMap)) {List&amp;lt;UserRecord&amp;gt; all = entranceUserRecordRepo.findAll();ridMobileMap = all.stream().filter(userRecord -&amp;gt; StringUtils.isNotEmpty(userRecord.getMobileNo())).collect(Collectors.toMap(UserRecord::getRid, UserRecord::getMobileNo));}}More Application spring application，一般就是spring boot项目中的 Application这个类
-@SpringBootApplication@EnableConfigurationProperties@EnableAutoConfiguration(exclude = {DruidDataSourceAutoConfigure.class, DataSourceAutoConfiguration.class, RedisAutoConfiguration.class})@EnableScheduling@EnableFeignClients(basePackages = {&amp;quot;&amp;quot;})@EnableAspectJAutoProxy(proxyTargetClass = true)@EnableCircuitBreaker@EnableLdapRepositoriespublic class Application {public static void main(String[] args) {SpringApplication.run(Application.class, args);}@BeanLdapTemplate getLdapTemplate(ContextSource contextSource) {LdapTemplate ldapTemplate = new LdapTemplate(contextSource);ldapTemplate.'>
+@EventListener(classes = {ApplicationReadyEvent.class}) public void initialMap() { if (CollectionUtils.isEmpty(ridMobileMap)) { List&amp;lt;UserRecord&amp;gt; all = entranceUserRecordRepo.findAll(); ridMobileMap = all.stream().filter(userRecord -&amp;gt; StringUtils.isNotEmpty(userRecord.getMobileNo())).collect(Collectors.toMap(UserRecord::getRid, UserRecord::getMobileNo)); } } More Application spring application，一般就是spring boot项目中的 Application这个类
+@SpringBootApplication @EnableConfigurationProperties @EnableAutoConfiguration(exclude = {DruidDataSourceAutoConfigure.class, DataSourceAutoConfiguration.class, RedisAutoConfiguration.class}) @EnableScheduling @EnableFeignClients(basePackages = {&amp;#34;&amp;#34;}) @EnableAspectJAutoProxy(proxyTargetClass = true) @EnableCircuitBreaker @EnableLdapRepositories public class Application { public static void main(String[] args) { SpringApplication.run(Application.class, args); } @Bean LdapTemplate getLdapTemplate(ContextSource contextSource) { LdapTemplate ldapTemplate = new LdapTemplate(contextSource); ldapTemplate.'>
 <meta property='og:url' content='https://lllovol.com/p/spring14/'>
 <meta property='og:site_name' content='lllovol'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Spring' /><meta property='article:published_time' content='2020-07-27T15:51:33&#43;00:00'/><meta property='article:modified_time' content='2020-07-27T15:51:33&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg' />
 <meta name="twitter:title" content="SpringBoot开发中的一些小细节(十四）事件监听的使用">
 <meta name="twitter:description" content="背景 最近在做同步先关的工作，为了提升同步任务的处理效率，减少频繁的mongo数据库查询，因此需要将一些数据统一查询出来，在内存中进行处理。
 解决方式 在任务执行的之前，就需要将相关的数据查询出来，如何实现呢？使用一个@EventListener进行ApplicationReadyEvent时间的监听，就能在应用启动之后，进行相应的操作
-@EventListener(classes = {ApplicationReadyEvent.class})public void initialMap() {if (CollectionUtils.isEmpty(ridMobileMap)) {List&amp;lt;UserRecord&amp;gt; all = entranceUserRecordRepo.findAll();ridMobileMap = all.stream().filter(userRecord -&amp;gt; StringUtils.isNotEmpty(userRecord.getMobileNo())).collect(Collectors.toMap(UserRecord::getRid, UserRecord::getMobileNo));}}More Application spring application，一般就是spring boot项目中的 Application这个类
-@SpringBootApplication@EnableConfigurationProperties@EnableAutoConfiguration(exclude = {DruidDataSourceAutoConfigure.class, DataSourceAutoConfiguration.class, RedisAutoConfiguration.class})@EnableScheduling@EnableFeignClients(basePackages = {&amp;quot;&amp;quot;})@EnableAspectJAutoProxy(proxyTargetClass = true)@EnableCircuitBreaker@EnableLdapRepositoriespublic class Application {public static void main(String[] args) {SpringApplication.run(Application.class, args);}@BeanLdapTemplate getLdapTemplate(ContextSource contextSource) {LdapTemplate ldapTemplate = new LdapTemplate(contextSource);ldapTemplate."><meta name="twitter:card" content="summary_large_image">
+@EventListener(classes = {ApplicationReadyEvent.class}) public void initialMap() { if (CollectionUtils.isEmpty(ridMobileMap)) { List&amp;lt;UserRecord&amp;gt; all = entranceUserRecordRepo.findAll(); ridMobileMap = all.stream().filter(userRecord -&amp;gt; StringUtils.isNotEmpty(userRecord.getMobileNo())).collect(Collectors.toMap(UserRecord::getRid, UserRecord::getMobileNo)); } } More Application spring application，一般就是spring boot项目中的 Application这个类
+@SpringBootApplication @EnableConfigurationProperties @EnableAutoConfiguration(exclude = {DruidDataSourceAutoConfigure.class, DataSourceAutoConfiguration.class, RedisAutoConfiguration.class}) @EnableScheduling @EnableFeignClients(basePackages = {&amp;#34;&amp;#34;}) @EnableAspectJAutoProxy(proxyTargetClass = true) @EnableCircuitBreaker @EnableLdapRepositories public class Application { public static void main(String[] args) { SpringApplication.run(Application.class, args); } @Bean LdapTemplate getLdapTemplate(ContextSource contextSource) { LdapTemplate ldapTemplate = new LdapTemplate(contextSource); ldapTemplate."><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg' />
     <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
 
@@ -37,8 +37,8 @@ if (!doNotTrack) {
 
     </head>
     <body class="
-    article-page has-toc
-">
+    article-page
+    ">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -61,25 +61,175 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex 
-    
-        extended
-    
-">
-    
-        <div id="article-toolbar">
-            <a href="/" class="back-home">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">⚖️</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">lllovol</a></h1>
+            <h2 class="site-description">Stay hungry, stay foolish.</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="15 6 9 12 15 18" />
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
 </svg>
 
 
 
-                <span>返回</span>
+                
+                <span>主页</span>
             </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/links/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
         </div>
-    
+    </ol>
+</aside>
 <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
@@ -103,11 +253,13 @@ if (!doNotTrack) {
     </header>
     
 
-    <h2 class="article-title">
-        <a href="/p/spring14/">SpringBoot开发中的一些小细节(十四）事件监听的使用</a>
-    </h2>
-
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/spring14/">SpringBoot开发中的一些小细节(十四）事件监听的使用</a>
+        </h2>
     
+        
+    </div>
 
     
     <footer class="article-time">
@@ -143,15 +295,19 @@ if (!doNotTrack) {
         
     </footer>
     
+
+    
 </div>
 </header>
 
     <section class="article-content">
+    
+    
     <h2 id="背景">背景</h2>
 <p>最近在做同步先关的工作，为了提升同步任务的处理效率，减少频繁的mongo数据库查询，因此需要将一些数据统一查询出来，在内存中进行处理。</p>
 <h2 id="解决方式">解决方式</h2>
 <p>在任务执行的之前，就需要将相关的数据查询出来，如何实现呢？使用一个<code>@EventListener</code>进行ApplicationReadyEvent时间的监听，就能在应用启动之后，进行相应的操作</p>
-<pre><code>@EventListener(classes = {ApplicationReadyEvent.class})
+<pre tabindex="0"><code>@EventListener(classes = {ApplicationReadyEvent.class})
 public void initialMap() {
     if (CollectionUtils.isEmpty(ridMobileMap)) {
         List&lt;UserRecord&gt; all = entranceUserRecordRepo.findAll();
@@ -161,11 +317,11 @@ public void initialMap() {
 </code></pre><h2 id="more">More</h2>
 <h3 id="application">Application</h3>
 <p>spring application，一般就是spring boot项目中的 <code>Application</code>这个类</p>
-<pre><code>@SpringBootApplication
+<pre tabindex="0"><code>@SpringBootApplication
 @EnableConfigurationProperties
 @EnableAutoConfiguration(exclude = {DruidDataSourceAutoConfigure.class, DataSourceAutoConfiguration.class, RedisAutoConfiguration.class})
 @EnableScheduling
-@EnableFeignClients(basePackages = {&quot;&quot;})
+@EnableFeignClients(basePackages = {&#34;&#34;})
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 @EnableCircuitBreaker
 @EnableLdapRepositories
@@ -181,7 +337,6 @@ public class Application {
         return ldapTemplate;
     }
 }
-
 </code></pre><p>在这个当中，我们可以设置很多配置，比如排除掉一些自动配置、设置feignClient的扫描路径等等操作。</p>
 <blockquote>
 <p><a class="link" href="https://zhuanlan.zhihu.com/p/130309481"  target="_blank" rel="noopener"
@@ -190,7 +345,7 @@ public class Application {
 <h3 id="自定义事件和监听">自定义事件和监听</h3>
 <p>在不同的Service当中的时候，两个service的职责差别很大，但是A会调用B的方法，或者在A中个别服务完成之后，我们需要通知B中的个别方法开始执行。（观察者模式的一种实现）</p>
 <p>自定义event</p>
-<pre><code>public class ObjectALifecycleEvent extends ApplicationEvent {
+<pre tabindex="0"><code>public class ObjectALifecycleEvent extends ApplicationEvent {
 
     private ObjectA objectA;
 
@@ -211,9 +366,8 @@ public class Application {
     }
 
 }
-
 </code></pre><p>自定义listener</p>
-<pre><code>
+<pre tabindex="0"><code>
 @Component
 @Slf4j
 @Data
@@ -262,14 +416,16 @@ public class PolicyUpdater implements ApplicationListener&lt;ObjectALifecycleEve
     
 </article>
 
-    <aside class="related-contents--wrapper">
     
+
     
-        <h2 class="section-title">相关文章</h2>
-        <div class="related-contents">
-            <div class="flex article-list--tile">
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
                 
-                    
 <article class="has-image">
     <a href="/p/singleton-realization/">
         
@@ -286,8 +442,9 @@ public class PolicyUpdater implements ApplicationListener&lt;ObjectALifecycleEve
         </div>
     </a>
 </article>
+
+            
                 
-                    
 <article class="has-image">
     <a href="/p/spring13/">
         
@@ -304,8 +461,9 @@ public class PolicyUpdater implements ApplicationListener&lt;ObjectALifecycleEve
         </div>
     </a>
 </article>
+
+            
                 
-                    
 <article class="has-image">
     <a href="/p/spring12/">
         
@@ -322,8 +480,9 @@ public class PolicyUpdater implements ApplicationListener&lt;ObjectALifecycleEve
         </div>
     </a>
 </article>
+
+            
                 
-                    
 <article class="has-image">
     <a href="/p/synchronize-job/">
         
@@ -340,8 +499,9 @@ public class PolicyUpdater implements ApplicationListener&lt;ObjectALifecycleEve
         </div>
     </a>
 </article>
+
+            
                 
-                    
 <article class="has-image">
     <a href="/p/fallback/">
         
@@ -358,10 +518,10 @@ public class PolicyUpdater implements ApplicationListener&lt;ObjectALifecycleEve
         </div>
     </a>
 </article>
-                
-            </div>
+
+            
         </div>
-    
+    </div>
 </aside>
 
      
@@ -407,7 +567,7 @@ public class PolicyUpdater implements ApplicationListener&lt;ObjectALifecycleEve
             Owner Rainbowly <br/>
         
         Total [<span id="busuanzi_value_site_uv"></span>] user views [<span id="busuanzi_value_site_pv"></span>] site views [<span id="busuanzi_value_page_pv"></span>] page views <br/>Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -476,26 +636,28 @@ public class PolicyUpdater implements ApplicationListener&lt;ObjectALifecycleEve
 
 </div><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
             ><link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
             >
 
             </main>
-    
-        <aside class="sidebar right-sidebar sticky">
-            <section class="widget archives">
-                <div class="widget-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <line x1="5" y1="9" x2="19" y2="9" />
   <line x1="5" y1="15" x2="19" y2="15" />
@@ -505,11 +667,11 @@ public class PolicyUpdater implements ApplicationListener&lt;ObjectALifecycleEve
 
 
 
-                </div>
-                <h2 class="widget-title section-title">目录</h2>
-                
-                <div class="widget--toc">
-                    <nav id="TableOfContents">
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
   <ul>
     <li><a href="#背景">背景</a></li>
     <li><a href="#解决方式">解决方式</a></li>
@@ -521,15 +683,18 @@ public class PolicyUpdater implements ApplicationListener&lt;ObjectALifecycleEve
     </li>
   </ul>
 </nav>
-                </div>
-            </section>
-        </aside>
-    
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
         </div>
         <script 
-                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
-                defer="false"
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
                 >
             </script><script type="text/javascript" src="/ts/main.js" defer></script>
 <script>
