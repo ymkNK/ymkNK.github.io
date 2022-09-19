@@ -6,22 +6,141 @@
         <description>Recent content in Note on lllovol</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Mon, 19 Sep 2022 20:03:10 +0800</lastBuildDate><atom:link href="https://lllovol.com/categories/note/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 19 Sep 2022 20:20:29 +0800</lastBuildDate><atom:link href="https://lllovol.com/categories/note/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>项目管理经验学习</title>
+        <link>https://lllovol.com/p/2022/9/project-manage/</link>
+        <pubDate>Mon, 19 Sep 2022 20:20:29 +0800</pubDate>
+        
+        <guid>https://lllovol.com/p/2022/9/project-manage/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/17.jpeg" alt="Featured image of post 项目管理经验学习" /&gt;&lt;h2 id=&#34;项目管理三角&#34;&gt;项目管理三角&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;资源：人力成本&lt;/li&gt;
+&lt;li&gt;时间：在什么时间完成&lt;/li&gt;
+&lt;li&gt;需求：要完成什么样的需求&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;在传统的系统是正三角，需求是确定的，资源和时间是不确定的；&lt;/li&gt;
+&lt;li&gt;在互联网，是倒三角，资源和时间是确定的，但是需求可能是不同的；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;项目管理生命周期&#34;&gt;项目管理生命周期&lt;/h2&gt;
+&lt;p&gt;启动、计划、执行、交付&lt;/p&gt;
+&lt;h3 id=&#34;启动阶段&#34;&gt;启动阶段&lt;/h3&gt;
+&lt;p&gt;有以下几个点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;为什么要启动这个项目？&lt;/li&gt;
+&lt;li&gt;能产生什么价值？&lt;/li&gt;
+&lt;li&gt;目标是什么？&lt;/li&gt;
+&lt;li&gt;利益相关人？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;smart原则制定有效的项目目标&#34;&gt;SMART原则(制定有效的项目目标)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;S (Specific) 明确性 目标必须是具体的，要对标特定的工作指标，不能笼统&lt;/li&gt;
+&lt;li&gt;M (Measurable) 可度量性 能在多大程序上测量最终目标的完成情况&lt;/li&gt;
+&lt;li&gt;A (Attainable) 可完成性 在规定的时间内,最终目标十分合理,能否实现&lt;/li&gt;
+&lt;li&gt;R (Relevant) 相关性 指实现此目标与其他目标的关联情况&lt;/li&gt;
+&lt;li&gt;T (Time-Bound or Time-Based) 时限性 代表有时限，注重完成绩效指标的特定期限&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;计划阶段&#34;&gt;计划阶段&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;范围：确定项目的边界&lt;/li&gt;
+&lt;li&gt;定义：将较大的可交付成果分解为较小的可交付成果，以便于管理&lt;/li&gt;
+&lt;li&gt;方案：项目方案及评审&lt;/li&gt;
+&lt;li&gt;任务：确定哪些任务对最终交付的成果来说是必要的，并指出任务间的关联性&lt;/li&gt;
+&lt;li&gt;进度/人力/成本表：分工&amp;amp;排期&lt;/li&gt;
+&lt;li&gt;风险：预测可能存在的风险，评估它们对项目的影响并制定应对方案或计划&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;执行阶段&#34;&gt;执行阶段&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;监督：进度追踪&lt;/li&gt;
+&lt;li&gt;控制：风险控制&lt;/li&gt;
+&lt;li&gt;信息互通：沟通合作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;执行阶段如何控制项目风险？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;先紧后松，将确定的东西优先放在前面来执行&lt;/li&gt;
+&lt;li&gt;每日站会，跟进进度表汇报进度，有延期和风险及时发现并评估调整&lt;/li&gt;
+&lt;li&gt;核心路径排期要review，前期计划做得好，后期风险才会相对少&lt;/li&gt;
+&lt;li&gt;风险在项目阶段做好预测，必要时预留buffer（人力、时间）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;交付阶段&#34;&gt;交付阶段&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;交付结果&lt;/li&gt;
+&lt;li&gt;项目回顾&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如何做好项目回顾？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;意识上要重视：行百里者半九十，项目收尾回顾非常重要，总结归纳，吸取教训，沉淀为经验&lt;/li&gt;
+&lt;li&gt;分析计划进度表和实施进度表，分析出现风险的地方，有没有更好的方式规避？目标是否足够清晰、任务拆解是否到位、排期是否有问题、沟通协作是否有问题&lt;/li&gt;
+&lt;li&gt;做得好的地方有哪些：有什么收益，解决了什么问题，开辟了什么通路&lt;/li&gt;
+&lt;li&gt;重来一次会怎么计划&amp;amp;执行？&lt;/li&gt;
+&lt;li&gt;如果在已有的基础上，如何深入，如何做的更加通用？多往前去深入思考&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;其他&#34;&gt;其他&lt;/h2&gt;
+&lt;h3 id=&#34;如何面对倒排的情况&#34;&gt;如何面对倒排的情况&lt;/h3&gt;
+&lt;p&gt;倒排就是确定了需求完成的时间&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;砍需求：这个功能不着急，下一期做&lt;/li&gt;
+&lt;li&gt;资源调整：人不够，加人（得加钱），封闭开发，安排一下加班（希望有加班工资）&lt;/li&gt;
+&lt;li&gt;方案简化：舍弃一部分完美的思路，做一些妥协&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;不过有时候光加人是没用的，有时候还有其他部门或者外部的依赖，这时候就需要把问题抛出来，让领导去协商&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;在质量与进度之间的取舍&#34;&gt;在质量与进度之间的取舍&lt;/h3&gt;
+&lt;p&gt;如果质量出了问题，会花费更多的时间去修复，得不偿失。&lt;/p&gt;
+&lt;h3 id=&#34;变更发布的三板斧&#34;&gt;变更发布的三板斧&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;可监控&lt;/li&gt;
+&lt;li&gt;可灰度&lt;/li&gt;
+&lt;li&gt;可回滚&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;面向失败编程&#34;&gt;面向失败编程&lt;/h3&gt;
+&lt;p&gt;多考虑一些边界情况，黄金法则-墨菲定律&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;越不想发生什么，越容易发生什么
+越想没有bug，往往越有bug&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;如何理解如果一个项目不能去量化就需要重新去审视这个项目&#34;&gt;如何理解：&amp;ldquo;如果一个项目不能去量化，就需要重新去审视这个项目&amp;rdquo;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;大部分的时候，是可以被一串串数字去展示的&lt;/li&gt;
+&lt;li&gt;如果展示不出来，可以看看支撑了多少业务&lt;/li&gt;
+&lt;li&gt;去思考一下，是不好量化，还是不能量化？可以去和同类的产品去做比较&lt;/li&gt;
+&lt;li&gt;同类产品搞一个表格，把自己有的功能，竞品没有的功能，就标个红&lt;/li&gt;
+&lt;li&gt;可能会导致更多去追求一些短期价值，陷入了短期最优解的陷阱。因此定O的时候，大的目标可以激进一点，小的目标可拆分更细&lt;/li&gt;
+&lt;li&gt;反逼负责人leader，制定更合理的一些指标。不断去思考，什么样的目标才是更有价值的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;业务开发效率有没有比较科学的衡量方式&#34;&gt;业务开发效率，有没有比较科学的衡量方式&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;例如：单位需求吞吐率，但是每个人的工时都是不一样的，如何找到一个基础的计量单位（故事点，敏捷开发的概念）&lt;/li&gt;
+&lt;li&gt;用户反馈率&lt;/li&gt;
+&lt;li&gt;提测之后的bug数&lt;/li&gt;
+&lt;li&gt;自己和自己去比&lt;/li&gt;
+&lt;li&gt;并发度：同时多少个开发同时进行开发&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>技术软素质</title>
         <link>https://lllovol.com/p/2022/9/person-soft-ability/</link>
         <pubDate>Mon, 19 Sep 2022 20:03:10 +0800</pubDate>
         
         <guid>https://lllovol.com/p/2022/9/person-soft-ability/</guid>
-        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/26.jpeg" alt="Featured image of post 技术软素质" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/26.jpeg" alt="Featured image of post 技术软素质" /&gt;&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
 &lt;p&gt;作为一个技术人员，前期对技术要求会比较高，但是随着工作经验的积累，对于软素质的要求会更高。&lt;/p&gt;
-&lt;h1 id=&#34;执行力&#34;&gt;执行力&lt;/h1&gt;
+&lt;h2 id=&#34;执行力&#34;&gt;执行力&lt;/h2&gt;
 &lt;p&gt;执行力：如期完全老板安排的任务，学会排期和时间管理。排期是你对别人的承诺，同时也是别人对自己的期望&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;合理排期，风险控制，如果有意外，变更，需要及时的向相关业务方同步相关的进度&lt;/li&gt;
 &lt;li&gt;学会时间管理，按照优先级进行todo执行&lt;/li&gt;
 &lt;li&gt;超出预期去完成，追求极致&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1 id=&#34;技术自驱力&#34;&gt;技术自驱力&lt;/h1&gt;
+&lt;h2 id=&#34;技术自驱力&#34;&gt;技术自驱力&lt;/h2&gt;
 &lt;p&gt;&amp;ldquo;没有优秀的业务，只有优秀的人&amp;rdquo;
 需要自己不断的去自驱思考的总结，把一个一个问题由点连成线，由线编织成面&lt;/p&gt;
 &lt;blockquote&gt;
@@ -29,9 +148,9 @@
 长期方案
 有没有更好的方式&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1 id=&#34;管理能力&#34;&gt;管理能力&lt;/h1&gt;
+&lt;h2 id=&#34;管理能力&#34;&gt;管理能力&lt;/h2&gt;
 &lt;p&gt;暂时和我没有太大关系&lt;/p&gt;
-&lt;h1 id=&#34;有效沟通&#34;&gt;有效沟通&lt;/h1&gt;
+&lt;h2 id=&#34;有效沟通&#34;&gt;有效沟通&lt;/h2&gt;
 &lt;p&gt;沟通的时候，记住一个原则：&amp;ldquo;你能给别人带来什么价值？&amp;rdquo;
 保持谦虚，放低姿态&lt;/p&gt;
 </description>

@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='使用Goland的全局替换   单文件 使用Command&#43;R进行替换
-  多文件 使用Shift&#43;Command&#43;R进行替换
-  正则替换 可以使用正则表达式进行替换 例如，我们想为DoFunction这个方法添加一个ctx作为第一个参数
- 打开Regex的开关 搜索：DoFunction((.*?)\)，其中 (.*?) 表示正则 group，会取到这个函数的参数 替换：DoFunction(ctx, $1)，其中 $1 表示上一步匹配到的第一个参数  '><title>Goland全局替换正则技巧</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='项目管理三角  资源：人力成本 时间：在什么时间完成 需求：要完成什么样的需求    在传统的系统是正三角，需求是确定的，资源和时间是不确定的； 在互联网，是倒三角，资源和时间是确定的，但是需求可能是不同的；   项目管理生命周期 启动、计划、执行、交付
+启动阶段 有以下几个点：
+ 为什么要启动这个项目？ 能产生什么价值？ 目标是什么？ 利益相关人？  SMART原则(制定有效的项目目标)  S (Specific) 明确性 目标必须是具体的，要对标特定的工作指标，不能笼统 M (Measurable) 可度量性 能在多大程序上测量最终目标的完成情况 A (Attainable) 可完成性 在规定的时间内,最终目标十分合理,能否实现 R (Relevant) 相关性 指实现此目标与其他目标的关联情况 T (Time-Bound or Time-Based) 时限性 代表有时限，注重完成绩效指标的特定期限  计划阶段  范围：确定项目的边界 定义：将较大的可交付成果分解为较小的可交付成果，以便于管理 方案：项目方案及评审 任务：确定哪些任务对最终交付的成果来说是必要的，并指出任务间的关联性 进度/人力/成本表：分工&amp;amp;排期 风险：预测可能存在的风险，评估它们对项目的影响并制定应对方案或计划  执行阶段  监督：进度追踪 控制：风险控制 信息互通：沟通合作   执行阶段如何控制项目风险？
+ 先紧后松，将确定的东西优先放在前面来执行 每日站会，跟进进度表汇报进度，有延期和风险及时发现并评估调整 核心路径排期要review，前期计划做得好，后期风险才会相对少 风险在项目阶段做好预测，必要时预留buffer（人力、时间）   交付阶段  交付结果 项目回顾   如何做好项目回顾？'><title>项目管理经验学习</title>
 
-<link rel='canonical' href='https://lllovol.com/p/2021/10/goland-tips/'>
+<link rel='canonical' href='https://lllovol.com/p/2022/9/project-manage/'>
 
-<link rel="stylesheet" href="/scss/style.min.ac77dcf8b111b51da39a92990f431923f210f3876d85798a2125667f96dc33a4.css"><meta property='og:title' content='Goland全局替换正则技巧'>
-<meta property='og:description' content='使用Goland的全局替换   单文件 使用Command&#43;R进行替换
-  多文件 使用Shift&#43;Command&#43;R进行替换
-  正则替换 可以使用正则表达式进行替换 例如，我们想为DoFunction这个方法添加一个ctx作为第一个参数
- 打开Regex的开关 搜索：DoFunction((.*?)\)，其中 (.*?) 表示正则 group，会取到这个函数的参数 替换：DoFunction(ctx, $1)，其中 $1 表示上一步匹配到的第一个参数  '>
-<meta property='og:url' content='https://lllovol.com/p/2021/10/goland-tips/'>
+<link rel="stylesheet" href="/scss/style.min.ac77dcf8b111b51da39a92990f431923f210f3876d85798a2125667f96dc33a4.css"><meta property='og:title' content='项目管理经验学习'>
+<meta property='og:description' content='项目管理三角  资源：人力成本 时间：在什么时间完成 需求：要完成什么样的需求    在传统的系统是正三角，需求是确定的，资源和时间是不确定的； 在互联网，是倒三角，资源和时间是确定的，但是需求可能是不同的；   项目管理生命周期 启动、计划、执行、交付
+启动阶段 有以下几个点：
+ 为什么要启动这个项目？ 能产生什么价值？ 目标是什么？ 利益相关人？  SMART原则(制定有效的项目目标)  S (Specific) 明确性 目标必须是具体的，要对标特定的工作指标，不能笼统 M (Measurable) 可度量性 能在多大程序上测量最终目标的完成情况 A (Attainable) 可完成性 在规定的时间内,最终目标十分合理,能否实现 R (Relevant) 相关性 指实现此目标与其他目标的关联情况 T (Time-Bound or Time-Based) 时限性 代表有时限，注重完成绩效指标的特定期限  计划阶段  范围：确定项目的边界 定义：将较大的可交付成果分解为较小的可交付成果，以便于管理 方案：项目方案及评审 任务：确定哪些任务对最终交付的成果来说是必要的，并指出任务间的关联性 进度/人力/成本表：分工&amp;amp;排期 风险：预测可能存在的风险，评估它们对项目的影响并制定应对方案或计划  执行阶段  监督：进度追踪 控制：风险控制 信息互通：沟通合作   执行阶段如何控制项目风险？
+ 先紧后松，将确定的东西优先放在前面来执行 每日站会，跟进进度表汇报进度，有延期和风险及时发现并评估调整 核心路径排期要review，前期计划做得好，后期风险才会相对少 风险在项目阶段做好预测，必要时预留buffer（人力、时间）   交付阶段  交付结果 项目回顾   如何做好项目回顾？'>
+<meta property='og:url' content='https://lllovol.com/p/2022/9/project-manage/'>
 <meta property='og:site_name' content='lllovol'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Note' /><meta property='article:published_time' content='2021-10-11T11:33:32&#43;08:00'/><meta property='article:modified_time' content='2021-10-11T11:33:32&#43;08:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/20.jpeg' />
-<meta name="twitter:title" content="Goland全局替换正则技巧">
-<meta name="twitter:description" content="使用Goland的全局替换   单文件 使用Command&#43;R进行替换
-  多文件 使用Shift&#43;Command&#43;R进行替换
-  正则替换 可以使用正则表达式进行替换 例如，我们想为DoFunction这个方法添加一个ctx作为第一个参数
- 打开Regex的开关 搜索：DoFunction((.*?)\)，其中 (.*?) 表示正则 group，会取到这个函数的参数 替换：DoFunction(ctx, $1)，其中 $1 表示上一步匹配到的第一个参数  "><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/20.jpeg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Note' /><meta property='article:tag' content='Summary' /><meta property='article:published_time' content='2022-09-19T20:20:29&#43;08:00'/><meta property='article:modified_time' content='2022-09-19T20:20:29&#43;08:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/17.jpeg' />
+<meta name="twitter:title" content="项目管理经验学习">
+<meta name="twitter:description" content="项目管理三角  资源：人力成本 时间：在什么时间完成 需求：要完成什么样的需求    在传统的系统是正三角，需求是确定的，资源和时间是不确定的； 在互联网，是倒三角，资源和时间是确定的，但是需求可能是不同的；   项目管理生命周期 启动、计划、执行、交付
+启动阶段 有以下几个点：
+ 为什么要启动这个项目？ 能产生什么价值？ 目标是什么？ 利益相关人？  SMART原则(制定有效的项目目标)  S (Specific) 明确性 目标必须是具体的，要对标特定的工作指标，不能笼统 M (Measurable) 可度量性 能在多大程序上测量最终目标的完成情况 A (Attainable) 可完成性 在规定的时间内,最终目标十分合理,能否实现 R (Relevant) 相关性 指实现此目标与其他目标的关联情况 T (Time-Bound or Time-Based) 时限性 代表有时限，注重完成绩效指标的特定期限  计划阶段  范围：确定项目的边界 定义：将较大的可交付成果分解为较小的可交付成果，以便于管理 方案：项目方案及评审 任务：确定哪些任务对最终交付的成果来说是必要的，并指出任务间的关联性 进度/人力/成本表：分工&amp;amp;排期 风险：预测可能存在的风险，评估它们对项目的影响并制定应对方案或计划  执行阶段  监督：进度追踪 控制：风险控制 信息互通：沟通合作   执行阶段如何控制项目风险？
+ 先紧后松，将确定的东西优先放在前面来执行 每日站会，跟进进度表汇报进度，有延期和风险及时发现并评估调整 核心路径排期要review，前期计划做得好，后期风险才会相对少 风险在项目阶段做好预测，必要时预留buffer（人力、时间）   交付阶段  交付结果 项目回顾   如何做好项目回顾？"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/17.jpeg' />
     <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-MK7GTCNC34"></script>
@@ -234,9 +234,9 @@ if (!doNotTrack) {
     <article class="main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/2021/10/goland-tips/">
+            <a href="/p/2022/9/project-manage/">
                 
-                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/20.jpeg" loading="lazy" alt="Featured image of post Goland全局替换正则技巧" />
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/17.jpeg" loading="lazy" alt="Featured image of post 项目管理经验学习" />
                 
             </a>
         </div>
@@ -250,12 +250,16 @@ if (!doNotTrack) {
                 Note
             </a>
         
+            <a href="/categories/summary/" style="background-color: ; color: ;">
+                Summary
+            </a>
+        
     </header>
     
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/2021/10/goland-tips/">Goland全局替换正则技巧</a>
+            <a href="/p/2022/9/project-manage/">项目管理经验学习</a>
         </h2>
     
         
@@ -274,7 +278,7 @@ if (!doNotTrack) {
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Oct 11, 2021</time>
+                <time class="article-time--published">Sep 19, 2022</time>
             </div>
         
 
@@ -303,24 +307,116 @@ if (!doNotTrack) {
     <section class="article-content">
     
     
-    <h1 id="使用goland的全局替换">使用Goland的全局替换</h1>
-<ol>
-<li>
-<p>单文件
-使用<code>Command+R</code>进行替换</p>
-</li>
-<li>
-<p>多文件
-使用<code>Shift+Command+R</code>进行替换</p>
-</li>
-</ol>
-<h1 id="正则替换">正则替换</h1>
-<p>可以使用正则表达式进行替换
-例如，我们想为DoFunction这个方法添加一个ctx作为第一个参数</p>
+    <h2 id="项目管理三角">项目管理三角</h2>
 <ul>
-<li>打开Regex的开关</li>
-<li>搜索：<code>DoFunction((.*?)\)</code>，其中 <code>(.*?)</code> 表示正则 group，会取到这个函数的参数</li>
-<li>替换：<code>DoFunction(ctx, $1)</code>，其中 $1 表示上一步匹配到的第一个参数</li>
+<li>资源：人力成本</li>
+<li>时间：在什么时间完成</li>
+<li>需求：要完成什么样的需求</li>
+</ul>
+<blockquote>
+<ul>
+<li>在传统的系统是正三角，需求是确定的，资源和时间是不确定的；</li>
+<li>在互联网，是倒三角，资源和时间是确定的，但是需求可能是不同的；</li>
+</ul>
+</blockquote>
+<h2 id="项目管理生命周期">项目管理生命周期</h2>
+<p>启动、计划、执行、交付</p>
+<h3 id="启动阶段">启动阶段</h3>
+<p>有以下几个点：</p>
+<ul>
+<li>为什么要启动这个项目？</li>
+<li>能产生什么价值？</li>
+<li>目标是什么？</li>
+<li>利益相关人？</li>
+</ul>
+<h4 id="smart原则制定有效的项目目标">SMART原则(制定有效的项目目标)</h4>
+<ul>
+<li>S (Specific) 明确性 目标必须是具体的，要对标特定的工作指标，不能笼统</li>
+<li>M (Measurable) 可度量性 能在多大程序上测量最终目标的完成情况</li>
+<li>A (Attainable) 可完成性 在规定的时间内,最终目标十分合理,能否实现</li>
+<li>R (Relevant) 相关性 指实现此目标与其他目标的关联情况</li>
+<li>T (Time-Bound or Time-Based) 时限性 代表有时限，注重完成绩效指标的特定期限</li>
+</ul>
+<h3 id="计划阶段">计划阶段</h3>
+<ul>
+<li>范围：确定项目的边界</li>
+<li>定义：将较大的可交付成果分解为较小的可交付成果，以便于管理</li>
+<li>方案：项目方案及评审</li>
+<li>任务：确定哪些任务对最终交付的成果来说是必要的，并指出任务间的关联性</li>
+<li>进度/人力/成本表：分工&amp;排期</li>
+<li>风险：预测可能存在的风险，评估它们对项目的影响并制定应对方案或计划</li>
+</ul>
+<h3 id="执行阶段">执行阶段</h3>
+<ul>
+<li>监督：进度追踪</li>
+<li>控制：风险控制</li>
+<li>信息互通：沟通合作</li>
+</ul>
+<blockquote>
+<p>执行阶段如何控制项目风险？</p>
+<ul>
+<li>先紧后松，将确定的东西优先放在前面来执行</li>
+<li>每日站会，跟进进度表汇报进度，有延期和风险及时发现并评估调整</li>
+<li>核心路径排期要review，前期计划做得好，后期风险才会相对少</li>
+<li>风险在项目阶段做好预测，必要时预留buffer（人力、时间）</li>
+</ul>
+</blockquote>
+<h3 id="交付阶段">交付阶段</h3>
+<ul>
+<li>交付结果</li>
+<li>项目回顾</li>
+</ul>
+<blockquote>
+<p>如何做好项目回顾？</p>
+<ul>
+<li>意识上要重视：行百里者半九十，项目收尾回顾非常重要，总结归纳，吸取教训，沉淀为经验</li>
+<li>分析计划进度表和实施进度表，分析出现风险的地方，有没有更好的方式规避？目标是否足够清晰、任务拆解是否到位、排期是否有问题、沟通协作是否有问题</li>
+<li>做得好的地方有哪些：有什么收益，解决了什么问题，开辟了什么通路</li>
+<li>重来一次会怎么计划&amp;执行？</li>
+<li>如果在已有的基础上，如何深入，如何做的更加通用？多往前去深入思考</li>
+</ul>
+</blockquote>
+<h2 id="其他">其他</h2>
+<h3 id="如何面对倒排的情况">如何面对倒排的情况</h3>
+<p>倒排就是确定了需求完成的时间</p>
+<ul>
+<li>砍需求：这个功能不着急，下一期做</li>
+<li>资源调整：人不够，加人（得加钱），封闭开发，安排一下加班（希望有加班工资）</li>
+<li>方案简化：舍弃一部分完美的思路，做一些妥协</li>
+</ul>
+<blockquote>
+<p>不过有时候光加人是没用的，有时候还有其他部门或者外部的依赖，这时候就需要把问题抛出来，让领导去协商</p>
+</blockquote>
+<h3 id="在质量与进度之间的取舍">在质量与进度之间的取舍</h3>
+<p>如果质量出了问题，会花费更多的时间去修复，得不偿失。</p>
+<h3 id="变更发布的三板斧">变更发布的三板斧</h3>
+<ul>
+<li>可监控</li>
+<li>可灰度</li>
+<li>可回滚</li>
+</ul>
+<h3 id="面向失败编程">面向失败编程</h3>
+<p>多考虑一些边界情况，黄金法则-墨菲定律</p>
+<blockquote>
+<p>越不想发生什么，越容易发生什么
+越想没有bug，往往越有bug</p>
+</blockquote>
+<h3 id="如何理解如果一个项目不能去量化就需要重新去审视这个项目">如何理解：&ldquo;如果一个项目不能去量化，就需要重新去审视这个项目&rdquo;</h3>
+<ul>
+<li>大部分的时候，是可以被一串串数字去展示的</li>
+<li>如果展示不出来，可以看看支撑了多少业务</li>
+<li>去思考一下，是不好量化，还是不能量化？可以去和同类的产品去做比较</li>
+<li>同类产品搞一个表格，把自己有的功能，竞品没有的功能，就标个红</li>
+<li>可能会导致更多去追求一些短期价值，陷入了短期最优解的陷阱。因此定O的时候，大的目标可以激进一点，小的目标可拆分更细</li>
+<li>反逼负责人leader，制定更合理的一些指标。不断去思考，什么样的目标才是更有价值的</li>
+</ul>
+<h3 id="业务开发效率有没有比较科学的衡量方式">业务开发效率，有没有比较科学的衡量方式</h3>
+<ul>
+<li>例如：单位需求吞吐率，但是每个人的工时都是不一样的，如何找到一个基础的计量单位（故事点，敏捷开发的概念）</li>
+<li>用户反馈率</li>
+<li>提测之后的bug数</li>
+<li>自己和自己去比</li>
+<li>并发度：同时多少个开发同时进行开发</li>
 </ul>
 
 </section>
@@ -331,6 +427,8 @@ if (!doNotTrack) {
     <section class="article-tags">
         
             <a href="/tags/note/">Note</a>
+        
+            <a href="/tags/summary/">Summary</a>
         
     </section>
 
@@ -361,25 +459,6 @@ if (!doNotTrack) {
     <h2 class="section-title">相关文章</h2>
     <div class="related-content">
         <div class="flex article-list--tile">
-            
-                
-<article class="has-image">
-    <a href="/p/2022/9/project-manage/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/17.jpeg" loading="lazy" data-key="2022/9/project-manage" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/17.jpeg"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">项目管理经验学习</h2>
-        </div>
-    </a>
-</article>
-
             
                 
 <article class="has-image">
@@ -414,6 +493,25 @@ if (!doNotTrack) {
 
         <div class="article-details">
             <h2 class="article-title">《重构》-代码的坏味道</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/2022/1/2021-summary/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/26.jpeg" loading="lazy" data-key="2022/1/2021-summary" data-hash="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/26.jpeg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">迟到的2021总结</h2>
         </div>
     </a>
 </article>
@@ -588,7 +686,56 @@ if (!doNotTrack) {
             >
 
             </main>
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#项目管理三角">项目管理三角</a></li>
+    <li><a href="#项目管理生命周期">项目管理生命周期</a>
+      <ul>
+        <li><a href="#启动阶段">启动阶段</a></li>
+        <li><a href="#计划阶段">计划阶段</a></li>
+        <li><a href="#执行阶段">执行阶段</a></li>
+        <li><a href="#交付阶段">交付阶段</a></li>
+      </ul>
+    </li>
+    <li><a href="#其他">其他</a>
+      <ul>
+        <li><a href="#如何面对倒排的情况">如何面对倒排的情况</a></li>
+        <li><a href="#在质量与进度之间的取舍">在质量与进度之间的取舍</a></li>
+        <li><a href="#变更发布的三板斧">变更发布的三板斧</a></li>
+        <li><a href="#面向失败编程">面向失败编程</a></li>
+        <li><a href="#如何理解如果一个项目不能去量化就需要重新去审视这个项目">如何理解：&ldquo;如果一个项目不能去量化，就需要重新去审视这个项目&rdquo;</a></li>
+        <li><a href="#业务开发效率有没有比较科学的衡量方式">业务开发效率，有没有比较科学的衡量方式</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
         </div>
         <script 
