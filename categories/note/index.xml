@@ -6,7 +6,37 @@
         <description>Recent content in Note on lllovol</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Mon, 07 Feb 2022 20:17:32 +0800</lastBuildDate><atom:link href="https://lllovol.com/categories/note/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 19 Sep 2022 20:03:10 +0800</lastBuildDate><atom:link href="https://lllovol.com/categories/note/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>技术软素质</title>
+        <link>https://lllovol.com/p/2022/9/person-soft-ability/</link>
+        <pubDate>Mon, 19 Sep 2022 20:03:10 +0800</pubDate>
+        
+        <guid>https://lllovol.com/p/2022/9/person-soft-ability/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/26.jpeg" alt="Featured image of post 技术软素质" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
+&lt;p&gt;作为一个技术人员，前期对技术要求会比较高，但是随着工作经验的积累，对于软素质的要求会更高。&lt;/p&gt;
+&lt;h1 id=&#34;执行力&#34;&gt;执行力&lt;/h1&gt;
+&lt;p&gt;执行力：如期完全老板安排的任务，学会排期和时间管理。排期是你对别人的承诺，同时也是别人对自己的期望&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;合理排期，风险控制，如果有意外，变更，需要及时的向相关业务方同步相关的进度&lt;/li&gt;
+&lt;li&gt;学会时间管理，按照优先级进行todo执行&lt;/li&gt;
+&lt;li&gt;超出预期去完成，追求极致&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;技术自驱力&#34;&gt;技术自驱力&lt;/h1&gt;
+&lt;p&gt;&amp;ldquo;没有优秀的业务，只有优秀的人&amp;rdquo;
+需要自己不断的去自驱思考的总结，把一个一个问题由点连成线，由线编织成面&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;短期方案
+长期方案
+有没有更好的方式&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;管理能力&#34;&gt;管理能力&lt;/h1&gt;
+&lt;p&gt;暂时和我没有太大关系&lt;/p&gt;
+&lt;h1 id=&#34;有效沟通&#34;&gt;有效沟通&lt;/h1&gt;
+&lt;p&gt;沟通的时候，记住一个原则：&amp;ldquo;你能给别人带来什么价值？&amp;rdquo;
+保持谦虚，放低姿态&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>《重构》-代码的坏味道</title>
         <link>https://lllovol.com/p/2022/2/refactoring-chapter3/</link>
         <pubDate>Mon, 07 Feb 2022 20:17:32 +0800</pubDate>
