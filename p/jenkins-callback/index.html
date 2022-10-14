@@ -525,29 +525,44 @@ curl &#34;$API_HOST/api/xxx/xxx/xxx/hook&#34; -X POST -d &#34;Id=$ID&amp;buildNo
      
     
         
-    
-
-
-<div id="gitalk-container"></div>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script>
-    const gitalk = new Gitalk({
-        clientID: "aaf5fc3a72ea9ce81d62",
-        clientSecret: "7792527b47af3239ddbc2274fb5fd141c28d8339",
-        repo: "ymkNK.github.io",
-        owner: "ymkNK",
-        admin: "ymkNK",
-        proxy: "https://netnr-proxy.cloudno.de/https://github.com/login/oauth/access_token",
-        id: window.location.pathname,
-        title: document.title,
-        distractionFreeMode:  true 
-    })
-
-    gitalk.render('gitalk-container')
+    <script src="https://utteranc.es/client.js" 
+        repo="ymkNK.github.io"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
 </script>
 
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
 
+<script>
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        setUtterancesTheme(e.detail)
+    })
+</script>
 
 
     
