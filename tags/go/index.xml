@@ -6,7 +6,17 @@
     <description>Recent content in Go on lllovol</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 21 Apr 2022 22:02:27 +0000</lastBuildDate><atom:link href="https://lllovol.com/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 28 Jun 2022 18:01:27 +0000</lastBuildDate><atom:link href="https://lllovol.com/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go实践：将Struct转为Query参数字符串</title>
+      <link>https://lllovol.com/p/2022/6/build-api-query/</link>
+      <pubDate>Tue, 28 Jun 2022 18:01:27 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2022/6/build-api-query/</guid>
+      <description>背景 在写go的过程中，经常需要拼接一些url来进行http的请求，代码起来感觉非常的不优雅，全是fmt，因此写了一个小工具，将简单的struct，通过json的tag，转化为对应的query string
+代码 // IsNil 判断指针,Slice,Map类型的值是否为空 func IsNil(i interface{}) bool { // 首先判断i是否为nil 	if i == nil { return true } // 判断值是否为nil 	vi := reflect.ValueOf(i) if vi.Kind() == reflect.Ptr || vi.Kind() == reflect.Slice || vi.Kind() == reflect.Map { return vi.IsNil() } return false } // ParseToRequestQuery 将简单json结构体转成query参数 func ParseToRequestQuery(p interface{}) string { paramArr := buildParamArr(p) return strings.Join(paramArr, &amp;#34;&amp;amp;&amp;#34;) } func buildParamArr(p interface{}) []string { v := reflect.</description>
+    </item>
+    
     <item>
       <title>Go中经典nil!=nil问题</title>
       <link>https://lllovol.com/p/2022/4/go-nil-equal/</link>

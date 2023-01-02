@@ -6,7 +6,33 @@
     <description>Recent content in Summary on lllovol</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 21 Jan 2022 21:58:39 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/summary/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 19 Sep 2022 20:20:29 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/summary/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>项目管理经验学习</title>
+      <link>https://lllovol.com/p/2022/9/project-manage/</link>
+      <pubDate>Mon, 19 Sep 2022 20:20:29 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2022/9/project-manage/</guid>
+      <description>项目管理三角  资源：人力成本 时间：在什么时间完成 需求：要完成什么样的需求    在传统的系统是正三角，需求是确定的，资源和时间是不确定的； 在互联网，是倒三角，资源和时间是确定的，但是需求可能是不同的；   项目管理生命周期 启动、计划、执行、交付
+启动阶段 有以下几个点：
+ 为什么要启动这个项目？ 能产生什么价值？ 目标是什么？ 利益相关人？  SMART原则(制定有效的项目目标)  S (Specific) 明确性 目标必须是具体的，要对标特定的工作指标，不能笼统 M (Measurable) 可度量性 能在多大程序上测量最终目标的完成情况 A (Attainable) 可完成性 在规定的时间内,最终目标十分合理,能否实现 R (Relevant) 相关性 指实现此目标与其他目标的关联情况 T (Time-Bound or Time-Based) 时限性 代表有时限，注重完成绩效指标的特定期限  计划阶段  范围：确定项目的边界 定义：将较大的可交付成果分解为较小的可交付成果，以便于管理 方案：项目方案及评审 任务：确定哪些任务对最终交付的成果来说是必要的，并指出任务间的关联性 进度/人力/成本表：分工&amp;amp;排期 风险：预测可能存在的风险，评估它们对项目的影响并制定应对方案或计划  执行阶段  监督：进度追踪 控制：风险控制 信息互通：沟通合作   执行阶段如何控制项目风险？
+ 先紧后松，将确定的东西优先放在前面来执行 每日站会，跟进进度表汇报进度，有延期和风险及时发现并评估调整 核心路径排期要review，前期计划做得好，后期风险才会相对少 风险在项目阶段做好预测，必要时预留buffer（人力、时间）   交付阶段  交付结果 项目回顾   如何做好项目回顾？</description>
+    </item>
+    
+    <item>
+      <title>技术软素质</title>
+      <link>https://lllovol.com/p/2022/9/person-soft-ability/</link>
+      <pubDate>Mon, 19 Sep 2022 20:03:10 +0000</pubDate>
+      
+      <guid>https://lllovol.com/p/2022/9/person-soft-ability/</guid>
+      <description>前言 作为一个技术人员，前期对技术要求会比较高，但是随着工作经验的积累，对于软素质的要求会更高。
+执行力 执行力：如期完全老板安排的任务，学会排期和时间管理。排期是你对别人的承诺，同时也是别人对自己的期望
+ 合理排期，风险控制，如果有意外，变更，需要及时的向相关业务方同步相关的进度 学会时间管理，按照优先级进行todo执行 超出预期去完成，追求极致  技术自驱力 &amp;ldquo;没有优秀的业务，只有优秀的人&amp;rdquo; 需要自己不断的去自驱思考的总结，把一个一个问题由点连成线，由线编织成面
+ 短期方案 长期方案 有没有更好的方式
+ 管理能力 暂时和我没有太大关系
+有效沟通 沟通的时候，记住一个原则：&amp;ldquo;你能给别人带来什么价值？&amp;rdquo; 保持谦虚，放低姿态</description>
+    </item>
+    
     <item>
       <title>迟到的2021总结</title>
       <link>https://lllovol.com/p/2022/1/2021-summary/</link>

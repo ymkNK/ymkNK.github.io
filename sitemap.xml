@@ -2,26 +2,56 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://lllovol.com/p/2023/1/okr-2023/</loc>
+    <lastmod>2023-01-03T00:45:12+00:00</lastmod>
+  </url><url>
+    <loc>https://lllovol.com/categories/</loc>
+    <lastmod>2023-01-03T00:45:12+00:00</lastmod>
+  </url><url>
+    <loc>https://lllovol.com/</loc>
+    <lastmod>2023-01-03T00:45:12+00:00</lastmod>
+  </url><url>
+    <loc>https://lllovol.com/tags/okr/</loc>
+    <lastmod>2023-01-03T00:45:12+00:00</lastmod>
+  </url><url>
+    <loc>https://lllovol.com/categories/okr/</loc>
+    <lastmod>2023-01-03T00:45:12+00:00</lastmod>
+  </url><url>
+    <loc>https://lllovol.com/post/</loc>
+    <lastmod>2023-01-03T00:45:12+00:00</lastmod>
+  </url><url>
+    <loc>https://lllovol.com/tags/</loc>
+    <lastmod>2023-01-03T00:45:12+00:00</lastmod>
+  </url><url>
     <loc>https://lllovol.com/p/2022/okr/</loc>
     <lastmod>2022-12-31T23:59:59+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/categories/</loc>
-    <lastmod>2022-12-31T23:59:59+00:00</lastmod>
+    <loc>https://lllovol.com/categories/note/</loc>
+    <lastmod>2022-09-19T20:20:29+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/</loc>
-    <lastmod>2022-12-31T23:59:59+00:00</lastmod>
+    <loc>https://lllovol.com/tags/note/</loc>
+    <lastmod>2022-09-19T20:20:29+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/tags/okr/</loc>
-    <lastmod>2022-12-31T23:59:59+00:00</lastmod>
+    <loc>https://lllovol.com/categories/summary/</loc>
+    <lastmod>2022-09-19T20:20:29+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/categories/okr/</loc>
-    <lastmod>2022-12-31T23:59:59+00:00</lastmod>
+    <loc>https://lllovol.com/tags/summary/</loc>
+    <lastmod>2022-09-19T20:20:29+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/post/</loc>
-    <lastmod>2022-12-31T23:59:59+00:00</lastmod>
+    <loc>https://lllovol.com/p/2022/9/project-manage/</loc>
+    <lastmod>2022-09-19T20:20:29+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/tags/</loc>
-    <lastmod>2022-12-31T23:59:59+00:00</lastmod>
+    <loc>https://lllovol.com/p/2022/9/person-soft-ability/</loc>
+    <lastmod>2022-09-19T20:03:10+00:00</lastmod>
+  </url><url>
+    <loc>https://lllovol.com/categories/go/</loc>
+    <lastmod>2022-06-28T18:01:27+00:00</lastmod>
+  </url><url>
+    <loc>https://lllovol.com/tags/go/</loc>
+    <lastmod>2022-06-28T18:01:27+00:00</lastmod>
+  </url><url>
+    <loc>https://lllovol.com/p/2022/6/build-api-query/</loc>
+    <lastmod>2022-06-28T18:01:27+00:00</lastmod>
   </url><url>
     <loc>https://lllovol.com/categories/monitor/</loc>
     <lastmod>2022-06-14T00:58:16+00:00</lastmod>
@@ -32,20 +62,8 @@
     <loc>https://lllovol.com/p/2022/6/measure-monitor/</loc>
     <lastmod>2022-06-14T00:58:16+00:00</lastmod>
   </url><url>
-    <loc>https://lllovol.com/categories/go/</loc>
-    <lastmod>2022-04-21T22:02:27+00:00</lastmod>
-  </url><url>
-    <loc>https://lllovol.com/tags/go/</loc>
-    <lastmod>2022-04-21T22:02:27+00:00</lastmod>
-  </url><url>
     <loc>https://lllovol.com/p/2022/4/go-nil-equal/</loc>
     <lastmod>2022-04-21T22:02:27+00:00</lastmod>
-  </url><url>
-    <loc>https://lllovol.com/categories/note/</loc>
-    <lastmod>2022-02-07T20:17:32+00:00</lastmod>
-  </url><url>
-    <loc>https://lllovol.com/tags/note/</loc>
-    <lastmod>2022-02-07T20:17:32+00:00</lastmod>
   </url><url>
     <loc>https://lllovol.com/tags/refactoring/</loc>
     <lastmod>2022-02-07T20:17:32+00:00</lastmod>
@@ -55,12 +73,6 @@
   </url><url>
     <loc>https://lllovol.com/p/2022/2/refactoring-chapter3/</loc>
     <lastmod>2022-02-07T20:17:32+00:00</lastmod>
-  </url><url>
-    <loc>https://lllovol.com/categories/summary/</loc>
-    <lastmod>2022-01-21T21:58:39+00:00</lastmod>
-  </url><url>
-    <loc>https://lllovol.com/tags/summary/</loc>
-    <lastmod>2022-01-21T21:58:39+00:00</lastmod>
   </url><url>
     <loc>https://lllovol.com/p/2022/1/2021-summary/</loc>
     <lastmod>2022-01-21T21:58:39+00:00</lastmod>
