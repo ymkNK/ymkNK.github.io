@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='第1章 构造抽象过程  这一张主要学习的是有关计算过程的知识。   定义：计算过程是存在于计算机的里的一类抽象事物，主要操作一些被称之为&amp;quot;数据&amp;quot;的抽象事物。（就像Java中的各种类中的方法）
    我们指挥这种过程的程序就像是巫师的巫术一样，使用一些诡秘而深奥的程序设计语言，通过符号表达式的形式精心编排而成，他们描述了我们希望相应的计算过程去完成的工作。
@@ -9,11 +9,12 @@
   1.1 程序设计的基本元素 一个强有力的语言，不仅是一种指挥计算机执行任务的方式，它应该成为一种框架，是我们能够在其中组织自己有关计算过程的思想。 每一种强有力的语言都提供了三种机制：
  基本表达式形式：用于表示语言所关心的最简单的个体。 组合的方法：通过它们可以从比较简单的东西出发构造出复合的元素。 抽象的方法：通过它们可以为复合对象命名，并将它们当做单元去操作。  用白话来解释，数据就是我们希望去操作的东西，而过程就是有关操作这些数据的规则描述。这样，任何强有力的程序设计语言都必须能够表达表述基本的数据和基本过程，还需要提供对过程和数据进行组合和抽象的方法。
 1.1.1 表达式  开始程序设计，最简单的方式就是打开计算机的终端，用键盘输入一个表达式，解释器的响应就是将它对这一个表达式的求值结果显示出来。 运算对象&#43;运算符 ==&amp;gt;组合式 （组合式本身也可以作为运算对象参与其他组合式的运算（套娃递归）） 即使对于非常复杂的表达式 解释器也是按照同样的基本循环运作： 读入-&amp;gt;求值-&amp;gt;打印  1.1.2 命名和环境  程序设计中一个必不可少的方面，就是它需要提供一种通过名字去使用计算对象的方式。我们将名字标识符成为变量，它的值也就是它所对应的那个对象。 实际上，构造一个复杂的程序，也就是为了去一步步地创建出越来越复杂的计算性对象。（一个Lisp程序通常是由一大批相对简单的过程组成的） 我们可以将值和符号相关联，而后又能提取出这些纸，这意味着解释器必须维护这某种存储能力，以便保持有关 名字-值 对偶的轨迹。这种存储被称之为环境 （更加准确的说是全局环境，以后会看到，在一个计算过程中完全可能涉及到若干不同的环境（全局域和局部域，全局变量和局部变量））  1.1.3 组合式的求值 一个组合式的求值狐妖就是做两件事
- 求值该组合式的各个子表达式 将作为最左子表达式的（运算符）的值那个过程应用于相应的实际参数，所谓的实际参数就是其他子表达式（运算对象）的值。   一般而言，我们将递归看做一种处理层次性结构的（像树这样的对象）极强有力的技术。 &amp;ldquo;值向上穿行&amp;quot;形式的求值形式是一类更一般的计算过程的例子，这种计算过程被称为树形积累。 (define x 3)这种定义的情况，这算是一种特殊形式，作用是将符号x关联一个3的值，这并不是一个组合式。每一种特殊形式都有自己的求值规则。  1.'><title>Structure and Interpretation of Computer Programs 读书笔记 Chapter 1 构造过程抽象 1.1 程序设计的基本元素</title>
+ 求值该组合式的各个子表达式 将作为最左子表达式的（运算符）的值那个过程应用于相应的实际参数，所谓的实际参数就是其他子表达式（运算对象）的值。   一般而言，我们将递归看做一种处理层次性结构的（像树这样的对象）极强有力的技术。 &amp;ldquo;值向上穿行&amp;quot;形式的求值形式是一类更一般的计算过程的例子，这种计算过程被称为树形积累。 (define x 3)这种定义的情况，这算是一种特殊形式，作用是将符号x关联一个3的值，这并不是一个组合式。每一种特殊形式都有自己的求值规则。  1.'>
+<title>Structure and Interpretation of Computer Programs 读书笔记 Chapter 1 构造过程抽象 1.1 程序设计的基本元素</title>
 
 <link rel='canonical' href='https://lllovol.com/p/sicp-chapter1.1/'>
 
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Structure and Interpretation of Computer Programs 读书笔记 Chapter 1 构造过程抽象 1.1 程序设计的基本元素'>
+<link rel="stylesheet" href="/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css"><meta property='og:title' content='Structure and Interpretation of Computer Programs 读书笔记 Chapter 1 构造过程抽象 1.1 程序设计的基本元素'>
 <meta property='og:description' content='第1章 构造抽象过程  这一张主要学习的是有关计算过程的知识。   定义：计算过程是存在于计算机的里的一类抽象事物，主要操作一些被称之为&amp;quot;数据&amp;quot;的抽象事物。（就像Java中的各种类中的方法）
    我们指挥这种过程的程序就像是巫师的巫术一样，使用一些诡秘而深奥的程序设计语言，通过符号表达式的形式精心编排而成，他们描述了我们希望相应的计算过程去完成的工作。
   但是幸运的是，我们学习程序的危险性远远小于巫术。但是我们也必须像麻瓜一样，必须去学习、理解、预期我们所使用的咒语（程序）所带来的效果。程序里即使有一个小错误（bug or glitch）,也可能带来无法预料的后果。 真实的程序设计则需要极度细心，需要经验和智慧。
@@ -52,8 +53,8 @@ if (!doNotTrack) {
 
     </head>
     <body class="
-    article-page has-toc
-">
+    article-page
+    ">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -76,26 +77,215 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex 
-    
-        extended
-    
-">
-    
-        <div id="article-toolbar">
-            <a href="/" class="back-home">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">⚖️</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">lllovol</a></h1>
+            <h2 class="site-description">Stay hungry, stay foolish.</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="15 6 9 12 15 18" />
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
 </svg>
 
 
 
-                <span>返回</span>
+                
+                <span>主页</span>
             </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
         </div>
-    
-<main class="main full-width">
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#第1章-构造抽象过程">第1章 构造抽象过程</a></li>
+    <li><a href="#11-程序设计的基本元素">1.1 程序设计的基本元素</a>
+      <ul>
+        <li><a href="#111-表达式">1.1.1 表达式</a></li>
+        <li><a href="#112-命名和环境">1.1.2 命名和环境</a></li>
+        <li><a href="#113-组合式的求值">1.1.3 组合式的求值</a></li>
+        <li><a href="#114-复合过程">1.1.4 复合过程</a></li>
+        <li><a href="#115-过程应用的代换模型">1.1.5 过程应用的代换模型</a></li>
+        <li><a href="#条件表达式和谓词">条件表达式和谓词</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
         <div class="article-image">
@@ -118,12 +308,17 @@ if (!doNotTrack) {
     </header>
     
 
-    <h2 class="article-title">
-        <a href="/p/sicp-chapter1.1/">Structure and Interpretation of Computer Programs 读书笔记 Chapter 1 构造过程抽象 1.1 程序设计的基本元素</a>
-    </h2>
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/sicp-chapter1.1/">Structure and Interpretation of Computer Programs 读书笔记 Chapter 1 构造过程抽象 1.1 程序设计的基本元素</a>
+        </h2>
+    
+        
+    </div>
 
     
-
+    
+    
     
     <footer class="article-time">
         
@@ -158,10 +353,15 @@ if (!doNotTrack) {
         
     </footer>
     
+
+    
 </div>
+
 </header>
 
     <section class="article-content">
+    
+    
     <h2 id="第1章-构造抽象过程">第1章 构造抽象过程</h2>
 <ul>
 <li>这一张主要学习的是有关<strong>计算过程</strong>的知识。</li>
@@ -224,15 +424,15 @@ if (!doNotTrack) {
 <li>定义是一种受限的抽象手段，他为名字关联相应的值</li>
 </ol>
 <p>这是一种威力更强大的抽象技术</p>
-<pre><code>(define (square x) (* x x))
+<pre tabindex="0"><code>(define (square x) (* x x))
 </code></pre><p>上述代码就是是用复合过程的方式，定义了一个乘方，使用的时候只需要</p>
-<pre><code>(square x)
+<pre tabindex="0"><code>(square x)
 </code></pre><p>和组合式的嵌套类似，复合过程也可以使用在其他的复合过程的定义当中</p>
-<pre><code>(
+<pre tabindex="0"><code>(
     define (sum_of_squares x y) (+ (square x) (square y))
 )
-</code></pre><p>例如上面的代码，就是一个平方和的复合过程实现,我们同样也能够将其实用到更加复杂的复合过程中去（无限套娃）。但是由于复合过程的构造太深，如果我们只是看到sum_of_squares这一层，就会感到疑惑？这个square究竟是像 &ldquo;+&rdquo;,&quot;-&rdquo;,&quot;*&rdquo;,&quot;/&quot; 一样直接做在解释器中呢？还是被定义成了一个复合过程呢？</p>
-<pre><code>(
+</code></pre><p>例如上面的代码，就是一个平方和的复合过程实现,我们同样也能够将其实用到更加复杂的复合过程中去（无限套娃）。但是由于复合过程的构造太深，如果我们只是看到sum_of_squares这一层，就会感到疑惑？这个square究竟是像 &ldquo;+&rdquo;,&rdquo;-&rdquo;,&quot;*&quot;,&quot;/&quot; 一样直接做在解释器中呢？还是被定义成了一个复合过程呢？</p>
+<pre tabindex="0"><code>(
     define (f a)
         (sum_of_squares (+ a 1) (* a 2))
 )
@@ -292,14 +492,16 @@ if (!doNotTrack) {
     
 </article>
 
-    <aside class="related-contents--wrapper">
     
+
     
-        <h2 class="section-title">相关文章</h2>
-        <div class="related-contents">
-            <div class="flex article-list--tile">
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
                 
-                    
 <article class="has-image">
     <a href="/p/2022/9/project-manage/">
         
@@ -316,8 +518,9 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
+
+            
                 
-                    
 <article class="has-image">
     <a href="/p/2022/9/person-soft-ability/">
         
@@ -334,8 +537,9 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
+
+            
                 
-                    
 <article class="has-image">
     <a href="/p/2022/2/refactoring-chapter3/">
         
@@ -352,8 +556,9 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
+
+            
                 
-                    
 <article class="has-image">
     <a href="/p/2021/12/refactoring-chapter2/">
         
@@ -370,8 +575,9 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
+
+            
                 
-                    
 <article class="has-image">
     <a href="/p/2021/10/mindfulness/">
         
@@ -388,10 +594,10 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
-                
-            </div>
+
+            
         </div>
-    
+    </div>
 </aside>
 
      
@@ -438,7 +644,7 @@ if (!doNotTrack) {
             Owner Rainbowly <br/>
         
         Total [<span id="busuanzi_value_site_uv"></span>] user views [<span id="busuanzi_value_site_pv"></span>] site views [<span id="busuanzi_value_page_pv"></span>] page views <br/>Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -507,63 +713,25 @@ if (!doNotTrack) {
 
 </div><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
             ><link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
             >
 
             </main>
-    
-        <aside class="sidebar right-sidebar sticky">
-            <section class="widget archives">
-                <div class="widget-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-                </div>
-                <h2 class="widget-title section-title">目录</h2>
-                
-                <div class="widget--toc">
-                    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#第1章-构造抽象过程">第1章 构造抽象过程</a></li>
-    <li><a href="#11-程序设计的基本元素">1.1 程序设计的基本元素</a>
-      <ul>
-        <li><a href="#111-表达式">1.1.1 表达式</a></li>
-        <li><a href="#112-命名和环境">1.1.2 命名和环境</a></li>
-        <li><a href="#113-组合式的求值">1.1.3 组合式的求值</a></li>
-        <li><a href="#114-复合过程">1.1.4 复合过程</a></li>
-        <li><a href="#115-过程应用的代换模型">1.1.5 过程应用的代换模型</a></li>
-        <li><a href="#条件表达式和谓词">条件表达式和谓词</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-                </div>
-            </section>
-        </aside>
-    
-
         </div>
         <script 
-                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
-                defer="false"
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
                 >
             </script><script type="text/javascript" src="/ts/main.js" defer></script>
 <script>

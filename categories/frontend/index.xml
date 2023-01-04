@@ -1,26 +1,104 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Frontend on lllovol</title>
-    <link>https://lllovol.com/categories/frontend/</link>
-    <description>Recent content in Frontend on lllovol</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Wed, 05 Dec 2018 18:08:38 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/frontend/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>基于Gitalk实现文章的评论功能</title>
-      <link>https://lllovol.com/p/gitalk/</link>
-      <pubDate>Wed, 05 Dec 2018 18:08:38 +0000</pubDate>
-      
-      <guid>https://lllovol.com/p/gitalk/</guid>
-      <description>前言 想要在blog中实现文章评论发布功能，网上百度了很多文章，发现DISQUZ国内网访问速度比较慢，网易评论等平台也被关闭，最后发现了github强大功能，Gitalk。
- Gitalk：一个基于 Github Issue 和 Preact 开发的评论插件 摘自v2ex
- 再一次感受到了开源的强大之处，造就了现如今信息技术的高速发展
-设置OAuth github&amp;gt;右上角settings&amp;gt;Developer Settings&amp;gt;new OAuth App 然后依次输入
- Application name : 一个超厉害的名字 Homepage URL : github page的地址（http://yourname.github.io/） Application description : app的描述（随意） Authorization callback URL : Github api回调的地址，与Homepage URL相同  有一些坑需要注意，如果解析到了自己的域名，就在githubpage中的Repository，找到settings，找到github给你的url   即可获取到对应的clientId和clientSecret 
-修改post.html 然后在修改项目文件中的_layouts的post.html 找到合适的位置添加如下代码
-&amp;lt;!--Gitalk评论start --&amp;gt;{% if site.gitalk.enable %}&amp;lt;!-- 引入Gitalk评论插件 --&amp;gt;&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;https://unpkg.com/gitalk/dist/gitalk.css&amp;quot;&amp;gt;&amp;lt;script src=&amp;quot;https://unpkg.com/gitalk@latest/dist/gitalk.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&amp;lt;div id=&amp;quot;gitalk-container&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;var gitalk = new Gitalk({clientID: &#39;{{site.</description>
-    </item>
-    
-  </channel>
+    <channel>
+        <title>Frontend on lllovol</title>
+        <link>https://lllovol.com/categories/frontend/</link>
+        <description>Recent content in Frontend on lllovol</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Wed, 05 Dec 2018 18:08:38 +0000</lastBuildDate><atom:link href="https://lllovol.com/categories/frontend/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>基于Gitalk实现文章的评论功能</title>
+        <link>https://lllovol.com/p/gitalk/</link>
+        <pubDate>Wed, 05 Dec 2018 18:08:38 +0000</pubDate>
+        
+        <guid>https://lllovol.com/p/gitalk/</guid>
+        <description>&lt;img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/2.jpg" alt="Featured image of post 基于Gitalk实现文章的评论功能" /&gt;&lt;h3 id=&#34;前言&#34;&gt;前言&lt;/h3&gt;
+&lt;p&gt;想要在blog中实现文章评论发布功能，网上百度了很多文章，发现DISQUZ国内网访问速度比较慢，网易评论等平台也被关闭，最后发现了github强大功能，Gitalk。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Gitalk：一个基于 Github Issue 和 Preact 开发的评论插件
+&lt;a class=&#34;link&#34; href=&#34;https://www.v2ex.com/t/378728&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;摘自v2ex&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;再一次感受到了开源的强大之处，造就了现如今信息技术的高速发展&lt;/p&gt;
+&lt;h3 id=&#34;设置oauth&#34;&gt;设置OAuth&lt;/h3&gt;
+&lt;p&gt;github&amp;gt;右上角settings&amp;gt;Developer Settings&amp;gt;new OAuth App
+然后依次输入&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Application name : 一个超厉害的名字&lt;/li&gt;
+&lt;li&gt;Homepage URL : github page的地址（http://yourname.github.io/）&lt;/li&gt;
+&lt;li&gt;Application description : app的描述（随意）&lt;/li&gt;
+&lt;li&gt;Authorization callback URL : Github api回调的地址，与Homepage URL相同&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;有一些坑需要注意，如果解析到了自己的域名，就在githubpage中的Repository，找到settings，找到github给你的url
+&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/BF70070C-3B46-4045-B222-AB0F67941A4C.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;
+&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/WX20181205-185017@2x.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;
+即可获取到对应的clientId和clientSecret
+&lt;img src=&#34;https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/WX20181205-185240@2x.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;修改posthtml&#34;&gt;修改post.html&lt;/h3&gt;
+&lt;p&gt;然后在修改项目文件中的_layouts的post.html
+找到合适的位置添加如下代码&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!--Gitalk评论start  --&amp;gt;
+{% if site.gitalk.enable %}
+&amp;lt;!-- 引入Gitalk评论插件  --&amp;gt;
+&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;https://unpkg.com/gitalk/dist/gitalk.css&amp;quot;&amp;gt;
+&amp;lt;script src=&amp;quot;https://unpkg.com/gitalk@latest/dist/gitalk.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;div id=&amp;quot;gitalk-container&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;
+    var gitalk = new Gitalk({
+    clientID: &#39;{{site.gitalk.clientID}}&#39;,
+    clientSecret: &#39;{{site.gitalk.clientSecret}}&#39;,
+    repo: &#39;{{site.gitalk.repo}}&#39;,
+    owner: &#39;{{site.gitalk.owner}}&#39;,
+    admin: [&#39;{{site.gitalk.admin}}&#39;],
+    distractionFreeMode: {{site.gitalk.distractionFreeMode}},
+    id: decodeURI(window.location.pathname),
+    });
+    gitalk.render(&#39;gitalk-container&#39;);
+&amp;lt;/script&amp;gt;
+{% endif %}
+&amp;lt;!-- Gitalk end --&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;修改_cofigyaml&#34;&gt;修改_cofig.yaml&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;gitalk:
+  enable: true    #是否开启Gitalk评论
+  clientID: &#39;your clientId&#39;   #生成的clientID
+  clientSecret: &#39;your clientSecret&#39;    #生成的clientSecret
+  repo: &#39;yourrepo.github.io&#39;    #仓库名称
+  owner: &#39;yourname&#39;    #github用户名
+  admin: &#39;yourname&#39;
+  distractionFreeMode: true #是否启用类似FB的阴影遮罩
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;提交代码&#34;&gt;提交代码&lt;/h3&gt;
+&lt;p&gt;然后&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git add .
+git commit -m &amp;quot;your msg&amp;quot;
+git push
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;到github上，过一会，刷新github page就可以看见评论功能啦~&lt;/p&gt;
+&lt;p&gt;欢迎留言~&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
 </rss>

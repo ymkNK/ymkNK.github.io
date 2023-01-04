@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='概览  实习工作回顾 实习主要产出 没做好的地方 做的好的地方 成长以及收获 个人成长计划  实习工作回顾 从9月17号入职，实习至今，已将近有三个月的时间，全勤，认真负责的完成份内的工作，并且主动承担自己力所能及的其他任务。在海洋前辈的指导下，开发了nintendo，并且独立完成了运维的部分的自动化运维工具。
 实习主要产出 Devops Nintendo平台 从零开始搭建的公司内部自研devops平台
- 负责了gitlab方面的数据收集以及处理部分  获取gitlab的group，project，tag，commit，job分别持久化存储到MongoDb当中，实现相应的CRUD,以及返回数据的分页。 产品线的CRUD。 增加字段判断服务是不是公共服务，是不是需要部署，将服务与产品线相关联。 nintendo增量更新信息，使用gitlab的webhook回调更新tag信息，再通过SpringTask定时任务更新新增的project，并为新的project自动添加hook，实现数据的自动化更新。 通过pipeline，tag，定位到job，取得要运行的jobid，进行发版，实现部署发布服务的最初版本的接口（后期前辈改用了线程去实现，异步的去执行）。 获取gitlab执行job后的日志并进行处理，返回到前端。 改进接口，不传env的显示所有的服务，这样实现同一业务线下的服务可以部署到不同的环境下。   集成ldap，实现了用户的登录与登出，将用户登录状态记录在缓存中并返回一个token，使用redis实现，将来流量大的时候能够解决分布式问题。 nintendo的intercepter拦截器实现，同时记录下用户的操作日志，并且提供了用户的操作日志的模糊查询以及分页。 实现一个服务的tag和commit相关联，使得用户能够知道本次发布都更新了那些信息。 集成企业微信，并与上一个功能结合起来，实现用户发布服务之后，将服务发布的状态与信息发送给相关联的用户。  优化改进企业微信为卡片信息显示的样子。 卡片信息可以直接跳转到指定的服务日志地址进行查看，并且生成对应用户自带的token，实现免登陆直接查看，提高了用户体验。   平台信息显示的优化，将用户从拼音的显示转化为真正的名字来进行显示。 nintendo平台的历史功能部署实现。  每个人发布的tag，会帮他筛选出最近部署的5个服务，显示出最近发布的版本。 使用redis来进行存储对应的username,tag,service。 添加tag push类型的webhook，在tag进行更新的时候，更新对应user的对应的service信息。   nintendo平台一键部署到多环境的功能实现。  Autotool自动化运维工具  Ldap中rds组用户的自动化添加：基于LDAP自身的数据实现，每隔一段时间，遍历各个department，将符合条件的人员放进一个Set,再与rds中原来的用户进行比对，将新的用户添加到rds的members当中。 jumpserver的grey log_select test的跳板机权限的自动化添加：基于ldap和rds组和jumpserver的用户组实现，如果rds的用户组中出现了jumpserver中不存在的用户，自动为其创建一个账户，并且添加test log_select test的权限。  aaa项目升级与完善  将项目升级到Spring Boot 2.0，并且修复由于升级而造成的bug。 给aaa项目添加swagger-ui 企业微信消息发送Api的依赖封装与接口实现。  实现获取Token的接口，使得其他业务的同事能够使用这个token进行文件上传的功能 实现发送普通消息的接口 实现发送卡片信息的接口 实现发送文件信息的接口    没做好的地方  处理问题的方式不够完善和全面，在实现给每个project添加hook的时候，不小心多加了几条重复的数据，第一想法是将所有的hook全部删除，然后被海洋前辈及时制止：* “如果有的项目本身就有一些hook呢？你不能全部都删了。” * 最后改进，在删除的时候，判断是不是需要删除的url，如果匹配成功才执行删除操作。 查询日志的时候，不应该以当前的时间往前倒退一天，正常的操作应该是以一个零点作为时间点来进行查询。 jumpserver自动化运维工具所使用的账号，不应该是我个人的账号，由于原本使用的个人账号，后期因为我更改了密码，导致工具在一段时间内失效。 构建模板样式的工作没有放在值对象外面,这样的设计换不了模板，后来将api的包改为了单纯封装http请求，这样才能保证代码的可维护性和可拓展性。 升级aaa的时候，由于依赖版本的更新，更改代码之后没有进行逻辑方面的测试，就上线发版，导致了新入职的人员没有及时的同步与更新。以后对于线上的操作要万分慎重，无论多么小的改动，都需要进行仔细的测试，再进行提交。  做的好的地方  将公司的核心价值观牢记于心，并且贯彻落实到生活工作中。  用户第一 追求极致 开放心态 拥抱变化 诚信严谨 勤俭敬业   在不明白的地方及时的请教前辈，深知团队协作才能发挥1&#43;1&amp;gt;2的能量。 对于学习工作中学习到的新的知识，会将其记录下来，深知好记性不如烂笔头的道理。 能够积极主动去承担工作中的任务。 对新事物永远保有一颗探索与发现的心，不断学习充实自己。  成长以及收获  熟悉了SpringBoot的框架，Initializer的使用和Swagger的使用，以及Spring的各种映射注解的使用（例如使用@Getter @Setter或者@Data，而不是原来每一次都generate Getter and Setter,一旦成员变量有一些变动，就需要维护很多地方），使用注解调动配置文件中的信息等等。 更加熟练地掌握了java代码的编写，更加熟悉了了解其中HashSet,HashMap以及有序的LinkedHashMap等数据结构（例如使用HashMap实现空间换取时间），使用了mock数据给前端进行同步开发，使用枚举类型来避免魔法数的产生等很多的细节。 更好的代码习惯养成，例如尽量重用对象，尽量使用局部对象，尽量减少对变量的重复计算，减少对象的IO，优化代码的体积等等。 更加熟悉了解了MongoDb这样的非关系型数据库。 更加熟悉了解了redis这样的分布式缓存。 更加熟悉了解了LDAP。 docker以及Kubernetes等关于微服务的相关知识，常用的命令行指令查看pods状态信息和日志。 CI/CD（Continuous Integration/ Continuous Deployment）方面的了解，熟悉了一个项目发布流程和整个生产的生命周期 gitlab,github等团队项目管理工具的使用。 maven构建项目，以及nexus公司私服服务器的使用。 AOP的面向切面的编程思想，将为业务逻辑所公用的逻辑封装起来，减少系统的重复代码，降低模块之间的耦合度，有利于未来的可操作性和可维护性。 提升了对各种官方文档的阅读能力和理解能力。 从刚进公司的龟速一指禅打字，到现在40wpm左右的规范指法打字。 OKR的这种聚焦的工作管理方式。  个人成长计划 不断积累方方面面的知识，主攻后端，也可以懂一点前端知识，也可以懂服务器的搭建，项目的发布等运维相关的知识，也可以懂DBA等等，希望自己能够成为一个全栈复合型的人才。虽然这难度很大，但是也正因为有挑战，才会更有价值。海洋前辈给我说，坚持每周写至少一篇技术型的文档，这将对自己的能力提升有很大帮助，我深表赞同，并将坚持下去。'><title>实习总结与报告</title>
+ 负责了gitlab方面的数据收集以及处理部分  获取gitlab的group，project，tag，commit，job分别持久化存储到MongoDb当中，实现相应的CRUD,以及返回数据的分页。 产品线的CRUD。 增加字段判断服务是不是公共服务，是不是需要部署，将服务与产品线相关联。 nintendo增量更新信息，使用gitlab的webhook回调更新tag信息，再通过SpringTask定时任务更新新增的project，并为新的project自动添加hook，实现数据的自动化更新。 通过pipeline，tag，定位到job，取得要运行的jobid，进行发版，实现部署发布服务的最初版本的接口（后期前辈改用了线程去实现，异步的去执行）。 获取gitlab执行job后的日志并进行处理，返回到前端。 改进接口，不传env的显示所有的服务，这样实现同一业务线下的服务可以部署到不同的环境下。   集成ldap，实现了用户的登录与登出，将用户登录状态记录在缓存中并返回一个token，使用redis实现，将来流量大的时候能够解决分布式问题。 nintendo的intercepter拦截器实现，同时记录下用户的操作日志，并且提供了用户的操作日志的模糊查询以及分页。 实现一个服务的tag和commit相关联，使得用户能够知道本次发布都更新了那些信息。 集成企业微信，并与上一个功能结合起来，实现用户发布服务之后，将服务发布的状态与信息发送给相关联的用户。  优化改进企业微信为卡片信息显示的样子。 卡片信息可以直接跳转到指定的服务日志地址进行查看，并且生成对应用户自带的token，实现免登陆直接查看，提高了用户体验。   平台信息显示的优化，将用户从拼音的显示转化为真正的名字来进行显示。 nintendo平台的历史功能部署实现。  每个人发布的tag，会帮他筛选出最近部署的5个服务，显示出最近发布的版本。 使用redis来进行存储对应的username,tag,service。 添加tag push类型的webhook，在tag进行更新的时候，更新对应user的对应的service信息。   nintendo平台一键部署到多环境的功能实现。  Autotool自动化运维工具  Ldap中rds组用户的自动化添加：基于LDAP自身的数据实现，每隔一段时间，遍历各个department，将符合条件的人员放进一个Set,再与rds中原来的用户进行比对，将新的用户添加到rds的members当中。 jumpserver的grey log_select test的跳板机权限的自动化添加：基于ldap和rds组和jumpserver的用户组实现，如果rds的用户组中出现了jumpserver中不存在的用户，自动为其创建一个账户，并且添加test log_select test的权限。  aaa项目升级与完善  将项目升级到Spring Boot 2.0，并且修复由于升级而造成的bug。 给aaa项目添加swagger-ui 企业微信消息发送Api的依赖封装与接口实现。  实现获取Token的接口，使得其他业务的同事能够使用这个token进行文件上传的功能 实现发送普通消息的接口 实现发送卡片信息的接口 实现发送文件信息的接口    没做好的地方  处理问题的方式不够完善和全面，在实现给每个project添加hook的时候，不小心多加了几条重复的数据，第一想法是将所有的hook全部删除，然后被海洋前辈及时制止：* “如果有的项目本身就有一些hook呢？你不能全部都删了。” * 最后改进，在删除的时候，判断是不是需要删除的url，如果匹配成功才执行删除操作。 查询日志的时候，不应该以当前的时间往前倒退一天，正常的操作应该是以一个零点作为时间点来进行查询。 jumpserver自动化运维工具所使用的账号，不应该是我个人的账号，由于原本使用的个人账号，后期因为我更改了密码，导致工具在一段时间内失效。 构建模板样式的工作没有放在值对象外面,这样的设计换不了模板，后来将api的包改为了单纯封装http请求，这样才能保证代码的可维护性和可拓展性。 升级aaa的时候，由于依赖版本的更新，更改代码之后没有进行逻辑方面的测试，就上线发版，导致了新入职的人员没有及时的同步与更新。以后对于线上的操作要万分慎重，无论多么小的改动，都需要进行仔细的测试，再进行提交。  做的好的地方  将公司的核心价值观牢记于心，并且贯彻落实到生活工作中。  用户第一 追求极致 开放心态 拥抱变化 诚信严谨 勤俭敬业   在不明白的地方及时的请教前辈，深知团队协作才能发挥1&#43;1&amp;gt;2的能量。 对于学习工作中学习到的新的知识，会将其记录下来，深知好记性不如烂笔头的道理。 能够积极主动去承担工作中的任务。 对新事物永远保有一颗探索与发现的心，不断学习充实自己。  成长以及收获  熟悉了SpringBoot的框架，Initializer的使用和Swagger的使用，以及Spring的各种映射注解的使用（例如使用@Getter @Setter或者@Data，而不是原来每一次都generate Getter and Setter,一旦成员变量有一些变动，就需要维护很多地方），使用注解调动配置文件中的信息等等。 更加熟练地掌握了java代码的编写，更加熟悉了了解其中HashSet,HashMap以及有序的LinkedHashMap等数据结构（例如使用HashMap实现空间换取时间），使用了mock数据给前端进行同步开发，使用枚举类型来避免魔法数的产生等很多的细节。 更好的代码习惯养成，例如尽量重用对象，尽量使用局部对象，尽量减少对变量的重复计算，减少对象的IO，优化代码的体积等等。 更加熟悉了解了MongoDb这样的非关系型数据库。 更加熟悉了解了redis这样的分布式缓存。 更加熟悉了解了LDAP。 docker以及Kubernetes等关于微服务的相关知识，常用的命令行指令查看pods状态信息和日志。 CI/CD（Continuous Integration/ Continuous Deployment）方面的了解，熟悉了一个项目发布流程和整个生产的生命周期 gitlab,github等团队项目管理工具的使用。 maven构建项目，以及nexus公司私服服务器的使用。 AOP的面向切面的编程思想，将为业务逻辑所公用的逻辑封装起来，减少系统的重复代码，降低模块之间的耦合度，有利于未来的可操作性和可维护性。 提升了对各种官方文档的阅读能力和理解能力。 从刚进公司的龟速一指禅打字，到现在40wpm左右的规范指法打字。 OKR的这种聚焦的工作管理方式。  个人成长计划 不断积累方方面面的知识，主攻后端，也可以懂一点前端知识，也可以懂服务器的搭建，项目的发布等运维相关的知识，也可以懂DBA等等，希望自己能够成为一个全栈复合型的人才。虽然这难度很大，但是也正因为有挑战，才会更有价值。海洋前辈给我说，坚持每周写至少一篇技术型的文档，这将对自己的能力提升有很大帮助，我深表赞同，并将坚持下去。'>
+<title>实习总结与报告</title>
 
 <link rel='canonical' href='https://lllovol.com/p/summary/'>
 
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='实习总结与报告'>
+<link rel="stylesheet" href="/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css"><meta property='og:title' content='实习总结与报告'>
 <meta property='og:description' content='概览  实习工作回顾 实习主要产出 没做好的地方 做的好的地方 成长以及收获 个人成长计划  实习工作回顾 从9月17号入职，实习至今，已将近有三个月的时间，全勤，认真负责的完成份内的工作，并且主动承担自己力所能及的其他任务。在海洋前辈的指导下，开发了nintendo，并且独立完成了运维的部分的自动化运维工具。
 实习主要产出 Devops Nintendo平台 从零开始搭建的公司内部自研devops平台
  负责了gitlab方面的数据收集以及处理部分  获取gitlab的group，project，tag，commit，job分别持久化存储到MongoDb当中，实现相应的CRUD,以及返回数据的分页。 产品线的CRUD。 增加字段判断服务是不是公共服务，是不是需要部署，将服务与产品线相关联。 nintendo增量更新信息，使用gitlab的webhook回调更新tag信息，再通过SpringTask定时任务更新新增的project，并为新的project自动添加hook，实现数据的自动化更新。 通过pipeline，tag，定位到job，取得要运行的jobid，进行发版，实现部署发布服务的最初版本的接口（后期前辈改用了线程去实现，异步的去执行）。 获取gitlab执行job后的日志并进行处理，返回到前端。 改进接口，不传env的显示所有的服务，这样实现同一业务线下的服务可以部署到不同的环境下。   集成ldap，实现了用户的登录与登出，将用户登录状态记录在缓存中并返回一个token，使用redis实现，将来流量大的时候能够解决分布式问题。 nintendo的intercepter拦截器实现，同时记录下用户的操作日志，并且提供了用户的操作日志的模糊查询以及分页。 实现一个服务的tag和commit相关联，使得用户能够知道本次发布都更新了那些信息。 集成企业微信，并与上一个功能结合起来，实现用户发布服务之后，将服务发布的状态与信息发送给相关联的用户。  优化改进企业微信为卡片信息显示的样子。 卡片信息可以直接跳转到指定的服务日志地址进行查看，并且生成对应用户自带的token，实现免登陆直接查看，提高了用户体验。   平台信息显示的优化，将用户从拼音的显示转化为真正的名字来进行显示。 nintendo平台的历史功能部署实现。  每个人发布的tag，会帮他筛选出最近部署的5个服务，显示出最近发布的版本。 使用redis来进行存储对应的username,tag,service。 添加tag push类型的webhook，在tag进行更新的时候，更新对应user的对应的service信息。   nintendo平台一键部署到多环境的功能实现。  Autotool自动化运维工具  Ldap中rds组用户的自动化添加：基于LDAP自身的数据实现，每隔一段时间，遍历各个department，将符合条件的人员放进一个Set,再与rds中原来的用户进行比对，将新的用户添加到rds的members当中。 jumpserver的grey log_select test的跳板机权限的自动化添加：基于ldap和rds组和jumpserver的用户组实现，如果rds的用户组中出现了jumpserver中不存在的用户，自动为其创建一个账户，并且添加test log_select test的权限。  aaa项目升级与完善  将项目升级到Spring Boot 2.0，并且修复由于升级而造成的bug。 给aaa项目添加swagger-ui 企业微信消息发送Api的依赖封装与接口实现。  实现获取Token的接口，使得其他业务的同事能够使用这个token进行文件上传的功能 实现发送普通消息的接口 实现发送卡片信息的接口 实现发送文件信息的接口    没做好的地方  处理问题的方式不够完善和全面，在实现给每个project添加hook的时候，不小心多加了几条重复的数据，第一想法是将所有的hook全部删除，然后被海洋前辈及时制止：* “如果有的项目本身就有一些hook呢？你不能全部都删了。” * 最后改进，在删除的时候，判断是不是需要删除的url，如果匹配成功才执行删除操作。 查询日志的时候，不应该以当前的时间往前倒退一天，正常的操作应该是以一个零点作为时间点来进行查询。 jumpserver自动化运维工具所使用的账号，不应该是我个人的账号，由于原本使用的个人账号，后期因为我更改了密码，导致工具在一段时间内失效。 构建模板样式的工作没有放在值对象外面,这样的设计换不了模板，后来将api的包改为了单纯封装http请求，这样才能保证代码的可维护性和可拓展性。 升级aaa的时候，由于依赖版本的更新，更改代码之后没有进行逻辑方面的测试，就上线发版，导致了新入职的人员没有及时的同步与更新。以后对于线上的操作要万分慎重，无论多么小的改动，都需要进行仔细的测试，再进行提交。  做的好的地方  将公司的核心价值观牢记于心，并且贯彻落实到生活工作中。  用户第一 追求极致 开放心态 拥抱变化 诚信严谨 勤俭敬业   在不明白的地方及时的请教前辈，深知团队协作才能发挥1&#43;1&amp;gt;2的能量。 对于学习工作中学习到的新的知识，会将其记录下来，深知好记性不如烂笔头的道理。 能够积极主动去承担工作中的任务。 对新事物永远保有一颗探索与发现的心，不断学习充实自己。  成长以及收获  熟悉了SpringBoot的框架，Initializer的使用和Swagger的使用，以及Spring的各种映射注解的使用（例如使用@Getter @Setter或者@Data，而不是原来每一次都generate Getter and Setter,一旦成员变量有一些变动，就需要维护很多地方），使用注解调动配置文件中的信息等等。 更加熟练地掌握了java代码的编写，更加熟悉了了解其中HashSet,HashMap以及有序的LinkedHashMap等数据结构（例如使用HashMap实现空间换取时间），使用了mock数据给前端进行同步开发，使用枚举类型来避免魔法数的产生等很多的细节。 更好的代码习惯养成，例如尽量重用对象，尽量使用局部对象，尽量减少对变量的重复计算，减少对象的IO，优化代码的体积等等。 更加熟悉了解了MongoDb这样的非关系型数据库。 更加熟悉了解了redis这样的分布式缓存。 更加熟悉了解了LDAP。 docker以及Kubernetes等关于微服务的相关知识，常用的命令行指令查看pods状态信息和日志。 CI/CD（Continuous Integration/ Continuous Deployment）方面的了解，熟悉了一个项目发布流程和整个生产的生命周期 gitlab,github等团队项目管理工具的使用。 maven构建项目，以及nexus公司私服服务器的使用。 AOP的面向切面的编程思想，将为业务逻辑所公用的逻辑封装起来，减少系统的重复代码，降低模块之间的耦合度，有利于未来的可操作性和可维护性。 提升了对各种官方文档的阅读能力和理解能力。 从刚进公司的龟速一指禅打字，到现在40wpm左右的规范指法打字。 OKR的这种聚焦的工作管理方式。  个人成长计划 不断积累方方面面的知识，主攻后端，也可以懂一点前端知识，也可以懂服务器的搭建，项目的发布等运维相关的知识，也可以懂DBA等等，希望自己能够成为一个全栈复合型的人才。虽然这难度很大，但是也正因为有挑战，才会更有价值。海洋前辈给我说，坚持每周写至少一篇技术型的文档，这将对自己的能力提升有很大帮助，我深表赞同，并将坚持下去。'>
@@ -34,8 +35,8 @@ if (!doNotTrack) {
 
     </head>
     <body class="
-    article-page has-toc
-">
+    article-page
+    ">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -58,26 +59,211 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex 
-    
-        extended
-    
-">
-    
-        <div id="article-toolbar">
-            <a href="/" class="back-home">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">⚖️</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">lllovol</a></h1>
+            <h2 class="site-description">Stay hungry, stay foolish.</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="15 6 9 12 15 18" />
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
 </svg>
 
 
 
-                <span>返回</span>
+                
+                <span>主页</span>
             </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
         </div>
-    
-<main class="main full-width">
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#devops-nintendo平台">Devops Nintendo平台</a></li>
+        <li><a href="#autotool自动化运维工具">Autotool自动化运维工具</a></li>
+        <li><a href="#aaa项目升级与完善">aaa项目升级与完善</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
         <div class="article-image">
@@ -100,12 +286,17 @@ if (!doNotTrack) {
     </header>
     
 
-    <h2 class="article-title">
-        <a href="/p/summary/">实习总结与报告</a>
-    </h2>
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/summary/">实习总结与报告</a>
+        </h2>
+    
+        
+    </div>
 
     
-
+    
+    
     
     <footer class="article-time">
         
@@ -140,10 +331,15 @@ if (!doNotTrack) {
         
     </footer>
     
+
+    
 </div>
+
 </header>
 
     <section class="article-content">
+    
+    
     <h1 id="概览">概览</h1>
 <ul>
 <li>实习工作回顾</li>
@@ -286,14 +482,16 @@ if (!doNotTrack) {
     
 </article>
 
-    <aside class="related-contents--wrapper">
     
+
     
-        <h2 class="section-title">相关文章</h2>
-        <div class="related-contents">
-            <div class="flex article-list--tile">
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
                 
-                    
 <article class="has-image">
     <a href="/p/2022/9/project-manage/">
         
@@ -310,8 +508,9 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
+
+            
                 
-                    
 <article class="has-image">
     <a href="/p/2022/9/person-soft-ability/">
         
@@ -328,8 +527,9 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
+
+            
                 
-                    
 <article class="has-image">
     <a href="/p/2022/1/2021-summary/">
         
@@ -346,8 +546,9 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
+
+            
                 
-                    
 <article class="has-image">
     <a href="/p/2021/8/work-summary/">
         
@@ -364,8 +565,9 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
+
+            
                 
-                    
 <article class="has-image">
     <a href="/p/aboutsomething/">
         
@@ -382,10 +584,10 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
-                
-            </div>
+
+            
         </div>
-    
+    </div>
 </aside>
 
      
@@ -432,7 +634,7 @@ if (!doNotTrack) {
             Owner Rainbowly <br/>
         
         Total [<span id="busuanzi_value_site_uv"></span>] user views [<span id="busuanzi_value_site_pv"></span>] site views [<span id="busuanzi_value_page_pv"></span>] page views <br/>Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -501,59 +703,25 @@ if (!doNotTrack) {
 
 </div><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
             ><link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
             >
 
             </main>
-    
-        <aside class="sidebar right-sidebar sticky">
-            <section class="widget archives">
-                <div class="widget-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-                </div>
-                <h2 class="widget-title section-title">目录</h2>
-                
-                <div class="widget--toc">
-                    <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#devops-nintendo平台">Devops Nintendo平台</a></li>
-        <li><a href="#autotool自动化运维工具">Autotool自动化运维工具</a></li>
-        <li><a href="#aaa项目升级与完善">aaa项目升级与完善</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-                </div>
-            </section>
-        </aside>
-    
-
         </div>
         <script 
-                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
-                defer="false"
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
                 >
             </script><script type="text/javascript" src="/ts/main.js" defer></script>
 <script>

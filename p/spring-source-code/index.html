@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='前言 这个系列主要是用来记录自己读这本书的一些笔记和想法的记录，不过买书好像买错了，应该买spring boot的相关解读的书籍，这是spring的深入解读的书。吃了一亏，不过这也是spring boot的前身，其中的源码也是有价值的。
 首先开始的，是整个spring当中最核心的用法，但是却十分重要的一个部分&amp;ndash;容器。大道至简，大音希声。
@@ -7,30 +7,31 @@
   一个成员属性
   这个属性的getter
   这个属性的setter 然后在配置文件xml当中添加相关的bean
- &amp;lt;bean id=&amp;quot;myTestBean&amp;quot; class=&amp;quot;bean.MyTestBean&amp;quot;/&amp;gt;   然后就可以在测试代码中使用我们所测试的bean了
+ &amp;lt;bean id=&amp;quot;myTestBean&amp;quot; class=&amp;quot;bean.MyTestBean&amp;quot;/&amp;gt;    然后就可以在测试代码中使用我们所测试的bean了
 容器的基础XmlBeanFactory 代码如下
- BeanFactory bf= new XmlBeanFactory(new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;)); 实现流程 首先调用了ClassPathResource的构造函数 来构造了Resource资源文件的实例对象，然后后续的资源处理就可以使用Resource提供的各种服务来操作了。然后当我们有了Resource之后，就可以进行XmlBeanFactory的初始化了。
+ BeanFactory bf= new XmlBeanFactory(new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;));  实现流程 首先调用了ClassPathResource的构造函数 来构造了Resource资源文件的实例对象，然后后续的资源处理就可以使用Resource提供的各种服务来操作了。然后当我们有了Resource之后，就可以进行XmlBeanFactory的初始化了。
 与之同理，对于不同来源的资源文件都有相应的Resource实现。有了Resource接口之后便可以对所有资源文件进行统一的处理。例如
- Resource resource=new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;);InputStream inputStream=resource.getInputStream(); XmlBeanDefinition 然后，当Resource的相关类完成了对配置文件进行封住后配置文件的读取工作就全权交给XmlBeanDefinition来处理了。
+ Resource resource=new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;); InputStream inputStream=resource.getInputStream();  XmlBeanDefinition 然后，当Resource的相关类完成了对配置文件进行封住后配置文件的读取工作就全权交给XmlBeanDefinition来处理了。
 （ignoreDependencyInterface（）函数的主要功能是忽略给定接口的自动装配功能） (时序图书 p20)
  封装资源文件。 获取输入流 通过构造的InputSource实例和Resource实例继续调用函数doLoadbeanDefinitions  支撑着整个Spring容器部分的实现基础 然后就是3个步骤，支撑着整个Spring容器部分的实现基础
  获取对XML文件的验证模式 加载XML文件，并得到对应的Document 根据返回的Document注册Bean信息  doRegisterBeanDefinitions(root) 然后，又通过一系列的处理之后，终于可以到了核心逻辑的底部doRegisterBeanDefinitions(root)
-终于开始真正的解析了。'><title>《Spring源码深度解析》读后感(一)Spring的容器Bean</title>
+终于开始真正的解析了。'>
+<title>《Spring源码深度解析》读后感(一)Spring的容器Bean</title>
 
 <link rel='canonical' href='https://lllovol.com/p/spring-source-code/'>
 
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='《Spring源码深度解析》读后感(一)Spring的容器Bean'>
+<link rel="stylesheet" href="/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css"><meta property='og:title' content='《Spring源码深度解析》读后感(一)Spring的容器Bean'>
 <meta property='og:description' content='前言 这个系列主要是用来记录自己读这本书的一些笔记和想法的记录，不过买书好像买错了，应该买spring boot的相关解读的书籍，这是spring的深入解读的书。吃了一亏，不过这也是spring boot的前身，其中的源码也是有价值的。
 首先开始的，是整个spring当中最核心的用法，但是却十分重要的一个部分&amp;ndash;容器。大道至简，大音希声。
 容器的基本用法 bean是spring中最核心的东西，因为spring就像一个大水桶，而bean就像是水桶中的水，水桶脱离了水便没有了什么用处。而spring 的目的，就是让我们的bean，能够成为纯粹的POJO（plain ordinary java object）。 需要：
   一个成员属性
   这个属性的getter
   这个属性的setter 然后在配置文件xml当中添加相关的bean
- &amp;lt;bean id=&amp;quot;myTestBean&amp;quot; class=&amp;quot;bean.MyTestBean&amp;quot;/&amp;gt;   然后就可以在测试代码中使用我们所测试的bean了
+ &amp;lt;bean id=&amp;quot;myTestBean&amp;quot; class=&amp;quot;bean.MyTestBean&amp;quot;/&amp;gt;    然后就可以在测试代码中使用我们所测试的bean了
 容器的基础XmlBeanFactory 代码如下
- BeanFactory bf= new XmlBeanFactory(new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;)); 实现流程 首先调用了ClassPathResource的构造函数 来构造了Resource资源文件的实例对象，然后后续的资源处理就可以使用Resource提供的各种服务来操作了。然后当我们有了Resource之后，就可以进行XmlBeanFactory的初始化了。
+ BeanFactory bf= new XmlBeanFactory(new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;));  实现流程 首先调用了ClassPathResource的构造函数 来构造了Resource资源文件的实例对象，然后后续的资源处理就可以使用Resource提供的各种服务来操作了。然后当我们有了Resource之后，就可以进行XmlBeanFactory的初始化了。
 与之同理，对于不同来源的资源文件都有相应的Resource实现。有了Resource接口之后便可以对所有资源文件进行统一的处理。例如
- Resource resource=new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;);InputStream inputStream=resource.getInputStream(); XmlBeanDefinition 然后，当Resource的相关类完成了对配置文件进行封住后配置文件的读取工作就全权交给XmlBeanDefinition来处理了。
+ Resource resource=new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;); InputStream inputStream=resource.getInputStream();  XmlBeanDefinition 然后，当Resource的相关类完成了对配置文件进行封住后配置文件的读取工作就全权交给XmlBeanDefinition来处理了。
 （ignoreDependencyInterface（）函数的主要功能是忽略给定接口的自动装配功能） (时序图书 p20)
  封装资源文件。 获取输入流 通过构造的InputSource实例和Resource实例继续调用函数doLoadbeanDefinitions  支撑着整个Spring容器部分的实现基础 然后就是3个步骤，支撑着整个Spring容器部分的实现基础
  获取对XML文件的验证模式 加载XML文件，并得到对应的Document 根据返回的Document注册Bean信息  doRegisterBeanDefinitions(root) 然后，又通过一系列的处理之后，终于可以到了核心逻辑的底部doRegisterBeanDefinitions(root)
@@ -45,11 +46,11 @@
   一个成员属性
   这个属性的getter
   这个属性的setter 然后在配置文件xml当中添加相关的bean
- &amp;lt;bean id=&amp;quot;myTestBean&amp;quot; class=&amp;quot;bean.MyTestBean&amp;quot;/&amp;gt;   然后就可以在测试代码中使用我们所测试的bean了
+ &amp;lt;bean id=&amp;quot;myTestBean&amp;quot; class=&amp;quot;bean.MyTestBean&amp;quot;/&amp;gt;    然后就可以在测试代码中使用我们所测试的bean了
 容器的基础XmlBeanFactory 代码如下
- BeanFactory bf= new XmlBeanFactory(new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;)); 实现流程 首先调用了ClassPathResource的构造函数 来构造了Resource资源文件的实例对象，然后后续的资源处理就可以使用Resource提供的各种服务来操作了。然后当我们有了Resource之后，就可以进行XmlBeanFactory的初始化了。
+ BeanFactory bf= new XmlBeanFactory(new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;));  实现流程 首先调用了ClassPathResource的构造函数 来构造了Resource资源文件的实例对象，然后后续的资源处理就可以使用Resource提供的各种服务来操作了。然后当我们有了Resource之后，就可以进行XmlBeanFactory的初始化了。
 与之同理，对于不同来源的资源文件都有相应的Resource实现。有了Resource接口之后便可以对所有资源文件进行统一的处理。例如
- Resource resource=new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;);InputStream inputStream=resource.getInputStream(); XmlBeanDefinition 然后，当Resource的相关类完成了对配置文件进行封住后配置文件的读取工作就全权交给XmlBeanDefinition来处理了。
+ Resource resource=new ClassPathResource(&amp;quot;beanFactoryTest.xml&amp;quot;); InputStream inputStream=resource.getInputStream();  XmlBeanDefinition 然后，当Resource的相关类完成了对配置文件进行封住后配置文件的读取工作就全权交给XmlBeanDefinition来处理了。
 （ignoreDependencyInterface（）函数的主要功能是忽略给定接口的自动装配功能） (时序图书 p20)
  封装资源文件。 获取输入流 通过构造的InputSource实例和Resource实例继续调用函数doLoadbeanDefinitions  支撑着整个Spring容器部分的实现基础 然后就是3个步骤，支撑着整个Spring容器部分的实现基础
  获取对XML文件的验证模式 加载XML文件，并得到对应的Document 根据返回的Document注册Bean信息  doRegisterBeanDefinitions(root) 然后，又通过一系列的处理之后，终于可以到了核心逻辑的底部doRegisterBeanDefinitions(root)
@@ -70,8 +71,8 @@ if (!doNotTrack) {
 
     </head>
     <body class="
-    article-page has-toc
-">
+    article-page
+    ">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -94,26 +95,212 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex 
-    
-        extended
-    
-">
-    
-        <div id="article-toolbar">
-            <a href="/" class="back-home">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">⚖️</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">lllovol</a></h1>
+            <h2 class="site-description">Stay hungry, stay foolish.</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="15 6 9 12 15 18" />
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
 </svg>
 
 
 
-                <span>返回</span>
+                
+                <span>主页</span>
             </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
         </div>
-    
-<main class="main full-width">
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#实现流程">实现流程</a>
+      <ul>
+        <li><a href="#首先调用了classpathresource的构造函数">首先调用了ClassPathResource的构造函数</a></li>
+        <li><a href="#xmlbeandefinition">XmlBeanDefinition</a></li>
+        <li><a href="#支撑着整个spring容器部分的实现基础">支撑着整个Spring容器部分的实现基础</a></li>
+        <li><a href="#doregisterbeandefinitionsroot">doRegisterBeanDefinitions(root)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
         <div class="article-image">
@@ -136,12 +323,17 @@ if (!doNotTrack) {
     </header>
     
 
-    <h2 class="article-title">
-        <a href="/p/spring-source-code/">《Spring源码深度解析》读后感(一)Spring的容器Bean</a>
-    </h2>
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/spring-source-code/">《Spring源码深度解析》读后感(一)Spring的容器Bean</a>
+        </h2>
+    
+        
+    </div>
 
     
-
+    
+    
     
     <footer class="article-time">
         
@@ -176,10 +368,15 @@ if (!doNotTrack) {
         
     </footer>
     
+
+    
 </div>
+
 </header>
 
     <section class="article-content">
+    
+    
     <h1 id="前言">前言</h1>
 <p>这个系列主要是用来记录自己读这本书的一些笔记和想法的记录，不过买书好像买错了，应该买spring boot的相关解读的书籍，这是spring的深入解读的书。吃了一亏，不过这也是spring boot的前身，其中的源码也是有价值的。<br>
 首先开始的，是整个spring当中最核心的用法，但是却十分重要的一个部分&ndash;容器。大道至简，大音希声。</p>
@@ -267,14 +464,16 @@ if (!doNotTrack) {
     
 </article>
 
-    <aside class="related-contents--wrapper">
     
+
     
-        <h2 class="section-title">相关文章</h2>
-        <div class="related-contents">
-            <div class="flex article-list--tile">
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
                 
-                    
 <article class="has-image">
     <a href="/p/spring14/">
         
@@ -291,8 +490,9 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
+
+            
                 
-                    
 <article class="has-image">
     <a href="/p/singleton-realization/">
         
@@ -309,8 +509,9 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
+
+            
                 
-                    
 <article class="has-image">
     <a href="/p/spring13/">
         
@@ -327,8 +528,9 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
+
+            
                 
-                    
 <article class="has-image">
     <a href="/p/spring12/">
         
@@ -345,8 +547,9 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
+
+            
                 
-                    
 <article class="has-image">
     <a href="/p/synchronize-job/">
         
@@ -363,10 +566,10 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
-                
-            </div>
+
+            
         </div>
-    
+    </div>
 </aside>
 
      
@@ -413,7 +616,7 @@ if (!doNotTrack) {
             Owner Rainbowly <br/>
         
         Total [<span id="busuanzi_value_site_uv"></span>] user views [<span id="busuanzi_value_site_pv"></span>] site views [<span id="busuanzi_value_page_pv"></span>] page views <br/>Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -482,60 +685,25 @@ if (!doNotTrack) {
 
 </div><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
             ><link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
             >
 
             </main>
-    
-        <aside class="sidebar right-sidebar sticky">
-            <section class="widget archives">
-                <div class="widget-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-                </div>
-                <h2 class="widget-title section-title">目录</h2>
-                
-                <div class="widget--toc">
-                    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#实现流程">实现流程</a>
-      <ul>
-        <li><a href="#首先调用了classpathresource的构造函数">首先调用了ClassPathResource的构造函数</a></li>
-        <li><a href="#xmlbeandefinition">XmlBeanDefinition</a></li>
-        <li><a href="#支撑着整个spring容器部分的实现基础">支撑着整个Spring容器部分的实现基础</a></li>
-        <li><a href="#doregisterbeandefinitionsroot">doRegisterBeanDefinitions(root)</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-                </div>
-            </section>
-        </aside>
-    
-
         </div>
         <script 
-                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
-                defer="false"
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
                 >
             </script><script type="text/javascript" src="/ts/main.js" defer></script>
 <script>

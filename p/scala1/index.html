@@ -1,20 +1,21 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='前言 最近工作中需要参与一下scala的项目，借此机会学习一下这个心的语言。
-环境搭建  Java环境 JDK1.5以上  ymk@localhost ~ $ java -versionjava version &amp;quot;1.8.0_181&amp;quot;Java(TM) SE Runtime Environment (build 1.8.0_181-b13)Java HotSpot(TM) 64-Bit Server VM (build 25.181-b13, mixed mode)下载安装Scala
+环境搭建  Java环境 JDK1.5以上  ymk@localhost ~ $ java -version java version &amp;#34;1.8.0_181&amp;#34; Java(TM) SE Runtime Environment (build 1.8.0_181-b13) Java HotSpot(TM) 64-Bit Server VM (build 25.181-b13, mixed mode) 下载安装Scala
 Scala官方下载地址
-安装好了之后,可以通过scala查看是否安装成功  ymk@localhost ~ $ scalaWelcome to Scala 2.12.7 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_181).Type in expressions for evaluation. Or try :help.下载安装sbt
+安装好了之后,可以通过scala查看是否安装成功  ymk@localhost ~ $ scala Welcome to Scala 2.12.7 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_181). Type in expressions for evaluation. Or try :help. 下载安装sbt
 Mac: brew install sbt@1  使用命令行搭建第一个Scala项目 本节内容主要来自于官方文档
-创建项目  cd 进入一个新的空的文件夹。 执行命令 sbt new scala/hello-world.'><title>Scala环境搭建</title>
+创建项目  cd 进入一个新的空的文件夹。 执行命令 sbt new scala/hello-world.'>
+<title>Scala环境搭建</title>
 
 <link rel='canonical' href='https://lllovol.com/p/scala1/'>
 
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Scala环境搭建'>
+<link rel="stylesheet" href="/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css"><meta property='og:title' content='Scala环境搭建'>
 <meta property='og:description' content='前言 最近工作中需要参与一下scala的项目，借此机会学习一下这个心的语言。
-环境搭建  Java环境 JDK1.5以上  ymk@localhost ~ $ java -versionjava version &amp;quot;1.8.0_181&amp;quot;Java(TM) SE Runtime Environment (build 1.8.0_181-b13)Java HotSpot(TM) 64-Bit Server VM (build 25.181-b13, mixed mode)下载安装Scala
+环境搭建  Java环境 JDK1.5以上  ymk@localhost ~ $ java -version java version &amp;#34;1.8.0_181&amp;#34; Java(TM) SE Runtime Environment (build 1.8.0_181-b13) Java HotSpot(TM) 64-Bit Server VM (build 25.181-b13, mixed mode) 下载安装Scala
 Scala官方下载地址
-安装好了之后,可以通过scala查看是否安装成功  ymk@localhost ~ $ scalaWelcome to Scala 2.12.7 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_181).Type in expressions for evaluation. Or try :help.下载安装sbt
+安装好了之后,可以通过scala查看是否安装成功  ymk@localhost ~ $ scala Welcome to Scala 2.12.7 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_181). Type in expressions for evaluation. Or try :help. 下载安装sbt
 Mac: brew install sbt@1  使用命令行搭建第一个Scala项目 本节内容主要来自于官方文档
 创建项目  cd 进入一个新的空的文件夹。 执行命令 sbt new scala/hello-world.'>
 <meta property='og:url' content='https://lllovol.com/p/scala1/'>
@@ -22,9 +23,9 @@ Mac: brew install sbt@1  使用命令行搭建第一个Scala项目 本节内容�
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Scala' /><meta property='article:published_time' content='2019-08-02T14:50:13&#43;00:00'/><meta property='article:modified_time' content='2019-08-02T14:50:13&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/8.jpg' />
 <meta name="twitter:title" content="Scala环境搭建">
 <meta name="twitter:description" content="前言 最近工作中需要参与一下scala的项目，借此机会学习一下这个心的语言。
-环境搭建  Java环境 JDK1.5以上  ymk@localhost ~ $ java -versionjava version &amp;quot;1.8.0_181&amp;quot;Java(TM) SE Runtime Environment (build 1.8.0_181-b13)Java HotSpot(TM) 64-Bit Server VM (build 25.181-b13, mixed mode)下载安装Scala
+环境搭建  Java环境 JDK1.5以上  ymk@localhost ~ $ java -version java version &amp;#34;1.8.0_181&amp;#34; Java(TM) SE Runtime Environment (build 1.8.0_181-b13) Java HotSpot(TM) 64-Bit Server VM (build 25.181-b13, mixed mode) 下载安装Scala
 Scala官方下载地址
-安装好了之后,可以通过scala查看是否安装成功  ymk@localhost ~ $ scalaWelcome to Scala 2.12.7 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_181).Type in expressions for evaluation. Or try :help.下载安装sbt
+安装好了之后,可以通过scala查看是否安装成功  ymk@localhost ~ $ scala Welcome to Scala 2.12.7 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_181). Type in expressions for evaluation. Or try :help. 下载安装sbt
 Mac: brew install sbt@1  使用命令行搭建第一个Scala项目 本节内容主要来自于官方文档
 创建项目  cd 进入一个新的空的文件夹。 执行命令 sbt new scala/hello-world."><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/8.jpg' />
@@ -43,8 +44,8 @@ if (!doNotTrack) {
 
     </head>
     <body class="
-    article-page has-toc
-">
+    article-page
+    ">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -67,26 +68,214 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex 
-    
-        extended
-    
-">
-    
-        <div id="article-toolbar">
-            <a href="/" class="back-home">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">⚖️</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">lllovol</a></h1>
+            <h2 class="site-description">Stay hungry, stay foolish.</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="15 6 9 12 15 18" />
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
 </svg>
 
 
 
-                <span>返回</span>
+                
+                <span>主页</span>
             </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
         </div>
-    
-<main class="main full-width">
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#环境搭建">环境搭建</a></li>
+    <li><a href="#使用命令行搭建第一个scala项目">使用命令行搭建第一个Scala项目</a>
+      <ul>
+        <li><a href="#创建项目">创建项目</a></li>
+        <li><a href="#启动项目">启动项目</a></li>
+        <li><a href="#编辑代码">编辑代码</a></li>
+      </ul>
+    </li>
+    <li><a href="#添加依赖">添加依赖</a></li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
         <div class="article-image">
@@ -109,12 +298,17 @@ if (!doNotTrack) {
     </header>
     
 
-    <h2 class="article-title">
-        <a href="/p/scala1/">Scala环境搭建</a>
-    </h2>
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/scala1/">Scala环境搭建</a>
+        </h2>
+    
+        
+    </div>
 
     
-
+    
+    
     
     <footer class="article-time">
         
@@ -149,18 +343,23 @@ if (!doNotTrack) {
         
     </footer>
     
+
+    
 </div>
+
 </header>
 
     <section class="article-content">
+    
+    
     <h2 id="前言">前言</h2>
 <p>最近工作中需要参与一下scala的项目，借此机会学习一下这个心的语言。</p>
 <h2 id="环境搭建">环境搭建</h2>
 <ol>
 <li>Java环境 JDK1.5以上</li>
 </ol>
-<pre><code>ymk@localhost ~ $ java -version
-java version &quot;1.8.0_181&quot;
+<pre tabindex="0"><code>ymk@localhost ~ $ java -version
+java version &#34;1.8.0_181&#34;
 Java(TM) SE Runtime Environment (build 1.8.0_181-b13)
 Java HotSpot(TM) 64-Bit Server VM (build 25.181-b13, mixed mode)
 </code></pre><ol start="2">
@@ -169,7 +368,7 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.181-b13, mixed mode)
     >Scala官方下载地址</a><br>
 安装好了之后,可以通过scala查看是否安装成功</li>
 </ol>
-<pre><code>ymk@localhost ~ $ scala
+<pre tabindex="0"><code>ymk@localhost ~ $ scala
 Welcome to Scala 2.12.7 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_181).
 Type in expressions for evaluation. Or try :help.
 </code></pre><ol start="3">
@@ -187,30 +386,26 @@ Mac:
 <li>当有提示的时候，给这个应用取个名<code>hello-world</code>。这时候就会创建一个名为“hello-world”的项目。</li>
 <li>查看一下这个项目的目录结构</li>
 </ol>
-<pre><code>- hello-world
+<pre tabindex="0"><code>- hello-world
     - project (sbt uses this to install manage plugins and dependencies)
         - build.properties
     - src
         - main
             - scala (All of your scala code goes here)
                 -Main.scala (Entry point of program) &lt;-- this is all we need for now
-    build.sbt (sbt's build definition file)
+    build.sbt (sbt&#39;s build definition file)
 </code></pre><h3 id="启动项目">启动项目</h3>
 <ol>
 <li><code>cd</code>进入对应的scala项目。</li>
 <li>使用<code>sbt</code>,这将打开对应项目的sbt的命令行。
-<figure 
-	>
-	<a href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190802-154645@2x.png" >
-		<img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190802-154645@2x.png"
-			
-			
-			
-			loading="lazy"
-			>
-	</a>
+<img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/pics/WX20190802-154645@2x.png"
 	
-</figure></li>
+	
+	
+	loading="lazy"
+	
+	
+></li>
 <li>使用<code>~run</code>指令，<code>~</code>指令可以让sbt在每次文件更改保存后，重新run一次，可以用在快速编辑、快速启动、以及debug上。</li>
 </ol>
 <h3 id="编辑代码">编辑代码</h3>
@@ -221,7 +416,7 @@ Mac:
 <h2 id="添加依赖">添加依赖</h2>
 <p>如果我们需要其他的功能和依赖，就需要打开 <code>build.sbt</code>文件夹，按照如下的方式，使用“+=”的方式来添加依赖，更多的依赖可以在<a class="link" href="https://index.scala-lang.org/"  target="_blank" rel="noopener"
     >Scaladex</a>中找到</p>
-<pre><code>libraryDependencies += &quot;org.scala-lang.modules&quot; %% &quot;scala-parser-combinators&quot; % &quot;1.1.0&quot;
+<pre tabindex="0"><code>libraryDependencies += &#34;org.scala-lang.modules&#34; %% &#34;scala-parser-combinators&#34; % &#34;1.1.0&#34;
 </code></pre>
 </section>
 
@@ -253,10 +448,9 @@ Mac:
     
 </article>
 
-    <aside class="related-contents--wrapper">
     
+
     
-</aside>
 
      
     
@@ -302,7 +496,7 @@ Mac:
             Owner Rainbowly <br/>
         
         Total [<span id="busuanzi_value_site_uv"></span>] user views [<span id="busuanzi_value_site_pv"></span>] site views [<span id="busuanzi_value_page_pv"></span>] page views <br/>Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -371,62 +565,25 @@ Mac:
 
 </div><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
             ><link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
             >
 
             </main>
-    
-        <aside class="sidebar right-sidebar sticky">
-            <section class="widget archives">
-                <div class="widget-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-                </div>
-                <h2 class="widget-title section-title">目录</h2>
-                
-                <div class="widget--toc">
-                    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#前言">前言</a></li>
-    <li><a href="#环境搭建">环境搭建</a></li>
-    <li><a href="#使用命令行搭建第一个scala项目">使用命令行搭建第一个Scala项目</a>
-      <ul>
-        <li><a href="#创建项目">创建项目</a></li>
-        <li><a href="#启动项目">启动项目</a></li>
-        <li><a href="#编辑代码">编辑代码</a></li>
-      </ul>
-    </li>
-    <li><a href="#添加依赖">添加依赖</a></li>
-  </ul>
-</nav>
-                </div>
-            </section>
-        </aside>
-    
-
         </div>
         <script 
-                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
-                defer="false"
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
                 >
             </script><script type="text/javascript" src="/ts/main.js" defer></script>
 <script>

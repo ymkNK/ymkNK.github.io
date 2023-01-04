@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=' 本文是学习笔记，来自极客时间
  mysql&amp;gt; select * from T where ID=10； 这么一条查询语句是如何执行的呢？
-MySQL基础架构 
-Server层：
- 连接器：管理连接，权限认证 分析器：词法语法分析 查询缓存：命中则直接返回结果 优化器：执行计划生成，索引选择 执行器：操作引擎，返回结果 Server层涵盖了MySQL的大多数的核心服务功能，以及所有的内置函数  '><title>基础架构：一条SQL更新语句是如何执行的？</title>
+MySQL基础架构 Server层：
+ 连接器：管理连接，权限认证 分析器：词法语法分析 查询缓存：命中则直接返回结果 优化器：执行计划生成，索引选择 执行器：操作引擎，返回结果 Server层涵盖了MySQL的大多数的核心服务功能，以及所有的内置函数  '>
+<title>基础架构：一条SQL更新语句是如何执行的？</title>
 
 <link rel='canonical' href='https://lllovol.com/p/how-a-sql-executes/'>
 
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='基础架构：一条SQL更新语句是如何执行的？'>
+<link rel="stylesheet" href="/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css"><meta property='og:title' content='基础架构：一条SQL更新语句是如何执行的？'>
 <meta property='og:description' content=' 本文是学习笔记，来自极客时间
  mysql&amp;gt; select * from T where ID=10； 这么一条查询语句是如何执行的呢？
-MySQL基础架构 
-Server层：
+MySQL基础架构 Server层：
  连接器：管理连接，权限认证 分析器：词法语法分析 查询缓存：命中则直接返回结果 优化器：执行计划生成，索引选择 执行器：操作引擎，返回结果 Server层涵盖了MySQL的大多数的核心服务功能，以及所有的内置函数  '>
 <meta property='og:url' content='https://lllovol.com/p/how-a-sql-executes/'>
 <meta property='og:site_name' content='lllovol'>
@@ -21,8 +20,7 @@ Server层：
 <meta name="twitter:title" content="基础架构：一条SQL更新语句是如何执行的？">
 <meta name="twitter:description" content=" 本文是学习笔记，来自极客时间
  mysql&amp;gt; select * from T where ID=10； 这么一条查询语句是如何执行的呢？
-MySQL基础架构 
-Server层：
+MySQL基础架构 Server层：
  连接器：管理连接，权限认证 分析器：词法语法分析 查询缓存：命中则直接返回结果 优化器：执行计划生成，索引选择 执行器：操作引擎，返回结果 Server层涵盖了MySQL的大多数的核心服务功能，以及所有的内置函数  "><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/6.jpg' />
     <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
@@ -40,8 +38,8 @@ if (!doNotTrack) {
 
     </head>
     <body class="
-    article-page 
-">
+    article-page
+    ">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -64,27 +62,22 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex 
-    
-        on-phone--column extended
-    
-">
-    
-        <aside class="sidebar left-sidebar sticky">
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
     <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
         </span>
     </button>
 
-    <header class="site-info">
+    <header>
         
             
             <figure class="site-avatar">
+                <a href="/">
                 
                     <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
                 
-
+                </a>
                 
                     <span class="emoji">⚖️</span>
                 
@@ -92,14 +85,14 @@ if (!doNotTrack) {
             
         
         
-        <h1 class="site-name"><a href="/">lllovol</a></h1>
-        <h2 class="site-description">Stay hungry, stay foolish.</h2></header>
-
-    <ol class="menu" id="main-menu">
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">lllovol</a></h1>
+            <h2 class="site-description">Stay hungry, stay foolish.</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
         
         
         
-
         <li >
             <a href='/' >
                 
@@ -122,7 +115,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/about/' >
                 
@@ -144,7 +136,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/archives/' >
                 
@@ -167,7 +158,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/links/' >
                 
@@ -189,7 +179,6 @@ if (!doNotTrack) {
         </li>
         
         
-
         <li >
             <a href='/search/' >
                 
@@ -211,9 +200,11 @@ if (!doNotTrack) {
         </li>
         
 
-        
-            <li id="dark-mode-toggle">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="8" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -221,7 +212,7 @@ if (!doNotTrack) {
 
 
 
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="16" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -229,14 +220,16 @@ if (!doNotTrack) {
 
 
 
-                <span>暗色模式</span>
-            </li>
-        
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
     </ol>
 </aside>
 
     
-<main class="main full-width">
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
         <div class="article-image">
@@ -259,12 +252,17 @@ if (!doNotTrack) {
     </header>
     
 
-    <h2 class="article-title">
-        <a href="/p/how-a-sql-executes/">基础架构：一条SQL更新语句是如何执行的？</a>
-    </h2>
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/how-a-sql-executes/">基础架构：一条SQL更新语句是如何执行的？</a>
+        </h2>
+    
+        
+    </div>
 
     
-
+    
+    
     
     <footer class="article-time">
         
@@ -299,28 +297,29 @@ if (!doNotTrack) {
         
     </footer>
     
+
+    
 </div>
+
 </header>
 
     <section class="article-content">
+    
+    
     <blockquote>
 <p><a class="link" href="https://time.geekbang.org/column/article/68319"  target="_blank" rel="noopener"
     >本文是学习笔记，来自极客时间</a></p>
 </blockquote>
 <p><code>mysql&gt; select * from T where ID=10；</code> 这么一条查询语句是如何执行的呢？</p>
 <p>MySQL基础架构
-<figure 
-	>
-	<a href="https://lllovol.oss-cn-beijing.aliyuncs.com/oss/mysql%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.png" >
-		<img src="https://lllovol.oss-cn-beijing.aliyuncs.com/oss/mysql%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.png"
-			
-			
-			
-			loading="lazy"
-			>
-	</a>
+<img src="https://lllovol.oss-cn-beijing.aliyuncs.com/oss/mysql%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.png"
 	
-</figure></p>
+	
+	
+	loading="lazy"
+	
+	
+></p>
 <p>Server层：</p>
 <ul>
 <li>连接器：管理连接，权限认证</li>
@@ -361,10 +360,9 @@ Server层涵盖了MySQL的大多数的核心服务功能，以及所有的内置
     
 </article>
 
-    <aside class="related-contents--wrapper">
     
+
     
-</aside>
 
      
     
@@ -410,7 +408,7 @@ Server层涵盖了MySQL的大多数的核心服务功能，以及所有的内置
             Owner Rainbowly <br/>
         
         Total [<span id="busuanzi_value_site_uv"></span>] user views [<span id="busuanzi_value_site_pv"></span>] site views [<span id="busuanzi_value_page_pv"></span>] page views <br/>Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -479,27 +477,25 @@ Server层涵盖了MySQL的大多数的核心服务功能，以及所有的内置
 
 </div><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
             ><link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
             >
 
             </main>
-    
-
         </div>
         <script 
-                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
-                defer="false"
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
                 >
             </script><script type="text/javascript" src="/ts/main.js" defer></script>
 <script>

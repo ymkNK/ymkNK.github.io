@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='前言 本文是一篇关于Martin Fowler《重构：改善既有代码的设计》的第二章读书笔记与总结。
 何谓重构 很多一线的实践者会非常随意的使用重构这个词，但是作者会非常严谨地使用重构。
@@ -23,11 +23,12 @@
  何时重构 编程的每个小时，都应该去做重构。有几种方式可以把重构融入工作过程中。
 三次法则  第一次做某件事的时候尽管去做 第二次做类似的事情会产生方案，但是无论如何还是可以去去做 第三次再做类似的事情，就应该去重构  预备性重构：让添加新功能更容易 重构的最佳时机就是在添加新功能之前
 帮助理解的重构：使代码更易懂 需要理解代码做什么才能着手修改
- 比如看到一段迷惑的代码，自问，能不能重构它，让它看起来一目了然？ 看到结果糟糕的条件判断，想修改，发现函数命名太糟糕了？ 等等，都是重构的机会。哪怕只是修改函数的命名这类重构，只要能够更加清楚的表达出一图，都会是非常有意义的。这些初步的重构，就像是扫去窗上的灰尘，能够让我们看到窗外的风景。  捡垃圾式重构 可以把要重构的点记下来，把更紧急的事情处理之后，抽空来处理这些垃圾。积少成多'><title>《重构》-重构的原则</title>
+ 比如看到一段迷惑的代码，自问，能不能重构它，让它看起来一目了然？ 看到结果糟糕的条件判断，想修改，发现函数命名太糟糕了？ 等等，都是重构的机会。哪怕只是修改函数的命名这类重构，只要能够更加清楚的表达出一图，都会是非常有意义的。这些初步的重构，就像是扫去窗上的灰尘，能够让我们看到窗外的风景。  捡垃圾式重构 可以把要重构的点记下来，把更紧急的事情处理之后，抽空来处理这些垃圾。积少成多'>
+<title>《重构》-重构的原则</title>
 
 <link rel='canonical' href='https://lllovol.com/p/2021/12/refactoring-chapter2/'>
 
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='《重构》-重构的原则'>
+<link rel="stylesheet" href="/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css"><meta property='og:title' content='《重构》-重构的原则'>
 <meta property='og:description' content='前言 本文是一篇关于Martin Fowler《重构：改善既有代码的设计》的第二章读书笔记与总结。
 何谓重构 很多一线的实践者会非常随意的使用重构这个词，但是作者会非常严谨地使用重构。
  重构（名词）：对软件内部的结构的一种调整，目的是在不改变可观察行为的前提下，提高其可理解性，降低其修改成本 重构（动词）：使用一系列重构手法，在不改变可观察行为的前提下，调整其结构。  重构的关键在于运用大量微且保持软件行为的步骤，一步步达成大规模的修改。 每个单独的重构呀么很小，要么由若干个小步骤组合而成。这样的好处是，即使重构没有完成，也可以在任何时刻停下来，代码很少进入到不可工作的状态。
@@ -53,7 +54,7 @@
  比如看到一段迷惑的代码，自问，能不能重构它，让它看起来一目了然？ 看到结果糟糕的条件判断，想修改，发现函数命名太糟糕了？ 等等，都是重构的机会。哪怕只是修改函数的命名这类重构，只要能够更加清楚的表达出一图，都会是非常有意义的。这些初步的重构，就像是扫去窗上的灰尘，能够让我们看到窗外的风景。  捡垃圾式重构 可以把要重构的点记下来，把更紧急的事情处理之后，抽空来处理这些垃圾。积少成多'>
 <meta property='og:url' content='https://lllovol.com/p/2021/12/refactoring-chapter2/'>
 <meta property='og:site_name' content='lllovol'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Refactoring' /><meta property='article:tag' content='Note' /><meta property='article:published_time' content='2021-12-07T21:05:58&#43;00:00'/><meta property='article:modified_time' content='2021-12-07T21:05:58&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/6.jpeg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Refactoring' /><meta property='article:tag' content='Note' /><meta property='article:published_time' content='2021-12-07T21:05:58&#43;08:00'/><meta property='article:modified_time' content='2021-12-07T21:05:58&#43;08:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/6.jpeg' />
 <meta name="twitter:title" content="《重构》-重构的原则">
 <meta name="twitter:description" content="前言 本文是一篇关于Martin Fowler《重构：改善既有代码的设计》的第二章读书笔记与总结。
 何谓重构 很多一线的实践者会非常随意的使用重构这个词，但是作者会非常严谨地使用重构。
@@ -94,8 +95,8 @@ if (!doNotTrack) {
 
     </head>
     <body class="
-    article-page has-toc
-">
+    article-page
+    ">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -118,26 +119,248 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex 
-    
-        extended
-    
-">
-    
-        <div id="article-toolbar">
-            <a href="/" class="back-home">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">⚖️</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">lllovol</a></h1>
+            <h2 class="site-description">Stay hungry, stay foolish.</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="15 6 9 12 15 18" />
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
 </svg>
 
 
 
-                <span>返回</span>
+                
+                <span>主页</span>
             </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
         </div>
-    
-<main class="main full-width">
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#何谓重构">何谓重构</a>
+      <ul>
+        <li><a href="#重构与性能优化">重构与性能优化</a></li>
+      </ul>
+    </li>
+    <li><a href="#两顶帽子">两顶帽子</a></li>
+    <li><a href="#为何重构">为何重构</a>
+      <ul>
+        <li><a href="#重构改进软件的设计">重构改进软件的设计</a></li>
+        <li><a href="#重构使软件更容易理解">重构使软件更容易理解</a></li>
+        <li><a href="#重构帮助找到bug">重构帮助找到bug</a></li>
+        <li><a href="#重构提高编程速度">重构提高编程速度</a></li>
+      </ul>
+    </li>
+    <li><a href="#何时重构">何时重构</a>
+      <ul>
+        <li><a href="#三次法则">三次法则</a></li>
+        <li><a href="#预备性重构让添加新功能更容易">预备性重构：让添加新功能更容易</a></li>
+        <li><a href="#帮助理解的重构使代码更易懂">帮助理解的重构：使代码更易懂</a></li>
+        <li><a href="#捡垃圾式重构">捡垃圾式重构</a></li>
+        <li><a href="#有计划的重构和见机行事的重构">有计划的重构和见机行事的重构</a></li>
+        <li><a href="#长期重构">长期重构</a></li>
+        <li><a href="#复审代码时重构">复审代码时重构</a></li>
+        <li><a href="#怎么对经理说客户">怎么对经理说？（客户）</a></li>
+        <li><a href="#何时不应该重构">何时不应该重构</a></li>
+      </ul>
+    </li>
+    <li><a href="#重构的挑战">重构的挑战</a>
+      <ul>
+        <li><a href="#延缓新功能开发">延缓新功能开发</a></li>
+        <li><a href="#代码所有权">代码所有权</a></li>
+        <li><a href="#分支">分支</a></li>
+        <li><a href="#测试">测试</a></li>
+        <li><a href="#遗留代码">遗留代码</a></li>
+        <li><a href="#数据库">数据库</a></li>
+      </ul>
+    </li>
+    <li><a href="#重构架构和yagni">重构、架构和YAGNI</a></li>
+    <li><a href="#重构和软件开发过程">重构和软件开发过程</a></li>
+    <li><a href="#重构和性能">重构和性能</a></li>
+    <li><a href="#重构起源于何处">重构起源于何处</a></li>
+    <li><a href="#自动化重构">自动化重构</a></li>
+    <li><a href="#延展阅读">延展阅读</a></li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
         <div class="article-image">
@@ -164,12 +387,17 @@ if (!doNotTrack) {
     </header>
     
 
-    <h2 class="article-title">
-        <a href="/p/2021/12/refactoring-chapter2/">《重构》-重构的原则</a>
-    </h2>
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/2021/12/refactoring-chapter2/">《重构》-重构的原则</a>
+        </h2>
+    
+        
+    </div>
 
     
-
+    
+    
     
     <footer class="article-time">
         
@@ -204,10 +432,15 @@ if (!doNotTrack) {
         
     </footer>
     
+
+    
 </div>
+
 </header>
 
     <section class="article-content">
+    
+    
     <h2 id="前言">前言</h2>
 <p>本文是一篇关于Martin Fowler《重构：改善既有代码的设计》的第二章读书笔记与总结。</p>
 <h2 id="何谓重构">何谓重构</h2>
@@ -216,7 +449,7 @@ if (!doNotTrack) {
 <li>重构（名词）：对软件内部的结构的一种调整，目的是在不改变可观察行为的前提下，提高其可理解性，降低其修改成本</li>
 <li>重构（动词）：使用一系列重构手法，在不改变可观察行为的前提下，调整其结构。</li>
 </ul>
-<p>重构的关键在于<strong>运用大量微且保持软件行为的步骤，一步步达成大规模的修改。</strong> 
+<p>重构的关键在于<strong>运用大量微且保持软件行为的步骤，一步步达成大规模的修改。</strong>
 每个单独的重构呀么很小，要么由若干个小步骤组合而成。这样的好处是，即使重构没有完成，也可以在任何时刻停下来，代码很少进入到不可工作的状态。</p>
 <h3 id="重构与性能优化">重构与性能优化</h3>
 <p>二者有很多相似之处</p>
@@ -411,14 +644,16 @@ if (!doNotTrack) {
     
 </article>
 
-    <aside class="related-contents--wrapper">
     
+
     
-        <h2 class="section-title">相关文章</h2>
-        <div class="related-contents">
-            <div class="flex article-list--tile">
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
                 
-                    
 <article class="has-image">
     <a href="/p/2022/2/refactoring-chapter3/">
         
@@ -435,8 +670,9 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
+
+            
                 
-                    
 <article class="has-image">
     <a href="/p/2022/9/project-manage/">
         
@@ -453,8 +689,9 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
+
+            
                 
-                    
 <article class="has-image">
     <a href="/p/2022/9/person-soft-ability/">
         
@@ -471,8 +708,9 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
+
+            
                 
-                    
 <article class="has-image">
     <a href="/p/2021/10/mindfulness/">
         
@@ -489,8 +727,9 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
+
+            
                 
-                    
 <article class="has-image">
     <a href="/p/2021/10/goland-tips/">
         
@@ -507,10 +746,10 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
-                
-            </div>
+
+            
         </div>
-    
+    </div>
 </aside>
 
      
@@ -557,7 +796,7 @@ if (!doNotTrack) {
             Owner Rainbowly <br/>
         
         Total [<span id="busuanzi_value_site_uv"></span>] user views [<span id="busuanzi_value_site_pv"></span>] site views [<span id="busuanzi_value_page_pv"></span>] page views <br/>Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -626,96 +865,25 @@ if (!doNotTrack) {
 
 </div><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
             ><link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
             >
 
             </main>
-    
-        <aside class="sidebar right-sidebar sticky">
-            <section class="widget archives">
-                <div class="widget-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-                </div>
-                <h2 class="widget-title section-title">目录</h2>
-                
-                <div class="widget--toc">
-                    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#前言">前言</a></li>
-    <li><a href="#何谓重构">何谓重构</a>
-      <ul>
-        <li><a href="#重构与性能优化">重构与性能优化</a></li>
-      </ul>
-    </li>
-    <li><a href="#两顶帽子">两顶帽子</a></li>
-    <li><a href="#为何重构">为何重构</a>
-      <ul>
-        <li><a href="#重构改进软件的设计">重构改进软件的设计</a></li>
-        <li><a href="#重构使软件更容易理解">重构使软件更容易理解</a></li>
-        <li><a href="#重构帮助找到bug">重构帮助找到bug</a></li>
-        <li><a href="#重构提高编程速度">重构提高编程速度</a></li>
-      </ul>
-    </li>
-    <li><a href="#何时重构">何时重构</a>
-      <ul>
-        <li><a href="#三次法则">三次法则</a></li>
-        <li><a href="#预备性重构让添加新功能更容易">预备性重构：让添加新功能更容易</a></li>
-        <li><a href="#帮助理解的重构使代码更易懂">帮助理解的重构：使代码更易懂</a></li>
-        <li><a href="#捡垃圾式重构">捡垃圾式重构</a></li>
-        <li><a href="#有计划的重构和见机行事的重构">有计划的重构和见机行事的重构</a></li>
-        <li><a href="#长期重构">长期重构</a></li>
-        <li><a href="#复审代码时重构">复审代码时重构</a></li>
-        <li><a href="#怎么对经理说客户">怎么对经理说？（客户）</a></li>
-        <li><a href="#何时不应该重构">何时不应该重构</a></li>
-      </ul>
-    </li>
-    <li><a href="#重构的挑战">重构的挑战</a>
-      <ul>
-        <li><a href="#延缓新功能开发">延缓新功能开发</a></li>
-        <li><a href="#代码所有权">代码所有权</a></li>
-        <li><a href="#分支">分支</a></li>
-        <li><a href="#测试">测试</a></li>
-        <li><a href="#遗留代码">遗留代码</a></li>
-        <li><a href="#数据库">数据库</a></li>
-      </ul>
-    </li>
-    <li><a href="#重构架构和yagni">重构、架构和YAGNI</a></li>
-    <li><a href="#重构和软件开发过程">重构和软件开发过程</a></li>
-    <li><a href="#重构和性能">重构和性能</a></li>
-    <li><a href="#重构起源于何处">重构起源于何处</a></li>
-    <li><a href="#自动化重构">自动化重构</a></li>
-    <li><a href="#延展阅读">延展阅读</a></li>
-  </ul>
-</nav>
-                </div>
-            </section>
-        </aside>
-    
-
         </div>
         <script 
-                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
-                defer="false"
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
                 >
             </script><script type="text/javascript" src="/ts/main.js" defer></script>
 <script>

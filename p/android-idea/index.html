@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='前言 最近在帮朋友优化一个安卓的应用，使用Android来实现的一个华容道的小游戏。 项目链接
 Android Studio的开发项目文件结构图 主要显示的是src文件夹下的结构
- .├── AndroidManifest.xml ├── java│ └── com│ └── example│ └── huarongdao│ ├── AboutActivity.java│ ├── Block.java│ ├── Dimension.java│ ├── Klotski.java│ ├── KlotskiMapParser.java│ ├── L.java│ ├── Level1Activity.java│ ├── Level2Activity.java│ ├── Level3Activity.java│ ├── Level4Activity.java│ ├── LevelActivity.java│ ├── MainActivity.java│ └── Screen.java└── res├── drawable├── drawable-v24├── layout├── mipmap-anydpi-v26├── mipmap-hdpi├── mipmap-mdpi├── mipmap-xhdpi├── mipmap-xxhdpi├── mipmap-xxxhdpi├── temp-mipmap└── values AndroidManifest.'><title>Android开发笔记（一)</title>
+	. ├── AndroidManifest.xml ├── java │ └── com │ └── example │ └── huarongdao │ ├── AboutActivity.java │ ├── Block.java │ ├── Dimension.java │ ├── Klotski.java │ ├── KlotskiMapParser.java │ ├── L.java │ ├── Level1Activity.java │ ├── Level2Activity.java │ ├── Level3Activity.java │ ├── Level4Activity.java │ ├── LevelActivity.java │ ├── MainActivity.java │ └── Screen.java └── res ├── drawable ├── drawable-v24 ├── layout ├── mipmap-anydpi-v26 ├── mipmap-hdpi ├── mipmap-mdpi ├── mipmap-xhdpi ├── mipmap-xxhdpi ├── mipmap-xxxhdpi ├── temp-mipmap └── values  AndroidManifest.'>
+<title>Android开发笔记（一)</title>
 
 <link rel='canonical' href='https://lllovol.com/p/android-idea/'>
 
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Android开发笔记（一)'>
+<link rel="stylesheet" href="/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css"><meta property='og:title' content='Android开发笔记（一)'>
 <meta property='og:description' content='前言 最近在帮朋友优化一个安卓的应用，使用Android来实现的一个华容道的小游戏。 项目链接
 Android Studio的开发项目文件结构图 主要显示的是src文件夹下的结构
- .├── AndroidManifest.xml ├── java│ └── com│ └── example│ └── huarongdao│ ├── AboutActivity.java│ ├── Block.java│ ├── Dimension.java│ ├── Klotski.java│ ├── KlotskiMapParser.java│ ├── L.java│ ├── Level1Activity.java│ ├── Level2Activity.java│ ├── Level3Activity.java│ ├── Level4Activity.java│ ├── LevelActivity.java│ ├── MainActivity.java│ └── Screen.java└── res├── drawable├── drawable-v24├── layout├── mipmap-anydpi-v26├── mipmap-hdpi├── mipmap-mdpi├── mipmap-xhdpi├── mipmap-xxhdpi├── mipmap-xxxhdpi├── temp-mipmap└── values AndroidManifest.'>
+	. ├── AndroidManifest.xml ├── java │ └── com │ └── example │ └── huarongdao │ ├── AboutActivity.java │ ├── Block.java │ ├── Dimension.java │ ├── Klotski.java │ ├── KlotskiMapParser.java │ ├── L.java │ ├── Level1Activity.java │ ├── Level2Activity.java │ ├── Level3Activity.java │ ├── Level4Activity.java │ ├── LevelActivity.java │ ├── MainActivity.java │ └── Screen.java └── res ├── drawable ├── drawable-v24 ├── layout ├── mipmap-anydpi-v26 ├── mipmap-hdpi ├── mipmap-mdpi ├── mipmap-xhdpi ├── mipmap-xxhdpi ├── mipmap-xxxhdpi ├── temp-mipmap └── values  AndroidManifest.'>
 <meta property='og:url' content='https://lllovol.com/p/android-idea/'>
 <meta property='og:site_name' content='lllovol'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Android' /><meta property='article:published_time' content='2019-06-08T16:49:49&#43;00:00'/><meta property='article:modified_time' content='2019-06-08T16:49:49&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg' />
 <meta name="twitter:title" content="Android开发笔记（一)">
 <meta name="twitter:description" content="前言 最近在帮朋友优化一个安卓的应用，使用Android来实现的一个华容道的小游戏。 项目链接
 Android Studio的开发项目文件结构图 主要显示的是src文件夹下的结构
- .├── AndroidManifest.xml ├── java│ └── com│ └── example│ └── huarongdao│ ├── AboutActivity.java│ ├── Block.java│ ├── Dimension.java│ ├── Klotski.java│ ├── KlotskiMapParser.java│ ├── L.java│ ├── Level1Activity.java│ ├── Level2Activity.java│ ├── Level3Activity.java│ ├── Level4Activity.java│ ├── LevelActivity.java│ ├── MainActivity.java│ └── Screen.java└── res├── drawable├── drawable-v24├── layout├── mipmap-anydpi-v26├── mipmap-hdpi├── mipmap-mdpi├── mipmap-xhdpi├── mipmap-xxhdpi├── mipmap-xxxhdpi├── temp-mipmap└── values AndroidManifest."><meta name="twitter:card" content="summary_large_image">
+	. ├── AndroidManifest.xml ├── java │ └── com │ └── example │ └── huarongdao │ ├── AboutActivity.java │ ├── Block.java │ ├── Dimension.java │ ├── Klotski.java │ ├── KlotskiMapParser.java │ ├── L.java │ ├── Level1Activity.java │ ├── Level2Activity.java │ ├── Level3Activity.java │ ├── Level4Activity.java │ ├── LevelActivity.java │ ├── MainActivity.java │ └── Screen.java └── res ├── drawable ├── drawable-v24 ├── layout ├── mipmap-anydpi-v26 ├── mipmap-hdpi ├── mipmap-mdpi ├── mipmap-xhdpi ├── mipmap-xxhdpi ├── mipmap-xxxhdpi ├── temp-mipmap └── values  AndroidManifest."><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/5.jpg' />
     <link rel="shortcut icon" href="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" />
 
@@ -34,8 +35,8 @@ if (!doNotTrack) {
 
     </head>
     <body class="
-    article-page has-toc
-">
+    article-page
+    ">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -58,26 +59,217 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex 
-    
-        extended
-    
-">
-    
-        <div id="article-toolbar">
-            <a href="/" class="back-home">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">⚖️</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">lllovol</a></h1>
+            <h2 class="site-description">Stay hungry, stay foolish.</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="15 6 9 12 15 18" />
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
 </svg>
 
 
 
-                <span>返回</span>
+                
+                <span>主页</span>
             </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
         </div>
-    
-<main class="main full-width">
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
         <div class="article-image">
@@ -100,12 +292,17 @@ if (!doNotTrack) {
     </header>
     
 
-    <h2 class="article-title">
-        <a href="/p/android-idea/">Android开发笔记（一)</a>
-    </h2>
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/android-idea/">Android开发笔记（一)</a>
+        </h2>
+    
+        
+    </div>
 
     
-
+    
+    
     
     <footer class="article-time">
         
@@ -140,16 +337,21 @@ if (!doNotTrack) {
         
     </footer>
     
+
+    
 </div>
+
 </header>
 
     <section class="article-content">
+    
+    
     <h1 id="前言">前言</h1>
 <p>最近在帮朋友优化一个安卓的应用，使用Android来实现的一个华容道的小游戏。 <a class="link" href="https://github.com/MikarLittle/HuaRongDao"  target="_blank" rel="noopener"
     >项目链接</a></p>
 <h1 id="android-studio的开发项目文件结构图">Android Studio的开发项目文件结构图</h1>
 <p>主要显示的是src文件夹下的结构</p>
-<pre><code>     .
+<pre><code>	 .
 	├── AndroidManifest.xml 
 	├── java
 	│   └── com
@@ -169,73 +371,73 @@ if (!doNotTrack) {
 	│               ├── MainActivity.java
 	│               └── Screen.java
 	└── res
-        ├── drawable
-        ├── drawable-v24
-        ├── layout
-        ├── mipmap-anydpi-v26
-        ├── mipmap-hdpi
-        ├── mipmap-mdpi
-        ├── mipmap-xhdpi
-        ├── mipmap-xxhdpi
-        ├── mipmap-xxxhdpi
-        ├── temp-mipmap
-        └── values
+	    ├── drawable
+	    ├── drawable-v24
+	    ├── layout
+	    ├── mipmap-anydpi-v26
+	    ├── mipmap-hdpi
+	    ├── mipmap-mdpi
+	    ├── mipmap-xhdpi
+	    ├── mipmap-xxhdpi
+	    ├── mipmap-xxxhdpi
+	    ├── temp-mipmap
+	    └── values
 </code></pre>
 <h1 id="androidmanifestxml">AndroidManifest.xml</h1>
 <p>这个配置文件中主要用来说明整个app都将使用哪一些Activity，同时也可以设置有没有上面的导航栏等功能。</p>
-<pre><code>    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+<pre><code>	&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 	&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-        xmlns:tools=&quot;http://schemas.android.com/tools&quot;
-        package=&quot;com.example.huarongdao&quot;&gt;
+	    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+	    package=&quot;com.example.huarongdao&quot;&gt;
 
-        &lt;application
-            android:allowBackup=&quot;true&quot;
-            android:icon=&quot;@mipmap/ic_launcher&quot;
-            android:label=&quot;@string/app_name&quot;
-            android:roundIcon=&quot;@mipmap/ic_launcher_round&quot;
-            android:supportsRtl=&quot;true&quot;
-            android:theme=&quot;@style/AppTheme&quot;
-            tools:ignore=&quot;GoogleAppIndexingWarning&quot;&gt;
-            &lt;activity
-                android:name=&quot;.Level1Activity&quot;
-                android:theme=&quot;@style/AppTheme.NoActionBar&quot; /&gt;
-            &lt;activity
-                android:name=&quot;.Level2Activity&quot;
-                android:theme=&quot;@style/AppTheme.NoActionBar&quot; /&gt;
-            &lt;activity
-                android:name=&quot;.Level3Activity&quot;
-                android:theme=&quot;@style/AppTheme.NoActionBar&quot; /&gt;
-            &lt;activity
-                android:name=&quot;.Level4Activity&quot;
-                android:theme=&quot;@style/AppTheme.NoActionBar&quot; /&gt;
-            &lt;activity
-                android:name=&quot;.AboutActivity&quot;
-                android:theme=&quot;@style/AppTheme.NoActionBar&quot; /&gt;
-            &lt;activity
-                android:name=&quot;.LevelActivity&quot;
-                android:theme=&quot;@style/AppTheme.NoActionBar&quot; /&gt;
-            &lt;activity
-                android:name=&quot;.MainActivity&quot;
-                android:theme=&quot;@style/AppTheme.NoActionBar&quot;&gt;
-                &lt;intent-filter&gt;
-                    &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
+	    &lt;application
+	        android:allowBackup=&quot;true&quot;
+	        android:icon=&quot;@mipmap/ic_launcher&quot;
+	        android:label=&quot;@string/app_name&quot;
+	        android:roundIcon=&quot;@mipmap/ic_launcher_round&quot;
+	        android:supportsRtl=&quot;true&quot;
+	        android:theme=&quot;@style/AppTheme&quot;
+	        tools:ignore=&quot;GoogleAppIndexingWarning&quot;&gt;
+	        &lt;activity
+	            android:name=&quot;.Level1Activity&quot;
+	            android:theme=&quot;@style/AppTheme.NoActionBar&quot; /&gt;
+	        &lt;activity
+	            android:name=&quot;.Level2Activity&quot;
+	            android:theme=&quot;@style/AppTheme.NoActionBar&quot; /&gt;
+	        &lt;activity
+	            android:name=&quot;.Level3Activity&quot;
+	            android:theme=&quot;@style/AppTheme.NoActionBar&quot; /&gt;
+	        &lt;activity
+	            android:name=&quot;.Level4Activity&quot;
+	            android:theme=&quot;@style/AppTheme.NoActionBar&quot; /&gt;
+	        &lt;activity
+	            android:name=&quot;.AboutActivity&quot;
+	            android:theme=&quot;@style/AppTheme.NoActionBar&quot; /&gt;
+	        &lt;activity
+	            android:name=&quot;.LevelActivity&quot;
+	            android:theme=&quot;@style/AppTheme.NoActionBar&quot; /&gt;
+	        &lt;activity
+	            android:name=&quot;.MainActivity&quot;
+	            android:theme=&quot;@style/AppTheme.NoActionBar&quot;&gt;
+	            &lt;intent-filter&gt;
+	                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
 
-                    &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
-                &lt;/intent-filter&gt;
-            &lt;/activity&gt;
-        &lt;/application&gt;
+	                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
+	            &lt;/intent-filter&gt;
+	        &lt;/activity&gt;
+	    &lt;/application&gt;
 
 	&lt;/manifest&gt;
 </code></pre>
 <h1 id="res文件夹下的layout">Res文件夹下的Layout</h1>
-<pre><code>        ├── layout
-        │   ├── activity_about.xml
-        │   ├── activity_level.xml
-        │   ├── activity_level1.xml
-        │   ├── activity_level2.xml
-        │   ├── activity_level3.xml
-        │   ├── activity_level4.xml
-        │   └── activity_main.xml
+<pre><code>	    ├── layout
+	    │   ├── activity_about.xml
+	    │   ├── activity_level.xml
+	    │   ├── activity_level1.xml
+	    │   ├── activity_level2.xml
+	    │   ├── activity_level3.xml
+	    │   ├── activity_level4.xml
+	    │   └── activity_main.xml
 </code></pre>
 <p>在这个文件夹中的，就是app的各个页面的布局文件，在右方有可以直接拖动添加组件，但是拖动而得到的位置，最终都不是那么的准确。
 因此一般都主要在代码中体现布局，这是可以最终确定布局是什么样子的。<br>
@@ -246,41 +448,41 @@ if (!doNotTrack) {
 </ul>
 <h1 id="res的其他配置文件">Res的其他配置文件</h1>
 <h4 id="drawable文件夹">drawable文件夹</h4>
-<pre><code>        ├── drawable
-        │   ├── aboutbtn.xml
-        │   ├── angry.jpg
-        │   ├── back_icon.jpg
-        │   ├── backimage.jpg
-        │   ├── btn.xml
-        │   ├── cry.jpg
-        │   ├── ic_launcher_background.xml
-        │   ├── levelback.jpg
-        │   └── surprise_icon.jpg
+<pre><code>	    ├── drawable
+	    │   ├── aboutbtn.xml
+	    │   ├── angry.jpg
+	    │   ├── back_icon.jpg
+	    │   ├── backimage.jpg
+	    │   ├── btn.xml
+	    │   ├── cry.jpg
+	    │   ├── ic_launcher_background.xml
+	    │   ├── levelback.jpg
+	    │   └── surprise_icon.jpg
 </code></pre>
 <p>这个文件夹主要用于存放图片的资源文件，可以使用xml来配置图片被点击的时候的动画（press=false或者press=true的时候分别显示哪一张图）</p>
-<pre><code>    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+<pre><code>	&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 	&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
-        &lt;item android:drawable=&quot;@drawable/surprise_icon&quot;
-            android:state_pressed=&quot;true&quot;/&gt;
-        &lt;item android:drawable=&quot;@drawable/back_icon&quot;
-            android:state_pressed=&quot;false&quot;/&gt;
+	    &lt;item android:drawable=&quot;@drawable/surprise_icon&quot;
+	        android:state_pressed=&quot;true&quot;/&gt;
+	    &lt;item android:drawable=&quot;@drawable/back_icon&quot;
+	        android:state_pressed=&quot;false&quot;/&gt;
 	&lt;/selector&gt;
 </code></pre>
 <p>在上面的代码中，android:state_pressed=&ldquo;true&quot;的时候（也就是受到按压的时候），就显示surprise_icon，如果为&quot;false&quot;就显示back_icon</p>
 <h4 id="values文件夹">values文件夹</h4>
-<pre><code>        └── values
-            ├── attrs.xml
-            ├── colors.xml
-            ├── dimens.xml
-            ├── strings.xml
-            └── styles.xml
+<pre><code>	    └── values
+	        ├── attrs.xml
+	        ├── colors.xml
+	        ├── dimens.xml
+	        ├── strings.xml
+	        └── styles.xml
 </code></pre>
 <p>在这些xml文件当中，可以配置Android应用中的各种属性。</p>
-<pre><code>    &lt;resources&gt;
-        &lt;dimen name=&quot;fab_margin&quot;&gt;16dp&lt;/dimen&gt;
-        &lt;dimen name=&quot;level_text_size&quot;&gt;24sp&lt;/dimen&gt;
-        &lt;dimen name=&quot;level_text_size_big&quot;&gt;30sp&lt;/dimen&gt;
-        &lt;dimen name=&quot;level_text_width&quot;&gt;192dp&lt;/dimen&gt;
+<pre><code>	&lt;resources&gt;
+	    &lt;dimen name=&quot;fab_margin&quot;&gt;16dp&lt;/dimen&gt;
+	    &lt;dimen name=&quot;level_text_size&quot;&gt;24sp&lt;/dimen&gt;
+	    &lt;dimen name=&quot;level_text_size_big&quot;&gt;30sp&lt;/dimen&gt;
+	    &lt;dimen name=&quot;level_text_width&quot;&gt;192dp&lt;/dimen&gt;
 
 	&lt;/resources&gt;
 </code></pre>
@@ -295,7 +497,7 @@ if (!doNotTrack) {
 <li>使用findViewById方法，可以将layout中的各个组件，通过id找到，然后和java对象进行绑定，然后进行相应的操作</li>
 </ul>
 <h4 id="例子监听textview的点击事件">例子：监听TextView的点击事件</h4>
-<pre><code>    final TextView aboutGame = findViewById(R.id.about);
+<pre><code>   	final TextView aboutGame = findViewById(R.id.about);
     aboutGame.setOnTouchListener(new View.OnTouchListener() {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
@@ -344,10 +546,9 @@ if (!doNotTrack) {
     
 </article>
 
-    <aside class="related-contents--wrapper">
     
+
     
-</aside>
 
      
     
@@ -393,7 +594,7 @@ if (!doNotTrack) {
             Owner Rainbowly <br/>
         
         Total [<span id="busuanzi_value_site_uv"></span>] user views [<span id="busuanzi_value_site_pv"></span>] site views [<span id="busuanzi_value_page_pv"></span>] page views <br/>Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -462,65 +663,25 @@ if (!doNotTrack) {
 
 </div><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
             ><link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
             >
 
             </main>
-    
-        <aside class="sidebar right-sidebar sticky">
-            <section class="widget archives">
-                <div class="widget-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-                </div>
-                <h2 class="widget-title section-title">目录</h2>
-                
-                <div class="widget--toc">
-                    <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li></li>
-      </ul>
-    </li>
-  </ul>
-
-  <ul>
-    <li>
-      <ul>
-        <li></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-                </div>
-            </section>
-        </aside>
-    
-
         </div>
         <script 
-                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
-                defer="false"
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
                 >
             </script><script type="text/javascript" src="/ts/main.js" defer></script>
 <script>

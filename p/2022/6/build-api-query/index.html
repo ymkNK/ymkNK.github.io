@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='背景 在写go的过程中，经常需要拼接一些url来进行http的请求，代码起来感觉非常的不优雅，全是fmt，因此写了一个小工具，将简单的struct，通过json的tag，转化为对应的query string
-代码 // IsNil 判断指针,Slice,Map类型的值是否为空 func IsNil(i interface{}) bool { // 首先判断i是否为nil 	if i == nil { return true } // 判断值是否为nil 	vi := reflect.ValueOf(i) if vi.Kind() == reflect.Ptr || vi.Kind() == reflect.Slice || vi.Kind() == reflect.Map { return vi.IsNil() } return false } // ParseToRequestQuery 将简单json结构体转成query参数 func ParseToRequestQuery(p interface{}) string { paramArr := buildParamArr(p) return strings.Join(paramArr, &amp;#34;&amp;amp;&amp;#34;) } func buildParamArr(p interface{}) []string { v := reflect.'><title>Go实践：将Struct转为Query参数字符串</title>
+代码 // IsNil 判断指针,Slice,Map类型的值是否为空 func IsNil(i interface{}) bool { // 首先判断i是否为nil 	if i == nil { return true } // 判断值是否为nil 	vi := reflect.ValueOf(i) if vi.Kind() == reflect.Ptr || vi.Kind() == reflect.Slice || vi.Kind() == reflect.Map { return vi.IsNil() } return false } // ParseToRequestQuery 将简单json结构体转成query参数 func ParseToRequestQuery(p interface{}) string { paramArr := buildParamArr(p) return strings.Join(paramArr, &amp;#34;&amp;amp;&amp;#34;) } func buildParamArr(p interface{}) []string { v := reflect.'>
+<title>Go实践：将Struct转为Query参数字符串</title>
 
 <link rel='canonical' href='https://lllovol.com/p/2022/6/build-api-query/'>
 
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Go实践：将Struct转为Query参数字符串'>
+<link rel="stylesheet" href="/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css"><meta property='og:title' content='Go实践：将Struct转为Query参数字符串'>
 <meta property='og:description' content='背景 在写go的过程中，经常需要拼接一些url来进行http的请求，代码起来感觉非常的不优雅，全是fmt，因此写了一个小工具，将简单的struct，通过json的tag，转化为对应的query string
 代码 // IsNil 判断指针,Slice,Map类型的值是否为空 func IsNil(i interface{}) bool { // 首先判断i是否为nil 	if i == nil { return true } // 判断值是否为nil 	vi := reflect.ValueOf(i) if vi.Kind() == reflect.Ptr || vi.Kind() == reflect.Slice || vi.Kind() == reflect.Map { return vi.IsNil() } return false } // ParseToRequestQuery 将简单json结构体转成query参数 func ParseToRequestQuery(p interface{}) string { paramArr := buildParamArr(p) return strings.Join(paramArr, &amp;#34;&amp;amp;&amp;#34;) } func buildParamArr(p interface{}) []string { v := reflect.'>
 <meta property='og:url' content='https://lllovol.com/p/2022/6/build-api-query/'>
 <meta property='og:site_name' content='lllovol'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Go' /><meta property='article:published_time' content='2022-06-28T18:01:27&#43;00:00'/><meta property='article:modified_time' content='2022-06-28T18:01:27&#43;00:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/6.jpeg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Go' /><meta property='article:published_time' content='2022-06-28T18:01:27&#43;08:00'/><meta property='article:modified_time' content='2022-06-28T18:01:27&#43;08:00'/><meta property='og:image' content='https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/post/6.jpeg' />
 <meta name="twitter:title" content="Go实践：将Struct转为Query参数字符串">
 <meta name="twitter:description" content="背景 在写go的过程中，经常需要拼接一些url来进行http的请求，代码起来感觉非常的不优雅，全是fmt，因此写了一个小工具，将简单的struct，通过json的tag，转化为对应的query string
 代码 // IsNil 判断指针,Slice,Map类型的值是否为空 func IsNil(i interface{}) bool { // 首先判断i是否为nil 	if i == nil { return true } // 判断值是否为nil 	vi := reflect.ValueOf(i) if vi.Kind() == reflect.Ptr || vi.Kind() == reflect.Slice || vi.Kind() == reflect.Map { return vi.IsNil() } return false } // ParseToRequestQuery 将简单json结构体转成query参数 func ParseToRequestQuery(p interface{}) string { paramArr := buildParamArr(p) return strings.Join(paramArr, &amp;#34;&amp;amp;&amp;#34;) } func buildParamArr(p interface{}) []string { v := reflect."><meta name="twitter:card" content="summary_large_image">
@@ -31,8 +32,8 @@ if (!doNotTrack) {
 
     </head>
     <body class="
-    article-page has-toc
-">
+    article-page
+    ">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -55,26 +56,208 @@ if (!doNotTrack) {
         }
     })();
 </script>
-<div class="container main-container flex 
-    
-        extended
-    
-">
-    
-        <div id="article-toolbar">
-            <a href="/" class="back-home">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="https://lllovol.oss-cn-beijing.aliyuncs.com/assets/img/cat.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">⚖️</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">lllovol</a></h1>
+            <h2 class="site-description">Stay hungry, stay foolish.</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="15 6 9 12 15 18" />
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
 </svg>
 
 
 
-                <span>返回</span>
+                
+                <span>主页</span>
             </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                    
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
         </div>
-    
-<main class="main full-width">
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#代码">代码</a></li>
+    <li><a href="#效果">效果</a></li>
+    <li><a href="#实际使用">实际使用</a></li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
         <div class="article-image">
@@ -97,12 +280,17 @@ if (!doNotTrack) {
     </header>
     
 
-    <h2 class="article-title">
-        <a href="/p/2022/6/build-api-query/">Go实践：将Struct转为Query参数字符串</a>
-    </h2>
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/2022/6/build-api-query/">Go实践：将Struct转为Query参数字符串</a>
+        </h2>
+    
+        
+    </div>
 
     
-
+    
+    
     
     <footer class="article-time">
         
@@ -137,153 +325,158 @@ if (!doNotTrack) {
         
     </footer>
     
+
+    
 </div>
+
 </header>
 
     <section class="article-content">
+    
+    
     <h2 id="背景">背景</h2>
 <p>在写go的过程中，经常需要拼接一些url来进行http的请求，代码起来感觉非常的不优雅，全是fmt，因此写了一个小工具，将简单的struct，通过json的tag，转化为对应的query string</p>
 <h2 id="代码">代码</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Go" data-lang="Go"><span class="c1">// IsNil 判断指针,Slice,Map类型的值是否为空
-</span><span class="c1"></span><span class="kd">func</span> <span class="nf">IsNil</span><span class="p">(</span><span class="nx">i</span> <span class="kd">interface</span><span class="p">{})</span> <span class="kt">bool</span> <span class="p">{</span>
-	<span class="c1">// 首先判断i是否为nil
-</span><span class="c1"></span>	<span class="k">if</span> <span class="nx">i</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="kc">true</span>
-	<span class="p">}</span>
-
-	<span class="c1">// 判断值是否为nil
-</span><span class="c1"></span>	<span class="nx">vi</span> <span class="o">:=</span> <span class="nx">reflect</span><span class="p">.</span><span class="nf">ValueOf</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">vi</span><span class="p">.</span><span class="nf">Kind</span><span class="p">()</span> <span class="o">==</span> <span class="nx">reflect</span><span class="p">.</span><span class="nx">Ptr</span> <span class="o">||</span>
-		<span class="nx">vi</span><span class="p">.</span><span class="nf">Kind</span><span class="p">()</span> <span class="o">==</span> <span class="nx">reflect</span><span class="p">.</span><span class="nx">Slice</span> <span class="o">||</span>
-		<span class="nx">vi</span><span class="p">.</span><span class="nf">Kind</span><span class="p">()</span> <span class="o">==</span> <span class="nx">reflect</span><span class="p">.</span><span class="nx">Map</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="nx">vi</span><span class="p">.</span><span class="nf">IsNil</span><span class="p">()</span>
-	<span class="p">}</span>
-
-	<span class="k">return</span> <span class="kc">false</span>
-<span class="p">}</span>
-
-<span class="c1">// ParseToRequestQuery 将简单json结构体转成query参数
-</span><span class="c1"></span><span class="kd">func</span> <span class="nf">ParseToRequestQuery</span><span class="p">(</span><span class="nx">p</span> <span class="kd">interface</span><span class="p">{})</span> <span class="kt">string</span> <span class="p">{</span>
-	<span class="nx">paramArr</span> <span class="o">:=</span> <span class="nf">buildParamArr</span><span class="p">(</span><span class="nx">p</span><span class="p">)</span>
-
-	<span class="k">return</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Join</span><span class="p">(</span><span class="nx">paramArr</span><span class="p">,</span> <span class="s">&#34;&amp;&#34;</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">buildParamArr</span><span class="p">(</span><span class="nx">p</span> <span class="kd">interface</span><span class="p">{})</span> <span class="p">[]</span><span class="kt">string</span> <span class="p">{</span>
-	<span class="nx">v</span> <span class="o">:=</span> <span class="nx">reflect</span><span class="p">.</span><span class="nf">ValueOf</span><span class="p">(</span><span class="nx">p</span><span class="p">)</span>
-	<span class="nx">t</span> <span class="o">:=</span> <span class="nx">v</span><span class="p">.</span><span class="nf">Type</span><span class="p">()</span>
-
-	<span class="nx">paramArr</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">string</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-
-	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">t</span><span class="p">.</span><span class="nf">NumField</span><span class="p">();</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
-		<span class="c1">// Interface()：获取字段对应的值
-</span><span class="c1"></span>		<span class="nx">paramVal</span> <span class="o">:=</span> <span class="nx">v</span><span class="p">.</span><span class="nf">Field</span><span class="p">(</span><span class="nx">i</span><span class="p">).</span><span class="nf">Interface</span><span class="p">()</span>
-		<span class="k">if</span> <span class="nf">IsNil</span><span class="p">(</span><span class="nx">paramVal</span><span class="p">)</span> <span class="p">{</span>
-			<span class="k">continue</span>
-		<span class="p">}</span>
-
-		<span class="c1">// 取每个字段的json tag
-</span><span class="c1"></span>		<span class="nx">paramKey</span> <span class="o">:=</span> <span class="nx">t</span><span class="p">.</span><span class="nf">Field</span><span class="p">(</span><span class="nx">i</span><span class="p">).</span><span class="nx">Tag</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;json&#34;</span><span class="p">)</span>
-
-		<span class="c1">// 取出指针中的值
-</span><span class="c1"></span>		<span class="k">if</span> <span class="nx">reflect</span><span class="p">.</span><span class="nf">ValueOf</span><span class="p">(</span><span class="nx">paramVal</span><span class="p">).</span><span class="nf">Kind</span><span class="p">()</span> <span class="o">==</span> <span class="nx">reflect</span><span class="p">.</span><span class="nx">Ptr</span> <span class="p">{</span>
-			<span class="nx">paramVal</span> <span class="p">=</span> <span class="nx">reflect</span><span class="p">.</span><span class="nf">ValueOf</span><span class="p">(</span><span class="nx">paramVal</span><span class="p">).</span><span class="nf">Elem</span><span class="p">().</span><span class="nf">Interface</span><span class="p">()</span>
-		<span class="p">}</span>
-
-		<span class="c1">// 如果是struct 那么看看里面的字段
-</span><span class="c1"></span>		<span class="k">if</span> <span class="nx">reflect</span><span class="p">.</span><span class="nf">ValueOf</span><span class="p">(</span><span class="nx">paramVal</span><span class="p">).</span><span class="nf">Kind</span><span class="p">()</span> <span class="o">==</span> <span class="nx">reflect</span><span class="p">.</span><span class="nx">Struct</span> <span class="p">{</span>
-			<span class="nx">paramArr</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">paramArr</span><span class="p">,</span> <span class="nf">buildParamArr</span><span class="p">(</span><span class="nx">paramVal</span><span class="p">)</span><span class="o">...</span><span class="p">)</span>
-			<span class="k">continue</span>
-		<span class="p">}</span>
-
-		<span class="nx">paramArr</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">paramArr</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;%s=%v&#34;</span><span class="p">,</span> <span class="nx">paramKey</span><span class="p">,</span> <span class="nx">paramVal</span><span class="p">))</span>
-	<span class="p">}</span>
-
-	<span class="k">return</span> <span class="nx">paramArr</span>
-<span class="p">}</span>
-</code></pre></div><h2 id="效果">效果</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Go" data-lang="Go"><span class="kd">type</span> <span class="nx">TestStruct</span> <span class="kd">struct</span> <span class="p">{</span>
-	<span class="nx">A</span> <span class="kt">string</span> <span class="s">`json:&#34;a&#34;`</span>
-	<span class="nx">B</span> <span class="kt">int64</span>  <span class="s">`json:&#34;b&#34;`</span>
-<span class="p">}</span>
-
-<span class="kd">type</span> <span class="nx">TestStruct1</span> <span class="kd">struct</span> <span class="p">{</span>
-	<span class="nx">C</span> <span class="o">*</span><span class="kt">bool</span> <span class="s">`json:&#34;c&#34;`</span>
-	<span class="nx">D</span> <span class="kt">bool</span>  <span class="s">`json:&#34;d&#34;`</span>
-<span class="p">}</span>
-
-<span class="kd">type</span> <span class="nx">TestStruct2</span> <span class="kd">struct</span> <span class="p">{</span>
-	<span class="nx">E</span> <span class="o">*</span><span class="kt">string</span> <span class="s">`json:&#34;e&#34;`</span>
-<span class="p">}</span>
-
-<span class="kd">type</span> <span class="nx">TestStructTotal</span> <span class="kd">struct</span> <span class="p">{</span>
-	<span class="nx">F</span>     <span class="kt">string</span>       <span class="s">`json:&#34;f&#34;`</span>
-	<span class="nx">Test</span>  <span class="nx">TestStruct</span>   <span class="s">`json:&#34;test&#34;`</span>
-	<span class="nx">Test1</span> <span class="o">*</span><span class="nx">TestStruct1</span> <span class="s">`json:&#34;test_1&#34;`</span>
-	<span class="nx">TestStruct2</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">TestParseToRequestQuery</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
-	<span class="kd">type</span> <span class="nx">args</span> <span class="kd">struct</span> <span class="p">{</span>
-		<span class="nx">p</span> <span class="kd">interface</span><span class="p">{}</span>
-	<span class="p">}</span>
-	<span class="kd">type</span> <span class="nx">testConfig</span> <span class="kd">struct</span> <span class="p">{</span>
-		<span class="nx">args</span> <span class="nx">args</span>
-		<span class="nx">want</span> <span class="kt">string</span>
-	<span class="p">}</span>
-	<span class="nf">PatchConvey</span><span class="p">(</span><span class="s">&#34;test&#34;</span><span class="p">,</span> <span class="nx">t</span><span class="p">,</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
-		<span class="c1">//your mock code...
-</span><span class="c1"></span>		<span class="nf">PatchConvey</span><span class="p">(</span><span class="s">&#34;test case1&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
-			<span class="nx">c</span> <span class="o">:=</span> <span class="kc">true</span>
-			<span class="nx">e</span> <span class="o">:=</span> <span class="s">&#34;test&#34;</span>
-			<span class="nx">tt</span> <span class="o">:=</span> <span class="nx">testConfig</span><span class="p">{</span>
-				<span class="nx">args</span><span class="p">:</span> <span class="nx">args</span><span class="p">{},</span>
-				<span class="nx">want</span><span class="p">:</span> <span class="s">&#34;f=f&amp;a=&amp;b=0&amp;c=true&amp;d=true&amp;e=test&#34;</span><span class="p">,</span>
-			<span class="p">}</span>
-
-			<span class="nx">got</span> <span class="o">:=</span> <span class="nf">ParseToRequestQuery</span><span class="p">(</span><span class="nx">TestStructTotal</span><span class="p">{</span>
-				<span class="nx">F</span><span class="p">:</span> <span class="s">&#34;f&#34;</span><span class="p">,</span>
-				<span class="nx">Test</span><span class="p">:</span> <span class="nx">TestStruct</span><span class="p">{</span>
-					<span class="nx">A</span><span class="p">:</span> <span class="s">&#34;&#34;</span><span class="p">,</span>
-					<span class="nx">B</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-				<span class="p">},</span>
-				<span class="nx">Test1</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">TestStruct1</span><span class="p">{</span>
-					<span class="nx">C</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">c</span><span class="p">,</span>
-					<span class="nx">D</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-				<span class="p">},</span>
-				<span class="nx">TestStruct2</span><span class="p">:</span> <span class="nx">TestStruct2</span><span class="p">{</span>
-					<span class="nx">E</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">e</span><span class="p">,</span>
-				<span class="p">},</span>
-			<span class="p">})</span>
-			<span class="nf">So</span><span class="p">(</span><span class="nx">got</span><span class="p">,</span> <span class="nx">ShouldEqual</span><span class="p">,</span> <span class="nx">tt</span><span class="p">.</span><span class="nx">want</span><span class="p">)</span>
-		<span class="p">})</span>
-		<span class="nf">PatchConvey</span><span class="p">(</span><span class="s">&#34;test case2&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
-			<span class="nx">tt</span> <span class="o">:=</span> <span class="nx">testConfig</span><span class="p">{</span>
-				<span class="nx">args</span><span class="p">:</span> <span class="nx">args</span><span class="p">{</span>
-					<span class="nx">p</span><span class="p">:</span> <span class="nx">TestStructTotal</span><span class="p">{</span>
-						<span class="nx">Test</span><span class="p">:</span> <span class="nx">TestStruct</span><span class="p">{</span>
-							<span class="nx">A</span><span class="p">:</span> <span class="s">&#34;valueA&#34;</span><span class="p">,</span>
-							<span class="nx">B</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-						<span class="p">},</span>
-						<span class="nx">Test1</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">TestStruct1</span><span class="p">{</span>
-							<span class="nx">C</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span>
-							<span class="nx">D</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-						<span class="p">},</span>
-					<span class="p">},</span>
-				<span class="p">},</span>
-				<span class="nx">want</span><span class="p">:</span> <span class="s">&#34;f=&amp;a=valueA&amp;b=2&amp;d=false&#34;</span><span class="p">,</span>
-			<span class="p">}</span>
-			<span class="nx">got</span> <span class="o">:=</span> <span class="nf">ParseToRequestQuery</span><span class="p">(</span><span class="nx">tt</span><span class="p">.</span><span class="nx">args</span><span class="p">.</span><span class="nx">p</span><span class="p">)</span>
-			<span class="nf">So</span><span class="p">(</span><span class="nx">got</span><span class="p">,</span> <span class="nx">ShouldEqual</span><span class="p">,</span> <span class="nx">tt</span><span class="p">.</span><span class="nx">want</span><span class="p">)</span>
-		<span class="p">})</span>
-	<span class="p">})</span>
-<span class="p">}</span>
-</code></pre></div><h2 id="实际使用">实际使用</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go">    <span class="c1">// param 为参数结构体
-</span><span class="c1"></span>	<span class="nx">apiPath</span> <span class="o">:=</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span>
-		<span class="s">&#34;/api/path?%s&#34;</span><span class="p">,</span> <span class="nx">beanutil</span><span class="p">.</span><span class="nf">ParseToRequestQuery</span><span class="p">(</span><span class="nx">param</span><span class="p">),</span>
-	<span class="p">)</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Go" data-lang="Go"><span class="line"><span class="cl"><span class="c1">// IsNil 判断指针,Slice,Map类型的值是否为空
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">IsNil</span><span class="p">(</span><span class="nx">i</span> <span class="kd">interface</span><span class="p">{})</span> <span class="kt">bool</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 首先判断i是否为nil
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="nx">i</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 判断值是否为nil
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">vi</span> <span class="o">:=</span> <span class="nx">reflect</span><span class="p">.</span><span class="nf">ValueOf</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">vi</span><span class="p">.</span><span class="nf">Kind</span><span class="p">()</span> <span class="o">==</span> <span class="nx">reflect</span><span class="p">.</span><span class="nx">Ptr</span> <span class="o">||</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">vi</span><span class="p">.</span><span class="nf">Kind</span><span class="p">()</span> <span class="o">==</span> <span class="nx">reflect</span><span class="p">.</span><span class="nx">Slice</span> <span class="o">||</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">vi</span><span class="p">.</span><span class="nf">Kind</span><span class="p">()</span> <span class="o">==</span> <span class="nx">reflect</span><span class="p">.</span><span class="nx">Map</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">vi</span><span class="p">.</span><span class="nf">IsNil</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ParseToRequestQuery 将简单json结构体转成query参数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">ParseToRequestQuery</span><span class="p">(</span><span class="nx">p</span> <span class="kd">interface</span><span class="p">{})</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">paramArr</span> <span class="o">:=</span> <span class="nf">buildParamArr</span><span class="p">(</span><span class="nx">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Join</span><span class="p">(</span><span class="nx">paramArr</span><span class="p">,</span> <span class="s">&#34;&amp;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">buildParamArr</span><span class="p">(</span><span class="nx">p</span> <span class="kd">interface</span><span class="p">{})</span> <span class="p">[]</span><span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">v</span> <span class="o">:=</span> <span class="nx">reflect</span><span class="p">.</span><span class="nf">ValueOf</span><span class="p">(</span><span class="nx">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">t</span> <span class="o">:=</span> <span class="nx">v</span><span class="p">.</span><span class="nf">Type</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">paramArr</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">string</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">t</span><span class="p">.</span><span class="nf">NumField</span><span class="p">();</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// Interface()：获取字段对应的值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">paramVal</span> <span class="o">:=</span> <span class="nx">v</span><span class="p">.</span><span class="nf">Field</span><span class="p">(</span><span class="nx">i</span><span class="p">).</span><span class="nf">Interface</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nf">IsNil</span><span class="p">(</span><span class="nx">paramVal</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">continue</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="c1">// 取每个字段的json tag
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">paramKey</span> <span class="o">:=</span> <span class="nx">t</span><span class="p">.</span><span class="nf">Field</span><span class="p">(</span><span class="nx">i</span><span class="p">).</span><span class="nx">Tag</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;json&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="c1">// 取出指针中的值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">if</span> <span class="nx">reflect</span><span class="p">.</span><span class="nf">ValueOf</span><span class="p">(</span><span class="nx">paramVal</span><span class="p">).</span><span class="nf">Kind</span><span class="p">()</span> <span class="o">==</span> <span class="nx">reflect</span><span class="p">.</span><span class="nx">Ptr</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">paramVal</span> <span class="p">=</span> <span class="nx">reflect</span><span class="p">.</span><span class="nf">ValueOf</span><span class="p">(</span><span class="nx">paramVal</span><span class="p">).</span><span class="nf">Elem</span><span class="p">().</span><span class="nf">Interface</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="c1">// 如果是struct 那么看看里面的字段
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">if</span> <span class="nx">reflect</span><span class="p">.</span><span class="nf">ValueOf</span><span class="p">(</span><span class="nx">paramVal</span><span class="p">).</span><span class="nf">Kind</span><span class="p">()</span> <span class="o">==</span> <span class="nx">reflect</span><span class="p">.</span><span class="nx">Struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">paramArr</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">paramArr</span><span class="p">,</span> <span class="nf">buildParamArr</span><span class="p">(</span><span class="nx">paramVal</span><span class="p">)</span><span class="o">...</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="k">continue</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="nx">paramArr</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">paramArr</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;%s=%v&#34;</span><span class="p">,</span> <span class="nx">paramKey</span><span class="p">,</span> <span class="nx">paramVal</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">paramArr</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="效果">效果</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Go" data-lang="Go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">TestStruct</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">A</span> <span class="kt">string</span> <span class="s">`json:&#34;a&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">B</span> <span class="kt">int64</span>  <span class="s">`json:&#34;b&#34;`</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">TestStruct1</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">C</span> <span class="o">*</span><span class="kt">bool</span> <span class="s">`json:&#34;c&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">D</span> <span class="kt">bool</span>  <span class="s">`json:&#34;d&#34;`</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">TestStruct2</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">E</span> <span class="o">*</span><span class="kt">string</span> <span class="s">`json:&#34;e&#34;`</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">TestStructTotal</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">F</span>     <span class="kt">string</span>       <span class="s">`json:&#34;f&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Test</span>  <span class="nx">TestStruct</span>   <span class="s">`json:&#34;test&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Test1</span> <span class="o">*</span><span class="nx">TestStruct1</span> <span class="s">`json:&#34;test_1&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">TestStruct2</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">TestParseToRequestQuery</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">type</span> <span class="nx">args</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">p</span> <span class="kd">interface</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">type</span> <span class="nx">testConfig</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">args</span> <span class="nx">args</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">want</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">PatchConvey</span><span class="p">(</span><span class="s">&#34;test&#34;</span><span class="p">,</span> <span class="nx">t</span><span class="p">,</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">//your mock code...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nf">PatchConvey</span><span class="p">(</span><span class="s">&#34;test case1&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">c</span> <span class="o">:=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">e</span> <span class="o">:=</span> <span class="s">&#34;test&#34;</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">tt</span> <span class="o">:=</span> <span class="nx">testConfig</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">args</span><span class="p">:</span> <span class="nx">args</span><span class="p">{},</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">want</span><span class="p">:</span> <span class="s">&#34;f=f&amp;a=&amp;b=0&amp;c=true&amp;d=true&amp;e=test&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			<span class="nx">got</span> <span class="o">:=</span> <span class="nf">ParseToRequestQuery</span><span class="p">(</span><span class="nx">TestStructTotal</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">F</span><span class="p">:</span> <span class="s">&#34;f&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Test</span><span class="p">:</span> <span class="nx">TestStruct</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">A</span><span class="p">:</span> <span class="s">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">B</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="p">},</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Test1</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">TestStruct1</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">C</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">c</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">D</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="p">},</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">TestStruct2</span><span class="p">:</span> <span class="nx">TestStruct2</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">E</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">e</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="p">})</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">So</span><span class="p">(</span><span class="nx">got</span><span class="p">,</span> <span class="nx">ShouldEqual</span><span class="p">,</span> <span class="nx">tt</span><span class="p">.</span><span class="nx">want</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">})</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">PatchConvey</span><span class="p">(</span><span class="s">&#34;test case2&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">tt</span> <span class="o">:=</span> <span class="nx">testConfig</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">args</span><span class="p">:</span> <span class="nx">args</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">p</span><span class="p">:</span> <span class="nx">TestStructTotal</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">						<span class="nx">Test</span><span class="p">:</span> <span class="nx">TestStruct</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">							<span class="nx">A</span><span class="p">:</span> <span class="s">&#34;valueA&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">							<span class="nx">B</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">						<span class="p">},</span>
+</span></span><span class="line"><span class="cl">						<span class="nx">Test1</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">TestStruct1</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">							<span class="nx">C</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">							<span class="nx">D</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">						<span class="p">},</span>
+</span></span><span class="line"><span class="cl">					<span class="p">},</span>
+</span></span><span class="line"><span class="cl">				<span class="p">},</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">want</span><span class="p">:</span> <span class="s">&#34;f=&amp;a=valueA&amp;b=2&amp;d=false&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">got</span> <span class="o">:=</span> <span class="nf">ParseToRequestQuery</span><span class="p">(</span><span class="nx">tt</span><span class="p">.</span><span class="nx">args</span><span class="p">.</span><span class="nx">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">So</span><span class="p">(</span><span class="nx">got</span><span class="p">,</span> <span class="nx">ShouldEqual</span><span class="p">,</span> <span class="nx">tt</span><span class="p">.</span><span class="nx">want</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">})</span>
+</span></span><span class="line"><span class="cl">	<span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="实际使用">实际使用</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl">    <span class="c1">// param 为参数结构体
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">apiPath</span> <span class="o">:=</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="s">&#34;/api/path?%s&#34;</span><span class="p">,</span> <span class="nx">beanutil</span><span class="p">.</span><span class="nf">ParseToRequestQuery</span><span class="p">(</span><span class="nx">param</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">	<span class="p">)</span>
+</span></span></code></pre></div>
 </section>
 
 
@@ -314,14 +507,16 @@ if (!doNotTrack) {
     
 </article>
 
-    <aside class="related-contents--wrapper">
     
+
     
-        <h2 class="section-title">相关文章</h2>
-        <div class="related-contents">
-            <div class="flex article-list--tile">
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
                 
-                    
 <article class="has-image">
     <a href="/p/2022/4/go-nil-equal/">
         
@@ -338,8 +533,9 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
+
+            
                 
-                    
 <article class="has-image">
     <a href="/p/2022/1/go-concurrency/">
         
@@ -356,8 +552,9 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
+
+            
                 
-                    
 <article class="has-image">
     <a href="/p/2021/8/go-slice/">
         
@@ -374,10 +571,10 @@ if (!doNotTrack) {
         </div>
     </a>
 </article>
-                
-            </div>
+
+            
         </div>
-    
+    </div>
 </aside>
 
      
@@ -424,7 +621,7 @@ if (!doNotTrack) {
             Owner Rainbowly <br/>
         
         Total [<span id="busuanzi_value_site_uv"></span>] user views [<span id="busuanzi_value_site_pv"></span>] site views [<span id="busuanzi_value_page_pv"></span>] page views <br/>Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -493,56 +690,25 @@ if (!doNotTrack) {
 
 </div><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><script 
                 src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer="true"
+                defer
                 >
             </script><link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
             ><link 
                 rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
             >
 
             </main>
-    
-        <aside class="sidebar right-sidebar sticky">
-            <section class="widget archives">
-                <div class="widget-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-                </div>
-                <h2 class="widget-title section-title">目录</h2>
-                
-                <div class="widget--toc">
-                    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#背景">背景</a></li>
-    <li><a href="#代码">代码</a></li>
-    <li><a href="#效果">效果</a></li>
-    <li><a href="#实际使用">实际使用</a></li>
-  </ul>
-</nav>
-                </div>
-            </section>
-        </aside>
-    
-
         </div>
         <script 
-                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
-                defer="false"
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
                 >
             </script><script type="text/javascript" src="/ts/main.js" defer></script>
 <script>
